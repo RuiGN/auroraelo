@@ -3,29 +3,29 @@
 
 {% block auth_content %}
 <section class="product-auth-card product-auth-form" aria-labelledby="auth-title">
-  <div class="mb-4">
-    <h1 id="auth-title" class="fs-20 fw-bolder mb-2">{{ title }}</h1>
-    {% if description %}<p class="fs-12 fw-medium text-body-secondary mb-0">{{ description }}</p>{% endif %}
+  <div class="mb-3 text-center">
+    <h2 id="auth-title" class="fs-15 fw-bold text-dark mb-1">{{ title }}</h2>
+    {% if description %}<p class="fs-12 text-muted mb-0">{{ description }}</p>{% endif %}
   </div>
 
-  <form class="d-grid gap-3 w-100" method="post" novalidate data-form-guard>
+  <form class="d-flex flex-column gap-3 w-100" method="post" novalidate data-form-guard>
     {% csrf_token %}
     {% if form.non_field_errors %}
-      <div class="alert alert-danger" role="alert" tabindex="-1" data-focus-error-summary>
-        {% for error in form.non_field_errors %}<p class="mb-0">{{ error }}</p>{% endfor %}
+      <div class="alert alert-danger py-2.5 px-3 mb-2" role="alert" tabindex="-1" data-focus-error-summary>
+        {% for error in form.non_field_errors %}<p class="mb-0 fs-13">{{ error }}</p>{% endfor %}
       </div>
     {% endif %}
 
     {% for field in form %}
-      <div class="d-grid gap-2">
+      <div class="auth-field-wrapper d-flex flex-column gap-1 mb-1">
         {% if field.field.widget.input_type == "checkbox" %}
-          <div class="form-check">
+          <div class="form-check my-1">
             {{ field|accessible_widget }}
-            <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <label class="form-check-label fs-13 text-secondary ps-1" for="{{ field.id_for_label }}">{{ field.label }}</label>
           </div>
         {% else %}
-          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-          <div class="product-auth-control">
+          <label class="form-label fs-12 fw-bold text-uppercase text-secondary mb-1" style="letter-spacing: 0.04em;" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          <div class="product-auth-control position-relative">
             {% if field.name == "email" or field.name == "recipient_email" %}
               <span class="product-auth-control-icon" aria-hidden="true"><i class="feather-mail"></i></span>
             {% elif "password" in field.name %}
@@ -36,19 +36,19 @@
             {{ field|accessible_widget }}
           </div>
         {% endif %}
-        {% if field.help_text %}<p class="form-text" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</p>{% endif %}
+        {% if field.help_text %}<p class="form-text fs-11 text-muted mt-1 mb-0" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</p>{% endif %}
         {% for error in field.errors %}
-          <p class="invalid-feedback d-block" id="{{ field.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>
+          <p class="invalid-feedback d-block fs-12 mt-1 mb-0 text-danger" id="{{ field.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>
         {% endfor %}
       </div>
     {% endfor %}
 
-    <button class="btn btn-lg btn-primary w-100 mt-2" type="submit" data-submit-button>{{ submit_label }}</button>
+    <button class="btn btn-lg btn-primary w-100 mt-3 py-2.5 rounded-3 fw-bold" type="submit" data-submit-button>{{ submit_label }}</button>
   </form>
 
   {% if secondary_url and secondary_label %}
-    <div class="mt-4 text-center text-body-secondary">
-      <a class="fw-semibold" href="{{ secondary_url }}">{{ secondary_label }}</a>
+    <div class="mt-4 pt-3 text-center border-top border-slate-100">
+      <a class="fw-semibold text-decoration-none fs-13" style="color: #0284c7;" href="{{ secondary_url }}">{{ secondary_label }}</a>
     </div>
   {% endif %}
 </section>

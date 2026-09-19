@@ -345,25 +345,87 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #64748b !important;
 }
 
-/* Auth Specific Controls */
+/* Auth Specific Controls & Field Margins */
+.auth-minimal-wrapper {
+  min-height: calc(100vh - 120px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.auth-minimal-inner {
+  width: 100% !important;
+  max-width: 460px !important;
+  margin: 0 auto !important;
+}
+
+/* Prevent double-nested card appearance on auth form */
+section.product-auth-form,
+section.product-auth-form.product-auth-card {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+.auth-field-wrapper {
+  margin-bottom: 1.15rem !important;
+}
+
 .product-auth-control {
-  position: relative;
+  position: relative !important;
+  width: 100% !important;
 }
 
 .product-auth-control .form-control {
-  padding-left: 2.75rem !important;
+  height: 48px !important;
+  padding-left: 2.85rem !important;
+  padding-right: 1rem !important;
+  border-radius: 0.75rem !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-size: 0.925rem !important;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  transition: all 0.2s ease !important;
+}
+
+.product-auth-control .form-control:focus {
+  background-color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.18) !important;
 }
 
 .product-auth-control-icon {
-  position: absolute;
-  left: 0.875rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  pointer-events: none;
-  z-index: 4;
+  position: absolute !important;
+  left: 1rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #64748b !important;
+  font-size: 1.15rem !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
 }
 
 .product-auth-control:focus-within .product-auth-control-icon {
-  color: #0284c7;
+  color: #0284c7 !important;
 }
+
+.product-auth-form button[type="submit"] {
+  height: 48px !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  border-radius: 0.75rem !important;
+  letter-spacing: 0.02em !important;
+  background: linear-gradient(135deg, #0a2540 0%, #0369a1 50%, #0891b2 100%) !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+.product-auth-form button[type="submit"]:hover {
+  background: linear-gradient(135deg, #051424 0%, #0284c7 50%, #0e7490 100%) !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
