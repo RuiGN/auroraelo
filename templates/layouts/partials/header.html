@@ -38,7 +38,18 @@
 
     <!-- Header Right -->
     <div class="header-right ms-auto">
-      <div class="d-flex align-items-center gap-1">
+      <div class="d-flex align-items-center gap-2">
+        <div class="aurora-header-quicknav d-none d-md-flex align-items-center gap-2 me-2">
+          <a href="{% url 'psychiatry:crisis_protocol' %}" style="background: #fff1f2; border: 1px solid #fecdd3; color: #e11d48;" title="Protocolo de Crise e SOS 24h">
+            <i class="feather-alert-triangle"></i> SOS 24h
+          </a>
+          <a href="{% url 'psychiatry:telepsychiatry' %}" style="background: #f0fdf4; border: 1px solid #bbf7d0; color: #059669;" title="Consultas e Telepsiquiatria">
+            <i class="feather-video"></i> Telepsi
+          </a>
+          <a href="{% url 'design_system_reference' %}" style="background: #f0f7ff; border: 1px solid #bae0fd; color: #0284c7;" title="Design System Aurora Elo">
+            <i class="feather-layers"></i> Design System
+          </a>
+        </div>
         {% include "components/language_selector.html" with selector_id="header" %}
         <!-- Notifications Bell -->
         <div class="dropdown nxl-h-item">

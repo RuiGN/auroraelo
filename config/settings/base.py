@@ -100,9 +100,10 @@ MIDDLEWARE = [
 
 CONTENT_SECURITY_POLICY = (
     "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; "
-    "form-action 'self'; object-src 'none'; script-src 'self'; "
-    "style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
-    "font-src 'self'; connect-src 'self'"
+    "form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; "
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+    "img-src 'self' data: https://images.unsplash.com; "
+    "font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'"
 )
 REFERRER_POLICY = "strict-origin-when-cross-origin"
 PERMISSIONS_POLICY = "camera=(), microphone=(), geolocation=()"

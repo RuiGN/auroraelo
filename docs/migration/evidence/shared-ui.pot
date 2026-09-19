@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 10:22-0300\n"
+"POT-Creation-Date: 2026-09-19 18:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: people/presentation.py:16 scheduling/forms.py:129
 #: templates/analytics/therapist_dashboard.html:39
 #: templates/goals/exercise_assign.html:20
-#: templates/layouts/partials/header.html:111
+#: templates/layouts/partials/header.html:122
 #: templates/people/patient_detail.html:4
 #: templates/scheduling/waitlist_list.html:15
 msgid "Paciente"
@@ -284,8 +284,8 @@ msgid "Estes indicadores descrevem autorrelatos e fatos registrados. Eles não c
 msgstr ""
 
 #: analytics/views.py:94 templates/analytics/patient_dashboard.html:10
-#: templates/layouts/partials/navigation.html:168
-#: templates/workspace/home.html:17
+#: templates/layouts/partials/navigation.html:178
+#: templates/workspace/home.html:117
 msgid "Minha evolução"
 msgstr ""
 
@@ -315,14 +315,14 @@ msgid "Muito bem"
 msgstr ""
 
 #: analytics/views.py:125 templates/analytics/therapist_dashboard.html:10
-#: templates/layouts/partials/navigation.html:177
-#: templates/workspace/home.html:25
+#: templates/layouts/partials/navigation.html:187
+#: templates/workspace/home.html:125
 msgid "Painel profissional"
 msgstr ""
 
 #: analytics/views.py:149 templates/analytics/clinic_panel.html:10
-#: templates/layouts/partials/navigation.html:80
-#: templates/workspace/home.html:29
+#: templates/layouts/partials/navigation.html:90
+#: templates/workspace/home.html:129
 msgid "Painel operacional"
 msgstr ""
 
@@ -358,10 +358,11 @@ msgstr ""
 msgid "Domingo"
 msgstr ""
 
-#: clinics/forms.py:21 templates/layouts/partials/navigation.html:64
+#: clinics/forms.py:21 templates/layouts/partials/navigation.html:74
 #: templates/people/patient_list.html:4 templates/people/patient_list.html:6
 #: templates/people/patient_list.html:7 templates/people/patient_list.html:20
-#: templates/therapist_dashboard/home.html:132 templates/workspace/home.html:33
+#: templates/therapist_dashboard/home.html:132
+#: templates/workspace/home.html:133
 msgid "Pacientes"
 msgstr ""
 
@@ -370,7 +371,7 @@ msgstr ""
 #: templates/scheduling/appointment_request.html:9
 #: templates/scheduling/appointment_reschedule.html:9
 #: templates/scheduling/waitlist_form.html:8
-#: templates/scheduling/waitlist_list.html:8 templates/workspace/home.html:38
+#: templates/scheduling/waitlist_list.html:8 templates/workspace/home.html:138
 msgid "Agenda"
 msgstr ""
 
@@ -397,8 +398,8 @@ msgstr ""
 
 #: clinics/forms.py:28 templates/content/notifications.html:4
 #: templates/content/notifications.html:10
-#: templates/layouts/partials/header.html:46
-#: templates/layouts/partials/header.html:56
+#: templates/layouts/partials/header.html:57
+#: templates/layouts/partials/header.html:67
 msgid "Notificações"
 msgstr ""
 
@@ -472,7 +473,7 @@ msgstr ""
 msgid "English (US)"
 msgstr ""
 
-#: clinics/forms.py:63 config/views.py:41
+#: clinics/forms.py:63 config/views.py:42
 msgid "Canais institucionais"
 msgstr ""
 
@@ -524,84 +525,84 @@ msgstr ""
 msgid "Módulos ativos"
 msgstr ""
 
-#: clinics/forms.py:157 clinics/services.py:613
+#: clinics/forms.py:157 clinics/services.py:625
 #, python-format
 msgid "Ative os pré-requisitos antes dos módulos dependentes: %(modules)s"
 msgstr ""
 
-#: clinics/services.py:198
+#: clinics/services.py:210
 msgid "Selecione um papel profissional válido."
 msgstr ""
 
-#: clinics/services.py:201
+#: clinics/services.py:213
 msgid "A data final não pode ser anterior à data inicial."
 msgstr ""
 
-#: clinics/services.py:364
+#: clinics/services.py:376
 msgid "Preencha os dados institucionais obrigatórios."
 msgstr ""
 
-#: clinics/services.py:406
+#: clinics/services.py:418
 msgid "Selecione um fuso horário IANA válido."
 msgstr ""
 
-#: clinics/services.py:409
+#: clinics/services.py:421
 msgid "Selecione um idioma suportado."
 msgstr ""
 
-#: clinics/services.py:417
+#: clinics/services.py:429
 msgid "Selecione canais de atendimento válidos e únicos."
 msgstr ""
 
-#: clinics/services.py:430
+#: clinics/services.py:442
 msgid "Informe os horários de todos os dias da semana."
 msgstr ""
 
-#: clinics/services.py:439
+#: clinics/services.py:451
 msgid "Informe início e fim para cada intervalo."
 msgstr ""
 
-#: clinics/services.py:446
+#: clinics/services.py:458
 msgid "Use horários no formato HH:MM."
 msgstr ""
 
-#: clinics/services.py:450
+#: clinics/services.py:462
 msgid "Os intervalos devem ser válidos e não sobrepostos."
 msgstr ""
 
-#: clinics/services.py:460
+#: clinics/services.py:472
 msgid "As orientações fora do horário são muito extensas."
 msgstr ""
 
-#: clinics/services.py:470 clinics/services.py:560 clinics/services.py:625
+#: clinics/services.py:482 clinics/services.py:572 clinics/services.py:637
 msgid "Conclua primeiro os dados institucionais."
 msgstr ""
 
-#: clinics/services.py:535
+#: clinics/services.py:547
 msgid "Use cores no formato hexadecimal #RRGGBB."
 msgstr ""
 
-#: clinics/services.py:540
+#: clinics/services.py:552
 msgid "A cor primária não tem contraste suficiente no tema claro."
 msgstr ""
 
-#: clinics/services.py:544
+#: clinics/services.py:556
 msgid "A cor secundária não tem contraste suficiente no tema escuro."
 msgstr ""
 
-#: clinics/services.py:547
+#: clinics/services.py:559
 msgid "O logotipo excede o limite de 2 MB."
 msgstr ""
 
-#: clinics/services.py:550
+#: clinics/services.py:562
 msgid "O logotipo deve ser PNG ou JPEG."
 msgstr ""
 
-#: clinics/services.py:600
+#: clinics/services.py:612
 msgid "Não repita módulos na configuração."
 msgstr ""
 
-#: clinics/services.py:603
+#: clinics/services.py:615
 msgid "A configuração contém módulos desconhecidos."
 msgstr ""
 
@@ -613,7 +614,7 @@ msgstr ""
 msgid "Atendimento e horários"
 msgstr ""
 
-#: clinics/views.py:42 config/views.py:38 templates/clinics/setup.html:37
+#: clinics/views.py:42 config/views.py:39 templates/clinics/setup.html:37
 msgid "Identidade visual"
 msgstr ""
 
@@ -626,7 +627,7 @@ msgstr ""
 msgid "Revisão"
 msgstr ""
 
-#: clinics/views.py:48 clinics/views.py:55 config/views.py:47
+#: clinics/views.py:48 clinics/views.py:55 config/views.py:48
 #: templates/therapist_dashboard/home.html:67
 msgid "Pendente"
 msgstr ""
@@ -652,216 +653,212 @@ msgstr ""
 msgid "Renovação pendente"
 msgstr ""
 
-#: config/views.py:32
+#: config/views.py:33
 msgid "Configuração inicial"
 msgstr ""
 
-#: config/views.py:32 goals/presentation.py:10
+#: config/views.py:33 goals/presentation.py:10
 msgid "Concluída"
 msgstr ""
 
-#: config/views.py:35
+#: config/views.py:36
 msgid "Permissões da equipe"
 msgstr ""
 
-#: config/views.py:36
+#: config/views.py:37
 msgid "Revisão pendente"
 msgstr ""
 
-#: config/views.py:38
+#: config/views.py:39
 msgid "Configurada"
 msgstr ""
 
-#: config/views.py:42 templates/visual_reference/reference.html:102
+#: config/views.py:43 templates/visual_reference/reference.html:102
 msgid "Disponível"
 msgstr ""
 
-#: config/views.py:46
+#: config/views.py:47
 msgid "Horários de atendimento"
 msgstr ""
 
-#: config/views.py:67 templates/content/library.html:34
+#: config/views.py:68 templates/content/library.html:34
 #: templates/journal/checkin_list.html:87 templates/journal/list.html:202
 #: templates/therapist_dashboard/home.html:184
 #, python-format
 msgid "Página %(current)s de %(total)s"
 msgstr ""
 
-#: config/views.py:123
+#: config/views.py:124
 #, python-format
 msgid "Abrir %(name)s"
 msgstr ""
 
-#: config/views.py:141
+#: config/views.py:142
 msgid "Atividade"
 msgstr ""
 
-#: config/views.py:141
+#: config/views.py:142
 msgid "Situação"
 msgstr ""
 
-#: config/views.py:157
+#: config/views.py:158
 msgid "decrescente"
 msgstr ""
 
-#: config/views.py:157
+#: config/views.py:158
 msgid "crescente"
 msgstr ""
 
-#: config/views.py:165
+#: config/views.py:166
 msgid "Módulos disponíveis"
 msgstr ""
 
-#: config/views.py:166
+#: config/views.py:167
 msgid "Recursos operacionais liberados para a clínica ativa."
 msgstr ""
 
-#: config/views.py:169
+#: config/views.py:170
 msgid "sem alteração no período"
 msgstr ""
 
-#: config/views.py:175
+#: config/views.py:176
 msgid "Configurações pendentes"
 msgstr ""
 
-#: config/views.py:176
+#: config/views.py:177
 msgid "Ajustes factuais que ainda precisam de revisão."
 msgstr ""
 
-#: config/views.py:179
+#: config/views.py:180
 msgid "1 revisão concluída"
 msgstr ""
 
-#: config/views.py:181
+#: config/views.py:182
 msgid "Revisar configurações"
 msgstr ""
 
-#: config/views.py:185
+#: config/views.py:186
 msgid "Informações disponíveis"
 msgstr ""
 
-#: config/views.py:186
+#: config/views.py:187
 msgid "Exemplo de indicador informativo."
 msgstr ""
 
-#: config/views.py:189
+#: config/views.py:190
 msgid "2 novos registros"
 msgstr ""
 
-#: config/views.py:195
+#: config/views.py:196
 msgid "Etapas concluídas"
 msgstr ""
 
-#: config/views.py:196
+#: config/views.py:197
 msgid "Conclusões confirmadas no fluxo operacional."
 msgstr ""
 
-#: config/views.py:199
+#: config/views.py:200
 msgid "2 conclusões no período"
 msgstr ""
 
-#: config/views.py:205
+#: config/views.py:206
 msgid "Falhas operacionais"
 msgstr ""
 
-#: config/views.py:206
+#: config/views.py:207
 msgid "Erros técnicos que exigem nova tentativa."
 msgstr ""
 
-#: config/views.py:209
+#: config/views.py:210
 msgid "sem dados sensíveis"
 msgstr ""
 
-#: config/views.py:225 templates/visual_reference/reference.html:187
+#: config/views.py:226 templates/visual_reference/reference.html:187
 msgid "Carregando conteúdo"
 msgstr ""
 
-#: config/views.py:226
+#: config/views.py:227
 msgid "Aguarde enquanto os dados autorizados são preparados."
 msgstr ""
 
-#: config/views.py:230
+#: config/views.py:231
 msgid "Nenhum item cadastrado"
 msgstr ""
 
-#: config/views.py:231
+#: config/views.py:232
 msgid "Cadastre o primeiro item quando estiver pronto."
 msgstr ""
 
-#: config/views.py:235
+#: config/views.py:236
 msgid "Nenhum resultado encontrado"
 msgstr ""
 
-#: config/views.py:236
+#: config/views.py:237
 msgid "Revise os filtros aplicados."
 msgstr ""
 
-#: config/views.py:240
+#: config/views.py:241
 msgid "Conteúdo temporariamente indisponível"
 msgstr ""
 
-#: config/views.py:241
+#: config/views.py:242
 msgid "Tente novamente em alguns instantes."
 msgstr ""
 
-#: config/views.py:245
+#: config/views.py:246
 msgid "Não foi possível carregar o conteúdo"
 msgstr ""
 
-#: config/views.py:246
+#: config/views.py:247
 msgid "Tente novamente sem reenviar dados."
 msgstr ""
 
-#: config/views.py:250 config/views.py:472
+#: config/views.py:251 config/views.py:451
 msgid "Acesso não autorizado"
 msgstr ""
 
-#: config/views.py:251 config/views.py:473
+#: config/views.py:252 config/views.py:452
 msgid "Você não tem permissão para acessar este conteúdo."
 msgstr ""
 
-#: config/views.py:262
+#: config/views.py:263
 msgid "Atividades operacionais recentes"
 msgstr ""
 
-#: config/views.py:274
-msgid "Plataforma terapêutica disponível."
-msgstr ""
-
-#: config/views.py:334 templates/layouts/detached.html:32
+#: config/views.py:313 templates/layouts/detached.html:32
 #: templates/layouts/detached.html:37
-#: templates/layouts/partials/navigation.html:21
+#: templates/layouts/partials/navigation.html:31
 #: templates/layouts/vertical.html:32 templates/layouts/vertical.html:37
 #: templates/workspace/home.html:3 templates/workspace/home.html:4
 #: templates/workspace/home.html:5
 msgid "Área de trabalho"
 msgstr ""
 
-#: config/views.py:363
+#: config/views.py:342
 msgid "Preferência de layout inválida."
 msgstr ""
 
-#: config/views.py:462
+#: config/views.py:441
 msgid "Solicitação inválida"
 msgstr ""
 
-#: config/views.py:463
+#: config/views.py:442
 msgid "Não foi possível processar sua solicitação."
 msgstr ""
 
-#: config/views.py:482
+#: config/views.py:461
 msgid "Página não encontrada"
 msgstr ""
 
-#: config/views.py:483
+#: config/views.py:462
 msgid "A página solicitada não foi encontrada."
 msgstr ""
 
-#: config/views.py:492
+#: config/views.py:471
 msgid "Erro inesperado"
 msgstr ""
 
-#: config/views.py:493
+#: config/views.py:472
 msgid "Ocorreu um erro inesperado."
 msgstr ""
 
@@ -1037,7 +1034,7 @@ msgstr ""
 
 #: content/forms.py:192 scheduling/forms.py:29
 #: templates/analytics/clinic_panel.html:34
-#: templates/layouts/partials/header.html:111
+#: templates/layouts/partials/header.html:122
 msgid "Profissional"
 msgstr ""
 
@@ -2240,9 +2237,9 @@ msgstr ""
 msgid "Salvar preferência"
 msgstr ""
 
-#: scheduling/views.py:396 templates/layouts/partials/navigation.html:153
+#: scheduling/views.py:396 templates/layouts/partials/navigation.html:163
 #: templates/scheduling/conversation_list.html:9
-#: templates/workspace/home.html:40
+#: templates/workspace/home.html:140
 msgid "Mensagens"
 msgstr ""
 
@@ -2274,7 +2271,7 @@ msgstr ""
 msgid "Adicionar"
 msgstr ""
 
-#: templates/accounts/auth_base.html:24 templates/layouts/base.html:25
+#: templates/accounts/auth_base.html:70 templates/layouts/base.html:73
 #: templates/visual_reference/reference.html:18
 msgid "Ir para o conteúdo principal"
 msgstr ""
@@ -2554,8 +2551,8 @@ msgid "Manter clínica atual"
 msgstr ""
 
 #: templates/clinics/setup.html:4 templates/clinics/setup.html:11
-#: templates/layouts/partials/navigation.html:56
-#: templates/workspace/home.html:35
+#: templates/layouts/partials/navigation.html:66
+#: templates/workspace/home.html:135
 msgid "Configurar clínica"
 msgstr ""
 
@@ -4784,7 +4781,7 @@ msgid "Fechar menu"
 msgstr ""
 
 #: templates/layouts/detached.html:19
-#: templates/layouts/partials/navigation.html:34
+#: templates/layouts/partials/navigation.html:44
 msgid "Navegação destacada"
 msgstr ""
 
@@ -4812,11 +4809,11 @@ msgstr ""
 msgid "Clínica ativa"
 msgstr ""
 
-#: templates/layouts/partials/header.html:57
+#: templates/layouts/partials/header.html:68
 msgid "Central de avisos"
 msgstr ""
 
-#: templates/layouts/partials/header.html:63
+#: templates/layouts/partials/header.html:74
 #: templates/layouts/partials/navigation.html:8
 #, python-format
 msgid "%(count)s revogação operacional pendente"
@@ -4824,55 +4821,55 @@ msgid_plural "%(count)s revogações operacionais pendentes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/layouts/partials/header.html:66
+#: templates/layouts/partials/header.html:77
 msgid "Nenhuma notificação pendente."
 msgstr ""
 
-#: templates/layouts/partials/header.html:76
+#: templates/layouts/partials/header.html:87
 msgid "Trocar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:80
+#: templates/layouts/partials/header.html:91
 msgid "Alternar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:83
+#: templates/layouts/partials/header.html:94
 msgid "Selecionar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:91
+#: templates/layouts/partials/header.html:102
 msgid "Revisar troca"
 msgstr ""
 
-#: templates/layouts/partials/header.html:100
+#: templates/layouts/partials/header.html:111
 msgid "Menu da conta"
 msgstr ""
 
-#: templates/layouts/partials/header.html:111
+#: templates/layouts/partials/header.html:122
 msgid "Administrador"
 msgstr ""
 
-#: templates/layouts/partials/header.html:111
+#: templates/layouts/partials/header.html:122
 msgid "Usuário"
 msgstr ""
 
-#: templates/layouts/partials/header.html:118
+#: templates/layouts/partials/header.html:129
 msgid "Modo de navegação"
 msgstr ""
 
-#: templates/layouts/partials/header.html:121
+#: templates/layouts/partials/header.html:132
 msgid "Vertical"
 msgstr ""
 
-#: templates/layouts/partials/header.html:122
+#: templates/layouts/partials/header.html:133
 msgid "Destacado"
 msgstr ""
 
-#: templates/layouts/partials/header.html:125
+#: templates/layouts/partials/header.html:136
 msgid "OK"
 msgstr ""
 
-#: templates/layouts/partials/header.html:136
+#: templates/layouts/partials/header.html:147
 msgid "Sair da conta"
 msgstr ""
 
@@ -4880,68 +4877,68 @@ msgstr ""
 msgid "Mensagens do sistema"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:15
+#: templates/layouts/partials/navigation.html:25
 msgid "Geral"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:28
+#: templates/layouts/partials/navigation.html:38
 #: templates/layouts/vertical.html:19
 msgid "Navegação vertical"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:42
+#: templates/layouts/partials/navigation.html:52
 msgid "Gestão da clínica"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:48
+#: templates/layouts/partials/navigation.html:58
 msgid "Administração"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:71
+#: templates/layouts/partials/navigation.html:81
 #: templates/people/professional_list.html:4
 #: templates/people/professional_list.html:11
 msgid "Profissionais"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:90
+#: templates/layouts/partials/navigation.html:100
 msgid "Cuidado e prática"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:96
+#: templates/layouts/partials/navigation.html:106
 msgid "Rotina terapêutica"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:104
-#: templates/workspace/home.html:19
+#: templates/layouts/partials/navigation.html:114
+#: templates/workspace/home.html:119
 msgid "Diário emocional"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:111
-#: templates/workspace/home.html:21
+#: templates/layouts/partials/navigation.html:121
+#: templates/workspace/home.html:121
 msgid "Minhas metas"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:118
+#: templates/layouts/partials/navigation.html:128
 msgid "Exercícios"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:125
+#: templates/layouts/partials/navigation.html:135
 msgid "Modo de baixa energia"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:133
+#: templates/layouts/partials/navigation.html:143
 msgid "Comunicação e agenda"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:139
+#: templates/layouts/partials/navigation.html:149
 msgid "Atendimento"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:146
+#: templates/layouts/partials/navigation.html:156
 msgid "Agenda de consultas"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:161
+#: templates/layouts/partials/navigation.html:171
 msgid "Painéis de evolução"
 msgstr ""
 
@@ -5987,68 +5984,64 @@ msgstr ""
 msgid "Concluir"
 msgstr ""
 
-#: templates/workspace/home.html:8
-msgid "SEU ESPAÇO DE CUIDADO"
-msgstr ""
-
-#: templates/workspace/home.html:9
+#: templates/workspace/home.html:22
 msgid "seja bem-vindo"
 msgstr ""
 
-#: templates/workspace/home.html:10
+#: templates/workspace/home.html:24
 #, python-format
 msgid "Olá, %(name)s."
 msgstr ""
 
-#: templates/workspace/home.html:11
+#: templates/workspace/home.html:27
 #, python-format
 msgid "Acesse seus recursos em %(clinic_name)s."
 msgstr ""
 
-#: templates/workspace/home.html:14
+#: templates/workspace/home.html:114
 msgid "Por onde começar"
 msgstr ""
 
-#: templates/workspace/home.html:17
+#: templates/workspace/home.html:117
 msgid "Acompanhe os registros do seu cuidado."
 msgstr ""
 
-#: templates/workspace/home.html:19
+#: templates/workspace/home.html:119
 msgid "Reserve um momento para registrar como você está."
 msgstr ""
 
-#: templates/workspace/home.html:21
+#: templates/workspace/home.html:121
 msgid "Retome seus objetivos e próximos passos."
 msgstr ""
 
-#: templates/workspace/home.html:25
+#: templates/workspace/home.html:125
 msgid "Acompanhe os pacientes vinculados a você."
 msgstr ""
 
-#: templates/workspace/home.html:29
+#: templates/workspace/home.html:129
 msgid "Consulte os indicadores da clínica ativa."
 msgstr ""
 
-#: templates/workspace/home.html:33
+#: templates/workspace/home.html:133
 msgid "Consulte e organize os cadastros da clínica."
 msgstr ""
 
-#: templates/workspace/home.html:35
+#: templates/workspace/home.html:135
 msgid "Revise os dados e a identidade da sua clínica."
 msgstr ""
 
-#: templates/workspace/home.html:38
+#: templates/workspace/home.html:138
 msgid "Veja as consultas disponíveis para o seu perfil."
 msgstr ""
 
-#: templates/workspace/home.html:40
+#: templates/workspace/home.html:140
 msgid "Acesse suas conversas na plataforma."
 msgstr ""
 
-#: templates/workspace/home.html:42
+#: templates/workspace/home.html:142
 msgid "Segurança da conta"
 msgstr ""
 
-#: templates/workspace/home.html:42
+#: templates/workspace/home.html:142
 msgid "Confira os dispositivos e as sessões da sua conta."
 msgstr ""

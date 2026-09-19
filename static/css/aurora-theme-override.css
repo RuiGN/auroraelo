@@ -1,0 +1,369 @@
+/* ==========================================================================
+   AURORA ELO DESIGN SYSTEM - THEME OVERRIDE FOR APPLICATION TEMPLATES
+   Harmonizes legacy and modern components with Aurora Elo Design Tokens
+   ========================================================================== */
+
+:root {
+  --product-primary: #0a2540;
+  --product-secondary: #0284c7;
+  --product-accent: #06b6d4;
+  --product-bg: #f8fafc;
+  --product-card-bg: #ffffff;
+  --product-border: #e2e8f0;
+  --bs-primary: #0369a1;
+  --bs-primary-rgb: 3, 105, 161;
+  --bs-font-sans-serif: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --bs-body-font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --bs-body-bg: #f8fafc;
+  --bs-body-color: #0f172a;
+}
+
+body, html {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif !important;
+  letter-spacing: -0.02em;
+  color: #0a2540;
+  font-weight: 700;
+}
+
+/* Aurora Elo Navigation (Sidebar) */
+.nxl-navigation {
+  background: #0a2540 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 4px 0 24px -4px rgba(5, 20, 36, 0.3) !important;
+}
+
+.nxl-navigation .m-header {
+  background: #051424 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 1rem 1.25rem !important;
+}
+
+.nxl-navigation .nxl-navbar .nxl-item .nxl-link {
+  color: #bae0fd !important;
+  font-weight: 500 !important;
+  border-radius: 0.75rem !important;
+  margin: 0.15rem 0.75rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.nxl-navigation .nxl-navbar .nxl-item .nxl-link:hover {
+  background: rgba(14, 165, 233, 0.15) !important;
+  color: #ffffff !important;
+  transform: translateX(3px);
+}
+
+.nxl-navigation .nxl-navbar .nxl-item.active > .nxl-link,
+.nxl-navigation .nxl-navbar .nxl-item.nxl-trigger > .nxl-link {
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.28) 0%, rgba(6, 182, 212, 0.18) 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-left: 3px solid #38a9f8 !important;
+}
+
+.nxl-navigation .nxl-navbar .nxl-caption label {
+  color: #7cc7fb !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  opacity: 0.85;
+}
+
+.nxl-navigation .nxl-submenu {
+  background: #071c30 !important;
+  border-radius: 0.75rem !important;
+  margin: 0.25rem 0.75rem 0.5rem 0.75rem !important;
+  padding: 0.35rem 0 !important;
+}
+
+.nxl-navigation .nxl-submenu .nxl-link {
+  color: #93c5fd !important;
+  font-size: 0.82rem !important;
+  padding: 0.45rem 1rem !important;
+}
+
+.nxl-navigation .nxl-submenu .nxl-link:hover,
+.nxl-navigation .nxl-submenu .nxl-link.is-active {
+  color: #ffffff !important;
+  background: rgba(14, 165, 233, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+/* Aurora Elo Top Header Bar */
+.nxl-header {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px -2px rgba(10, 37, 64, 0.04) !important;
+}
+
+.clinic-context strong {
+  color: #0a2540 !important;
+  font-weight: 700 !important;
+}
+
+.clinic-context .avatar-text {
+  background: linear-gradient(135deg, #0a2540 0%, #0369a1 100%) !important;
+}
+
+/* Cards & Panels */
+.card, .product-auth-card {
+  border-radius: 1.25rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 8px 24px -4px rgba(10, 37, 64, 0.06), 0 2px 6px -1px rgba(2, 132, 199, 0.04) !important;
+  background-color: #ffffff !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.card:hover {
+  box-shadow: 0 16px 36px -8px rgba(10, 37, 64, 0.12), 0 4px 12px -2px rgba(2, 132, 199, 0.08) !important;
+}
+
+.product-shortcut {
+  border-radius: 1.25rem !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+}
+
+.product-shortcut:hover {
+  border-color: #38a9f8 !important;
+  transform: translateY(-2px) !important;
+}
+
+.product-shortcut .avatar-text {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border-radius: 0.85rem !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #0a2540 0%, #0369a1 50%, #0891b2 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25) !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: linear-gradient(135deg, #051424 0%, #0284c7 50%, #0e7490 100%) !important;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-outline-primary {
+  border-color: #0369a1 !important;
+  color: #0369a1 !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0369a1 !important;
+  color: #ffffff !important;
+}
+
+/* Form Controls & Inputs */
+.form-control, .form-select {
+  border-radius: 0.75rem !important;
+  border: 1px solid #cbd5e1 !important;
+  padding: 0.625rem 0.875rem !important;
+  font-size: 0.875rem !important;
+  color: #0f172a !important;
+  transition: all 0.2s ease !important;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2) !important;
+}
+
+/* Badges */
+.badge.bg-soft-primary {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  font-weight: 600 !important;
+  border-radius: 9999px !important;
+  padding: 0.35em 0.75em !important;
+}
+
+.badge.bg-primary {
+  background: #0284c7 !important;
+  border-radius: 9999px !important;
+}
+
+/* Custom Header Bar quick navigation */
+.aurora-header-quicknav a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.6rem;
+  color: #0369a1;
+  background: #f0f7ff;
+  border: 1px solid #bae0fd;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.aurora-header-quicknav a:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+/* Brand Logo (Preserve natural proportions, never deform or circle crop) */
+.product-brand-logo {
+  max-height: 40px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+  border-radius: 1rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 12px 32px -4px rgba(10, 37, 64, 0.12), 0 4px 12px -2px rgba(2, 132, 199, 0.08) !important;
+  padding: 0.75rem !important;
+}
+
+.dropdown-item {
+  border-radius: 0.6rem !important;
+  padding: 0.5rem 0.85rem !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #f0f7ff !important;
+  color: #0369a1 !important;
+}
+
+/* Tables */
+.table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+.table thead th {
+  background: #f8fafc !important;
+  color: #0a2540 !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.78rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 0.85rem 1rem !important;
+}
+
+.table tbody td {
+  padding: 0.85rem 1rem !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  font-size: 0.875rem !important;
+}
+
+.table tbody tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+/* Modals */
+.modal-content {
+  border-radius: 1.5rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 24px 48px -12px rgba(10, 37, 64, 0.25) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 1.25rem 1.5rem !important;
+}
+
+.modal-footer {
+  border-top: 1px solid #e2e8f0 !important;
+  padding: 1rem 1.5rem !important;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 0.875rem !important;
+  border: none !important;
+  font-size: 0.875rem !important;
+  padding: 0.875rem 1.15rem !important;
+}
+
+.alert-warning {
+  background: #fffbeb !important;
+  color: #92400e !important;
+  border-left: 4px solid #f59e0b !important;
+}
+
+.alert-danger {
+  background: #fff1f2 !important;
+  color: #9f1239 !important;
+  border-left: 4px solid #f43f5e !important;
+}
+
+.alert-success {
+  background: #f0fdf4 !important;
+  color: #166534 !important;
+  border-left: 4px solid #10b981 !important;
+}
+
+.alert-info {
+  background: #f0f7ff !important;
+  color: #075985 !important;
+  border-left: 4px solid #0ea5e9 !important;
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+  font-size: 0.82rem !important;
+}
+
+.breadcrumb-item a {
+  color: #0369a1 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+.breadcrumb-item.active {
+  color: #64748b !important;
+}
+
+/* Auth Specific Controls */
+.product-auth-control {
+  position: relative;
+}
+
+.product-auth-control .form-control {
+  padding-left: 2.75rem !important;
+}
+
+.product-auth-control-icon {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.product-auth-control:focus-within .product-auth-control-icon {
+  color: #0284c7;
+}

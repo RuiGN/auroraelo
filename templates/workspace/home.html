@@ -4,12 +4,112 @@
 {% block header_title %}{% translate "Área de trabalho" %}{% endblock %}
 {% block breadcrumb_active %}{% translate "Área de trabalho" %}{% endblock %}
 {% block content %}
-<section class="mb-4" aria-labelledby="workspace-title">
-  <p class="text-primary fs-12 fw-semibold mb-2">{% translate "SEU ESPAÇO DE CUIDADO" %}</p>
-  {% translate "seja bem-vindo" as welcome_fallback %}
-  <h1 id="workspace-title" class="h3 mb-2">{% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}</h1>
-  <p class="text-body-secondary mb-0">{% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}</p>
+<!-- Aurora Elo Executive Welcome Banner -->
+<section class="card mb-4 overflow-hidden border-0 shadow-lg text-white" style="background: linear-gradient(135deg, #051424 0%, #0a2540 60%, #0369a1 100%); border-radius: 1.5rem;" aria-labelledby="workspace-title">
+  <div class="card-body p-4 p-md-5 position-relative">
+    <div class="position-absolute end-0 top-0 bottom-0 opacity-10 d-none d-md-block" style="pointer-events: none;">
+      <i class="feather-activity" style="font-size: 15rem; transform: translate(15%, -10%);"></i>
+    </div>
+    <div class="position-relative z-1">
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+        <span class="badge px-3 py-1 text-white" style="background: rgba(6, 182, 212, 0.25); border: 1px solid rgba(6, 182, 212, 0.4); font-size: 0.72rem; letter-spacing: 0.05em;">
+          AURORA ELO · PSIQUIATRIA & ADICTOLOGIA INTEGRADA
+        </span>
+        <span class="badge px-3 py-1 bg-white text-dark fw-bold" style="font-size: 0.72rem;">
+          {{ active_clinic.name }}
+        </span>
+      </div>
+      {% translate "seja bem-vindo" as welcome_fallback %}
+      <h1 id="workspace-title" class="display-6 fw-bold text-white mb-2" style="font-family: 'Outfit', sans-serif;">
+        {% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}
+      </h1>
+      <p class="fs-15 text-white-50 mb-4 max-w-2xl">
+        {% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}
+      </p>
+
+      <!-- Quick Action Clinical Modules Ribbon -->
+      <div class="d-flex flex-wrap align-items-center gap-2 pt-2">
+        <a href="{% url 'psychiatry:crisis_protocol' %}" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center gap-1.5 px-3 py-2 rounded-3" style="background: #e11d48; border: none; box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);">
+          <i class="feather-alert-octagon"></i> SOS Crise 24h
+        </a>
+        <a href="{% url 'psychiatry:addiction_dashboard' %}" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1.5 px-3 py-2 rounded-3" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.25);">
+          <i class="feather-shield text-info"></i> Adictologia & 12 Passos
+        </a>
+        <a href="{% url 'psychiatry:telepsychiatry' %}" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1.5 px-3 py-2 rounded-3" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.25);">
+          <i class="feather-video text-success"></i> Telepsiquiatria
+        </a>
+        <a href="{% url 'psychiatry:inpatient_beds' %}" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1.5 px-3 py-2 rounded-3" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.25);">
+          <i class="feather-grid text-warning"></i> Gestão de Leitos
+        </a>
+        <a href="{% url 'design_system_reference' %}" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1.5 px-3 py-2 rounded-3 ms-md-auto" style="background: #0284c7; border: none;">
+          <i class="feather-layers"></i> Design System (Tailwind)
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- Clinical Overview Quick Metric Cards -->
+<section class="row g-3 mb-4" aria-label="Indicadores Clínicos Rápidos">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card border-0 shadow-sm rounded-4 p-3 h-100" style="background: #ffffff; border-left: 4px solid #0ea5e9 !important;">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <span class="text-muted fs-11 text-uppercase fw-bold d-block">Acompanhamento Clínico</span>
+          <h3 class="fs-22 fw-bold text-dark mb-0 mt-1" style="font-family: 'Outfit', sans-serif;">Ativo</h3>
+          <span class="text-success fs-12 fw-semibold">Protocolo Vigente</span>
+        </div>
+        <div class="avatar-text avatar-md rounded-3 bg-soft-primary text-primary">
+          <i class="feather-user-check"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card border-0 shadow-sm rounded-4 p-3 h-100" style="background: #ffffff; border-left: 4px solid #06b6d4 !important;">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <span class="text-muted fs-11 text-uppercase fw-bold d-block">12 Passos & Dependência</span>
+          <h3 class="fs-22 fw-bold text-dark mb-0 mt-1" style="font-family: 'Outfit', sans-serif;">SOGS & Craving</h3>
+          <span class="text-info fs-12 fw-semibold">Monitoramento Contínuo</span>
+        </div>
+        <div class="avatar-text avatar-md rounded-3 bg-soft-info text-info">
+          <i class="feather-compass"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card border-0 shadow-sm rounded-4 p-3 h-100" style="background: #ffffff; border-left: 4px solid #10b981 !important;">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <span class="text-muted fs-11 text-uppercase fw-bold d-block">Telepsiquiatria</span>
+          <h3 class="fs-22 fw-bold text-dark mb-0 mt-1" style="font-family: 'Outfit', sans-serif;">Disponível</h3>
+          <span class="text-success fs-12 fw-semibold">Consultório Online</span>
+        </div>
+        <div class="avatar-text avatar-md rounded-3 bg-soft-success text-success">
+          <i class="feather-video"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card border-0 shadow-sm rounded-4 p-3 h-100" style="background: #ffffff; border-left: 4px solid #f43f5e !important;">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <span class="text-muted fs-11 text-uppercase fw-bold d-block">Central SOS 24h</span>
+          <h3 class="fs-22 fw-bold text-danger mb-0 mt-1" style="font-family: 'Outfit', sans-serif;">Plantão 188</h3>
+          <span class="text-danger fs-12 fw-semibold">Triagem de Risco</span>
+        </div>
+        <div class="avatar-text avatar-md rounded-3 bg-soft-danger text-danger">
+          <i class="feather-alert-octagon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Standard Workspace Shortcuts (Contractually tested) -->
 <section id="workspace-shortcuts" aria-labelledby="shortcut-title">
   <h2 id="shortcut-title" class="fs-16 fw-semibold mb-3">{% translate "Por onde começar" %}</h2>
   <div class="row g-4">
@@ -41,6 +141,149 @@
       {% include "workspace/shortcut.html" with route="conversation_list" icon="feather-message-square" label=shortcut_label description=shortcut_description only %}
       {% translate "Segurança da conta" as shortcut_label %}{% translate "Confira os dispositivos e as sessões da sua conta." as shortcut_description %}
       {% include "workspace/shortcut.html" with route="account_sessions" icon="feather-shield" label=shortcut_label description=shortcut_description only %}
+  </div>
+</section>
+
+<!-- Specialized Aurora Elo Clinical Services Showcase -->
+<section class="mt-5" aria-labelledby="aurora-modules-title">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h2 id="aurora-modules-title" class="fs-18 fw-bold text-dark mb-1" style="font-family: 'Outfit', sans-serif;">
+        Ecossistema Clínico Especializado
+      </h2>
+      <p class="fs-13 text-muted mb-0">Módulos integrados para Dependência Química, Jogos de Azar, Telepsiquiatria e Apps</p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Card 1: Dependencia Quimica & 12 Passos -->
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background: #ffffff; transition: transform 0.2s;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="p-3 rounded-3" style="background: #e0f2fe; color: #0284c7;">
+            <i class="feather-compass text-2xl" style="font-size: 1.5rem;"></i>
+          </div>
+          <div>
+            <h3 class="fs-16 fw-bold mb-0">Dependência Química & Álcool</h3>
+            <span class="fs-11 text-muted">Adictologia & Programa 12 Passos</span>
+          </div>
+        </div>
+        <p class="fs-13 text-muted mb-4">
+          Anamnese estruturada nos 12 Passos, prevenção de recaída, diário de fissura (craving) e triagem de vulnerabilidades.
+        </p>
+        <div class="mt-auto d-flex gap-2">
+          <a href="{% url 'psychiatry:addiction_dashboard' %}" class="btn btn-sm btn-primary flex-grow-1 rounded-3">Painel 12 Passos</a>
+          <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="btn btn-sm btn-outline-primary rounded-3">Anamnese</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Jogos de Azar & Ludopatia -->
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background: #ffffff; transition: transform 0.2s;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="p-3 rounded-3" style="background: #cffafe; color: #0891b2;">
+            <i class="feather-target text-2xl" style="font-size: 1.5rem;"></i>
+          </div>
+          <div>
+            <h3 class="fs-16 fw-bold mb-0">Jogos de Azar & Apostas</h3>
+            <span class="fs-11 text-muted">Escala SOGS & Controle de Impulso</span>
+          </div>
+        </div>
+        <p class="fs-13 text-muted mb-4">
+          Instrumentos validados para ludopatia, monitoramento de gatilhos financeiros, impulsividade e plano de contingência.
+        </p>
+        <div class="mt-auto d-flex gap-2">
+          <a href="{% url 'psychiatry:addiction_dashboard' %}" class="btn btn-sm btn-primary flex-grow-1 rounded-3">Triagem SOGS</a>
+          <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="btn btn-sm btn-outline-primary rounded-3">Avaliação</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Telepsiquiatria & Consultorio -->
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background: #ffffff; transition: transform 0.2s;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="p-3 rounded-3" style="background: #dcfce7; color: #059669;">
+            <i class="feather-video text-2xl" style="font-size: 1.5rem;"></i>
+          </div>
+          <div>
+            <h3 class="fs-16 fw-bold mb-0">Telepsiquiatria</h3>
+            <span class="fs-11 text-muted">Consultório Virtual Criptografado</span>
+          </div>
+        </div>
+        <p class="fs-13 text-muted mb-4">
+          Atendimento remoto com teleprescrição, anotações de evolução em tempo real e prontuário integrado.
+        </p>
+        <div class="mt-auto">
+          <a href="{% url 'psychiatry:telepsychiatry' %}" class="btn btn-sm btn-primary w-100 rounded-3">Acessar Consultório</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Gestao de Leitos -->
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background: #ffffff; transition: transform 0.2s;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="p-3 rounded-3" style="background: #fef3c7; color: #d97706;">
+            <i class="feather-grid text-2xl" style="font-size: 1.5rem;"></i>
+          </div>
+          <div>
+            <h3 class="fs-16 fw-bold mb-0">Leitos & Internação</h3>
+            <span class="fs-11 text-muted">Acolhimento & Desintoxicação</span>
+          </div>
+        </div>
+        <p class="fs-13 text-muted mb-4">
+          Mapa de ocupação de leitos psiquiátricos, regime de internação voluntária/involuntária e evolução médica.
+        </p>
+        <div class="mt-auto">
+          <a href="{% url 'psychiatry:inpatient_beds' %}" class="btn btn-sm btn-primary w-100 rounded-3">Mapa de Leitos</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5: Apps Mobile -->
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background: #ffffff; transition: transform 0.2s;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="p-3 rounded-3" style="background: #ede9fe; color: #7c3aed;">
+            <i class="feather-smartphone text-2xl" style="font-size: 1.5rem;"></i>
+          </div>
+          <div>
+            <h3 class="fs-16 fw-bold mb-0">Ecossistema Mobile</h3>
+            <span class="fs-11 text-muted">Apps iOS & Android</span>
+          </div>
+        </div>
+        <p class="fs-13 text-muted mb-4">
+          Aplicativo conectado ao prontuário clínico e aplicativo de varejo (B2C) com Programa de 12 Passos e Mindfulness.
+        </p>
+        <div class="mt-auto d-flex gap-2">
+          <a href="{% url 'psychiatry:mobile_connected' %}" class="btn btn-sm btn-outline-primary flex-grow-1 rounded-3">App Clínico</a>
+          <a href="{% url 'psychiatry:mobile_b2c' %}" class="btn btn-sm btn-outline-primary flex-grow-1 rounded-3">App B2C</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6: Design System -->
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background: linear-gradient(135deg, #0a2540 0%, #0369a1 100%); color: #ffffff;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="p-3 rounded-3 bg-white text-dark">
+            <i class="feather-layers text-2xl" style="font-size: 1.5rem;"></i>
+          </div>
+          <div>
+            <h3 class="fs-16 fw-bold text-white mb-0">Aurora Elo Design System</h3>
+            <span class="fs-11 text-info">Tailwind CSS · Multi-idioma</span>
+          </div>
+        </div>
+        <p class="fs-13 text-white-50 mb-4">
+          Tokens, componentes de formulário, máscaras, modais, gráficos de euthimia e biblioteca completa de UI.
+        </p>
+        <div class="mt-auto">
+          <a href="{% url 'design_system_reference' %}" class="btn btn-sm btn-light w-100 fw-bold rounded-3">Abrir Design System</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

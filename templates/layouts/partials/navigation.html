@@ -10,6 +10,16 @@
   </div>
   {% endif %}
 
+  <div class="px-3 pt-2 pb-1">
+    <a href="{% url 'psychiatry:crisis_protocol' %}" class="d-flex align-items-center justify-content-between p-2.5 rounded-3 text-white" style="background: linear-gradient(135deg, #be123c 0%, #e11d48 50%, #f43f5e 100%); text-decoration: none; font-size: 0.8rem; font-weight: 700; box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);">
+      <span class="d-flex align-items-center gap-2">
+        <i class="feather-alert-octagon"></i>
+        <span>SOS Crise 24h</span>
+      </span>
+      <span class="badge bg-white text-danger px-1.5 py-0.5 rounded-pill" style="font-size: 0.65rem; font-weight: 800;">188</span>
+    </a>
+  </div>
+
   <ul class="nxl-navbar">
     <li class="nxl-item nxl-caption">
       <label>{% translate "Geral" %}</label>
@@ -179,5 +189,62 @@
     </li>
     {% endif %}
     {% endif %}
+
+    <!-- Aurora Elo Specialized Clinical & Ecosystem Modules -->
+    <li class="nxl-item nxl-caption">
+      <label>Psiquiatria & Adictologia</label>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:addiction_dashboard' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-shield"></i></span>
+        <span class="nxl-mtext">Dependência & Álcool</span>
+      </a>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-compass"></i></span>
+        <span class="nxl-mtext">12 Passos & Jogos de Azar</span>
+      </a>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:telepsychiatry' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-video"></i></span>
+        <span class="nxl-mtext">Telepsiquiatria</span>
+      </a>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:inpatient_beds' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-grid"></i></span>
+        <span class="nxl-mtext">Gestão de Leitos</span>
+      </a>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:crisis_protocol' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-alert-triangle" style="color: #f43f5e;"></i></span>
+        <span class="nxl-mtext" style="color: #fca5a5;">Protocolo SOS Crise</span>
+      </a>
+    </li>
+
+    <li class="nxl-item nxl-caption">
+      <label>Apps & Design System</label>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:mobile_connected' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-smartphone"></i></span>
+        <span class="nxl-mtext">App Clínico Conectado</span>
+      </a>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'psychiatry:mobile_b2c' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-shopping-bag"></i></span>
+        <span class="nxl-mtext">App Loja (12 Passos B2C)</span>
+      </a>
+    </li>
+    <li class="nxl-item">
+      <a href="{% url 'design_system_reference' %}" class="nxl-link">
+        <span class="nxl-micon"><i aria-hidden="true" class="feather-layers" style="color: #38a9f8;"></i></span>
+        <span class="nxl-mtext" style="color: #7cc7fb;">Design System (Tailwind)</span>
+      </a>
+    </li>
   </ul>
 </nav>
