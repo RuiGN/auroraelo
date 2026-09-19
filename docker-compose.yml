@@ -8,6 +8,7 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:${WEB_PORT:-4130}:8000"
+      - "127.0.0.1:4132:8000"
     env_file:
       - .env
     environment:
