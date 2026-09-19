@@ -1,0 +1,89 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Criar conteúdo" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="create-content-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "CMS" %}</span>
+    <h1 id="create-content-title" class="mb-0">{% translate "Criar conteúdo" %}</h1>
+  </header>
+  <form method="post" class="product-form-card product-stack">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="product-stack gap-1"><label for="{{ form.slug.id_for_label }}">{{ form.slug.label }}</label>{{ form.slug }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>{{ form.title }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.kind.id_for_label }}">{{ form.kind.label }}</label>{{ form.kind }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.language_code.id_for_label }}">{{ form.language_code.label }}</label>{{ form.language_code }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.audience.id_for_label }}">{{ form.audience.label }}</label>{{ form.audience }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.categories.id_for_label }}">{{ form.categories.label }}</label>{{ form.categories }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.tags.id_for_label }}">{{ form.tags.label }}</label>{{ form.tags }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.contraindications.id_for_label }}">{{ form.contraindications.label }}</label>{{ form.contraindications }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.source_reference.id_for_label }}">{{ form.source_reference.label }}</label>{{ form.source_reference }}</div>
+    <div class="product-stack gap-1"><label for="{{ form.valid_until.id_for_label }}">{{ form.valid_until.label }}</label>{{ form.valid_until }}</div>
+    <fieldset id="block-editor" class="product-stack border rounded p-3">
+      <legend class="h6 mb-2">{% translate "Editor de blocos" %}</legend>
+      <p id="editor-help" class="product-muted">{% translate "Estruture o texto com títulos, parágrafos e listas. Cada bloco é mantido na ordem definida abaixo." %}</p>
+      <div id="block-list" class="product-stack">
+        <div class="block-row product-stack border rounded p-3">
+          <label for="id_block_type_0">{% translate "Tipo do bloco 1" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="id_block_type_0" name="block_type" aria-label="{% translate 'Tipo do bloco 1' %}">
+            <option value="paragraph">{% translate "Parágrafo" %}</option>
+            <option value="heading">{% translate "Título" %}</option>
+            <option value="list_item">{% translate "Item de lista" %}</option>
+          </select></div>
+          <label for="id_block_text_0">{% translate "Texto do bloco 1" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="id_block_text_0" name="block_text" rows="3" aria-label="{% translate 'Texto do bloco 1' %}" placeholder="{% translate 'Texto do bloco 1' %}"></textarea></div>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary" type="button" data-block-move="up" aria-label="{% translate 'Mover bloco 1 para cima' %}">{% translate "Mover para cima" %}</button>
+            <button class="btn btn-outline-secondary" type="button" data-block-move="down" aria-label="{% translate 'Mover bloco 1 para baixo' %}">{% translate "Mover para baixo" %}</button>
+            <button class="btn btn-outline-danger" type="button" data-block-remove aria-label="{% translate 'Remover bloco 1' %}">{% translate "Remover bloco" %}</button>
+          </div>
+        </div>
+        <div class="block-row product-stack border rounded p-3">
+          <label for="id_block_type_1">{% translate "Tipo do bloco 2" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="id_block_type_1" name="block_type" aria-label="{% translate 'Tipo do bloco 2' %}">
+            <option value="paragraph">{% translate "Parágrafo" %}</option>
+            <option value="heading">{% translate "Título" %}</option>
+            <option value="list_item">{% translate "Item de lista" %}</option>
+          </select></div>
+          <label for="id_block_text_1">{% translate "Texto do bloco 2" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="id_block_text_1" name="block_text" rows="3" aria-label="{% translate 'Texto do bloco 2' %}" placeholder="{% translate 'Texto do bloco 2' %}"></textarea></div>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary" type="button" data-block-move="up" aria-label="{% translate 'Mover bloco 2 para cima' %}">{% translate "Mover para cima" %}</button>
+            <button class="btn btn-outline-secondary" type="button" data-block-move="down" aria-label="{% translate 'Mover bloco 2 para baixo' %}">{% translate "Mover para baixo" %}</button>
+            <button class="btn btn-outline-danger" type="button" data-block-remove aria-label="{% translate 'Remover bloco 2' %}">{% translate "Remover bloco" %}</button>
+          </div>
+        </div>
+        <div class="block-row product-stack border rounded p-3">
+          <label for="id_block_type_2">{% translate "Tipo do bloco 3" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="id_block_type_2" name="block_type" aria-label="{% translate 'Tipo do bloco 3' %}">
+            <option value="paragraph">{% translate "Parágrafo" %}</option>
+            <option value="heading">{% translate "Título" %}</option>
+            <option value="list_item">{% translate "Item de lista" %}</option>
+          </select></div>
+          <label for="id_block_text_2">{% translate "Texto do bloco 3" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="id_block_text_2" name="block_text" rows="3" aria-label="{% translate 'Texto do bloco 3' %}" placeholder="{% translate 'Texto do bloco 3' %}"></textarea></div>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-outline-secondary" type="button" data-block-move="up" aria-label="{% translate 'Mover bloco 3 para cima' %}">{% translate "Mover para cima" %}</button>
+            <button class="btn btn-outline-secondary" type="button" data-block-move="down" aria-label="{% translate 'Mover bloco 3 para baixo' %}">{% translate "Mover para baixo" %}</button>
+            <button class="btn btn-outline-danger" type="button" data-block-remove aria-label="{% translate 'Remover bloco 3' %}">{% translate "Remover bloco" %}</button>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-outline-primary" type="button" data-block-add aria-label="{% translate 'Adicionar bloco' %}">{% translate "Adicionar bloco" %}</button>
+        <button class="btn btn-outline-secondary" type="button" data-block-move-up aria-label="{% translate 'Mover último bloco para cima' %}">{% translate "Mover último para cima" %}</button>
+      </div>
+      <details class="border rounded p-3">
+        <summary>{% translate "Editar HTML bruto (fallback)" %}</summary>
+        <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
+        {{ form.body }}
+      </details>
+    </fieldset>
+    {% for field in form %}{% for error in field.errors %}<div role="alert" class="invalid-feedback d-block">{{ error }}</div>{% endfor %}{% endfor %}
+    <button class="btn btn-primary" type="submit">{% translate "Salvar rascunho" %}</button>
+  </form>
+</div>
+{% endblock %}

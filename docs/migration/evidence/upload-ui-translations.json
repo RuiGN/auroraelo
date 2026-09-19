@@ -1,0 +1,32 @@
+[
+  {
+    "msgid": "Tipo de arquivo não permitido.",
+    "en": "File type not allowed.",
+    "es": "Tipo de archivo no permitido."
+  },
+  {
+    "msgid": "O tipo declarado do arquivo é inválido.",
+    "en": "The declared file type is invalid.",
+    "es": "El tipo de archivo declarado no es válido."
+  },
+  {
+    "msgid": "O arquivo está vazio ou excede o limite permitido.",
+    "en": "The file is empty or exceeds the allowed limit.",
+    "es": "El archivo está vacío o supera el límite permitido."
+  },
+  {
+    "msgid": "O conteúdo do arquivo não corresponde ao tipo informado.",
+    "en": "The file content does not match the declared type.",
+    "es": "El contenido del archivo no coincide con el tipo declarado."
+  },
+  {
+    "msgid": "A varredura de segurança do arquivo está indisponível.",
+    "en": "File security scanning is unavailable.",
+    "es": "El análisis de seguridad del archivo no está disponible."
+  },
+  {
+    "msgid": "O arquivo não foi aprovado na varredura de segurança.",
+    "en": "The file did not pass security scanning.",
+    "es": "El archivo no superó el análisis de seguridad."
+  }
+]

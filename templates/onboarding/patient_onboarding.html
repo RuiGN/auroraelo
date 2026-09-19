@@ -1,0 +1,53 @@
+{% extends layout_template %}
+{% load i18n static %}
+
+{% block title %}{% translate "Primeiros passos" %}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="patient-onboarding-title">
+<section class="product-page-header" aria-labelledby="patient-onboarding-title">
+  <div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Boas-vindas" %}</p><h1 id="patient-onboarding-title">{% translate "Sua jornada" %}</h1><p class="lead mb-0">{% translate "Registre objetivos e preferências. Tudo pode ser revisado depois." %}</p></div>
+</section>
+<nav class="product-stepper" aria-label="{% translate 'Etapas do onboarding' %}">
+  <ol>
+    {% for item in step_presentations %}<li{% if item.code == step %} aria-current="step"{% endif %}>{{ item.label }}</li>{% endfor %}
+  </ol>
+</nav>
+<section class="product-form-card">
+  {% if form.non_field_errors %}
+    <div class="form-error-summary" role="alert" tabindex="-1" data-focus-error-summary>
+      {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+    </div>
+  {% endif %}
+  {% if step == "goals" %}
+    <h2>{% translate "Objetivos pessoais" %}</h2>
+    <p class="lead mb-0">{% translate "Declare, se quiser, o que espera trabalhar. Não há nota, risco ou diagnóstico." %}</p>
+    <form method="post" class="product-form-grid" novalidate>
+      {% csrf_token %}<input type="hidden" name="step" value="goals">
+      {% include "components/duralux_field.html" with field=form.goals only %}
+      <div class="d-flex flex-wrap gap-2"><button type="submit" class="btn btn-primary">{% translate "Continuar" %}</button></div>
+    </form>
+  {% elif step == "preferences" %}
+    <h2>{% translate "Preferências de contato e lembretes" %}</h2>
+    <form method="post" class="product-form-grid" novalidate>
+      {% csrf_token %}<input type="hidden" name="step" value="preferences">
+      {% for field in form %}{% include "components/duralux_field.html" with field=field only %}{% endfor %}
+      <div class="d-flex flex-wrap gap-2"><button type="submit" class="btn btn-primary">{% translate "Continuar" %}</button></div>
+    </form>
+  {% elif step == "terms" %}
+    <h2>{% translate "Termos e limites" %}</h2>
+    <p class="lead mb-0" role="note">{% translate "Esta plataforma não substitui atendimento profissional nem serviço de emergência. Em perigo imediato, acione o serviço de emergência da sua localidade." %}</p>
+    {% for document in documents %}<article class="card card-body"><h3>{{ document.title }}</h3><p>{{ document.purpose }}</p></article>{% empty %}<p>{% translate "Nenhum termo publicado ainda." %}</p>{% endfor %}
+    <form method="post">{% csrf_token %}<input type="hidden" name="step" value="terms"><div class="d-flex flex-wrap gap-2"><button type="submit" class="btn btn-primary">{% translate "Li e entendi os limites" %}</button></div></form>
+  {% else %}
+    <h2>{% translate "Onboarding concluído" %}</h2>
+    <p class="lead mb-0">{% translate "Seus objetivos e preferências foram registrados. Você pode revisá-los a qualquer momento." %}</p>
+    <a class="btn btn-primary" href="{% url 'workspace_vertical' %}">{% translate "Ir para a área inicial" %}</a>
+  {% endif %}
+</section>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

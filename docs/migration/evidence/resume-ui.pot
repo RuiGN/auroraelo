@@ -1,0 +1,2677 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-08 20:01-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: accounts/forms.py:15 people/presentation.py:13
+msgid "Administrador da clínica"
+msgstr ""
+
+#: accounts/forms.py:16 people/presentation.py:14
+#: templates/people/professional_list.html:32
+msgid "Terapeuta"
+msgstr ""
+
+#: accounts/forms.py:17 people/presentation.py:15
+#: templates/people/professional_list.html:33
+msgid "Equipe administrativa"
+msgstr ""
+
+#: accounts/forms.py:18 people/presentation.py:16
+#: templates/layouts/partials/header.html:127
+#: templates/people/patient_detail.html:4
+msgid "Paciente"
+msgstr ""
+
+#: accounts/forms.py:34 accounts/forms.py:48 core/forms.py:60
+#: onboarding/forms.py:32 people/forms.py:26
+#: templates/people/patient_detail.html:20
+msgid "E-mail"
+msgstr ""
+
+#: accounts/forms.py:38 accounts/forms.py:144
+msgid "Senha"
+msgstr ""
+
+#: accounts/forms.py:57
+msgid "Nova senha"
+msgstr ""
+
+#: accounts/forms.py:62
+msgid "Confirme a nova senha"
+msgstr ""
+
+#: accounts/forms.py:75 accounts/forms.py:160
+msgid "As senhas informadas não coincidem."
+msgstr ""
+
+#: accounts/forms.py:90
+msgid "Código de verificação"
+msgstr ""
+
+#: accounts/forms.py:104
+msgid "Senha atual"
+msgstr ""
+
+#: accounts/forms.py:113
+msgid "Identificador da pessoa"
+msgstr ""
+
+#: accounts/forms.py:115
+msgid "Justificativa"
+msgstr ""
+
+#: accounts/forms.py:125
+msgid "E-mail da pessoa convidada"
+msgstr ""
+
+#: accounts/forms.py:127
+msgid "Papel inicial"
+msgstr ""
+
+#: accounts/forms.py:131
+msgid "Validade em horas"
+msgstr ""
+
+#: accounts/forms.py:141
+msgid "Nome"
+msgstr ""
+
+#: accounts/forms.py:142
+msgid "Sobrenome"
+msgstr ""
+
+#: accounts/forms.py:149
+msgid "Confirme a senha"
+msgstr ""
+
+#: accounts/language_views.py:21
+msgid "Unsupported language."
+msgstr ""
+
+#: accounts/services.py:62
+msgid "Não foi possível entrar com os dados informados."
+msgstr ""
+
+#: accounts/services.py:64
+msgid "Se existir uma conta ativa para este e-mail, você receberá as instruções."
+msgstr ""
+
+#: accounts/views.py:141
+msgid "Entrar na plataforma"
+msgstr ""
+
+#: accounts/views.py:143
+msgid "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+msgstr ""
+
+#: accounts/views.py:145 accounts/views.py:426
+msgid "Entrar"
+msgstr ""
+
+#: accounts/views.py:148
+msgid "Esqueci minha senha"
+msgstr ""
+
+#: accounts/views.py:186 accounts/views.py:522 accounts/views.py:575
+#: accounts/views.py:635
+msgid "Muitas tentativas. Tente novamente mais tarde."
+msgstr ""
+
+#: accounts/views.py:190 accounts/views.py:204
+msgid "Redefinir autenticação multifator"
+msgstr ""
+
+#: accounts/views.py:191 accounts/views.py:205
+msgid "Confirme a ação sensível e registre a justificativa."
+msgstr ""
+
+#: accounts/views.py:192 accounts/views.py:206
+msgid "Redefinir MFA"
+msgstr ""
+
+#: accounts/views.py:200 accounts/views.py:656
+msgid "Não foi possível confirmar sua senha atual."
+msgstr ""
+
+#: accounts/views.py:257 accounts/views.py:258
+msgid "Convite enviado"
+msgstr ""
+
+#: accounts/views.py:259
+msgid "O convite foi enviado para o endereço informado."
+msgstr ""
+
+#: accounts/views.py:261
+msgid "Enviar outro convite"
+msgstr ""
+
+#: accounts/views.py:267
+msgid "Convidar pessoa"
+msgstr ""
+
+#: accounts/views.py:268
+msgid "Defina o acesso inicial e a validade do convite."
+msgstr ""
+
+#: accounts/views.py:269 templates/people/patient_list.html:56
+msgid "Enviar convite"
+msgstr ""
+
+#: accounts/views.py:302
+msgid "Convite inválido ou expirado."
+msgstr ""
+
+#: accounts/views.py:308 accounts/views.py:310
+msgid "Aceitar convite"
+msgstr ""
+
+#: accounts/views.py:309
+msgid "Confirme seus dados para criar o acesso à clínica."
+msgstr ""
+
+#: accounts/views.py:346
+msgid "Solicitação recebida"
+msgstr ""
+
+#: accounts/views.py:347
+msgid "Verifique seu e-mail"
+msgstr ""
+
+#: accounts/views.py:350 accounts/views.py:366
+msgid "Voltar para entrar"
+msgstr ""
+
+#: accounts/views.py:362
+msgid "Recuperar acesso"
+msgstr ""
+
+#: accounts/views.py:363
+msgid "Informe seu e-mail para receber instruções de recuperação."
+msgstr ""
+
+#: accounts/views.py:364
+msgid "Enviar instruções"
+msgstr ""
+
+#: accounts/views.py:379 accounts/views.py:399
+msgid "Link inválido"
+msgstr ""
+
+#: accounts/views.py:380 accounts/views.py:400
+msgid "Link inválido ou expirado."
+msgstr ""
+
+#: accounts/views.py:381 accounts/views.py:401
+msgid "Solicite novas instruções para recuperar seu acesso."
+msgstr ""
+
+#: accounts/views.py:383 accounts/views.py:403
+msgid "Solicitar novo link"
+msgstr ""
+
+#: accounts/views.py:410
+msgid "Definir nova senha"
+msgstr ""
+
+#: accounts/views.py:411
+msgid "Escolha uma nova senha para proteger sua conta."
+msgstr ""
+
+#: accounts/views.py:412
+msgid "Salvar nova senha"
+msgstr ""
+
+#: accounts/views.py:422
+msgid "Senha alterada"
+msgstr ""
+
+#: accounts/views.py:423
+msgid "Senha alterada com segurança"
+msgstr ""
+
+#: accounts/views.py:424
+msgid "Entre novamente em todos os seus dispositivos."
+msgstr ""
+
+#: accounts/views.py:481 templates/accounts/mfa_enroll.html:8
+msgid "Ativar autenticação em duas etapas"
+msgstr ""
+
+#: accounts/views.py:534
+msgid "Código inválido ou expirado."
+msgstr ""
+
+#: accounts/views.py:545 accounts/views.py:546
+#: templates/accounts/mfa_recovery_codes.html:14
+msgid "Códigos de recuperação"
+msgstr ""
+
+#: accounts/views.py:548
+msgid "Guarde estes códigos antes de continuar; eles não serão exibidos novamente."
+msgstr ""
+
+#: accounts/views.py:579 accounts/views.py:604
+msgid "Confirmar autenticação em duas etapas"
+msgstr ""
+
+#: accounts/views.py:580
+msgid "Informe o código do aplicativo ou de recuperação."
+msgstr ""
+
+#: accounts/views.py:581 accounts/views.py:608
+msgid "Verificar"
+msgstr ""
+
+#: accounts/views.py:599
+msgid "Código inválido ou já utilizado."
+msgstr ""
+
+#: accounts/views.py:606
+msgid "Informe o código do aplicativo ou um código de recuperação."
+msgstr ""
+
+#: clinics/forms.py:11
+msgid "Segunda-feira"
+msgstr ""
+
+#: clinics/forms.py:12
+msgid "Terça-feira"
+msgstr ""
+
+#: clinics/forms.py:13
+msgid "Quarta-feira"
+msgstr ""
+
+#: clinics/forms.py:14
+msgid "Quinta-feira"
+msgstr ""
+
+#: clinics/forms.py:15
+msgid "Sexta-feira"
+msgstr ""
+
+#: clinics/forms.py:16
+msgid "Sábado"
+msgstr ""
+
+#: clinics/forms.py:17
+msgid "Domingo"
+msgstr ""
+
+#: clinics/forms.py:21 templates/layouts/partials/navigation.html:64
+#: templates/people/patient_list.html:4 templates/people/patient_list.html:6
+#: templates/people/patient_list.html:7 templates/people/patient_list.html:20
+#: templates/workspace/home.html:33
+msgid "Pacientes"
+msgstr ""
+
+#: clinics/forms.py:22 templates/workspace/home.html:38
+msgid "Agenda"
+msgstr ""
+
+#: clinics/forms.py:23
+msgid "Registros clínicos"
+msgstr ""
+
+#: clinics/forms.py:24
+msgid "Financeiro"
+msgstr ""
+
+#: clinics/forms.py:25
+msgid "Cobrança"
+msgstr ""
+
+#: clinics/forms.py:26
+msgid "Documentos"
+msgstr ""
+
+#: clinics/forms.py:27
+msgid "Indicadores"
+msgstr ""
+
+#: clinics/forms.py:28 templates/layouts/partials/header.html:62
+#: templates/layouts/partials/header.html:72
+msgid "Notificações"
+msgstr ""
+
+#: clinics/forms.py:35
+msgid "Razão social"
+msgstr ""
+
+#: clinics/forms.py:36 core/forms.py:40 templates/clinics/setup.html:48
+msgid "Nome de exibição"
+msgstr ""
+
+#: clinics/forms.py:38
+msgid "Documento aplicável"
+msgstr ""
+
+#: clinics/forms.py:40
+msgid "E-mail administrativo"
+msgstr ""
+
+#: clinics/forms.py:42
+msgid "Telefone administrativo"
+msgstr ""
+
+#: clinics/forms.py:44 people/forms.py:39
+#: templates/people/patient_detail.html:36
+#: templates/people/patient_detail.html:39
+msgid "Endereço"
+msgstr ""
+
+#: clinics/forms.py:46
+msgid "Complemento"
+msgstr ""
+
+#: clinics/forms.py:48 people/forms.py:40
+#: templates/people/patient_detail.html:40
+msgid "Cidade"
+msgstr ""
+
+#: clinics/forms.py:49
+msgid "Estado ou região"
+msgstr ""
+
+#: clinics/forms.py:50
+msgid "Código postal"
+msgstr ""
+
+#: clinics/forms.py:51
+msgid "País (ISO)"
+msgstr ""
+
+#: clinics/forms.py:57 people/forms.py:30 templates/clinics/setup.html:49
+#: templates/people/patient_detail.html:23
+msgid "Fuso horário"
+msgstr ""
+
+#: clinics/forms.py:59 people/forms.py:28 templates/clinics/setup.html:50
+#: templates/components/language_selector.html:7
+#: templates/people/patient_detail.html:22
+msgid "Idioma"
+msgstr ""
+
+#: clinics/forms.py:60
+msgid "Português do Brasil"
+msgstr ""
+
+#: clinics/forms.py:60
+msgid "English (US)"
+msgstr ""
+
+#: clinics/forms.py:63 config/views.py:41
+msgid "Canais institucionais"
+msgstr ""
+
+#: clinics/forms.py:65
+msgid "Presencial"
+msgstr ""
+
+#: clinics/forms.py:66
+msgid "Videochamada"
+msgstr ""
+
+#: clinics/forms.py:67 core/forms.py:50 core/forms.py:60 onboarding/forms.py:33
+#: people/forms.py:27 templates/people/patient_detail.html:21
+#: templates/people/patient_detail.html:53
+msgid "Telefone"
+msgstr ""
+
+#: clinics/forms.py:72
+msgid "Orientação fora do expediente"
+msgstr ""
+
+#: clinics/forms.py:82
+#, python-format
+msgid "%(weekday)s: início"
+msgstr ""
+
+#: clinics/forms.py:87
+#, python-format
+msgid "%(weekday)s: fim"
+msgstr ""
+
+#: clinics/forms.py:101
+msgid "Informe início e fim, ou deixe os dois campos vazios."
+msgstr ""
+
+#: clinics/forms.py:116
+msgid "Logotipo (PNG ou JPEG, até 2 MB)"
+msgstr ""
+
+#: clinics/forms.py:122
+msgid "Cor primária"
+msgstr ""
+
+#: clinics/forms.py:127
+msgid "Cor secundária"
+msgstr ""
+
+#: clinics/forms.py:139 templates/clinics/setup.html:51
+msgid "Módulos ativos"
+msgstr ""
+
+#: clinics/forms.py:157 clinics/services.py:613
+#, python-format
+msgid "Ative os pré-requisitos antes dos módulos dependentes: %(modules)s"
+msgstr ""
+
+#: clinics/services.py:198
+msgid "Selecione um papel profissional válido."
+msgstr ""
+
+#: clinics/services.py:201
+msgid "A data final não pode ser anterior à data inicial."
+msgstr ""
+
+#: clinics/services.py:364
+msgid "Preencha os dados institucionais obrigatórios."
+msgstr ""
+
+#: clinics/services.py:406
+msgid "Selecione um fuso horário IANA válido."
+msgstr ""
+
+#: clinics/services.py:409
+msgid "Selecione um idioma suportado."
+msgstr ""
+
+#: clinics/services.py:417
+msgid "Selecione canais de atendimento válidos e únicos."
+msgstr ""
+
+#: clinics/services.py:430
+msgid "Informe os horários de todos os dias da semana."
+msgstr ""
+
+#: clinics/services.py:439
+msgid "Informe início e fim para cada intervalo."
+msgstr ""
+
+#: clinics/services.py:446
+msgid "Use horários no formato HH:MM."
+msgstr ""
+
+#: clinics/services.py:450
+msgid "Os intervalos devem ser válidos e não sobrepostos."
+msgstr ""
+
+#: clinics/services.py:460
+msgid "As orientações fora do horário são muito extensas."
+msgstr ""
+
+#: clinics/services.py:470 clinics/services.py:560 clinics/services.py:625
+msgid "Conclua primeiro os dados institucionais."
+msgstr ""
+
+#: clinics/services.py:535
+msgid "Use cores no formato hexadecimal #RRGGBB."
+msgstr ""
+
+#: clinics/services.py:540
+msgid "A cor primária não tem contraste suficiente no tema claro."
+msgstr ""
+
+#: clinics/services.py:544
+msgid "A cor secundária não tem contraste suficiente no tema escuro."
+msgstr ""
+
+#: clinics/services.py:547
+msgid "O logotipo excede o limite de 2 MB."
+msgstr ""
+
+#: clinics/services.py:550
+msgid "O logotipo deve ser PNG ou JPEG."
+msgstr ""
+
+#: clinics/services.py:600
+msgid "Não repita módulos na configuração."
+msgstr ""
+
+#: clinics/services.py:603
+msgid "A configuração contém módulos desconhecidos."
+msgstr ""
+
+#: clinics/views.py:40 templates/clinics/setup.html:29
+msgid "Dados institucionais"
+msgstr ""
+
+#: clinics/views.py:41 templates/clinics/setup.html:33
+msgid "Atendimento e horários"
+msgstr ""
+
+#: clinics/views.py:42 config/views.py:38 templates/clinics/setup.html:37
+msgid "Identidade visual"
+msgstr ""
+
+#: clinics/views.py:43 templates/clinics/setup.html:41
+msgid "Módulos"
+msgstr ""
+
+#: clinics/views.py:44 templates/clinics/setup.html:45
+msgid "Revisão"
+msgstr ""
+
+#: clinics/views.py:48 clinics/views.py:55 config/views.py:47
+msgid "Pendente"
+msgstr ""
+
+#: clinics/views.py:49
+msgid "Verificado"
+msgstr ""
+
+#: clinics/views.py:50 clinics/views.py:56 people/presentation.py:19
+#: templates/people/professional_list.html:22
+msgid "Ativo"
+msgstr ""
+
+#: clinics/views.py:51 clinics/views.py:58
+msgid "Falhou"
+msgstr ""
+
+#: clinics/views.py:52
+msgid "Revogado"
+msgstr ""
+
+#: clinics/views.py:57
+msgid "Renovação pendente"
+msgstr ""
+
+#: config/views.py:32
+msgid "Configuração inicial"
+msgstr ""
+
+#: config/views.py:32
+msgid "Concluída"
+msgstr ""
+
+#: config/views.py:35
+msgid "Permissões da equipe"
+msgstr ""
+
+#: config/views.py:36
+msgid "Revisão pendente"
+msgstr ""
+
+#: config/views.py:38
+msgid "Configurada"
+msgstr ""
+
+#: config/views.py:42 templates/visual_reference/reference.html:102
+msgid "Disponível"
+msgstr ""
+
+#: config/views.py:46
+msgid "Horários de atendimento"
+msgstr ""
+
+#: config/views.py:67
+#, python-format
+msgid "Página %(current)s de %(total)s"
+msgstr ""
+
+#: config/views.py:123
+#, python-format
+msgid "Abrir %(name)s"
+msgstr ""
+
+#: config/views.py:141
+msgid "Atividade"
+msgstr ""
+
+#: config/views.py:141
+msgid "Situação"
+msgstr ""
+
+#: config/views.py:157
+msgid "decrescente"
+msgstr ""
+
+#: config/views.py:157
+msgid "crescente"
+msgstr ""
+
+#: config/views.py:165
+msgid "Módulos disponíveis"
+msgstr ""
+
+#: config/views.py:166
+msgid "Recursos operacionais liberados para a clínica ativa."
+msgstr ""
+
+#: config/views.py:169
+msgid "sem alteração no período"
+msgstr ""
+
+#: config/views.py:175
+msgid "Configurações pendentes"
+msgstr ""
+
+#: config/views.py:176
+msgid "Ajustes factuais que ainda precisam de revisão."
+msgstr ""
+
+#: config/views.py:179
+msgid "1 revisão concluída"
+msgstr ""
+
+#: config/views.py:181
+msgid "Revisar configurações"
+msgstr ""
+
+#: config/views.py:185
+msgid "Informações disponíveis"
+msgstr ""
+
+#: config/views.py:186
+msgid "Exemplo de indicador informativo."
+msgstr ""
+
+#: config/views.py:189
+msgid "2 novos registros"
+msgstr ""
+
+#: config/views.py:195
+msgid "Etapas concluídas"
+msgstr ""
+
+#: config/views.py:196
+msgid "Conclusões confirmadas no fluxo operacional."
+msgstr ""
+
+#: config/views.py:199
+msgid "2 conclusões no período"
+msgstr ""
+
+#: config/views.py:205
+msgid "Falhas operacionais"
+msgstr ""
+
+#: config/views.py:206
+msgid "Erros técnicos que exigem nova tentativa."
+msgstr ""
+
+#: config/views.py:209
+msgid "sem dados sensíveis"
+msgstr ""
+
+#: config/views.py:225 templates/visual_reference/reference.html:187
+msgid "Carregando conteúdo"
+msgstr ""
+
+#: config/views.py:226
+msgid "Aguarde enquanto os dados autorizados são preparados."
+msgstr ""
+
+#: config/views.py:230
+msgid "Nenhum item cadastrado"
+msgstr ""
+
+#: config/views.py:231
+msgid "Cadastre o primeiro item quando estiver pronto."
+msgstr ""
+
+#: config/views.py:235
+msgid "Nenhum resultado encontrado"
+msgstr ""
+
+#: config/views.py:236
+msgid "Revise os filtros aplicados."
+msgstr ""
+
+#: config/views.py:240
+msgid "Conteúdo temporariamente indisponível"
+msgstr ""
+
+#: config/views.py:241
+msgid "Tente novamente em alguns instantes."
+msgstr ""
+
+#: config/views.py:245
+msgid "Não foi possível carregar o conteúdo"
+msgstr ""
+
+#: config/views.py:246
+msgid "Tente novamente sem reenviar dados."
+msgstr ""
+
+#: config/views.py:250 config/views.py:472
+msgid "Acesso não autorizado"
+msgstr ""
+
+#: config/views.py:251 config/views.py:473
+msgid "Você não tem permissão para acessar este conteúdo."
+msgstr ""
+
+#: config/views.py:262
+msgid "Atividades operacionais recentes"
+msgstr ""
+
+#: config/views.py:274
+msgid "Plataforma terapêutica disponível."
+msgstr ""
+
+#: config/views.py:334 templates/layouts/detached.html:32
+#: templates/layouts/detached.html:37
+#: templates/layouts/partials/navigation.html:21
+#: templates/layouts/vertical.html:32 templates/layouts/vertical.html:37
+#: templates/workspace/home.html:3 templates/workspace/home.html:4
+#: templates/workspace/home.html:5
+msgid "Área de trabalho"
+msgstr ""
+
+#: config/views.py:363
+msgid "Preferência de layout inválida."
+msgstr ""
+
+#: config/views.py:462
+msgid "Solicitação inválida"
+msgstr ""
+
+#: config/views.py:463
+msgid "Não foi possível processar sua solicitação."
+msgstr ""
+
+#: config/views.py:482
+msgid "Página não encontrada"
+msgstr ""
+
+#: config/views.py:483
+msgid "A página solicitada não foi encontrada."
+msgstr ""
+
+#: config/views.py:492
+msgid "Erro inesperado"
+msgstr ""
+
+#: config/views.py:493
+msgid "Ocorreu um erro inesperado."
+msgstr ""
+
+#: consents/forms.py:15 consents/forms.py:41
+msgid "Identificador da solicitação"
+msgstr ""
+
+#: consents/forms.py:21
+msgid "Sua decisão"
+msgstr ""
+
+#: consents/forms.py:25 consents/views.py:154
+msgid "Aceitou"
+msgstr ""
+
+#: consents/forms.py:29 consents/views.py:155
+msgid "Recusou"
+msgstr ""
+
+#: consents/forms.py:47
+msgid "Reason for revocation"
+msgstr ""
+
+#: consents/forms.py:54
+msgid "I understand that revocation stops future use for this purpose and does not erase the historical evidence."
+msgstr ""
+
+#: consents/policies.py:112
+msgid "Termos de uso"
+msgstr ""
+
+#: consents/policies.py:113
+msgid "Limites do atendimento"
+msgstr ""
+
+#: consents/policies.py:114
+msgid "Acompanhamento clínico"
+msgstr ""
+
+#: consents/policies.py:115
+msgid "Comunicação"
+msgstr ""
+
+#: consents/policies.py:116
+msgid "Operação da equipe"
+msgstr ""
+
+#: consents/selectors.py:57 consents/services.py:260
+msgid "É necessário possuir acesso ativo à clínica."
+msgstr ""
+
+#: consents/services.py:114
+msgid "Somente a administração pode reconhecer esta tarefa."
+msgstr ""
+
+#: consents/services.py:118
+msgid "Informe a referência do atendimento operacional."
+msgstr ""
+
+#: consents/services.py:125
+msgid "Tarefa operacional indisponível."
+msgstr ""
+
+#: consents/services.py:164
+msgid "Despacho de revogação indisponível."
+msgstr ""
+
+#: consents/services.py:976
+msgid "Titular sem vínculo ativo com esta clínica."
+msgstr ""
+
+#: consents/services.py:979
+msgid "Referências textuais não comprovam representação legal."
+msgstr ""
+
+#: consents/services.py:987
+msgid "A decisão explícita deve ser aceite ou recusa; revogações usam o fluxo próprio."
+msgstr ""
+
+#: consents/services.py:998 consents/services.py:1007
+msgid "Documento indisponível ou ainda não vigente."
+msgstr ""
+
+#: consents/services.py:1010
+msgid "Documento não destinado a este titular."
+msgstr ""
+
+#: consents/services.py:1032 consents/services.py:1191
+msgid "A chave idempotente já foi usada com outra decisão."
+msgstr ""
+
+#: consents/services.py:1048
+msgid "Uma autorização aceita só pode ser retirada pelo fluxo de revogação."
+msgstr ""
+
+#: consents/services.py:1052
+msgid "Esta versão foi revogada e não pode ser reativada por uma nova decisão."
+msgstr ""
+
+#: consents/services.py:1162
+msgid "Somente o titular ativo pode revogar esta autorização."
+msgstr ""
+
+#: consents/services.py:1166 people/services.py:127
+msgid "Informe o motivo da revogação."
+msgstr ""
+
+#: consents/services.py:1173
+msgid "Documento indisponível para revogação."
+msgstr ""
+
+#: consents/services.py:1177
+msgid "Este documento não é uma autorização opcional revogável neste fluxo."
+msgstr ""
+
+#: consents/services.py:1202
+msgid "Não existe autorização vigente para revogar."
+msgstr ""
+
+#: consents/services.py:1243
+msgid "Nenhum destino de revogação está configurado."
+msgstr ""
+
+#: consents/services.py:1276
+msgid "Acesso à clínica indisponível."
+msgstr ""
+
+#: consents/services.py:1279
+msgid "Direito básico disponível independentemente de consentimento."
+msgstr ""
+
+#: consents/services.py:1314
+msgid "Finalidade não configurada para autorização; operação bloqueada por segurança."
+msgstr ""
+
+#: consents/services.py:1329
+#, python-format
+msgid "%(consequence)s Alternativa: %(alternative)s Contato da clínica: %(contact)s Seus direitos básicos permanecem acessíveis."
+msgstr ""
+
+#: consents/services.py:1340
+msgid "Finalidade autorizada."
+msgstr ""
+
+#: consents/views.py:156
+msgid "Revogou"
+msgstr ""
+
+#: core/forms.py:17
+#, python-format
+msgid "Informe no máximo %(limit_value)d dígitos."
+msgstr ""
+
+#: core/forms.py:41
+msgid "Use um nome reconhecível para a equipe autorizada."
+msgstr ""
+
+#: core/forms.py:44
+msgid "Categoria"
+msgstr ""
+
+#: core/forms.py:45
+msgid "Individual"
+msgstr ""
+
+#: core/forms.py:45
+msgid "Grupo"
+msgstr ""
+
+#: core/forms.py:48
+msgid "Data de início"
+msgstr ""
+
+#: core/forms.py:51
+msgid "Documento"
+msgstr ""
+
+#: core/forms.py:53
+msgid "Observações administrativas"
+msgstr ""
+
+#: core/forms.py:57
+msgid "Confirmo os dados"
+msgstr ""
+
+#: core/forms.py:59
+msgid "Contato preferencial"
+msgstr ""
+
+#: core/forms.py:63
+msgid "Recurso ativo"
+msgstr ""
+
+#: core/forms.py:64
+msgid "Anexo"
+msgstr ""
+
+#: core/uploads.py:197
+msgid "Tipo de arquivo não permitido."
+msgstr ""
+
+#: core/uploads.py:200
+msgid "O tipo declarado do arquivo é inválido."
+msgstr ""
+
+#: core/uploads.py:203
+msgid "O arquivo está vazio ou excede o limite permitido."
+msgstr ""
+
+#: core/uploads.py:211
+msgid "O conteúdo do arquivo não corresponde ao tipo informado."
+msgstr ""
+
+#: core/uploads.py:231 core/uploads.py:248
+msgid "A varredura de segurança do arquivo está indisponível."
+msgstr ""
+
+#: core/uploads.py:254
+msgid "O arquivo não foi aprovado na varredura de segurança."
+msgstr ""
+
+#: onboarding/forms.py:13 templates/onboarding/patient_onboarding.html:23
+msgid "Objetivos pessoais"
+msgstr ""
+
+#: onboarding/forms.py:16
+msgid "Um objetivo por linha."
+msgstr ""
+
+#: onboarding/forms.py:29
+msgid "Como você prefere ser contatado(a)?"
+msgstr ""
+
+#: onboarding/forms.py:34
+msgid "WhatsApp"
+msgstr ""
+
+#: onboarding/forms.py:39
+msgid "Melhores horários para lembretes"
+msgstr ""
+
+#: onboarding/forms.py:42
+msgid "Manhã"
+msgstr ""
+
+#: onboarding/forms.py:43
+msgid "Tarde"
+msgstr ""
+
+#: onboarding/forms.py:44
+msgid "Noite"
+msgstr ""
+
+#: onboarding/selectors.py:57
+msgid "Perfil da clínica completo"
+msgstr ""
+
+#: onboarding/selectors.py:59
+msgid "Identidade, operação, identidade visual e módulos configurados."
+msgstr ""
+
+#: onboarding/selectors.py:63
+msgid "Profissionais convidados"
+msgstr ""
+
+#: onboarding/selectors.py:65
+msgid "Pelo menos um profissional ou membro administrativo associado."
+msgstr ""
+
+#: onboarding/selectors.py:69
+msgid "Termos publicados"
+msgstr ""
+
+#: onboarding/selectors.py:71
+msgid "Documentos de consentimento publicados e vigentes."
+msgstr ""
+
+#: onboarding/selectors.py:75
+msgid "Permissões configuradas"
+msgstr ""
+
+#: onboarding/selectors.py:77
+msgid "Administrador da clínica definido."
+msgstr ""
+
+#: onboarding/selectors.py:81
+msgid "Primeiro paciente"
+msgstr ""
+
+#: onboarding/selectors.py:83
+msgid "Pelo menos um paciente cadastrado ou convidado."
+msgstr ""
+
+#: onboarding/services.py:57
+msgid "Etapa de onboarding inválida."
+msgstr ""
+
+#: onboarding/views.py:30
+msgid "Objetivos"
+msgstr ""
+
+#: onboarding/views.py:31
+msgid "Preferências"
+msgstr ""
+
+#: onboarding/views.py:32
+msgid "Termos"
+msgstr ""
+
+#: onboarding/views.py:33
+msgid "Concluído"
+msgstr ""
+
+#: people/forms.py:14 templates/people/patient_detail.html:16
+msgid "Nome completo"
+msgstr ""
+
+#: people/forms.py:16 templates/people/patient_detail.html:17
+msgid "Nome social"
+msgstr ""
+
+#: people/forms.py:19 templates/people/patient_detail.html:18
+msgid "Data de nascimento"
+msgstr ""
+
+#: people/forms.py:22
+msgid "Gênero (opcional)"
+msgstr ""
+
+#: people/forms.py:24 people/views.py:194
+msgid "Não informado"
+msgstr ""
+
+#: people/forms.py:33
+msgid "Preferências de acessibilidade"
+msgstr ""
+
+#: people/forms.py:41 templates/people/patient_detail.html:41
+msgid "UF"
+msgstr ""
+
+#: people/forms.py:42 templates/people/patient_detail.html:42
+msgid "CEP"
+msgstr ""
+
+#: people/forms.py:44
+msgid "Finalidade do endereço"
+msgstr ""
+
+#: people/forms.py:47
+msgid "Contato de emergência — nome"
+msgstr ""
+
+#: people/forms.py:50
+msgid "Contato de emergência — telefone"
+msgstr ""
+
+#: people/forms.py:53
+msgid "Finalidade do contato de emergência"
+msgstr ""
+
+#: people/forms.py:75 people/services.py:301
+msgid "Informe a finalidade para registrar o endereço."
+msgstr ""
+
+#: people/forms.py:83 people/services.py:303
+msgid "Informe a finalidade para o contato de emergência."
+msgstr ""
+
+#: people/presentation.py:6
+msgid "Mulher"
+msgstr ""
+
+#: people/presentation.py:7
+msgid "Homem"
+msgstr ""
+
+#: people/presentation.py:8
+msgid "Pessoa não binária"
+msgstr ""
+
+#: people/presentation.py:9
+msgid "Outro"
+msgstr ""
+
+#: people/presentation.py:10
+msgid "Prefiro não informar"
+msgstr ""
+
+#: people/presentation.py:20 templates/people/professional_list.html:23
+msgid "Agendado"
+msgstr ""
+
+#: people/presentation.py:21 templates/people/professional_list.html:24
+msgid "Suspenso"
+msgstr ""
+
+#: people/presentation.py:22 templates/people/professional_list.html:25
+msgid "Encerrado"
+msgstr ""
+
+#: people/selectors.py:92
+msgid "Perfil pendente"
+msgstr ""
+
+#: people/services.py:125
+msgid "Esta credencial já está revogada."
+msgstr ""
+
+#: people/services.py:191
+msgid "Informe nome e e-mail profissional."
+msgstr ""
+
+#: people/services.py:193
+msgid "Selecione uma categoria profissional válida."
+msgstr ""
+
+#: people/services.py:202
+msgid "Informe especialidades técnicas válidas e sem repetição."
+msgstr ""
+
+#: people/services.py:209
+msgid "Informe conselho, número e jurisdição em conjunto."
+msgstr ""
+
+#: people/services.py:232
+msgid "A foto excede o limite de 2 MB."
+msgstr ""
+
+#: people/services.py:235
+msgid "A foto deve ser PNG ou JPEG."
+msgstr ""
+
+#: people/services.py:297
+msgid "Informe nome e e-mail da pessoa paciente."
+msgstr ""
+
+#: people/services.py:299
+msgid "Selecione uma opção de gênero válida."
+msgstr ""
+
+#: people/services.py:312
+msgid "Foi encontrada uma possível duplicidade nesta clínica."
+msgstr ""
+
+#: people/services.py:457
+msgid "Informe a função do profissional no vínculo."
+msgstr ""
+
+#: people/services.py:504
+msgid "A data de encerramento não pode preceder o início."
+msgstr ""
+
+#: people/services.py:543
+msgid "O novo profissional deve ser diferente do atual."
+msgstr ""
+
+#: people/services.py:545
+msgid "A data de transferência não pode preceder o início."
+msgstr ""
+
+#: people/services.py:548
+msgid "A data de transferência excede o término do vínculo."
+msgstr ""
+
+#: templates/accounts/auth_base.html:24 templates/layouts/base.html:25
+#: templates/visual_reference/reference.html:18
+msgid "Ir para o conteúdo principal"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:7
+msgid "Proteção da conta"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:10
+msgid "No Google Authenticator, adicione uma conta e escaneie o código abaixo."
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:20
+msgid "QR Code para cadastrar esta conta no Google Authenticator"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:25
+msgid "Não consegue escanear?"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:26
+msgid "Cadastre manualmente usando esta chave:"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:32
+msgid "Chave copiada."
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:33
+msgid "Não foi possível copiar. Selecione a chave manualmente."
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:35
+msgid "Copiar chave"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:44
+msgid "Gerar um novo QR Code e reiniciar o cadastro"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:52
+msgid "Não foi possível confirmar"
+msgstr ""
+
+#: templates/accounts/mfa_enroll.html:74
+msgid "Ativar proteção"
+msgstr ""
+
+#: templates/accounts/mfa_recovery_codes.html:7
+msgid "Proteção ativa"
+msgstr ""
+
+#: templates/accounts/mfa_recovery_codes.html:12
+msgid "Estes códigos são exibidos apenas agora. Guarde-os em um local seguro e não os compartilhe."
+msgstr ""
+
+#: templates/accounts/mfa_recovery_codes.html:19
+#: templates/onboarding/patient_onboarding.html:28
+#: templates/onboarding/patient_onboarding.html:35
+msgid "Continuar"
+msgstr ""
+
+#: templates/accounts/sessions.html:4 templates/accounts/sessions.html:12
+msgid "Sessões e dispositivos"
+msgstr ""
+
+#: templates/accounts/sessions.html:13
+msgid "Revise os acessos à sua conta e encerre os que não reconhecer."
+msgstr ""
+
+#: templates/accounts/sessions.html:22
+msgid "Última atividade:"
+msgstr ""
+
+#: templates/accounts/sessions.html:23
+msgid "Encerrada"
+msgstr ""
+
+#: templates/accounts/sessions.html:24
+msgid "Sessão atual"
+msgstr ""
+
+#: templates/accounts/sessions.html:27
+#, python-format
+msgid "Encerrar %(device_label)s"
+msgstr ""
+
+#: templates/accounts/sessions.html:31
+msgid "Encerrar sessão"
+msgstr ""
+
+#: templates/accounts/sessions.html:45
+msgid "Encerrar todas as outras sessões"
+msgstr ""
+
+#: templates/accounts/sessions.html:48
+msgid "Nenhuma sessão registrada."
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:4
+msgid "Confirmar troca de clínica"
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:9
+msgid "Confirmação de contexto"
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:10
+msgid "Trocar clínica ativa?"
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:11
+#, python-format
+msgid "Você está em <strong>%(current_clinic_name)s</strong> e solicitou acesso a <strong>%(target_clinic_name)s</strong>."
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:12
+msgid "A troca atualiza o contexto das próximas páginas. Nenhum dado é copiado entre clínicas."
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:18
+msgid "Confirmar troca"
+msgstr ""
+
+#: templates/clinics/confirm_switch.html:20
+msgid "Manter clínica atual"
+msgstr ""
+
+#: templates/clinics/setup.html:4 templates/clinics/setup.html:11
+#: templates/layouts/partials/navigation.html:56
+#: templates/workspace/home.html:35
+msgid "Configurar clínica"
+msgstr ""
+
+#: templates/clinics/setup.html:10
+msgid "Configuração da clínica ativa"
+msgstr ""
+
+#: templates/clinics/setup.html:12
+#, python-format
+msgid "Revise cada etapa na ordem. As mudanças ficam restritas a %(clinic_name)s e são registradas na auditoria."
+msgstr ""
+
+#: templates/clinics/setup.html:16
+msgid "Etapas da configuração"
+msgstr ""
+
+#: templates/clinics/setup.html:28
+msgid "Etapa 1 de 5"
+msgstr ""
+
+#: templates/clinics/setup.html:30
+msgid "Informe identificação, contato administrativo e endereço estruturado."
+msgstr ""
+
+#: templates/clinics/setup.html:32
+msgid "Etapa 2 de 5"
+msgstr ""
+
+#: templates/clinics/setup.html:34
+msgid "Defina fuso, idioma, canais, semana operacional e orientação fora do horário."
+msgstr ""
+
+#: templates/clinics/setup.html:36
+msgid "Etapa 3 de 5"
+msgstr ""
+
+#: templates/clinics/setup.html:38
+msgid "Envie um logotipo raster seguro e escolha cores com contraste adequado."
+msgstr ""
+
+#: templates/clinics/setup.html:40
+msgid "Etapa 4 de 5"
+msgstr ""
+
+#: templates/clinics/setup.html:42
+msgid "Ative somente recursos necessários. Pré-requisitos são verificados pelo servidor."
+msgstr ""
+
+#: templates/clinics/setup.html:44
+msgid "Etapa 5 de 5"
+msgstr ""
+
+#: templates/clinics/setup.html:51
+msgid "Nenhum"
+msgstr ""
+
+#: templates/clinics/setup.html:54
+msgid "Comece pelos dados institucionais para montar a revisão."
+msgstr ""
+
+#: templates/clinics/setup.html:59 templates/components/form.html:8
+msgid "Há alterações não salvas."
+msgstr ""
+
+#: templates/clinics/setup.html:64
+msgid "Revise os campos informados"
+msgstr ""
+
+#: templates/clinics/setup.html:97
+msgid "Pré-visualização da marca"
+msgstr ""
+
+#: templates/clinics/setup.html:100
+#, python-format
+msgid "Pré-visualização do logotipo de %(clinic_name)s"
+msgstr ""
+
+#: templates/clinics/setup.html:104
+msgid "As cores serão aplicadas aos tokens permitidos nos temas claro e escuro após a validação de contraste."
+msgstr ""
+
+#: templates/clinics/setup.html:105
+msgid "Exemplo de ação principal"
+msgstr ""
+
+#: templates/clinics/setup.html:108
+msgid "Salvar e continuar"
+msgstr ""
+
+#: templates/clinics/whitelabel_domains.html:4
+#: templates/clinics/whitelabel_domains.html:10
+msgid "Domínios personalizados"
+msgstr ""
+
+#: templates/clinics/whitelabel_domains.html:9
+msgid "White label"
+msgstr ""
+
+#: templates/clinics/whitelabel_domains.html:13
+msgid "Domínios desta clínica"
+msgstr ""
+
+#: templates/clinics/whitelabel_domains.html:16
+#, python-format
+msgid "%(domain)s · %(status)s · TLS: %(tls_status)s"
+msgstr ""
+
+#: templates/clinics/whitelabel_domains.html:18
+msgid "Nenhum domínio personalizado cadastrado."
+msgstr ""
+
+#: templates/components/form.html:19 templates/people/patient_form.html:13
+msgid "Revise os campos indicados"
+msgstr ""
+
+#: templates/components/form.html:20
+msgid "Não foi possível salvar. Corrija os problemas abaixo."
+msgstr ""
+
+#: templates/components/language_selector.html:15
+msgid "Há alterações não salvas. Alterar o idioma e descartar essas alterações?"
+msgstr ""
+
+#: templates/components/language_selector.html:18
+msgid "Idioma da interface"
+msgstr ""
+
+#: templates/components/language_selector.html:24
+msgid "Aplicar idioma"
+msgstr ""
+
+#: templates/components/pagination.html:2
+msgid "Paginação"
+msgstr ""
+
+#: templates/components/pagination.html:6
+msgid "Primeira"
+msgstr ""
+
+#: templates/components/pagination.html:8
+#: templates/visual_reference/reference.html:153
+msgid "Anterior"
+msgstr ""
+
+#: templates/components/pagination.html:10
+#, python-format
+msgid "Ir para a página %(number)s"
+msgstr ""
+
+#: templates/components/pagination.html:12
+#: templates/visual_reference/reference.html:156
+msgid "Próxima"
+msgstr ""
+
+#: templates/components/pagination.html:14
+msgid "Última"
+msgstr ""
+
+#: templates/components/responsive_table.html:9
+#: templates/components/responsive_table.html:35
+#, python-format
+msgid "Ordenar por %(label)s"
+msgstr ""
+
+#: templates/components/responsive_table.html:12
+#: templates/people/professional_list.html:48
+#: templates/visual_reference/reference.html:28
+msgid "Ações"
+msgstr ""
+
+#: templates/components/responsive_table.html:23
+msgid "Sem ações"
+msgstr ""
+
+#: templates/components/responsive_table.html:28
+#: templates/components/responsive_table.html:52
+msgid "Nenhum registro disponível."
+msgstr ""
+
+#: templates/components/responsive_table.html:34
+msgid "Ordenação da lista"
+msgstr ""
+
+#: templates/components/responsive_table.html:35
+#, python-format
+msgid "Ordenar por %(label)s em ordem %(direction)s"
+msgstr ""
+
+#: templates/components/responsive_table.html:35
+msgid "; ordem atual crescente"
+msgstr ""
+
+#: templates/components/responsive_table.html:35
+msgid "; ordem atual decrescente"
+msgstr ""
+
+#: templates/components/summary_card.html:15
+#, python-format
+msgid "Tendência: %(trend)s"
+msgstr ""
+
+#: templates/consents/center.html:4 templates/consents/center.html:8
+msgid "Terms and consents"
+msgstr ""
+
+#: templates/consents/center.html:9
+msgid "Read each document and record your decision. Optional authorizations are not preselected and may be refused without blocking your basic rights."
+msgstr ""
+
+#: templates/consents/center.html:13
+msgid "Required acceptances"
+msgstr ""
+
+#: templates/consents/center.html:19
+msgid "There are no required acceptances pending."
+msgstr ""
+
+#: templates/consents/center.html:24
+msgid "Optional authorizations"
+msgstr ""
+
+#: templates/consents/center.html:30
+msgid "There are no optional authorizations available."
+msgstr ""
+
+#: templates/consents/decision_error.html:4
+#: templates/consents/decision_error.html:8
+msgid "Review your decision"
+msgstr ""
+
+#: templates/consents/decision_error.html:9
+msgid "Select accept or refuse before continuing."
+msgstr ""
+
+#: templates/consents/decision_error.html:12
+msgid "The decision could not be recorded."
+msgstr ""
+
+#: templates/consents/decision_error.html:19
+msgid "Back to terms"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:5
+#, python-format
+msgid "Version %(version)s · Purpose: %(purpose)s"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:7
+msgid "If you refuse:"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:8
+msgid "Alternative:"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:9
+msgid "Clinic contact:"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:10
+msgid "Recorded decision:"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:15
+msgid "Choose an option"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:18
+msgid "I accept for the stated purpose"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:22
+msgid "I do not accept"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:25
+msgid "Record decision"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:31
+msgid "A revogação interrompe novos usos para esta finalidade, preservando a evidência histórica e obrigações legais aplicáveis."
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:32
+msgid "Motivo da revogação"
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:36
+msgid "Entendo o escopo e desejo revogar esta autorização."
+msgstr ""
+
+#: templates/consents/partials/document_decision.html:38
+msgid "Revogar autorização"
+msgstr ""
+
+#: templates/consents/revocation_error.html:4
+#: templates/consents/revocation_error.html:8
+msgid "Não foi possível revogar a autorização"
+msgstr ""
+
+#: templates/consents/revocation_error.html:14
+msgid "Voltar aos termos e consentimentos"
+msgstr ""
+
+#: templates/consents/revocation_work_error.html:4
+#: templates/consents/revocation_work_error.html:8
+msgid "Não foi possível confirmar o atendimento"
+msgstr ""
+
+#: templates/consents/revocation_work_error.html:10
+msgid "Voltar para a fila"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:4
+#: templates/consents/revocation_work_queue.html:8
+msgid "Revogações aguardando tratamento"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:9
+msgid "Confirme cada bloqueio operacional somente após concluir o atendimento no sistema de destino."
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:12
+msgid "Fila operacional de revogações"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:19
+msgid "Titular:"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:20
+msgid "Finalidade:"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:21
+msgid "Documento:"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:21
+#, python-format
+msgid "%(title)s — version %(version)s"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:22
+msgid "Despacho:"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:23
+msgid "Criada em:"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:26
+msgid "Referência do atendimento operacional"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:28
+msgid "Confirmar atendimento"
+msgstr ""
+
+#: templates/consents/revocation_work_queue.html:36
+msgid "Não há revogações aguardando tratamento."
+msgstr ""
+
+#: templates/errors/400.html:6 templates/errors/403.html:6
+#: templates/errors/404.html:6 templates/errors/500.html:6
+#, python-format
+msgid "Erro %(code)s"
+msgstr ""
+
+#: templates/errors/400.html:9 templates/errors/403.html:9
+#: templates/errors/404.html:9 templates/errors/500.html:9
+msgid "Referência:"
+msgstr ""
+
+#: templates/errors/400.html:10 templates/errors/403.html:10
+#: templates/errors/404.html:10 templates/errors/500.html:10
+msgid "Voltar ao início"
+msgstr ""
+
+#: templates/layouts/detached.html:7
+#: templates/layouts/partials/navigation.html:2
+#: templates/layouts/vertical.html:7
+msgid "Navegação principal"
+msgstr ""
+
+#: templates/layouts/detached.html:10 templates/layouts/vertical.html:10
+msgid "Início da plataforma"
+msgstr ""
+
+#: templates/layouts/detached.html:14 templates/layouts/detached.html:52
+#: templates/layouts/vertical.html:14 templates/layouts/vertical.html:52
+msgid "Fechar menu"
+msgstr ""
+
+#: templates/layouts/detached.html:19
+#: templates/layouts/partials/navigation.html:34
+msgid "Navegação destacada"
+msgstr ""
+
+#: templates/layouts/detached.html:28 templates/layouts/vertical.html:28
+msgid "Caminho de navegação"
+msgstr ""
+
+#: templates/layouts/detached.html:36 templates/layouts/vertical.html:36
+msgid "Início"
+msgstr ""
+
+#: templates/layouts/partials/header.html:8
+msgid "Abrir menu"
+msgstr ""
+
+#: templates/layouts/partials/header.html:18
+msgid "Recolher navegação"
+msgstr ""
+
+#: templates/layouts/partials/header.html:22
+msgid "Expandir navegação"
+msgstr ""
+
+#: templates/layouts/partials/header.html:33
+msgid "Clínica ativa"
+msgstr ""
+
+#: templates/layouts/partials/header.html:46
+#: templates/layouts/partials/header.html:50
+msgid "Alternar tema claro e escuro"
+msgstr ""
+
+#: templates/layouts/partials/header.html:54
+msgid "Tema escuro"
+msgstr ""
+
+#: templates/layouts/partials/header.html:55
+msgid "Tema claro"
+msgstr ""
+
+#: templates/layouts/partials/header.html:56
+msgid "Tema do sistema"
+msgstr ""
+
+#: templates/layouts/partials/header.html:73
+msgid "Central de avisos"
+msgstr ""
+
+#: templates/layouts/partials/header.html:79
+#: templates/layouts/partials/navigation.html:8
+#, python-format
+msgid "%(count)s revogação operacional pendente"
+msgid_plural "%(count)s revogações operacionais pendentes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/layouts/partials/header.html:82
+msgid "Nenhuma notificação pendente."
+msgstr ""
+
+#: templates/layouts/partials/header.html:92
+msgid "Trocar clínica"
+msgstr ""
+
+#: templates/layouts/partials/header.html:96
+msgid "Alternar clínica"
+msgstr ""
+
+#: templates/layouts/partials/header.html:99
+msgid "Selecionar clínica"
+msgstr ""
+
+#: templates/layouts/partials/header.html:107
+msgid "Revisar troca"
+msgstr ""
+
+#: templates/layouts/partials/header.html:116
+msgid "Menu da conta"
+msgstr ""
+
+#: templates/layouts/partials/header.html:127
+msgid "Administrador"
+msgstr ""
+
+#: templates/layouts/partials/header.html:127
+msgid "Profissional"
+msgstr ""
+
+#: templates/layouts/partials/header.html:127
+msgid "Usuário"
+msgstr ""
+
+#: templates/layouts/partials/header.html:134
+msgid "Modo de navegação"
+msgstr ""
+
+#: templates/layouts/partials/header.html:137
+msgid "Vertical"
+msgstr ""
+
+#: templates/layouts/partials/header.html:138
+msgid "Destacado"
+msgstr ""
+
+#: templates/layouts/partials/header.html:141
+msgid "OK"
+msgstr ""
+
+#: templates/layouts/partials/header.html:152
+msgid "Sair da conta"
+msgstr ""
+
+#: templates/layouts/partials/messages.html:4
+msgid "Mensagens do sistema"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:15
+msgid "Geral"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:28
+#: templates/layouts/vertical.html:19
+msgid "Navegação vertical"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:42
+msgid "Gestão da clínica"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:48
+msgid "Administração"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:71
+#: templates/people/professional_list.html:4
+#: templates/people/professional_list.html:11
+msgid "Profissionais"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:80
+#: templates/workspace/home.html:29
+msgid "Painel operacional"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:90
+msgid "Cuidado e prática"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:96
+msgid "Rotina terapêutica"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:104
+#: templates/workspace/home.html:19
+msgid "Diário emocional"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:111
+#: templates/workspace/home.html:21
+msgid "Minhas metas"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:118
+msgid "Exercícios"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:125
+msgid "Modo de baixa energia"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:133
+msgid "Comunicação e agenda"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:139
+msgid "Atendimento"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:146
+msgid "Agenda de consultas"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:153
+#: templates/workspace/home.html:40
+msgid "Mensagens"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:161
+msgid "Painéis de evolução"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:168
+#: templates/workspace/home.html:17
+msgid "Minha evolução"
+msgstr ""
+
+#: templates/layouts/partials/navigation.html:177
+#: templates/workspace/home.html:25
+msgid "Painel profissional"
+msgstr ""
+
+#: templates/onboarding/clinic_checklist.html:4
+#: templates/onboarding/clinic_checklist.html:9
+msgid "Onboarding da clínica"
+msgstr ""
+
+#: templates/onboarding/clinic_checklist.html:9
+msgid "Preparação operacional"
+msgstr ""
+
+#: templates/onboarding/clinic_checklist.html:9
+msgid "Pendências factuais para liberar a operação inicial."
+msgstr ""
+
+#: templates/onboarding/clinic_checklist.html:12
+msgid "Checklist de preparação"
+msgstr ""
+
+#: templates/onboarding/clinic_checklist.html:21
+msgid "concluído"
+msgstr ""
+
+#: templates/onboarding/clinic_checklist.html:21
+msgid "pendente"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:4
+msgid "Primeiros passos"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:9
+msgid "Boas-vindas"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:9
+msgid "Sua jornada"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:9
+msgid "Registre objetivos e preferências. Tudo pode ser revisado depois."
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:11
+msgid "Etapas do onboarding"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:24
+msgid "Declare, se quiser, o que espera trabalhar. Não há nota, risco ou diagnóstico."
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:31
+msgid "Preferências de contato e lembretes"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:38
+msgid "Termos e limites"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:39
+msgid "Esta plataforma não substitui atendimento profissional nem serviço de emergência. Em perigo imediato, acione o serviço de emergência da sua localidade."
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:40
+msgid "Nenhum termo publicado ainda."
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:41
+msgid "Li e entendi os limites"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:43
+msgid "Onboarding concluído"
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:44
+msgid "Seus objetivos e preferências foram registrados. Você pode revisá-los a qualquer momento."
+msgstr ""
+
+#: templates/onboarding/patient_onboarding.html:45
+msgid "Ir para a área inicial"
+msgstr ""
+
+#: templates/people/patient_detail.html:9 templates/people/patient_form.html:8
+msgid "Cadastro mínimo"
+msgstr ""
+
+#: templates/people/patient_detail.html:9
+msgid "Dados cadastrais autorizados da clínica ativa."
+msgstr ""
+
+#: templates/people/patient_detail.html:10
+msgid "Voltar à lista de pacientes"
+msgstr ""
+
+#: templates/people/patient_detail.html:14
+msgid "Identificação"
+msgstr ""
+
+#: templates/people/patient_detail.html:19
+msgid "Gênero"
+msgstr ""
+
+#: templates/people/patient_detail.html:29
+msgid "Acessibilidade"
+msgstr ""
+
+#: templates/people/patient_detail.html:38
+#: templates/people/patient_detail.html:51
+msgid "Finalidade"
+msgstr ""
+
+#: templates/people/patient_detail.html:49
+msgid "Contato de emergência"
+msgstr ""
+
+#: templates/people/patient_detail.html:52
+#: templates/people/patient_list.html:40
+#: templates/people/professional_list.html:48
+msgctxt "person full name"
+msgid "Nome"
+msgstr ""
+
+#: templates/people/patient_form.html:4 templates/people/patient_form.html:8
+#: templates/people/patient_list.html:12 templates/people/patient_list.html:30
+msgid "Cadastrar paciente"
+msgstr ""
+
+#: templates/people/patient_form.html:8
+msgid "Informe somente os dados necessários. Gênero é opcional e preferências podem ser revisadas."
+msgstr ""
+
+#: templates/people/patient_form.html:21
+msgid "Salvar cadastro"
+msgstr ""
+
+#: templates/people/patient_form.html:21
+#: templates/visual_reference/reference.html:57
+#: templates/visual_reference/reference.html:314
+msgid "Cancelar"
+msgstr ""
+
+#: templates/people/patient_list.html:25
+msgid "Cadastros autorizados"
+msgstr ""
+
+#: templates/people/patient_list.html:26
+msgid "Pessoas cadastradas"
+msgstr ""
+
+#: templates/people/patient_list.html:36
+msgid "Lista de pacientes"
+msgstr ""
+
+#: templates/people/patient_list.html:41
+msgid "Contato"
+msgstr ""
+
+#: templates/people/patient_list.html:42
+msgid "Acesso"
+msgstr ""
+
+#: templates/people/patient_list.html:48
+#: templates/people/professional_list.html:52
+msgid "Nome social:"
+msgstr ""
+
+#: templates/people/patient_list.html:52
+msgid "Conta vinculada"
+msgstr ""
+
+#: templates/people/patient_list.html:70
+msgid "Nenhum paciente cadastrado"
+msgstr ""
+
+#: templates/people/patient_list.html:71
+msgid "Use a ação principal para iniciar um cadastro mínimo."
+msgstr ""
+
+#: templates/people/professional_list.html:10
+msgid "Equipe da clínica ativa"
+msgstr ""
+
+#: templates/people/professional_list.html:12
+msgid "Perfis, vínculos e credenciais informadas, sem confirmação automática pela plataforma."
+msgstr ""
+
+#: templates/people/professional_list.html:14
+msgid "Convidar profissional"
+msgstr ""
+
+#: templates/people/professional_list.html:17
+msgid "Filtros de profissionais"
+msgstr ""
+
+#: templates/people/professional_list.html:19
+#: templates/people/professional_list.html:48
+msgid "Status"
+msgstr ""
+
+#: templates/people/professional_list.html:21
+#: templates/people/professional_list.html:31
+msgid "Todos"
+msgstr ""
+
+#: templates/people/professional_list.html:29
+#: templates/people/professional_list.html:48
+msgid "Papel"
+msgstr ""
+
+#: templates/people/professional_list.html:37
+msgid "Especialidade técnica"
+msgstr ""
+
+#: templates/people/professional_list.html:40
+msgid "Aplicar filtros"
+msgstr ""
+
+#: templates/people/professional_list.html:44
+msgid "Resultado"
+msgstr ""
+
+#: templates/people/professional_list.html:46
+msgid "Lista de profissionais"
+msgstr ""
+
+#: templates/people/professional_list.html:48
+msgid "Unidade"
+msgstr ""
+
+#: templates/people/professional_list.html:48
+msgid "Especialidades"
+msgstr ""
+
+#: templates/people/professional_list.html:55
+msgid "Não informada"
+msgstr ""
+
+#: templates/people/professional_list.html:56
+msgid "Não informadas"
+msgstr ""
+
+#: templates/people/professional_list.html:59
+msgid "Reativar"
+msgstr ""
+
+#: templates/people/professional_list.html:61
+msgid "Suspender"
+msgstr ""
+
+#: templates/people/professional_list.html:70
+msgid "Nenhum profissional encontrado"
+msgstr ""
+
+#: templates/people/professional_list.html:70
+msgid "Revise os filtros ou convide o primeiro profissional."
+msgstr ""
+
+#: templates/visual_reference/reference.html:9
+msgid "Referência do sistema visual — Catálogo Duralux"
+msgstr ""
+
+#: templates/visual_reference/reference.html:24
+msgid "Referência interna de interface"
+msgstr ""
+
+#: templates/visual_reference/reference.html:26
+msgid "Seções do catálogo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:29
+#: templates/visual_reference/reference.html:137
+msgid "Formulários"
+msgstr ""
+
+#: templates/visual_reference/reference.html:30
+msgid "Conteúdo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:31
+msgid "Sobreposições"
+msgstr ""
+
+#: templates/visual_reference/reference.html:39
+msgid "Fundação Duralux"
+msgstr ""
+
+#: templates/visual_reference/reference.html:40
+msgid "Referência do sistema visual"
+msgstr ""
+
+#: templates/visual_reference/reference.html:42
+msgid "Exemplos baseados em Bootstrap e nas integrações do produto, com estrutura semântica, rótulos visíveis e estados que não dependem apenas de cor."
+msgstr ""
+
+#: templates/visual_reference/reference.html:49
+msgid "Botões e ações"
+msgstr ""
+
+#: templates/visual_reference/reference.html:50
+msgid "Use o texto da ação para comunicar seu resultado."
+msgstr ""
+
+#: templates/visual_reference/reference.html:54
+msgid "Ação principal"
+msgstr ""
+
+#: templates/visual_reference/reference.html:55
+msgid "Ação secundária"
+msgstr ""
+
+#: templates/visual_reference/reference.html:56
+msgid "Ação alternativa"
+msgstr ""
+
+#: templates/visual_reference/reference.html:58
+msgid "Excluir"
+msgstr ""
+
+#: templates/visual_reference/reference.html:59
+msgid "Ação indisponível"
+msgstr ""
+
+#: templates/visual_reference/reference.html:66
+msgid "Formulário acessível"
+msgstr ""
+
+#: templates/visual_reference/reference.html:68
+msgid "Cada campo possui um rótulo associado; a validação do servidor é a fonte de verdade."
+msgstr ""
+
+#: templates/visual_reference/reference.html:74
+msgid "Exemplo validado pelo servidor. Nenhum dado foi armazenado."
+msgstr ""
+
+#: templates/visual_reference/reference.html:77
+msgid "Salvar exemplo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:84
+msgid "Cards, alertas e badges"
+msgstr ""
+
+#: templates/visual_reference/reference.html:85
+msgid "Componentes de conteúdo combinam hierarquia, texto e contexto."
+msgstr ""
+
+#: templates/visual_reference/reference.html:92
+msgid "Informativo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:93
+msgid "Card básico"
+msgstr ""
+
+#: templates/visual_reference/reference.html:94
+msgid "Agrupa informações relacionadas e uma ação contextual."
+msgstr ""
+
+#: templates/visual_reference/reference.html:95
+msgid "Ver inventário"
+msgstr ""
+
+#: templates/visual_reference/reference.html:103
+msgid "Card com rodapé"
+msgstr ""
+
+#: templates/visual_reference/reference.html:104
+msgid "O rodapé pode separar metadados do conteúdo principal."
+msgstr ""
+
+#: templates/visual_reference/reference.html:106
+msgid "Atualizado pelo próprio sistema"
+msgstr ""
+
+#: templates/visual_reference/reference.html:111
+msgid "Exemplos de alertas"
+msgstr ""
+
+#: templates/visual_reference/reference.html:112
+msgid "<strong>Sucesso:</strong> operação concluída."
+msgstr ""
+
+#: templates/visual_reference/reference.html:113
+msgid "<strong>Atenção:</strong> revise os campos antes de continuar."
+msgstr ""
+
+#: templates/visual_reference/reference.html:114
+msgid "<strong>Erro:</strong> não foi possível concluir a operação."
+msgstr ""
+
+#: templates/visual_reference/reference.html:115
+msgid "<strong>Informação:</strong> há orientações adicionais disponíveis."
+msgstr ""
+
+#: templates/visual_reference/reference.html:119
+msgid "Tabela responsiva"
+msgstr ""
+
+#: templates/visual_reference/reference.html:122
+msgid "Disponibilidade dos componentes apresentados neste catálogo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:125
+msgid "Componente"
+msgstr ""
+
+#: templates/visual_reference/reference.html:126
+msgid "Fundação"
+msgstr ""
+
+#: templates/visual_reference/reference.html:127
+msgid "Estado"
+msgstr ""
+
+#: templates/visual_reference/reference.html:132
+msgid "Botões"
+msgstr ""
+
+#: templates/visual_reference/reference.html:134
+#: templates/visual_reference/reference.html:139
+#: templates/visual_reference/reference.html:144
+msgid "Suportado"
+msgstr ""
+
+#: templates/visual_reference/reference.html:142
+#: templates/visual_reference/reference.html:163
+msgid "Estados de conteúdo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:143
+msgid "Integração do produto"
+msgstr ""
+
+#: templates/visual_reference/reference.html:151
+msgid "Paginação do catálogo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:164
+msgid "O nome do estado e a orientação permanecem disponíveis em texto."
+msgstr ""
+
+#: templates/visual_reference/reference.html:169
+msgid "Nenhum item encontrado"
+msgstr ""
+
+#: templates/visual_reference/reference.html:170
+msgid "Altere os filtros ou crie o primeiro item."
+msgstr ""
+
+#: templates/visual_reference/reference.html:171
+msgid "Criar item"
+msgstr ""
+
+#: templates/visual_reference/reference.html:176
+msgid "Falha ao carregar"
+msgstr ""
+
+#: templates/visual_reference/reference.html:177
+msgid "Verifique sua conexão e tente novamente."
+msgstr ""
+
+#: templates/visual_reference/reference.html:178
+msgid "Tentar novamente"
+msgstr ""
+
+#: templates/visual_reference/reference.html:185
+msgid "Carregando"
+msgstr ""
+
+#: templates/visual_reference/reference.html:188
+msgid "Aguarde enquanto as informações são preparadas."
+msgstr ""
+
+#: templates/visual_reference/reference.html:197
+msgid "Cards de resumo"
+msgstr ""
+
+#: templates/visual_reference/reference.html:199
+msgid "Indicadores factuais combinam texto, valor e contexto sem conclusão clínica."
+msgstr ""
+
+#: templates/visual_reference/reference.html:213
+msgid "Tabela responsiva e paginação"
+msgstr ""
+
+#: templates/visual_reference/reference.html:215
+msgid "A mesma informação permanece disponível em tabela no desktop e em cards no celular."
+msgstr ""
+
+#: templates/visual_reference/reference.html:224
+msgid "Estados gerados pelo produto"
+msgstr ""
+
+#: templates/visual_reference/reference.html:225
+msgid "Cada estado combina texto, contexto e semântica; não depende apenas da cor."
+msgstr ""
+
+#: templates/visual_reference/reference.html:236
+msgid "Formatação e privacidade"
+msgstr ""
+
+#: templates/visual_reference/reference.html:237
+msgid "A densidade nunca reduz os alvos de interação nem oculta o contexto."
+msgstr ""
+
+#: templates/visual_reference/reference.html:240
+msgid "<strong>Fuso horário efetivo:</strong> datas exibem o contexto temporal aplicável."
+msgstr ""
+
+#: templates/visual_reference/reference.html:241
+msgid "<strong>Identificadores pessoais:</strong> valores chegam mascarados pelo backend."
+msgstr ""
+
+#: templates/visual_reference/reference.html:242
+msgid "<strong>Truncamento:</strong> o valor integral permanece disponível no detalhe autorizado."
+msgstr ""
+
+#: templates/visual_reference/reference.html:243
+msgid "<strong>Ausência de dados:</strong> zero, dado ausente e indisponibilidade são estados diferentes."
+msgstr ""
+
+#: templates/visual_reference/reference.html:249
+msgid "Gráfico de registros operacionais"
+msgstr ""
+
+#: templates/visual_reference/reference.html:251
+msgid "Registros por semana: 4 na Semana 1, 7 na Semana 2 e 5 na Semana 3. Apenas registros agregados autorizados; não representa diagnóstico ou causalidade."
+msgstr ""
+
+#: templates/visual_reference/reference.html:258
+msgid "Registros operacionais por semana"
+msgstr ""
+
+#: templates/visual_reference/reference.html:259
+#: templates/visual_reference/reference.html:270
+msgid "Registros"
+msgstr ""
+
+#: templates/visual_reference/reference.html:260
+msgid "Quantidade de registros"
+msgstr ""
+
+#: templates/visual_reference/reference.html:261
+#: templates/visual_reference/reference.html:270
+msgid "Período"
+msgstr ""
+
+#: templates/visual_reference/reference.html:262
+#: templates/visual_reference/reference.html:272
+msgid "Semana 1"
+msgstr ""
+
+#: templates/visual_reference/reference.html:263
+#: templates/visual_reference/reference.html:273
+msgid "Semana 2"
+msgstr ""
+
+#: templates/visual_reference/reference.html:264
+#: templates/visual_reference/reference.html:274
+msgid "Semana 3"
+msgstr ""
+
+#: templates/visual_reference/reference.html:269
+msgid "Registros por semana"
+msgstr ""
+
+#: templates/visual_reference/reference.html:282
+msgid "Modal e painel lateral"
+msgstr ""
+
+#: templates/visual_reference/reference.html:283
+msgid "Os controles usam o comportamento acessível fornecido pelo Bootstrap."
+msgstr ""
+
+#: templates/visual_reference/reference.html:288
+msgid "Abrir modal"
+msgstr ""
+
+#: templates/visual_reference/reference.html:291
+msgid "Abrir painel lateral"
+msgstr ""
+
+#: templates/visual_reference/reference.html:301
+msgid "Catálogo interno dos componentes disponíveis na fundação visual do produto."
+msgstr ""
+
+#: templates/visual_reference/reference.html:309
+msgid "Confirmar ação"
+msgstr ""
+
+#: templates/visual_reference/reference.html:310
+#: templates/visual_reference/reference.html:324
+msgid "Fechar"
+msgstr ""
+
+#: templates/visual_reference/reference.html:312
+msgid "Revise as informações antes de confirmar."
+msgstr ""
+
+#: templates/visual_reference/reference.html:315
+msgid "Confirmar"
+msgstr ""
+
+#: templates/visual_reference/reference.html:323
+msgid "Detalhes do componente"
+msgstr ""
+
+#: templates/visual_reference/reference.html:327
+msgid "O painel lateral mantém o contexto da página enquanto apresenta informações complementares."
+msgstr ""
+
+#: templates/visual_reference/reference.html:328
+msgid "Concluir"
+msgstr ""
+
+#: templates/workspace/home.html:8
+msgid "SEU ESPAÇO DE CUIDADO"
+msgstr ""
+
+#: templates/workspace/home.html:9
+msgid "seja bem-vindo"
+msgstr ""
+
+#: templates/workspace/home.html:10
+#, python-format
+msgid "Olá, %(name)s."
+msgstr ""
+
+#: templates/workspace/home.html:11
+#, python-format
+msgid "Acesse seus recursos em %(clinic_name)s."
+msgstr ""
+
+#: templates/workspace/home.html:14
+msgid "Por onde começar"
+msgstr ""
+
+#: templates/workspace/home.html:17
+msgid "Acompanhe os registros do seu cuidado."
+msgstr ""
+
+#: templates/workspace/home.html:19
+msgid "Reserve um momento para registrar como você está."
+msgstr ""
+
+#: templates/workspace/home.html:21
+msgid "Retome seus objetivos e próximos passos."
+msgstr ""
+
+#: templates/workspace/home.html:25
+msgid "Acompanhe os pacientes vinculados a você."
+msgstr ""
+
+#: templates/workspace/home.html:29
+msgid "Consulte os indicadores da clínica ativa."
+msgstr ""
+
+#: templates/workspace/home.html:33
+msgid "Consulte e organize os cadastros da clínica."
+msgstr ""
+
+#: templates/workspace/home.html:35
+msgid "Revise os dados e a identidade da sua clínica."
+msgstr ""
+
+#: templates/workspace/home.html:38
+msgid "Veja as consultas disponíveis para o seu perfil."
+msgstr ""
+
+#: templates/workspace/home.html:40
+msgid "Acesse suas conversas na plataforma."
+msgstr ""
+
+#: templates/workspace/home.html:42
+msgid "Segurança da conta"
+msgstr ""
+
+#: templates/workspace/home.html:42
+msgid "Confira os dispositivos e as sessões da sua conta."
+msgstr ""

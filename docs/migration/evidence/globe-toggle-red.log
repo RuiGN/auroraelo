@@ -1,0 +1,115 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_closed_language_toggle_shows_globe_and_language_code[pt-br-Portugu\xeas (Brasil)] _
+
+language = 'pt-br', name = 'Português (Brasil)'
+
+    @pytest.mark.parametrize(
+        ("language", "name"),
+        (
+            ("pt-br", "Português (Brasil)"),
+            ("en", "English"),
+            ("es", "Español"),
+        ),
+    )
+    def test_closed_language_toggle_shows_globe_and_language_code(
+        language: str, name: str
+    ) -> None:
+        html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "header",
+                "current_ui_language": language,
+                "ui_language_next": "/workspace/",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                    {"code": "es", "name_local": "Español"},
+                ],
+            },
+        )
+        toggle = html.split("</button>", 1)[0]
+        parser = Elements()
+        parser.feed(toggle)
+>       assert not any(tag == "img" for tag, _attrs in parser.items)
+E       assert not True
+E        +  where True = any(<generator object test_closed_language_toggle_shows_globe_and_language_code.<locals>.<genexpr> at 0x7184da05d460>)
+
+tests/test_language_selector_ui.py:83: AssertionError
+____ test_closed_language_toggle_shows_globe_and_language_code[en-English] _____
+
+language = 'en', name = 'English'
+
+    @pytest.mark.parametrize(
+        ("language", "name"),
+        (
+            ("pt-br", "Português (Brasil)"),
+            ("en", "English"),
+            ("es", "Español"),
+        ),
+    )
+    def test_closed_language_toggle_shows_globe_and_language_code(
+        language: str, name: str
+    ) -> None:
+        html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "header",
+                "current_ui_language": language,
+                "ui_language_next": "/workspace/",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                    {"code": "es", "name_local": "Español"},
+                ],
+            },
+        )
+        toggle = html.split("</button>", 1)[0]
+        parser = Elements()
+        parser.feed(toggle)
+>       assert not any(tag == "img" for tag, _attrs in parser.items)
+E       assert not True
+E        +  where True = any(<generator object test_closed_language_toggle_shows_globe_and_language_code.<locals>.<genexpr> at 0x7184dd197ae0>)
+
+tests/test_language_selector_ui.py:83: AssertionError
+___ test_closed_language_toggle_shows_globe_and_language_code[es-Espa\xf1ol] ___
+
+language = 'es', name = 'Español'
+
+    @pytest.mark.parametrize(
+        ("language", "name"),
+        (
+            ("pt-br", "Português (Brasil)"),
+            ("en", "English"),
+            ("es", "Español"),
+        ),
+    )
+    def test_closed_language_toggle_shows_globe_and_language_code(
+        language: str, name: str
+    ) -> None:
+        html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "header",
+                "current_ui_language": language,
+                "ui_language_next": "/workspace/",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                    {"code": "es", "name_local": "Español"},
+                ],
+            },
+        )
+        toggle = html.split("</button>", 1)[0]
+        parser = Elements()
+        parser.feed(toggle)
+>       assert not any(tag == "img" for tag, _attrs in parser.items)
+E       assert not True
+E        +  where True = any(<generator object test_closed_language_toggle_shows_globe_and_language_code.<locals>.<genexpr> at 0x7184d9c025e0>)
+
+tests/test_language_selector_ui.py:83: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_language_selector_ui.py::test_closed_language_toggle_shows_globe_and_language_code[pt-br-Portugu\xeas (Brasil)]
+FAILED tests/test_language_selector_ui.py::test_closed_language_toggle_shows_globe_and_language_code[en-English]
+FAILED tests/test_language_selector_ui.py::test_closed_language_toggle_shows_globe_and_language_code[es-Espa\xf1ol]
+3 failed, 3 deselected in 0.72s

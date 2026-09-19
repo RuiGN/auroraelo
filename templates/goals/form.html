@@ -1,0 +1,112 @@
+{% extends layout_template %}
+{% load accessible_forms static i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Minhas Metas" %}</span>
+      <h1 class="mb-0">{{ page_title }}</h1>
+    </div>
+    <a href="{% url 'goal_list' %}" class="btn btn-outline-secondary">{% translate "Voltar às metas" %}</a>
+  </header>
+
+  <div class="product-form-card">
+    <form id="{{ form_id }}" class="product-form-grid" method="post" novalidate data-form-guard>
+      {% csrf_token %}
+
+      {% if form.errors %}
+        <div class="alert alert-danger" role="alert" tabindex="-1" data-focus-error-summary aria-labelledby="{{ form_id }}-error-title">
+          <h2 id="{{ form_id }}-error-title" class="h5">{% translate "Revise os campos indicados" %}</h2>
+          <p>{% translate "Não foi possível salvar. Corrija os problemas abaixo." %}</p>
+          <ul class="mb-0">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li><a href="#{{ field|error_target_id }}">{{ field.label }}: {{ error }}</a></li>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="field-span {{ form.title|field_span }} mb-3{% if form.title.errors %} has-error{% endif %}">
+        <label for="{{ form.title.id_for_label }}" class="form-label fw-semibold">{{ form.title.label }} <span aria-hidden="true">*</span></label>
+        {% include "components/duralux_control.html" with field=form.title only %}
+        {% if form.title.help_text %}<p class="form-text" id="{{ form.title.auto_id }}_helptext">{{ form.title.help_text }}</p>{% endif %}
+        {% for error in form.title.errors %}<p class="invalid-feedback d-block" id="{{ form.title.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="field-span {{ form.description|field_span }} mb-3{% if form.description.errors %} has-error{% endif %}">
+        <label for="{{ form.description.id_for_label }}" class="form-label fw-semibold">{{ form.description.label }}</label>
+        {% include "components/duralux_control.html" with field=form.description only %}
+        {% if form.description.help_text %}<p class="form-text" id="{{ form.description.auto_id }}_helptext">{{ form.description.help_text }}</p>{% endif %}
+        {% for error in form.description.errors %}<p class="invalid-feedback d-block" id="{{ form.description.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="field-span {{ form.horizon|field_span }} mb-3{% if form.horizon.errors %} has-error{% endif %}">
+        <fieldset class="d-grid gap-2">
+          <legend class="form-label fw-semibold">{{ form.horizon.label }}</legend>
+          <div>
+            {% include "components/duralux_control.html" with field=form.horizon only %}
+          </div>
+        </fieldset>
+        {% for error in form.horizon.errors %}<p class="invalid-feedback d-block" id="{{ form.horizon.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="field-span {{ form.priority|field_span }} mb-3{% if form.priority.errors %} has-error{% endif %}">
+        <fieldset class="d-grid gap-2">
+          <legend class="form-label fw-semibold">{{ form.priority.label }}</legend>
+          <div>
+            {% include "components/duralux_control.html" with field=form.priority only %}
+          </div>
+        </fieldset>
+        {% for error in form.priority.errors %}<p class="invalid-feedback d-block" id="{{ form.priority.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="field-span {{ form.due_date|field_span }} mb-3{% if form.due_date.errors %} has-error{% endif %}">
+        <label for="{{ form.due_date.id_for_label }}" class="form-label fw-semibold">{{ form.due_date.label }}</label>
+        {% include "components/duralux_control.html" with field=form.due_date only %}
+        {% if form.due_date.help_text %}<p class="form-text" id="{{ form.due_date.auto_id }}_helptext">{{ form.due_date.help_text }}</p>{% endif %}
+        {% for error in form.due_date.errors %}<p class="invalid-feedback d-block" id="{{ form.due_date.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="field-span {{ form.steps_raw|field_span }} mb-3{% if form.steps_raw.errors %} has-error{% endif %}">
+        <label for="{{ form.steps_raw.id_for_label }}" class="form-label fw-semibold">{{ form.steps_raw.label }}</label>
+        {% include "components/duralux_control.html" with field=form.steps_raw only %}
+        {% if form.steps_raw.help_text %}<p class="form-text" id="{{ form.steps_raw.auto_id }}_helptext">{{ form.steps_raw.help_text }}</p>{% endif %}
+        {% for error in form.steps_raw.errors %}<p class="invalid-feedback d-block" id="{{ form.steps_raw.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="field-span {{ form.visibility|field_span }} mb-3{% if form.visibility.errors %} has-error{% endif %}">
+        <fieldset class="d-grid gap-2">
+          <legend class="form-label fw-semibold">{{ form.visibility.label }}</legend>
+          <div>
+            {% include "components/duralux_control.html" with field=form.visibility only %}
+          </div>
+          <div class="small text-body-secondary">
+            <p class="product-visibility-status mb-1"><span class="product-visibility-status__icon" aria-hidden="true">✓</span> <span>{% translate "Compartilhável" %} — <span class="product-visibility-status__description">{% translate "Pode compartilhar com o profissional." %}</span></span></p>
+            <p class="product-visibility-status mb-1"><span class="product-visibility-status__icon" aria-hidden="true">!</span> <span>{% translate "Confirmar antes" %} — <span class="product-visibility-status__description">{% translate "Confirme antes de compartilhar com o profissional." %}</span></span></p>
+            <p class="product-visibility-status mb-0"><span class="product-visibility-status__icon" aria-hidden="true">🔒</span> <span>{% translate "Privado" %} — <span class="product-visibility-status__description">{% translate "Somente você pode ver este registro." %}</span></span></p>
+          </div>
+          {% if form.visibility.help_text %}<p class="form-text" id="id_visibility_helptext">{{ form.visibility.help_text }}</p>{% endif %}
+        </fieldset>
+        {% for error in form.visibility.errors %}<p class="invalid-feedback d-block" id="{{ form.visibility.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+      </div>
+
+      <div class="d-flex flex-wrap gap-2">
+        <button type="submit" class="btn btn-primary" data-submit-button>{{ submit_label }}</button>
+        <a href="{% url 'goal_list' %}" class="btn btn-outline-secondary">{% translate "Cancelar" %}</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

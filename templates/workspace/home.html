@@ -1,0 +1,46 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block title %}{% translate "Área de trabalho" %}{% endblock %}
+{% block header_title %}{% translate "Área de trabalho" %}{% endblock %}
+{% block breadcrumb_active %}{% translate "Área de trabalho" %}{% endblock %}
+{% block content %}
+<section class="mb-4" aria-labelledby="workspace-title">
+  <p class="text-primary fs-12 fw-semibold mb-2">{% translate "SEU ESPAÇO DE CUIDADO" %}</p>
+  {% translate "seja bem-vindo" as welcome_fallback %}
+  <h1 id="workspace-title" class="h3 mb-2">{% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}</h1>
+  <p class="text-body-secondary mb-0">{% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}</p>
+</section>
+<section id="workspace-shortcuts" aria-labelledby="shortcut-title">
+  <h2 id="shortcut-title" class="fs-16 fw-semibold mb-3">{% translate "Por onde começar" %}</h2>
+  <div class="row g-4">
+    {% if is_patient %}
+      {% translate "Minha evolução" as shortcut_label %}{% translate "Acompanhe os registros do seu cuidado." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="patient_dashboard" icon="feather-trending-up" label=shortcut_label description=shortcut_description only %}
+      {% translate "Diário emocional" as shortcut_label %}{% translate "Reserve um momento para registrar como você está." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="journal_list" icon="feather-book-open" label=shortcut_label description=shortcut_description only %}
+      {% translate "Minhas metas" as shortcut_label %}{% translate "Retome seus objetivos e próximos passos." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="goal_list" icon="feather-target" label=shortcut_label description=shortcut_description only %}
+    {% endif %}
+    {% if is_therapist %}
+      {% translate "Painel profissional" as shortcut_label %}{% translate "Acompanhe os pacientes vinculados a você." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="therapist_dashboard" icon="feather-activity" label=shortcut_label description=shortcut_description only %}
+    {% endif %}
+    {% if is_clinic_admin %}
+      {% translate "Painel operacional" as shortcut_label %}{% translate "Consulte os indicadores da clínica ativa." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="clinic_panel" icon="feather-bar-chart-2" label=shortcut_label description=shortcut_description only %}
+    {% endif %}
+    {% if can_manage_active_clinic %}
+      {% translate "Pacientes" as shortcut_label %}{% translate "Consulte e organize os cadastros da clínica." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="patient_list" icon="feather-users" label=shortcut_label description=shortcut_description only %}
+      {% translate "Configurar clínica" as shortcut_label %}{% translate "Revise os dados e a identidade da sua clínica." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="clinic_setup" icon="feather-settings" label=shortcut_label description=shortcut_description only %}
+    {% endif %}
+      {% translate "Agenda" as shortcut_label %}{% translate "Veja as consultas disponíveis para o seu perfil." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="appointment_list" icon="feather-calendar" label=shortcut_label description=shortcut_description only %}
+      {% translate "Mensagens" as shortcut_label %}{% translate "Acesse suas conversas na plataforma." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="conversation_list" icon="feather-message-square" label=shortcut_label description=shortcut_description only %}
+      {% translate "Segurança da conta" as shortcut_label %}{% translate "Confira os dispositivos e as sessões da sua conta." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="account_sessions" icon="feather-shield" label=shortcut_label description=shortcut_description only %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,118 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_closed_language_toggle_shows_only_the_current_flag[pt-br-br-Portugu\xeas (Brasil)] _
+
+language = 'pt-br', country = 'br', name = 'Português (Brasil)'
+
+    @pytest.mark.parametrize(
+        ("language", "country", "name"),
+        (
+            ("pt-br", "br", "Português (Brasil)"),
+            ("en", "us", "English"),
+            ("es", "es", "Español"),
+        ),
+    )
+    def test_closed_language_toggle_shows_only_the_current_flag(
+        language: str, country: str, name: str
+    ) -> None:
+        html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "header",
+                "current_ui_language": language,
+                "ui_language_next": "/workspace/",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                    {"code": "es", "name_local": "Español"},
+                ],
+            },
+        )
+        toggle = html.split("</button>", 1)[0]
+        parser = Elements()
+        parser.feed(toggle)
+        image = next((attrs for tag, attrs in parser.items if tag == "img"), None)
+>       assert image is not None, "Closed language toggle must show a flag"
+E       AssertionError: Closed language toggle must show a flag
+E       assert None is not None
+
+tests/test_language_selector_ui.py:84: AssertionError
+____ test_closed_language_toggle_shows_only_the_current_flag[en-us-English] ____
+
+language = 'en', country = 'us', name = 'English'
+
+    @pytest.mark.parametrize(
+        ("language", "country", "name"),
+        (
+            ("pt-br", "br", "Português (Brasil)"),
+            ("en", "us", "English"),
+            ("es", "es", "Español"),
+        ),
+    )
+    def test_closed_language_toggle_shows_only_the_current_flag(
+        language: str, country: str, name: str
+    ) -> None:
+        html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "header",
+                "current_ui_language": language,
+                "ui_language_next": "/workspace/",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                    {"code": "es", "name_local": "Español"},
+                ],
+            },
+        )
+        toggle = html.split("</button>", 1)[0]
+        parser = Elements()
+        parser.feed(toggle)
+        image = next((attrs for tag, attrs in parser.items if tag == "img"), None)
+>       assert image is not None, "Closed language toggle must show a flag"
+E       AssertionError: Closed language toggle must show a flag
+E       assert None is not None
+
+tests/test_language_selector_ui.py:84: AssertionError
+__ test_closed_language_toggle_shows_only_the_current_flag[es-es-Espa\xf1ol] ___
+
+language = 'es', country = 'es', name = 'Español'
+
+    @pytest.mark.parametrize(
+        ("language", "country", "name"),
+        (
+            ("pt-br", "br", "Português (Brasil)"),
+            ("en", "us", "English"),
+            ("es", "es", "Español"),
+        ),
+    )
+    def test_closed_language_toggle_shows_only_the_current_flag(
+        language: str, country: str, name: str
+    ) -> None:
+        html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "header",
+                "current_ui_language": language,
+                "ui_language_next": "/workspace/",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                    {"code": "es", "name_local": "Español"},
+                ],
+            },
+        )
+        toggle = html.split("</button>", 1)[0]
+        parser = Elements()
+        parser.feed(toggle)
+        image = next((attrs for tag, attrs in parser.items if tag == "img"), None)
+>       assert image is not None, "Closed language toggle must show a flag"
+E       AssertionError: Closed language toggle must show a flag
+E       assert None is not None
+
+tests/test_language_selector_ui.py:84: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_language_selector_ui.py::test_closed_language_toggle_shows_only_the_current_flag[pt-br-br-Portugu\xeas (Brasil)]
+FAILED tests/test_language_selector_ui.py::test_closed_language_toggle_shows_only_the_current_flag[en-us-English]
+FAILED tests/test_language_selector_ui.py::test_closed_language_toggle_shows_only_the_current_flag[es-es-Espa\xf1ol]
+3 failed, 3 deselected in 1.36s

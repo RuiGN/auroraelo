@@ -1,0 +1,414 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-08 19:35-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: people/forms.py:14 templates/people/patient_detail.html:16
+msgid "Nome completo"
+msgstr ""
+
+#: people/forms.py:16 templates/people/patient_detail.html:17
+msgid "Nome social"
+msgstr ""
+
+#: people/forms.py:19 templates/people/patient_detail.html:18
+msgid "Data de nascimento"
+msgstr ""
+
+#: people/forms.py:22
+msgid "Gênero (opcional)"
+msgstr ""
+
+#: people/forms.py:24 people/views.py:194
+msgid "Não informado"
+msgstr ""
+
+#: people/forms.py:26 templates/people/patient_detail.html:20
+msgid "E-mail"
+msgstr ""
+
+#: people/forms.py:27 templates/people/patient_detail.html:21
+#: templates/people/patient_detail.html:53
+msgid "Telefone"
+msgstr ""
+
+#: people/forms.py:28 templates/people/patient_detail.html:22
+msgid "Idioma"
+msgstr ""
+
+#: people/forms.py:30 templates/people/patient_detail.html:23
+msgid "Fuso horário"
+msgstr ""
+
+#: people/forms.py:33
+msgid "Preferências de acessibilidade"
+msgstr ""
+
+#: people/forms.py:39 templates/people/patient_detail.html:36
+#: templates/people/patient_detail.html:39
+msgid "Endereço"
+msgstr ""
+
+#: people/forms.py:40 templates/people/patient_detail.html:40
+msgid "Cidade"
+msgstr ""
+
+#: people/forms.py:41 templates/people/patient_detail.html:41
+msgid "UF"
+msgstr ""
+
+#: people/forms.py:42 templates/people/patient_detail.html:42
+msgid "CEP"
+msgstr ""
+
+#: people/forms.py:44
+msgid "Finalidade do endereço"
+msgstr ""
+
+#: people/forms.py:47
+msgid "Contato de emergência — nome"
+msgstr ""
+
+#: people/forms.py:50
+msgid "Contato de emergência — telefone"
+msgstr ""
+
+#: people/forms.py:53
+msgid "Finalidade do contato de emergência"
+msgstr ""
+
+#: people/forms.py:75 people/services.py:301
+msgid "Informe a finalidade para registrar o endereço."
+msgstr ""
+
+#: people/forms.py:83 people/services.py:303
+msgid "Informe a finalidade para o contato de emergência."
+msgstr ""
+
+#: people/presentation.py:6
+msgid "Mulher"
+msgstr ""
+
+#: people/presentation.py:7
+msgid "Homem"
+msgstr ""
+
+#: people/presentation.py:8
+msgid "Pessoa não binária"
+msgstr ""
+
+#: people/presentation.py:9
+msgid "Outro"
+msgstr ""
+
+#: people/presentation.py:10
+msgid "Prefiro não informar"
+msgstr ""
+
+#: people/presentation.py:13
+msgid "Administrador da clínica"
+msgstr ""
+
+#: people/presentation.py:14 templates/people/professional_list.html:32
+msgid "Terapeuta"
+msgstr ""
+
+#: people/presentation.py:15 templates/people/professional_list.html:33
+msgid "Equipe administrativa"
+msgstr ""
+
+#: people/presentation.py:16 templates/people/patient_detail.html:4
+msgid "Paciente"
+msgstr ""
+
+#: people/presentation.py:19 templates/people/professional_list.html:22
+msgid "Ativo"
+msgstr ""
+
+#: people/presentation.py:20 templates/people/professional_list.html:23
+msgid "Agendado"
+msgstr ""
+
+#: people/presentation.py:21 templates/people/professional_list.html:24
+msgid "Suspenso"
+msgstr ""
+
+#: people/presentation.py:22 templates/people/professional_list.html:25
+msgid "Encerrado"
+msgstr ""
+
+#: people/selectors.py:92
+msgid "Perfil pendente"
+msgstr ""
+
+#: people/services.py:125
+msgid "Esta credencial já está revogada."
+msgstr ""
+
+#: people/services.py:127
+msgid "Informe o motivo da revogação."
+msgstr ""
+
+#: people/services.py:191
+msgid "Informe nome e e-mail profissional."
+msgstr ""
+
+#: people/services.py:193
+msgid "Selecione uma categoria profissional válida."
+msgstr ""
+
+#: people/services.py:202
+msgid "Informe especialidades técnicas válidas e sem repetição."
+msgstr ""
+
+#: people/services.py:209
+msgid "Informe conselho, número e jurisdição em conjunto."
+msgstr ""
+
+#: people/services.py:232
+msgid "A foto excede o limite de 2 MB."
+msgstr ""
+
+#: people/services.py:235
+msgid "A foto deve ser PNG ou JPEG."
+msgstr ""
+
+#: people/services.py:297
+msgid "Informe nome e e-mail da pessoa paciente."
+msgstr ""
+
+#: people/services.py:299
+msgid "Selecione uma opção de gênero válida."
+msgstr ""
+
+#: people/services.py:312
+msgid "Foi encontrada uma possível duplicidade nesta clínica."
+msgstr ""
+
+#: people/services.py:457
+msgid "Informe a função do profissional no vínculo."
+msgstr ""
+
+#: people/services.py:504
+msgid "A data de encerramento não pode preceder o início."
+msgstr ""
+
+#: people/services.py:543
+msgid "O novo profissional deve ser diferente do atual."
+msgstr ""
+
+#: people/services.py:545
+msgid "A data de transferência não pode preceder o início."
+msgstr ""
+
+#: people/services.py:548
+msgid "A data de transferência excede o término do vínculo."
+msgstr ""
+
+#: templates/people/patient_detail.html:9 templates/people/patient_form.html:8
+msgid "Cadastro mínimo"
+msgstr ""
+
+#: templates/people/patient_detail.html:9
+msgid "Dados cadastrais autorizados da clínica ativa."
+msgstr ""
+
+#: templates/people/patient_detail.html:10
+msgid "Voltar à lista de pacientes"
+msgstr ""
+
+#: templates/people/patient_detail.html:14
+msgid "Identificação"
+msgstr ""
+
+#: templates/people/patient_detail.html:19
+msgid "Gênero"
+msgstr ""
+
+#: templates/people/patient_detail.html:29
+msgid "Acessibilidade"
+msgstr ""
+
+#: templates/people/patient_detail.html:38
+#: templates/people/patient_detail.html:51
+msgid "Finalidade"
+msgstr ""
+
+#: templates/people/patient_detail.html:49
+msgid "Contato de emergência"
+msgstr ""
+
+#: templates/people/patient_detail.html:52
+#: templates/people/patient_list.html:40
+#: templates/people/professional_list.html:48
+msgid "Nome"
+msgstr ""
+
+#: templates/people/patient_form.html:4 templates/people/patient_form.html:8
+#: templates/people/patient_list.html:12 templates/people/patient_list.html:30
+msgid "Cadastrar paciente"
+msgstr ""
+
+#: templates/people/patient_form.html:8
+msgid "Informe somente os dados necessários. Gênero é opcional e preferências podem ser revisadas."
+msgstr ""
+
+#: templates/people/patient_form.html:13
+msgid "Revise os campos indicados"
+msgstr ""
+
+#: templates/people/patient_form.html:21
+msgid "Salvar cadastro"
+msgstr ""
+
+#: templates/people/patient_form.html:21
+msgid "Cancelar"
+msgstr ""
+
+#: templates/people/patient_list.html:4 templates/people/patient_list.html:6
+#: templates/people/patient_list.html:7 templates/people/patient_list.html:20
+msgid "Pacientes"
+msgstr ""
+
+#: templates/people/patient_list.html:25
+msgid "Cadastros autorizados"
+msgstr ""
+
+#: templates/people/patient_list.html:26
+msgid "Pessoas cadastradas"
+msgstr ""
+
+#: templates/people/patient_list.html:36
+msgid "Lista de pacientes"
+msgstr ""
+
+#: templates/people/patient_list.html:41
+msgid "Contato"
+msgstr ""
+
+#: templates/people/patient_list.html:42
+msgid "Acesso"
+msgstr ""
+
+#: templates/people/patient_list.html:48
+#: templates/people/professional_list.html:52
+msgid "Nome social:"
+msgstr ""
+
+#: templates/people/patient_list.html:52
+msgid "Conta vinculada"
+msgstr ""
+
+#: templates/people/patient_list.html:56
+msgid "Enviar convite"
+msgstr ""
+
+#: templates/people/patient_list.html:70
+msgid "Nenhum paciente cadastrado"
+msgstr ""
+
+#: templates/people/patient_list.html:71
+msgid "Use a ação principal para iniciar um cadastro mínimo."
+msgstr ""
+
+#: templates/people/professional_list.html:4
+#: templates/people/professional_list.html:11
+msgid "Profissionais"
+msgstr ""
+
+#: templates/people/professional_list.html:10
+msgid "Equipe da clínica ativa"
+msgstr ""
+
+#: templates/people/professional_list.html:12
+msgid "Perfis, vínculos e credenciais informadas, sem confirmação automática pela plataforma."
+msgstr ""
+
+#: templates/people/professional_list.html:14
+msgid "Convidar profissional"
+msgstr ""
+
+#: templates/people/professional_list.html:17
+msgid "Filtros de profissionais"
+msgstr ""
+
+#: templates/people/professional_list.html:19
+#: templates/people/professional_list.html:48
+msgid "Status"
+msgstr ""
+
+#: templates/people/professional_list.html:21
+#: templates/people/professional_list.html:31
+msgid "Todos"
+msgstr ""
+
+#: templates/people/professional_list.html:29
+#: templates/people/professional_list.html:48
+msgid "Papel"
+msgstr ""
+
+#: templates/people/professional_list.html:37
+msgid "Especialidade técnica"
+msgstr ""
+
+#: templates/people/professional_list.html:40
+msgid "Aplicar filtros"
+msgstr ""
+
+#: templates/people/professional_list.html:44
+msgid "Resultado"
+msgstr ""
+
+#: templates/people/professional_list.html:46
+msgid "Lista de profissionais"
+msgstr ""
+
+#: templates/people/professional_list.html:48
+msgid "Unidade"
+msgstr ""
+
+#: templates/people/professional_list.html:48
+msgid "Especialidades"
+msgstr ""
+
+#: templates/people/professional_list.html:48
+msgid "Ações"
+msgstr ""
+
+#: templates/people/professional_list.html:55
+msgid "Não informada"
+msgstr ""
+
+#: templates/people/professional_list.html:56
+msgid "Não informadas"
+msgstr ""
+
+#: templates/people/professional_list.html:59
+msgid "Reativar"
+msgstr ""
+
+#: templates/people/professional_list.html:61
+msgid "Suspender"
+msgstr ""
+
+#: templates/people/professional_list.html:70
+msgid "Nenhum profissional encontrado"
+msgstr ""
+
+#: templates/people/professional_list.html:70
+msgid "Revise os filtros ou convide o primeiro profissional."
+msgstr ""

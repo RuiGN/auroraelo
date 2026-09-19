@@ -1,0 +1,259 @@
+{
+  "generated_at": "2026-09-08T20:32:20.287Z",
+  "base_url": "http://127.0.0.1:8766",
+  "cases": 36,
+  "results": [
+    {
+      "state": "auth",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "auth-mobile-light.png"
+    },
+    {
+      "state": "recovery",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "recovery-mobile-light.png"
+    },
+    {
+      "state": "reset",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "reset-mobile-light.png"
+    },
+    {
+      "state": "invalid-reset",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "invalid-reset-mobile-light.png"
+    },
+    {
+      "state": "invite",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "invite-mobile-light.png"
+    },
+    {
+      "state": "enroll",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "enroll-mobile-light.png"
+    },
+    {
+      "state": "challenge",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "challenge-mobile-light.png"
+    },
+    {
+      "state": "sessions",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "sessions-mobile-light.png"
+    },
+    {
+      "state": "recovery-codes",
+      "viewport": "mobile",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "recovery-codes-mobile-light.png"
+    },
+    {
+      "state": "auth",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "auth-mobile-dark.png"
+    },
+    {
+      "state": "recovery",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "recovery-mobile-dark.png"
+    },
+    {
+      "state": "reset",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "reset-mobile-dark.png"
+    },
+    {
+      "state": "invalid-reset",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "invalid-reset-mobile-dark.png"
+    },
+    {
+      "state": "invite",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "invite-mobile-dark.png"
+    },
+    {
+      "state": "enroll",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "enroll-mobile-dark.png"
+    },
+    {
+      "state": "challenge",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "challenge-mobile-dark.png"
+    },
+    {
+      "state": "sessions",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "sessions-mobile-dark.png"
+    },
+    {
+      "state": "recovery-codes",
+      "viewport": "mobile",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "recovery-codes-mobile-dark.png"
+    },
+    {
+      "state": "auth",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "auth-desktop-light.png"
+    },
+    {
+      "state": "recovery",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "recovery-desktop-light.png"
+    },
+    {
+      "state": "reset",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "reset-desktop-light.png"
+    },
+    {
+      "state": "invalid-reset",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "invalid-reset-desktop-light.png"
+    },
+    {
+      "state": "invite",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "invite-desktop-light.png"
+    },
+    {
+      "state": "enroll",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "enroll-desktop-light.png"
+    },
+    {
+      "state": "challenge",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "challenge-desktop-light.png"
+    },
+    {
+      "state": "sessions",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "sessions-desktop-light.png"
+    },
+    {
+      "state": "recovery-codes",
+      "viewport": "desktop",
+      "theme": "light",
+      "ok": true,
+      "screenshot": "recovery-codes-desktop-light.png"
+    },
+    {
+      "state": "auth",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "auth-desktop-dark.png"
+    },
+    {
+      "state": "recovery",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "recovery-desktop-dark.png"
+    },
+    {
+      "state": "reset",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "reset-desktop-dark.png"
+    },
+    {
+      "state": "invalid-reset",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "invalid-reset-desktop-dark.png"
+    },
+    {
+      "state": "invite",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "invite-desktop-dark.png"
+    },
+    {
+      "state": "enroll",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "enroll-desktop-dark.png"
+    },
+    {
+      "state": "challenge",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "challenge-desktop-dark.png"
+    },
+    {
+      "state": "sessions",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "sessions-desktop-dark.png"
+    },
+    {
+      "state": "recovery-codes",
+      "viewport": "desktop",
+      "theme": "dark",
+      "ok": true,
+      "screenshot": "recovery-codes-desktop-dark.png"
+    }
+  ]
+}

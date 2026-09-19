@@ -1,0 +1,28 @@
+{
+  "isolated_copies_only": true,
+  "scope": "docs/migration/translated-ui-scope.json",
+  "source_files": 47,
+  "results": [
+    {
+      "scenario": "valid",
+      "expected_exit": 0,
+      "matched_expectation": true
+    },
+    {
+      "scenario": "missing",
+      "expected_exit": 1,
+      "matched_expectation": true
+    },
+    {
+      "scenario": "fuzzy",
+      "expected_exit": 1,
+      "matched_expectation": true
+    },
+    {
+      "scenario": "stale",
+      "expected_exit": 1,
+      "matched_expectation": true
+    }
+  ],
+  "github_actions_run": false
+}

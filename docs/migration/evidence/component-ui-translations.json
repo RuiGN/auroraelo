@@ -1,0 +1,182 @@
+[
+  {
+    "msgid": "Há alterações não salvas.",
+    "en": "You have unsaved changes.",
+    "es": "Hay cambios sin guardar."
+  },
+  {
+    "msgid": "Revise os campos indicados",
+    "en": "Review the highlighted fields",
+    "es": "Revise los campos indicados"
+  },
+  {
+    "msgid": "Não foi possível salvar. Corrija os problemas abaixo.",
+    "en": "Unable to save. Fix the problems below.",
+    "es": "No se pudo guardar. Corrija los problemas que se indican a continuación."
+  },
+  {
+    "msgid": "Paginação",
+    "en": "Pagination",
+    "es": "Paginación"
+  },
+  {
+    "msgid": "Primeira",
+    "en": "First",
+    "es": "Primera"
+  },
+  {
+    "msgid": "Anterior",
+    "en": "Previous",
+    "es": "Anterior"
+  },
+  {
+    "msgid": "Próxima",
+    "en": "Next",
+    "es": "Siguiente"
+  },
+  {
+    "msgid": "Última",
+    "en": "Last",
+    "es": "Última"
+  },
+  {
+    "msgid": "Ações",
+    "en": "Actions",
+    "es": "Acciones"
+  },
+  {
+    "msgid": "Sem ações",
+    "en": "No actions",
+    "es": "Sin acciones"
+  },
+  {
+    "msgid": "Nenhum registro disponível.",
+    "en": "No records available.",
+    "es": "No hay registros disponibles."
+  },
+  {
+    "msgid": "Ordenação da lista",
+    "en": "List sorting",
+    "es": "Orden de la lista"
+  },
+  {
+    "msgid": "; ordem atual crescente",
+    "en": "; currently sorted in ascending order",
+    "es": "; orden actual ascendente"
+  },
+  {
+    "msgid": "; ordem atual decrescente",
+    "en": "; currently sorted in descending order",
+    "es": "; orden actual descendente"
+  },
+  {
+    "msgid": "Ir para a página %(number)s",
+    "en": "Go to page %(number)s",
+    "es": "Ir a la página %(number)s"
+  },
+  {
+    "msgid": "Ordenar por %(label)s",
+    "en": "Sort by %(label)s",
+    "es": "Ordenar por %(label)s"
+  },
+  {
+    "msgid": "Ordenar por %(label)s em ordem %(direction)s",
+    "en": "Sort by %(label)s in %(direction)s order",
+    "es": "Ordenar por %(label)s en orden %(direction)s"
+  },
+  {
+    "msgid": "Tendência: %(trend)s",
+    "en": "Trend: %(trend)s",
+    "es": "Tendencia: %(trend)s"
+  },
+  {
+    "msgid": "Erro %(code)s",
+    "en": "Error %(code)s",
+    "es": "Error %(code)s"
+  },
+  {
+    "msgid": "Referência:",
+    "en": "Reference:",
+    "es": "Referencia:"
+  },
+  {
+    "msgid": "Voltar ao início",
+    "en": "Back to home",
+    "es": "Volver al inicio"
+  },
+  {
+    "msgid": "Nome de exibição",
+    "en": "Display name",
+    "es": "Nombre para mostrar"
+  },
+  {
+    "msgid": "Use um nome reconhecível para a equipe autorizada.",
+    "en": "Use a name the authorized team will recognize.",
+    "es": "Use un nombre reconocible para el equipo autorizado."
+  },
+  {
+    "msgid": "Categoria",
+    "en": "Category",
+    "es": "Categoría"
+  },
+  {
+    "msgid": "Individual",
+    "en": "Individual",
+    "es": "Individual"
+  },
+  {
+    "msgid": "Grupo",
+    "en": "Group",
+    "es": "Grupo"
+  },
+  {
+    "msgid": "Data de início",
+    "en": "Start date",
+    "es": "Fecha de inicio"
+  },
+  {
+    "msgid": "Telefone",
+    "en": "Phone",
+    "es": "Teléfono"
+  },
+  {
+    "msgid": "Documento",
+    "en": "Document",
+    "es": "Documento"
+  },
+  {
+    "msgid": "Observações administrativas",
+    "en": "Administrative notes",
+    "es": "Notas administrativas"
+  },
+  {
+    "msgid": "Confirmo os dados",
+    "en": "I confirm the details",
+    "es": "Confirmo los datos"
+  },
+  {
+    "msgid": "Contato preferencial",
+    "en": "Preferred contact method",
+    "es": "Método de contacto preferido"
+  },
+  {
+    "msgid": "E-mail",
+    "en": "Email",
+    "es": "Correo electrónico"
+  },
+  {
+    "msgid": "Recurso ativo",
+    "en": "Feature enabled",
+    "es": "Función activada"
+  },
+  {
+    "msgid": "Anexo",
+    "en": "Attachment",
+    "es": "Archivo adjunto"
+  },
+  {
+    "msgid": "Informe no máximo %(limit_value)d dígitos.",
+    "en": "Enter no more than %(limit_value)d digits.",
+    "es": "Introduzca como máximo %(limit_value)d dígitos."
+  }
+]

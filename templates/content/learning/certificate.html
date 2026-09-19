@@ -1,0 +1,33 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=course.title %}Certificado: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="certificate-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with title=course.title %}Curso: {{ title }}{% endblocktranslate %}</span>
+    <h1 id="certificate-title" class="mb-0">{% translate "Certificado de conclusão" %}</h1>
+  </header>
+  {% if certificate %}
+    <section class="product-table-card" aria-labelledby="cert-title">
+      <h2 id="cert-title" class="h5">{% translate "Certificado emitido" %}</h2>
+      <p>{% translate "Código de verificação:" %} <code>{{ certificate.public_code }}</code></p>
+      <p class="product-muted mb-0">{% translate "Compartilhe este código para verificação pública." %}</p>
+    </section>
+  {% else %}
+    <section class="product-table-card" aria-labelledby="cert-pending-title">
+      <h2 id="cert-pending-title" class="h5">{% translate "Certificado ainda não emitido" %}</h2>
+      {% if completed %}
+        <p>{% translate "Você concluiu todas as aulas. Emita seu certificado abaixo." %}</p>
+        <form method="post" action="{% url 'content_course_certificate' course.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">{% translate "Emitir certificado" %}</button>
+        </form>
+      {% else %}
+        <p class="product-muted mb-0">{% translate "Conclua todas as aulas do curso para emitir o certificado." %}</p>
+      {% endif %}
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

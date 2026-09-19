@@ -1,0 +1,21 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=content.title %}Comparar versões: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="compare-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Histórico editorial" %}</span>
+    <h1 id="compare-title" class="mb-0">{% blocktranslate with before_ver=before.version after_ver=after.version %}Comparar versões {{ before_ver }} e {{ after_ver }}{% endblocktranslate %}</h1>
+  </header>
+  <section class="product-table-card content-body" aria-label="{% translate 'Diferenças entre versões' %}">
+    {{ comparison|safe }}
+  </section>
+  <div class="row g-3">
+    <article class="col-lg-6"><div class="product-table-card content-body h-100"><h2 class="h4">{% blocktranslate with ver=before.version %}Versão {{ ver }}{% endblocktranslate %}</h2>{{ before.body|safe }}</div></article>
+    <article class="col-lg-6"><div class="product-table-card content-body h-100"><h2 class="h4">{% blocktranslate with ver=after.version %}Versão {{ ver }}{% endblocktranslate %}</h2>{{ after.body|safe }}</div></article>
+  </div>
+  <a class="btn btn-outline-secondary align-self-start" href="{% url 'content_editorial_detail' content_id=content.pk %}">{% translate "Voltar ao editor" %}</a>
+</div>
+{% endblock %}

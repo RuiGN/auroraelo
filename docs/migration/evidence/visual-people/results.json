@@ -1,0 +1,612 @@
+{
+  "scope": "People UI synthetic preview; en/es unpublished",
+  "results": [
+    {
+      "surface": "patients",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "form-error",
+      "language": "pt-br",
+      "preservedInput": true,
+      "invalidFieldFocused": true
+    },
+    {
+      "surface": "professional-empty",
+      "language": "pt-br",
+      "filtersPreserved": true
+    },
+    {
+      "surface": "foreign-patient",
+      "language": "pt-br",
+      "denied": true
+    },
+    {
+      "surface": "/people/patients/",
+      "language": "pt-br",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/people/patients/new/",
+      "language": "pt-br",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/people/professionals/",
+      "language": "pt-br",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "patients",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "form-error",
+      "language": "en",
+      "preservedInput": true,
+      "invalidFieldFocused": true
+    },
+    {
+      "surface": "professional-empty",
+      "language": "en",
+      "filtersPreserved": true
+    },
+    {
+      "surface": "foreign-patient",
+      "language": "en",
+      "denied": true
+    },
+    {
+      "surface": "/people/patients/",
+      "language": "en",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/people/patients/new/",
+      "language": "en",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/people/professionals/",
+      "language": "en",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "patients",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "surface": "patients",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "create",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "detail",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "professionals",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "surface": "form-error",
+      "language": "es",
+      "preservedInput": true,
+      "invalidFieldFocused": true
+    },
+    {
+      "surface": "professional-empty",
+      "language": "es",
+      "filtersPreserved": true
+    },
+    {
+      "surface": "foreign-patient",
+      "language": "es",
+      "denied": true
+    },
+    {
+      "surface": "/people/patients/",
+      "language": "es",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/people/patients/new/",
+      "language": "es",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/people/professionals/",
+      "language": "es",
+      "role": "patient",
+      "denied": true
+    }
+  ],
+  "errors": []
+}

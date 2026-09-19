@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Aurora Elo Clínica",
+    "slug": "aurora-elo-clinica",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "auroraelo",
+    "splash": {
+      "backgroundColor": "#0a2540"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "br.med.auroraelo.clinica",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Permitir acesso à câmera para teleconsultas psiquiátricas seguras.",
+        "NSMicrophoneUsageDescription": "Permitir microfone para comunicação com o psiquiatra em teleconsulta.",
+        "NSLocationWhenInUseUsageDescription": "Sua localização é utilizada exclusivamente ao acionar o botão de emergência SOS."
+      }
+    },
+    "android": {
+      "package": "br.med.auroraelo.clinica",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ]
+    }
+  }
+}

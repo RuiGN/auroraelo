@@ -1,0 +1,164 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Detalhes do Registro" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="journal-detail-container product-page product-page--narrow">
+  <header class="journal-header product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Diário Emocional" %}</span>
+      <h1 class="mb-0">{% blocktranslate with date=entry.created_at|date:"SHORT_DATETIME_FORMAT" %}Registro de {{ date }}{% endblocktranslate %}</h1>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+      <a href="{% url 'journal_edit' entry.pk %}" class="btn btn-primary">
+        {% translate "Editar" %}
+      </a>
+      <a href="{% url 'journal_list' %}" class="btn btn-outline-secondary">
+        {% translate "Voltar ao diário" %}
+      </a>
+    </div>
+  </header>
+
+  <article class="journal-entry-card product-table-card d-grid gap-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pb-3 border-bottom">
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <span class="badge text-bg-secondary mood-{{ entry.mood }}">
+          {% translate "Humor" %}: {{ entry.get_mood_display }} ({{ entry.mood }}/5)
+        </span>
+        <span class="badge text-bg-light border">
+          {% translate "Intensidade" %}: {{ entry.intensity }}/5
+        </span>
+      </div>
+
+      <div>
+        {% if entry.visibility == "shareable" %}
+          <span class="visibility-badge visibility-shareable badge text-bg-success">
+            <span aria-hidden="true">●</span> {% translate "Verde — Compartilhável" %}
+          </span>
+        {% elif entry.visibility == "confirmation_required" %}
+          <span class="visibility-badge visibility-confirmation badge text-bg-warning">
+            <span aria-hidden="true">●</span> {% translate "Amarelo — Requer confirmação" %}
+          </span>
+        {% else %}
+          <span class="visibility-badge visibility-private badge text-bg-danger">
+            <span aria-hidden="true">●</span> {% translate "Vermelho — Somente você (Privado)" %}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+
+    {# Context #}
+    <div>
+      <h2 class="h5">{% translate "Relato do Diário" %}</h2>
+      <p class="mb-0">{{ entry.context|linebreaksbr }}</p>
+    </div>
+
+    {# Emotions #}
+    {% if entry.emotions %}
+      <div>
+        <h2 class="h5">{% translate "Emoções Identificadas" %}</h2>
+        <div class="emotion-list d-flex flex-wrap gap-1">
+          {% for emo in entry.emotions %}
+            <span class="emotion-tag badge text-bg-light border">{{ emo }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {# Triggers, Reactions, Strategies #}
+    {% if entry.triggers or entry.reactions or entry.strategies %}
+      <div class="journal-entry-details d-grid gap-3 p-3 bg-light rounded border">
+        {% if entry.triggers %}
+          <div>
+            <strong>{% translate "Gatilhos" %}:</strong>
+            <p class="mb-0 text-muted">{{ entry.triggers }}</p>
+          </div>
+        {% endif %}
+        {% if entry.reactions %}
+          <div>
+            <strong>{% translate "Reações físicas" %}:</strong>
+            <p class="mb-0 text-muted">{{ entry.reactions }}</p>
+          </div>
+        {% endif %}
+        {% if entry.strategies %}
+          <div>
+            <strong>{% translate "O que me ajudou" %}:</strong>
+            <p class="mb-0 text-muted">{{ entry.strategies }}</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {# Quick visibility change #}
+    <div class="pt-3 border-top">
+      <h3 class="h6 mb-3">{% translate "Alterar visibilidade deste registro:" %}</h3>
+      <form method="post" action="{% url 'journal_set_visibility' entry.pk %}" class="d-flex flex-wrap gap-2 mb-3">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button
+          type="submit"
+          name="visibility"
+          value="shareable"
+          class="btn btn-sm btn-outline-success{% if entry.visibility == 'shareable' %} active{% endif %}"
+        >
+          ● {% translate "Verde (Compartilhável)" %}
+        </button>
+        <button
+          type="submit"
+          name="visibility"
+          value="confirmation_required"
+          class="btn btn-sm btn-outline-warning{% if entry.visibility == 'confirmation_required' %} active{% endif %}"
+        >
+          ● {% translate "Amarelo (Perguntar antes)" %}
+        </button>
+        <button
+          type="submit"
+          name="visibility"
+          value="private"
+          class="btn btn-sm btn-outline-danger{% if entry.visibility == 'private' %} active{% endif %}"
+        >
+          ● {% translate "Vermelho (Privado)" %}
+        </button>
+      </form>
+
+      {% if entry.visibility != "private" %}
+        <div>
+          <form method="post" action="{% url 'journal_revoke_sharing' entry.pk %}">
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="btn btn-sm btn-outline-danger"
+            >
+              {% translate "Revogar todo o compartilhamento deste registro" %}
+            </button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+
+    {# Access Requests History #}
+    {% if access_requests %}
+      <div class="pt-3 border-top">
+        <h3 class="h6 mb-3">{% translate "Histórico de solicitações de acesso deste registro:" %}</h3>
+        <div class="d-grid gap-2">
+          {% for req in access_requests %}
+            <div class="p-2 border rounded small">
+              <div class="d-flex justify-content-between mb-1">
+                <span><strong>{% translate "Terapeuta" %}:</strong> {{ req.therapist.get_full_name|default:req.therapist.email }}</span>
+                <span class="badge text-bg-secondary">{{ req.get_status_display }}</span>
+              </div>
+              <div class="text-muted mb-1"><strong>{% translate "Finalidade" %}:</strong> {{ req.purpose }}</div>
+              <div class="text-muted small">
+                {% translate "Solicitado em" %}: {{ req.requested_at|date:"SHORT_DATETIME_FORMAT" }}
+                {% if req.expires_at %} | {% translate "Expira em" %}: {{ req.expires_at|date:"SHORT_DATETIME_FORMAT" }}{% endif %}
+                {% if req.revoked_at %} | {% translate "Revogado em" %}: {{ req.revoked_at|date:"SHORT_DATETIME_FORMAT" }}{% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </article>
+</div>
+{% endblock %}

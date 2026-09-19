@@ -1,0 +1,8 @@
+{
+  "templates/accounts/auth_base.html": "a2d6ad2801344f50c3b405dde15ee28f3bfb46740bdec213db19f205c4714811",
+  "templates/components/language_selector.html": "f0ac0504f62302387ac0bad19535d4d61e9e733ac48d4c14cd2e820b2bc0a098",
+  "static/duralux/css/product-integration.css": "2c6cd7b28c264faaec6cefd45793230ad1e891b962900a0ef86385a2cae93920",
+  "tests/test_language_selector_ui.py": "125ef9eef384709af7e56c2ca5a31caf41c0d76e815918074f3a0d2c6fc3fc0c",
+  "scripts/verify-runtime-languages.cjs": "040aed6d90fd2ed6ea5e11f9e35e5fee83ffa2ee03272f46a06dcb54369311ba",
+  "scripts/verify-language-selector-contrast.cjs": "0288ec224a165dd89f3efb54ce6dd53bc25c387880077f706ce9ae74a349cc4d"
+}

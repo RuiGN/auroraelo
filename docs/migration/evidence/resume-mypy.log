@@ -1,0 +1,6 @@
+consents/views.py:159: error: No overload variant of "get" of "dict" matches argument type "str"  [call-overload]
+consents/views.py:159: note: Possible overload variants:
+consents/views.py:159: note:     def get(self, Decision, None = ..., /) -> str | None
+consents/views.py:159: note:     def get(self, Decision, str, /) -> str
+consents/views.py:159: note:     def [_T] get(self, Decision, _T, /) -> str | _T
+Found 1 error in 1 file (checked 583 source files)

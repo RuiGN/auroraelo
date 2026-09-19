@@ -1,0 +1,56 @@
+{% extends "layouts/vertical.html" %}
+{% load accessible_forms i18n static %}
+
+{% block title %}{% translate "Sessões e dispositivos" %}{% endblock %}
+
+{% block content %}
+<section class="card" aria-labelledby="sessions-title">
+  <div class="card-body p-4">
+    <div class="d-flex align-items-start gap-3 mb-4">
+      <span class="avatar-text avatar-md bg-soft-primary text-primary flex-shrink-0" aria-hidden="true"><i class="feather-monitor"></i></span>
+      <div>
+      <h1 id="sessions-title" class="h3 mb-2">{% translate "Sessões e dispositivos" %}</h1>
+      <p class="text-body-secondary mb-0">{% translate "Revise os acessos à sua conta e encerre os que não reconhecer." %}</p>
+      </div>
+    </div>
+    {% if account_sessions %}
+      <ul class="list-group mb-4">
+        {% for device in account_sessions %}
+          <li class="list-group-item d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div>
+              <strong class="d-block">{{ device.client_label }}</strong>
+              <span class="text-body-secondary d-block">{% translate "Última atividade:" %} <time datetime="{{ device.last_seen_at|date:'c' }}">{{ device.last_seen_at }}</time></span>
+              {% if device.revoked_at %}<span class="badge text-bg-secondary ms-2">{% translate "Encerrada" %}</span>{% endif %}
+              {% if current_session and device.pk == current_session.pk %}<span class="badge text-bg-success ms-2">{% translate "Sessão atual" %}</span>{% endif %}
+            </div>
+            {% if not device.revoked_at and not current_session or not device.revoked_at and device.pk != current_session.pk %}
+              <form method="post" aria-label="{% blocktranslate with device_label=device.client_label %}Encerrar {{ device_label }}{% endblocktranslate %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="revoke">
+                <input type="hidden" name="session_id" value="{{ device.pk }}">
+                <button class="btn btn-outline-danger" type="submit">{% translate "Encerrar sessão" %}</button>
+              </form>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      <form class="border rounded p-3" method="post" novalidate data-form-guard>
+        {% csrf_token %}
+        <input type="hidden" name="action" value="revoke_others">
+        <div class="d-grid gap-2">
+          <label class="form-label mb-0" for="{{ reauthentication_form.password.id_for_label }}">{{ reauthentication_form.password.label }}</label>
+          {% include "components/duralux_control.html" with field=reauthentication_form.password only %}
+          {% for error in reauthentication_form.password.errors %}<p class="invalid-feedback d-block mb-0" id="{{ reauthentication_form.password.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>{% endfor %}
+        </div>
+        <button class="btn btn-danger mt-3" type="submit">{% translate "Encerrar todas as outras sessões" %}</button>
+      </form>
+    {% else %}
+      <div class="alert alert-info mb-0" role="status">{% translate "Nenhuma sessão registrada." %}</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

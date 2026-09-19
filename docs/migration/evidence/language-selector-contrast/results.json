@@ -1,0 +1,6000 @@
+{
+  "scope": "Post-login language selector contrast only; not whole-page WCAG acceptance",
+  "results": [
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "pt-br",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "en",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "en",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "es",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "es",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 390,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 390,
+      "language": "pt-br",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 390,
+      "language": "en",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 390,
+      "language": "en",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 390,
+      "language": "es",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 390,
+      "language": "es",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 1440,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 1440,
+      "language": "pt-br",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 1440,
+      "language": "en",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 1440,
+      "language": "en",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 1440,
+      "language": "es",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/",
+      "width": 1440,
+      "language": "es",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 320,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 320,
+      "language": "pt-br",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 320,
+      "language": "en",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 320,
+      "language": "en",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 320,
+      "language": "es",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 320,
+      "language": "es",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 390,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 390,
+      "language": "pt-br",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 390,
+      "language": "en",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 390,
+      "language": "en",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 390,
+      "language": "es",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 390,
+      "language": "es",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 1440,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 1440,
+      "language": "pt-br",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 1440,
+      "language": "en",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 1440,
+      "language": "en",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 1440,
+      "language": "es",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "focus": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        },
+        "hover": {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 16.955105845628285
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        },
+        {
+          "foreground": [
+            248,
+            250,
+            252
+          ],
+          "background": [
+            17,
+            24,
+            39
+          ],
+          "effectiveBackground": [
+            17,
+            24,
+            39
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(248, 250, 252)",
+          "backgroundImage": "none",
+          "contrast": 16.955105845628285
+        }
+      ]
+    },
+    {
+      "path": "/workspace/detached/",
+      "width": 1440,
+      "language": "es",
+      "theme": "light",
+      "states": {
+        "normal": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "focus": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        },
+        "hover": {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "solid",
+          "outlineColor": "rgb(29, 78, 216)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 11.336619137888956
+        }
+      },
+      "label": {
+        "foreground": [
+          40,
+          60,
+          80
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          255,
+          255,
+          255
+        ],
+        "colorScheme": "light",
+        "outline": "none",
+        "outlineColor": "rgb(40, 60, 80)",
+        "backgroundImage": "none",
+        "contrast": 11.336619137888956
+      },
+      "options": [
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        },
+        {
+          "foreground": [
+            40,
+            60,
+            80
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            255,
+            255,
+            255
+          ],
+          "colorScheme": "light",
+          "outline": "none",
+          "outlineColor": "rgb(40, 60, 80)",
+          "backgroundImage": "none",
+          "contrast": 11.336619137888956
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

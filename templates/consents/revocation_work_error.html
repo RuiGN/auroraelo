@@ -1,0 +1,12 @@
+{% extends "layouts/vertical.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Não foi possível confirmar o atendimento" %}{% endblock %}
+
+{% block content %}
+<section class="product-table-card" role="alert" aria-labelledby="revocation-work-error-title">
+  <h1 id="revocation-work-error-title">{% translate "Não foi possível confirmar o atendimento" %}</h1>
+  <p>{{ error }}</p>
+  <a class="btn btn-primary" href="{% url 'consent_revocation_work_queue' %}">{% translate "Voltar para a fila" %}</a>
+</section>
+{% endblock %}

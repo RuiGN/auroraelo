@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="dbase" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0C1420"/>
+      <stop offset="0.5" stop-color="#101B29"/>
+      <stop offset="1" stop-color="#0E1826"/>
+    </linearGradient>
+    <radialGradient id="dglowA" cx="0.78" cy="0.14" r="0.6">
+      <stop offset="0" stop-color="#233A52" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#233A52" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="dglowB" cx="0.12" cy="0.9" r="0.65">
+      <stop offset="0" stop-color="#1C3A36" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#1C3A36" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dband1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3E5B76" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#3E5B76" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3E5B76" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dband2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#35564C" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#35564C" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#35564C" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dband3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4A6A82" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#4A6A82" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#4A6A82" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#dbase)"/>
+  <rect width="1920" height="1080" fill="url(#dglowA)"/>
+  <rect width="1920" height="1080" fill="url(#dglowB)"/>
+
+  <g fill="none" stroke-linecap="round">
+    <path d="M-40,812 C420,742 780,862 1180,792 C1480,740 1700,820 1960,772" stroke="url(#dband3)" stroke-width="1.6"/>
+    <path d="M-40,760 C400,688 820,808 1220,738 C1520,686 1740,760 1960,714" stroke="url(#dband1)" stroke-width="2"/>
+    <path d="M-40,708 C380,640 840,756 1260,688 C1560,640 1760,702 1960,660" stroke="url(#dband2)" stroke-width="1.6"/>
+    <path d="M-40,656 C360,592 860,706 1300,640 C1600,596 1780,648 1960,610" stroke="url(#dband1)" stroke-width="1.1"/>
+    <path d="M-40,866 C460,800 820,912 1240,850 C1520,810 1760,878 1960,832" stroke="url(#dband2)" stroke-width="1.1"/>
+  </g>
+
+  <path d="M0,1080 L0,940 C400,892 880,968 1300,916 C1560,884 1760,932 1920,900 L1920,1080 Z" fill="#0B1520" opacity="0.85"/>
+  <path d="M0,1080 L0,996 C480,956 920,1012 1360,968 C1620,944 1800,978 1920,956 L1920,1080 Z" fill="#091219"/>
+</svg>

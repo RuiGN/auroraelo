@@ -1,0 +1,51 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+___________ test_production_trusts_only_explicit_csrf_origins[None] ____________
+
+trusted_origins = None
+
+    @pytest.mark.parametrize("trusted_origins", (None, "https://mindcare.example.test"))
+    def test_production_trusts_only_explicit_csrf_origins(
+        trusted_origins: str | None,
+    ) -> None:
+        """A new deployment must not inherit cross-origin trust from the source."""
+        environment = {
+            "DJANGO_SETTINGS_MODULE": "config.settings.production",
+            "DJANGO_SECRET_KEY": "test-only-production-secret",
+            "AUDIT_INTEGRITY_KEY": "test-only-audit-integrity-key-32-characters",
+            "MFA_ENCRYPTION_KEY": "test-only-mfa-key-32-characters-long",
+            "DJANGO_ALLOWED_HOSTS": "mindcare.example.test",
+            "CACHE_URL": "redis://127.0.0.1:6379/15",
+            "DB_NAME": "mindcare_test",
+            "DB_USER": "test",
+            "DB_PASSWORD": "test",
+            "DB_HOST": "127.0.0.1",
+            "DB_PORT": "5432",
+            "DB_SSLROOTCERT": "/test-only/postgresql-ca.pem",
+        }
+        if trusted_origins is not None:
+            environment["DJANGO_CSRF_TRUSTED_ORIGINS"] = trusted_origins
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                "import json; from django.conf import settings; "
+                "print(json.dumps(settings.CSRF_TRUSTED_ORIGINS))",
+            ],
+            env=environment,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+>       assert json.loads(result.stdout) == (
+            [trusted_origins] if trusted_origins is not None else []
+        )
+E       AssertionError: assert ['https://pro...stems.com.br'] == []
+E         
+E         Left contains 2 more items, first extra item: 'https://projetomnunes.rgnsystems.com.br'
+E         Use -v to get more diff
+
+tests/test_mindcare_configuration.py:43: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_mindcare_configuration.py::test_production_trusts_only_explicit_csrf_origins[None]
+1 failed, 1 passed in 1.25s

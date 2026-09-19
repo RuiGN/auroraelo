@@ -1,0 +1,128 @@
+.FF                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_localized_service_errors_preserve_configuration[en-Select a valid IANA time zone.-Enable prerequisites before dependent modules: finance] _
+
+language = 'en', timezone_error = 'Select a valid IANA time zone.'
+module_error = 'Enable prerequisites before dependent modules: finance'
+
+    from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
+    
+    
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        ("language", "timezone_error", "module_error"),
+        [
+            (
+                "pt-br",
+                "Selecione um fuso horário IANA válido.",
+                "Ative os pré-requisitos antes dos módulos dependentes: finance",
+            ),
+            (
+                "en",
+                "Select a valid IANA time zone.",
+                "Enable prerequisites before dependent modules: finance",
+            ),
+            (
+                "es",
+                "Seleccione una zona horaria IANA válida.",
+                "Active los requisitos previos antes de los módulos dependientes: finance",
+            ),
+        ],
+    )
+    def test_localized_service_errors_preserve_configuration(
+        language: str, timezone_error: str, module_error: str
+    ) -> None:
+        clinic = ClinicFactory.create()
+        administrator = UserFactory.create()
+        ClinicMembershipFactory.create(
+            clinic=clinic, user=administrator, role="clinic_admin"
+        )
+        configuration = ClinicConfiguration.infrastructure_objects.create(
+            clinic=clinic,
+            display_name="Nome original <paciente>",
+            enabled_modules=["patient_management"],
+            timezone_name="America/Recife",
+        )
+        with override(language):
+            with pytest.raises(ValidationError) as invalid_timezone:
+                update_clinic_operations(
+                    clinic_id=clinic.pk,
+                    actor=administrator,
+                    timezone_name="Invalid/Zone",
+                    language_code="pt-BR",
+                    service_channels=["in_person"],
+                    weekly_hours={},
+>                   out_of_hours_instructions="Texto original",
+                    request_id=uuid4(),
+                )
+E               AssertionError: assert ['Selecione u...IANA válido.'] == ['Select a va...A time zone.']
+E                 
+E                 At index 0 diff: 'Selecione um fuso horário IANA válido.' != 'Select a valid IANA time zone.'
+E                 Use -v to get more diff
+
+tests/test_clinic_service_translations.py:61: AssertionError
+_ test_localized_service_errors_preserve_configuration[es-Seleccione una zona horaria IANA v\xe1lida.-Active los requisitos previos antes de los m\xf3dulos dependientes: finance] _
+
+language = 'es', timezone_error = 'Seleccione una zona horaria IANA válida.'
+module_error = 'Active los requisitos previos antes de los módulos dependientes: finance'
+
+    from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
+    
+    
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        ("language", "timezone_error", "module_error"),
+        [
+            (
+                "pt-br",
+                "Selecione um fuso horário IANA válido.",
+                "Ative os pré-requisitos antes dos módulos dependentes: finance",
+            ),
+            (
+                "en",
+                "Select a valid IANA time zone.",
+                "Enable prerequisites before dependent modules: finance",
+            ),
+            (
+                "es",
+                "Seleccione una zona horaria IANA válida.",
+                "Active los requisitos previos antes de los módulos dependientes: finance",
+            ),
+        ],
+    )
+    def test_localized_service_errors_preserve_configuration(
+        language: str, timezone_error: str, module_error: str
+    ) -> None:
+        clinic = ClinicFactory.create()
+        administrator = UserFactory.create()
+        ClinicMembershipFactory.create(
+            clinic=clinic, user=administrator, role="clinic_admin"
+        )
+        configuration = ClinicConfiguration.infrastructure_objects.create(
+            clinic=clinic,
+            display_name="Nome original <paciente>",
+            enabled_modules=["patient_management"],
+            timezone_name="America/Recife",
+        )
+        with override(language):
+            with pytest.raises(ValidationError) as invalid_timezone:
+                update_clinic_operations(
+                    clinic_id=clinic.pk,
+                    actor=administrator,
+                    timezone_name="Invalid/Zone",
+                    language_code="pt-BR",
+                    service_channels=["in_person"],
+                    weekly_hours={},
+>                   out_of_hours_instructions="Texto original",
+                    request_id=uuid4(),
+                )
+E               AssertionError: assert ['Selecione u...IANA válido.'] == ['Seleccione ...IANA válida.']
+E                 
+E                 At index 0 diff: 'Selecione um fuso horário IANA válido.' != 'Seleccione una zona horaria IANA válida.'
+E                 Use -v to get more diff
+
+tests/test_clinic_service_translations.py:61: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_clinic_service_translations.py::test_localized_service_errors_preserve_configuration[en-Select a valid IANA time zone.-Enable prerequisites before dependent modules: finance]
+FAILED tests/test_clinic_service_translations.py::test_localized_service_errors_preserve_configuration[es-Seleccione una zona horaria IANA v\xe1lida.-Active los requisitos previos antes de los m\xf3dulos dependientes: finance]
+2 failed, 1 passed in 133.21s (0:02:13)

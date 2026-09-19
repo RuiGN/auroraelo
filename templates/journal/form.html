@@ -1,0 +1,189 @@
+{% extends layout_template %}
+{% load accessible_forms static i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="form-container product-page product-page--narrow">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Diário Emocional" %}</span>
+      <h1 class="mb-0">{{ page_title }}</h1>
+    </div>
+    <a href="{% url 'journal_list' %}" class="btn btn-outline-secondary">
+      {% translate "Voltar para o diário" %}
+    </a>
+  </header>
+
+  <div class="product-form-card">
+    <form id="{{ form_id }}"
+      class="product-form-grid"
+      method="post"
+      novalidate
+      data-form-guard
+      data-dirty-message="{% translate 'Há alterações não salvas no registro.' %}"
+    >
+      {% csrf_token %}
+
+      {# Error Summary #}
+      {% if form.errors %}
+        <div
+          class="alert alert-danger form-error-summary"
+          role="alert"
+          tabindex="-1"
+          data-focus-error-summary
+          aria-labelledby="{{ form_id }}-error-title"
+        >
+          <h2 id="{{ form_id }}-error-title" class="h5">{% translate "Revise os campos indicados" %}</h2>
+          <p>{% translate "Não foi possível salvar seu registro. Corrija os problemas abaixo." %}</p>
+          <ul class="mb-0">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li><a href="#{{ field|error_target_id }}">{{ field.label }}: {{ error }}</a></li>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {# Mood Scale #}
+      <div class="field-span {{ form.mood|field_span }} mb-3{% if form.mood.errors %} has-error{% endif %}">
+        <fieldset class="d-grid gap-2">
+          <legend class="form-label fw-semibold">
+            {{ form.mood.label }} <span aria-hidden="true">*</span>
+          </legend>
+          <p class="form-text" id="id_mood_helptext">{{ form.mood.help_text }}</p>
+          <div>
+            {% include "components/duralux_control.html" with field=form.mood only %}
+          </div>
+          {% for error in form.mood.errors %}
+            <p class="invalid-feedback d-block" id="id_mood_error_{{ forloop.counter0 }}">{{ error }}</p>
+          {% endfor %}
+        </fieldset>
+      </div>
+
+      {# Emotions Multiple Choice #}
+      <div class="field-span {{ form.emotions|field_span }} mb-3{% if form.emotions.errors %} has-error{% endif %}">
+        <fieldset class="d-grid gap-2">
+          <legend class="form-label fw-semibold">{{ form.emotions.label }}</legend>
+          <p class="form-text" id="id_emotions_helptext">{{ form.emotions.help_text }}</p>
+          <div>
+            {% include "components/duralux_control.html" with field=form.emotions only %}
+          </div>
+          {% for error in form.emotions.errors %}
+            <p class="invalid-feedback d-block" id="id_emotions_error_{{ forloop.counter0 }}">{{ error }}</p>
+          {% endfor %}
+        </fieldset>
+      </div>
+
+      {# Intensity #}
+      <div class="field-span {{ form.intensity|field_span }} mb-3{% if form.intensity.errors %} has-error{% endif %}">
+        <label for="{{ form.intensity.id_for_label }}" class="form-label fw-semibold">
+          {{ form.intensity.label }} <span aria-hidden="true">*</span>
+        </label>
+        {% include "components/duralux_control.html" with field=form.intensity only %}
+        {% if form.intensity.help_text %}
+          <p class="form-text" id="id_intensity_helptext">{{ form.intensity.help_text }}</p>
+        {% endif %}
+        {% for error in form.intensity.errors %}
+          <p class="invalid-feedback d-block" id="id_intensity_error_{{ forloop.counter0 }}">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      {# Context (Required) #}
+      <div class="field-span {{ form.context|field_span }} mb-3{% if form.context.errors %} has-error{% endif %}">
+        <label for="{{ form.context.id_for_label }}" class="form-label fw-semibold">
+          {{ form.context.label }} <span aria-hidden="true">*</span>
+        </label>
+        {% include "components/duralux_control.html" with field=form.context only %}
+        {% if form.context.help_text %}
+          <p class="form-text" id="id_context_helptext">{{ form.context.help_text }}</p>
+        {% endif %}
+        {% for error in form.context.errors %}
+          <p class="invalid-feedback d-block" id="id_context_error_{{ forloop.counter0 }}">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      {# Triggers #}
+      <div class="field-span {{ form.triggers|field_span }} mb-3{% if form.triggers.errors %} has-error{% endif %}">
+        <label for="{{ form.triggers.id_for_label }}" class="form-label fw-semibold">
+          {{ form.triggers.label }}
+        </label>
+        {% include "components/duralux_control.html" with field=form.triggers only %}
+        {% if form.triggers.help_text %}
+          <p class="form-text" id="id_triggers_helptext">{{ form.triggers.help_text }}</p>
+        {% endif %}
+        {% for error in form.triggers.errors %}
+          <p class="invalid-feedback d-block" id="id_triggers_error_{{ forloop.counter0 }}">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      {# Reactions #}
+      <div class="field-span {{ form.reactions|field_span }} mb-3{% if form.reactions.errors %} has-error{% endif %}">
+        <label for="{{ form.reactions.id_for_label }}" class="form-label fw-semibold">
+          {{ form.reactions.label }}
+        </label>
+        {% include "components/duralux_control.html" with field=form.reactions only %}
+        {% if form.reactions.help_text %}
+          <p class="form-text" id="id_reactions_helptext">{{ form.reactions.help_text }}</p>
+        {% endif %}
+        {% for error in form.reactions.errors %}
+          <p class="invalid-feedback d-block" id="id_reactions_error_{{ forloop.counter0 }}">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      {# Strategies #}
+      <div class="field-span {{ form.strategies|field_span }} mb-3{% if form.strategies.errors %} has-error{% endif %}">
+        <label for="{{ form.strategies.id_for_label }}" class="form-label fw-semibold">
+          {{ form.strategies.label }}
+        </label>
+        {% include "components/duralux_control.html" with field=form.strategies only %}
+        {% if form.strategies.help_text %}
+          <p class="form-text" id="id_strategies_helptext">{{ form.strategies.help_text }}</p>
+        {% endif %}
+        {% for error in form.strategies.errors %}
+          <p class="invalid-feedback d-block" id="id_strategies_error_{{ forloop.counter0 }}">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      {# Visibility Traffic Light #}
+      <div class="field-span {{ form.visibility|field_span }} mb-3{% if form.visibility.errors %} has-error{% endif %}">
+        <fieldset class="d-grid gap-2">
+          <legend class="form-label fw-semibold">{{ form.visibility.label }} <span aria-hidden="true">*</span></legend>
+          <p class="form-text" id="id_visibility_helptext">
+            {% translate "Você tem controle total sobre o compartilhamento de cada registro:" %}
+          </p>
+          <div>
+            {% include "components/duralux_control.html" with field=form.visibility only %}
+          </div>
+          <div class="small text-body-secondary">
+            <p class="mb-1"><span class="product-visibility-status__icon" aria-hidden="true">●</span> <span>{% translate "Verde — Compartilhável: o terapeuta vinculado poderá ver este registro." %}</span></p>
+            <p class="mb-1"><span class="product-visibility-status__icon" aria-hidden="true">●</span> <span>{% translate "Amarelo — Confirmação necessária: o terapeuta sabe que existe um registro, mas só terá acesso se você autorizar explicitamente." %}</span></p>
+            <p class="mb-0"><span class="product-visibility-status__icon" aria-hidden="true">●</span> <span>{% translate "Vermelho — Privado: somente você tem acesso. O terapeuta não vê e não é notificado." %}</span></p>
+          </div>
+          {% for error in form.visibility.errors %}
+            <p class="invalid-feedback d-block" id="id_visibility_error_{{ forloop.counter0 }}">{{ error }}</p>
+          {% endfor %}
+        </fieldset>
+      </div>
+
+      {# Actions #}
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-primary" type="submit" data-submit-button>
+          {{ submit_label }}
+        </button>
+        <a href="{% url 'journal_list' %}" class="btn btn-outline-secondary">
+          {% translate "Cancelar" %}
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

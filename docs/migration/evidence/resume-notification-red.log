@@ -1,0 +1,199 @@
+.FFFFF.                                                                  [100%]
+=================================== FAILURES ===================================
+_ test_sidebar_revocation_notification_uses_localized_plural[1-en-1 pending operational revocation-2 pending operational revocations] _
+
+language = 'en', singular = '1 pending operational revocation'
+plural = '2 pending operational revocations', count = 1
+
+    @pytest.mark.parametrize(
+        ("language", "singular", "plural"),
+        (
+            (
+                "pt-br",
+                "1 revogação operacional pendente",
+                "2 revogações operacionais pendentes",
+            ),
+            (
+                "en",
+                "1 pending operational revocation",
+                "2 pending operational revocations",
+            ),
+            (
+                "es",
+                "1 revocación operativa pendiente",
+                "2 revocaciones operativas pendientes",
+            ),
+        ),
+    )
+    @pytest.mark.parametrize("count", (1, 2))
+    def test_sidebar_revocation_notification_uses_localized_plural(
+        language: str, singular: str, plural: str, count: int
+    ) -> None:
+        with override(language):
+            content = render_to_string(
+                "layouts/partials/navigation.html",
+                {"pending_consent_revocation_count": count},
+            )
+>       assert f"<span>{singular if count == 1 else plural}</span>" in content
+E       assert '<span>1 pending operational revocation</span>' in '\n<nav aria-label="Main navigation" class="nxl-navigation-content">\n  \n  <div class="px-3 pt-2">\n    <a href="/con...an class="nxl-mtext">Messages</span>\n          </a>\n        </li>\n      </ul>\n    </li>\n\n    \n  </ul>\n</nav>\n'
+
+tests/test_consent_navigation_translations.py:37: AssertionError
+_ test_sidebar_revocation_notification_uses_localized_plural[1-es-1 revocaci\xf3n operativa pendiente-2 revocaciones operativas pendientes] _
+
+language = 'es', singular = '1 revocación operativa pendiente'
+plural = '2 revocaciones operativas pendientes', count = 1
+
+    @pytest.mark.parametrize(
+        ("language", "singular", "plural"),
+        (
+            (
+                "pt-br",
+                "1 revogação operacional pendente",
+                "2 revogações operacionais pendentes",
+            ),
+            (
+                "en",
+                "1 pending operational revocation",
+                "2 pending operational revocations",
+            ),
+            (
+                "es",
+                "1 revocación operativa pendiente",
+                "2 revocaciones operativas pendientes",
+            ),
+        ),
+    )
+    @pytest.mark.parametrize("count", (1, 2))
+    def test_sidebar_revocation_notification_uses_localized_plural(
+        language: str, singular: str, plural: str, count: int
+    ) -> None:
+        with override(language):
+            content = render_to_string(
+                "layouts/partials/navigation.html",
+                {"pending_consent_revocation_count": count},
+            )
+>       assert f"<span>{singular if count == 1 else plural}</span>" in content
+E       assert '<span>1 revocación operativa pendiente</span>' in '\n<nav aria-label="Navegación principal" class="nxl-navigation-content">\n  \n  <div class="px-3 pt-2">\n    <a href=...an class="nxl-mtext">Mensajes</span>\n          </a>\n        </li>\n      </ul>\n    </li>\n\n    \n  </ul>\n</nav>\n'
+
+tests/test_consent_navigation_translations.py:37: AssertionError
+_ test_sidebar_revocation_notification_uses_localized_plural[2-pt-br-1 revoga\xe7\xe3o operacional pendente-2 revoga\xe7\xf5es operacionais pendentes] _
+
+language = 'pt-br', singular = '1 revogação operacional pendente'
+plural = '2 revogações operacionais pendentes', count = 2
+
+    @pytest.mark.parametrize(
+        ("language", "singular", "plural"),
+        (
+            (
+                "pt-br",
+                "1 revogação operacional pendente",
+                "2 revogações operacionais pendentes",
+            ),
+            (
+                "en",
+                "1 pending operational revocation",
+                "2 pending operational revocations",
+            ),
+            (
+                "es",
+                "1 revocación operativa pendiente",
+                "2 revocaciones operativas pendientes",
+            ),
+        ),
+    )
+    @pytest.mark.parametrize("count", (1, 2))
+    def test_sidebar_revocation_notification_uses_localized_plural(
+        language: str, singular: str, plural: str, count: int
+    ) -> None:
+        with override(language):
+            content = render_to_string(
+                "layouts/partials/navigation.html",
+                {"pending_consent_revocation_count": count},
+            )
+>       assert f"<span>{singular if count == 1 else plural}</span>" in content
+E       assert '<span>2 revogações operacionais pendentes</span>' in '\n<nav aria-label="Navegação principal" class="nxl-navigation-content">\n  \n  <div class="px-3 pt-2">\n    <a href="...n class="nxl-mtext">Mensagens</span>\n          </a>\n        </li>\n      </ul>\n    </li>\n\n    \n  </ul>\n</nav>\n'
+
+tests/test_consent_navigation_translations.py:37: AssertionError
+_ test_sidebar_revocation_notification_uses_localized_plural[2-en-1 pending operational revocation-2 pending operational revocations] _
+
+language = 'en', singular = '1 pending operational revocation'
+plural = '2 pending operational revocations', count = 2
+
+    @pytest.mark.parametrize(
+        ("language", "singular", "plural"),
+        (
+            (
+                "pt-br",
+                "1 revogação operacional pendente",
+                "2 revogações operacionais pendentes",
+            ),
+            (
+                "en",
+                "1 pending operational revocation",
+                "2 pending operational revocations",
+            ),
+            (
+                "es",
+                "1 revocación operativa pendiente",
+                "2 revocaciones operativas pendientes",
+            ),
+        ),
+    )
+    @pytest.mark.parametrize("count", (1, 2))
+    def test_sidebar_revocation_notification_uses_localized_plural(
+        language: str, singular: str, plural: str, count: int
+    ) -> None:
+        with override(language):
+            content = render_to_string(
+                "layouts/partials/navigation.html",
+                {"pending_consent_revocation_count": count},
+            )
+>       assert f"<span>{singular if count == 1 else plural}</span>" in content
+E       assert '<span>2 pending operational revocations</span>' in '\n<nav aria-label="Main navigation" class="nxl-navigation-content">\n  \n  <div class="px-3 pt-2">\n    <a href="/con...an class="nxl-mtext">Messages</span>\n          </a>\n        </li>\n      </ul>\n    </li>\n\n    \n  </ul>\n</nav>\n'
+
+tests/test_consent_navigation_translations.py:37: AssertionError
+_ test_sidebar_revocation_notification_uses_localized_plural[2-es-1 revocaci\xf3n operativa pendiente-2 revocaciones operativas pendientes] _
+
+language = 'es', singular = '1 revocación operativa pendiente'
+plural = '2 revocaciones operativas pendientes', count = 2
+
+    @pytest.mark.parametrize(
+        ("language", "singular", "plural"),
+        (
+            (
+                "pt-br",
+                "1 revogação operacional pendente",
+                "2 revogações operacionais pendentes",
+            ),
+            (
+                "en",
+                "1 pending operational revocation",
+                "2 pending operational revocations",
+            ),
+            (
+                "es",
+                "1 revocación operativa pendiente",
+                "2 revocaciones operativas pendientes",
+            ),
+        ),
+    )
+    @pytest.mark.parametrize("count", (1, 2))
+    def test_sidebar_revocation_notification_uses_localized_plural(
+        language: str, singular: str, plural: str, count: int
+    ) -> None:
+        with override(language):
+            content = render_to_string(
+                "layouts/partials/navigation.html",
+                {"pending_consent_revocation_count": count},
+            )
+>       assert f"<span>{singular if count == 1 else plural}</span>" in content
+E       assert '<span>2 revocaciones operativas pendientes</span>' in '\n<nav aria-label="Navegación principal" class="nxl-navigation-content">\n  \n  <div class="px-3 pt-2">\n    <a href=...an class="nxl-mtext">Mensajes</span>\n          </a>\n        </li>\n      </ul>\n    </li>\n\n    \n  </ul>\n</nav>\n'
+
+tests/test_consent_navigation_translations.py:37: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_consent_navigation_translations.py::test_sidebar_revocation_notification_uses_localized_plural[1-en-1 pending operational revocation-2 pending operational revocations]
+FAILED tests/test_consent_navigation_translations.py::test_sidebar_revocation_notification_uses_localized_plural[1-es-1 revocaci\xf3n operativa pendiente-2 revocaciones operativas pendientes]
+FAILED tests/test_consent_navigation_translations.py::test_sidebar_revocation_notification_uses_localized_plural[2-pt-br-1 revoga\xe7\xe3o operacional pendente-2 revoga\xe7\xf5es operacionais pendentes]
+FAILED tests/test_consent_navigation_translations.py::test_sidebar_revocation_notification_uses_localized_plural[2-en-1 pending operational revocation-2 pending operational revocations]
+FAILED tests/test_consent_navigation_translations.py::test_sidebar_revocation_notification_uses_localized_plural[2-es-1 revocaci\xf3n operativa pendiente-2 revocaciones operativas pendientes]
+5 failed, 2 passed in 0.84s

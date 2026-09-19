@@ -1,0 +1,226 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_local_runtime_offers_and_applies_launch_languages[pt-br-Entrar na plataforma] _
+
+language = 'pt-br', title = 'Entrar na plataforma'
+
+    @pytest.mark.parametrize(
+        ("language", "title"),
+        (
+            ("pt-br", "Entrar na plataforma"),
+            ("en", "Sign in to the platform"),
+            ("es", "Iniciar sesión en la plataforma"),
+        ),
+    )
+    def test_local_runtime_offers_and_applies_launch_languages(
+        language: str, title: str
+    ) -> None:
+        environment = {
+            "DJANGO_SETTINGS_MODULE": "config.settings.development",
+            "DJANGO_SECRET_KEY": "test-only-runtime-secret",
+            "AUDIT_INTEGRITY_KEY": "test-only-runtime-audit",
+            "DJANGO_ALLOWED_HOSTS": "testserver",
+            "DB_NAME": "unused",
+            "DB_USER": "unused",
+            "DB_PASSWORD": "unused",
+            "DB_HOST": "127.0.0.1",
+            "DB_PORT": "1",
+        }
+        probe = '''
+    import json
+    import sys
+    import django
+    django.setup()
+    from django.conf import settings
+    from django.test import Client
+    language = sys.argv[1]
+    client = Client(enforce_csrf_checks=True)
+    page = client.get('/accounts/login/', HTTP_ACCEPT_LANGUAGE=language)
+    csrf = client.cookies[settings.CSRF_COOKIE_NAME].value
+    changed = client.post('/accounts/language/', {
+        'language': language,
+        'next': '/accounts/login/?next=%2Fworkspace%2F',
+    }, HTTP_X_CSRFTOKEN=csrf)
+    reload = client.get('/accounts/login/', HTTP_ACCEPT_LANGUAGE='pt-br')
+    invalid = client.post('/accounts/language/', {'language': 'fr'}, HTTP_X_CSRFTOKEN=csrf)
+    no_csrf = Client(enforce_csrf_checks=True).post('/accounts/language/', {'language': language})
+    print(json.dumps({
+        'languages': [code for code, name in settings.LANGUAGES],
+        'status': page.status_code,
+        'negotiated': page.headers.get('Content-Language'),
+        'html': page.content.decode(),
+        'post_status': changed.status_code,
+        'location': changed.headers.get('Location'),
+        'cookie': changed.cookies.get(settings.LANGUAGE_COOKIE_NAME).value if settings.LANGUAGE_COOKIE_NAME in changed.cookies else None,
+        'reload_language': reload.headers.get('Content-Language'),
+        'invalid_status': invalid.status_code,
+        'no_csrf_status': no_csrf.status_code,
+    }))
+    '''
+        result = subprocess.run(
+            [sys.executable, "-c", probe, language],
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=True,
+        )
+        report = json.loads(result.stdout)
+>       assert report["languages"] == ["pt-br", "en", "es"]
+E       AssertionError: assert ['pt-br'] == ['pt-br', 'en', 'es']
+E
+E         Right contains 2 more items, first extra item: 'en'
+E         Use -v to get more diff
+
+tests/test_runtime_language_publication.py:72: AssertionError
+_ test_local_runtime_offers_and_applies_launch_languages[en-Sign in to the platform] _
+
+language = 'en', title = 'Sign in to the platform'
+
+    @pytest.mark.parametrize(
+        ("language", "title"),
+        (
+            ("pt-br", "Entrar na plataforma"),
+            ("en", "Sign in to the platform"),
+            ("es", "Iniciar sesión en la plataforma"),
+        ),
+    )
+    def test_local_runtime_offers_and_applies_launch_languages(
+        language: str, title: str
+    ) -> None:
+        environment = {
+            "DJANGO_SETTINGS_MODULE": "config.settings.development",
+            "DJANGO_SECRET_KEY": "test-only-runtime-secret",
+            "AUDIT_INTEGRITY_KEY": "test-only-runtime-audit",
+            "DJANGO_ALLOWED_HOSTS": "testserver",
+            "DB_NAME": "unused",
+            "DB_USER": "unused",
+            "DB_PASSWORD": "unused",
+            "DB_HOST": "127.0.0.1",
+            "DB_PORT": "1",
+        }
+        probe = '''
+    import json
+    import sys
+    import django
+    django.setup()
+    from django.conf import settings
+    from django.test import Client
+    language = sys.argv[1]
+    client = Client(enforce_csrf_checks=True)
+    page = client.get('/accounts/login/', HTTP_ACCEPT_LANGUAGE=language)
+    csrf = client.cookies[settings.CSRF_COOKIE_NAME].value
+    changed = client.post('/accounts/language/', {
+        'language': language,
+        'next': '/accounts/login/?next=%2Fworkspace%2F',
+    }, HTTP_X_CSRFTOKEN=csrf)
+    reload = client.get('/accounts/login/', HTTP_ACCEPT_LANGUAGE='pt-br')
+    invalid = client.post('/accounts/language/', {'language': 'fr'}, HTTP_X_CSRFTOKEN=csrf)
+    no_csrf = Client(enforce_csrf_checks=True).post('/accounts/language/', {'language': language})
+    print(json.dumps({
+        'languages': [code for code, name in settings.LANGUAGES],
+        'status': page.status_code,
+        'negotiated': page.headers.get('Content-Language'),
+        'html': page.content.decode(),
+        'post_status': changed.status_code,
+        'location': changed.headers.get('Location'),
+        'cookie': changed.cookies.get(settings.LANGUAGE_COOKIE_NAME).value if settings.LANGUAGE_COOKIE_NAME in changed.cookies else None,
+        'reload_language': reload.headers.get('Content-Language'),
+        'invalid_status': invalid.status_code,
+        'no_csrf_status': no_csrf.status_code,
+    }))
+    '''
+        result = subprocess.run(
+            [sys.executable, "-c", probe, language],
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=True,
+        )
+        report = json.loads(result.stdout)
+>       assert report["languages"] == ["pt-br", "en", "es"]
+E       AssertionError: assert ['pt-br'] == ['pt-br', 'en', 'es']
+E
+E         Right contains 2 more items, first extra item: 'en'
+E         Use -v to get more diff
+
+tests/test_runtime_language_publication.py:72: AssertionError
+_ test_local_runtime_offers_and_applies_launch_languages[es-Iniciar sesi\xf3n en la plataforma] _
+
+language = 'es', title = 'Iniciar sesión en la plataforma'
+
+    @pytest.mark.parametrize(
+        ("language", "title"),
+        (
+            ("pt-br", "Entrar na plataforma"),
+            ("en", "Sign in to the platform"),
+            ("es", "Iniciar sesión en la plataforma"),
+        ),
+    )
+    def test_local_runtime_offers_and_applies_launch_languages(
+        language: str, title: str
+    ) -> None:
+        environment = {
+            "DJANGO_SETTINGS_MODULE": "config.settings.development",
+            "DJANGO_SECRET_KEY": "test-only-runtime-secret",
+            "AUDIT_INTEGRITY_KEY": "test-only-runtime-audit",
+            "DJANGO_ALLOWED_HOSTS": "testserver",
+            "DB_NAME": "unused",
+            "DB_USER": "unused",
+            "DB_PASSWORD": "unused",
+            "DB_HOST": "127.0.0.1",
+            "DB_PORT": "1",
+        }
+        probe = '''
+    import json
+    import sys
+    import django
+    django.setup()
+    from django.conf import settings
+    from django.test import Client
+    language = sys.argv[1]
+    client = Client(enforce_csrf_checks=True)
+    page = client.get('/accounts/login/', HTTP_ACCEPT_LANGUAGE=language)
+    csrf = client.cookies[settings.CSRF_COOKIE_NAME].value
+    changed = client.post('/accounts/language/', {
+        'language': language,
+        'next': '/accounts/login/?next=%2Fworkspace%2F',
+    }, HTTP_X_CSRFTOKEN=csrf)
+    reload = client.get('/accounts/login/', HTTP_ACCEPT_LANGUAGE='pt-br')
+    invalid = client.post('/accounts/language/', {'language': 'fr'}, HTTP_X_CSRFTOKEN=csrf)
+    no_csrf = Client(enforce_csrf_checks=True).post('/accounts/language/', {'language': language})
+    print(json.dumps({
+        'languages': [code for code, name in settings.LANGUAGES],
+        'status': page.status_code,
+        'negotiated': page.headers.get('Content-Language'),
+        'html': page.content.decode(),
+        'post_status': changed.status_code,
+        'location': changed.headers.get('Location'),
+        'cookie': changed.cookies.get(settings.LANGUAGE_COOKIE_NAME).value if settings.LANGUAGE_COOKIE_NAME in changed.cookies else None,
+        'reload_language': reload.headers.get('Content-Language'),
+        'invalid_status': invalid.status_code,
+        'no_csrf_status': no_csrf.status_code,
+    }))
+    '''
+        result = subprocess.run(
+            [sys.executable, "-c", probe, language],
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=True,
+        )
+        report = json.loads(result.stdout)
+>       assert report["languages"] == ["pt-br", "en", "es"]
+E       AssertionError: assert ['pt-br'] == ['pt-br', 'en', 'es']
+E
+E         Right contains 2 more items, first extra item: 'en'
+E         Use -v to get more diff
+
+tests/test_runtime_language_publication.py:72: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_runtime_language_publication.py::test_local_runtime_offers_and_applies_launch_languages[pt-br-Entrar na plataforma]
+FAILED tests/test_runtime_language_publication.py::test_local_runtime_offers_and_applies_launch_languages[en-Sign in to the platform]
+FAILED tests/test_runtime_language_publication.py::test_local_runtime_offers_and_applies_launch_languages[es-Iniciar sesi\xf3n en la plataforma]
+3 failed in 7.34s

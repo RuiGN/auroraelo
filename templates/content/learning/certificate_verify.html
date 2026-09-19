@@ -1,0 +1,29 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:'pt-BR' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% translate "Verificação de certificado" %}</title>
+  <link rel="icon" href="{% static 'duralux/images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/css/theme.min.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/css/product-integration.css' %}">
+</head>
+<body class="product-workspace-body">
+  <main class="container py-5 product-page product-page--narrow" aria-labelledby="certificate-verification-title">
+    {% include "layouts/partials/brand.html" %}
+    <section class="product-table-card mt-4">
+      <h1 id="certificate-verification-title" class="mb-3">{% translate "Verificação de certificado" %}</h1>
+      {% if status == "valid" %}
+        <p class="alert alert-success" role="status" aria-live="polite">{% translate "Certificado válido" %}</p>
+        <p class="mb-0">{% blocktranslate with title=course_title %}Curso: {{ title }}{% endblocktranslate %}</p>
+      {% elif status == "revoked" %}
+        <p class="alert alert-warning" role="status" aria-live="polite">{% translate "Certificado revogado" %}</p>
+      {% else %}
+        <p class="alert alert-danger" role="status" aria-live="polite">{% translate "Certificado não encontrado" %}</p>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

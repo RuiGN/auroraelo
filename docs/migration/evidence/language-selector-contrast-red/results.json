@@ -1,0 +1,179 @@
+{
+  "scope": "Post-login language selector contrast only; not whole-page WCAG acceptance",
+  "results": [
+    {
+      "path": "/workspace/",
+      "width": 320,
+      "language": "pt-br",
+      "theme": "dark",
+      "states": {
+        "normal": {
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            15,
+            23,
+            42
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(255, 255, 255)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 17.85253496299567
+        },
+        "focus": {
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            15,
+            23,
+            42
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 17.85253496299567
+        },
+        "hover": {
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            15,
+            23,
+            42
+          ],
+          "colorScheme": "dark",
+          "outline": "solid",
+          "outlineColor": "rgb(147, 197, 253)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e\"), none",
+          "contrast": 17.85253496299567
+        }
+      },
+      "label": {
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "background": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "effectiveBackground": [
+          15,
+          23,
+          42
+        ],
+        "colorScheme": "dark",
+        "outline": "none",
+        "outlineColor": "rgb(255, 255, 255)",
+        "backgroundImage": "none",
+        "contrast": 17.85253496299567
+      },
+      "options": [
+        {
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            15,
+            23,
+            42
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(255, 255, 255)",
+          "backgroundImage": "none",
+          "contrast": 17.85253496299567
+        },
+        {
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            15,
+            23,
+            42
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(255, 255, 255)",
+          "backgroundImage": "none",
+          "contrast": 17.85253496299567
+        },
+        {
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effectiveBackground": [
+            15,
+            23,
+            42
+          ],
+          "colorScheme": "dark",
+          "outline": "none",
+          "outlineColor": "rgb(255, 255, 255)",
+          "backgroundImage": "none",
+          "contrast": 17.85253496299567
+        }
+      ]
+    }
+  ],
+  "errors": [
+    "Dark input needs an opaque background, not the vendor transparent override"
+  ]
+}

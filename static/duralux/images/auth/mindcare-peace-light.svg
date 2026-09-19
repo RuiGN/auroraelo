@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E7EDF2"/>
+      <stop offset="0.3" stop-color="#E4EBEE"/>
+      <stop offset="0.55" stop-color="#E2E9E7"/>
+      <stop offset="0.8" stop-color="#E0E7E2"/>
+      <stop offset="1" stop-color="#DCE5DF"/>
+    </linearGradient>
+    <radialGradient id="wash" cx="0.5" cy="0.34" r="0.85">
+      <stop offset="0" stop-color="#F6F4EF" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#EFEFEA" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#E3EAE6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C9D6D2" stop-opacity="0"/>
+      <stop offset="1" stop-color="#C2D2CC" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="band1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#AFC4D0" stop-opacity="0"/>
+      <stop offset="0.25" stop-color="#AFC4D0" stop-opacity="0.7"/>
+      <stop offset="0.6" stop-color="#B4C9BF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#B4C9BF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="band2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A9BEAF" stop-opacity="0"/>
+      <stop offset="0.4" stop-color="#A9BEAF" stop-opacity="0.55"/>
+      <stop offset="0.75" stop-color="#A3BAC8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#A3BAC8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#base)"/>
+  <rect width="1920" height="1080" fill="url(#wash)"/>
+
+  <!-- flowing contours, quiet but present -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M-40,596 C360,530 860,646 1300,578 C1600,532 1780,590 1960,548" stroke="url(#band2)" stroke-width="1.2" opacity="0.55"/>
+    <path d="M-40,652 C360,586 840,704 1260,636 C1580,584 1760,650 1960,604" stroke="url(#band1)" stroke-width="1.6" opacity="0.7"/>
+    <path d="M-40,712 C400,642 820,762 1220,692 C1520,640 1740,714 1960,666" stroke="url(#band1)" stroke-width="2" opacity="0.85"/>
+    <path d="M-40,774 C420,704 780,824 1180,754 C1480,702 1700,782 1960,732" stroke="url(#band2)" stroke-width="1.6" opacity="0.75"/>
+    <path d="M-40,838 C460,770 820,884 1240,822 C1520,782 1760,850 1960,804" stroke="url(#band2)" stroke-width="1.2" opacity="0.6"/>
+  </g>
+
+  <!-- low mist horizon -->
+  <rect x="0" y="880" width="1920" height="200" fill="url(#mist)"/>
+  <path d="M0,1080 L0,962 C460,916 920,984 1340,938 C1580,912 1780,952 1920,928 L1920,1080 Z" fill="#D3DFD8" opacity="0.6"/>
+  <path d="M0,1080 L0,1016 C500,980 940,1028 1380,992 C1630,972 1810,1000 1920,982 L1920,1080 Z" fill="#C8D7CF" opacity="0.75"/>
+</svg>

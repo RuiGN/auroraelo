@@ -1,0 +1,95 @@
+{% extends layout_template %}
+{% load accessible_forms static i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="checkin-container product-page product-page--narrow">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Acompanhamento pessoal" %}</span>
+      <h1 class="mb-0">{% translate "Check-in Diário" %}</h1>
+      <p class="product-page-meta mb-0">
+        {% blocktranslate with today=today_date|date:"d \d\e F \d\e Y" %}{{ today }} — leva menos de um minuto{% endblocktranslate %}
+      </p>
+    </div>
+    <a href="{% url 'checkin_list' %}" class="btn btn-outline-secondary">
+      {% translate "Ver histórico" %}
+    </a>
+  </header>
+
+  {% if existing_checkin and not existing_checkin.is_draft %}
+    <div class="alert alert-info" role="status">
+      {% translate "Você já enviou seu check-in hoje. Você pode revisar e atualizar suas respostas abaixo enquanto a janela de edição estiver aberta." %}
+    </div>
+  {% endif %}
+
+  <div class="product-card p-3 border rounded mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-1">
+      <span class="fw-semibold">{% translate "Progresso" %}</span>
+      <span aria-live="polite" class="text-muted small">{% blocktranslate with pct=progress_pct count=total_questions %}{{ pct }}% ({{ count }} perguntas){% endblocktranslate %}</span>
+    </div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{% translate 'Progresso do check-in' %}"></div>
+    </div>
+  </div>
+
+  <div class="product-form-card">
+    <form id="daily-checkin-form" class="d-grid gap-3" method="post" novalidate data-form-guard>
+      {% csrf_token %}
+      <input type="hidden" name="idempotency_key" value="{{ idempotency_key }}">
+
+      {% if form.errors %}
+        <div class="alert alert-danger" role="alert" tabindex="-1" data-focus-error-summary aria-labelledby="checkin-error-title">
+          <h2 id="checkin-error-title" class="h5">{% translate "Revise as respostas indicadas" %}</h2>
+          <p>{% translate "Não foi possível enviar. Corrija os problemas abaixo." %}</p>
+          <ul class="mb-0">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li><a href="#{{ field|error_target_id }}">{{ field.label }}: {{ error }}</a></li>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% for field in form %}
+        <div class="mb-3{% if field.errors %} has-error{% endif %}">
+          <fieldset class="d-grid gap-2">
+            <legend class="form-label fw-semibold">{{ field.label }}{% if field.field.required %} <span aria-hidden="true">*</span>{% endif %}</legend>
+            <div>
+              {% include "components/duralux_control.html" with field=field only %}
+            </div>
+          </fieldset>
+          {% if field.help_text %}
+            <p class="form-text" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</p>
+          {% endif %}
+          {% for error in field.errors %}
+            <p class="invalid-feedback d-block" id="{{ field.auto_id }}_error_{{ forloop.counter0 }}">{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <div class="d-flex flex-wrap gap-2">
+        <button type="submit" name="action" value="submit" class="btn btn-primary" data-submit-button>
+          {% if existing_checkin and not existing_checkin.is_draft %}{% translate "Atualizar respostas" %}{% else %}{% translate "Confirmar e enviar" %}{% endif %}
+        </button>
+        <button type="submit" name="action" value="save_draft" class="btn btn-outline-secondary">
+          {% translate "Salvar e continuar depois" %}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <p class="text-muted small mt-3">
+    {% translate "Este aplicativo não atende emergências. Se você estiver em risco, procure imediatamente os serviços de emergência da sua localidade." %}
+  </p>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

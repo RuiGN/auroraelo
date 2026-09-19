@@ -1,0 +1,67 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=course.title %}Construtor: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="course-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Cursos" %}</span>
+    <h1 id="course-title" class="mb-0">{{ course.title }}</h1>
+    <p class="product-page-meta">{{ course.get_status_display }} · {% blocktranslate with version=course.curriculum_version %}versão de currículo {{ version }}{% endblocktranslate %}</p>
+  </header>
+  <section class="product-table-card" aria-labelledby="modules-title">
+    <h2 id="modules-title" class="h5">{% translate "Módulos" %}</h2>
+    <ol class="product-stack mb-0">
+      {% for module in modules %}
+        <li><a href="{% url 'content_course_module_detail' course.pk module.pk %}">{% blocktranslate with pos=module.position title=module.title %}Módulo {{ pos }}: {{ title }}{% endblocktranslate %}</a> · {{ module.get_status_display }}</li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhum módulo ainda." %}</li>
+      {% endfor %}
+    </ol>
+  </section>
+  <section class="product-form-card" aria-labelledby="add-module-title">
+    <h2 id="add-module-title" class="h5">{% translate "Adicionar módulo" %}</h2>
+    <form class="product-form-grid" method="post" action="{% url 'content_course_module_create' course.pk %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="module-title">{% translate "Título do módulo" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="module-title" name="title" type="text" required maxlength="255" placeholder="{% translate 'Título do módulo' %}" /></div></div>
+      <div class="field-span field-span--sm d-grid gap-2"><label for="module-position">{% translate "Posição" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="module-position" name="position" type="number" min="1" value="{{ modules|length|add:1 }}" required placeholder="1" /></div></div>
+      <button class="btn btn-primary" type="submit">{% translate "Adicionar módulo" %}</button>
+    </form>
+  </section>
+  <section class="product-form-card" aria-labelledby="prereq-title">
+    <h2 id="prereq-title" class="h5">{% translate "Pré-requisito" %}</h2>
+    <form class="product-form-grid" method="post" action="{% url 'content_course_prerequisite_add' course.pk %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="prereq-id">{% translate "Curso de pré-requisito (ID)" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="prereq-id" name="prerequisite_course_id" type="text" required placeholder="{% translate 'Curso de pré-requisito (ID)' %}" /></div></div>
+      <button class="btn btn-outline-primary" type="submit">{% translate "Vincular pré-requisito" %}</button>
+    </form>
+  </section>
+  <section class="product-form-card" aria-labelledby="publish-title">
+    <h2 id="publish-title" class="h5">{% translate "Publicação" %}</h2>
+    <form method="post" action="{% url 'content_course_publish' course.pk %}">
+      {% csrf_token %}
+      <button class="btn btn-primary" type="submit">{% translate "Publicar curso" %}</button>
+    </form>
+  </section>
+  <section class="product-form-card" aria-labelledby="quiz-title">
+    <h2 id="quiz-title" class="h5">{% translate "Questionário educacional" %}</h2>
+    <form class="product-form-grid" method="post" action="{% url 'content_quiz_create' course.pk %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="quiz-slug">{% translate "Slug" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="quiz-slug" name="slug" type="text" required maxlength="160" placeholder="{% translate 'Slug' %}" /></div></div>
+      <div class="field-span field-span--md d-grid gap-2"><label for="quiz-title">{% translate "Título" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="quiz-title" name="title" type="text" required maxlength="255" placeholder="{% translate 'Título' %}" /></div></div>
+      <div class="field-span field-span--sm d-grid gap-2"><label for="quiz-grade">{% translate "Nota mínima (0–100)" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="quiz-grade" name="minimum_grade" type="number" min="0" max="100" value="70" required placeholder="0" /></div></div>
+      <div class="field-span field-span--sm d-grid gap-2"><label for="quiz-attempts">{% translate "Tentativas" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="quiz-attempts" name="max_attempts" type="number" min="1" value="3" required placeholder="1" /></div></div>
+      <label class="form-check"><input class="form-check-input" type="checkbox" name="shuffle_questions" /> <span class="form-check-label">{% translate "Embaralhar questões" %}</span></label>
+      <button class="btn btn-primary" type="submit">{% translate "Criar questionário" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

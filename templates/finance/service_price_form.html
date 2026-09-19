@@ -1,0 +1,29 @@
+{% extends layout_template %}
+{% load accessible_forms i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="service-price-title">
+  <header class="product-page-header">
+    <p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Financeiro" %}</p>
+    <h1 id="service-price-title" class="mb-0">{% translate "Cadastrar preço" %}</h1>
+    <p class="product-page-meta">{% translate "Informe o valor monetário, a moeda e a vigência do preço do serviço." %}</p>
+  </header>
+
+  <form method="post" class="product-form-card product-form-grid" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>
+    {% endif %}
+    {% for field in form %}
+      {% include "components/duralux_field.html" with field=field only %}
+    {% endfor %}
+    <div class="d-flex flex-wrap gap-2">
+      <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+      <a href="{% url 'charge_list' %}" class="btn btn-outline-secondary">{% translate "Cancelar cadastro" %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+

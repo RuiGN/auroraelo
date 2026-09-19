@@ -1,0 +1,3 @@
+Migrations for 'audit':
+  audit/migrations/0005_expand_action_namespace.py
+    ~ Alter field action on auditevent

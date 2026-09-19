@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Seguro - Aurora Elo Clínica Psiquiátrica</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            aurora: {
+              50: '#f0f7ff', 100: '#e0f0fe', 200: '#bae0fd', 300: '#7cc7fb', 400: '#38a9f8',
+              500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0a2540', 950: '#051424'
+            },
+            elo: {
+              50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 300: '#67e8f9', 400: '#22d3ee',
+              500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63'
+            },
+            crisis: {
+              50: '#fff1f2', 100: '#ffe4e6', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c'
+            },
+            healing: {
+              50: '#f0fdf4', 100: '#dcfce7', 500: '#10b981', 600: '#059669', 700: '#047857'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            'aurora': '0 12px 32px -4px rgba(10, 37, 64, 0.25)',
+            'aurora-glow': '0 0 24px rgba(14, 165, 233, 0.3)',
+            'crisis-glow': '0 0 20px rgba(244, 63, 94, 0.3)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body class="h-full bg-slate-900 text-slate-100 flex flex-col justify-between relative overflow-x-hidden font-sans">
+  <!-- Atmospheric Aurora Background with Clinic Imagery -->
+  <div class="fixed inset-0 z-0">
+    <img src="assets/images/clinic-hero.jpg" alt="Aurora Elo Clinic" class="w-full h-full object-cover opacity-20 filter blur-sm scale-105" />
+    <div class="absolute inset-0 bg-gradient-to-tr from-aurora-950 via-aurora-900/90 to-slate-950/95"></div>
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-elo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-aurora-600/15 rounded-full blur-3xl pointer-events-none"></div>
+  </div>
+
+  <!-- Top Bar: Logo & Language / Return -->
+  <header class="relative z-10 w-full px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center space-x-3 group">
+      <div class="p-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 group-hover:border-elo-400/50 transition-colors">
+        <img src="assets/images/logo.png" alt="Aurora Elo" class="h-9 w-auto filter drop-shadow" />
+      </div>
+      <div>
+        <span class="font-display font-black text-xl text-white tracking-tight leading-none block">
+          Aurora <span class="text-elo-400">Elo</span>
+        </span>
+        <span class="text-[10px] text-aurora-200 tracking-wider font-semibold uppercase" data-i18n="clinic_subtitle">Saúde Mental & Psiquiatria Integrada</span>
+      </div>
+    </a>
+
+    <div class="flex items-center space-x-3">
+      <!-- Language Dropdown -->
+      <div class="relative">
+        <select class="aurora-lang-select bg-white/10 border border-white/20 text-white text-xs rounded-xl px-3 py-1.5 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-elo-400 cursor-pointer">
+          <option value="pt-BR" class="bg-slate-900 text-white">🇧🇷 PT-BR</option>
+          <option value="en" class="bg-slate-900 text-white">🇺🇸 EN</option>
+          <option value="es" class="bg-slate-900 text-white">🇪🇸 ES</option>
+        </select>
+      </div>
+      <a href="index.html" class="text-xs font-semibold text-aurora-200 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/10 transition-colors">
+        ← Voltar ao Design System
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Login Card Container -->
+  <main class="relative z-10 flex-1 flex items-center justify-center p-4 sm:p-6 my-auto">
+    <div class="w-full max-w-md bg-white/95 dark:bg-aurora-950/90 text-slate-900 dark:text-white rounded-3xl p-7 sm:p-9 shadow-aurora border border-white/40 dark:border-aurora-800/80 backdrop-blur-xl">
+      <!-- Heading & Welcome -->
+      <div class="text-center mb-6">
+        <div class="inline-flex p-3 rounded-2xl bg-aurora-50 dark:bg-aurora-900/50 mb-3 text-aurora-600 dark:text-elo-400 ring-1 ring-aurora-200 dark:ring-aurora-800">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        </div>
+        <h1 class="text-2xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white" data-i18n="login_title">Portal Clínico Aurora Elo</h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="login_subtitle">Acesse o ambiente seguro de gestão psiquiátrica e cuidado integrado.</p>
+      </div>
+
+      <!-- Profile Selector Tabs -->
+      <div class="grid grid-cols-3 gap-1 p-1 bg-slate-100 dark:bg-aurora-900/60 rounded-xl mb-6 text-xs font-semibold text-center select-none">
+        <button type="button" class="login-role-tab active py-2 rounded-lg bg-white dark:bg-aurora-800 text-aurora-900 dark:text-white shadow-sm transition-all" data-role="doctor" data-i18n="login_role_doctor">Médico / Psi</button>
+        <button type="button" class="login-role-tab py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-aurora-600 transition-all" data-role="patient" data-i18n="login_role_patient">Paciente</button>
+        <button type="button" class="login-role-tab py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-aurora-600 transition-all" data-role="admin" data-i18n="login_role_admin">Recepção</button>
+      </div>
+
+      <!-- Login Form -->
+      <form class="space-y-4" onsubmit="event.preventDefault(); window.showToast ? window.showToast('Login autenticado com sucesso! Redirecionando...') : alert('Login realizado');">
+        <!-- Identification Field -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="login_email_label">
+            E-mail ou Prontuário
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            </div>
+            <input type="text" id="login-identifier" data-i18n-placeholder="login_email_placeholder" placeholder="ex: dr.marcelo@auroraelo.med.br ou CPF" required class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 transition-all text-slate-900 dark:text-white" />
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="login_password_label">
+              Senha de Acesso
+            </label>
+            <a href="#" class="text-xs text-aurora-600 dark:text-elo-400 hover:underline font-semibold" data-i18n="login_forgot">Esqueceu a senha?</a>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <input type="password" id="login-password" data-i18n-placeholder="login_password_placeholder" placeholder="Digite sua senha com segurança" required class="w-full pl-10 pr-11 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 transition-all text-slate-900 dark:text-white" />
+            <button type="button" class="toggle-password-visibility absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember Me Checkbox -->
+        <div class="flex items-center justify-between pt-1">
+          <label class="flex items-center space-x-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer">
+            <input type="checkbox" checked class="custom-checkbox w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-aurora-600 focus:ring-aurora-500" />
+            <span data-i18n="login_remember">Lembrar deste dispositivo por 30 dias</span>
+          </label>
+        </div>
+
+        <!-- 2FA Notice Badge -->
+        <div class="p-3 rounded-xl bg-aurora-50 dark:bg-aurora-900/40 border border-aurora-100 dark:border-aurora-800/60 flex items-center space-x-2.5 text-xs text-aurora-800 dark:text-aurora-200">
+          <div class="w-2 h-2 rounded-full bg-elo-500 animate-ping"></div>
+          <span class="font-medium" data-i18n="login_2fa_alert">Autenticação de Dois Fatores (2FA) Ativa</span>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full py-3 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-aurora-900 via-aurora-700 to-aurora-600 hover:from-aurora-950 hover:to-aurora-700 shadow-aurora hover:shadow-aurora-lg transition-all duration-200 flex items-center justify-center gap-2 focus:ring-4 focus:ring-aurora-500/20 active:scale-98">
+          <svg class="w-4 h-4 text-elo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span data-i18n="login_submit">Acessar Sistema Seguro</span>
+        </button>
+      </form>
+
+      <!-- Security Certification Footer -->
+      <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center space-x-2 text-[11px] text-slate-400">
+        <svg class="w-3.5 h-3.5 text-healing-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span data-i18n="login_security_badge">Conformidade LGPD & Criptografia Ponta a Ponta</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Emergency Crisis Hotline Banner (Always accessible on psychiatric logins) -->
+  <footer class="relative z-10 w-full bg-crisis-950/90 border-t border-crisis-800/80 px-6 py-3.5 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div class="flex items-center space-x-2 text-crisis-200 text-center sm:text-left">
+        <span class="w-2.5 h-2.5 rounded-full bg-crisis-500 animate-ping"></span>
+        <span data-i18n="login_crisis_banner">Em situação de crise aguda ou emergência emocional? Ligue 188 (CVV) ou contate nosso plantão 24h: 0800 770 ELO.</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="tel:0800770356" class="px-3 py-1 rounded-lg bg-crisis-600 hover:bg-crisis-500 text-white font-bold text-[11px] transition-colors">Plantão 0800 770 ELO</a>
+        <a href="tel:188" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-crisis-100 font-bold text-[11px] transition-colors">CVV 188</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/masks.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Role switcher logic
+    document.querySelectorAll('.login-role-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.login-role-tab').forEach(t => {
+          t.classList.remove('active', 'bg-white', 'dark:bg-aurora-800', 'text-aurora-900', 'dark:text-white', 'shadow-sm');
+          t.classList.add('text-slate-600', 'dark:text-slate-400');
+        });
+        tab.classList.add('active', 'bg-white', 'dark:bg-aurora-800', 'text-aurora-900', 'dark:text-white', 'shadow-sm');
+        tab.classList.remove('text-slate-600', 'dark:text-slate-400');
+
+        const role = tab.getAttribute('data-role');
+        const inputId = document.getElementById('login-identifier');
+        if (role === 'doctor') {
+          inputId.placeholder = 'ex: dr.marcelo@auroraelo.med.br ou CRM';
+        } else if (role === 'patient') {
+          inputId.placeholder = 'Digite seu CPF ou Código do Prontuário';
+        } else {
+          inputId.placeholder = 'matricula@auroraelo.med.br';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

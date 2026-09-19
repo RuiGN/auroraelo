@@ -1,0 +1,34 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="patient-dashboard-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Acompanhamento" %}</span>
+    <h1 id="patient-dashboard-title" class="mb-0">{% translate "Minha evolução" %}</h1>
+    <p class="product-page-meta">{% blocktranslate with start=data.period_start|date:"SHORT_DATE_FORMAT" end=data.period_end|date:"SHORT_DATE_FORMAT" %}{{ start }} – {{ end }}{% endblocktranslate %}</p>
+  </header>
+  <aside class="product-notice" role="note">{{ non_diagnostic_notice }}</aside>
+  <section class="product-metric-grid" aria-label="{% translate 'Indicadores do período' %}">
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Check-ins no período" %}</p><p class="product-metric-value">{{ data.checkin_count }}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Metas em andamento" %}</p><p class="product-metric-value">{{ data.active_goals }}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Exercícios concluídos" %}</p><p class="product-metric-value">{{ data.completed_exercises }}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Próximas consultas" %}</p><p class="product-metric-value">{{ data.upcoming_appointments }}</p></article>
+  </section>
+  <section class="product-chart-summary" aria-labelledby="mood-heading">
+    <h2 id="mood-heading" class="h5">{% translate "Distribuição de humor (diário)" %}</h2>
+    <div class="product-mood-list">
+      {% for count in data.mood_distribution %}
+        <div class="product-mood-row">
+          <span>{{ forloop.counter }} · {% if forloop.counter == 1 %}{% translate "Muito mal" %}{% elif forloop.counter == 2 %}{% translate "Mal" %}{% elif forloop.counter == 3 %}{% translate "Neutro" %}{% elif forloop.counter == 4 %}{% translate "Bem" %}{% else %}{% translate "Muito bem" %}{% endif %}</span>
+          <meter min="0" max="100" value="{{ count }}">{{ count }}</meter>
+          <span>{{ count }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="product-muted">{% translate "A tabela textual equivalente mostra a contagem de registros por humor no período. Comparações são apenas com seus próprios períodos; não indicam diagnóstico nem causalidade." %}</p>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,232 @@
+[
+  {
+    "msgid": "Termos de uso",
+    "en": "Terms of use",
+    "es": "Términos de uso"
+  },
+  {
+    "msgid": "Limites do atendimento",
+    "en": "Care limitations",
+    "es": "Límites de la atención"
+  },
+  {
+    "msgid": "Acompanhamento clínico",
+    "en": "Clinical follow-up",
+    "es": "Seguimiento clínico"
+  },
+  {
+    "msgid": "Comunicação",
+    "en": "Communication",
+    "es": "Comunicación"
+  },
+  {
+    "msgid": "Operação da equipe",
+    "en": "Staff operations",
+    "es": "Operaciones del equipo"
+  },
+  {
+    "msgid": "Sua decisão",
+    "en": "Your decision",
+    "es": "Su decisión"
+  },
+  {
+    "msgid": "Aceitou",
+    "en": "Accepted",
+    "es": "Aceptó"
+  },
+  {
+    "msgid": "Recusou",
+    "en": "Refused",
+    "es": "Rechazó"
+  },
+  {
+    "msgid": "Revogou",
+    "en": "Revoked",
+    "es": "Revocó"
+  },
+  {
+    "msgid": "Não foi possível revogar a autorização",
+    "en": "The authorization could not be revoked",
+    "es": "No se pudo revocar la autorización"
+  },
+  {
+    "msgid": "Voltar aos termos e consentimentos",
+    "en": "Back to terms and consents",
+    "es": "Volver a términos y consentimientos"
+  },
+  {
+    "msgid": "Não foi possível confirmar o atendimento",
+    "en": "The processing could not be confirmed",
+    "es": "No se pudo confirmar la tramitación"
+  },
+  {
+    "msgid": "Voltar para a fila",
+    "en": "Back to the queue",
+    "es": "Volver a la cola"
+  },
+  {
+    "msgid": "Revogações aguardando tratamento",
+    "en": "Revocations awaiting processing",
+    "es": "Revocaciones pendientes de tramitación"
+  },
+  {
+    "msgid": "Confirme cada bloqueio operacional somente após concluir o atendimento no sistema de destino.",
+    "en": "Confirm each operational restriction only after completing the work in the destination system.",
+    "es": "Confirme cada restricción operativa solo después de completar la atención en el sistema de destino."
+  },
+  {
+    "msgid": "Fila operacional de revogações",
+    "en": "Operational revocation queue",
+    "es": "Cola operativa de revocaciones"
+  },
+  {
+    "msgid": "Titular:",
+    "en": "Data subject:",
+    "es": "Titular:"
+  },
+  {
+    "msgid": "Finalidade:",
+    "en": "Purpose:",
+    "es": "Finalidad:"
+  },
+  {
+    "msgid": "Documento:",
+    "en": "Document:",
+    "es": "Documento:"
+  },
+  {
+    "msgid": "Despacho:",
+    "en": "Dispatch:",
+    "es": "Despacho:"
+  },
+  {
+    "msgid": "Criada em:",
+    "en": "Created at:",
+    "es": "Creada el:"
+  },
+  {
+    "msgid": "Referência do atendimento operacional",
+    "en": "Operational service reference",
+    "es": "Referencia de la atención operativa"
+  },
+  {
+    "msgid": "Confirmar atendimento",
+    "en": "Confirm processing",
+    "es": "Confirmar tramitación"
+  },
+  {
+    "msgid": "Não há revogações aguardando tratamento.",
+    "en": "There are no revocations awaiting processing.",
+    "es": "No hay revocaciones pendientes de tramitación."
+  },
+  {
+    "msgid": "A revogação interrompe novos usos para esta finalidade, preservando a evidência histórica e obrigações legais aplicáveis.",
+    "en": "Revocation stops new uses for this purpose while preserving historical evidence and applicable legal obligations.",
+    "es": "La revocación detiene nuevos usos para esta finalidad y preserva la evidencia histórica y las obligaciones legales aplicables."
+  },
+  {
+    "msgid": "Motivo da revogação",
+    "en": "Reason for revocation",
+    "es": "Motivo de la revocación"
+  },
+  {
+    "msgid": "Entendo o escopo e desejo revogar esta autorização.",
+    "en": "I understand the scope and wish to revoke this authorization.",
+    "es": "Entiendo el alcance y deseo revocar esta autorización."
+  },
+  {
+    "msgid": "Revogar autorização",
+    "en": "Revoke authorization",
+    "es": "Revocar autorización"
+  },
+  {
+    "msgid": "Informe a referência do atendimento operacional.",
+    "en": "Enter the operational service reference.",
+    "es": "Indique la referencia de la atención operativa."
+  },
+  {
+    "msgid": "Tarefa operacional indisponível.",
+    "en": "Operational task unavailable.",
+    "es": "Tarea operativa no disponible."
+  },
+  {
+    "msgid": "Despacho de revogação indisponível.",
+    "en": "Revocation dispatch unavailable.",
+    "es": "Despacho de revocación no disponible."
+  },
+  {
+    "msgid": "Titular sem vínculo ativo com esta clínica.",
+    "en": "The data subject has no active relationship with this clinic.",
+    "es": "El titular no tiene un vínculo activo con esta clínica."
+  },
+  {
+    "msgid": "Referências textuais não comprovam representação legal.",
+    "en": "Text references do not prove legal representation.",
+    "es": "Las referencias textuales no acreditan la representación legal."
+  },
+  {
+    "msgid": "A decisão explícita deve ser aceite ou recusa; revogações usam o fluxo próprio.",
+    "en": "The explicit decision must be acceptance or refusal; revocations use their own flow.",
+    "es": "La decisión explícita debe ser aceptación o rechazo; las revocaciones usan su propio flujo."
+  },
+  {
+    "msgid": "Documento indisponível ou ainda não vigente.",
+    "en": "Document unavailable or not yet effective.",
+    "es": "Documento no disponible o aún no vigente."
+  },
+  {
+    "msgid": "Documento não destinado a este titular.",
+    "en": "This document is not intended for this data subject.",
+    "es": "Este documento no está destinado a este titular."
+  },
+  {
+    "msgid": "A chave idempotente já foi usada com outra decisão.",
+    "en": "The idempotency key has already been used for another decision.",
+    "es": "La clave de idempotencia ya se ha usado para otra decisión."
+  },
+  {
+    "msgid": "Uma autorização aceita só pode ser retirada pelo fluxo de revogação.",
+    "en": "An accepted authorization can only be withdrawn through revocation.",
+    "es": "Una autorización aceptada solo puede retirarse mediante la revocación."
+  },
+  {
+    "msgid": "Esta versão foi revogada e não pode ser reativada por uma nova decisão.",
+    "en": "This version has been revoked and cannot be reactivated by a new decision.",
+    "es": "Esta versión ha sido revocada y no puede reactivarse mediante una nueva decisión."
+  },
+  {
+    "msgid": "Somente o titular ativo pode revogar esta autorização.",
+    "en": "Only the active data subject can revoke this authorization.",
+    "es": "Solo el titular activo puede revocar esta autorización."
+  },
+  {
+    "msgid": "Informe o motivo da revogação.",
+    "en": "Enter the reason for revocation.",
+    "es": "Indique el motivo de la revocación."
+  },
+  {
+    "msgid": "Documento indisponível para revogação.",
+    "en": "Document unavailable for revocation.",
+    "es": "Documento no disponible para revocación."
+  },
+  {
+    "msgid": "Este documento não é uma autorização opcional revogável neste fluxo.",
+    "en": "This document is not an optional authorization that can be revoked through this flow.",
+    "es": "Este documento no es una autorización opcional revocable mediante este flujo."
+  },
+  {
+    "msgid": "Não existe autorização vigente para revogar.",
+    "en": "There is no active authorization to revoke.",
+    "es": "No existe una autorización vigente para revocar."
+  },
+  {
+    "msgid": "Nenhum destino de revogação está configurado.",
+    "en": "No revocation destination is configured.",
+    "es": "No hay ningún destino de revocación configurado."
+  },
+  {
+    "msgid": "Identificador da solicitação",
+    "en": "Request identifier",
+    "es": "Identificador de la solicitud"
+  }
+]

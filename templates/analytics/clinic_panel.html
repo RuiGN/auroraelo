@@ -1,0 +1,41 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="clinic-panel-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Operação" %}</span>
+    <h1 id="clinic-panel-title" class="mb-0">{% translate "Painel operacional" %}</h1>
+    <p class="product-page-meta">{% blocktranslate with start=data.period_start|date:"SHORT_DATE_FORMAT" end=data.period_end|date:"SHORT_DATE_FORMAT" updated=data.last_updated|date:"SHORT_DATETIME_FORMAT" %}{{ start }} – {{ end }} · atualizado em {{ updated }}{% endblocktranslate %}</p>
+  </header>
+  <aside class="product-notice" role="note">{% translate "Métricas operacionais agregadas e anonimizadas. Recortes abaixo do limiar foram suprimidos." %}</aside>
+  <section class="product-metric-grid" aria-label="{% translate 'Indicadores operacionais' %}">
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Consultas no período" %}</p><p class="product-metric-value">{{ data.total_appointments }}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Ocupação da agenda" %}</p><p class="product-metric-value">{% if data.occupancy_rate is not None %}{{ data.occupancy_rate }}%{% else %}—{% endif %}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Taxa de faltas" %}</p><p class="product-metric-value">{% if data.no_show_rate is not None %}{{ data.no_show_rate }}%{% else %}—{% endif %}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Pacientes ativos" %}</p><p class="product-metric-value">{% if data.active_patients is not None %}{{ data.active_patients }}{% else %}{% translate "oculto" %}{% endif %}</p></article>
+  </section>
+  <section class="product-data-grid" aria-label="{% translate 'Resumos por unidade e profissional' %}">
+    <article class="product-table-card" aria-labelledby="by-unit-heading">
+      <h2 id="by-unit-heading" class="h5">{% translate "Consultas por unidade" %}</h2>
+      <div class="product-table-scroll">
+        <table class="table product-table">
+          <thead><tr><th scope="col">{% translate "Unidade" %}</th><th scope="col">{% translate "Consultas" %}</th></tr></thead>
+          <tbody>{% for row in data.by_unit %}<tr><td>{{ row.label }}</td><td>{% if row.count is not None %}{{ row.count }}{% else %}{% translate "oculto" %}{% endif %}</td></tr>{% endfor %}</tbody>
+        </table>
+      </div>
+    </article>
+    <article class="product-table-card" aria-labelledby="by-pro-heading">
+      <h2 id="by-pro-heading" class="h5">{% translate "Consultas por profissional" %}</h2>
+      <div class="product-table-scroll">
+        <table class="table product-table">
+          <thead><tr><th scope="col">{% translate "Profissional" %}</th><th scope="col">{% translate "Consultas" %}</th></tr></thead>
+          <tbody>{% for row in data.by_professional %}<tr><td>{{ row.label }}</td><td>{% if row.count is not None %}{{ row.count }}{% else %}{% translate "oculto" %}{% endif %}</td></tr>{% endfor %}</tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+</div>
+{% endblock %}

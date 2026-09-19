@@ -1,0 +1,6 @@
+{% load static %}
+{% if active_clinic_branding.logo %}
+<img src="{{ active_clinic_branding.logo.url }}" alt="{{ active_clinic_branding.display_name }}" class="product-brand-logo" width="140" height="30">
+{% else %}
+<img src="{% static 'images/aurora-elo-login.webp' %}" alt="Aurora Elo" class="product-brand-logo" width="200" height="200" style="max-width: 100%; height: auto;">
+{% endif %}

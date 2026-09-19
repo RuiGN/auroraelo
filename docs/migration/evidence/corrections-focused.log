@@ -1,0 +1,13 @@
+........................................................................ [ 58%]
+....................................................                     [100%]
+=============================== warnings summary ===============================
+tests/test_theme_charts.py::test_theme_bootstrap_runs_before_styles_and_toggle_is_accessible
+tests/test_theme_charts.py::test_layout_preference_defaults_to_vertical_and_persists_per_user
+tests/test_theme_charts.py::test_default_workspace_route_restores_the_saved_layout
+tests/test_theme_charts.py::test_layout_preference_rejects_unknown_value_without_mutation
+tests/test_theme_charts.py::test_visual_reference_chart_has_summary_table_and_local_vendor_asset
+  /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/.venv/lib/python3.14/site-packages/django/core/handlers/base.py:63: UserWarning: No directory at: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/staticfiles/
+    mw_instance = middleware(adapted_handler)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+124 passed, 5 warnings in 3.30s

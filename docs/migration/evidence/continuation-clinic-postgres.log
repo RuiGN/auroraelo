@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.0.2, pluggy-1.6.0
+django: version: 6.1, settings: config.settings.test (from env)
+rootdir: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare
+configfile: pyproject.toml
+plugins: django-4.12.0, Faker-40.38.0, cov-7.0.0
+collected 52 items
+
+tests/test_clinic_onboarding_ui_translations.py ......                   [ 11%]
+tests/test_clinic_service_translations.py ...                            [ 17%]
+tests/test_clinic_setup.py ...................                           [ 53%]
+tests/test_onboarding.py ......                                          [ 65%]
+tests/test_clinic_onboarding_ui_translations.py ...............          [ 94%]
+tests/test_clinic_service_translations.py ...                            [100%]
+
+- generated xml file: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/docs/migration/evidence/continuation-clinic-postgres.xml -
+======================== 52 passed in 158.07s (0:02:38) ========================

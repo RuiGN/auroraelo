@@ -1,0 +1,51 @@
+{% load i18n static %}
+{% if ui_languages %}
+<div class="dropdown nxl-h-item nxl-header-language product-language-selector" data-language-selector="{{ selector_id }}">
+  <button type="button" class="nxl-head-link me-0 nxl-language-link product-language-toggle border-0 bg-transparent"
+    id="{{ selector_id }}-language-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+    aria-expanded="false" aria-controls="{{ selector_id }}-language-menu"
+    aria-label="{% translate 'Idioma' %}: {% for language in ui_languages %}{% if language.code == current_ui_language %}{{ language.name_local }}{% endif %}{% endfor %}">
+    {% for language in ui_languages %}{% if language.code == current_ui_language %}
+    <img src="{% static language.flag_path %}" alt="{{ language.name_local }}" class="product-language-flag" aria-hidden="true">
+    {% endif %}{% endfor %}
+    <span class="product-language-code">{{ current_ui_language|upper }}</span>
+  </button>
+  <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-language-dropdown product-language-menu"
+    id="{{ selector_id }}-language-menu">
+    <div class="dropdown-divider mt-0"></div>
+    <div class="language-items-wrapper">
+      <div class="select-language px-4 py-2 hstack justify-content-between gap-4">
+        <div class="lh-lg">
+          <h6 class="mb-0 text-dark">{% translate "Selecione o idioma" %}</h6>
+          <p class="fs-11 text-muted mb-0">{% blocktranslate count count=ui_languages|length %}{{ count }} idioma disponível!{% plural %}{{ count }} idiomas disponíveis!{% endblocktranslate %}</p>
+        </div>
+        <span class="avatar-text avatar-md" title="{% translate 'Idiomas disponíveis' %}">
+          <i aria-hidden="true" class="feather-globe"></i>
+        </span>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="row px-4 pt-3">
+        {% for language in ui_languages %}
+        <div class="{% if ui_languages|length <= 3 %}col-12{% else %}col-sm-4 col-6{% endif %} language_select{% if language.code == current_ui_language %} active{% endif %}">
+          <form method="post" action="{% url 'account_set_language' %}" class="product-language-option-form m-0" data-language-form
+            data-language-source="{{ selector_id }}"
+            data-language-confirm="{% translate 'Há alterações não salvas. Alterar o idioma e descartar essas alterações?' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ ui_language_next }}">
+            <input type="hidden" name="language" value="{{ language.code }}">
+            <button class="product-language-option{% if language.code == current_ui_language %} active{% endif %} d-flex align-items-center gap-2 w-100 text-start"
+              type="submit" lang="{{ language.code }}"{% if language.code == current_ui_language %} aria-current="true"{% endif %}
+              aria-label="{{ language.name_local }}">
+              <div class="avatar-image avatar-sm">
+                <img src="{% static language.flag_path %}" alt="{{ language.name_local }}" class="img-fluid">
+              </div>
+              <span>{{ language.name_local }}</span>
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

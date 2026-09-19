@@ -1,0 +1,66 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "theme": "light",
+      "csrfPost": true,
+      "fieldErrorFocus": true,
+      "emptyTable": true,
+      "mobileSort": true,
+      "overlays": true
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "unprivilegedCatalogDenied": true
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "csrfPost": true,
+      "fieldErrorFocus": true,
+      "emptyTable": true,
+      "mobileSort": true,
+      "overlays": true
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "unprivilegedCatalogDenied": true
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "csrfPost": true,
+      "fieldErrorFocus": true,
+      "emptyTable": true,
+      "mobileSort": true,
+      "overlays": true
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "unprivilegedCatalogDenied": true
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "csrfPost": true,
+      "fieldErrorFocus": true,
+      "emptyTable": true,
+      "mobileSort": true,
+      "overlays": true
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "unprivilegedCatalogDenied": true
+    },
+    {
+      "isolatedFormBehavior": "passed",
+      "generalErrorFocus": true,
+      "originalDisabledStateRestored": true
+    }
+  ],
+  "errors": []
+}

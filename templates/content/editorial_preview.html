@@ -1,0 +1,15 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=content.title %}Pré-visualização: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page editorial-preview" aria-labelledby="preview-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with ver=version.version %}Pré-visualização responsiva · versão {{ ver }}{% endblocktranslate %}</span>
+    <h1 id="preview-title" class="mb-0">{{ content.title }}</h1>
+  </header>
+  <article class="product-table-card content-body" aria-label="{% translate 'Conteúdo pré-visualizado' %}">{{ version.body|safe }}</article>
+  <a class="btn btn-outline-secondary align-self-start" href="{% url 'content_editorial_detail' content_id=content.pk %}">{% translate "Voltar ao editor" %}</a>
+</div>
+{% endblock %}

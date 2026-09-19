@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* Global Reset & Smooth Behavior */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Utility */
+.font-display {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-dark {
+  background: rgba(10, 37, 64, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 64, 175, 0.25);
+}
+
+/* Aurora Glow & Ribbons */
+.aurora-gradient-text {
+  background: linear-gradient(135deg, #0a2540 10%, #0284c7 60%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aurora-glow-box {
+  position: relative;
+}
+.aurora-glow-box::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(6, 182, 212, 0.2), transparent);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Crisis Pulse Animation */
+@keyframes pulse-crisis {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
+  }
+}
+
+.crisis-pulse {
+  animation: pulse-crisis 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Telehealth Live Radar Pulse */
+@keyframes pulse-live {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+.live-indicator {
+  animation: pulse-live 1.8s ease-in-out infinite;
+}
+
+/* Mobile Frame Mockup */
+.mobile-device-frame {
+  width: 380px;
+  height: 780px;
+  border-radius: 46px;
+  border: 11px solid #1e293b;
+  box-shadow: 0 25px 50px -12px rgba(10, 37, 64, 0.35), 0 0 0 3px #64748b;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-notch {
+  width: 120px;
+  height: 28px;
+  background-color: #1e293b;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mobile-camera {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #0f172a;
+  border: 2px solid #334155;
+}
+
+.mobile-speaker {
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  background: #334155;
+}
+
+.mobile-screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+
+/* Custom Checkbox & Radio styling */
+.custom-checkbox:checked {
+  background-color: #0284c7;
+  border-color: #0284c7;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+}
+
+/* Range Slider Styling */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #0284c7;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+  border: 2px solid #ffffff;
+}
+
+/* Input Floating Label & Transition */
+.form-floating-group {
+  position: relative;
+}
+
+.form-floating-group input:focus ~ label,
+.form-floating-group input:not(:placeholder-shown) ~ label {
+  transform: translateY(-1.3rem) scale(0.85);
+  color: #0284c7;
+  background-color: #ffffff;
+  padding: 0 6px;
+}
+
+/* Smooth Navigation Switching */
+.nav-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

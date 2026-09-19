@@ -1,0 +1,137 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_namespaced_domain_action_is_preserved_in_audit_chain ___________
+
+self = <django.db.backends.utils.CursorWrapper object at 0x770cc3b181d0>
+sql = 'INSERT INTO "audit_auditevent" ("id", "clinic_id", "sequence", "occurred_at", "actor_id", "action", "resource_type", ... "previous_hash", "event_hash", "retention_until") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+params = (UUID('c3b8ccf0-b9f3-4d06-b7f1-bd38d4ff127a'), UUID('1d0404cf-1c4d-43b7-b133-686f80e88c39'), Int8(1), datetime.datetim..., 9, 8, 19, 4, 37, 747136, tzinfo=datetime.timezone.utc), None, 'support_network.contemplative_content_published', ...)
+ignored_wrapper_args = (False, {'connection': <DatabaseWrapper vendor='postgresql' alias='default'>, 'cursor': <django.db.backends.utils.CursorWrapper object at 0x770cc3b181d0>})
+
+    def _execute(self, sql, params, *ignored_wrapper_args):
+        # Raise a warning during app initialization (stored_app_configs is only
+        # ever set during testing).
+        if not apps.ready and not apps.stored_app_configs:
+            warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)
+        self.db.validate_no_broken_transaction()
+        with self.db.wrap_database_errors:
+            if params is None:
+                # params default might be backend specific.
+                return self.cursor.execute(sql)
+            else:
+>               return self.cursor.execute(sql, params)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.14/site-packages/django/db/backends/utils.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <django.db.backends.postgresql.base.Cursor [closed] [INTRANS] (host=127.0.0.1 port=55439 user=mindcare database=test_mindcare) at 0x770cc402a5b0>
+query = 'INSERT INTO "audit_auditevent" ("id", "clinic_id", "sequence", "occurred_at", "actor_id", "action", "resource_type", ... "previous_hash", "event_hash", "retention_until") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+params = (UUID('c3b8ccf0-b9f3-4d06-b7f1-bd38d4ff127a'), UUID('1d0404cf-1c4d-43b7-b133-686f80e88c39'), Int8(1), datetime.datetim..., 9, 8, 19, 4, 37, 747136, tzinfo=datetime.timezone.utc), None, 'support_network.contemplative_content_published', ...)
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           psycopg.errors.StringDataRightTruncation: value too long for type character varying(32)
+
+.venv/lib/python3.14/site-packages/psycopg/cursor.py:117: StringDataRightTruncation
+
+The above exception was the direct cause of the following exception:
+
+    def test_namespaced_domain_action_is_preserved_in_audit_chain() -> None:
+        """Production PostgreSQL must retain existing long domain action names."""
+        clinic = ClinicFactory.create()
+        action = "support_network.contemplative_content_published"
+>       event = record_audit_event(
+            clinic_id=clinic.id,
+            actor_id=None,
+            action=action,
+            resource_type="contemplative_content",
+            resource_id="synthetic-content",
+            outcome=AuditOutcome.SUCCESS,
+            request_id=uuid4(),
+            network_origin=None,
+        )
+
+tests/test_audit_trail.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/rui/.local/python-3.14.7/lib/python3.14/contextlib.py:85: in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+audit/services.py:86: in record_audit_event
+    event.save(force_insert=True)
+audit/models.py:152: in save
+    super().save(*args, **kwargs)
+.venv/lib/python3.14/site-packages/django/db/models/base.py:904: in save
+    self.save_base(
+.venv/lib/python3.14/site-packages/django/db/models/base.py:996: in save_base
+    updated = self._save_table(
+.venv/lib/python3.14/site-packages/django/db/models/base.py:1201: in _save_table
+    results = self._do_insert(
+.venv/lib/python3.14/site-packages/django/db/models/base.py:1253: in _do_insert
+    return manager._insert(
+.venv/lib/python3.14/site-packages/django/db/models/manager.py:87: in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/db/models/query.py:2118: in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/db/models/sql/compiler.py:1935: in execute_sql
+    cursor.execute(sql, params)
+.venv/lib/python3.14/site-packages/django/db/backends/utils.py:79: in execute
+    return self._execute_with_wrappers(
+.venv/lib/python3.14/site-packages/django/db/backends/utils.py:92: in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/db/backends/utils.py:100: in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/db/utils.py:94: in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+.venv/lib/python3.14/site-packages/django/db/backends/utils.py:105: in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <django.db.backends.postgresql.base.Cursor [closed] [INTRANS] (host=127.0.0.1 port=55439 user=mindcare database=test_mindcare) at 0x770cc402a5b0>
+query = 'INSERT INTO "audit_auditevent" ("id", "clinic_id", "sequence", "occurred_at", "actor_id", "action", "resource_type", ... "previous_hash", "event_hash", "retention_until") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+params = (UUID('c3b8ccf0-b9f3-4d06-b7f1-bd38d4ff127a'), UUID('1d0404cf-1c4d-43b7-b133-686f80e88c39'), Int8(1), datetime.datetim..., 9, 8, 19, 4, 37, 747136, tzinfo=datetime.timezone.utc), None, 'support_network.contemplative_content_published', ...)
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           django.db.utils.DataError: value too long for type character varying(32)
+
+.venv/lib/python3.14/site-packages/psycopg/cursor.py:117: DataError
+=========================== short test summary info ============================
+FAILED tests/test_audit_trail.py::test_namespaced_domain_action_is_preserved_in_audit_chain
+1 failed in 1.55s

@@ -1,0 +1,75 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+  <header class="product-page-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+    <div>
+      <a href="{% url 'patient_exercise_list' %}" class="btn btn-outline-secondary btn-sm mb-2">← {% translate "Voltar aos exercícios" %}</a>
+      <h1 class="h3 mb-0">{{ execution.assignment.exercise.title }}</h1>
+    </div>
+  </header>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4 d-grid gap-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pb-3 border-bottom">
+        <span class="text-body-secondary small">{% blocktranslate with completed=execution.completed_at|date:"SHORT_DATETIME_FORMAT" %}Concluído em: {{ completed }}{% endblocktranslate %}</span>
+        <span class="visibility-badge product-visibility-status {% if execution.visibility == 'shareable' %}visibility-green{% elif execution.visibility == 'confirmation_required' %}visibility-yellow{% else %}visibility-red{% endif %}">
+          {% if execution.visibility == "shareable" %}
+            <span class="product-visibility-status__icon" aria-hidden="true">✓</span>
+            <span>{{ execution.get_visibility_display }}<span class="product-visibility-status__description">{% translate "Pode compartilhar com o profissional." %}</span></span>
+          {% elif execution.visibility == "confirmation_required" %}
+            <span class="product-visibility-status__icon" aria-hidden="true">!</span>
+            <span>{{ execution.get_visibility_display }}<span class="product-visibility-status__description">{% translate "Confirme antes de compartilhar com o profissional." %}</span></span>
+          {% else %}
+            <span class="product-visibility-status__icon" aria-hidden="true">🔒</span>
+            <span>{{ execution.get_visibility_display }}<span class="product-visibility-status__description">{% translate "Somente você pode ver este registro." %}</span></span>
+          {% endif %}
+        </span>
+      </div>
+
+      <div>
+        <h2 class="h5 mb-2">{% translate "Resposta registrada:" %}</h2>
+        <div class="p-3 bg-light rounded-3 text-body">
+          {% translate "Sem resposta em texto." as no_response_text %}
+          {{ execution.response_data.text|default:no_response_text }}
+        </div>
+      </div>
+
+      <!-- Async Therapist Comments -->
+      <div class="border-top pt-4">
+        <h2 class="h5 mb-3">{% translate "Comentários do profissional" %}</h2>
+        {% if comments %}
+          <div class="d-grid gap-3 mb-4">
+            {% for comment in comments %}
+              <div class="border rounded-3 p-3 bg-light">
+                <div class="d-flex justify-content-between align-items-center gap-2 mb-1">
+                  <strong>{{ comment.author.get_full_name|default:comment.author.email }}</strong>
+                  <span class="text-body-secondary small">{{ comment.created_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+                </div>
+                <p class="mb-0">{{ comment.content }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-body-secondary mb-4">{% translate "Nenhum comentário registrado ainda." %}</p>
+        {% endif %}
+
+        {% if not is_patient %}
+          <form method="post" class="d-grid gap-2">
+            {% csrf_token %}
+            <label for="id_content" class="form-label fw-semibold">{% translate "Adicionar comentário profissional (assíncrono)" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea name="content" id="id_content" class="form-control" rows="3" required placeholder="{% translate 'Escreva uma orientação ou comentário de apoio...' %}"></textarea></div>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">{% translate "Enviar comentário" %}</button>
+            </div>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

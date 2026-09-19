@@ -1,0 +1,1 @@
+The first destination full-suite run was interrupted intentionally after the complete source baseline identified a shared navigation TemplateSyntaxError. No passing result is claimed. Templates will be corrected and the destination suite rerun from the start.

@@ -1,0 +1,458 @@
+{
+  "source_commit": "453eab77867f6c199887946b11996a1a4558f4db",
+  "passed": 1061,
+  "failed": 89,
+  "skipped": 1,
+  "categories": {
+    "template_syntax": 87,
+    "http_status": 1,
+    "visual_contract": 1
+  },
+  "failures": [
+    {
+      "test": "tests.test_account_session_mfa::test_login_registers_session_before_fail_closed_validation",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_account_session_mfa::test_registered_session_has_minimized_device_data_and_enforced_expiry",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_account_session_mfa::test_unknown_session_is_rejected_when_fail_closed_is_enabled",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_account_session_mfa::test_user_can_revoke_one_or_all_other_sessions",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_account_session_mfa::test_revoking_all_other_sessions_requires_current_password",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_account_session_mfa::test_session_reauthentication_rate_limit_returns_429",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_analytics::test_patient_dashboard_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_analytics::test_report_list_and_download_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_checkin::test_checkin_http_flow_submit_and_history",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_checkin::test_checkin_http_unavailable_without_questionnaire",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_clinic_setup_is_primary_navigation_action_for_admin",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_clinic_setup_form_enables_shared_duplicate_submission_guard",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_branding_stage_uploads_logo_and_advances",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_modules_stage_enforces_prerequisites_and_advances",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_setup_validation_has_accessible_error_summary",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_saved_branding_is_applied_to_the_active_tenant_workspace",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_clinic_setup::test_branding_preview_updates_from_unsaved_form_values",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_clinic_admin_consumes_revocation_work_queue_through_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_revocation_queue_distinguishes_same_purpose_without_exposing_subject_uuid",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_non_admin_cannot_view_or_acknowledge_revocation_work_http[patient]",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_non_admin_cannot_view_or_acknowledge_revocation_work_http[administrative_staff]",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_admin_cannot_acknowledge_revocation_work_from_another_tenant",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_generic_decision_flow_rejects_revoked_for_mandatory_document",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_generic_refusal_cannot_bypass_revocation_propagation",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_revoked_document_version_cannot_be_reaccepted_while_dispatch_is_pending",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_consent_access_lifecycle::test_patient_revokes_optional_consent_through_confirmed_accessible_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_components::test_workspace_integrates_components_without_clinical_demo_data[workspace_vertical]",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_components::test_workspace_integrates_components_without_clinical_demo_data[workspace_detached]",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_components::test_workspace_filter_preserves_the_active_order",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_curation_governance::test_report_http_surface_lists_and_resolves",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_library_lists_published_content",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_detail_renders_published_body",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_library_is_tenant_scoped",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_recommendation_list_scoped_to_recipient",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_editorial_http_surface_supports_complete_versioned_workflow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_editorial_taxonomy_rejects_terms_beyond_model_limit",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_editorial_block_editor_preserves_order_and_semantics",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_http::test_editorial_stored_href_injection_is_neutralized_end_to_end",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_learning_authoring_http::test_course_builder_detail_renders_modules_in_stable_order",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_learning_authoring_http::test_learning_authoring_dashboard_lists_only_active_tenant_resources",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_learning_authoring_http_round5::test_course_create_http_rejects_foreign_instructor_with_message",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_learning_authoring_http_round5::test_enrollment_http_denies_non_member_and_draft_course",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_learning_participant_http_round5::test_participant_quiz_http_is_tenant_safe_idempotent_and_accessible",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_content_learning_participant_http_round5::test_participant_certificate_http_requires_completion_and_verifies_publicly",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_exercises::test_exercise_http_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_finance::test_charge_list_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_goals::test_goal_panel_http_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_goals::test_goal_empty_state_and_status_filter_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_journal::test_journal_views_create_and_list_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_journal::test_journal_views_validation_error_rendering",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_journal::test_journal_detail_and_edit_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_journal::test_journal_history_filtering_and_pagination",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/journal/list.html, Could not parse the remainder: '==\"7d\"' from 'selected_period==\"7d\"'"
+    },
+    {
+      "test": "tests.test_journal::test_sharing_traffic_light_yellow_request_grant_and_revoke_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/journal/list.html, Could not parse the remainder: '==\"7d\"' from 'selected_period==\"7d\"'"
+    },
+    {
+      "test": "tests.test_layouts::test_workspace_layouts_share_semantics_and_authorized_context[workspace_vertical-Navega\\xe7\\xe3o vertical-layout-vertical]",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_layouts::test_workspace_layouts_share_semantics_and_authorized_context[workspace_detached-Navega\\xe7\\xe3o destacada-layout-detached]",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_layouts::test_workspace_shell_uses_only_the_duralux_runtime",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_layouts::test_mobile_drawer_has_focus_escape_overlay_and_scroll_lock_contract",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_layouts::test_switch_preserves_tracked_session_under_fail_closed_validation",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_learning_experience_round3::test_lesson_player_renders_video_with_speed_and_resume",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_learning_player_http::test_lesson_page_renders_player_for_enrolled_learner",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_low_energy::test_low_energy_http_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_onboarding::test_patient_onboarding_http_stepped_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_onboarding::test_patient_onboarding_resumes_at_current_step",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_patient_management::test_patient_directory_http_supports_manual_registration",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_patient_management::test_patient_form_requires_purpose_for_emergency_contact",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_patient_management::test_therapist_opens_linked_patient_ficha_and_audits",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_professional_management::test_professional_directory_http_is_accessible_and_permission_scoped",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_scheduling::test_appointment_request_http_flow",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_scheduling::test_weekly_calendar_renders_grid_and_textual_list",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_scheduling::test_message_history_paginates",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_theme_charts::test_theme_bootstrap_runs_before_styles_and_toggle_is_accessible",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_theme_charts::test_layout_preference_defaults_to_vertical_and_persists_per_user",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_therapist_dashboard::test_dashboard_http_renders_cards_table_and_chart",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_triage::test_persistent_emergency_notice_on_checkin_ui",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_units::test_unit_list_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_consent_center_separates_required_and_optional_without_preselection",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_consent_center_static_copy_comes_from_translation_catalog",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_request_id_is_required_by_form_and_manifestation_service",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_consent_decision_records_refusal_without_blocking_basic_workspace",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_consent_center_translates_persisted_decision",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_conflicting_http_replay_returns_controlled_client_error",
+      "category": "http_status",
+      "message": "assert 500 == 409\n +  where 500 = <TemplateResponse status_code=500, \"text/html; charset=utf-8\">.status_code"
+    },
+    {
+      "test": "tests.test_versioned_consents::test_consent_center_translates_purpose_labels",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_waitlist::test_waitlist_list_http",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_whitelabel_brand_schema::test_whitelabel_http_surface_lists_domains",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_whitelabel_round4::test_whitelabel_http_surface_lists_domains",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_duralux_form_regressions::test_onboarding_uses_duralux_field_rendering",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_duralux_form_regressions::test_patient_form_renders_duralux_controls_and_existing_error_targets",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_duralux_form_regressions::test_sprint6_visibility_help_targets_exist_and_enums_are_not_visible",
+      "category": "template_syntax",
+      "message": "django.template.exceptions.TemplateSyntaxError: Template: source/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?"
+    },
+    {
+      "test": "tests.test_sprint4_duralux_templates::test_therapist_dashboard_uses_local_progressive_chart_enhancement",
+      "category": "visual_contract",
+      "message": "assert 'class=\"table product-table\"' in '{% extends layout_template %}\\n{% load static %}\\n\\n{% block title %}Painel do terapeuta{% endblock %}\\n\\n{% block he....min.js\\' %}\"></script>\\n<script defer src=\"{% static \\'duralux/js/dashboard-charts.js\\' %}\"></script>\\n{% endblock %}'"
+    }
+  ]
+}

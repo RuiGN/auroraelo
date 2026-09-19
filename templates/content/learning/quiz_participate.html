@@ -1,0 +1,36 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=quiz.title %}Questionário: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="quiz-participate-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with title=course.title %}Curso: {{ title }}{% endblocktranslate %}</span>
+    <h1 id="quiz-participate-title" class="mb-0">{{ quiz.title }}</h1>
+    <p class="product-notice" role="note" aria-live="polite">
+      {{ disclaimer }}
+    </p>
+  </header>
+  <form class="product-form-grid" method="post" action="{% url 'content_quiz_submit' quiz.pk %}">
+    {% csrf_token %}
+    <input type="hidden" name="request_id" value="{{ request_id }}">
+    <input type="hidden" name="shuffle_seed" value="{{ shuffle_seed }}">
+    {% for question in questions %}
+      <fieldset class="product-form-card product-stack">
+        <legend class="h5">{% blocktranslate with counter=forloop.counter %}Questão {{ counter }}{% endblocktranslate %}</legend>
+        <p>{{ question.prompt }}</p>
+        {% for option in question.options %}
+          <label class="form-check">
+            <input class="form-check-input" type="radio" name="answer_{{ question.question_id }}" value="{{ option.key }}" required>
+            <span class="form-check-label">{{ option.text }}</span>
+          </label>
+        {% endfor %}
+      </fieldset>
+    {% empty %}
+      <p aria-live="polite">{% translate "Este questionário ainda não possui perguntas." %}</p>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">{% translate "Enviar respostas" %}</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Autoria de aprendizagem" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="learning-authoring-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Cursos e coortes" %}</span>
+    <h1 id="learning-authoring-title" class="mb-0">{% translate "Autoria de aprendizagem" %}</h1>
+  </header>
+  <section class="product-form-card" aria-labelledby="courses-title">
+    <h2 id="courses-title" class="h5">{% translate "Cursos" %}</h2>
+    <ul class="product-stack">
+      {% for course in courses %}
+        <li><a href="{% url 'content_course_authoring_detail' course.pk %}">{{ course.title }}</a> · {{ course.get_status_display }}</li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhum curso ainda." %}</li>
+      {% endfor %}
+    </ul>
+    <form class="product-form-grid" method="post" action="{% url 'content_course_create' %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="course-slug">{% translate "Slug do curso" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="course-slug" name="slug" type="text" required maxlength="160" placeholder="{% translate 'Slug do curso' %}" /></div></div>
+      <div class="field-span field-span--md d-grid gap-2"><label for="course-title">{% translate "Título" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="course-title" name="title" type="text" required maxlength="255" placeholder="{% translate 'Título' %}" /></div></div>
+      <div class="field-span field-span--sm d-grid gap-2"><label for="course-duration">{% translate "Duração total (minutos)" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-clock"></i></span><input class="form-control" id="course-duration" name="duration_minutes" type="number" min="1" value="60" required placeholder="1" /></div></div>
+      <div class="field-span field-span--md d-grid gap-2"><label for="course-instructor">{% translate "Instrutor (ID)" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="course-instructor" name="instructor_id" type="text" required placeholder="{% translate 'Instrutor (ID)' %}" /></div></div>
+      <button class="btn btn-primary" type="submit">{% translate "Criar curso" %}</button>
+    </form>
+  </section>
+  <section class="product-form-card" aria-labelledby="cohorts-title">
+    <h2 id="cohorts-title" class="h5">{% translate "Coortes" %}</h2>
+    <ul class="product-stack">
+      {% for cohort in cohorts %}
+        <li><a href="{% url 'content_cohort_detail' cohort.pk %}">{{ cohort.name }}</a></li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhuma coorte ainda." %}</li>
+      {% endfor %}
+    </ul>
+    <form class="product-form-grid" method="post" action="{% url 'content_cohort_create' %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="cohort-name">{% translate "Nome da coorte" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="cohort-name" name="name" type="text" required maxlength="255" placeholder="{% translate 'Nome da coorte' %}" /></div></div>
+      <button class="btn btn-primary" type="submit">{% translate "Criar coorte" %}</button>
+    </form>
+  </section>
+  <section class="product-table-card" aria-labelledby="quizzes-title">
+    <h2 id="quizzes-title" class="h5">{% translate "Questionários educacionais" %}</h2>
+    <ul class="product-stack">
+      {% for quiz in quizzes %}
+        <li><a href="{% url 'content_quiz_detail' quiz.pk %}">{{ quiz.title }}</a> · {{ quiz.get_status_display }}</li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhum questionário ainda." %}</li>
+      {% endfor %}
+    </ul>
+    <form method="post" data-quiz-form>
+      {% csrf_token %}
+      <p class="product-muted">{% translate "Nenhum curso selecionado — use a página de um curso para criar questionários." %}</p>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load i18n %}
+<section class="emotional-calendar-card product-table-card" aria-labelledby="calendar-heading">
+  <div class="calendar-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
+    <h2 id="calendar-heading" class="h5 mb-0">{% blocktranslate with month_name=calendar_data.month_name %}Calendário Emocional — {{ month_name }}{% endblocktranslate %}</h2>
+    <nav class="calendar-nav d-flex gap-2" aria-label="{% translate 'Navegação do calendário por mês' %}">
+      <a
+        href="?year={{ calendar_data.previous_year }}&month={{ calendar_data.previous_month }}&period={{ selected_period }}&emotion={{ selected_emotion }}&mood={{ selected_mood }}"
+        class="btn btn-sm btn-outline-secondary"
+        aria-label="{% translate 'Mês anterior' %}"
+      >
+        <span aria-hidden="true">&larr;</span> {% translate "Anterior" %}
+      </a>
+      <a
+        href="?year={{ calendar_data.next_year }}&month={{ calendar_data.next_month }}&period={{ selected_period }}&emotion={{ selected_emotion }}&mood={{ selected_mood }}"
+        class="btn btn-sm btn-outline-secondary"
+        aria-label="{% translate 'Próximo mês' %}"
+      >
+        {% translate "Próximo" %} <span aria-hidden="true">&rarr;</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="calendar-grid" role="grid" aria-readonly="true" aria-label="{% blocktranslate with month=calendar_data.month_name %}Dias de {{ month }}{% endblocktranslate %}">
+    <div class="calendar-day-header" role="columnheader">{% translate "Dom" %}</div>
+    <div class="calendar-day-header" role="columnheader">{% translate "Seg" %}</div>
+    <div class="calendar-day-header" role="columnheader">{% translate "Ter" %}</div>
+    <div class="calendar-day-header" role="columnheader">{% translate "Qua" %}</div>
+    <div class="calendar-day-header" role="columnheader">{% translate "Qui" %}</div>
+    <div class="calendar-day-header" role="columnheader">{% translate "Sex" %}</div>
+    <div class="calendar-day-header" role="columnheader">{% translate "Sáb" %}</div>
+
+    {% for week in calendar_data.weeks %}
+      <div class="calendar-week" role="row">
+        {% for day in week %}
+          <div
+            role="gridcell"
+            tabindex="0"
+            class="calendar-day-cell{% if not day.is_current_month %} is-other-month{% endif %}{% if day.is_today %} is-today{% endif %}"
+            aria-label="{{ day.accessible_label }}"
+          >
+            <span class="calendar-day-num" aria-hidden="true">{{ day.day_number }}</span>
+            {% if day.entry_count > 0 %}
+              <span
+                class="calendar-mood-dot {{ day.mood_class }}"
+                aria-hidden="true"
+                title="{{ day.dominant_mood_label }}"
+              ></span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="calendar-legend d-flex flex-wrap align-items-center gap-3 mt-3 pt-2 border-top small" aria-label="{% translate 'Legenda de cores do humor' %}">
+    <strong>{% translate "Legenda" %}:</strong>
+    {% for mood_val, mood_label, mood_class in calendar_data.legend %}
+      <span class="legend-item d-flex align-items-center gap-1">
+        <span class="legend-swatch {{ mood_class }}" aria-hidden="true"></span>
+        <span>{{ mood_label }} ({{ mood_val }})</span>
+      </span>
+    {% endfor %}
+    <span class="legend-item d-flex align-items-center gap-1">
+      <span class="legend-swatch mood-empty" aria-hidden="true"></span>
+      <span>{% translate "Sem registro" %}</span>
+    </span>
+  </div>
+
+  {% if calendar_data.text_summary_rows %}
+    <details class="calendar-accessible-summary mt-3">
+      <summary class="text-primary fw-semibold cursor-pointer">
+        {% translate "Ver resumo textual do mês (tabela acessível)" %}
+      </summary>
+      <div class="mt-2 table-responsive">
+        <table class="table product-table" aria-label="{% blocktranslate with month=calendar_data.month_name %}Registros de humor de {{ month }}{% endblocktranslate %}">
+          <caption class="visually-hidden">{% blocktranslate with month=calendar_data.month_name %}Histórico diário em {{ month }}{% endblocktranslate %}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{% translate "Data" %}</th>
+              <th scope="col">{% translate "Humor predominante" %}</th>
+              <th scope="col">{% translate "Total de registros" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for date_str, mood_lbl, count in calendar_data.text_summary_rows %}
+              <tr>
+                <td>{{ date_str }}</td>
+                <td>{{ mood_lbl }}</td>
+                <td>{{ count }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  {% endif %}
+</section>

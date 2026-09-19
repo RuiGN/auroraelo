@@ -1,0 +1,38 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ content.title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="content-detail-title">
+  <header class="product-page-header d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{{ content.get_kind_display }}</span>
+      <h1 id="content-detail-title" class="mb-0">{{ content.title }}</h1>
+    </div>
+    <a class="btn btn-outline-secondary" href="{% url 'content_library' %}">← {% translate "Voltar à biblioteca" %}</a>
+  </header>
+
+  <article class="product-table-card">
+    <div class="content-body">{{ body|safe }}</div>
+  </article>
+
+  {% if recommend_form %}
+    <section class="product-form-card" aria-labelledby="recommend-title">
+      <h2 id="recommend-title" class="h4">{% translate "Recomendar a um paciente" %}</h2>
+      <form method="post" action="{% url 'content_recommend' content_id=content.pk %}" class="d-grid gap-3">
+        {% csrf_token %}
+        {% for field in recommend_form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}<div class="invalid-feedback d-block" role="alert">{{ error }}</div>{% endfor %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">{% translate "Atribuir recomendação" %}</button>
+      </form>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}
+

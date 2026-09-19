@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Confirmar troca de clínica" %}{% endblock %}
+
+{% block workspace %}
+<main id="main-content" class="product-page product-page--narrow">
+  <section class="product-form-card" aria-labelledby="confirmation-title">
+    <p class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "Confirmação de contexto" %}</p>
+    <h1 id="confirmation-title">{% translate "Trocar clínica ativa?" %}</h1>
+    <p>{% blocktranslate with current_clinic_name=current_clinic.name target_clinic_name=target_clinic.name %}Você está em <strong>{{ current_clinic_name }}</strong> e solicitou acesso a <strong>{{ target_clinic_name }}</strong>.{% endblocktranslate %}</p>
+    <p>{% translate "A troca atualiza o contexto das próximas páginas. Nenhum dado é copiado entre clínicas." %}</p>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <form method="post" action="{% url 'clinic_switch_confirm' %}">
+        {% csrf_token %}
+        <input type="hidden" name="clinic_id" value="{{ target_clinic.pk }}">
+        <input type="hidden" name="next" value="{{ next_url }}">
+        <button class="btn btn-primary" type="submit">{% translate "Confirmar troca" %}</button>
+      </form>
+      <a class="btn btn-outline-secondary" href="{{ next_url }}">{% translate "Manter clínica atual" %}</a>
+    </div>
+  </section>
+</main>
+{% endblock %}

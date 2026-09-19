@@ -1,0 +1,412 @@
+{
+  "scope": "Selector foundation only; en/es enabled exclusively in disposable preview, not full UI translations",
+  "results": [
+    {
+      "surface": "auth",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "auth",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "surface": "header",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "keyboard": true,
+      "focusRestored": true,
+      "returnPathPreserved": true,
+      "persisted": true,
+      "overflow": false
+    },
+    {
+      "dirtyForm": true,
+      "cancelPreservesInput": true,
+      "acceptSinglePost": true,
+      "noDoublePrompt": true
+    },
+    {
+      "blockedBrowserStorage": true,
+      "languageChangeWorks": true
+    }
+  ],
+  "errors": []
+}

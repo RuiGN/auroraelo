@@ -1,0 +1,91 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow">
+  <div class="product-table-card d-grid gap-4">
+    <header class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 pb-3 border-bottom">
+      <div>
+        <p class="text-primary-emphasis fw-semibold text-uppercase small mb-1">{% translate "Minhas Metas" %}</p>
+        <h1 class="h3 mb-0">{{ goal.title }}</h1>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'goal_edit' goal.pk %}" class="btn btn-primary">{% translate "Editar" %}</a>
+        <a href="{% url 'goal_list' %}" class="btn btn-outline-secondary">{% translate "Voltar" %}</a>
+      </div>
+    </header>
+
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <span class="badge text-bg-secondary">{{ horizon_label }}</span>
+      <span class="badge text-bg-light border">{% translate "Prioridade" %} {{ priority_label }}</span>
+      {% if goal.visibility == 'shareable' %}
+        <span class="badge text-bg-success"><span aria-hidden="true">●</span> {% translate "Verde — Compartilhável" %}</span>
+      {% elif goal.visibility == 'confirmation_required' %}
+        <span class="badge text-bg-warning"><span aria-hidden="true">●</span> {% translate "Amarelo — Confirmar antes" %}</span>
+      {% else %}
+        <span class="badge text-bg-danger"><span aria-hidden="true">●</span> {% translate "Vermelho — Somente você" %}</span>
+      {% endif %}
+      {% if goal.due_date %}<span class="text-muted small">{% translate "Prazo" %}: {{ goal.due_date|date:"SHORT_DATE_FORMAT" }}</span>{% endif %}
+      <span class="badge text-bg-info">
+        {{ status_label }}
+      </span>
+    </div>
+
+    {% if goal.description %}
+      <p class="mb-0 text-muted">{{ goal.description|linebreaksbr }}</p>
+    {% endif %}
+
+    <div class="d-grid gap-2">
+      <div class="d-flex justify-content-between small text-muted">
+        <span aria-live="polite">
+          {% blocktranslate with done=done_count total=total_steps percent=percent %}Progresso: {{ done }} de {{ total }} etapas concluídas ({{ percent }}%){% endblocktranslate %}
+        </span>
+        <span>{{ percent }}%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100" aria-label="{% blocktranslate with title=goal.title %}Progresso da meta {{ title }}{% endblocktranslate %}"></div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="h5 mb-3">{% translate "Pequenas etapas" %}</h2>
+      {% if steps %}
+        <ul class="list-group list-group-flush border-top">
+          {% for step in steps %}
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+              <span class="{% if step.is_done %}text-decoration-line-through text-muted{% endif %}">
+                {{ step.order }}. {{ step.description }}
+              </span>
+              <form method="post" action="{% url 'goal_step_toggle' step.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <input type="hidden" name="is_done" value="{% if step.is_done %}false{% else %}true{% endif %}">
+                <button type="submit" class="btn btn-sm {% if step.is_done %}btn-outline-secondary{% else %}btn-outline-success{% endif %}">
+                  {% if step.is_done %}{% translate "Reabrir etapa" %}{% else %}{% translate "Concluir etapa" %}{% endif %}
+                </button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">
+          {% translate "Esta meta ainda não tem etapas. Você pode editar a meta e adicionar pequenas etapas quando quiser." %}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="pt-3 border-top">
+      <h3 class="h6 mb-2">{% translate "Estado da meta:" %}</h3>
+      <form method="post" action="{% url 'goal_status_change' goal.pk %}" class="d-flex flex-wrap gap-2">
+        {% csrf_token %}
+        <button type="submit" name="status" value="active" class="btn btn-sm btn-outline-primary{% if goal.status == 'active' %} active{% endif %}">{% translate "Ativar" %}</button>
+        <button type="submit" name="status" value="paused" class="btn btn-sm btn-outline-warning{% if goal.status == 'paused' %} active{% endif %}">{% translate "Pausar (descansar é ok)" %}</button>
+        <button type="submit" name="status" value="completed" class="btn btn-sm btn-outline-success{% if goal.status == 'completed' %} active{% endif %}">{% translate "Marcar como concluída" %}</button>
+        <button type="submit" name="status" value="archived" class="btn btn-sm btn-outline-danger{% if goal.status == 'archived' %} active{% endif %}">{% translate "Arquivar" %}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

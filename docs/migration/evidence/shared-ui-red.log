@@ -1,0 +1,120 @@
+.FFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+_ test_shared_table_translates_labels_without_translating_or_unescaping_data[en-Actions-Sort by-No records available.-Display name] _
+
+language = 'en', actions = 'Actions', sort = 'Sort by'
+empty = 'No records available.', field_label = 'Display name'
+
+    @pytest.mark.parametrize(
+        ("language", "actions", "sort", "empty", "field_label"),
+        [
+            ("pt-br", "Ações", "Ordenar por", "Nenhum registro disponível.", "Nome de exibição"),
+            ("en", "Actions", "Sort by", "No records available.", "Display name"),
+            ("es", "Acciones", "Ordenar por", "No hay registros disponibles.", "Nombre para mostrar"),
+        ],
+    )
+    def test_shared_table_translates_labels_without_translating_or_unescaping_data(
+        language: str, actions: str, sort: str, empty: str, field_label: str
+    ) -> None:
+        table = {
+            "id": "records",
+            "caption": "Registro original",
+            "columns": [{"label": '<img src=x onerror="alert(1)">', "order_url": "?order=title"}],
+            "rows": [{"id": "record-1", "cells": ["Nome clínico original"], "actions": []}],
+        }
+        with translation.override(language):
+            html = render_to_string("components/responsive_table.html", {"table": table})
+>           assert str(DesignSystemExampleForm()["display_name"].label) == field_label
+E           AssertionError: assert 'Nome de exibição' == 'Display name'
+E             
+E             - Display name
+E             + Nome de exibição
+
+tests/test_shared_ui_translations.py:31: AssertionError
+_ test_shared_table_translates_labels_without_translating_or_unescaping_data[es-Acciones-Ordenar por-No hay registros disponibles.-Nombre para mostrar] _
+
+language = 'es', actions = 'Acciones', sort = 'Ordenar por'
+empty = 'No hay registros disponibles.', field_label = 'Nombre para mostrar'
+
+    @pytest.mark.parametrize(
+        ("language", "actions", "sort", "empty", "field_label"),
+        [
+            ("pt-br", "Ações", "Ordenar por", "Nenhum registro disponível.", "Nome de exibição"),
+            ("en", "Actions", "Sort by", "No records available.", "Display name"),
+            ("es", "Acciones", "Ordenar por", "No hay registros disponibles.", "Nombre para mostrar"),
+        ],
+    )
+    def test_shared_table_translates_labels_without_translating_or_unescaping_data(
+        language: str, actions: str, sort: str, empty: str, field_label: str
+    ) -> None:
+        table = {
+            "id": "records",
+            "caption": "Registro original",
+            "columns": [{"label": '<img src=x onerror="alert(1)">', "order_url": "?order=title"}],
+            "rows": [{"id": "record-1", "cells": ["Nome clínico original"], "actions": []}],
+        }
+        with translation.override(language):
+            html = render_to_string("components/responsive_table.html", {"table": table})
+>           assert str(DesignSystemExampleForm()["display_name"].label) == field_label
+E           AssertionError: assert 'Nome de exibição' == 'Nombre para mostrar'
+E             
+E             - Nombre para mostrar
+E             + Nome de exibição
+
+tests/test_shared_ui_translations.py:31: AssertionError
+_ test_pagination_accessible_name_uses_translated_placeholder[en-Go to page 2] _
+
+language = 'en', label = 'Go to page 2'
+
+    @pytest.mark.parametrize(("language", "label"), [("en", "Go to page 2"), ("es", "Ir a la página 2")])
+    def test_pagination_accessible_name_uses_translated_placeholder(language: str, label: str) -> None:
+        with translation.override(language):
+            html = render_to_string("components/pagination.html", {"pagination": {"pages": [{"number": 2, "url": "?page=2&q=original"}]}})
+>       assert f'aria-label="{label}"' in html
+E       assert 'aria-label="Go to page 2"' in '<nav aria-label="Paginação">\n  <p class="small text-muted mb-2"></p>\n  <ul class="pagination product-pagination fle...ge-link" href="?page=2&amp;q=original" aria-label="Ir para a página 2">2</a></li>\n    \n    \n    \n  </ul>\n</nav>\n'
+
+tests/test_shared_ui_translations.py:47: AssertionError
+_ test_pagination_accessible_name_uses_translated_placeholder[es-Ir a la p\xe1gina 2] _
+
+language = 'es', label = 'Ir a la página 2'
+
+    @pytest.mark.parametrize(("language", "label"), [("en", "Go to page 2"), ("es", "Ir a la página 2")])
+    def test_pagination_accessible_name_uses_translated_placeholder(language: str, label: str) -> None:
+        with translation.override(language):
+            html = render_to_string("components/pagination.html", {"pagination": {"pages": [{"number": 2, "url": "?page=2&q=original"}]}})
+>       assert f'aria-label="{label}"' in html
+E       assert 'aria-label="Ir a la página 2"' in '<nav aria-label="Paginação">\n  <p class="small text-muted mb-2"></p>\n  <ul class="pagination product-pagination fle...ge-link" href="?page=2&amp;q=original" aria-label="Ir para a página 2">2</a></li>\n    \n    \n    \n  </ul>\n</nav>\n'
+
+tests/test_shared_ui_translations.py:47: AssertionError
+_______ test_error_page_keeps_request_reference_escaped[en-Back to home] _______
+
+language = 'en', back = 'Back to home'
+
+    @pytest.mark.parametrize(("language", "back"), [("en", "Back to home"), ("es", "Volver al inicio")])
+    def test_error_page_keeps_request_reference_escaped(language: str, back: str) -> None:
+        with translation.override(language):
+            html = render_to_string("errors/403.html", {"title": "Fixed title", "message": "Fixed message", "request_id": "<private-reference>"})
+>       assert back in html
+E       assert 'Back to home' in '\n\n\n<!doctype html>\n<html lang="en" dir="ltr">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" conten...e.min.js"></script>\n  <script defer src="/static/duralux/js/language-selector.js"></script>\n  \n</body>\n\n</html>\n'
+
+tests/test_shared_ui_translations.py:55: AssertionError
+_____ test_error_page_keeps_request_reference_escaped[es-Volver al inicio] _____
+
+language = 'es', back = 'Volver al inicio'
+
+    @pytest.mark.parametrize(("language", "back"), [("en", "Back to home"), ("es", "Volver al inicio")])
+    def test_error_page_keeps_request_reference_escaped(language: str, back: str) -> None:
+        with translation.override(language):
+            html = render_to_string("errors/403.html", {"title": "Fixed title", "message": "Fixed message", "request_id": "<private-reference>"})
+>       assert back in html
+E       assert 'Volver al inicio' in '\n\n\n<!doctype html>\n<html lang="es" dir="ltr">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" conten...e.min.js"></script>\n  <script defer src="/static/duralux/js/language-selector.js"></script>\n  \n</body>\n\n</html>\n'
+
+tests/test_shared_ui_translations.py:55: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_shared_ui_translations.py::test_shared_table_translates_labels_without_translating_or_unescaping_data[en-Actions-Sort by-No records available.-Display name]
+FAILED tests/test_shared_ui_translations.py::test_shared_table_translates_labels_without_translating_or_unescaping_data[es-Acciones-Ordenar por-No hay registros disponibles.-Nombre para mostrar]
+FAILED tests/test_shared_ui_translations.py::test_pagination_accessible_name_uses_translated_placeholder[en-Go to page 2]
+FAILED tests/test_shared_ui_translations.py::test_pagination_accessible_name_uses_translated_placeholder[es-Ir a la p\xe1gina 2]
+FAILED tests/test_shared_ui_translations.py::test_error_page_keeps_request_reference_escaped[en-Back to home]
+FAILED tests/test_shared_ui_translations.py::test_error_page_keeps_request_reference_escaped[es-Volver al inicio]
+6 failed, 1 passed in 0.53s

@@ -1,0 +1,32 @@
+........................................................................ [ 38%]
+........................................................................ [ 77%]
+...............................F..........                               [100%]
+=================================== FAILURES ===================================
+__________ test_documented_runtime_hashes_match_the_published_assets ___________
+
+    def test_documented_runtime_hashes_match_the_published_assets() -> None:
+        manifest_path = (
+            Path(settings.BASE_DIR) / "docs" / "duralux" / "runtime-asset-manifest.md"
+        )
+        manifest = manifest_path.read_text(encoding="utf-8")
+        documented = dict(re.findall(r"\| `([^`]+)` \| `([0-9a-f]{64})` \|", manifest))
+        runtime_root = Path(settings.BASE_DIR) / "static" / "duralux"
+    
+        assert documented
+        for relative_path, expected_hash in documented.items():
+            asset = runtime_root / relative_path
+            if not asset.is_file():
+                continue
+>           assert hashlib.sha256(asset.read_bytes()).hexdigest() == expected_hash, (
+                relative_path
+            )
+E           AssertionError: css/product-integration.css
+E           assert '969c260a5394...74be05f31a1ad' == 'd4526c6df6e7...1e04f3d864d59'
+E             
+E             - d4526c6df6e735414b8d7b0ff96a98d58d912519c3a193f4bcd1e04f3d864d59
+E             + 969c260a5394d087ad2491c962eb3581ad67829235de63d8c6574be05f31a1ad
+
+tests/test_duralux_static_foundation.py:301: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_duralux_static_foundation.py::test_documented_runtime_hashes_match_the_published_assets
+1 failed, 185 passed in 20.16s

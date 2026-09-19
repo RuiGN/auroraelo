@@ -1,0 +1,105 @@
+{% extends layout_template %}
+{% load accessible_forms i18n static %}
+
+{% block title %}{% translate "Configurar clínica" %}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="clinic-setup-title">
+<section class="product-page-header" aria-labelledby="clinic-setup-title">
+  <div>
+    <p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Configuração da clínica ativa" %}</p>
+    <h1 id="clinic-setup-title">{% translate "Configurar clínica" %}</h1>
+    <p class="lead mb-0">{% blocktranslate with clinic_name=active_clinic.name %}Revise cada etapa na ordem. As mudanças ficam restritas a {{ clinic_name }} e são registradas na auditoria.{% endblocktranslate %}</p>
+  </div>
+</section>
+
+<nav aria-label="{% translate 'Etapas da configuração' %}">
+  <ol class="breadcrumb flex-wrap mb-0">
+    {% for stage_key, stage_label in setup_stages %}
+      <li class="breadcrumb-item"{% if current_stage == stage_key %} aria-current="step"{% endif %}>
+        <a href="?stage={{ stage_key }}">{{ stage_label }}</a>
+      </li>
+    {% endfor %}
+  </ol>
+</nav>
+
+<section class="product-form-card" aria-labelledby="current-stage-title">
+  {% if current_stage == "identity" %}
+    <p class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "Etapa 1 de 5" %}</p>
+    <h2 id="current-stage-title">{% translate "Dados institucionais" %}</h2>
+    <p>{% translate "Informe identificação, contato administrativo e endereço estruturado." %}</p>
+  {% elif current_stage == "operations" %}
+    <p class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "Etapa 2 de 5" %}</p>
+    <h2 id="current-stage-title">{% translate "Atendimento e horários" %}</h2>
+    <p>{% translate "Defina fuso, idioma, canais, semana operacional e orientação fora do horário." %}</p>
+  {% elif current_stage == "branding" %}
+    <p class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "Etapa 3 de 5" %}</p>
+    <h2 id="current-stage-title">{% translate "Identidade visual" %}</h2>
+    <p>{% translate "Envie um logotipo raster seguro e escolha cores com contraste adequado." %}</p>
+  {% elif current_stage == "modules" %}
+    <p class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "Etapa 4 de 5" %}</p>
+    <h2 id="current-stage-title">{% translate "Módulos" %}</h2>
+    <p>{% translate "Ative somente recursos necessários. Pré-requisitos são verificados pelo servidor." %}</p>
+  {% else %}
+    <p class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "Etapa 5 de 5" %}</p>
+    <h2 id="current-stage-title">{% translate "Revisão" %}</h2>
+    {% if clinic_configuration %}
+      <dl>
+        <dt>{% translate "Nome de exibição" %}</dt><dd>{{ clinic_configuration.display_name }}</dd>
+        <dt>{% translate "Fuso horário" %}</dt><dd>{{ clinic_configuration.timezone_name }}</dd>
+        <dt>{% translate "Idioma" %}</dt><dd>{{ clinic_configuration.language_code }}</dd>
+        <dt>{% translate "Módulos ativos" %}</dt><dd>{% for module in review_modules %}{{ module.label }}{% if not forloop.last %}, {% endif %}{% empty %}{% translate "Nenhum" %}{% endfor %}</dd>
+      </dl>
+    {% else %}
+      <p>{% translate "Comece pelos dados institucionais para montar a revisão." %}</p>
+    {% endif %}
+  {% endif %}
+
+  {% if current_stage != "review" %}
+    <form method="post" enctype="multipart/form-data" class="product-form-grid" novalidate data-form-guard data-dirty-message="{% translate 'Há alterações não salvas.' %}">
+      {% csrf_token %}
+      <input type="hidden" name="stage" value="{{ current_stage }}">
+      {% if form.errors %}
+        <div class="form-error-summary" role="alert" tabindex="-1" data-focus-error-summary aria-labelledby="clinic-setup-error-title">
+          <h3 id="clinic-setup-error-title">{% translate "Revise os campos informados" %}</h3>
+          <ul>
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li><a href="#{{ field|error_target_id }}">{{ field.label }}: {{ error }}</a></li>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      {% for field in form %}
+        {% include "components/duralux_field.html" with field=field only %}
+      {% endfor %}
+      {% if current_stage == "branding" %}
+        <div
+          class="product-brand-preview"
+          aria-live="polite"
+          data-brand-preview
+          {% if clinic_configuration %}data-brand-preview-primary="{{ clinic_configuration.primary_color }}" data-brand-preview-secondary="{{ clinic_configuration.secondary_color }}"{% endif %}
+        >
+          <h3>{% translate "Pré-visualização da marca" %}</h3>
+          <img
+            {% if clinic_configuration.logo %}src="{{ clinic_configuration.logo.url }}"{% endif %}
+            alt="{% blocktranslate with clinic_name=clinic_configuration.display_name|default:active_clinic.name %}Pré-visualização do logotipo de {{ clinic_name }}{% endblocktranslate %}"
+            class="product-brand-preview__logo{% if not clinic_configuration.logo %} d-none{% endif %}"
+            data-brand-preview-logo
+          >
+          <p>{% translate "As cores serão aplicadas aos tokens permitidos nos temas claro e escuro após a validação de contraste." %}</p>
+          <button type="button" class="btn btn-primary">{% translate "Exemplo de ação principal" %}</button>
+        </div>
+      {% endif %}
+      <button type="submit" class="btn btn-primary" data-submit-button>{% translate "Salvar e continuar" %}</button>
+    </form>
+  {% endif %}
+</section>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layouts/vertical.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Revogações aguardando tratamento" %}{% endblock %}
+
+{% block content %}
+<section class="product-table-card" aria-labelledby="revocation-work-title">
+  <h1 id="revocation-work-title">{% translate "Revogações aguardando tratamento" %}</h1>
+  <p>{% translate "Confirme cada bloqueio operacional somente após concluir o atendimento no sistema de destino." %}</p>
+</section>
+
+<section class="product-table-card" aria-label="{% translate 'Fila operacional de revogações' %}">
+  {% if work_rows %}
+    <ul class="d-grid gap-3 list-unstyled" role="list">
+      {% for row in work_rows %}
+        {% with item=row.work_item %}
+        <li class="card">
+          <div class="card-body">
+            <p><strong>{% translate "Titular:" %}</strong> {{ row.subject_reference }}</p>
+            <p><strong>{% translate "Finalidade:" %}</strong> {{ row.purpose_label }}</p>
+            <p><strong>{% translate "Documento:" %}</strong> {% blocktranslate with title=item.dispatch.manifestation.document.title version=item.dispatch.manifestation.document.version %}{{ title }} — version {{ version }}{% endblocktranslate %}</p>
+            <p><strong>{% translate "Despacho:" %}</strong> <code>{{ item.dispatch.pk }}</code></p>
+            <p><strong>{% translate "Criada em:" %}</strong> {{ item.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+            <form method="post" class="d-grid gap-3 mt-4" action="{% url 'consent_revocation_work_acknowledge' item.pk %}">
+              {% csrf_token %}
+              <label for="reference-{{ item.pk }}">{% translate "Referência do atendimento operacional" %}</label>
+              <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="reference-{{ item.pk }}" name="acknowledgement_reference" type="text" required maxlength="255" autocomplete="off" placeholder="{% translate 'Referência do atendimento operacional' %}"></div>
+              <button class="btn btn-primary" type="submit">{% translate "Confirmar atendimento" %}</button>
+            </form>
+          </div>
+        </li>
+        {% endwith %}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% translate "Não há revogações aguardando tratamento." %}</p>
+  {% endif %}
+</section>
+{% endblock %}

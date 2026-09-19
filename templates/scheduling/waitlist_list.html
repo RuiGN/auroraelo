@@ -1,0 +1,21 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="waitlist-title">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3"><div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Agenda" %}</p><h1 id="waitlist-title">{% translate "Lista de espera" %}</h1><p class="product-page-meta">{% translate "Acompanhe pedidos por unidade, serviço e período." %}</p></div><a href="{% url 'waitlist_add' %}" class="btn btn-primary">{% translate "Adicionar à lista" %}</a></header>
+  <form method="get" class="product-form-card d-flex flex-column flex-sm-row gap-2 align-items-sm-end" aria-label="{% translate 'Filtrar lista de espera' %}">
+    <div class="flex-grow-1"><label for="status" class="form-label">{% translate "Status" %}</label><div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select id="status" name="status" class="form-select"><option value="">{% translate "Todos" %}</option><option value="waiting" {% if selected_status == "waiting" %}selected{% endif %}>{% translate "Aguardando" %}</option><option value="offered" {% if selected_status == "offered" %}selected{% endif %}>{% translate "Vaga oferecida" %}</option><option value="filled" {% if selected_status == "filled" %}selected{% endif %}>{% translate "Encaixado" %}</option><option value="canceled" {% if selected_status == "canceled" %}selected{% endif %}>{% translate "Cancelado" %}</option></select></div></div>
+    <button type="submit" class="btn btn-outline-primary">{% translate "Filtrar" %}</button>
+  </form>
+  {% if entries %}
+    <div class="product-table-card product-table-scroll" role="region" aria-label="{% translate 'Entradas na lista de espera' %}" tabindex="0">
+      <table class="table product-table"><thead><tr><th scope="col">{% translate "Paciente" %}</th><th scope="col">{% translate "Unidade" %}</th><th scope="col">{% translate "Serviço" %}</th><th scope="col">{% translate "Período" %}</th><th scope="col">{% translate "Status" %}</th><th scope="col">{% translate "Ações" %}</th></tr></thead><tbody>
+      {% for entry in entries %}<tr><th scope="row">{{ entry.patient_profile.full_name }}</th><td>{{ entry.unit.name }}</td><td>{{ entry.service.name }}</td><td>{{ entry.preferred_period|default:"—" }}</td><td>{% if entry.status == "waiting" %}{% translate "Aguardando" %}{% elif entry.status == "offered" %}{% translate "Vaga oferecida" %}{% elif entry.status == "filled" %}{% translate "Encaixado" %}{% elif entry.status == "canceled" %}{% translate "Cancelado" %}{% else %}{{ entry.get_status_display }}{% endif %}</td><td>{% if entry.status == "waiting" %}<form method="post" action="{% url 'waitlist_cancel' entry.pk %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-danger">{% translate "Cancelar entrada" %}</button></form>{% endif %}</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+  {% else %}<div class="product-empty-state" role="status"><h2 class="h5">{% translate "Nenhuma entrada na lista de espera" %}</h2><p>{% translate "Revise o filtro ou adicione uma nova solicitação." %}</p></div>{% endif %}
+</div>
+{% endblock %}

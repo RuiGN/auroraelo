@@ -1,0 +1,121 @@
+{
+  "scope": "Runtime and test files validated in the Mindcare foundation increment",
+  "files": [
+    {
+      "path": "config/views.py",
+      "sha256": "b74724ed555e7c8d06622f035628710727be4e1c29e1c4db14b8160de9446a00"
+    },
+    {
+      "path": "static/duralux/js/product-shell.js",
+      "sha256": "1d5d3d6e8ca93cd2dba5fc35aad7a1ae9ccb19d18e4144718a9a2833e7b60c2b"
+    },
+    {
+      "path": "static/duralux/css/product-integration.css",
+      "sha256": "870973c7593a36cbe28c59ae31057435919b5655e6dddb262618a16c0a9cde73"
+    },
+    {
+      "path": "static/duralux/images/favicon.svg",
+      "sha256": "c25f91807314d0c2af9077f98d890e5e7d9bcbcea8ac3c4a98b5478c1c8fa724"
+    },
+    {
+      "path": "templates/workspace/home.html",
+      "sha256": "353d4fa6d2255cd119a578e2aed256e2bd1c0f95d90353850adac17702ab29e1"
+    },
+    {
+      "path": "templates/workspace/shortcut.html",
+      "sha256": "6495f17f6bd4f41bd8f97eed96fa94d7031254053d588bc0d38cb2128146ead8"
+    },
+    {
+      "path": "templates/layouts/partials/brand.html",
+      "sha256": "182e726a026947e3f2f8b7a681f7fbf936bcc427812a6a82213469d24a1b56c1"
+    },
+    {
+      "path": "templates/layouts/base.html",
+      "sha256": "7f866fbb464422f91563cae65d53781650f5cc07df20c5b82c5175391a03a7a1"
+    },
+    {
+      "path": "templates/layouts/vertical.html",
+      "sha256": "9a64af4fef51069ce4d9614dd174be1713de13715278fa2e8975ff230f57260d"
+    },
+    {
+      "path": "templates/layouts/detached.html",
+      "sha256": "f16dd831aaa459b279da5f7e99d99dd2aa89f95347412327e13124809e1dea3b"
+    },
+    {
+      "path": "templates/layouts/partials/header.html",
+      "sha256": "047cf14d9762e9af1318a1a105c3214ab0ddefeeb00e758365e9be1c6fee9fdf"
+    },
+    {
+      "path": "templates/layouts/partials/navigation.html",
+      "sha256": "fb17e94ebd107c62b0aeb426334c5d97e9fbba0d26f872f98a621c47bc90b916"
+    },
+    {
+      "path": "templates/accounts/auth_base.html",
+      "sha256": "dadeb33e1cca6964822ad3f9e277a92322f2de7a1b2538dd87f9c868beb0cfcb"
+    },
+    {
+      "path": "templates/accounts/auth_form.html",
+      "sha256": "b5bc0ed7652f5eafd0614b4d2a09705165e16b7f535acd049a722ae9f6d37fbd"
+    },
+    {
+      "path": "templates/accounts/auth_message.html",
+      "sha256": "f5a9f149712e14caaee444f3253162e0ab76891fb961af5f406874cf35ff7ea8"
+    },
+    {
+      "path": "templates/accounts/mfa_recovery_codes.html",
+      "sha256": "f515ea07e31be7c9163b71ddb993c2a213572b9b21680d977b656a8f3c960bba"
+    },
+    {
+      "path": "templates/errors/400.html",
+      "sha256": "7ad665b0581ff3ab82f0156d7dd7f7e3b09e7265803915030d7e199f6ac74565"
+    },
+    {
+      "path": "templates/errors/403.html",
+      "sha256": "6f47fed0ce37916de1b7a3dd71075150d59cec4d52aa8fd7d3d0439d78f8475a"
+    },
+    {
+      "path": "templates/errors/404.html",
+      "sha256": "acacbb6b4e9b5ada27bd4d09fbda8af67a3fe44fbd20facf2db2042774506f51"
+    },
+    {
+      "path": "templates/errors/500.html",
+      "sha256": "e89469be76aeb3749c91692eb44f92078eb8150c157e56189f55f609c8016bf7"
+    },
+    {
+      "path": "templates/content/learning/certificate_verify.html",
+      "sha256": "e893df65831763b8fe547faa33637bd0998f08c3b11bffd998fbf67f87d400be"
+    },
+    {
+      "path": "templates/visual_reference/reference.html",
+      "sha256": "b500f4b3d7a46e782121d58bb5d676696043718dee22c32236357e6db78eb032"
+    },
+    {
+      "path": "tests/test_workspace_foundation.py",
+      "sha256": "488dadc96caf416d7b1a30943d4b0901622fa7a6e9569718237dadb857b7d840"
+    },
+    {
+      "path": "tests/test_layouts.py",
+      "sha256": "7d769ac838c1374065066e0af2b9e65d6a1249ca5d33c3bee50aacce7b49c197"
+    },
+    {
+      "path": "tests/test_content_components.py",
+      "sha256": "6c8cb4959d7547e5ba556daf49eb6848d1845329561e7829179d7282af828466"
+    },
+    {
+      "path": "tests/test_duralux_static_foundation.py",
+      "sha256": "150f4224713d4a805f7b3324326cd07b282bc96d2d9c75418defde5cdb96183b"
+    },
+    {
+      "path": "tests/test_duralux_domain_templates.py",
+      "sha256": "e708129a8ae63173add38ffd70685ee98da2fa2fa86c299d903d24cad816137d"
+    },
+    {
+      "path": "scripts/verify-duralux-shell.cjs",
+      "sha256": "e07fafebb01a752d9884d141e3bf0000f32b1c6262ffb4f4a691b9d73284fa66"
+    },
+    {
+      "path": "tests/test_design_system.py",
+      "sha256": "f0d3bed7c3356faa4698722ac5e716736d392294ba480c785ea702bcd9597793"
+    }
+  ]
+}

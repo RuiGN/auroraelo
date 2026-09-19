@@ -1,0 +1,26 @@
+[
+  {
+    "catalog": "locale/en/LC_MESSAGES/django.po",
+    "compiled": "locale/en/LC_MESSAGES/django.mo",
+    "msgfmt_check": "passed",
+    "compiled_matches_source": true,
+    "sha256": "ee6877ae9c8b875f0845a4e236a372f621cbd5dfd4c9f59f0b338001b98e4ec0",
+    "scope": "partial catalog; not publication acceptance"
+  },
+  {
+    "catalog": "locale/es/LC_MESSAGES/django.po",
+    "compiled": "locale/es/LC_MESSAGES/django.mo",
+    "msgfmt_check": "passed",
+    "compiled_matches_source": true,
+    "sha256": "4d1affdf8392de2218f35d2f8842428ccfbf72d900d3565385b2e78349fb3c20",
+    "scope": "partial catalog; not publication acceptance"
+  },
+  {
+    "catalog": "locale/pt_BR/LC_MESSAGES/django.po",
+    "compiled": "locale/pt_BR/LC_MESSAGES/django.mo",
+    "msgfmt_check": "passed",
+    "compiled_matches_source": true,
+    "sha256": "84260c4192eb221c75fbd4df7d3208908cceb504c98d3582d1db999bc7d89c3a",
+    "scope": "partial catalog; not publication acceptance"
+  }
+]

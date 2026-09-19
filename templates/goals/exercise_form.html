@@ -1,0 +1,71 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Prática terapêutica" %}</span>
+      <h1 class="mb-0">{{ page_title }}</h1>
+    </div>
+    <a href="{% url 'exercise_catalog' %}" class="btn btn-outline-secondary">← {% translate "Voltar ao catálogo" %}</a>
+  </header>
+
+  <div class="product-form-card">
+    <form method="post" class="d-grid gap-3">
+      {% csrf_token %}
+      <div>
+        <label for="id_title" class="form-label fw-semibold">{% translate "Título do exercício" %} <span aria-hidden="true">*</span></label>
+        <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input type="text" name="title" id="id_title" class="form-control" required value="{{ exercise.title|default:'' }}" placeholder="{% translate 'Ex.: Respiração e ancoragem' %}"></div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="id_approach" class="form-label fw-semibold">{% translate "Abordagem" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input type="text" name="approach" id="id_approach" class="form-control" value="{{ exercise.approach|default:'Geral' }}" placeholder="{% translate 'Ex.: TCC, Mindfulness, ACT' %}"></div>
+        </div>
+        <div class="col-md-6">
+          <label for="id_estimated_minutes" class="form-label fw-semibold">{% translate "Duração estimada (minutos)" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-clock"></i></span><input type="number" name="estimated_minutes" id="id_estimated_minutes" class="form-control" min="1" max="120" value="{{ exercise.estimated_minutes|default:'10' }}" placeholder="1"></div>
+        </div>
+      </div>
+
+      <div>
+        <label for="id_instructions" class="form-label fw-semibold">{% translate "Instruções detalhadas" %} <span aria-hidden="true">*</span></label>
+        <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea name="instructions" id="id_instructions" class="form-control" rows="6" required placeholder="{% translate 'Descreva os passos para o paciente realizar o exercício...' %}">{{ exercise.instructions|default:'' }}</textarea></div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="id_response_format" class="form-label fw-semibold">{% translate "Formato da resposta" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="response_format" id="id_response_format" class="form-select">
+            {% for code, label in response_formats %}
+              <option value="{{ code }}" {% if exercise.response_format == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select></div>
+        </div>
+        <div class="col-md-6">
+          <label for="id_status" class="form-label fw-semibold">{% translate "Status de publicação" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="status" id="id_status" class="form-select">
+            {% for code, label in statuses %}
+              <option value="{{ code }}" {% if exercise.status == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select></div>
+        </div>
+      </div>
+
+      <div>
+        <label for="id_accessibility_notes" class="form-label fw-semibold">{% translate "Notas de acessibilidade (opcional)" %}</label>
+        <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input type="text" name="accessibility_notes" id="id_accessibility_notes" class="form-control" value="{{ exercise.accessibility_notes|default:'' }}" placeholder="{% translate 'Ex.: Leitura simples, pode ser feito sentado' %}"></div>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 pt-2">
+        <button type="submit" class="btn btn-primary">{% translate "Salvar exercício" %}</button>
+        <a href="{% url 'exercise_catalog' %}" class="btn btn-outline-secondary">{% translate "Cancelar" %}</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

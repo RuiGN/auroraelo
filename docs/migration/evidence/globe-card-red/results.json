@@ -1,0 +1,8 @@
+{
+  "scope": "Anonymous login selector on local Compose; not full-domain visual or editorial acceptance",
+  "base": "http://127.0.0.1:8000",
+  "results": [],
+  "errors": [
+    "Language selector must be inside the login card"
+  ]
+}

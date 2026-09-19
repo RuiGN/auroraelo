@@ -1,0 +1,16 @@
+{
+  "covered_lines": 19302,
+  "num_statements": 21593,
+  "percent_covered": 85.7699957103303,
+  "percent_covered_display": "86",
+  "missing_lines": 2291,
+  "excluded_lines": 113,
+  "percent_statements_covered": 89.39008011855694,
+  "percent_statements_covered_display": "89",
+  "num_branches": 4050,
+  "num_partial_branches": 1022,
+  "covered_branches": 2692,
+  "missing_branches": 1358,
+  "percent_branches_covered": 66.46913580246914,
+  "percent_branches_covered_display": "66"
+}

@@ -1,0 +1,1337 @@
+FFFF.....................F...........F.................................. [  6%]
+...................
+=================================== FAILURES ===================================
+__________ test_login_registers_session_before_fail_closed_validation __________
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+client = <django.test.client.Client object at 0x7146fbf8ead0>
+
+    @override_settings(ACCOUNT_SESSION_ALLOW_UNKNOWN=False)
+    def test_login_registers_session_before_fail_closed_validation(client: Client) -> None:
+        clinic = ClinicFactory.create()
+        user = User.objects.create_user(
+            email="login-rastreado@example.test",
+            password="senha-sintetica-segura",
+        )
+        ClinicMembershipFactory.create(
+            clinic=clinic,
+            user=user,
+            role=ClinicMembership.Role.THERAPIST,
+        )
+    
+        response = client.post(
+            reverse("account_login"),
+            {
+                "email": "login-rastreado@example.test",
+                "password": "senha-sintetica-segura",
+            },
+        )
+    
+        assert response.status_code == 302
+        assert AccountSession.objects.filter(user=user, revoked_at__isnull=True).exists()
+>       assert client.get(reverse("workspace_vertical")).status_code == 200
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_account_session_mfa.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/test/client.py:1128: in get
+    response = super().get(
+.venv/lib/python3.14/site-packages/django/test/client.py:475: in get
+    return self.generic(
+.venv/lib/python3.14/site-packages/django/test/client.py:671: in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/client.py:1091: in request
+    self.check_exception(response)
+.venv/lib/python3.14/site-packages/django/test/client.py:805: in check_exception
+    raise exc_value
+.venv/lib/python3.14/site-packages/django/core/handlers/exception.py:56: in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/core/handlers/base.py:222: in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:114: in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:92: in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:107: in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:174: in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:66: in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:200: in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:228: in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T19:00:21.570230+00:00","level":"INFO","logger":"application.request","request_id":"0c5da9b5209a4dc3bc0c798dafb4f4d6","tenant_id":"unknown","actor_ref":"anonymous","event":"request.completed","outcome":"success","latency_ms":163.218}
+{"timestamp":"2026-09-08T19:00:21.656580+00:00","level":"ERROR","logger":"django.request","request_id":"16c275dccc4e4e168576886bae720449","tenant_id":"a529280b-d233-4086-92d1-93a9c9251689","actor_ref":"actor_9fdcf47bed31a44e","event":"log.event","outcome":"unknown"}
+{"timestamp":"2026-09-08T19:00:21.680519+00:00","level":"INFO","logger":"application.request","request_id":"16c275dccc4e4e168576886bae720449","tenant_id":"a529280b-d233-4086-92d1-93a9c9251689","actor_ref":"actor_9fdcf47bed31a44e","event":"request.completed","outcome":"error","latency_ms":107.512}
+____ test_registered_session_has_minimized_device_data_and_enforced_expiry _____
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+client = <django.test.client.Client object at 0x7146fa06d810>
+
+    @override_settings(
+        ACCOUNT_SESSION_IDLE_SECONDS=900,
+        ACCOUNT_SESSION_ABSOLUTE_SECONDS=7200,
+    )
+    def test_registered_session_has_minimized_device_data_and_enforced_expiry(
+        client: Client,
+    ) -> None:
+        user, _clinic = authenticated_admin(client)
+>       request = client.get("/workspace/").wsgi_request
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_account_session_mfa.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/test/client.py:1128: in get
+    response = super().get(
+.venv/lib/python3.14/site-packages/django/test/client.py:475: in get
+    return self.generic(
+.venv/lib/python3.14/site-packages/django/test/client.py:671: in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/client.py:1091: in request
+    self.check_exception(response)
+.venv/lib/python3.14/site-packages/django/test/client.py:805: in check_exception
+    raise exc_value
+.venv/lib/python3.14/site-packages/django/core/handlers/exception.py:56: in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/core/handlers/base.py:222: in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:114: in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:92: in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:107: in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:174: in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:66: in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:200: in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:228: in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T19:00:22.445527+00:00","level":"ERROR","logger":"django.request","request_id":"9f378cb279d243a8a94aa93f0e5e5862","tenant_id":"6cd07ab8-7030-41ae-b7f6-322fe0aaf707","actor_ref":"actor_d29a32417acabf40","event":"log.event","outcome":"unknown"}
+{"timestamp":"2026-09-08T19:00:22.465138+00:00","level":"INFO","logger":"application.request","request_id":"9f378cb279d243a8a94aa93f0e5e5862","tenant_id":"6cd07ab8-7030-41ae-b7f6-322fe0aaf707","actor_ref":"actor_d29a32417acabf40","event":"request.completed","outcome":"error","latency_ms":55.666}
+_________ test_unknown_session_is_rejected_when_fail_closed_is_enabled _________
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+client = <django.test.client.Client object at 0x7146fa019490>
+
+    @override_settings(ACCOUNT_SESSION_ALLOW_UNKNOWN=True)
+    def test_unknown_session_is_rejected_when_fail_closed_is_enabled(
+        client: Client,
+    ) -> None:
+        user, _clinic = authenticated_admin(client)
+>       request = client.get("/workspace/").wsgi_request
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_account_session_mfa.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/test/client.py:1128: in get
+    response = super().get(
+.venv/lib/python3.14/site-packages/django/test/client.py:475: in get
+    return self.generic(
+.venv/lib/python3.14/site-packages/django/test/client.py:671: in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/client.py:1091: in request
+    self.check_exception(response)
+.venv/lib/python3.14/site-packages/django/test/client.py:805: in check_exception
+    raise exc_value
+.venv/lib/python3.14/site-packages/django/core/handlers/exception.py:56: in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/core/handlers/base.py:222: in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:114: in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:92: in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:107: in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:174: in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:66: in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:200: in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:228: in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T19:00:23.231070+00:00","level":"ERROR","logger":"django.request","request_id":"3d0e9bb5deba4036a68db9a514c56730","tenant_id":"c686a9ab-2c2a-41a7-838a-00add36a130d","actor_ref":"actor_c7b285993bed1789","event":"log.event","outcome":"unknown"}
+{"timestamp":"2026-09-08T19:00:23.255266+00:00","level":"INFO","logger":"application.request","request_id":"3d0e9bb5deba4036a68db9a514c56730","tenant_id":"c686a9ab-2c2a-41a7-838a-00add36a130d","actor_ref":"actor_c7b285993bed1789","event":"request.completed","outcome":"error","latency_ms":63.2}
+________________ test_user_can_revoke_one_or_all_other_sessions ________________
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+client = <django.test.client.Client object at 0x7146fa9257b0>
+
+    def test_user_can_revoke_one_or_all_other_sessions(client: Client) -> None:
+        user, clinic = authenticated_admin(client)
+>       current_request = client.get("/workspace/").wsgi_request
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_account_session_mfa.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/test/client.py:1128: in get
+    response = super().get(
+.venv/lib/python3.14/site-packages/django/test/client.py:475: in get
+    return self.generic(
+.venv/lib/python3.14/site-packages/django/test/client.py:671: in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/client.py:1091: in request
+    self.check_exception(response)
+.venv/lib/python3.14/site-packages/django/test/client.py:805: in check_exception
+    raise exc_value
+.venv/lib/python3.14/site-packages/django/core/handlers/exception.py:56: in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/core/handlers/base.py:222: in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:114: in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:92: in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:107: in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:174: in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:66: in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:200: in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:228: in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T19:00:23.794259+00:00","level":"ERROR","logger":"django.request","request_id":"899e5855e83b4b058db7a107726d9fa2","tenant_id":"cc2374f4-92e1-4769-964f-6a37a2fa3baf","actor_ref":"actor_658db2e573ce78c5","event":"log.event","outcome":"unknown"}
+{"timestamp":"2026-09-08T19:00:23.805019+00:00","level":"INFO","logger":"application.request","request_id":"899e5855e83b4b058db7a107726d9fa2","tenant_id":"cc2374f4-92e1-4769-964f-6a37a2fa3baf","actor_ref":"actor_658db2e573ce78c5","event":"request.completed","outcome":"error","latency_ms":33.992}
+__________ test_revoking_all_other_sessions_requires_current_password __________
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+client = <django.test.client.Client object at 0x7146fa385c70>
+
+    def test_revoking_all_other_sessions_requires_current_password(client: Client) -> None:
+        user, _clinic = authenticated_admin(client)
+        other_django_session = Session.objects.create(
+            session_key="reauth-other-session",
+            session_data="e30:synthetic",
+            expire_date=timezone.now() + timedelta(hours=1),
+        )
+        other = AccountSession.objects.create_for_session(
+            user=user,
+            session_key=other_django_session.session_key,
+            client_label="Outro navegador",
+            network_hint="",
+            absolute_expires_at=timezone.now() + timedelta(hours=1),
+        )
+    
+>       denied = client.post(
+            reverse("account_sessions"),
+            {"action": "revoke_others", "password": "senha-incorreta"},
+        )
+
+tests/test_account_session_mfa.py:765: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/test/client.py:1157: in post
+    response = super().post(
+.venv/lib/python3.14/site-packages/django/test/client.py:499: in post
+    return self.generic(
+.venv/lib/python3.14/site-packages/django/test/client.py:671: in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/client.py:1091: in request
+    self.check_exception(response)
+.venv/lib/python3.14/site-packages/django/test/client.py:805: in check_exception
+    raise exc_value
+.venv/lib/python3.14/site-packages/django/core/handlers/exception.py:56: in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/core/handlers/base.py:222: in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:114: in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:92: in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:107: in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:174: in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:66: in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:200: in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:228: in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T19:00:24.756090+00:00","level":"ERROR","logger":"django.request","request_id":"145c7002fa164004bd3e0cf37640f8f4","tenant_id":"unknown","actor_ref":"actor_6cf6746994deb306","event":"log.event","outcome":"unknown"}
+{"timestamp":"2026-09-08T19:00:24.756937+00:00","level":"INFO","logger":"application.request","request_id":"145c7002fa164004bd3e0cf37640f8f4","tenant_id":"unknown","actor_ref":"actor_6cf6746994deb306","event":"request.completed","outcome":"error","latency_ms":11.457}
+_____________ test_session_reauthentication_rate_limit_returns_429 _____________
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+client = <django.test.client.Client object at 0x7146f9ea4370>
+
+    @override_settings(
+        SENSITIVE_REAUTH_RATE_LIMIT_ATTEMPTS=1,
+        SENSITIVE_REAUTH_RATE_LIMIT_WINDOW_SECONDS=300,
+    )
+    def test_session_reauthentication_rate_limit_returns_429(client: Client) -> None:
+        authenticated_admin(client)
+>       assert client.get(reverse("account_sessions")).status_code == 200
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_account_session_mfa.py:1034: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/test/client.py:1128: in get
+    response = super().get(
+.venv/lib/python3.14/site-packages/django/test/client.py:475: in get
+    return self.generic(
+.venv/lib/python3.14/site-packages/django/test/client.py:671: in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/client.py:1091: in request
+    self.check_exception(response)
+.venv/lib/python3.14/site-packages/django/test/client.py:805: in check_exception
+    raise exc_value
+.venv/lib/python3.14/site-packages/django/core/handlers/exception.py:56: in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/core/handlers/base.py:222: in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:114: in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/response.py:92: in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:107: in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:174: in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:160: in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/test/utils.py:113: in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:66: in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1107: in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:1068: in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:200: in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:228: in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T19:00:25.367017+00:00","level":"ERROR","logger":"django.request","request_id":"e8bc244245d04b5189de2d38904fe2ad","tenant_id":"unknown","actor_ref":"actor_7cf89bbf73fac04c","event":"log.event","outcome":"unknown"}
+{"timestamp":"2026-09-08T19:00:25.367715+00:00","level":"INFO","logger":"application.request","request_id":"e8bc244245d04b5189de2d38904fe2ad","tenant_id":"unknown","actor_ref":"actor_7cf89bbf73fac04c","event":"request.completed","outcome":"error","latency_ms":8.002}
+=============================== warnings summary ===============================
+tests/test_account_session_mfa.py: 24 warnings
+tests/test_accounts_authentication.py: 15 warnings
+  /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/.venv/lib/python3.14/site-packages/django/core/handlers/base.py:63: UserWarning: No directory at: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/staticfiles/
+    mw_instance = middleware(adapted_handler)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_account_session_mfa.py::test_login_registers_session_before_fail_closed_validation
+FAILED tests/test_account_session_mfa.py::test_registered_session_has_minimized_device_data_and_enforced_expiry
+FAILED tests/test_account_session_mfa.py::test_unknown_session_is_rejected_when_fail_closed_is_enabled
+FAILED tests/test_account_session_mfa.py::test_user_can_revoke_one_or_all_other_sessions
+FAILED tests/test_account_session_mfa.py::test_revoking_all_other_sessions_requires_current_password
+FAILED tests/test_account_session_mfa.py::test_session_reauthentication_rate_limit_returns_429
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/.venv/lib/python3.14/site-packages/asgiref/local.py:156: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+6 failed, 85 passed, 39 warnings in 227.06s (0:03:47)

@@ -1,0 +1,103 @@
+{% extends "psychiatry/base_aurora.html" %}
+{% load static %}
+
+{% block title %}Gestão de Leitos & Internação Psiquiátrica - Aurora Elo{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-2xl font-extrabold font-display text-slate-900 dark:text-white" data-i18n="nav_inpatient">
+        Gestão de Leitos & Internação Psiquiátrica
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">
+        Acompanhamento de enfermarias, internações voluntárias e involuntárias (Lei 10.216/2001) e ocupação em tempo real.
+      </p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="px-3 py-1.5 rounded-xl bg-aurora-100 text-aurora-800 dark:bg-aurora-900 dark:text-aurora-200 text-xs font-bold">
+        Ocupação: 12 / 16 Leitos (75%)
+      </span>
+    </div>
+  </div>
+
+  <!-- Bed Grid by Wards -->
+  <div class="space-y-6">
+    <!-- Ala 1: Observação de Crise e Estabilização -->
+    <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-crisis-500"></span>
+          <h3 class="font-bold text-sm text-slate-900 dark:text-white font-display">Ala de Observação Intensiva & Crise (4 Leitos)</h3>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">Monitoramento de Enfermagem 24h</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Leito 04-B (Ocupado / Alto Risco) -->
+        <div class="p-4 rounded-2xl border-2 border-crisis-400 bg-crisis-50/50 dark:bg-crisis-950/30 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-mono font-bold text-xs text-crisis-800 dark:text-crisis-200">Leito 04-B</span>
+            <span class="crisis-pulse px-2 py-0.5 rounded-full text-[10px] font-bold bg-crisis-500 text-white">Alto Risco</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Roberto Carlos Meireles</h4>
+            <p class="text-[11px] text-slate-500">CID-11: 6A60 (Bipolar I - Mania)</p>
+            <p class="text-[10px] text-slate-400 mt-1">Internação: Involuntária (MP notificado)</p>
+          </div>
+          <button class="w-full py-1 rounded-lg text-[11px] font-semibold text-white bg-crisis-600 hover:bg-crisis-700 transition-colors">
+            Evolução Médica
+          </button>
+        </div>
+
+        <!-- Leito 05-A (Disponível para Crise) -->
+        <div class="p-4 rounded-2xl border-2 border-dashed border-healing-400 bg-healing-50/40 dark:bg-healing-950/20 space-y-2 flex flex-col justify-between">
+          <div class="flex justify-between items-center">
+            <span class="font-mono font-bold text-xs text-healing-800 dark:text-healing-200">Leito 05-A</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-healing-500 text-white">Disponível</span>
+          </div>
+          <div class="py-2 text-center">
+            <span class="text-xs font-semibold text-healing-700 dark:text-healing-300">Pronto para Admissão</span>
+            <p class="text-[10px] text-slate-400">Higienização completa realizada</p>
+          </div>
+          <a href="{% url 'psychiatry:anamnesis' %}" class="w-full py-1 rounded-lg text-[11px] font-semibold text-white bg-healing-600 hover:bg-healing-700 transition-colors text-center">
+            Admitir Paciente
+          </a>
+        </div>
+
+        <!-- Leito 06 (Ocupado) -->
+        <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-mono font-bold text-xs text-slate-700 dark:text-slate-300">Leito 06</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">Observação</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Carlos Daniel Moura</h4>
+            <p class="text-[11px] text-slate-500">CID-11: 6B01 (Pânico com Agorafobia)</p>
+            <p class="text-[10px] text-slate-400 mt-1">Internação: Voluntária</p>
+          </div>
+          <button class="w-full py-1 rounded-lg text-[11px] font-semibold text-slate-700 bg-slate-200 hover:bg-slate-300 transition-colors">
+            Ver Prontuário
+          </button>
+        </div>
+
+        <!-- Leito 07 (Em Alta) -->
+        <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-mono font-bold text-xs text-slate-700 dark:text-slate-300">Leito 07</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">Alta Prevista</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Juliana Castro Lima</h4>
+            <p class="text-[11px] text-slate-500">CID-11: 6A70 (Depressão Maior)</p>
+            <p class="text-[10px] text-slate-400 mt-1">Eutimia atingida • Alta amanhã</p>
+          </div>
+          <button class="w-full py-1 rounded-lg text-[11px] font-semibold text-healing-700 bg-healing-50 border border-healing-200 hover:bg-healing-100 transition-colors">
+            Preparar Laudo de Alta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,4685 @@
+# Shared UI translation draft; human terminology review pending.
+msgid ""
+msgstr ""
+"Project-Id-Version: Mindcare UI\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-11 03:44-0300\n"
+"PO-Revision-Date: 2026-09-08 22:00+0000\n"
+"Last-Translator: Mindcare engineering review\n"
+"Language-Team: Mindcare\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Administrador da clínica"
+msgstr "Administrador da clínica"
+
+msgid "Terapeuta"
+msgstr "Terapeuta"
+
+msgid "Equipe administrativa"
+msgstr "Equipe administrativa"
+
+msgid "Paciente"
+msgstr "Paciente"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "seu@email.com"
+msgstr "seu@email.com"
+
+msgid "Senha"
+msgstr "Senha"
+
+msgid "Digite sua senha"
+msgstr "Digite sua senha"
+
+msgid "Informe o e-mail cadastrado"
+msgstr "Informe o e-mail cadastrado"
+
+msgid "Nova senha"
+msgstr "Nova senha"
+
+msgid "Crie uma senha forte"
+msgstr "Crie uma senha forte"
+
+msgid "Confirme a nova senha"
+msgstr "Confirme a nova senha"
+
+msgid "Repita a nova senha"
+msgstr "Repita a nova senha"
+
+msgid "As senhas informadas não coincidem."
+msgstr "As senhas informadas não coincidem."
+
+msgid "Senha atual"
+msgstr "Senha atual"
+
+msgid "E-mail da pessoa convidada"
+msgstr "E-mail da pessoa convidada"
+
+msgid "Papel inicial"
+msgstr "Papel inicial"
+
+msgid "Validade em horas"
+msgstr "Validade em horas"
+
+msgid "Nome"
+msgstr "Nome"
+
+msgid "Sobrenome"
+msgstr "Sobrenome"
+
+msgid "Confirme a senha"
+msgstr "Confirme a senha"
+
+msgid "Unsupported language."
+msgstr "Unsupported language."
+
+msgid "Não foi possível entrar com os dados informados."
+msgstr "Não foi possível entrar com os dados informados."
+
+msgid ""
+"Se existir uma conta ativa para este e-mail, você receberá as instruções."
+msgstr ""
+"Se existir uma conta ativa para este e-mail, você receberá as instruções."
+
+msgid "Recuperação de acesso"
+msgstr "Recuperação de acesso"
+
+#, python-format
+msgid ""
+"Recebemos uma solicitação para redefinir sua senha.\n"
+"\n"
+"Acesse o link a seguir: %(reset_url)s\n"
+"\n"
+"Se você não fez esta solicitação, ignore esta mensagem."
+msgstr ""
+"Recebemos uma solicitação para redefinir sua senha.\n"
+"\n"
+"Acesse o link a seguir: %(reset_url)s\n"
+"\n"
+"Se você não fez esta solicitação, ignore esta mensagem."
+
+msgid "Entrar na plataforma"
+msgstr "Entrar na plataforma"
+
+msgid "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+msgstr "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+
+msgid "Entrar"
+msgstr "Entrar"
+
+msgid "Esqueci minha senha"
+msgstr "Esqueci minha senha"
+
+msgid "Convite para acessar a clínica"
+msgstr "Convite para acessar a clínica"
+
+#, python-format
+msgid ""
+"Você recebeu um convite para acessar a clínica.\n"
+"\n"
+"Acesse: %(accept_url)s\n"
+"\n"
+"O convite é individual, temporário e pode ser usado uma única vez."
+msgstr ""
+"Você recebeu um convite para acessar a clínica.\n"
+"\n"
+"Acesse: %(accept_url)s\n"
+"\n"
+"O convite é individual, temporário e pode ser usado uma única vez."
+
+msgid "Convite enviado"
+msgstr "Convite enviado"
+
+msgid "O convite foi enviado para o endereço informado."
+msgstr "O convite foi enviado para o endereço informado."
+
+msgid "Enviar outro convite"
+msgstr "Enviar outro convite"
+
+msgid "Convidar pessoa"
+msgstr "Convidar pessoa"
+
+msgid "Defina o acesso inicial e a validade do convite."
+msgstr "Defina o acesso inicial e a validade do convite."
+
+msgid "Enviar convite"
+msgstr "Enviar convite"
+
+msgid "Convite inválido ou expirado."
+msgstr "Convite inválido ou expirado."
+
+msgid "Aceitar convite"
+msgstr "Aceitar convite"
+
+msgid "Confirme seus dados para criar o acesso à clínica."
+msgstr "Confirme seus dados para criar o acesso à clínica."
+
+msgid "Solicitação recebida"
+msgstr "Solicitação recebida"
+
+msgid "Verifique seu e-mail"
+msgstr "Verifique seu e-mail"
+
+msgid "Voltar para entrar"
+msgstr "Voltar para entrar"
+
+msgid "Recuperar acesso"
+msgstr "Recuperar acesso"
+
+msgid "Informe seu e-mail para receber instruções de recuperação."
+msgstr "Informe seu e-mail para receber instruções de recuperação."
+
+msgid "Enviar instruções"
+msgstr "Enviar instruções"
+
+msgid "Link inválido"
+msgstr "Link inválido"
+
+msgid "Link inválido ou expirado."
+msgstr "Link inválido ou expirado."
+
+msgid "Solicite novas instruções para recuperar seu acesso."
+msgstr "Solicite novas instruções para recuperar seu acesso."
+
+msgid "Solicitar novo link"
+msgstr "Solicitar novo link"
+
+msgid "Definir nova senha"
+msgstr "Definir nova senha"
+
+msgid "Escolha uma nova senha para proteger sua conta."
+msgstr "Escolha uma nova senha para proteger sua conta."
+
+msgid "Salvar nova senha"
+msgstr "Salvar nova senha"
+
+msgid "Senha alterada"
+msgstr "Senha alterada"
+
+msgid "Senha alterada com segurança"
+msgstr "Senha alterada com segurança"
+
+msgid "Entre novamente em todos os seus dispositivos."
+msgstr "Entre novamente em todos os seus dispositivos."
+
+msgid "Muitas tentativas. Tente novamente mais tarde."
+msgstr "Muitas tentativas. Tente novamente mais tarde."
+
+msgid "Não foi possível confirmar sua senha atual."
+msgstr "Não foi possível confirmar sua senha atual."
+
+msgid ""
+"Estes indicadores descrevem autorrelatos e fatos registrados. Eles não "
+"constituem diagnóstico, recomendação clínica ou relação de causalidade."
+msgstr ""
+"Estes indicadores descrevem autorrelatos e fatos registrados. Eles não "
+"constituem diagnóstico, recomendação clínica ou relação de causalidade."
+
+msgid "Minha evolução"
+msgstr "Minha evolução"
+
+msgid "Muito mal"
+msgstr "Muito mal"
+
+msgid "Mal"
+msgstr "Mal"
+
+msgid "Neutro"
+msgstr "Neutro"
+
+msgid "Bem"
+msgstr "Bem"
+
+msgid "Muito bem"
+msgstr "Muito bem"
+
+msgid "Painel profissional"
+msgstr "Painel profissional"
+
+msgid "Painel operacional"
+msgstr "Painel operacional"
+
+msgid "Relatórios"
+msgstr "Relatórios"
+
+msgid "Segunda-feira"
+msgstr "Segunda-feira"
+
+msgid "Terça-feira"
+msgstr "Terça-feira"
+
+msgid "Quarta-feira"
+msgstr "Quarta-feira"
+
+msgid "Quinta-feira"
+msgstr "Quinta-feira"
+
+msgid "Sexta-feira"
+msgstr "Sexta-feira"
+
+msgid "Sábado"
+msgstr "Sábado"
+
+msgid "Domingo"
+msgstr "Domingo"
+
+msgid "Pacientes"
+msgstr "Pacientes"
+
+msgid "Agenda"
+msgstr "Agenda"
+
+msgid "Registros clínicos"
+msgstr "Registros clínicos"
+
+msgid "Financeiro"
+msgstr "Financeiro"
+
+msgid "Cobrança"
+msgstr "Cobrança"
+
+msgid "Documentos"
+msgstr "Documentos"
+
+msgid "Indicadores"
+msgstr "Indicadores"
+
+msgid "Notificações"
+msgstr "Notificações"
+
+msgid "Razão social"
+msgstr "Razão social"
+
+msgid "Nome de exibição"
+msgstr "Nome de exibição"
+
+msgid "Documento aplicável"
+msgstr "Documento aplicável"
+
+msgid "E-mail administrativo"
+msgstr "E-mail administrativo"
+
+msgid "Telefone administrativo"
+msgstr "Telefone administrativo"
+
+msgid "Endereço"
+msgstr "Endereço"
+
+msgid "Complemento"
+msgstr "Complemento"
+
+msgid "Cidade"
+msgstr "Cidade"
+
+msgid "Estado ou região"
+msgstr "Estado ou região"
+
+msgid "Código postal"
+msgstr "Código postal"
+
+msgid "País (ISO)"
+msgstr "País (ISO)"
+
+msgid "Fuso horário"
+msgstr "Fuso horário"
+
+msgid "Idioma"
+msgstr "Idioma"
+
+msgid "Português do Brasil"
+msgstr "Português do Brasil"
+
+msgid "English (US)"
+msgstr "English (US)"
+
+msgid "Canais institucionais"
+msgstr "Canais institucionais"
+
+msgid "Presencial"
+msgstr "Presencial"
+
+msgid "Videochamada"
+msgstr "Videochamada"
+
+msgid "Telefone"
+msgstr "Telefone"
+
+msgid "Orientação fora do expediente"
+msgstr "Orientação fora do expediente"
+
+#, python-format
+msgid "%(weekday)s: início"
+msgstr "%(weekday)s: início"
+
+#, python-format
+msgid "%(weekday)s: fim"
+msgstr "%(weekday)s: fim"
+
+msgid "Informe início e fim, ou deixe os dois campos vazios."
+msgstr "Informe início e fim, ou deixe os dois campos vazios."
+
+msgid "Logotipo (PNG ou JPEG, até 2 MB)"
+msgstr "Logotipo (PNG ou JPEG, até 2 MB)"
+
+msgid "Cor primária"
+msgstr "Cor primária"
+
+msgid "Cor secundária"
+msgstr "Cor secundária"
+
+msgid "Módulos ativos"
+msgstr "Módulos ativos"
+
+#, python-format
+msgid "Ative os pré-requisitos antes dos módulos dependentes: %(modules)s"
+msgstr "Ative os pré-requisitos antes dos módulos dependentes: %(modules)s"
+
+msgid "Selecione um papel profissional válido."
+msgstr "Selecione um papel profissional válido."
+
+msgid "A data final não pode ser anterior à data inicial."
+msgstr "A data final não pode ser anterior à data inicial."
+
+msgid "Preencha os dados institucionais obrigatórios."
+msgstr "Preencha os dados institucionais obrigatórios."
+
+msgid "Selecione um fuso horário IANA válido."
+msgstr "Selecione um fuso horário IANA válido."
+
+msgid "Selecione um idioma suportado."
+msgstr "Selecione um idioma suportado."
+
+msgid "Selecione canais de atendimento válidos e únicos."
+msgstr "Selecione canais de atendimento válidos e únicos."
+
+msgid "Informe os horários de todos os dias da semana."
+msgstr "Informe os horários de todos os dias da semana."
+
+msgid "Informe início e fim para cada intervalo."
+msgstr "Informe início e fim para cada intervalo."
+
+msgid "Use horários no formato HH:MM."
+msgstr "Use horários no formato HH:MM."
+
+msgid "Os intervalos devem ser válidos e não sobrepostos."
+msgstr "Os intervalos devem ser válidos e não sobrepostos."
+
+msgid "As orientações fora do horário são muito extensas."
+msgstr "As orientações fora do horário são muito extensas."
+
+msgid "Conclua primeiro os dados institucionais."
+msgstr "Conclua primeiro os dados institucionais."
+
+msgid "Use cores no formato hexadecimal #RRGGBB."
+msgstr "Use cores no formato hexadecimal #RRGGBB."
+
+msgid "A cor primária não tem contraste suficiente no tema claro."
+msgstr "A cor primária não tem contraste suficiente no tema claro."
+
+msgid "A cor secundária não tem contraste suficiente no tema escuro."
+msgstr "A cor secundária não tem contraste suficiente no tema escuro."
+
+msgid "O logotipo excede o limite de 2 MB."
+msgstr "O logotipo excede o limite de 2 MB."
+
+msgid "O logotipo deve ser PNG ou JPEG."
+msgstr "O logotipo deve ser PNG ou JPEG."
+
+msgid "Não repita módulos na configuração."
+msgstr "Não repita módulos na configuração."
+
+msgid "A configuração contém módulos desconhecidos."
+msgstr "A configuração contém módulos desconhecidos."
+
+msgid "Dados institucionais"
+msgstr "Dados institucionais"
+
+msgid "Atendimento e horários"
+msgstr "Atendimento e horários"
+
+msgid "Identidade visual"
+msgstr "Identidade visual"
+
+msgid "Módulos"
+msgstr "Módulos"
+
+msgid "Revisão"
+msgstr "Revisão"
+
+msgid "Pendente"
+msgstr "Pendente"
+
+msgid "Verificado"
+msgstr "Verificado"
+
+msgid "Ativo"
+msgstr "Ativo"
+
+msgid "Falhou"
+msgstr "Falhou"
+
+msgid "Revogado"
+msgstr "Revogado"
+
+msgid "Renovação pendente"
+msgstr "Renovação pendente"
+
+msgid "Configuração inicial"
+msgstr "Configuração inicial"
+
+msgid "Concluída"
+msgstr "Concluída"
+
+msgid "Permissões da equipe"
+msgstr "Permissões da equipe"
+
+msgid "Revisão pendente"
+msgstr "Revisão pendente"
+
+msgid "Configurada"
+msgstr "Configurada"
+
+msgid "Disponível"
+msgstr "Disponível"
+
+msgid "Horários de atendimento"
+msgstr "Horários de atendimento"
+
+#, python-format
+msgid "Página %(current)s de %(total)s"
+msgstr "Página %(current)s de %(total)s"
+
+#, python-format
+msgid "Abrir %(name)s"
+msgstr "Abrir %(name)s"
+
+msgid "Atividade"
+msgstr "Atividade"
+
+msgid "Situação"
+msgstr "Situação"
+
+msgid "decrescente"
+msgstr "decrescente"
+
+msgid "crescente"
+msgstr "crescente"
+
+msgid "Módulos disponíveis"
+msgstr "Módulos disponíveis"
+
+msgid "Recursos operacionais liberados para a clínica ativa."
+msgstr "Recursos operacionais liberados para a clínica ativa."
+
+msgid "sem alteração no período"
+msgstr "sem alteração no período"
+
+msgid "Configurações pendentes"
+msgstr "Configurações pendentes"
+
+msgid "Ajustes factuais que ainda precisam de revisão."
+msgstr "Ajustes factuais que ainda precisam de revisão."
+
+msgid "1 revisão concluída"
+msgstr "1 revisão concluída"
+
+msgid "Revisar configurações"
+msgstr "Revisar configurações"
+
+msgid "Informações disponíveis"
+msgstr "Informações disponíveis"
+
+msgid "Exemplo de indicador informativo."
+msgstr "Exemplo de indicador informativo."
+
+msgid "2 novos registros"
+msgstr "2 novos registros"
+
+msgid "Etapas concluídas"
+msgstr "Etapas concluídas"
+
+msgid "Conclusões confirmadas no fluxo operacional."
+msgstr "Conclusões confirmadas no fluxo operacional."
+
+msgid "2 conclusões no período"
+msgstr "2 conclusões no período"
+
+msgid "Falhas operacionais"
+msgstr "Falhas operacionais"
+
+msgid "Erros técnicos que exigem nova tentativa."
+msgstr "Erros técnicos que exigem nova tentativa."
+
+msgid "sem dados sensíveis"
+msgstr "sem dados sensíveis"
+
+msgid "Carregando conteúdo"
+msgstr "Carregando conteúdo"
+
+msgid "Aguarde enquanto os dados autorizados são preparados."
+msgstr "Aguarde enquanto os dados autorizados são preparados."
+
+msgid "Nenhum item cadastrado"
+msgstr "Nenhum item cadastrado"
+
+msgid "Cadastre o primeiro item quando estiver pronto."
+msgstr "Cadastre o primeiro item quando estiver pronto."
+
+msgid "Nenhum resultado encontrado"
+msgstr "Nenhum resultado encontrado"
+
+msgid "Revise os filtros aplicados."
+msgstr "Revise os filtros aplicados."
+
+msgid "Conteúdo temporariamente indisponível"
+msgstr "Conteúdo temporariamente indisponível"
+
+msgid "Tente novamente em alguns instantes."
+msgstr "Tente novamente em alguns instantes."
+
+msgid "Não foi possível carregar o conteúdo"
+msgstr "Não foi possível carregar o conteúdo"
+
+msgid "Tente novamente sem reenviar dados."
+msgstr "Tente novamente sem reenviar dados."
+
+msgid "Acesso não autorizado"
+msgstr "Acesso não autorizado"
+
+msgid "Você não tem permissão para acessar este conteúdo."
+msgstr "Você não tem permissão para acessar este conteúdo."
+
+msgid "Atividades operacionais recentes"
+msgstr "Atividades operacionais recentes"
+
+msgid "Plataforma terapêutica disponível."
+msgstr "Plataforma terapêutica disponível."
+
+msgid "Área de trabalho"
+msgstr "Área de trabalho"
+
+msgid "Preferência de layout inválida."
+msgstr "Preferência de layout inválida."
+
+msgid "Solicitação inválida"
+msgstr "Solicitação inválida"
+
+msgid "Não foi possível processar sua solicitação."
+msgstr "Não foi possível processar sua solicitação."
+
+msgid "Página não encontrada"
+msgstr "Página não encontrada"
+
+msgid "A página solicitada não foi encontrada."
+msgstr "A página solicitada não foi encontrada."
+
+msgid "Erro inesperado"
+msgstr "Erro inesperado"
+
+msgid "Ocorreu um erro inesperado."
+msgstr "Ocorreu um erro inesperado."
+
+msgid "Identificador da solicitação"
+msgstr "Identificador da solicitação"
+
+msgid "Sua decisão"
+msgstr "Sua decisão"
+
+msgid "Aceitou"
+msgstr "Aceitou"
+
+msgid "Recusou"
+msgstr "Recusou"
+
+msgid "Reason for revocation"
+msgstr "Motivo da revogação"
+
+msgid ""
+"I understand that revocation stops future use for this purpose and does not "
+"erase the historical evidence."
+msgstr ""
+"Entendo que a revogação interrompe usos futuros para esta finalidade e não "
+"apaga a evidência histórica."
+
+msgid "Termos de uso"
+msgstr "Termos de uso"
+
+msgid "Limites do atendimento"
+msgstr "Limites do atendimento"
+
+msgid "Acompanhamento clínico"
+msgstr "Acompanhamento clínico"
+
+msgid "Comunicação"
+msgstr "Comunicação"
+
+msgid "Operação da equipe"
+msgstr "Operação da equipe"
+
+msgid "É necessário possuir acesso ativo à clínica."
+msgstr "É necessário possuir acesso ativo à clínica."
+
+msgid "Somente a administração pode reconhecer esta tarefa."
+msgstr "Somente a administração pode reconhecer esta tarefa."
+
+msgid "Informe a referência do atendimento operacional."
+msgstr "Informe a referência do atendimento operacional."
+
+msgid "Tarefa operacional indisponível."
+msgstr "Tarefa operacional indisponível."
+
+msgid "Despacho de revogação indisponível."
+msgstr "Despacho de revogação indisponível."
+
+msgid "Titular sem vínculo ativo com esta clínica."
+msgstr "Titular sem vínculo ativo com esta clínica."
+
+msgid "Referências textuais não comprovam representação legal."
+msgstr "Referências textuais não comprovam representação legal."
+
+msgid ""
+"A decisão explícita deve ser aceite ou recusa; revogações usam o fluxo "
+"próprio."
+msgstr ""
+"A decisão explícita deve ser aceite ou recusa; revogações usam o fluxo "
+"próprio."
+
+msgid "Documento indisponível ou ainda não vigente."
+msgstr "Documento indisponível ou ainda não vigente."
+
+msgid "Documento não destinado a este titular."
+msgstr "Documento não destinado a este titular."
+
+msgid "A chave idempotente já foi usada com outra decisão."
+msgstr "A chave idempotente já foi usada com outra decisão."
+
+msgid "Uma autorização aceita só pode ser retirada pelo fluxo de revogação."
+msgstr "Uma autorização aceita só pode ser retirada pelo fluxo de revogação."
+
+msgid "Esta versão foi revogada e não pode ser reativada por uma nova decisão."
+msgstr ""
+"Esta versão foi revogada e não pode ser reativada por uma nova decisão."
+
+msgid "Somente o titular ativo pode revogar esta autorização."
+msgstr "Somente o titular ativo pode revogar esta autorização."
+
+msgid "Informe o motivo da revogação."
+msgstr "Informe o motivo da revogação."
+
+msgid "Documento indisponível para revogação."
+msgstr "Documento indisponível para revogação."
+
+msgid "Este documento não é uma autorização opcional revogável neste fluxo."
+msgstr "Este documento não é uma autorização opcional revogável neste fluxo."
+
+msgid "Não existe autorização vigente para revogar."
+msgstr "Não existe autorização vigente para revogar."
+
+msgid "Nenhum destino de revogação está configurado."
+msgstr "Nenhum destino de revogação está configurado."
+
+msgid "Acesso à clínica indisponível."
+msgstr "Acesso à clínica indisponível."
+
+msgid "Direito básico disponível independentemente de consentimento."
+msgstr "Direito básico disponível independentemente de consentimento."
+
+msgid ""
+"Finalidade não configurada para autorização; operação bloqueada por "
+"segurança."
+msgstr ""
+"Finalidade não configurada para autorização; operação bloqueada por "
+"segurança."
+
+#, python-format
+msgid ""
+"%(consequence)s Alternativa: %(alternative)s Contato da clínica: %(contact)s "
+"Seus direitos básicos permanecem acessíveis."
+msgstr ""
+"%(consequence)s Alternativa: %(alternative)s Contato da clínica: %(contact)s "
+"Seus direitos básicos permanecem acessíveis."
+
+msgid "Finalidade autorizada."
+msgstr "Finalidade autorizada."
+
+msgid "Revogou"
+msgstr "Revogou"
+
+msgid "Identificador"
+msgstr "Identificador"
+
+msgid "Título"
+msgstr "Título"
+
+msgid "Tipo"
+msgstr "Tipo"
+
+msgid "Profissional"
+msgstr "Profissional"
+
+msgid "Público"
+msgstr "Público"
+
+msgid "Categorias"
+msgstr "Categorias"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Contraindicações"
+msgstr "Contraindicações"
+
+msgid "Referência da fonte"
+msgstr "Referência da fonte"
+
+msgid "Válido até"
+msgstr "Válido até"
+
+msgid "Conteúdo em blocos"
+msgstr "Conteúdo em blocos"
+
+msgid "Parágrafo"
+msgstr "Parágrafo"
+
+msgid "Item de lista"
+msgstr "Item de lista"
+
+msgid "Tipo de bloco"
+msgstr "Tipo de bloco"
+
+msgid "Texto do bloco"
+msgstr "Texto do bloco"
+
+msgid "Informe o conteúdo em blocos."
+msgstr "Informe o conteúdo em blocos."
+
+msgid "Cada termo deve ter no máximo 64 caracteres."
+msgstr "Cada termo deve ter no máximo 64 caracteres."
+
+msgid "Agendar publicação"
+msgstr "Agendar publicação"
+
+msgid "Comentário editorial"
+msgstr "Comentário editorial"
+
+msgid "Parecer"
+msgstr "Parecer"
+
+msgid "Validade da revisão em dias"
+msgstr "Validade da revisão em dias"
+
+msgid "Versão de destino"
+msgstr "Versão de destino"
+
+msgid "Arquivo de mídia"
+msgstr "Arquivo de mídia"
+
+msgid "Uma recomendação de conteúdo foi atribuída a você."
+msgstr "Uma recomendação de conteúdo foi atribuída a você."
+
+msgid "Uma recomendação foi retirada."
+msgstr "Uma recomendação foi retirada."
+
+msgid "Um conteúdo recomendado a você não está mais disponível."
+msgstr "Um conteúdo recomendado a você não está mais disponível."
+
+msgid "Uma recomendação foi retirada (credencial profissional revogada)."
+msgstr "Uma recomendação foi retirada (credencial profissional revogada)."
+
+msgid "Esta recomendação já está retirada."
+msgstr "Esta recomendação já está retirada."
+
+msgid "Informe o motivo da retirada."
+msgstr "Informe o motivo da retirada."
+
+msgid "Informe uma prioridade válida."
+msgstr "Informe uma prioridade válida."
+
+msgid "Informe o contexto clínico da recomendação."
+msgstr "Informe o contexto clínico da recomendação."
+
+msgid "Informe um período de validade positivo."
+msgstr "Informe um período de validade positivo."
+
+msgid "Este conteúdo expirou e não pode mais ser recomendado."
+msgstr "Este conteúdo expirou e não pode mais ser recomendado."
+
+msgid "Informe o paciente ou a coorte destinatária."
+msgstr "Informe o paciente ou a coorte destinatária."
+
+msgid "Conteúdo criado como rascunho."
+msgstr "Conteúdo criado como rascunho."
+
+msgid "Nova versão criada."
+msgstr "Nova versão criada."
+
+msgid "Metadados atualizados."
+msgstr "Metadados atualizados."
+
+msgid "Comentário adicionado ao histórico."
+msgstr "Comentário adicionado ao histórico."
+
+msgid "Conteúdo publicado."
+msgstr "Conteúdo publicado."
+
+msgid "Recomendação atribuída."
+msgstr "Recomendação atribuída."
+
+msgid "Não foi possível resolver a denúncia."
+msgstr "Não foi possível resolver a denúncia."
+
+msgid "Denúncia resolvida."
+msgstr "Denúncia resolvida."
+
+#, python-format
+msgid "Informe no máximo %(limit_value)d dígitos."
+msgstr "Informe no máximo %(limit_value)d dígitos."
+
+msgid "Use um nome reconhecível para a equipe autorizada."
+msgstr "Use um nome reconhecível para a equipe autorizada."
+
+msgid "Categoria"
+msgstr "Categoria"
+
+msgid "Individual"
+msgstr "Individual"
+
+msgid "Grupo"
+msgstr "Grupo"
+
+msgid "Data de início"
+msgstr "Data de início"
+
+msgid "Documento"
+msgstr "Documento"
+
+msgid "Observações administrativas"
+msgstr "Observações administrativas"
+
+msgid "Confirmo os dados"
+msgstr "Confirmo os dados"
+
+msgid "Contato preferencial"
+msgstr "Contato preferencial"
+
+msgid "Recurso ativo"
+msgstr "Recurso ativo"
+
+msgid "Anexo"
+msgstr "Anexo"
+
+msgid "nome@dominio.com"
+msgstr "nome@dominio.com"
+
+msgid "contato@clinica.com"
+msgstr "contato@clinica.com"
+
+msgid "Nome e sobrenome"
+msgstr "Nome e sobrenome"
+
+msgid "Como prefere ser chamado(a)"
+msgstr "Como prefere ser chamado(a)"
+
+msgid "Razão social completa"
+msgstr "Razão social completa"
+
+msgid "Nome público da clínica"
+msgstr "Nome público da clínica"
+
+msgid "Informe o nome"
+msgstr "Informe o nome"
+
+msgid "Rua, número e bairro"
+msgstr "Rua, número e bairro"
+
+msgid "Apartamento, sala, referência"
+msgstr "Apartamento, sala, referência"
+
+msgid "Título curto e objetivo"
+msgstr "Título curto e objetivo"
+
+msgid "identificador-sem-espacos"
+msgstr "identificador-sem-espacos"
+
+msgid "1 a 10"
+msgstr "1 a 10"
+
+msgid "Tipo de arquivo não permitido."
+msgstr "Tipo de arquivo não permitido."
+
+msgid "O tipo declarado do arquivo é inválido."
+msgstr "O tipo declarado do arquivo é inválido."
+
+msgid "O arquivo está vazio ou excede o limite permitido."
+msgstr "O arquivo está vazio ou excede o limite permitido."
+
+msgid "O conteúdo do arquivo não corresponde ao tipo informado."
+msgstr "O conteúdo do arquivo não corresponde ao tipo informado."
+
+msgid "A varredura de segurança do arquivo está indisponível."
+msgstr "A varredura de segurança do arquivo está indisponível."
+
+msgid "O arquivo não foi aprovado na varredura de segurança."
+msgstr "O arquivo não foi aprovado na varredura de segurança."
+
+msgid "Serviço"
+msgstr "Serviço"
+
+msgid "Valor (R$)"
+msgstr "Valor (R$)"
+
+msgid "Moeda"
+msgstr "Moeda"
+
+msgid "Vigência inicial"
+msgstr "Papel inicial"
+
+msgid "Vigência final (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Motivo"
+msgstr "Ativo"
+
+msgid "Contas a receber"
+msgstr "Contas a receber"
+
+msgid "Cadastrar preço"
+msgstr "Cadastrar preço"
+
+msgid "Salvar preço"
+msgstr "Cadastrar preço"
+
+msgid "Catálogo de exercícios terapêuticos"
+msgstr "Catálogo de exercícios"
+
+msgid "Novo exercício"
+msgstr "Novo exercício"
+
+msgid "Editar exercício"
+msgstr "Realizar exercício"
+
+msgid "Atribuir exercício a paciente"
+msgstr "Atribuir a paciente"
+
+msgid "Meus exercícios terapêuticos"
+msgstr "Exercícios terapêuticos"
+
+#, python-format
+msgid "Resposta: %(title)s"
+msgstr "Resposta: %(title)s"
+
+msgid "Qual é a sua meta?"
+msgstr "Qual é a sua meta?"
+
+msgid "Ex.: Retomar caminhadas diárias"
+msgstr "Ex.: Retomar caminhadas diárias"
+
+msgid "Detalhes (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Opcional. Máximo de 4000 caracteres."
+msgstr "Opcional. Máximo de 4000 caracteres."
+
+msgid "Horizonte de tempo"
+msgstr "Horários de atendimento"
+
+msgid "Prioridade"
+msgstr "Prioridade"
+
+msgid "Prazo (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Você pode alterar ou remover o prazo quando quiser, sem penalidade."
+msgstr "Você pode alterar ou remover o prazo quando quiser, sem penalidade."
+
+msgid "Pequenas etapas"
+msgstr "Pequenas etapas"
+
+msgid ""
+"Uma etapa por linha. Ex.:\n"
+"Separe os tênis\n"
+"Caminhe 5 minutos hoje"
+msgstr ""
+"Uma etapa por linha. Ex.:\n"
+"Separe os tênis\n"
+"Caminhe 5 minutos hoje"
+
+msgid ""
+"Uma etapa por linha. Pequenas etapas tornam a meta mais fácil de seguir."
+msgstr ""
+"Uma etapa por linha. Pequenas etapas tornam a meta mais fácil de seguir."
+
+msgid "Compartilhamento"
+msgstr "Compartilhamento"
+
+msgid ""
+"Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes; Vermelho = "
+"Somente eu (privado)."
+msgstr ""
+"Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes; Vermelho = "
+"Somente eu (privado)."
+
+msgid "Dê um título à sua meta."
+msgstr "Dê um título à sua meta."
+
+msgid "Uma meta pode ter no máximo 50 etapas."
+msgstr "Uma meta pode ter no máximo 50 etapas."
+
+msgid "Modo baixa energia"
+msgstr "Modo baixa energia"
+
+msgid "Ativa"
+msgstr "Ativa"
+
+msgid "Pausada"
+msgstr "Pausada"
+
+msgid "Arquivada"
+msgstr "Arquivada"
+
+msgid "Baixa"
+msgstr "Baixa"
+
+msgid "Média"
+msgstr "Média"
+
+msgid "Alta"
+msgstr "Alta"
+
+msgid "Curto prazo"
+msgstr "Curto prazo"
+
+msgid "Médio prazo"
+msgstr "Médio prazo"
+
+msgid "Longo prazo"
+msgstr "Longo prazo"
+
+msgid "Verde — Compartilhável"
+msgstr "Verde — Compartilhável"
+
+msgid "Amarelo — Confirmar antes"
+msgstr "Amarelo — Confirmar antes"
+
+msgid "Vermelho — Privado"
+msgstr "Vermelho — Privado"
+
+msgid "Rascunho"
+msgstr "Rascunho"
+
+msgid "Publicado"
+msgstr "Publicado"
+
+msgid "Arquivado"
+msgstr "Arquivado"
+
+msgid "Texto livre"
+msgstr "Texto livre"
+
+msgid "Escala de 1 a 5"
+msgstr "Escala de 1 a 5"
+
+msgid "Escolha única"
+msgstr "Especialidade técnica"
+
+msgid "Múltipla escolha"
+msgstr "Múltipla escolha"
+
+msgid "Atribuído"
+msgstr "Atribuído"
+
+msgid "Concluído"
+msgstr "Concluído"
+
+msgid "Cancelado"
+msgstr "Cancelado"
+
+msgid "Verde (compartilhado)"
+msgstr "Verde (Compartilhável)"
+
+msgid "Amarelo (perguntar antes)"
+msgstr "Amarelo (Perguntar antes)"
+
+msgid "Vermelho (somente eu)"
+msgstr "Vermelho — Somente você"
+
+msgid "Minhas Metas"
+msgstr "Minhas Metas"
+
+msgid "Nova Meta"
+msgstr "Nova meta"
+
+msgid "Criar meta"
+msgstr "Criar item"
+
+msgid "Detalhe da Meta"
+msgstr "Detalhes do Registro"
+
+msgid "Editar Meta"
+msgstr "Editar"
+
+msgid "Salvar alterações"
+msgstr "Cancelar alterações"
+
+msgid "Prefiro não responder"
+msgstr "Prefiro não responder"
+
+msgid "1 — Muito baixo"
+msgstr "1 — Muito baixo"
+
+msgid "2 — Baixo"
+msgstr "2 — Baixo"
+
+msgid "3 — Médio"
+msgstr "3 — Médio"
+
+msgid "4 — Alto"
+msgstr "4 — Alto"
+
+msgid "5 — Muito alto"
+msgstr "Muito mal"
+
+msgid "Sim"
+msgstr "Sim"
+
+msgid "Não"
+msgstr "Ação"
+
+msgid "Opcional. Máximo de 2000 caracteres."
+msgstr "Opcional. Máximo de 2000 caracteres."
+
+msgid "Como você está se sentindo?"
+msgstr "Como você está se sentindo?"
+
+msgid ""
+"Selecione como você avalia seu humor geral neste momento (1 = Muito mal a 5 "
+"= Muito bem)."
+msgstr ""
+"Selecione como você avalia seu humor geral neste momento (1 = Muito mal a 5 "
+"= Muito bem)."
+
+msgid "Quais emoções você identifica?"
+msgstr "Emoções identificadas"
+
+msgid "Você pode selecionar mais de uma emoção."
+msgstr "Você pode selecionar mais de uma emoção."
+
+msgid "Intensidade emocional (1 a 5)"
+msgstr "Intensidade emocional (1 a 5)"
+
+msgid "1 = muito leve, 5 = muito intensa"
+msgstr "1 = muito leve, 5 = muito intensa"
+
+msgid "Relato do diário"
+msgstr "Relato do Diário"
+
+msgid "Descreva o que aconteceu ou como você está se sentindo..."
+msgstr "Descreva o que aconteceu ou como você está se sentindo..."
+
+#, python-format
+msgid "Máximo de %(max)d caracteres."
+msgstr "Máximo de %(max)d caracteres."
+
+msgid "Gatilhos"
+msgstr "Gatilhos"
+
+msgid ""
+"Situações, pensamentos ou eventos que desencadearam este momento (opcional)"
+msgstr ""
+"Situações, pensamentos ou eventos que desencadearam este momento (opcional)"
+
+#, python-format
+msgid "Opcional. Máximo de %(max)d caracteres."
+msgstr "Opcional. Máximo de %(max)d caracteres."
+
+msgid "Reações físicas"
+msgstr "Reações físicas"
+
+msgid "Ex.: tensão muscular, respiração curta, aperto no peito (opcional)"
+msgstr "Ex.: tensão muscular, respiração curta, aperto no peito (opcional)"
+
+msgid "O que me ajudou"
+msgstr "O que me ajudou"
+
+msgid ""
+"Ações, pensamentos ou técnicas que ajudaram a lidar com a situação (opcional)"
+msgstr ""
+"Ações, pensamentos ou técnicas que ajudaram a lidar com a situação (opcional)"
+
+msgid ""
+"Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes de "
+"compartilhar; Vermelho = Somente eu (privado)."
+msgstr ""
+"Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes de "
+"compartilhar; Vermelho = Somente eu (privado)."
+
+msgid "Descreva o relato do diário."
+msgstr "Relato do Diário"
+
+#, python-format
+msgid "O relato do diário deve ter no máximo %(max)d caracteres."
+msgstr "O relato do diário deve ter no máximo %(max)d caracteres."
+
+#, python-format
+msgid "O campo gatilhos deve ter no máximo %(max)d caracteres."
+msgstr "O campo gatilhos deve ter no máximo %(max)d caracteres."
+
+#, python-format
+msgid "O campo reações deve ter no máximo %(max)d caracteres."
+msgstr "O campo reações deve ter no máximo %(max)d caracteres."
+
+#, python-format
+msgid "O campo estratégias deve ter no máximo %(max)d caracteres."
+msgstr "O campo estratégias deve ter no máximo %(max)d caracteres."
+
+msgid "Últimos 7 dias"
+msgstr "Últimos 7 dias"
+
+msgid "Últimos 30 dias"
+msgstr "Últimos 30 dias"
+
+msgid "Últimos 90 dias"
+msgstr "Últimos 90 dias"
+
+msgid "Todo o histórico"
+msgstr "Todo o histórico"
+
+msgid "Período"
+msgstr "Período"
+
+msgid "Emoção"
+msgstr "Emoção"
+
+msgid "Todas as emoções"
+msgstr "Todas as emoções"
+
+msgid "Humor"
+msgstr "Humor"
+
+msgid "Todos os humores"
+msgstr "Todos os humores"
+
+msgid "Ansiedade"
+msgstr "Ansiedade"
+
+msgid "Tristeza"
+msgstr "Tristeza"
+
+msgid "Raiva"
+msgstr "Raiva"
+
+msgid "Alegria"
+msgstr "Alegria"
+
+msgid "Medo"
+msgstr "Medo"
+
+msgid "Calma"
+msgstr "Calma"
+
+msgid "Frustração"
+msgstr "Fundação"
+
+msgid "Esperança"
+msgstr "Cobrança"
+
+msgid "Amarelo — Confirmação necessária"
+msgstr "Amarelo — Confirmar antes"
+
+msgid "Diário Emocional"
+msgstr "Diário Emocional"
+
+msgid "Novo Registro no Diário"
+msgstr "Novo Registro no Diário"
+
+msgid "Salvar registro"
+msgstr "Sem registro"
+
+msgid "Detalhe do Registro"
+msgstr "Detalhes do Registro"
+
+msgid "Editar Registro no Diário"
+msgstr "Editar Registro no Diário"
+
+msgid "Histórico de Check-ins"
+msgstr "Histórico de Check-ins"
+
+msgid "Check-in Diário"
+msgstr "Check-in Diário"
+
+msgid "Objetivos pessoais"
+msgstr "Objetivos pessoais"
+
+msgid "Um objetivo por linha."
+msgstr "Um objetivo por linha."
+
+msgid "Como você prefere ser contatado(a)?"
+msgstr "Como você prefere ser contatado(a)?"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Melhores horários para lembretes"
+msgstr "Melhores horários para lembretes"
+
+msgid "Manhã"
+msgstr "Manhã"
+
+msgid "Tarde"
+msgstr "Tarde"
+
+msgid "Noite"
+msgstr "Noite"
+
+msgid "Perfil da clínica completo"
+msgstr "Perfil da clínica completo"
+
+msgid "Identidade, operação, identidade visual e módulos configurados."
+msgstr "Identidade, operação, identidade visual e módulos configurados."
+
+msgid "Profissionais convidados"
+msgstr "Profissionais convidados"
+
+msgid "Pelo menos um profissional ou membro administrativo associado."
+msgstr "Pelo menos um profissional ou membro administrativo associado."
+
+msgid "Termos publicados"
+msgstr "Termos publicados"
+
+msgid "Documentos de consentimento publicados e vigentes."
+msgstr "Documentos de consentimento publicados e vigentes."
+
+msgid "Permissões configuradas"
+msgstr "Permissões configuradas"
+
+msgid "Administrador da clínica definido."
+msgstr "Administrador da clínica definido."
+
+msgid "Primeiro paciente"
+msgstr "Primeiro paciente"
+
+msgid "Pelo menos um paciente cadastrado ou convidado."
+msgstr "Pelo menos um paciente cadastrado ou convidado."
+
+msgid "Etapa de onboarding inválida."
+msgstr "Etapa de onboarding inválida."
+
+msgid "Objetivos"
+msgstr "Objetivos"
+
+msgid "Preferências"
+msgstr "Preferências"
+
+msgid "Termos"
+msgstr "Termos"
+
+msgid "Nome completo"
+msgstr "Nome completo"
+
+msgid "Nome social"
+msgstr "Nome social"
+
+msgid "Data de nascimento"
+msgstr "Data de nascimento"
+
+msgid "Gênero (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Não informado"
+msgstr "Não informado"
+
+msgid "Preferências de acessibilidade"
+msgstr "Preferências de acessibilidade"
+
+msgid "UF"
+msgstr "UF"
+
+msgid "CEP"
+msgstr "CEP"
+
+msgid "Finalidade do endereço"
+msgstr "Finalidade do endereço"
+
+msgid "Contato de emergência — nome"
+msgstr "Contato de emergência — nome"
+
+msgid "Contato de emergência — telefone"
+msgstr "Contato de emergência — telefone"
+
+msgid "Finalidade do contato de emergência"
+msgstr "Finalidade do contato de emergência"
+
+msgid "Informe a finalidade para registrar o endereço."
+msgstr "Informe a finalidade para registrar o endereço."
+
+msgid "Informe a finalidade para o contato de emergência."
+msgstr "Informe a finalidade para o contato de emergência."
+
+msgid "Mulher"
+msgstr "Mulher"
+
+msgid "Homem"
+msgstr "Homem"
+
+msgid "Pessoa não binária"
+msgstr "Pessoa não binária"
+
+msgid "Outro"
+msgstr "Outro"
+
+msgid "Prefiro não informar"
+msgstr "Prefiro não informar"
+
+msgid "Agendado"
+msgstr "Agendado"
+
+msgid "Suspenso"
+msgstr "Suspenso"
+
+msgid "Encerrado"
+msgstr "Encerrado"
+
+msgid "Perfil pendente"
+msgstr "Perfil pendente"
+
+msgid "Esta credencial já está revogada."
+msgstr "Esta credencial já está revogada."
+
+msgid "Informe nome e e-mail profissional."
+msgstr "Informe nome e e-mail profissional."
+
+msgid "Selecione uma categoria profissional válida."
+msgstr "Selecione uma categoria profissional válida."
+
+msgid "Informe especialidades técnicas válidas e sem repetição."
+msgstr "Informe especialidades técnicas válidas e sem repetição."
+
+msgid "Informe conselho, número e jurisdição em conjunto."
+msgstr "Informe conselho, número e jurisdição em conjunto."
+
+msgid "A foto excede o limite de 2 MB."
+msgstr "A foto excede o limite de 2 MB."
+
+msgid "A foto deve ser PNG ou JPEG."
+msgstr "A foto deve ser PNG ou JPEG."
+
+msgid "Informe nome e e-mail da pessoa paciente."
+msgstr "Informe nome e e-mail da pessoa paciente."
+
+msgid "Selecione uma opção de gênero válida."
+msgstr "Selecione uma opção de gênero válida."
+
+msgid "Foi encontrada uma possível duplicidade nesta clínica."
+msgstr "Foi encontrada uma possível duplicidade nesta clínica."
+
+msgid "Informe a função do profissional no vínculo."
+msgstr "Informe a função do profissional no vínculo."
+
+msgid "A data de encerramento não pode preceder o início."
+msgstr "A data de encerramento não pode preceder o início."
+
+msgid "O novo profissional deve ser diferente do atual."
+msgstr "O novo profissional deve ser diferente do atual."
+
+msgid "A data de transferência não pode preceder o início."
+msgstr "A data de transferência não pode preceder o início."
+
+msgid "A data de transferência excede o término do vínculo."
+msgstr "A data de transferência excede o término do vínculo."
+
+#, python-format
+msgid ""
+"Lembrete: sua consulta de %(service_name)s está marcada para %(date)s às "
+"%(time)s."
+msgstr ""
+"Lembrete: sua consulta de %(service_name)s está marcada para %(date)s às "
+"%(time)s."
+
+#, python-format
+msgid "Você tem uma nova mensagem de %(sender_name)s na plataforma."
+msgstr "Você tem uma nova mensagem de %(sender_name)s na plataforma."
+
+msgid "Consulta"
+msgstr "Consulta"
+
+msgid "Check-in"
+msgstr "Check-in"
+
+msgid "Exercício"
+msgstr "Exercício"
+
+msgid "Push"
+msgstr "Push"
+
+msgid "Tipo de consulta"
+msgstr "Sem consultas"
+
+msgid "Unidade"
+msgstr "Unidade"
+
+msgid "Data e horário"
+msgstr "Data de início"
+
+msgid "Novo data e horário"
+msgstr "Fuso horário"
+
+msgid "Tipo de lembrete"
+msgstr "Preferências de lembrete"
+
+msgid "Canal"
+msgstr "Canal"
+
+msgid "Ativado"
+msgstr "Ativado"
+
+msgid "Antecedência (minutos)"
+msgstr "Antecedência (minutos)"
+
+msgid "Início do horário de silêncio (opcional)"
+msgstr "Início do horário de silêncio (opcional)"
+
+msgid "Fim do horário de silêncio (opcional)"
+msgstr "Fim do horário de silêncio (opcional)"
+
+msgid "Frequência máxima diária"
+msgstr "Frequência máxima diária"
+
+msgid "Tipo de conversa"
+msgstr "Nova conversa"
+
+msgid "Assunto (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Participantes"
+msgstr "Pacientes"
+
+msgid "Mensagem"
+msgstr "Mensagens"
+
+msgid "Este canal não atende emergências."
+msgstr "Contato de emergência"
+
+msgid "Motivo (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Período preferido (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Contato (opcional)"
+msgstr "Gênero (opcional)"
+
+msgid "Informe o nome da unidade."
+msgstr "Informe o nome da unidade."
+
+msgid "Já existe uma unidade com este nome."
+msgstr "Já existe uma unidade com este nome."
+
+msgid "Unidades e salas"
+msgstr "Unidades e salas"
+
+msgid "Nova unidade"
+msgstr "Nova unidade"
+
+msgid "Salvar unidade"
+msgstr "Inativar unidade"
+
+msgid "Editar unidade"
+msgstr "Editar unidade"
+
+msgid "Nova sala"
+msgstr "Nova sala"
+
+msgid "Salvar sala"
+msgstr "Nova sala"
+
+msgid "Agenda semanal"
+msgstr "Agenda semanal"
+
+msgid "Selecione um serviço válido."
+msgstr "Selecione um papel profissional válido."
+
+msgid "Solicitar consulta"
+msgstr "Solicitar consulta"
+
+msgid "Remarcar consulta"
+msgstr "Remarcar consulta"
+
+msgid "Propor novo horário"
+msgstr "Fuso horário"
+
+msgid "Preferências de lembrete"
+msgstr "Preferências de lembrete"
+
+msgid "Salvar preferência"
+msgstr "Salvar exercício"
+
+msgid "Mensagens"
+msgstr "Mensagens"
+
+msgid "Nova conversa"
+msgstr "Nova conversa"
+
+msgid "Iniciar conversa"
+msgstr "Iniciar conversa"
+
+msgid "Conversa"
+msgstr "Conversas"
+
+msgid "Enviar"
+msgstr "Enviado"
+
+msgid "Lista de espera"
+msgstr "Lista de espera"
+
+msgid "Adicionar à lista de espera"
+msgstr "Adicionar à lista de espera"
+
+msgid "Adicionar"
+msgstr "Adicionar aula"
+
+msgid "Ir para o conteúdo principal"
+msgstr "Ir para o conteúdo principal"
+
+msgid "Sessões e dispositivos"
+msgstr "Sessões e dispositivos"
+
+msgid "Revise os acessos à sua conta e encerre os que não reconhecer."
+msgstr "Revise os acessos à sua conta e encerre os que não reconhecer."
+
+msgid "Última atividade:"
+msgstr "Última atividade:"
+
+msgid "Encerrada"
+msgstr "Encerrada"
+
+msgid "Sessão atual"
+msgstr "Sessão atual"
+
+#, python-format
+msgid "Encerrar %(device_label)s"
+msgstr "Encerrar %(device_label)s"
+
+msgid "Encerrar sessão"
+msgstr "Encerrar sessão"
+
+msgid "Encerrar todas as outras sessões"
+msgstr "Encerrar todas as outras sessões"
+
+msgid "Nenhuma sessão registrada."
+msgstr "Nenhuma sessão registrada."
+
+msgid "Clínica"
+msgstr "Clínica"
+
+msgid "Operação"
+msgstr "Operação"
+
+#, python-format
+msgid "%(start)s – %(end)s · atualizado em %(updated)s"
+msgstr "%(start)s – %(end)s · atualizado em %(updated)s"
+
+msgid ""
+"Métricas operacionais agregadas e anonimizadas. Recortes abaixo do limiar "
+"foram suprimidos."
+msgstr ""
+"Métricas operacionais agregadas e anonimizadas. Recortes abaixo do limiar "
+"foram suprimidos."
+
+msgid "Indicadores operacionais"
+msgstr "Indicadores operacionais"
+
+msgid "Consultas no período"
+msgstr "Consultas no período"
+
+msgid "Ocupação da agenda"
+msgstr "Ocupação da agenda"
+
+msgid "Taxa de faltas"
+msgstr "Taxa de faltas"
+
+msgid "Pacientes ativos"
+msgstr "Pacientes ativos"
+
+msgid "oculto"
+msgstr "oculto"
+
+msgid "Resumos por unidade e profissional"
+msgstr "Resumos por unidade e profissional"
+
+msgid "Consultas por unidade"
+msgstr "Consultas por unidade"
+
+msgid "Consultas"
+msgstr "Consultas"
+
+msgid "Consultas por profissional"
+msgstr "Consultas por profissional"
+
+msgid "Acompanhamento"
+msgstr "Acompanhamento"
+
+#, python-format
+msgid "%(start)s – %(end)s"
+msgstr "%(start)s – %(end)s"
+
+msgid "Indicadores do período"
+msgstr "Indicadores do período"
+
+msgid "Check-ins no período"
+msgstr "Check-ins no período"
+
+msgid "Metas em andamento"
+msgstr "Metas em andamento"
+
+msgid "Exercícios concluídos"
+msgstr "Exercícios concluídos"
+
+msgid "Próximas consultas"
+msgstr "Próximas consultas"
+
+msgid "Distribuição de humor (diário)"
+msgstr "Distribuição de humor (diário)"
+
+msgid ""
+"A tabela textual equivalente mostra a contagem de registros por humor no "
+"período. Comparações são apenas com seus próprios períodos; não indicam "
+"diagnóstico nem causalidade."
+msgstr ""
+"A tabela textual equivalente mostra a contagem de registros por humor no "
+"período. Comparações são apenas com seus próprios períodos; não indicam "
+"diagnóstico nem causalidade."
+
+msgid "Exportações"
+msgstr "Exportações"
+
+msgid "Relatórios expiram e cada download é registrado."
+msgstr "Relatórios expiram e cada download é registrado."
+
+msgid "Gerar relatório"
+msgstr "Gerar relatório"
+
+msgid "Relatórios disponíveis"
+msgstr "Relatórios disponíveis"
+
+msgid "Baixar"
+msgstr "Baixar"
+
+msgid "Nenhum relatório gerado ainda."
+msgstr "Nenhum relatório gerado ainda."
+
+msgid "Visão longitudinal autorizada"
+msgstr "Visão longitudinal autorizada"
+
+msgid "Indicadores profissionais"
+msgstr "Indicadores profissionais"
+
+msgid "Triagem pendente"
+msgstr "Triagem pendente"
+
+msgid "Sinalizações para revisão humana"
+msgstr "Sinalizações para revisão humana"
+
+#, python-format
+msgid "Regra: %(rule)s · Monitoramento: %(window)s"
+msgstr "Regra: %(rule)s · Monitoramento: %(window)s"
+
+msgid "Nenhuma sinalização pendente para revisão."
+msgstr "Nenhuma sinalização pendente para revisão."
+
+msgid "Check-ins compartilhados por paciente"
+msgstr "Check-ins compartilhados por paciente"
+
+msgid "Check-ins"
+msgstr "Check-ins"
+
+msgid "Nenhum check-in compartilhado no período."
+msgstr "Nenhum check-in compartilhado no período."
+
+msgid "Confirmar troca de clínica"
+msgstr "Confirmar troca de clínica"
+
+msgid "Confirmação de contexto"
+msgstr "Confirmação de contexto"
+
+msgid "Trocar clínica ativa?"
+msgstr "Trocar clínica ativa?"
+
+#, python-format
+msgid ""
+"Você está em <strong>%(current_clinic_name)s</strong> e solicitou acesso a "
+"<strong>%(target_clinic_name)s</strong>."
+msgstr ""
+"Você está em <strong>%(current_clinic_name)s</strong> e solicitou acesso a "
+"<strong>%(target_clinic_name)s</strong>."
+
+msgid ""
+"A troca atualiza o contexto das próximas páginas. Nenhum dado é copiado "
+"entre clínicas."
+msgstr ""
+"A troca atualiza o contexto das próximas páginas. Nenhum dado é copiado "
+"entre clínicas."
+
+msgid "Confirmar troca"
+msgstr "Confirmar troca"
+
+msgid "Manter clínica atual"
+msgstr "Manter clínica atual"
+
+msgid "Configurar clínica"
+msgstr "Configurar clínica"
+
+msgid "Configuração da clínica ativa"
+msgstr "Configuração da clínica ativa"
+
+#, python-format
+msgid ""
+"Revise cada etapa na ordem. As mudanças ficam restritas a %(clinic_name)s e "
+"são registradas na auditoria."
+msgstr ""
+"Revise cada etapa na ordem. As mudanças ficam restritas a %(clinic_name)s e "
+"são registradas na auditoria."
+
+msgid "Etapas da configuração"
+msgstr "Etapas da configuração"
+
+msgid "Etapa 1 de 5"
+msgstr "Etapa 1 de 5"
+
+msgid "Informe identificação, contato administrativo e endereço estruturado."
+msgstr "Informe identificação, contato administrativo e endereço estruturado."
+
+msgid "Etapa 2 de 5"
+msgstr "Etapa 2 de 5"
+
+msgid ""
+"Defina fuso, idioma, canais, semana operacional e orientação fora do horário."
+msgstr ""
+"Defina fuso, idioma, canais, semana operacional e orientação fora do horário."
+
+msgid "Etapa 3 de 5"
+msgstr "Etapa 3 de 5"
+
+msgid "Envie um logotipo raster seguro e escolha cores com contraste adequado."
+msgstr ""
+"Envie um logotipo raster seguro e escolha cores com contraste adequado."
+
+msgid "Etapa 4 de 5"
+msgstr "Etapa 4 de 5"
+
+msgid ""
+"Ative somente recursos necessários. Pré-requisitos são verificados pelo "
+"servidor."
+msgstr ""
+"Ative somente recursos necessários. Pré-requisitos são verificados pelo "
+"servidor."
+
+msgid "Etapa 5 de 5"
+msgstr "Etapa 5 de 5"
+
+msgid "Nenhum"
+msgstr "Nenhum"
+
+msgid "Comece pelos dados institucionais para montar a revisão."
+msgstr "Comece pelos dados institucionais para montar a revisão."
+
+msgid "Há alterações não salvas."
+msgstr "Há alterações não salvas."
+
+msgid "Revise os campos informados"
+msgstr "Revise os campos informados"
+
+msgid "Pré-visualização da marca"
+msgstr "Pré-visualização da marca"
+
+#, python-format
+msgid "Pré-visualização do logotipo de %(clinic_name)s"
+msgstr "Pré-visualização do logotipo de %(clinic_name)s"
+
+msgid ""
+"As cores serão aplicadas aos tokens permitidos nos temas claro e escuro após "
+"a validação de contraste."
+msgstr ""
+"As cores serão aplicadas aos tokens permitidos nos temas claro e escuro após "
+"a validação de contraste."
+
+msgid "Exemplo de ação principal"
+msgstr "Exemplo de ação principal"
+
+msgid "Salvar e continuar"
+msgstr "Salvar e continuar"
+
+msgid "Domínios personalizados"
+msgstr "Domínios personalizados"
+
+msgid "White label"
+msgstr "White label"
+
+msgid "Domínios desta clínica"
+msgstr "Domínios desta clínica"
+
+#, python-format
+msgid "%(domain)s · %(status)s · TLS: %(tls_status)s"
+msgstr "%(domain)s · %(status)s · TLS: %(tls_status)s"
+
+msgid "Nenhum domínio personalizado cadastrado."
+msgstr "Nenhum domínio personalizado cadastrado."
+
+msgid "Revise os campos indicados"
+msgstr "Revise os campos indicados"
+
+msgid "Não foi possível salvar. Corrija os problemas abaixo."
+msgstr "Não foi possível salvar. Corrija os problemas abaixo."
+
+msgid "Selecione o idioma"
+msgstr "Selecione o idioma"
+
+#, python-format
+msgid "%(count)s idioma disponível!"
+msgid_plural "%(count)s idiomas disponíveis!"
+msgstr[0] "%(count)s idioma disponível!"
+msgstr[1] "%(count)s idiomas disponíveis!"
+
+msgid "Idiomas disponíveis"
+msgstr "Idiomas disponíveis"
+
+msgid ""
+"Há alterações não salvas. Alterar o idioma e descartar essas alterações?"
+msgstr ""
+"Há alterações não salvas. Alterar o idioma e descartar essas alterações?"
+
+msgid "Paginação"
+msgstr "Paginação"
+
+msgid "Primeira"
+msgstr "Primeira"
+
+msgid "Anterior"
+msgstr "Anterior"
+
+#, python-format
+msgid "Ir para a página %(number)s"
+msgstr "Ir para a página %(number)s"
+
+msgid "Próxima"
+msgstr "Próxima"
+
+msgid "Última"
+msgstr "Última"
+
+#, python-format
+msgid "Ordenar por %(label)s"
+msgstr "Ordenar por %(label)s"
+
+msgid "Ações"
+msgstr "Ações"
+
+msgid "Sem ações"
+msgstr "Sem ações"
+
+msgid "Nenhum registro disponível."
+msgstr "Nenhum registro disponível."
+
+msgid "Ordenação da lista"
+msgstr "Ordenação da lista"
+
+#, python-format
+msgid "Ordenar por %(label)s em ordem %(direction)s"
+msgstr "Ordenar por %(label)s em ordem %(direction)s"
+
+msgid "; ordem atual crescente"
+msgstr "; ordem atual crescente"
+
+msgid "; ordem atual decrescente"
+msgstr "; ordem atual decrescente"
+
+#, python-format
+msgid "Tendência: %(trend)s"
+msgstr "Tendência: %(trend)s"
+
+msgid "Terms and consents"
+msgstr "Termos e consentimentos"
+
+msgid ""
+"Read each document and record your decision. Optional authorizations are not "
+"preselected and may be refused without blocking your basic rights."
+msgstr ""
+"Leia cada documento e registre sua decisão. Autorizações opcionais não vêm "
+"marcadas e podem ser recusadas sem bloquear seus direitos básicos."
+
+msgid "Required acceptances"
+msgstr "Aceites necessários"
+
+msgid "There are no required acceptances pending."
+msgstr "Não há aceites necessários pendentes."
+
+msgid "Optional authorizations"
+msgstr "Autorizações opcionais"
+
+msgid "There are no optional authorizations available."
+msgstr "Não há autorizações opcionais disponíveis."
+
+msgid "Review your decision"
+msgstr "Revise sua decisão"
+
+msgid "Select accept or refuse before continuing."
+msgstr "Selecione aceitar ou recusar antes de continuar."
+
+msgid "The decision could not be recorded."
+msgstr "Não foi possível registrar a decisão."
+
+msgid "Back to terms"
+msgstr "Voltar aos termos"
+
+#, python-format
+msgid "Version %(version)s · Purpose: %(purpose)s"
+msgstr "Versão %(version)s · Finalidade: %(purpose)s"
+
+msgid "If you refuse:"
+msgstr "Em caso de recusa:"
+
+msgid "Alternative:"
+msgstr "Alternativa:"
+
+msgid "Clinic contact:"
+msgstr "Contato da clínica:"
+
+msgid "Recorded decision:"
+msgstr "Decisão registrada:"
+
+msgid "Choose an option"
+msgstr "Escolha uma opção"
+
+msgid "I accept for the stated purpose"
+msgstr "Aceito para a finalidade informada"
+
+msgid "I do not accept"
+msgstr "Não aceito"
+
+msgid "Record decision"
+msgstr "Registrar decisão"
+
+msgid ""
+"A revogação interrompe novos usos para esta finalidade, preservando a "
+"evidência histórica e obrigações legais aplicáveis."
+msgstr ""
+"A revogação interrompe novos usos para esta finalidade, preservando a "
+"evidência histórica e obrigações legais aplicáveis."
+
+msgid "Motivo da revogação"
+msgstr "Motivo da revogação"
+
+msgid "Entendo o escopo e desejo revogar esta autorização."
+msgstr "Entendo o escopo e desejo revogar esta autorização."
+
+msgid "Revogar autorização"
+msgstr "Revogar autorização"
+
+msgid "Não foi possível revogar a autorização"
+msgstr "Não foi possível revogar a autorização"
+
+msgid "Voltar aos termos e consentimentos"
+msgstr "Voltar aos termos e consentimentos"
+
+msgid "Não foi possível confirmar o atendimento"
+msgstr "Não foi possível confirmar o atendimento"
+
+msgid "Voltar para a fila"
+msgstr "Voltar para a fila"
+
+msgid "Revogações aguardando tratamento"
+msgstr "Revogações aguardando tratamento"
+
+msgid ""
+"Confirme cada bloqueio operacional somente após concluir o atendimento no "
+"sistema de destino."
+msgstr ""
+"Confirme cada bloqueio operacional somente após concluir o atendimento no "
+"sistema de destino."
+
+msgid "Fila operacional de revogações"
+msgstr "Fila operacional de revogações"
+
+msgid "Titular:"
+msgstr "Titular:"
+
+msgid "Finalidade:"
+msgstr "Finalidade:"
+
+msgid "Documento:"
+msgstr "Documento:"
+
+#, python-format
+msgid "%(title)s — version %(version)s"
+msgstr "%(title)s — versão %(version)s"
+
+msgid "Despacho:"
+msgstr "Despacho:"
+
+msgid "Criada em:"
+msgstr "Criada em:"
+
+msgid "Referência do atendimento operacional"
+msgstr "Referência do atendimento operacional"
+
+msgid "Confirmar atendimento"
+msgstr "Confirmar atendimento"
+
+msgid "Não há revogações aguardando tratamento."
+msgstr "Não há revogações aguardando tratamento."
+
+msgid "Voltar à biblioteca"
+msgstr "Voltar à biblioteca"
+
+msgid "Recomendar a um paciente"
+msgstr "Recomendar a um paciente"
+
+msgid "Atribuir recomendação"
+msgstr "Atribuir recomendação"
+
+#, python-format
+msgid "Comparar versões: %(title)s"
+msgstr "Comparar versões: %(title)s"
+
+msgid "Histórico editorial"
+msgstr "Histórico editorial"
+
+#, python-format
+msgid "Comparar versões %(before_ver)s e %(after_ver)s"
+msgstr "Comparar versões %(before_ver)s e %(after_ver)s"
+
+msgid "Diferenças entre versões"
+msgstr "Diferenças entre versões"
+
+#, python-format
+msgid "Versão %(ver)s"
+msgstr "Versão %(ver)s"
+
+msgid "Voltar ao editor"
+msgstr "Voltar ao editor"
+
+msgid "Criar conteúdo"
+msgstr "Criar conteúdo"
+
+msgid "CMS"
+msgstr "CMS"
+
+msgid "Editor de blocos"
+msgstr "Editor de blocos"
+
+msgid ""
+"Estruture o texto com títulos, parágrafos e listas. Cada bloco é mantido na "
+"ordem definida abaixo."
+msgstr ""
+"Estruture o texto com títulos, parágrafos e listas. Cada bloco é mantido na "
+"ordem definida abaixo."
+
+msgid "Tipo do bloco 1"
+msgstr "Tipo do bloco 1"
+
+msgid "Texto do bloco 1"
+msgstr "Texto do bloco 1"
+
+msgid "Mover bloco 1 para cima"
+msgstr "Mover bloco 1 para cima"
+
+msgid "Mover para cima"
+msgstr "Mover para cima"
+
+msgid "Mover bloco 1 para baixo"
+msgstr "Mover bloco 1 para baixo"
+
+msgid "Mover para baixo"
+msgstr "Mover para baixo"
+
+msgid "Remover bloco 1"
+msgstr "Remover bloco 1"
+
+msgid "Remover bloco"
+msgstr "Remover bloco"
+
+msgid "Tipo do bloco 2"
+msgstr "Tipo do bloco 2"
+
+msgid "Texto do bloco 2"
+msgstr "Texto do bloco 2"
+
+msgid "Mover bloco 2 para cima"
+msgstr "Mover bloco 2 para cima"
+
+msgid "Mover bloco 2 para baixo"
+msgstr "Mover bloco 2 para baixo"
+
+msgid "Remover bloco 2"
+msgstr "Remover bloco 2"
+
+msgid "Tipo do bloco 3"
+msgstr "Tipo do bloco 3"
+
+msgid "Texto do bloco 3"
+msgstr "Texto do bloco 3"
+
+msgid "Mover bloco 3 para cima"
+msgstr "Mover bloco 3 para cima"
+
+msgid "Mover bloco 3 para baixo"
+msgstr "Mover bloco 3 para baixo"
+
+msgid "Remover bloco 3"
+msgstr "Remover bloco 3"
+
+msgid "Adicionar bloco"
+msgstr "Adicionar bloco"
+
+msgid "Mover último bloco para cima"
+msgstr "Mover último bloco para cima"
+
+msgid "Mover último para cima"
+msgstr "Mover último para cima"
+
+msgid "Editar HTML bruto (fallback)"
+msgstr "Editar HTML bruto (fallback)"
+
+msgid "Salvar rascunho"
+msgstr "Salvar rascunho"
+
+#, python-format
+msgid "Editor: %(title)s"
+msgstr "Editor: %(title)s"
+
+#, python-format
+msgid "versão %(version)s"
+msgstr "versão %(version)s"
+
+msgid "Pré-visualizar"
+msgstr "Pré-visualizar"
+
+msgid "Novos blocos"
+msgstr "Novos blocos"
+
+msgid ""
+"Use títulos, parágrafos e listas. Uma nova versão preserva todo o histórico."
+msgstr ""
+"Use títulos, parágrafos e listas. Uma nova versão preserva todo o histórico."
+
+msgid "Criar nova versão"
+msgstr "Criar nova versão"
+
+msgid "Fluxo editorial"
+msgstr "Fluxo editorial"
+
+msgid "Enviar para revisão"
+msgstr "Enviar para revisão"
+
+msgid "Publicar"
+msgstr "Publicar"
+
+msgid "Arquivar"
+msgstr "Arquivar"
+
+msgid "Aprovar versão"
+msgstr "Aprovar versão"
+
+msgid "Atualizar metadados"
+msgstr "Atualizar metadados"
+
+msgid "Reverter versão"
+msgstr "Reverter versão"
+
+msgid "Anexar mídia"
+msgstr "Anexar mídia"
+
+msgid "Histórico de versões"
+msgstr "Histórico de versões"
+
+#, python-format
+msgid "Versão %(ver)s · %(status)s"
+msgstr "Versão %(ver)s · %(status)s"
+
+msgid "Comparar primeira e atual"
+msgstr "Comparar primeira e atual"
+
+#, python-format
+msgid "Comentários da versão %(version)s"
+msgstr "Comentários da versão %(version)s"
+
+msgid "Nenhum comentário."
+msgstr "Nenhum comentário."
+
+msgid "Comentários são permanentes e não podem ser editados ou removidos."
+msgstr "Comentários são permanentes e não podem ser editados ou removidos."
+
+msgid "Adicionar comentário"
+msgstr "Adicionar comentário"
+
+msgid "Voltar à gestão editorial"
+msgstr "Voltar à gestão editorial"
+
+msgid "Gestão editorial"
+msgstr "Gestão editorial"
+
+msgid "Conteúdos"
+msgstr "Conteúdos"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Versão"
+msgstr "Versão"
+
+msgid "Ação"
+msgstr "Ação"
+
+msgid "Editar"
+msgstr "Editar"
+
+msgid "Nenhum conteúdo editorial."
+msgstr "Nenhum conteúdo editorial."
+
+#, python-format
+msgid "Pré-visualização: %(title)s"
+msgstr "Pré-visualização: %(title)s"
+
+#, python-format
+msgid "Pré-visualização responsiva · versão %(ver)s"
+msgstr "Pré-visualização responsiva · versão %(ver)s"
+
+msgid "Conteúdo pré-visualizado"
+msgstr "Conteúdo pré-visualizado"
+
+#, python-format
+msgid "Certificado: %(title)s"
+msgstr "Certificado: %(title)s"
+
+#, python-format
+msgid "Curso: %(title)s"
+msgstr "Curso: %(title)s"
+
+msgid "Certificado de conclusão"
+msgstr "Certificado de conclusão"
+
+msgid "Certificado emitido"
+msgstr "Certificado emitido"
+
+msgid "Código de verificação:"
+msgstr "Código de verificação:"
+
+msgid "Compartilhe este código para verificação pública."
+msgstr "Compartilhe este código para verificação pública."
+
+msgid "Certificado ainda não emitido"
+msgstr "Certificado ainda não emitido"
+
+msgid "Você concluiu todas as aulas. Emita seu certificado abaixo."
+msgstr "Você concluiu todas as aulas. Emita seu certificado abaixo."
+
+msgid "Emitir certificado"
+msgstr "Emitir certificado"
+
+msgid "Conclua todas as aulas do curso para emitir o certificado."
+msgstr "Conclua todas as aulas do curso para emitir o certificado."
+
+msgid "Verificação de certificado"
+msgstr "Verificação de certificado"
+
+msgid "Certificado válido"
+msgstr "Certificado válido"
+
+msgid "Certificado revogado"
+msgstr "Certificado revogado"
+
+msgid "Certificado não encontrado"
+msgstr "Certificado não encontrado"
+
+#, python-format
+msgid "Coorte: %(name)s"
+msgstr "Coorte: %(name)s"
+
+msgid "Coortes"
+msgstr "Coortes"
+
+msgid "Membros"
+msgstr "Membros"
+
+msgid "Nenhum membro ainda."
+msgstr "Nenhum membro ainda."
+
+msgid "Adicionar membro"
+msgstr "Adicionar membro"
+
+msgid "Usuário (ID)"
+msgstr "Usuário (ID)"
+
+#, python-format
+msgid "Construtor: %(title)s"
+msgstr "Construtor: %(title)s"
+
+msgid "Cursos"
+msgstr "Cursos"
+
+#, python-format
+msgid "versão de currículo %(version)s"
+msgstr "versão de currículo %(version)s"
+
+#, python-format
+msgid "Módulo %(pos)s: %(title)s"
+msgstr "Módulo %(pos)s: %(title)s"
+
+msgid "Nenhum módulo ainda."
+msgstr "Nenhum módulo ainda."
+
+msgid "Adicionar módulo"
+msgstr "Adicionar módulo"
+
+msgid "Título do módulo"
+msgstr "Título do módulo"
+
+msgid "Posição"
+msgstr "Posição"
+
+msgid "Pré-requisito"
+msgstr "Pré-requisito"
+
+msgid "Curso de pré-requisito (ID)"
+msgstr "Curso de pré-requisito (ID)"
+
+msgid "Vincular pré-requisito"
+msgstr "Vincular pré-requisito"
+
+msgid "Publicação"
+msgstr "Publicação"
+
+msgid "Publicar curso"
+msgstr "Publicar curso"
+
+msgid "Questionário educacional"
+msgstr "Questionário educacional"
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Nota mínima (0–100)"
+msgstr "Nota mínima (0–100)"
+
+msgid "Tentativas"
+msgstr "Tentativas"
+
+msgid "Embaralhar questões"
+msgstr "Embaralhar questões"
+
+msgid "Criar questionário"
+msgstr "Criar questionário"
+
+msgid "Autoria de aprendizagem"
+msgstr "Autoria de aprendizagem"
+
+msgid "Cursos e coortes"
+msgstr "Cursos e coortes"
+
+msgid "Nenhum curso ainda."
+msgstr "Nenhum curso ainda."
+
+msgid "Slug do curso"
+msgstr "Slug do curso"
+
+msgid "Duração total (minutos)"
+msgstr "Duração total (minutos)"
+
+msgid "Instrutor (ID)"
+msgstr "Instrutor (ID)"
+
+msgid "Criar curso"
+msgstr "Criar curso"
+
+msgid "Nenhuma coorte ainda."
+msgstr "Nenhuma coorte ainda."
+
+msgid "Nome da coorte"
+msgstr "Nome da coorte"
+
+msgid "Criar coorte"
+msgstr "Criar coorte"
+
+msgid "Questionários educacionais"
+msgstr "Questionários educacionais"
+
+msgid "Nenhum questionário ainda."
+msgstr "Nenhum questionário ainda."
+
+msgid ""
+"Nenhum curso selecionado — use a página de um curso para criar questionários."
+msgstr ""
+"Nenhum curso selecionado — use a página de um curso para criar questionários."
+
+#, python-format
+msgid "Aula: %(title)s"
+msgstr "Aula: %(title)s"
+
+msgid "Concluir aula"
+msgstr "Concluir aula"
+
+msgid "Marcar como concluída"
+msgstr "Marcar como concluída"
+
+#, python-format
+msgid "Módulo: %(title)s"
+msgstr "Módulo: %(title)s"
+
+msgid "Aulas"
+msgstr "Aulas"
+
+#, python-format
+msgid "Aula %(pos)s: %(title)s · %(duration)s min · %(status)s"
+msgstr "Aula %(pos)s: %(title)s · %(duration)s min · %(status)s"
+
+msgid "Nenhuma aula ainda."
+msgstr "Nenhuma aula ainda."
+
+msgid "Adicionar aula"
+msgstr "Adicionar aula"
+
+msgid "Título da aula"
+msgstr "Título da aula"
+
+msgid "Duração (minutos)"
+msgstr "Duração (minutos)"
+
+#, python-format
+msgid "Questionário: %(title)s"
+msgstr "Questionário: %(title)s"
+
+#, python-format
+msgid "Nota mínima: %(grade)s · Tentativas: %(attempts)s · %(status)s"
+msgstr "Nota mínima: %(grade)s · Tentativas: %(attempts)s · %(status)s"
+
+msgid "Questões"
+msgstr "Questões"
+
+#, python-format
+msgid "Questão %(pos)s: %(prompt)s"
+msgstr "Questão %(pos)s: %(prompt)s"
+
+msgid "Nenhuma questão ainda."
+msgstr "Nenhuma questão ainda."
+
+msgid "Adicionar questão"
+msgstr "Adicionar questão"
+
+msgid "Enunciado"
+msgstr "Enunciado"
+
+msgid "Opção A"
+msgstr "Opção A"
+
+msgid "Opção B"
+msgstr "Opção B"
+
+msgid "Opção C"
+msgstr "Opção C"
+
+msgid "Opção D"
+msgstr "Opção D"
+
+msgid "Chave correta"
+msgstr "Chave correta"
+
+msgid "Publicação do questionário"
+msgstr "Publicação do questionário"
+
+msgid "Publicar questionário"
+msgstr "Publicar questionário"
+
+#, python-format
+msgid "Resultado: %(title)s"
+msgstr "Resultado: %(title)s"
+
+msgid "Seu resultado"
+msgstr "Seu resultado"
+
+msgid "Aprovado,Não aprovado"
+msgstr "Aprovado,Não aprovado"
+
+#, python-format
+msgid "Nota: %(score)s · %(passed)s"
+msgstr "Nota: %(score)s · %(passed)s"
+
+msgid "Revisão das respostas"
+msgstr "Revisão das respostas"
+
+#, python-format
+msgid "Questão %(counter)s"
+msgstr "Questão %(counter)s"
+
+msgid "Correta,Incorreta"
+msgstr "Correta,Incorreta"
+
+#, python-format
+msgid "Explicação: %(explanation)s"
+msgstr "Explicação: %(explanation)s"
+
+msgid "Nenhum feedback disponível."
+msgstr "Nenhum feedback disponível."
+
+msgid "Este questionário ainda não possui perguntas."
+msgstr "Este questionário ainda não possui perguntas."
+
+msgid "Enviar respostas"
+msgstr "Enviar respostas"
+
+#, python-format
+msgid "Reprodução da aula %(title)s"
+msgstr "Reprodução da aula %(title)s"
+
+msgid "Legendas em português"
+msgstr "Legendas em português"
+
+msgid "Seu navegador não suporta reprodução de vídeo."
+msgstr "Seu navegador não suporta reprodução de vídeo."
+
+msgid "Controles de reprodução"
+msgstr "Controles de reprodução"
+
+msgid "Velocidade"
+msgstr "Velocidade"
+
+#, python-format
+msgid "%(duration)s minutos"
+msgstr "%(duration)s minutos"
+
+msgid "Transcrição da aula"
+msgstr "Transcrição da aula"
+
+msgid "Biblioteca de Conteúdo"
+msgstr "Biblioteca de Conteúdo"
+
+msgid "Acompanhamento e educação"
+msgstr "Acompanhamento e educação"
+
+msgid "Filtros da biblioteca"
+msgstr "Filtros da biblioteca"
+
+msgid "Buscar"
+msgstr "Buscar"
+
+msgid "Página anterior"
+msgstr "Página anterior"
+
+msgid "Próxima página"
+msgstr "Próxima página"
+
+msgid "Nenhum conteúdo publicado encontrado."
+msgstr "Nenhum conteúdo publicado encontrado."
+
+msgid "Avisos da plataforma"
+msgstr "Avisos da plataforma"
+
+msgid "Nenhuma notificação."
+msgstr "Nenhuma notificação."
+
+msgid "Minhas Recomendações"
+msgstr "Minhas Recomendações"
+
+msgid "Curadoria clínica"
+msgstr "Curadoria clínica"
+
+#, python-format
+msgid "Recomendado por %(author)s"
+msgstr "Recomendado por %(author)s"
+
+#, python-format
+msgid "Válido até %(date)s"
+msgstr "Válido até %(date)s"
+
+msgid "Nenhuma recomendação ativa no momento."
+msgstr "Nenhuma recomendação ativa no momento."
+
+msgid "Denúncias de conteúdo"
+msgstr "Denúncias de conteúdo"
+
+msgid "Curadoria"
+msgstr "Curadoria"
+
+msgid "Denúncias abertas"
+msgstr "Denúncias abertas"
+
+#, python-format
+msgid "reportado por %(reporter)s"
+msgstr "reportado por %(reporter)s"
+
+msgid "Resolução"
+msgstr "Resolução"
+
+msgid "Resolvido"
+msgstr "Resolvido"
+
+msgid "Descartado"
+msgstr "Descartado"
+
+msgid "Nota"
+msgstr "Nota"
+
+msgid "Resolver denúncia"
+msgstr "Resolver denúncia"
+
+msgid "Nenhuma denúncia aberta."
+msgstr "Nenhuma denúncia aberta."
+
+#, python-format
+msgid "Erro %(code)s"
+msgstr "Erro %(code)s"
+
+msgid "Referência:"
+msgstr "Referência:"
+
+msgid "Voltar ao início"
+msgstr "Voltar ao início"
+
+msgid "Valores líquidos, vencimentos e estados das cobranças da clínica ativa."
+msgstr ""
+"Valores líquidos, vencimentos e estados das cobranças da clínica ativa."
+
+msgid "Cadastrar preço de serviço"
+msgstr "Cadastrar preço de serviço"
+
+msgid "Filtrar cobranças"
+msgstr "Filtrar cobranças"
+
+msgid "Status da cobrança"
+msgstr "Status da cobrança"
+
+msgid "Todos"
+msgstr "Todos"
+
+msgid "Em aberto"
+msgstr "Em aberto"
+
+msgid "Pago"
+msgstr "Pago"
+
+msgid "Vencido"
+msgstr "Vencido"
+
+msgid "Filtrar"
+msgstr "Filtrar"
+
+msgid "Cobranças"
+msgstr "Cobranças"
+
+msgid "Valor líquido e moeda"
+msgstr "Valor líquido e moeda"
+
+msgid "Vencimento"
+msgstr "Vencimento"
+
+msgid "Ações financeiras"
+msgstr "Ações financeiras"
+
+msgid "Registrar pagamento"
+msgstr "Registrar pagamento"
+
+msgid "Motivo do cancelamento"
+msgstr "Motivo do cancelamento"
+
+msgid "Informe o motivo"
+msgstr "Informe o motivo"
+
+msgid "Cancelar cobrança"
+msgstr "Cancelar cobrança"
+
+msgid "Nenhuma cobrança encontrada"
+msgstr "Nenhuma cobrança encontrada"
+
+msgid "Revise o filtro ou aguarde a geração de uma cobrança."
+msgstr "Revise o filtro ou aguarde a geração de uma cobrança."
+
+msgid "Informe o valor monetário, a moeda e a vigência do preço do serviço."
+msgstr "Informe o valor monetário, a moeda e a vigência do preço do serviço."
+
+msgid "Cancelar cadastro"
+msgstr "Cancelar cadastro"
+
+msgid "Voltar"
+msgstr "Voltar"
+
+msgid "Vermelho — Somente você"
+msgstr "Vermelho — Somente você"
+
+msgid "Prazo"
+msgstr "Prazo"
+
+#, python-format
+msgid "Progresso: %(done)s de %(total)s etapas concluídas (%(percent)s%%)"
+msgstr "Progresso: %(done)s de %(total)s etapas concluídas (%(percent)s%%)"
+
+#, python-format
+msgid "Progresso da meta %(title)s"
+msgstr "Progresso da meta %(title)s"
+
+msgid "Reabrir etapa"
+msgstr "Reabrir etapa"
+
+msgid "Concluir etapa"
+msgstr "Concluir etapa"
+
+msgid ""
+"Esta meta ainda não tem etapas. Você pode editar a meta e adicionar pequenas "
+"etapas quando quiser."
+msgstr ""
+"Esta meta ainda não tem etapas. Você pode editar a meta e adicionar pequenas "
+"etapas quando quiser."
+
+msgid "Estado da meta:"
+msgstr "Estado da meta:"
+
+msgid "Ativar"
+msgstr "Ativar"
+
+msgid "Pausar (descansar é ok)"
+msgstr "Pausar (descansar é ok)"
+
+msgid "Voltar ao catálogo"
+msgstr "Voltar ao catálogo"
+
+#, python-format
+msgid "Atribuir: %(title)s"
+msgstr "Atribuir: %(title)s"
+
+msgid "-- Selecione o paciente --"
+msgstr "-- Selecione o paciente --"
+
+msgid "Frequência"
+msgstr "Frequência"
+
+msgid "Ex.: Diária, Semanal, Pontual"
+msgstr "Ex.: Diária, Semanal, Pontual"
+
+msgid "Prazo de conclusão (opcional)"
+msgstr "Prazo de conclusão (opcional)"
+
+msgid "Observações para o paciente (opcional)"
+msgstr "Observações para o paciente (opcional)"
+
+msgid "Orientações específicas para a realização deste exercício..."
+msgstr "Orientações específicas para a realização deste exercício..."
+
+msgid "Cancelar"
+msgstr "Cancelar"
+
+msgid "Confirmar atribuição"
+msgstr "Confirmar atribuição"
+
+msgid "Prática terapêutica"
+msgstr "Prática terapêutica"
+
+msgid "Catálogo de exercícios"
+msgstr "Catálogo de exercícios"
+
+#, python-format
+msgid "Dur: %(minutes)s min"
+msgstr "Dur: %(minutes)s min"
+
+msgid "Formato"
+msgstr "Formato"
+
+msgid "Atribuir a paciente"
+msgstr "Atribuir a paciente"
+
+msgid "Nenhum exercício cadastrado no catálogo."
+msgstr "Nenhum exercício cadastrado no catálogo."
+
+msgid "Voltar aos exercícios"
+msgstr "Voltar aos exercícios"
+
+#, python-format
+msgid "%(approach)s (Aproximadamente %(minutes)s min)"
+msgstr "%(approach)s (Aproximadamente %(minutes)s min)"
+
+msgid "Instruções"
+msgstr "Instruções"
+
+msgid "Nota de acessibilidade"
+msgstr "Nota de acessibilidade"
+
+msgid "Sua reflexão / Resposta"
+msgstr "Sua reflexão / Resposta"
+
+msgid "Escreva aqui suas impressões, respostas ou reflexões..."
+msgstr "Escreva aqui suas impressões, respostas ou reflexões..."
+
+msgid "Semáforo de compartilhamento"
+msgstr "Semáforo de compartilhamento"
+
+msgid ""
+"Você escolhe o que o profissional pode ver. Esta decisão é sua e pode ser "
+"alterada a qualquer momento."
+msgstr ""
+"Você escolhe o que o profissional pode ver. Esta decisão é sua e pode ser "
+"alterada a qualquer momento."
+
+msgid "Concluir e enviar"
+msgstr "Concluir e enviar"
+
+#, python-format
+msgid "Concluído em: %(completed)s"
+msgstr "Concluído em: %(completed)s"
+
+msgid "Pode compartilhar com o profissional."
+msgstr "Pode compartilhar com o profissional."
+
+msgid "Confirme antes de compartilhar com o profissional."
+msgstr "Confirme antes de compartilhar com o profissional."
+
+msgid "Somente você pode ver este registro."
+msgstr "Somente você pode ver este registro."
+
+msgid "Resposta registrada:"
+msgstr "Resposta registrada:"
+
+msgid "Sem resposta em texto."
+msgstr "Sem resposta em texto."
+
+msgid "Comentários do profissional"
+msgstr "Comentários do profissional"
+
+msgid "Nenhum comentário registrado ainda."
+msgstr "Nenhum comentário registrado ainda."
+
+msgid "Adicionar comentário profissional (assíncrono)"
+msgstr "Adicionar comentário profissional (assíncrono)"
+
+msgid "Escreva uma orientação ou comentário de apoio..."
+msgstr "Escreva uma orientação ou comentário de apoio..."
+
+msgid "Enviar comentário"
+msgstr "Enviar comentário"
+
+msgid "Título do exercício"
+msgstr "Título do exercício"
+
+msgid "Ex.: Respiração e ancoragem"
+msgstr "Ex.: Respiração e ancoragem"
+
+msgid "Abordagem"
+msgstr "Abordagem"
+
+msgid "Ex.: TCC, Mindfulness, ACT"
+msgstr "Ex.: TCC, Mindfulness, ACT"
+
+msgid "Duração estimada (minutos)"
+msgstr "Duração estimada (minutos)"
+
+msgid "Instruções detalhadas"
+msgstr "Instruções detalhadas"
+
+msgid "Descreva os passos para o paciente realizar o exercício..."
+msgstr "Descreva os passos para o paciente realizar o exercício..."
+
+msgid "Formato da resposta"
+msgstr "Formato da resposta"
+
+msgid "Status de publicação"
+msgstr "Status de publicação"
+
+msgid "Notas de acessibilidade (opcional)"
+msgstr "Notas de acessibilidade (opcional)"
+
+msgid "Ex.: Leitura simples, pode ser feito sentado"
+msgstr "Ex.: Leitura simples, pode ser feito sentado"
+
+msgid "Salvar exercício"
+msgstr "Salvar exercício"
+
+msgid "Voltar às metas"
+msgstr "Voltar às metas"
+
+msgid "Compartilhável"
+msgstr "Compartilhável"
+
+msgid "Confirmar antes"
+msgstr "Confirmar antes"
+
+msgid "Privado"
+msgstr "Privado"
+
+msgid "Meu acompanhamento"
+msgstr "Meu acompanhamento"
+
+msgid ""
+"Celebre cada pequena etapa. Pausar ou reabrir uma meta nunca é uma falha."
+msgstr ""
+"Celebre cada pequena etapa. Pausar ou reabrir uma meta nunca é uma falha."
+
+msgid "Nova meta"
+msgstr "Nova meta"
+
+msgid "Filtrar metas por estado"
+msgstr "Filtrar metas por estado"
+
+msgid "Todas"
+msgstr "Todas"
+
+msgid "Ativas"
+msgstr "Ativas"
+
+msgid "Pausadas"
+msgstr "Pausadas"
+
+msgid "Concluídas"
+msgstr "Concluídas"
+
+msgid "Arquivadas"
+msgstr "Arquivadas"
+
+msgid "Verde"
+msgstr "Verde"
+
+msgid "Amarelo"
+msgstr "Amarelo"
+
+msgid "Vermelho (Privado)"
+msgstr "Vermelho (Privado)"
+
+msgid "Abrir"
+msgstr "Abrir"
+
+msgid "Nenhuma meta aqui ainda"
+msgstr "Nenhuma meta aqui ainda"
+
+msgid "Não há metas neste estado. Que tal começar com algo pequeno?"
+msgstr "Não há metas neste estado. Que tal começar com algo pequeno?"
+
+msgid ""
+"Metas são mais fáceis quando divididas em pequenas etapas. Comece com algo "
+"simples hoje."
+msgstr ""
+"Metas são mais fáceis quando divididas em pequenas etapas. Comece com algo "
+"simples hoje."
+
+msgid "Criar minha primeira meta"
+msgstr "Criar minha primeira meta"
+
+msgid "Descanse sem culpa"
+msgstr "Descanse sem culpa"
+
+#, python-format
+msgid "Modo ativo até %(ends)s — você está cuidando de si."
+msgstr "Modo ativo até %(ends)s — você está cuidando de si."
+
+msgid ""
+"Notificações não essenciais estão pausadas. Consultas e lembretes essenciais "
+"continuam."
+msgstr ""
+"Notificações não essenciais estão pausadas. Consultas e lembretes essenciais "
+"continuam."
+
+msgid "Uma ação por vez, no seu ritmo:"
+msgstr "Uma ação por vez, no seu ritmo:"
+
+msgid "Encerrar modo baixa energia agora"
+msgstr "Encerrar modo baixa energia agora"
+
+msgid ""
+"Em dias difíceis, o modo baixa energia mostra apenas algumas ações mínimas "
+"que você escolheu antes. Nada de cobrança — pausar é permitido."
+msgstr ""
+"Em dias difíceis, o modo baixa energia mostra apenas algumas ações mínimas "
+"que você escolheu antes. Nada de cobrança — pausar é permitido."
+
+msgid "Suas ações configuradas:"
+msgstr "Suas ações configuradas:"
+
+msgid "Observação (opcional)"
+msgstr "Observação (opcional)"
+
+msgid "Como você está? (opcional)"
+msgstr "Como você está? (opcional)"
+
+msgid "Ativar modo baixa energia"
+msgstr "Ativar modo baixa energia"
+
+msgid "Configure até 3 ações mínimas:"
+msgstr "Configure até 3 ações mínimas:"
+
+msgid "Ação 1"
+msgstr "Ação 1"
+
+msgid "Beber um copo de água"
+msgstr "Beber um copo de água"
+
+msgid "Ação 2"
+msgstr "Ação 2"
+
+msgid "Abrir a janela"
+msgstr "Abrir a janela"
+
+msgid "Ação 3"
+msgstr "Ação 3"
+
+msgid "Realizar uma etapa curta de uma meta"
+msgstr "Realizar uma etapa curta de uma meta"
+
+msgid "Salvar ações"
+msgstr "Salvar ações"
+
+msgid ""
+"Este modo não substitui orientação de crise. Em perigo imediato, acione os "
+"serviços de emergência da sua localidade."
+msgstr ""
+"Este modo não substitui orientação de crise. Em perigo imediato, acione os "
+"serviços de emergência da sua localidade."
+
+msgid "Minha jornada"
+msgstr "Minha jornada"
+
+msgid "Exercícios terapêuticos"
+msgstr "Exercícios terapêuticos"
+
+msgid "Nota do terapeuta"
+msgstr "Nota do terapeuta"
+
+msgid "Confirmar recebimento"
+msgstr "Confirmar recebimento"
+
+msgid "Refazer / Ver"
+msgstr "Refazer / Ver"
+
+msgid "Realizar exercício"
+msgstr "Realizar exercício"
+
+msgid "Você não possui exercícios atribuídos no momento."
+msgstr "Você não possui exercícios atribuídos no momento."
+
+msgid "Acompanhamento pessoal"
+msgstr "Acompanhamento pessoal"
+
+#, python-format
+msgid "1 registro no total"
+msgid_plural "%(counter)s registros no total"
+msgstr[0] "1 registro no total"
+msgstr[1] "%(counter)s registros no total"
+
+msgid "Fazer check-in de hoje"
+msgstr "Fazer check-in de hoje"
+
+msgid "Voltar ao diário"
+msgstr "Voltar ao diário"
+
+msgid "Respostas enviadas por dia"
+msgstr "Respostas enviadas por dia"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Estado geral"
+msgstr "Estado geral"
+
+msgid "Energia"
+msgstr "Energia"
+
+msgid "Sono"
+msgstr "Sono"
+
+msgid "Enviado"
+msgstr "Enviado"
+
+msgid "Paginação do histórico de check-ins"
+msgstr "Paginação do histórico de check-ins"
+
+msgid "Nenhum check-in registrado ainda"
+msgstr "Nenhum check-in registrado ainda"
+
+msgid ""
+"O check-in diário é rápido e ajuda você a acompanhar seu dia a dia. Comece "
+"agora."
+msgstr ""
+"O check-in diário é rápido e ajuda você a acompanhar seu dia a dia. Comece "
+"agora."
+
+msgid "Fazer meu primeiro check-in"
+msgstr "Fazer meu primeiro check-in"
+
+#, python-format
+msgid "%(today)s — leva menos de um minuto"
+msgstr "%(today)s — leva menos de um minuto"
+
+msgid "Ver histórico"
+msgstr "Ver histórico"
+
+msgid ""
+"Você já enviou seu check-in hoje. Você pode revisar e atualizar suas "
+"respostas abaixo enquanto a janela de edição estiver aberta."
+msgstr ""
+"Você já enviou seu check-in hoje. Você pode revisar e atualizar suas "
+"respostas abaixo enquanto a janela de edição estiver aberta."
+
+msgid "Progresso"
+msgstr "Progresso"
+
+#, python-format
+msgid "%(pct)s%% (%(count)s perguntas)"
+msgstr "%(pct)s%% (%(count)s perguntas)"
+
+msgid "Progresso do check-in"
+msgstr "Progresso do check-in"
+
+msgid "Revise as respostas indicadas"
+msgstr "Revise as respostas indicadas"
+
+msgid "Não foi possível enviar. Corrija os problemas abaixo."
+msgstr "Não foi possível enviar. Corrija os problemas abaixo."
+
+msgid "Atualizar respostas"
+msgstr "Atualizar respostas"
+
+msgid "Confirmar e enviar"
+msgstr "Confirmar e enviar"
+
+msgid "Salvar e continuar depois"
+msgstr "Salvar e continuar depois"
+
+msgid ""
+"Este aplicativo não atende emergências. Se você estiver em risco, procure "
+"imediatamente os serviços de emergência da sua localidade."
+msgstr ""
+"Este aplicativo não atende emergências. Se você estiver em risco, procure "
+"imediatamente os serviços de emergência da sua localidade."
+
+msgid "Check-in indisponível"
+msgstr "Check-in indisponível"
+
+msgid "No momento não há nenhum questionário de check-in ativo nesta clínica."
+msgstr "No momento não há nenhum questionário de check-in ativo nesta clínica."
+
+msgid "Fale com sua equipe de atendimento se precisar de ajuda."
+msgstr "Fale com sua equipe de atendimento se precisar de ajuda."
+
+msgid "Detalhes do Registro"
+msgstr "Detalhes do Registro"
+
+#, python-format
+msgid "Registro de %(date)s"
+msgstr "Registro de %(date)s"
+
+msgid "Intensidade"
+msgstr "Intensidade"
+
+msgid "Amarelo — Requer confirmação"
+msgstr "Amarelo — Requer confirmação"
+
+msgid "Vermelho — Somente você (Privado)"
+msgstr "Vermelho — Somente você (Privado)"
+
+msgid "Relato do Diário"
+msgstr "Relato do Diário"
+
+msgid "Emoções Identificadas"
+msgstr "Emoções Identificadas"
+
+msgid "Alterar visibilidade deste registro:"
+msgstr "Alterar visibilidade deste registro:"
+
+msgid "Verde (Compartilhável)"
+msgstr "Verde (Compartilhável)"
+
+msgid "Amarelo (Perguntar antes)"
+msgstr "Amarelo (Perguntar antes)"
+
+msgid "Revogar todo o compartilhamento deste registro"
+msgstr "Revogar todo o compartilhamento deste registro"
+
+msgid "Histórico de solicitações de acesso deste registro:"
+msgstr "Histórico de solicitações de acesso deste registro:"
+
+msgid "Finalidade"
+msgstr "Finalidade"
+
+msgid "Solicitado em"
+msgstr "Solicitado em"
+
+msgid "Expira em"
+msgstr "Expira em"
+
+msgid "Revogado em"
+msgstr "Revogado em"
+
+msgid "Voltar para o diário"
+msgstr "Voltar para o diário"
+
+msgid "Há alterações não salvas no registro."
+msgstr "Há alterações não salvas no registro."
+
+msgid "Não foi possível salvar seu registro. Corrija os problemas abaixo."
+msgstr "Não foi possível salvar seu registro. Corrija os problemas abaixo."
+
+msgid "Você tem controle total sobre o compartilhamento de cada registro:"
+msgstr "Você tem controle total sobre o compartilhamento de cada registro:"
+
+msgid "Verde — Compartilhável: o terapeuta vinculado poderá ver este registro."
+msgstr ""
+"Verde — Compartilhável: o terapeuta vinculado poderá ver este registro."
+
+msgid ""
+"Amarelo — Confirmação necessária: o terapeuta sabe que existe um registro, "
+"mas só terá acesso se você autorizar explicitamente."
+msgstr ""
+"Amarelo — Confirmação necessária: o terapeuta sabe que existe um registro, "
+"mas só terá acesso se você autorizar explicitamente."
+
+msgid ""
+"Vermelho — Privado: somente você tem acesso. O terapeuta não vê e não é "
+"notificado."
+msgstr ""
+"Vermelho — Privado: somente você tem acesso. O terapeuta não vê e não é "
+"notificado."
+
+msgid "Novo registro"
+msgstr "Novo registro"
+
+#, python-format
+msgid "Solicitações de Acesso Pendentes (%(count)s)"
+msgstr "Solicitações de Acesso Pendentes (%(count)s)"
+
+msgid ""
+"Seu terapeuta solicitou permissão para visualizar os registros abaixo. Você "
+"decide se autoriza ou recusa cada solicitação."
+msgstr ""
+"Seu terapeuta solicitou permissão para visualizar os registros abaixo. Você "
+"decide se autoriza ou recusa cada solicitação."
+
+msgid "Finalidade declarada"
+msgstr "Finalidade declarada"
+
+#, python-format
+msgid "Registro de %(date)s (%(mood)s)"
+msgstr "Registro de %(date)s (%(mood)s)"
+
+msgid "Validade da autorização"
+msgstr "Validade da autorização"
+
+msgid "Válido por 7 dias"
+msgstr "Válido por 7 dias"
+
+msgid "Válido por 30 dias"
+msgstr "Válido por 30 dias"
+
+msgid "Válido por 90 dias"
+msgstr "Válido por 90 dias"
+
+msgid "Sem data de expiração"
+msgstr "Sem data de expiração"
+
+msgid "Autorizar"
+msgstr "Autorizar"
+
+msgid "Recusar"
+msgstr "Recusar"
+
+msgid "Histórico de Registros"
+msgstr "Histórico de Registros"
+
+#, python-format
+msgid "(1 encontrado)"
+msgid_plural "(%(counter)s encontrados)"
+msgstr[0] "(1 encontrado)"
+msgstr[1] "(%(counter)s encontrados)"
+
+msgid "Filtrar histórico do diário"
+msgstr "Filtrar histórico do diário"
+
+msgid "Limpar filtros"
+msgstr "Limpar filtros"
+
+msgid "Visível para o terapeuta vinculado"
+msgstr "Visível para o terapeuta vinculado"
+
+msgid "Requer sua confirmação antes de liberar ao terapeuta"
+msgstr "Requer sua confirmação antes de liberar ao terapeuta"
+
+msgid "Privado: somente você tem acesso"
+msgstr "Privado: somente você tem acesso"
+
+msgid "Ver detalhes"
+msgstr "Ver detalhes"
+
+msgid "Emoções identificadas"
+msgstr "Emoções identificadas"
+
+msgid "Paginação do diário"
+msgstr "Paginação do diário"
+
+msgid "Nenhum registro encontrado"
+msgstr "Nenhum registro encontrado"
+
+msgid "Não há registros correspondentes aos filtros selecionados."
+msgstr "Não há registros correspondentes aos filtros selecionados."
+
+msgid ""
+"Você ainda não criou registros no seu diário emocional. Comece registrando "
+"como você se sente hoje."
+msgstr ""
+"Você ainda não criou registros no seu diário emocional. Comece registrando "
+"como você se sente hoje."
+
+msgid "Criar primeiro registro"
+msgstr "Criar primeiro registro"
+
+#, python-format
+msgid "Calendário Emocional — %(month_name)s"
+msgstr "Calendário Emocional — %(month_name)s"
+
+msgid "Navegação do calendário por mês"
+msgstr "Navegação do calendário por mês"
+
+msgid "Mês anterior"
+msgstr "Mês anterior"
+
+msgid "Próximo mês"
+msgstr "Próximo mês"
+
+msgid "Próximo"
+msgstr "Próximo"
+
+#, python-format
+msgid "Dias de %(month)s"
+msgstr "Dias de %(month)s"
+
+msgid "Dom"
+msgstr "Dom"
+
+msgid "Seg"
+msgstr "Seg"
+
+msgid "Ter"
+msgstr "Ter"
+
+msgid "Qua"
+msgstr "Qua"
+
+msgid "Qui"
+msgstr "Qui"
+
+msgid "Sex"
+msgstr "Sex"
+
+msgid "Sáb"
+msgstr "Sáb"
+
+msgid "Legenda de cores do humor"
+msgstr "Legenda de cores do humor"
+
+msgid "Legenda"
+msgstr "Legenda"
+
+msgid "Sem registro"
+msgstr "Sem registro"
+
+msgid "Ver resumo textual do mês (tabela acessível)"
+msgstr "Ver resumo textual do mês (tabela acessível)"
+
+#, python-format
+msgid "Registros de humor de %(month)s"
+msgstr "Registros de humor de %(month)s"
+
+#, python-format
+msgid "Histórico diário em %(month)s"
+msgstr "Histórico diário em %(month)s"
+
+msgid "Humor predominante"
+msgstr "Humor predominante"
+
+msgid "Total de registros"
+msgstr "Total de registros"
+
+msgid "Navegação principal"
+msgstr "Navegação principal"
+
+msgid "Início da plataforma"
+msgstr "Início da plataforma"
+
+msgid "Fechar menu"
+msgstr "Fechar menu"
+
+msgid "Navegação destacada"
+msgstr "Navegação destacada"
+
+msgid "Caminho de navegação"
+msgstr "Caminho de navegação"
+
+msgid "Início"
+msgstr "Início"
+
+msgid "Abrir menu"
+msgstr "Abrir menu"
+
+msgid "Recolher navegação"
+msgstr "Recolher navegação"
+
+msgid "Expandir navegação"
+msgstr "Expandir navegação"
+
+msgid "Clínica ativa"
+msgstr "Clínica ativa"
+
+msgid "Central de avisos"
+msgstr "Central de avisos"
+
+#, python-format
+msgid "%(count)s revogação operacional pendente"
+msgid_plural "%(count)s revogações operacionais pendentes"
+msgstr[0] "%(count)s revogação operacional pendente"
+msgstr[1] "%(count)s revogações operacionais pendentes"
+
+msgid "Nenhuma notificação pendente."
+msgstr "Nenhuma notificação pendente."
+
+msgid "Trocar clínica"
+msgstr "Trocar clínica"
+
+msgid "Alternar clínica"
+msgstr "Alternar clínica"
+
+msgid "Selecionar clínica"
+msgstr "Selecionar clínica"
+
+msgid "Revisar troca"
+msgstr "Revisar troca"
+
+msgid "Menu da conta"
+msgstr "Menu da conta"
+
+msgid "Administrador"
+msgstr "Administrador"
+
+msgid "Usuário"
+msgstr "Usuário"
+
+msgid "Modo de navegação"
+msgstr "Modo de navegação"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Destacado"
+msgstr "Destacado"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Sair da conta"
+msgstr "Sair da conta"
+
+msgid "Mensagens do sistema"
+msgstr "Mensagens do sistema"
+
+msgid "Geral"
+msgstr "Geral"
+
+msgid "Navegação vertical"
+msgstr "Navegação vertical"
+
+msgid "Gestão da clínica"
+msgstr "Gestão da clínica"
+
+msgid "Administração"
+msgstr "Administração"
+
+msgid "Profissionais"
+msgstr "Profissionais"
+
+msgid "Cuidado e prática"
+msgstr "Cuidado e prática"
+
+msgid "Rotina terapêutica"
+msgstr "Rotina terapêutica"
+
+msgid "Diário emocional"
+msgstr "Diário emocional"
+
+msgid "Minhas metas"
+msgstr "Minhas metas"
+
+msgid "Exercícios"
+msgstr "Exercícios"
+
+msgid "Modo de baixa energia"
+msgstr "Modo de baixa energia"
+
+msgid "Comunicação e agenda"
+msgstr "Comunicação e agenda"
+
+msgid "Atendimento"
+msgstr "Atendimento"
+
+msgid "Agenda de consultas"
+msgstr "Agenda de consultas"
+
+msgid "Painéis de evolução"
+msgstr "Painéis de evolução"
+
+msgid "Onboarding da clínica"
+msgstr "Onboarding da clínica"
+
+msgid "Preparação operacional"
+msgstr "Preparação operacional"
+
+msgid "Pendências factuais para liberar a operação inicial."
+msgstr "Pendências factuais para liberar a operação inicial."
+
+msgid "Checklist de preparação"
+msgstr "Checklist de preparação"
+
+msgid "concluído"
+msgstr "concluído"
+
+msgid "pendente"
+msgstr "pendente"
+
+msgid "Primeiros passos"
+msgstr "Primeiros passos"
+
+msgid "Boas-vindas"
+msgstr "Boas-vindas"
+
+msgid "Sua jornada"
+msgstr "Sua jornada"
+
+msgid "Registre objetivos e preferências. Tudo pode ser revisado depois."
+msgstr "Registre objetivos e preferências. Tudo pode ser revisado depois."
+
+msgid "Etapas do onboarding"
+msgstr "Etapas do onboarding"
+
+msgid ""
+"Declare, se quiser, o que espera trabalhar. Não há nota, risco ou "
+"diagnóstico."
+msgstr ""
+"Declare, se quiser, o que espera trabalhar. Não há nota, risco ou "
+"diagnóstico."
+
+msgid "Continuar"
+msgstr "Continuar"
+
+msgid "Preferências de contato e lembretes"
+msgstr "Preferências de contato e lembretes"
+
+msgid "Termos e limites"
+msgstr "Termos e limites"
+
+msgid ""
+"Esta plataforma não substitui atendimento profissional nem serviço de "
+"emergência. Em perigo imediato, acione o serviço de emergência da sua "
+"localidade."
+msgstr ""
+"Esta plataforma não substitui atendimento profissional nem serviço de "
+"emergência. Em perigo imediato, acione o serviço de emergência da sua "
+"localidade."
+
+msgid "Nenhum termo publicado ainda."
+msgstr "Nenhum termo publicado ainda."
+
+msgid "Li e entendi os limites"
+msgstr "Li e entendi os limites"
+
+msgid "Onboarding concluído"
+msgstr "Onboarding concluído"
+
+msgid ""
+"Seus objetivos e preferências foram registrados. Você pode revisá-los a "
+"qualquer momento."
+msgstr ""
+"Seus objetivos e preferências foram registrados. Você pode revisá-los a "
+"qualquer momento."
+
+msgid "Ir para a área inicial"
+msgstr "Ir para a área inicial"
+
+msgid "Cadastro mínimo"
+msgstr "Cadastro mínimo"
+
+msgid "Dados cadastrais autorizados da clínica ativa."
+msgstr "Dados cadastrais autorizados da clínica ativa."
+
+msgid "Voltar à lista de pacientes"
+msgstr "Voltar à lista de pacientes"
+
+msgid "Identificação"
+msgstr "Identificação"
+
+msgid "Gênero"
+msgstr "Gênero"
+
+msgid "Acessibilidade"
+msgstr "Acessibilidade"
+
+msgid "Contato de emergência"
+msgstr "Contato de emergência"
+
+msgctxt "person full name"
+msgid "Nome"
+msgstr "Nome"
+
+msgid "Cadastrar paciente"
+msgstr "Cadastrar paciente"
+
+msgid ""
+"Informe somente os dados necessários. Gênero é opcional e preferências podem "
+"ser revisadas."
+msgstr ""
+"Informe somente os dados necessários. Gênero é opcional e preferências podem "
+"ser revisadas."
+
+msgid "Salvar cadastro"
+msgstr "Salvar cadastro"
+
+msgid "Cadastros autorizados"
+msgstr "Cadastros autorizados"
+
+msgid "Pessoas cadastradas"
+msgstr "Pessoas cadastradas"
+
+msgid "Lista de pacientes"
+msgstr "Lista de pacientes"
+
+msgid "Contato"
+msgstr "Contato"
+
+msgid "Acesso"
+msgstr "Acesso"
+
+msgid "Nome social:"
+msgstr "Nome social:"
+
+msgid "Conta vinculada"
+msgstr "Conta vinculada"
+
+msgid "Nenhum paciente cadastrado"
+msgstr "Nenhum paciente cadastrado"
+
+msgid "Use a ação principal para iniciar um cadastro mínimo."
+msgstr "Use a ação principal para iniciar um cadastro mínimo."
+
+msgid "Equipe da clínica ativa"
+msgstr "Equipe da clínica ativa"
+
+msgid ""
+"Perfis, vínculos e credenciais informadas, sem confirmação automática pela "
+"plataforma."
+msgstr ""
+"Perfis, vínculos e credenciais informadas, sem confirmação automática pela "
+"plataforma."
+
+msgid "Convidar profissional"
+msgstr "Convidar profissional"
+
+msgid "Filtros de profissionais"
+msgstr "Filtros de profissionais"
+
+msgid "Papel"
+msgstr "Papel"
+
+msgid "Especialidade técnica"
+msgstr "Especialidade técnica"
+
+msgid "Aplicar filtros"
+msgstr "Aplicar filtros"
+
+msgid "Resultado"
+msgstr "Resultado"
+
+msgid "Lista de profissionais"
+msgstr "Lista de profissionais"
+
+msgid "Especialidades"
+msgstr "Especialidades"
+
+msgid "Não informada"
+msgstr "Não informada"
+
+msgid "Não informadas"
+msgstr "Não informadas"
+
+msgid "Reativar"
+msgstr "Reativar"
+
+msgid "Suspender"
+msgstr "Suspender"
+
+msgid "Nenhum profissional encontrado"
+msgstr "Nenhum profissional encontrado"
+
+msgid "Revise os filtros ou convide o primeiro profissional."
+msgstr "Revise os filtros ou convide o primeiro profissional."
+
+msgid "Coordenação de consultas"
+msgstr "Coordenação de consultas"
+
+#, python-format
+msgid "Semana de %(start)s. A lista textual abaixo é equivalente à grade."
+msgstr "Semana de %(start)s. A lista textual abaixo é equivalente à grade."
+
+msgid "Navegação da agenda semanal"
+msgstr "Navegação da agenda semanal"
+
+msgid "Semana anterior"
+msgstr "Semana anterior"
+
+msgid "Ver como lista"
+msgstr "Ver como lista"
+
+msgid "Próxima semana"
+msgstr "Próxima semana"
+
+msgid "Grade da agenda semanal"
+msgstr "Grade da agenda semanal"
+
+msgid "Consultas por dia da semana"
+msgstr "Consultas por dia da semana"
+
+msgid "Sem consultas"
+msgstr "Sem consultas"
+
+msgid "Lista textual equivalente"
+msgstr "Lista textual equivalente"
+
+msgid "Solicitada"
+msgstr "Solicitada"
+
+msgid "Confirmada"
+msgstr "Confirmada"
+
+msgid "Remarcação solicitada"
+msgstr "Remarcação solicitada"
+
+msgid "Cancelada"
+msgstr "Cancelada"
+
+msgid "Realizada"
+msgstr "Realizada"
+
+msgid "Falta"
+msgstr "Falta"
+
+msgid "Confirmar consulta"
+msgstr "Confirmar consulta"
+
+msgid "Nenhuma consulta nesta semana."
+msgstr "Nenhuma consulta nesta semana."
+
+msgid "Visão semanal"
+msgstr "Visão semanal"
+
+msgid "Filtrar consultas por estado"
+msgstr "Filtrar consultas por estado"
+
+msgid "Solicitadas"
+msgstr "Solicitadas"
+
+msgid "Confirmadas"
+msgstr "Confirmadas"
+
+msgid "Realizadas"
+msgstr "Realizadas"
+
+#, python-format
+msgid "Ações da consulta %(service)s"
+msgstr "Ações da consulta %(service)s"
+
+msgid "Registrar falta"
+msgstr "Registrar falta"
+
+msgid "Cancelar consulta"
+msgstr "Cancelar consulta"
+
+msgid "Nenhuma consulta aqui ainda"
+msgstr "Nenhuma consulta aqui ainda"
+
+msgid "Solicite uma consulta para começar a organizar seu acompanhamento."
+msgstr "Solicite uma consulta para começar a organizar seu acompanhamento."
+
+msgid "Voltar à agenda"
+msgstr "Voltar à agenda"
+
+msgid "Cancelar solicitação"
+msgstr "Cancelar solicitação"
+
+msgid "Informe o novo horário para continuar a remarcação."
+msgstr "Informe o novo horário para continuar a remarcação."
+
+msgid "Cancelar remarcação"
+msgstr "Cancelar remarcação"
+
+msgid "Voltar às conversas"
+msgstr "Voltar às conversas"
+
+msgid "Cancelar nova conversa"
+msgstr "Cancelar nova conversa"
+
+msgid "Histórico da conversa"
+msgstr "Histórico da conversa"
+
+msgid "Baixar anexo"
+msgstr "Baixar anexo"
+
+msgid "aguardando aprovação de segurança"
+msgstr "aguardando aprovação de segurança"
+
+msgid "Envie a primeira mensagem."
+msgstr "Envie a primeira mensagem."
+
+msgid "Paginação do histórico"
+msgstr "Paginação do histórico"
+
+msgid "Mais antigas"
+msgstr "Mais antigas"
+
+msgid "Mais recentes"
+msgstr "Mais recentes"
+
+msgid "Conversas"
+msgstr "Conversas"
+
+msgid "Conversa sem assunto"
+msgstr "Conversa sem assunto"
+
+msgid "Administrativa"
+msgstr "Administrativa"
+
+msgid "Nenhuma conversa ainda"
+msgstr "Nenhuma conversa ainda"
+
+msgid "Inicie uma conversa quando precisar falar com sua equipe de cuidado."
+msgstr "Inicie uma conversa quando precisar falar com sua equipe de cuidado."
+
+msgid "Escolha quando e como quer ser lembrado, sem excesso."
+msgstr "Escolha quando e como quer ser lembrado, sem excesso."
+
+msgid "Lembretes configurados"
+msgstr "Lembretes configurados"
+
+#, python-format
+msgid "%(minutes)s min antes · máx. %(max_daily)s por dia"
+msgstr "%(minutes)s min antes · máx. %(max_daily)s por dia"
+
+#, python-format
+msgid " · silêncio %(start)s–%(end)s"
+msgstr " · silêncio %(start)s–%(end)s"
+
+msgid "Desativado"
+msgstr "Desativado"
+
+msgid "Nenhuma preferência configurada ainda."
+msgstr "Nenhuma preferência configurada ainda."
+
+msgid "Configurar lembrete"
+msgstr "Configurar lembrete"
+
+msgid "Estrutura da agenda"
+msgstr "Estrutura da agenda"
+
+msgid "Cadastre a sala dentro de uma unidade da clínica ativa."
+msgstr "Cadastre a sala dentro de uma unidade da clínica ativa."
+
+msgid "Defina a identificação e o fuso horário da unidade."
+msgstr "Defina a identificação e o fuso horário da unidade."
+
+msgid "Cancelar alterações"
+msgstr "Cancelar alterações"
+
+msgid "Gerencie locais de atendimento da clínica ativa."
+msgstr "Gerencie locais de atendimento da clínica ativa."
+
+msgid "Unidades e salas cadastradas"
+msgstr "Unidades e salas cadastradas"
+
+msgid "Salas"
+msgstr "Salas"
+
+msgid "Inativa"
+msgstr "Inativa"
+
+msgid "inativa"
+msgstr "inativa"
+
+msgid "Inativar unidade"
+msgstr "Inativar unidade"
+
+msgid "Nenhuma unidade cadastrada"
+msgstr "Nenhuma unidade cadastrada"
+
+msgid "Cadastre uma unidade para organizar salas e atendimentos."
+msgstr "Cadastre uma unidade para organizar salas e atendimentos."
+
+msgid "Cadastrar unidade"
+msgstr "Cadastrar unidade"
+
+msgid ""
+"Registre a preferência para que a equipe possa oferecer uma vaga compatível."
+msgstr ""
+"Registre a preferência para que a equipe possa oferecer uma vaga compatível."
+
+msgid "Cancelar inclusão"
+msgstr "Cancelar inclusão"
+
+msgid "Acompanhe pedidos por unidade, serviço e período."
+msgstr "Acompanhe pedidos por unidade, serviço e período."
+
+msgid "Adicionar à lista"
+msgstr "Adicionar à lista"
+
+msgid "Filtrar lista de espera"
+msgstr "Filtrar lista de espera"
+
+msgid "Aguardando"
+msgstr "Aguardando"
+
+msgid "Vaga oferecida"
+msgstr "Vaga oferecida"
+
+msgid "Encaixado"
+msgstr "Encaixado"
+
+msgid "Entradas na lista de espera"
+msgstr "Entradas na lista de espera"
+
+msgid "Cancelar entrada"
+msgstr "Cancelar entrada"
+
+msgid "Nenhuma entrada na lista de espera"
+msgstr "Nenhuma entrada na lista de espera"
+
+msgid "Revise o filtro ou adicione uma nova solicitação."
+msgstr "Revise o filtro ou adicione uma nova solicitação."
+
+msgid "Painel do terapeuta"
+msgstr "Painel do terapeuta"
+
+msgid "Painel do Terapeuta"
+msgstr "Painel do Terapeuta"
+
+msgid "Pacientes vinculados"
+msgstr "Pacientes vinculados"
+
+msgid "Revisar pendências"
+msgstr "Revisar pendências"
+
+msgid "Indicadores factuais"
+msgstr "Indicadores factuais"
+
+msgid "Vigentes"
+msgstr "Vigentes"
+
+msgid "Pacientes ativos vinculados"
+msgstr "Pacientes ativos vinculados"
+
+msgid "Vínculos terapêuticos vigentes."
+msgstr "Vínculos terapêuticos vigentes."
+
+msgid "30 dias"
+msgstr "30 dias"
+
+msgid "Novos vínculos"
+msgstr "Novos vínculos"
+
+msgid "Criados nos últimos 30 dias."
+msgstr "Criados nos últimos 30 dias."
+
+msgid "Cadastros incompletos"
+msgstr "Cadastros incompletos"
+
+msgid "Sem telefone registrado."
+msgstr "Sem telefone registrado."
+
+msgid "Ação requerida"
+msgstr "Ação requerida"
+
+msgid "Consentimentos pendentes"
+msgstr "Consentimentos pendentes"
+
+msgid "Pacientes vinculados sem aceite registrado."
+msgstr "Pacientes vinculados sem aceite registrado."
+
+msgid "Cadastros por período"
+msgstr "Cadastros por período"
+
+msgid ""
+"Registros de pacientes vinculados, por mês. A tabela abaixo é o equivalente "
+"acessível do gráfico."
+msgstr ""
+"Registros de pacientes vinculados, por mês. A tabela abaixo é o equivalente "
+"acessível do gráfico."
+
+msgid "Gráfico de cadastros por mês"
+msgstr "Gráfico de cadastros por mês"
+
+msgid "Cadastros"
+msgstr "Cadastros"
+
+msgid "Sem cadastros no período."
+msgstr "Sem cadastros no período."
+
+msgid "Cadastros por mês"
+msgstr "Cadastros por mês"
+
+msgid "Mês"
+msgstr "Mês"
+
+msgid "Buscar paciente..."
+msgstr "Buscar paciente..."
+
+msgid "Última atividade"
+msgstr "Última atividade"
+
+msgid "Telefone não informado"
+msgstr "Telefone não informado"
+
+msgid "Abrir ficha"
+msgstr "Abrir ficha"
+
+msgid "Nenhum paciente vinculado"
+msgstr "Nenhum paciente vinculado"
+
+msgid "Cadastre um paciente ou aguarde novos vínculos."
+msgstr "Cadastre um paciente ou aguarde novos vínculos."
+
+msgid "Referência do sistema visual — Catálogo Duralux"
+msgstr "Referência do sistema visual — Catálogo Duralux"
+
+msgid "Referência interna de interface"
+msgstr "Referência interna de interface"
+
+msgid "Seções do catálogo"
+msgstr "Seções do catálogo"
+
+msgid "Formulários"
+msgstr "Formulários"
+
+msgid "Conteúdo"
+msgstr "Conteúdo"
+
+msgid "Sobreposições"
+msgstr "Sobreposições"
+
+msgid "Fundação Duralux"
+msgstr "Fundação Duralux"
+
+msgid "Referência do sistema visual"
+msgstr "Referência do sistema visual"
+
+msgid ""
+"Exemplos baseados em Bootstrap e nas integrações do produto, com estrutura "
+"semântica, rótulos visíveis e estados que não dependem apenas de cor."
+msgstr ""
+"Exemplos baseados em Bootstrap e nas integrações do produto, com estrutura "
+"semântica, rótulos visíveis e estados que não dependem apenas de cor."
+
+msgid "Botões e ações"
+msgstr "Botões e ações"
+
+msgid "Use o texto da ação para comunicar seu resultado."
+msgstr "Use o texto da ação para comunicar seu resultado."
+
+msgid "Ação principal"
+msgstr "Ação principal"
+
+msgid "Ação secundária"
+msgstr "Ação secundária"
+
+msgid "Ação alternativa"
+msgstr "Ação alternativa"
+
+msgid "Excluir"
+msgstr "Excluir"
+
+msgid "Ação indisponível"
+msgstr "Ação indisponível"
+
+msgid "Formulário acessível"
+msgstr "Formulário acessível"
+
+msgid ""
+"Cada campo possui um rótulo associado; a validação do servidor é a fonte de "
+"verdade."
+msgstr ""
+"Cada campo possui um rótulo associado; a validação do servidor é a fonte de "
+"verdade."
+
+msgid "Exemplo validado pelo servidor. Nenhum dado foi armazenado."
+msgstr "Exemplo validado pelo servidor. Nenhum dado foi armazenado."
+
+msgid "Salvar exemplo"
+msgstr "Salvar exemplo"
+
+msgid "Cards, alertas e badges"
+msgstr "Cards, alertas e badges"
+
+msgid "Componentes de conteúdo combinam hierarquia, texto e contexto."
+msgstr "Componentes de conteúdo combinam hierarquia, texto e contexto."
+
+msgid "Informativo"
+msgstr "Informativo"
+
+msgid "Card básico"
+msgstr "Card básico"
+
+msgid "Agrupa informações relacionadas e uma ação contextual."
+msgstr "Agrupa informações relacionadas e uma ação contextual."
+
+msgid "Ver inventário"
+msgstr "Ver inventário"
+
+msgid "Card com rodapé"
+msgstr "Card com rodapé"
+
+msgid "O rodapé pode separar metadados do conteúdo principal."
+msgstr "O rodapé pode separar metadados do conteúdo principal."
+
+msgid "Atualizado pelo próprio sistema"
+msgstr "Atualizado pelo próprio sistema"
+
+msgid "Exemplos de alertas"
+msgstr "Exemplos de alertas"
+
+msgid "<strong>Sucesso:</strong> operação concluída."
+msgstr "<strong>Sucesso:</strong> operação concluída."
+
+msgid "<strong>Atenção:</strong> revise os campos antes de continuar."
+msgstr "<strong>Atenção:</strong> revise os campos antes de continuar."
+
+msgid "<strong>Erro:</strong> não foi possível concluir a operação."
+msgstr "<strong>Erro:</strong> não foi possível concluir a operação."
+
+msgid "<strong>Informação:</strong> há orientações adicionais disponíveis."
+msgstr "<strong>Informação:</strong> há orientações adicionais disponíveis."
+
+msgid "Tabela responsiva"
+msgstr "Tabela responsiva"
+
+msgid "Disponibilidade dos componentes apresentados neste catálogo"
+msgstr "Disponibilidade dos componentes apresentados neste catálogo"
+
+msgid "Componente"
+msgstr "Componente"
+
+msgid "Fundação"
+msgstr "Fundação"
+
+msgid "Estado"
+msgstr "Estado"
+
+msgid "Botões"
+msgstr "Botões"
+
+msgid "Suportado"
+msgstr "Suportado"
+
+msgid "Estados de conteúdo"
+msgstr "Estados de conteúdo"
+
+msgid "Integração do produto"
+msgstr "Integração do produto"
+
+msgid "Paginação do catálogo"
+msgstr "Paginação do catálogo"
+
+msgid "O nome do estado e a orientação permanecem disponíveis em texto."
+msgstr "O nome do estado e a orientação permanecem disponíveis em texto."
+
+msgid "Nenhum item encontrado"
+msgstr "Nenhum item encontrado"
+
+msgid "Altere os filtros ou crie o primeiro item."
+msgstr "Altere os filtros ou crie o primeiro item."
+
+msgid "Criar item"
+msgstr "Criar item"
+
+msgid "Falha ao carregar"
+msgstr "Falha ao carregar"
+
+msgid "Verifique sua conexão e tente novamente."
+msgstr "Verifique sua conexão e tente novamente."
+
+msgid "Tentar novamente"
+msgstr "Tentar novamente"
+
+msgid "Carregando"
+msgstr "Carregando"
+
+msgid "Aguarde enquanto as informações são preparadas."
+msgstr "Aguarde enquanto as informações são preparadas."
+
+msgid "Cards de resumo"
+msgstr "Cards de resumo"
+
+msgid ""
+"Indicadores factuais combinam texto, valor e contexto sem conclusão clínica."
+msgstr ""
+"Indicadores factuais combinam texto, valor e contexto sem conclusão clínica."
+
+msgid "Tabela responsiva e paginação"
+msgstr "Tabela responsiva e paginação"
+
+msgid ""
+"A mesma informação permanece disponível em tabela no desktop e em cards no "
+"celular."
+msgstr ""
+"A mesma informação permanece disponível em tabela no desktop e em cards no "
+"celular."
+
+msgid "Estados gerados pelo produto"
+msgstr "Estados gerados pelo produto"
+
+msgid ""
+"Cada estado combina texto, contexto e semântica; não depende apenas da cor."
+msgstr ""
+"Cada estado combina texto, contexto e semântica; não depende apenas da cor."
+
+msgid "Formatação e privacidade"
+msgstr "Formatação e privacidade"
+
+msgid "A densidade nunca reduz os alvos de interação nem oculta o contexto."
+msgstr "A densidade nunca reduz os alvos de interação nem oculta o contexto."
+
+msgid ""
+"<strong>Fuso horário efetivo:</strong> datas exibem o contexto temporal "
+"aplicável."
+msgstr ""
+"<strong>Fuso horário efetivo:</strong> datas exibem o contexto temporal "
+"aplicável."
+
+msgid ""
+"<strong>Identificadores pessoais:</strong> valores chegam mascarados pelo "
+"backend."
+msgstr ""
+"<strong>Identificadores pessoais:</strong> valores chegam mascarados pelo "
+"backend."
+
+msgid ""
+"<strong>Truncamento:</strong> o valor integral permanece disponível no "
+"detalhe autorizado."
+msgstr ""
+"<strong>Truncamento:</strong> o valor integral permanece disponível no "
+"detalhe autorizado."
+
+msgid ""
+"<strong>Ausência de dados:</strong> zero, dado ausente e indisponibilidade "
+"são estados diferentes."
+msgstr ""
+"<strong>Ausência de dados:</strong> zero, dado ausente e indisponibilidade "
+"são estados diferentes."
+
+msgid "Gráfico de registros operacionais"
+msgstr "Gráfico de registros operacionais"
+
+msgid ""
+"Registros por semana: 4 na Semana 1, 7 na Semana 2 e 5 na Semana 3. Apenas "
+"registros agregados autorizados; não representa diagnóstico ou causalidade."
+msgstr ""
+"Registros por semana: 4 na Semana 1, 7 na Semana 2 e 5 na Semana 3. Apenas "
+"registros agregados autorizados; não representa diagnóstico ou causalidade."
+
+msgid "Registros operacionais por semana"
+msgstr "Registros operacionais por semana"
+
+msgid "Registros"
+msgstr "Registros"
+
+msgid "Quantidade de registros"
+msgstr "Quantidade de registros"
+
+msgid "Semana 1"
+msgstr "Semana 1"
+
+msgid "Semana 2"
+msgstr "Semana 2"
+
+msgid "Semana 3"
+msgstr "Semana 3"
+
+msgid "Registros por semana"
+msgstr "Registros por semana"
+
+msgid "Modal e painel lateral"
+msgstr "Modal e painel lateral"
+
+msgid "Os controles usam o comportamento acessível fornecido pelo Bootstrap."
+msgstr "Os controles usam o comportamento acessível fornecido pelo Bootstrap."
+
+msgid "Abrir modal"
+msgstr "Abrir modal"
+
+msgid "Abrir painel lateral"
+msgstr "Abrir painel lateral"
+
+msgid ""
+"Catálogo interno dos componentes disponíveis na fundação visual do produto."
+msgstr ""
+"Catálogo interno dos componentes disponíveis na fundação visual do produto."
+
+msgid "Confirmar ação"
+msgstr "Confirmar ação"
+
+msgid "Fechar"
+msgstr "Fechar"
+
+msgid "Revise as informações antes de confirmar."
+msgstr "Revise as informações antes de confirmar."
+
+msgid "Confirmar"
+msgstr "Confirmar"
+
+msgid "Detalhes do componente"
+msgstr "Detalhes do componente"
+
+msgid ""
+"O painel lateral mantém o contexto da página enquanto apresenta informações "
+"complementares."
+msgstr ""
+"O painel lateral mantém o contexto da página enquanto apresenta informações "
+"complementares."
+
+msgid "Concluir"
+msgstr "Concluir"
+
+msgid "SEU ESPAÇO DE CUIDADO"
+msgstr "SEU ESPAÇO DE CUIDADO"
+
+msgid "seja bem-vindo"
+msgstr "seja bem-vindo"
+
+#, python-format
+msgid "Olá, %(name)s."
+msgstr "Olá, %(name)s."
+
+#, python-format
+msgid "Acesse seus recursos em %(clinic_name)s."
+msgstr "Acesse seus recursos em %(clinic_name)s."
+
+msgid "Por onde começar"
+msgstr "Por onde começar"
+
+msgid "Acompanhe os registros do seu cuidado."
+msgstr "Acompanhe os registros do seu cuidado."
+
+msgid "Reserve um momento para registrar como você está."
+msgstr "Reserve um momento para registrar como você está."
+
+msgid "Retome seus objetivos e próximos passos."
+msgstr "Retome seus objetivos e próximos passos."
+
+msgid "Acompanhe os pacientes vinculados a você."
+msgstr "Acompanhe os pacientes vinculados a você."
+
+msgid "Consulte os indicadores da clínica ativa."
+msgstr "Consulte os indicadores da clínica ativa."
+
+msgid "Consulte e organize os cadastros da clínica."
+msgstr "Consulte e organize os cadastros da clínica."
+
+msgid "Revise os dados e a identidade da sua clínica."
+msgstr "Revise os dados e a identidade da sua clínica."
+
+msgid "Veja as consultas disponíveis para o seu perfil."
+msgstr "Veja as consultas disponíveis para o seu perfil."
+
+msgid "Acesse suas conversas na plataforma."
+msgstr "Acesse suas conversas na plataforma."
+
+msgid "Segurança da conta"
+msgstr "Segurança da conta"
+
+msgid "Confira os dispositivos e as sessões da sua conta."
+msgstr "Confira os dispositivos e as sessões da sua conta."
+
+#~ msgid "Código de verificação"
+#~ msgstr "Código de verificação"
+
+#~ msgid "000000"
+#~ msgstr "000000"
+
+#~ msgid "Identificador da pessoa"
+#~ msgstr "Identificador da pessoa"
+
+#~ msgid "Justificativa"
+#~ msgstr "Justificativa"
+
+#~ msgid "Redefinir autenticação multifator"
+#~ msgstr "Redefinir autenticação multifator"
+
+#~ msgid "Confirme a ação sensível e registre a justificativa."
+#~ msgstr "Confirme a ação sensível e registre a justificativa."
+
+#~ msgid "Redefinir MFA"
+#~ msgstr "Redefinir MFA"
+
+#~ msgid "Ativar autenticação em duas etapas"
+#~ msgstr "Ativar autenticação em duas etapas"
+
+#~ msgid "Código inválido ou expirado."
+#~ msgstr "Código inválido ou expirado."
+
+#~ msgid "Códigos de recuperação"
+#~ msgstr "Códigos de recuperação"
+
+#~ msgid ""
+#~ "Guarde estes códigos antes de continuar; eles não serão exibidos "
+#~ "novamente."
+#~ msgstr ""
+#~ "Guarde estes códigos antes de continuar; eles não serão exibidos "
+#~ "novamente."
+
+#~ msgid "Confirmar autenticação em duas etapas"
+#~ msgstr "Confirmar autenticação em duas etapas"
+
+#~ msgid "Informe o código do aplicativo ou de recuperação."
+#~ msgstr "Informe o código do aplicativo ou de recuperação."
+
+#~ msgid "Verificar"
+#~ msgstr "Verificar"
+
+#~ msgid "Código inválido ou já utilizado."
+#~ msgstr "Código inválido ou já utilizado."
+
+#~ msgid "Informe o código do aplicativo ou um código de recuperação."
+#~ msgstr "Informe o código do aplicativo ou um código de recuperação."
+
+#~ msgid "Tema"
+#~ msgstr "Tema"
+
+#~ msgid "Alternar tema claro e escuro"
+#~ msgstr "Alternar tema claro e escuro"
+
+#~ msgid "Tema escuro"
+#~ msgstr "Tema escuro"
+
+#~ msgid "Tema claro"
+#~ msgstr "Tema claro"
+
+#~ msgid "Tema do sistema"
+#~ msgstr "Tema do sistema"
+
+#~ msgid "Proteção da conta"
+#~ msgstr "Proteção da conta"
+
+#~ msgid ""
+#~ "No Google Authenticator, adicione uma conta e escaneie o código abaixo."
+#~ msgstr ""
+#~ "No Google Authenticator, adicione uma conta e escaneie o código abaixo."
+
+#~ msgid "QR Code para cadastrar esta conta no Google Authenticator"
+#~ msgstr "QR Code para cadastrar esta conta no Google Authenticator"
+
+#~ msgid "Não consegue escanear?"
+#~ msgstr "Não consegue escanear?"
+
+#~ msgid "Cadastre manualmente usando esta chave:"
+#~ msgstr "Cadastre manualmente usando esta chave:"
+
+#~ msgid "Chave copiada."
+#~ msgstr "Chave copiada."
+
+#~ msgid "Não foi possível copiar. Selecione a chave manualmente."
+#~ msgstr "Não foi possível copiar. Selecione a chave manualmente."
+
+#~ msgid "Copiar chave"
+#~ msgstr "Copiar chave"
+
+#~ msgid "Gerar um novo QR Code e reiniciar o cadastro"
+#~ msgstr "Gerar um novo QR Code e reiniciar o cadastro"
+
+#~ msgid "Não foi possível confirmar"
+#~ msgstr "Não foi possível confirmar"
+
+#~ msgid "Ativar proteção"
+#~ msgstr "Ativar proteção"
+
+#~ msgid "Proteção ativa"
+#~ msgstr "Proteção ativa"
+
+#~ msgid ""
+#~ "Estes códigos são exibidos apenas agora. Guarde-os em um local seguro e "
+#~ "não os compartilhe."
+#~ msgstr ""
+#~ "Estes códigos são exibidos apenas agora. Guarde-os em um local seguro e "
+#~ "não os compartilhe."
+
+#~ msgid "Configurações de aparência"
+#~ msgstr "Configurações de aparência"
+
+#~ msgid "Abrir configurações de aparência"
+#~ msgstr "Abrir configurações de aparência"
+
+#~ msgid "Fechar configurações de aparência"
+#~ msgstr "Fechar configurações de aparência"
+
+#~ msgid "Navegação"
+#~ msgstr "Navegação"
+
+#~ msgid "Light"
+#~ msgstr "Claro"
+
+#~ msgid "Dark"
+#~ msgstr "Escuro"
+
+#~ msgid "Cabeçalho"
+#~ msgstr "Cabeçalho"
+
+#~ msgid "Aparência"
+#~ msgstr "Frequência"
+
+#~ msgid "Restaurar"
+#~ msgstr "Restaurar"
+
+#~ msgid "••••••••"
+#~ msgstr "••••••••"
+
+#~ msgid "Idioma da interface"
+#~ msgstr "Idioma da interface"
+
+#~ msgid "Aplicar idioma"
+#~ msgstr "Aplicar idioma"

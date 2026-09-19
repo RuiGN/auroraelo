@@ -1,0 +1,90 @@
+....FF..................                                                 [100%]
+=================================== FAILURES ===================================
+_ test_invalid_preferences_post_keeps_bound_translated_form_without_writing[en-Contact and reminder preferences] _
+
+client = <django.test.client.Client object at 0x77c3ce5487c0>, language = 'en'
+heading = 'Contact and reminder preferences'
+
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        ("language", "heading"),
+        (
+            ("pt-br", "Preferências de contato e lembretes"),
+            ("en", "Contact and reminder preferences"),
+            ("es", "Preferencias de contacto y recordatorios"),
+        ),
+    )
+    def test_invalid_preferences_post_keeps_bound_translated_form_without_writing(
+        client: Client, language: str, heading: str
+    ) -> None:
+        clinic = ClinicFactory.create()
+        user, profile = _linked_patient(clinic)
+        client.force_login(user)
+        session = client.session
+        session["active_clinic_id"] = str(clinic.pk)
+        session.save()
+    
+        response = client.post(
+            reverse("patient_onboarding"),
+            {
+                "step": "preferences",
+                "contact_preferences": ["carrier_pigeon"],
+                "reminder_windows": ["morning"],
+            },
+            HTTP_ACCEPT_LANGUAGE=language,
+        )
+    
+        assert response.status_code == 200
+        content = response.content.decode()
+>       assert heading in content
+E       assert 'Contact and reminder preferences' in '\n\n\n<!doctype html>\n<html lang="pt-br" dir="ltr">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" con...selector.js"></script>\n  \n<script defer src="/static/duralux/js/form-behaviors.js"></script>\n\n</body>\n\n</html>\n'
+
+tests/test_clinic_onboarding_ui_translations.py:236: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T21:57:12.283546+00:00","level":"INFO","logger":"application.request","request_id":"ca8430a219fd47a1ae3d3aef027a3f38","tenant_id":"07dd7cfe-cee7-4162-9644-53b33548f21a","actor_ref":"actor_4b9d51287e9f776c","event":"request.completed","outcome":"success","latency_ms":63.628}
+_ test_invalid_preferences_post_keeps_bound_translated_form_without_writing[es-Preferencias de contacto y recordatorios] _
+
+client = <django.test.client.Client object at 0x77c3ce5b0c50>, language = 'es'
+heading = 'Preferencias de contacto y recordatorios'
+
+    @pytest.mark.django_db
+    @pytest.mark.parametrize(
+        ("language", "heading"),
+        (
+            ("pt-br", "Preferências de contato e lembretes"),
+            ("en", "Contact and reminder preferences"),
+            ("es", "Preferencias de contacto y recordatorios"),
+        ),
+    )
+    def test_invalid_preferences_post_keeps_bound_translated_form_without_writing(
+        client: Client, language: str, heading: str
+    ) -> None:
+        clinic = ClinicFactory.create()
+        user, profile = _linked_patient(clinic)
+        client.force_login(user)
+        session = client.session
+        session["active_clinic_id"] = str(clinic.pk)
+        session.save()
+    
+        response = client.post(
+            reverse("patient_onboarding"),
+            {
+                "step": "preferences",
+                "contact_preferences": ["carrier_pigeon"],
+                "reminder_windows": ["morning"],
+            },
+            HTTP_ACCEPT_LANGUAGE=language,
+        )
+    
+        assert response.status_code == 200
+        content = response.content.decode()
+>       assert heading in content
+E       assert 'Preferencias de contacto y recordatorios' in '\n\n\n<!doctype html>\n<html lang="pt-br" dir="ltr">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" con...selector.js"></script>\n  \n<script defer src="/static/duralux/js/form-behaviors.js"></script>\n\n</body>\n\n</html>\n'
+
+tests/test_clinic_onboarding_ui_translations.py:236: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T21:57:12.551477+00:00","level":"INFO","logger":"application.request","request_id":"609a2ff8495f4b7891ccfc57b979d6b7","tenant_id":"e1b299a2-9b3a-4b14-b4bd-7a3267da2fd3","actor_ref":"actor_8f7d16ec07c59f2c","event":"request.completed","outcome":"success","latency_ms":57.023}
+=========================== short test summary info ============================
+FAILED tests/test_clinic_onboarding_ui_translations.py::test_invalid_preferences_post_keeps_bound_translated_form_without_writing[en-Contact and reminder preferences]
+FAILED tests/test_clinic_onboarding_ui_translations.py::test_invalid_preferences_post_keeps_bound_translated_form_without_writing[es-Preferencias de contacto y recordatorios]
+2 failed, 22 passed in 2.01s

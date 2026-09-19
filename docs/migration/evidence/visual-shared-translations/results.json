@@ -1,0 +1,843 @@
+{
+  "scope": "Shared UI only, preview languages unpublished",
+  "results": [
+    {
+      "surface": "login",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "enroll",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "sessions",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "challenge",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "recovery",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reset",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "invalid-reset",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "invite",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "recovery-codes",
+      "language": "pt-br",
+      "realMfaPost": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "enroll",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "sessions",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "challenge",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "recovery",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reset",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "invalid-reset",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "invite",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "recovery-codes",
+      "language": "en",
+      "realMfaPost": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "login",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "workspace",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reference",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "error",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "login",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "workspace",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "light"
+    },
+    {
+      "surface": "reference",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "error",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "enroll",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "sessions",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "challenge",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "recovery",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "reset",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "invalid-reset",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "invite",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "overflow": false,
+      "screenshotTheme": "dark"
+    },
+    {
+      "surface": "recovery-codes",
+      "language": "es",
+      "realMfaPost": true,
+      "overflow": false,
+      "screenshotTheme": "dark"
+    }
+  ],
+  "errors": []
+}

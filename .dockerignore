@@ -1,0 +1,27 @@
+# Runtime configuration is injected by Compose, never baked into an image.
+**/.env
+**/.env.*
+**/.git
+**/.venv
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/.coverage*
+**/htmlcov
+**/node_modules
+.commandcode
+.superpowers
+.agents
+.codex
+.hermes
+.migration-runtime
+# Never package local databases, uploads, generated static trees or evidence.
+**/*.sqlite3
+media
+private_media
+staticfiles
+docs/migration/evidence
+design_system_duralux
+tests

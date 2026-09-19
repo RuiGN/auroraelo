@@ -1,0 +1,32 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with name=cohort.name %}Coorte: {{ name }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="cohort-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Coortes" %}</span>
+    <h1 id="cohort-title" class="mb-0">{{ cohort.name }}</h1>
+  </header>
+  <section class="product-table-card" aria-labelledby="members-title">
+    <h2 id="members-title" class="h5">{% translate "Membros" %}</h2>
+    <ul class="product-stack mb-0">
+      {% for member in members %}
+        <li>{{ member.user.get_full_name|default:member.user.email }}</li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhum membro ainda." %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  <section class="product-form-card" aria-labelledby="add-member-title">
+    <h2 id="add-member-title" class="h5">{% translate "Adicionar membro" %}</h2>
+    <form class="product-form-grid" method="post" action="{% url 'content_cohort_member_add' cohort.pk %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="member-user">{% translate "Usuário (ID)" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="member-user" name="user_id" type="text" required placeholder="{% translate 'Usuário (ID)' %}" /></div></div>
+      <button class="btn btn-primary" type="submit">{% translate "Adicionar membro" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

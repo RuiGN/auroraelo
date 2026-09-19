@@ -1,0 +1,912 @@
+[
+  {
+    "route": "",
+    "name": "home",
+    "callback": "config.views.home"
+  },
+  {
+    "route": "accounts/login/",
+    "name": "account_login",
+    "callback": "accounts.views.account_login"
+  },
+  {
+    "route": "accounts/logout/",
+    "name": "account_logout",
+    "callback": "accounts.views.account_logout"
+  },
+  {
+    "route": "accounts/mfa/enroll/",
+    "name": "mfa_enroll",
+    "callback": "accounts.views.mfa_enroll"
+  },
+  {
+    "route": "accounts/mfa/verify/",
+    "name": "mfa_verify",
+    "callback": "accounts.views.mfa_verify"
+  },
+  {
+    "route": "accounts/sessions/",
+    "name": "account_sessions",
+    "callback": "accounts.views.account_sessions"
+  },
+  {
+    "route": "accounts/mfa/administrative-reset/",
+    "name": "administrative_mfa_reset",
+    "callback": "accounts.views.administrative_mfa_reset"
+  },
+  {
+    "route": "accounts/invitations/",
+    "name": "invitation_issue",
+    "callback": "accounts.views.invitation_issue"
+  },
+  {
+    "route": "accounts/invitations/<str:raw_token>/accept/",
+    "name": "invitation_accept",
+    "callback": "accounts.views.invitation_accept"
+  },
+  {
+    "route": "accounts/invitations/<uuid:invitation_id>/revoke/",
+    "name": "invitation_revoke",
+    "callback": "accounts.views.invitation_revoke"
+  },
+  {
+    "route": "accounts/password-recovery/",
+    "name": "password_recovery",
+    "callback": "accounts.views.password_recovery"
+  },
+  {
+    "route": "accounts/password-reset/<str:uid>/<str:token>/",
+    "name": "password_reset",
+    "callback": "accounts.views.password_reset"
+  },
+  {
+    "route": "accounts/password-reset/complete/",
+    "name": "password_reset_complete",
+    "callback": "accounts.views.password_reset_complete"
+  },
+  {
+    "route": "clinics/setup/",
+    "name": "clinic_setup",
+    "callback": "clinics.views.clinic_setup"
+  },
+  {
+    "route": "clinics/white-label/dominios/",
+    "name": "whitelabel_domains",
+    "callback": "clinics.views.whitelabel_domains"
+  },
+  {
+    "route": "people/patients/",
+    "name": "patient_list",
+    "callback": "people.views.patient_list"
+  },
+  {
+    "route": "people/patients/new/",
+    "name": "patient_create",
+    "callback": "people.views.patient_create"
+  },
+  {
+    "route": "people/patients/<uuid:patient_profile_id>/invite/",
+    "name": "patient_invite",
+    "callback": "people.views.patient_invite"
+  },
+  {
+    "route": "people/patients/<uuid:patient_profile_id>/",
+    "name": "patient_detail",
+    "callback": "people.views.patient_detail"
+  },
+  {
+    "route": "people/professionals/",
+    "name": "professional_list",
+    "callback": "people.views.professional_list"
+  },
+  {
+    "route": "people/professionals/<uuid:membership_id>/suspend/",
+    "name": "professional_suspend",
+    "callback": "people.views.professional_suspend"
+  },
+  {
+    "route": "people/professionals/<uuid:membership_id>/reactivate/",
+    "name": "professional_reactivate",
+    "callback": "people.views.professional_reactivate"
+  },
+  {
+    "route": "consents/",
+    "name": "consent_center",
+    "callback": "consents.views.consent_center"
+  },
+  {
+    "route": "consents/operations/revocations/",
+    "name": "consent_revocation_work_queue",
+    "callback": "consents.views.revocation_work_queue"
+  },
+  {
+    "route": "consents/operations/revocations/<uuid:work_item_id>/acknowledge/",
+    "name": "consent_revocation_work_acknowledge",
+    "callback": "consents.views.acknowledge_revocation_work"
+  },
+  {
+    "route": "consents/<uuid:document_id>/decision/",
+    "name": "consent_decide",
+    "callback": "consents.views.consent_decide"
+  },
+  {
+    "route": "consents/<uuid:document_id>/revoke/",
+    "name": "consent_revoke",
+    "callback": "consents.views.consent_revoke"
+  },
+  {
+    "route": "journal/",
+    "name": "journal_list",
+    "callback": "journal.views.journal_list"
+  },
+  {
+    "route": "journal/novo/",
+    "name": "journal_create",
+    "callback": "journal.views.journal_create"
+  },
+  {
+    "route": "journal/<uuid:entry_id>/",
+    "name": "journal_detail",
+    "callback": "journal.views.journal_detail"
+  },
+  {
+    "route": "journal/<uuid:entry_id>/editar/",
+    "name": "journal_edit",
+    "callback": "journal.views.journal_edit"
+  },
+  {
+    "route": "journal/<uuid:entry_id>/visibilidade/",
+    "name": "journal_set_visibility",
+    "callback": "journal.views.journal_set_visibility"
+  },
+  {
+    "route": "journal/<uuid:entry_id>/revogar/",
+    "name": "journal_revoke_sharing",
+    "callback": "journal.views.journal_revoke_sharing_view"
+  },
+  {
+    "route": "journal/<uuid:entry_id>/solicitar-acesso/",
+    "name": "journal_request_access",
+    "callback": "journal.views.journal_request_access_view"
+  },
+  {
+    "route": "journal/solicitacoes/<uuid:access_request_id>/responder/",
+    "name": "journal_respond_access_request",
+    "callback": "journal.views.journal_respond_access_request_view"
+  },
+  {
+    "route": "journal/checkin/",
+    "name": "checkin_today",
+    "callback": "journal.views.checkin_today"
+  },
+  {
+    "route": "journal/checkin/historico/",
+    "name": "checkin_list",
+    "callback": "journal.views.checkin_list"
+  },
+  {
+    "route": "goals/",
+    "name": "goal_list",
+    "callback": "goals.views.goal_list"
+  },
+  {
+    "route": "goals/nova/",
+    "name": "goal_create",
+    "callback": "goals.views.goal_create"
+  },
+  {
+    "route": "goals/<uuid:goal_id>/",
+    "name": "goal_detail",
+    "callback": "goals.views.goal_detail"
+  },
+  {
+    "route": "goals/<uuid:goal_id>/editar/",
+    "name": "goal_edit",
+    "callback": "goals.views.goal_edit"
+  },
+  {
+    "route": "goals/etapas/<uuid:step_id>/alternar/",
+    "name": "goal_step_toggle",
+    "callback": "goals.views.goal_step_toggle"
+  },
+  {
+    "route": "goals/<uuid:goal_id>/estado/",
+    "name": "goal_status_change",
+    "callback": "goals.views.goal_status_change"
+  },
+  {
+    "route": "goals/<uuid:goal_id>/visibilidade/",
+    "name": "goal_visibility_change",
+    "callback": "goals.views.goal_visibility_change"
+  },
+  {
+    "route": "goals/baixa-energia/",
+    "name": "low_energy_home",
+    "callback": "goals.low_energy_views.low_energy_home"
+  },
+  {
+    "route": "goals/baixa-energia/configurar/",
+    "name": "low_energy_configure",
+    "callback": "goals.low_energy_views.low_energy_configure"
+  },
+  {
+    "route": "goals/baixa-energia/ativar/",
+    "name": "low_energy_activate",
+    "callback": "goals.low_energy_views.low_energy_activate"
+  },
+  {
+    "route": "goals/baixa-energia/encerrar/",
+    "name": "low_energy_deactivate",
+    "callback": "goals.low_energy_views.low_energy_deactivate"
+  },
+  {
+    "route": "goals/exercicios/catalogo/",
+    "name": "exercise_catalog",
+    "callback": "goals.exercise_views.exercise_catalog"
+  },
+  {
+    "route": "goals/exercicios/catalogo/novo/",
+    "name": "exercise_create",
+    "callback": "goals.exercise_views.exercise_form"
+  },
+  {
+    "route": "goals/exercicios/catalogo/<uuid:exercise_id>/editar/",
+    "name": "exercise_edit",
+    "callback": "goals.exercise_views.exercise_form"
+  },
+  {
+    "route": "goals/exercicios/catalogo/<uuid:exercise_id>/atribuir/",
+    "name": "exercise_assign",
+    "callback": "goals.exercise_views.exercise_assign_view"
+  },
+  {
+    "route": "goals/exercicios/meus/",
+    "name": "patient_exercise_list",
+    "callback": "goals.exercise_views.patient_exercise_list"
+  },
+  {
+    "route": "goals/exercicios/atribuicoes/<uuid:assignment_id>/confirmar/",
+    "name": "patient_confirm_assignment",
+    "callback": "goals.exercise_views.patient_confirm_assignment_view"
+  },
+  {
+    "route": "goals/exercicios/atribuicoes/<uuid:assignment_id>/executar/",
+    "name": "patient_exercise_execute",
+    "callback": "goals.exercise_views.patient_exercise_execute_view"
+  },
+  {
+    "route": "goals/exercicios/execucoes/<uuid:execution_id>/",
+    "name": "exercise_execution_detail",
+    "callback": "goals.exercise_views.exercise_execution_detail_view"
+  },
+  {
+    "route": "agenda/",
+    "name": "appointment_list",
+    "callback": "scheduling.views.appointment_list"
+  },
+  {
+    "route": "agenda/semana/",
+    "name": "appointment_calendar",
+    "callback": "scheduling.views.appointment_calendar"
+  },
+  {
+    "route": "agenda/consultas/nova/",
+    "name": "appointment_request",
+    "callback": "scheduling.views.appointment_request"
+  },
+  {
+    "route": "agenda/consultas/<uuid:appointment_id>/confirmar/",
+    "name": "appointment_confirm",
+    "callback": "scheduling.views.appointment_confirm"
+  },
+  {
+    "route": "agenda/consultas/<uuid:appointment_id>/remarcar/",
+    "name": "appointment_reschedule",
+    "callback": "scheduling.views.appointment_reschedule"
+  },
+  {
+    "route": "agenda/consultas/<uuid:appointment_id>/cancelar/",
+    "name": "appointment_cancel",
+    "callback": "scheduling.views.appointment_cancel"
+  },
+  {
+    "route": "agenda/consultas/<uuid:appointment_id>/concluir/",
+    "name": "appointment_complete",
+    "callback": "scheduling.views.appointment_complete"
+  },
+  {
+    "route": "agenda/consultas/<uuid:appointment_id>/falta/",
+    "name": "appointment_no_show",
+    "callback": "scheduling.views.appointment_no_show"
+  },
+  {
+    "route": "agenda/lembretes/",
+    "name": "reminder_preferences",
+    "callback": "scheduling.views.reminder_preferences"
+  },
+  {
+    "route": "agenda/mensagens/",
+    "name": "conversation_list",
+    "callback": "scheduling.views.conversation_list"
+  },
+  {
+    "route": "agenda/mensagens/nova/",
+    "name": "conversation_create",
+    "callback": "scheduling.views.conversation_create"
+  },
+  {
+    "route": "agenda/mensagens/<uuid:conversation_id>/",
+    "name": "conversation_detail",
+    "callback": "scheduling.views.conversation_detail"
+  },
+  {
+    "route": "agenda/anexos/<uuid:attachment_id>/baixar/",
+    "name": "attachment_download",
+    "callback": "scheduling.views.attachment_download"
+  },
+  {
+    "route": "agenda/anexos/<uuid:attachment_id>/excluir/",
+    "name": "attachment_delete",
+    "callback": "scheduling.views.attachment_delete"
+  },
+  {
+    "route": "agenda/espera/",
+    "name": "waitlist_list",
+    "callback": "scheduling.waitlist_views.waitlist_list"
+  },
+  {
+    "route": "agenda/espera/nova/",
+    "name": "waitlist_add",
+    "callback": "scheduling.waitlist_views.waitlist_add"
+  },
+  {
+    "route": "agenda/espera/<uuid:entry_id>/cancelar/",
+    "name": "waitlist_cancel",
+    "callback": "scheduling.waitlist_views.waitlist_cancel"
+  },
+  {
+    "route": "agenda/espera/<uuid:entry_id>/encaixar/",
+    "name": "waitlist_fill",
+    "callback": "scheduling.waitlist_views.waitlist_fill"
+  },
+  {
+    "route": "agenda/unidades/",
+    "name": "unit_list",
+    "callback": "scheduling.unit_views.unit_list"
+  },
+  {
+    "route": "agenda/unidades/nova/",
+    "name": "unit_create",
+    "callback": "scheduling.unit_views.unit_create"
+  },
+  {
+    "route": "agenda/unidades/<uuid:unit_id>/editar/",
+    "name": "unit_update",
+    "callback": "scheduling.unit_views.unit_update"
+  },
+  {
+    "route": "agenda/unidades/<uuid:unit_id>/inativar/",
+    "name": "unit_deactivate",
+    "callback": "scheduling.unit_views.unit_deactivate"
+  },
+  {
+    "route": "agenda/salas/nova/",
+    "name": "room_create",
+    "callback": "scheduling.unit_views.room_create"
+  },
+  {
+    "route": "agenda/salas/<uuid:room_id>/inativar/",
+    "name": "room_deactivate",
+    "callback": "scheduling.unit_views.room_deactivate"
+  },
+  {
+    "route": "analytics/",
+    "name": "patient_dashboard",
+    "callback": "analytics.views.patient_dashboard"
+  },
+  {
+    "route": "analytics/profissional/",
+    "name": "therapist_dashboard",
+    "callback": "analytics.views.therapist_dashboard"
+  },
+  {
+    "route": "analytics/clinica/",
+    "name": "clinic_panel",
+    "callback": "analytics.views.clinic_panel"
+  },
+  {
+    "route": "analytics/relatorios/",
+    "name": "report_list",
+    "callback": "analytics.views.report_list"
+  },
+  {
+    "route": "analytics/relatorios/gerar/",
+    "name": "report_generate",
+    "callback": "analytics.views.report_generate"
+  },
+  {
+    "route": "analytics/relatorios/<uuid:report_id>/baixar/",
+    "name": "report_download",
+    "callback": "analytics.views.report_download"
+  },
+  {
+    "route": "financeiro/",
+    "name": "charge_list",
+    "callback": "finance.views.charge_list"
+  },
+  {
+    "route": "financeiro/precos/novo/",
+    "name": "service_price_create",
+    "callback": "finance.views.service_price_create"
+  },
+  {
+    "route": "financeiro/cobrancas/<uuid:appointment_id>/gerar/",
+    "name": "charge_generate",
+    "callback": "finance.views.charge_generate"
+  },
+  {
+    "route": "financeiro/cobrancas/<uuid:charge_id>/baixar/",
+    "name": "charge_settle",
+    "callback": "finance.views.charge_settle"
+  },
+  {
+    "route": "financeiro/cobrancas/<uuid:charge_id>/cancelar/",
+    "name": "charge_cancel",
+    "callback": "finance.views.charge_cancel"
+  },
+  {
+    "route": "onboarding/clinic/",
+    "name": "clinic_onboarding",
+    "callback": "onboarding.views.clinic_onboarding"
+  },
+  {
+    "route": "onboarding/patient/",
+    "name": "patient_onboarding",
+    "callback": "onboarding.views.patient_onboarding"
+  },
+  {
+    "route": "conteudos/",
+    "name": "content_library",
+    "callback": "content.views.library_home"
+  },
+  {
+    "route": "conteudos/editorial/",
+    "name": "content_editorial_index",
+    "callback": "content.views.editorial_index"
+  },
+  {
+    "route": "conteudos/editorial/novo/",
+    "name": "content_editorial_create",
+    "callback": "content.views.editorial_create"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/",
+    "name": "content_editorial_detail",
+    "callback": "content.views.editorial_detail"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/versoes/nova/",
+    "name": "content_editorial_version",
+    "callback": "content.views.editorial_version_create"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/versoes/<int:version>/preview/",
+    "name": "content_editorial_preview",
+    "callback": "content.views.editorial_preview"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/versoes/<int:version>/comentarios/",
+    "name": "content_editorial_comment",
+    "callback": "content.views.editorial_comment"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/comparar/",
+    "name": "content_editorial_compare",
+    "callback": "content.views.editorial_compare"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/submeter/",
+    "name": "content_editorial_submit",
+    "callback": "content.views.editorial_submit"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/aprovar/",
+    "name": "content_editorial_approve",
+    "callback": "content.views.editorial_approve"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/reverter/",
+    "name": "content_editorial_rollback",
+    "callback": "content.views.editorial_rollback"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/arquivar/",
+    "name": "content_editorial_archive",
+    "callback": "content.views.editorial_archive"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/midia/",
+    "name": "content_editorial_media",
+    "callback": "content.views.editorial_media"
+  },
+  {
+    "route": "conteudos/editorial/<uuid:content_id>/metadados/",
+    "name": "content_editorial_metadata",
+    "callback": "content.views.editorial_metadata_update"
+  },
+  {
+    "route": "conteudos/minhas-recomendacoes/",
+    "name": "content_recommendations",
+    "callback": "content.views.recommendation_list"
+  },
+  {
+    "route": "conteudos/notificacoes/",
+    "name": "content_notifications",
+    "callback": "content.views.notification_list"
+  },
+  {
+    "route": "conteudos/denuncias/",
+    "name": "content_reports",
+    "callback": "content.views.content_reports"
+  },
+  {
+    "route": "conteudos/denuncias/<uuid:report_id>/resolver/",
+    "name": "content_report_resolve",
+    "callback": "content.views.content_report_resolve"
+  },
+  {
+    "route": "conteudos/<uuid:content_id>/publicar/",
+    "name": "content_publish",
+    "callback": "content.views.content_publish"
+  },
+  {
+    "route": "conteudos/<uuid:content_id>/recomendar/",
+    "name": "content_recommend",
+    "callback": "content.views.content_recommend"
+  },
+  {
+    "route": "conteudos/cursos/",
+    "name": "content_learning_authoring_index",
+    "callback": "content.learning_views.content_learning_authoring_index"
+  },
+  {
+    "route": "conteudos/cursos/cursos/novo/",
+    "name": "content_course_create",
+    "callback": "content.learning_views.content_course_create"
+  },
+  {
+    "route": "conteudos/cursos/coortes/nova/",
+    "name": "content_cohort_create",
+    "callback": "content.learning_views.content_cohort_create"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/matricula/",
+    "name": "content_course_enroll",
+    "callback": "content.learning_views.content_course_enroll"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/questionarios/",
+    "name": "content_quiz_create",
+    "callback": "content.learning_views.content_quiz_create"
+  },
+  {
+    "route": "conteudos/cursos/questionarios/<uuid:quiz_id>/",
+    "name": "content_quiz_detail",
+    "callback": "content.learning_views.content_quiz_detail"
+  },
+  {
+    "route": "conteudos/cursos/questionarios/<uuid:quiz_id>/questoes/",
+    "name": "content_quiz_question_create",
+    "callback": "content.learning_views.content_quiz_question_create"
+  },
+  {
+    "route": "conteudos/cursos/questionarios/<uuid:quiz_id>/publicar/",
+    "name": "content_quiz_publish",
+    "callback": "content.learning_views.content_quiz_publish"
+  },
+  {
+    "route": "conteudos/cursos/questionarios/<uuid:quiz_id>/participar/",
+    "name": "content_quiz_participate",
+    "callback": "content.learning_views.content_quiz_participate"
+  },
+  {
+    "route": "conteudos/cursos/questionarios/<uuid:quiz_id>/enviar/",
+    "name": "content_quiz_submit",
+    "callback": "content.learning_views.content_quiz_submit"
+  },
+  {
+    "route": "conteudos/cursos/questionarios/tentativas/<uuid:attempt_id>/",
+    "name": "content_quiz_feedback",
+    "callback": "content.learning_views.content_quiz_feedback"
+  },
+  {
+    "route": "conteudos/cursos/certificados/<str:public_code>/",
+    "name": "content_certificate_verify",
+    "callback": "content.learning_views.content_certificate_verify"
+  },
+  {
+    "route": "conteudos/cursos/coortes/<uuid:cohort_id>/",
+    "name": "content_cohort_detail",
+    "callback": "content.learning_views.content_cohort_detail"
+  },
+  {
+    "route": "conteudos/cursos/coortes/<uuid:cohort_id>/membros/",
+    "name": "content_cohort_member_add",
+    "callback": "content.learning_views.content_cohort_member_add"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/certificado/",
+    "name": "content_course_certificate",
+    "callback": "content.learning_views.content_course_certificate"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/aulas/<uuid:lesson_id>/",
+    "name": "content_lesson_player",
+    "callback": "content.learning_views.content_lesson_player"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/aulas/<uuid:lesson_id>/evento/",
+    "name": "content_lesson_event",
+    "callback": "content.learning_views.content_lesson_event"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/",
+    "name": "content_course_authoring_detail",
+    "callback": "content.learning_views.content_course_authoring_detail"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/modulos/",
+    "name": "content_course_module_create",
+    "callback": "content.learning_views.content_course_module_create"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/modulos/<uuid:module_id>/",
+    "name": "content_course_module_detail",
+    "callback": "content.learning_views.content_course_module_detail"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/modulos/<uuid:module_id>/aulas/",
+    "name": "content_course_lesson_create",
+    "callback": "content.learning_views.content_course_lesson_create"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/pre-requisitos/",
+    "name": "content_course_prerequisite_add",
+    "callback": "content.learning_views.content_course_prerequisite_add"
+  },
+  {
+    "route": "conteudos/cursos/<uuid:course_id>/publicar/",
+    "name": "content_course_publish",
+    "callback": "content.learning_views.content_course_publish"
+  },
+  {
+    "route": "conteudos/<slug:slug>/",
+    "name": "content_detail",
+    "callback": "content.views.content_detail"
+  },
+  {
+    "route": "dashboard/",
+    "name": "therapist_dashboard",
+    "callback": "therapist_dashboard.views.therapist_dashboard"
+  },
+  {
+    "route": "design-system/",
+    "name": "design_system_reference",
+    "callback": "config.views.design_system_reference"
+  },
+  {
+    "route": "workspace/",
+    "name": "workspace_vertical",
+    "callback": "config.views.workspace_vertical"
+  },
+  {
+    "route": "workspace/detached/",
+    "name": "workspace_detached",
+    "callback": "config.views.workspace_detached"
+  },
+  {
+    "route": "workspace/preferences/layout/",
+    "name": "workspace_layout_preference",
+    "callback": "config.views.save_workspace_layout"
+  },
+  {
+    "route": "clinics/switch/review/",
+    "name": "clinic_switch_review",
+    "callback": "config.views.review_clinic_switch"
+  },
+  {
+    "route": "clinics/switch/confirm/",
+    "name": "clinic_switch_confirm",
+    "callback": "config.views.confirm_clinic_switch"
+  },
+  {
+    "route": "health/live/",
+    "name": "health-live",
+    "callback": "config.views.liveness"
+  },
+  {
+    "route": "health/ready/",
+    "name": "health-ready",
+    "callback": "config.views.readiness"
+  },
+  {
+    "route": "admin/login/",
+    "name": "admin_login",
+    "callback": "config.views.admin_login_redirect"
+  },
+  {
+    "route": "admin/",
+    "name": "admin:index",
+    "callback": "django.contrib.admin.sites.AdminSite.index"
+  },
+  {
+    "route": "admin/login/",
+    "name": "admin:login",
+    "callback": "django.contrib.admin.sites.AdminSite.login"
+  },
+  {
+    "route": "admin/logout/",
+    "name": "admin:logout",
+    "callback": "django.contrib.admin.sites.AdminSite.logout"
+  },
+  {
+    "route": "admin/password_change/",
+    "name": "admin:password_change",
+    "callback": "django.contrib.admin.sites.AdminSite.password_change"
+  },
+  {
+    "route": "admin/password_change/done/",
+    "name": "admin:password_change_done",
+    "callback": "django.contrib.admin.sites.AdminSite.password_change_done"
+  },
+  {
+    "route": "admin/autocomplete/",
+    "name": "admin:autocomplete",
+    "callback": "django.contrib.admin.sites.AdminSite.autocomplete_view"
+  },
+  {
+    "route": "admin/jsi18n/",
+    "name": "admin:jsi18n",
+    "callback": "django.contrib.admin.sites.AdminSite.i18n_javascript"
+  },
+  {
+    "route": "admin/r/<path:content_type_id>/<path:object_id>/",
+    "name": "admin:view_on_site",
+    "callback": "django.contrib.contenttypes.views.shortcut"
+  },
+  {
+    "route": "admin/auth/group/",
+    "name": "admin:auth_group_changelist",
+    "callback": "django.contrib.admin.options.ModelAdmin.changelist_view"
+  },
+  {
+    "route": "admin/auth/group/add/",
+    "name": "admin:auth_group_add",
+    "callback": "django.contrib.admin.options.ModelAdmin.add_view"
+  },
+  {
+    "route": "admin/auth/group/<path:object_id>/history/",
+    "name": "admin:auth_group_history",
+    "callback": "django.contrib.admin.options.ModelAdmin.history_view"
+  },
+  {
+    "route": "admin/auth/group/<path:object_id>/delete/",
+    "name": "admin:auth_group_delete",
+    "callback": "django.contrib.admin.options.ModelAdmin.delete_view"
+  },
+  {
+    "route": "admin/auth/group/<path:object_id>/change/",
+    "name": "admin:auth_group_change",
+    "callback": "django.contrib.admin.options.ModelAdmin.change_view"
+  },
+  {
+    "route": "admin/auth/group/<path:object_id>/",
+    "name": "admin:",
+    "callback": "django.views.generic.base.RedirectView"
+  },
+  {
+    "route": "admin/accounts/user/<id>/password/",
+    "name": "admin:auth_user_password_change",
+    "callback": "django.contrib.auth.admin.UserAdmin.user_change_password"
+  },
+  {
+    "route": "admin/accounts/user/",
+    "name": "admin:accounts_user_changelist",
+    "callback": "django.contrib.admin.options.ModelAdmin.changelist_view"
+  },
+  {
+    "route": "admin/accounts/user/add/",
+    "name": "admin:accounts_user_add",
+    "callback": "django.contrib.auth.admin.UserAdmin.add_view"
+  },
+  {
+    "route": "admin/accounts/user/<path:object_id>/history/",
+    "name": "admin:accounts_user_history",
+    "callback": "django.contrib.admin.options.ModelAdmin.history_view"
+  },
+  {
+    "route": "admin/accounts/user/<path:object_id>/delete/",
+    "name": "admin:accounts_user_delete",
+    "callback": "django.contrib.admin.options.ModelAdmin.delete_view"
+  },
+  {
+    "route": "admin/accounts/user/<path:object_id>/change/",
+    "name": "admin:accounts_user_change",
+    "callback": "django.contrib.admin.options.ModelAdmin.change_view"
+  },
+  {
+    "route": "admin/accounts/user/<path:object_id>/",
+    "name": "admin:",
+    "callback": "django.views.generic.base.RedirectView"
+  },
+  {
+    "route": "admin/clinics/clinic/",
+    "name": "admin:clinics_clinic_changelist",
+    "callback": "django.contrib.admin.options.ModelAdmin.changelist_view"
+  },
+  {
+    "route": "admin/clinics/clinic/add/",
+    "name": "admin:clinics_clinic_add",
+    "callback": "django.contrib.admin.options.ModelAdmin.add_view"
+  },
+  {
+    "route": "admin/clinics/clinic/<path:object_id>/history/",
+    "name": "admin:clinics_clinic_history",
+    "callback": "django.contrib.admin.options.ModelAdmin.history_view"
+  },
+  {
+    "route": "admin/clinics/clinic/<path:object_id>/delete/",
+    "name": "admin:clinics_clinic_delete",
+    "callback": "django.contrib.admin.options.ModelAdmin.delete_view"
+  },
+  {
+    "route": "admin/clinics/clinic/<path:object_id>/change/",
+    "name": "admin:clinics_clinic_change",
+    "callback": "django.contrib.admin.options.ModelAdmin.change_view"
+  },
+  {
+    "route": "admin/clinics/clinic/<path:object_id>/",
+    "name": "admin:",
+    "callback": "django.views.generic.base.RedirectView"
+  },
+  {
+    "route": "admin/clinics/clinicmembership/",
+    "name": "admin:clinics_clinicmembership_changelist",
+    "callback": "django.contrib.admin.options.ModelAdmin.changelist_view"
+  },
+  {
+    "route": "admin/clinics/clinicmembership/add/",
+    "name": "admin:clinics_clinicmembership_add",
+    "callback": "django.contrib.admin.options.ModelAdmin.add_view"
+  },
+  {
+    "route": "admin/clinics/clinicmembership/<path:object_id>/history/",
+    "name": "admin:clinics_clinicmembership_history",
+    "callback": "django.contrib.admin.options.ModelAdmin.history_view"
+  },
+  {
+    "route": "admin/clinics/clinicmembership/<path:object_id>/delete/",
+    "name": "admin:clinics_clinicmembership_delete",
+    "callback": "django.contrib.admin.options.ModelAdmin.delete_view"
+  },
+  {
+    "route": "admin/clinics/clinicmembership/<path:object_id>/change/",
+    "name": "admin:clinics_clinicmembership_change",
+    "callback": "django.contrib.admin.options.ModelAdmin.change_view"
+  },
+  {
+    "route": "admin/clinics/clinicmembership/<path:object_id>/",
+    "name": "admin:",
+    "callback": "django.views.generic.base.RedirectView"
+  },
+  {
+    "route": "admin/^(?P<app_label>auth|accounts|clinics)/$",
+    "name": "admin:app_list",
+    "callback": "django.contrib.admin.sites.AdminSite.app_index"
+  },
+  {
+    "route": "admin/(?P<url>.*)$",
+    "name": "admin:",
+    "callback": "django.contrib.admin.sites.AdminSite.catch_all_view"
+  }
+]

@@ -1,0 +1,74 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Profissionais" %}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="professional-list-title">
+<section class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3" aria-labelledby="professional-list-title">
+  <div>
+    <p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Equipe da clínica ativa" %}</p>
+    <h1 id="professional-list-title">{% translate "Profissionais" %}</h1>
+    <p class="lead mb-0">{% translate "Perfis, vínculos e credenciais informadas, sem confirmação automática pela plataforma." %}</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'invitation_issue' %}">{% translate "Convidar profissional" %}</a>
+</section>
+
+<form method="get" class="product-form-card d-grid gap-3" aria-label="{% translate 'Filtros de profissionais' %}">
+  <div class="d-grid gap-2">
+    <label for="professional-status">{% translate "Status" %}</label>
+    <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="professional-status" name="status">
+      <option value="">{% translate "Todos" %}</option>
+      <option value="active"{% if selected_status == 'active' %} selected{% endif %}>{% translate "Ativo" %}</option>
+      <option value="scheduled"{% if selected_status == 'scheduled' %} selected{% endif %}>{% translate "Agendado" %}</option>
+      <option value="suspended"{% if selected_status == 'suspended' %} selected{% endif %}>{% translate "Suspenso" %}</option>
+      <option value="expired"{% if selected_status == 'expired' %} selected{% endif %}>{% translate "Encerrado" %}</option>
+    </select></div>
+  </div>
+  <div class="d-grid gap-2">
+    <label for="professional-role">{% translate "Papel" %}</label>
+    <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="professional-role" name="role">
+      <option value="">{% translate "Todos" %}</option>
+      <option value="therapist"{% if selected_role == 'therapist' %} selected{% endif %}>{% translate "Terapeuta" %}</option>
+      <option value="administrative_staff"{% if selected_role == 'administrative_staff' %} selected{% endif %}>{% translate "Equipe administrativa" %}</option>
+    </select></div>
+  </div>
+  <div class="d-grid gap-2">
+    <label for="professional-specialty">{% translate "Especialidade técnica" %}</label>
+    <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="professional-specialty" name="specialty" value="{{ selected_specialty }}" placeholder="{% translate 'Especialidade técnica' %}"></div>
+  </div>
+  <button type="submit" class="btn btn-primary">{% translate "Aplicar filtros" %}</button>
+</form>
+
+<section class="d-grid gap-3" aria-labelledby="professional-results-title">
+  <h2 id="professional-results-title">{% translate "Resultado" %}</h2>
+  {% if professionals %}
+    <div class="product-table-card product-table-scroll" role="region" aria-label="{% translate 'Lista de profissionais' %}" tabindex="0">
+      <table class="table product-table">
+        <thead><tr><th scope="col">{% translate "Nome" context "person full name" %}</th><th scope="col">{% translate "Papel" %}</th><th scope="col">{% translate "Status" %}</th><th scope="col">{% translate "Unidade" %}</th><th scope="col">{% translate "Especialidades" %}</th><th scope="col">{% translate "Ações" %}</th></tr></thead>
+        <tbody>
+          {% for professional in professionals %}
+          <tr>
+            <th scope="row">{{ professional.full_name }}{% if professional.social_name %}<br><small>{% translate "Nome social:" %} {{ professional.social_name }}</small>{% endif %}</th>
+            <td>{{ professional.role_label }}</td>
+            <td>{{ professional.status_label }}</td>
+            <td>{% if professional.unit_name %}{{ professional.unit_name }}{% else %}{% translate "Não informada" %}{% endif %}</td>
+            <td>{% if professional.specialties %}{{ professional.specialties|join:", " }}{% else %}{% translate "Não informadas" %}{% endif %}</td>
+            <td>
+              {% if professional.status == "suspended" %}
+                <form method="post" action="{% url 'professional_reactivate' professional.membership_id %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-primary">{% translate "Reativar" %}</button></form>
+              {% else %}
+                <form method="post" action="{% url 'professional_suspend' professional.membership_id %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-danger">{% translate "Suspender" %}</button></form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="product-empty-state" role="status"><h3>{% translate "Nenhum profissional encontrado" %}</h3><p>{% translate "Revise os filtros ou convide o primeiro profissional." %}</p></div>
+  {% endif %}
+</section>
+</div>
+{% endblock %}

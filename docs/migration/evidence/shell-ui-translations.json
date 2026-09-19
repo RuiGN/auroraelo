@@ -1,0 +1,639 @@
+[
+  {
+    "msgid": "Ir para o conteúdo principal",
+    "en": "Skip to main content",
+    "es": "Ir al contenido principal"
+  },
+  {
+    "msgid": "Navegação principal",
+    "en": "Main navigation",
+    "es": "Navegación principal"
+  },
+  {
+    "msgid": "Início da plataforma",
+    "en": "Platform home",
+    "es": "Inicio de la plataforma"
+  },
+  {
+    "msgid": "Fechar menu",
+    "en": "Close menu",
+    "es": "Cerrar menú"
+  },
+  {
+    "msgid": "Navegação destacada",
+    "en": "Detached navigation",
+    "es": "Navegación separada"
+  },
+  {
+    "msgid": "Navegação vertical",
+    "en": "Vertical navigation",
+    "es": "Navegación vertical"
+  },
+  {
+    "msgid": "Caminho de navegação",
+    "en": "Breadcrumb",
+    "es": "Ruta de navegación"
+  },
+  {
+    "msgid": "Área de trabalho",
+    "en": "Workspace",
+    "es": "Espacio de trabajo"
+  },
+  {
+    "msgid": "Início",
+    "en": "Home",
+    "es": "Inicio"
+  },
+  {
+    "msgid": "Abrir menu",
+    "en": "Open menu",
+    "es": "Abrir menú"
+  },
+  {
+    "msgid": "Recolher navegação",
+    "en": "Collapse navigation",
+    "es": "Contraer navegación"
+  },
+  {
+    "msgid": "Expandir navegação",
+    "en": "Expand navigation",
+    "es": "Expandir navegación"
+  },
+  {
+    "msgid": "Clínica ativa",
+    "en": "Active clinic",
+    "es": "Clínica activa"
+  },
+  {
+    "msgid": "Alternar tema claro e escuro",
+    "en": "Switch between light and dark theme",
+    "es": "Alternar entre tema claro y oscuro"
+  },
+  {
+    "msgid": "Tema escuro",
+    "en": "Dark theme",
+    "es": "Tema oscuro"
+  },
+  {
+    "msgid": "Tema claro",
+    "en": "Light theme",
+    "es": "Tema claro"
+  },
+  {
+    "msgid": "Tema do sistema",
+    "en": "System theme",
+    "es": "Tema del sistema"
+  },
+  {
+    "msgid": "Notificações",
+    "en": "Notifications",
+    "es": "Notificaciones"
+  },
+  {
+    "msgid": "Central de avisos",
+    "en": "Notification center",
+    "es": "Centro de avisos"
+  },
+  {
+    "msgid": "Nenhuma notificação pendente.",
+    "en": "No pending notifications.",
+    "es": "No hay notificaciones pendientes."
+  },
+  {
+    "msgid": "%(count)s revogação operacional pendente",
+    "msgid_plural": "%(count)s revogações operacionais pendentes",
+    "en": [
+      "%(count)s pending operational revocation",
+      "%(count)s pending operational revocations"
+    ],
+    "es": [
+      "%(count)s revocación operativa pendiente",
+      "%(count)s revocaciones operativas pendientes"
+    ]
+  },
+  {
+    "msgid": "Trocar clínica",
+    "en": "Switch clinic",
+    "es": "Cambiar de clínica"
+  },
+  {
+    "msgid": "Alternar clínica",
+    "en": "Switch clinic",
+    "es": "Cambiar de clínica"
+  },
+  {
+    "msgid": "Selecionar clínica",
+    "en": "Select clinic",
+    "es": "Seleccionar clínica"
+  },
+  {
+    "msgid": "Revisar troca",
+    "en": "Review switch",
+    "es": "Revisar cambio"
+  },
+  {
+    "msgid": "Menu da conta",
+    "en": "Account menu",
+    "es": "Menú de la cuenta"
+  },
+  {
+    "msgid": "Administrador",
+    "en": "Administrator",
+    "es": "Administrador"
+  },
+  {
+    "msgid": "Profissional",
+    "en": "Professional",
+    "es": "Profesional"
+  },
+  {
+    "msgid": "Paciente",
+    "en": "Patient",
+    "es": "Paciente"
+  },
+  {
+    "msgid": "Usuário",
+    "en": "User",
+    "es": "Usuario"
+  },
+  {
+    "msgid": "Modo de navegação",
+    "en": "Navigation mode",
+    "es": "Modo de navegación"
+  },
+  {
+    "msgid": "Vertical",
+    "en": "Vertical",
+    "es": "Vertical"
+  },
+  {
+    "msgid": "Destacado",
+    "en": "Detached",
+    "es": "Separado"
+  },
+  {
+    "msgid": "Sair da conta",
+    "en": "Sign out",
+    "es": "Cerrar sesión"
+  },
+  {
+    "msgid": "OK",
+    "en": "OK",
+    "es": "Aceptar"
+  },
+  {
+    "msgid": "Mensagens do sistema",
+    "en": "System messages",
+    "es": "Mensajes del sistema"
+  },
+  {
+    "msgid": "Geral",
+    "en": "General",
+    "es": "General"
+  },
+  {
+    "msgid": "Gestão da clínica",
+    "en": "Clinic management",
+    "es": "Gestión de la clínica"
+  },
+  {
+    "msgid": "Administração",
+    "en": "Administration",
+    "es": "Administración"
+  },
+  {
+    "msgid": "Configurar clínica",
+    "en": "Configure clinic",
+    "es": "Configurar clínica"
+  },
+  {
+    "msgid": "Pacientes",
+    "en": "Patients",
+    "es": "Pacientes"
+  },
+  {
+    "msgid": "Profissionais",
+    "en": "Professionals",
+    "es": "Profesionales"
+  },
+  {
+    "msgid": "Painel operacional",
+    "en": "Operations dashboard",
+    "es": "Panel operativo"
+  },
+  {
+    "msgid": "Cuidado e prática",
+    "en": "Care and practice",
+    "es": "Cuidado y práctica"
+  },
+  {
+    "msgid": "Rotina terapêutica",
+    "en": "Therapeutic routine",
+    "es": "Rutina terapéutica"
+  },
+  {
+    "msgid": "Diário emocional",
+    "en": "Emotional journal",
+    "es": "Diario emocional"
+  },
+  {
+    "msgid": "Minhas metas",
+    "en": "My goals",
+    "es": "Mis objetivos"
+  },
+  {
+    "msgid": "Exercícios",
+    "en": "Exercises",
+    "es": "Ejercicios"
+  },
+  {
+    "msgid": "Modo de baixa energia",
+    "en": "Low-energy mode",
+    "es": "Modo de baja energía"
+  },
+  {
+    "msgid": "Comunicação e agenda",
+    "en": "Communication and schedule",
+    "es": "Comunicación y agenda"
+  },
+  {
+    "msgid": "Atendimento",
+    "en": "Care",
+    "es": "Atención"
+  },
+  {
+    "msgid": "Agenda de consultas",
+    "en": "Appointment schedule",
+    "es": "Agenda de citas"
+  },
+  {
+    "msgid": "Mensagens",
+    "en": "Messages",
+    "es": "Mensajes"
+  },
+  {
+    "msgid": "Painéis de evolução",
+    "en": "Progress dashboards",
+    "es": "Paneles de evolución"
+  },
+  {
+    "msgid": "Minha evolução",
+    "en": "My progress",
+    "es": "Mi evolución"
+  },
+  {
+    "msgid": "Painel profissional",
+    "en": "Professional dashboard",
+    "es": "Panel profesional"
+  },
+  {
+    "msgid": "SEU ESPAÇO DE CUIDADO",
+    "en": "YOUR CARE SPACE",
+    "es": "TU ESPACIO DE CUIDADO"
+  },
+  {
+    "msgid": "seja bem-vindo",
+    "en": "welcome",
+    "es": "bienvenido"
+  },
+  {
+    "msgid": "Olá, %(name)s.",
+    "en": "Hello, %(name)s.",
+    "es": "Hola, %(name)s."
+  },
+  {
+    "msgid": "Acesse seus recursos em %(clinic_name)s.",
+    "en": "Access your resources at %(clinic_name)s.",
+    "es": "Accede a tus recursos en %(clinic_name)s."
+  },
+  {
+    "msgid": "Por onde começar",
+    "en": "Where to start",
+    "es": "Por dónde empezar"
+  },
+  {
+    "msgid": "Acompanhe os registros do seu cuidado.",
+    "en": "Follow your care records.",
+    "es": "Consulta los registros de tu cuidado."
+  },
+  {
+    "msgid": "Reserve um momento para registrar como você está.",
+    "en": "Take a moment to record how you are feeling.",
+    "es": "Tómate un momento para registrar cómo te sientes."
+  },
+  {
+    "msgid": "Retome seus objetivos e próximos passos.",
+    "en": "Review your goals and next steps.",
+    "es": "Retoma tus objetivos y próximos pasos."
+  },
+  {
+    "msgid": "Acompanhe os pacientes vinculados a você.",
+    "en": "Follow the patients assigned to you.",
+    "es": "Consulta los pacientes vinculados contigo."
+  },
+  {
+    "msgid": "Consulte os indicadores da clínica ativa.",
+    "en": "View the active clinic's indicators.",
+    "es": "Consulta los indicadores de la clínica activa."
+  },
+  {
+    "msgid": "Consulte e organize os cadastros da clínica.",
+    "en": "View and organize the clinic's records.",
+    "es": "Consulta y organiza los registros de la clínica."
+  },
+  {
+    "msgid": "Revise os dados e a identidade da sua clínica.",
+    "en": "Review your clinic's details and identity.",
+    "es": "Revisa los datos y la identidad de tu clínica."
+  },
+  {
+    "msgid": "Agenda",
+    "en": "Schedule",
+    "es": "Agenda"
+  },
+  {
+    "msgid": "Veja as consultas disponíveis para o seu perfil.",
+    "en": "View the appointments available for your profile.",
+    "es": "Consulta las citas disponibles para tu perfil."
+  },
+  {
+    "msgid": "Acesse suas conversas na plataforma.",
+    "en": "Access your conversations on the platform.",
+    "es": "Accede a tus conversaciones en la plataforma."
+  },
+  {
+    "msgid": "Segurança da conta",
+    "en": "Account security",
+    "es": "Seguridad de la cuenta"
+  },
+  {
+    "msgid": "Confira os dispositivos e as sessões da sua conta.",
+    "en": "Review your account devices and sessions.",
+    "es": "Revisa los dispositivos y las sesiones de tu cuenta."
+  },
+  {
+    "msgid": "Página %(current)s de %(total)s",
+    "en": "Page %(current)s of %(total)s",
+    "es": "Página %(current)s de %(total)s"
+  },
+  {
+    "msgid": "Configuração inicial",
+    "en": "Initial setup",
+    "es": "Configuración inicial"
+  },
+  {
+    "msgid": "Concluída",
+    "en": "Completed",
+    "es": "Completada"
+  },
+  {
+    "msgid": "Permissões da equipe",
+    "en": "Team permissions",
+    "es": "Permisos del equipo"
+  },
+  {
+    "msgid": "Revisão pendente",
+    "en": "Review pending",
+    "es": "Revisión pendiente"
+  },
+  {
+    "msgid": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
+  },
+  {
+    "msgid": "Configurada",
+    "en": "Configured",
+    "es": "Configurada"
+  },
+  {
+    "msgid": "Canais institucionais",
+    "en": "Institutional channels",
+    "es": "Canales institucionales"
+  },
+  {
+    "msgid": "Disponível",
+    "en": "Available",
+    "es": "Disponible"
+  },
+  {
+    "msgid": "Horários de atendimento",
+    "en": "Service hours",
+    "es": "Horarios de atención"
+  },
+  {
+    "msgid": "Pendente",
+    "en": "Pending",
+    "es": "Pendiente"
+  },
+  {
+    "msgid": "Abrir %(name)s",
+    "en": "Open %(name)s",
+    "es": "Abrir %(name)s"
+  },
+  {
+    "msgid": "Atividade",
+    "en": "Activity",
+    "es": "Actividad"
+  },
+  {
+    "msgid": "Situação",
+    "en": "Status",
+    "es": "Estado"
+  },
+  {
+    "msgid": "decrescente",
+    "en": "descending",
+    "es": "descendente"
+  },
+  {
+    "msgid": "crescente",
+    "en": "ascending",
+    "es": "ascendente"
+  },
+  {
+    "msgid": "Módulos disponíveis",
+    "en": "Available modules",
+    "es": "Módulos disponibles"
+  },
+  {
+    "msgid": "Recursos operacionais liberados para a clínica ativa.",
+    "en": "Operational resources enabled for the active clinic.",
+    "es": "Recursos operativos habilitados para la clínica activa."
+  },
+  {
+    "msgid": "sem alteração no período",
+    "en": "no change during the period",
+    "es": "sin cambios durante el período"
+  },
+  {
+    "msgid": "Configurações pendentes",
+    "en": "Pending settings",
+    "es": "Configuraciones pendientes"
+  },
+  {
+    "msgid": "Ajustes factuais que ainda precisam de revisão.",
+    "en": "Factual settings that still need review.",
+    "es": "Ajustes de datos que aún deben revisarse."
+  },
+  {
+    "msgid": "1 revisão concluída",
+    "en": "1 review completed",
+    "es": "1 revisión completada"
+  },
+  {
+    "msgid": "Revisar configurações",
+    "en": "Review settings",
+    "es": "Revisar configuraciones"
+  },
+  {
+    "msgid": "Informações disponíveis",
+    "en": "Available information",
+    "es": "Información disponible"
+  },
+  {
+    "msgid": "Exemplo de indicador informativo.",
+    "en": "Example of an informational indicator.",
+    "es": "Ejemplo de indicador informativo."
+  },
+  {
+    "msgid": "2 novos registros",
+    "en": "2 new records",
+    "es": "2 registros nuevos"
+  },
+  {
+    "msgid": "Etapas concluídas",
+    "en": "Completed steps",
+    "es": "Etapas completadas"
+  },
+  {
+    "msgid": "Conclusões confirmadas no fluxo operacional.",
+    "en": "Completions confirmed in the operational workflow.",
+    "es": "Finalizaciones confirmadas en el flujo operativo."
+  },
+  {
+    "msgid": "2 conclusões no período",
+    "en": "2 completions during the period",
+    "es": "2 finalizaciones durante el período"
+  },
+  {
+    "msgid": "Falhas operacionais",
+    "en": "Operational failures",
+    "es": "Fallos operativos"
+  },
+  {
+    "msgid": "Erros técnicos que exigem nova tentativa.",
+    "en": "Technical errors that require another attempt.",
+    "es": "Errores técnicos que requieren un nuevo intento."
+  },
+  {
+    "msgid": "sem dados sensíveis",
+    "en": "no sensitive data",
+    "es": "sin datos sensibles"
+  },
+  {
+    "msgid": "Carregando conteúdo",
+    "en": "Loading content",
+    "es": "Cargando contenido"
+  },
+  {
+    "msgid": "Aguarde enquanto os dados autorizados são preparados.",
+    "en": "Please wait while authorized data is prepared.",
+    "es": "Espera mientras se preparan los datos autorizados."
+  },
+  {
+    "msgid": "Nenhum item cadastrado",
+    "en": "No items registered",
+    "es": "No hay elementos registrados"
+  },
+  {
+    "msgid": "Cadastre o primeiro item quando estiver pronto.",
+    "en": "Register the first item when you are ready.",
+    "es": "Registra el primer elemento cuando estés listo."
+  },
+  {
+    "msgid": "Nenhum resultado encontrado",
+    "en": "No results found",
+    "es": "No se encontraron resultados"
+  },
+  {
+    "msgid": "Revise os filtros aplicados.",
+    "en": "Review the applied filters.",
+    "es": "Revisa los filtros aplicados."
+  },
+  {
+    "msgid": "Conteúdo temporariamente indisponível",
+    "en": "Content temporarily unavailable",
+    "es": "Contenido temporalmente no disponible"
+  },
+  {
+    "msgid": "Tente novamente em alguns instantes.",
+    "en": "Try again in a few moments.",
+    "es": "Inténtalo de nuevo en unos momentos."
+  },
+  {
+    "msgid": "Não foi possível carregar o conteúdo",
+    "en": "The content could not be loaded",
+    "es": "No se pudo cargar el contenido"
+  },
+  {
+    "msgid": "Tente novamente sem reenviar dados.",
+    "en": "Try again without resubmitting data.",
+    "es": "Inténtalo de nuevo sin volver a enviar datos."
+  },
+  {
+    "msgid": "Acesso não autorizado",
+    "en": "Access denied",
+    "es": "Acceso no autorizado"
+  },
+  {
+    "msgid": "Você não tem permissão para acessar este conteúdo.",
+    "en": "You do not have permission to access this content.",
+    "es": "No tienes permiso para acceder a este contenido."
+  },
+  {
+    "msgid": "Atividades operacionais recentes",
+    "en": "Recent operational activities",
+    "es": "Actividades operativas recientes"
+  },
+  {
+    "msgid": "Plataforma terapêutica disponível.",
+    "en": "Therapeutic platform available.",
+    "es": "Plataforma terapéutica disponible."
+  },
+  {
+    "msgid": "Preferência de layout inválida.",
+    "en": "Invalid layout preference.",
+    "es": "Preferencia de diseño no válida."
+  },
+  {
+    "msgid": "Solicitação inválida",
+    "en": "Invalid request",
+    "es": "Solicitud no válida"
+  },
+  {
+    "msgid": "Não foi possível processar sua solicitação.",
+    "en": "Your request could not be processed.",
+    "es": "No se pudo procesar tu solicitud."
+  },
+  {
+    "msgid": "Página não encontrada",
+    "en": "Page not found",
+    "es": "Página no encontrada"
+  },
+  {
+    "msgid": "A página solicitada não foi encontrada.",
+    "en": "The requested page was not found.",
+    "es": "No se encontró la página solicitada."
+  },
+  {
+    "msgid": "Erro inesperado",
+    "en": "Unexpected error",
+    "es": "Error inesperado"
+  },
+  {
+    "msgid": "Ocorreu um erro inesperado.",
+    "en": "An unexpected error occurred.",
+    "es": "Ocurrió un error inesperado."
+  }
+]

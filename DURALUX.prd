@@ -1,0 +1,640 @@
+# DURALUX — PRD de migração integral do backend e reconstrução dos templates
+
+Versão: 1.5 | Data: 09/09/2026 | Projeto de destino: Mindcare
+Estado: migração em homologação; aceite multilíngue reaberto em 09/09/2026. Inglês e espanhol disponíveis no ambiente local após correção de `config.settings.development`, mas a tradução integral não está concluída. Suíte nova: 1.432 testes aprovados, cobertura 86,10% abaixo do gate de 90%. O verificador cobre 1.250 chaves marcadas em 100 templates e 26 arquivos Python, não toda a UI. Evidências: `docs/migration/i18n-recheck-audit.md`, `docs/migration/evidence/i18n-runtime-recheck.md` e `docs/migration/evidence/latest-verification.json`.
+
+## 1. Objetivo
+
+Migrar integralmente o backend de `projetomnunes` para `mindcare`, preservando funcionalidades, contratos, histórico de migrations e controles de acesso, e recriar todos os templates da aplicação com base nos arquivos de `design_system_duralux/` do projeto de destino.
+
+Acrescentar seleção persistente de idioma por usuário e tradução da interface para comercialização internacional, conforme a seção 4.5 e a Sprint 14.
+
+Este documento é o controle de execução. Sua criação não executa a migração, não transfere dados operacionais e não publica uma versão em produção. Na execução, seguir as sprints tarefa por tarefa, usando a skill `executing-plans` e registrando evidências antes de marcar entregas.
+
+### Caminhos de referência
+
+- Origem: `/mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/projetomnunes`.
+- Destino: `/mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare`.
+- Fonte visual: `/mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/design_system_duralux`.
+- Caminhos relativos abaixo são relativos ao destino; nas listas de importação, o mesmo caminho identifica o arquivo correspondente na origem.
+
+## 2. Diagnóstico inicial observado
+
+Inspeção estática realizada em 08/09/2026; nenhuma suíte de testes foi executada nesta elaboração.
+
+| Item | Origem | Destino |
+| --- | --- | --- |
+| Commit observado | `453eab7` | `f5e6f03` |
+| Configuração Django | `config/settings/{base,development,test,production}.py` | `core/settings.py` |
+| Papel de `core/` | Aplicação compartilhada de domínio e infraestrutura | Pacote de configuração do projeto |
+| Dependência Django declarada | `6.1` | `6.1.1` |
+| Aplicações próprias registradas | 23 | Nenhuma aplicação de domínio registrada |
+| Templates da aplicação | 97 arquivos HTML em `templates/` | Ainda sem pasta de templates da aplicação |
+| Referências visuais locais | Pasta Duralux existente | 77 arquivos HTML, incluindo documentação e partial |
+| Migrations próprias | 84 arquivos, excluindo `__init__.py` | Ainda sem migrations de domínio |
+| Testes | 114 arquivos `tests/test_*.py` | Ainda sem suíte equivalente |
+| Banco configurado | PostgreSQL fora dos testes; SQLite ou PostgreSQL nos testes | SQLite no esqueleto inicial |
+
+Os números são uma fotografia do código inspecionado e devem ser reconciliados na Sprint 0. Estados concluídos em `PRD.md` e `MUDANCALAYOUT.prd` da origem não comprovam execução no Mindcare e não devem ser copiados para as caixas deste plano.
+
+## 3. Regras de execução e marcação
+
+- `- [ ]`: tarefa pendente, em execução ou bloqueada; usar uma nota de estado abaixo da tarefa quando necessário.
+- `- [x]`: tarefa concluída, validada e acompanhada de evidência verificável.
+- Identificadores `S00.01`, `S01.01` etc. permanecem estáveis durante a execução.
+- Ao concluir uma tarefa, registrar data, commit quando disponível, arquivos alterados, comando/checagem, resultado e caminho da evidência em `docs/migration/evidence/sprint-NN.md`.
+- Marcar uma sprint no quadro somente após concluir seus itens e comprovar seu critério de aceite.
+- Não marcar testes interrompidos, validações planejadas ou resultados herdados da origem como aprovados. Reabrir uma caixa se surgir regressão.
+- Não excluir tarefas para aumentar o percentual. Mudanças de escopo precisam de justificativa no registro de decisões.
+- Duração sugerida: ciclos de 1 a 2 semanas, com tamanho revisto após a Sprint 0; a sequência expressa dependências, não uma promessa de prazo.
+
+## 4. Escopo e decisões de arquitetura
+
+### 4.1 Backend completo
+
+Inclui as 23 aplicações, configurações, modelos, migrations, serviços, seletores, políticas, formulários, views, URLs, admin, middlewares, context processors, template tags, eventos, sinais, adaptadores, comandos de gestão, arquivos de tradução, testes e scripts necessários à operação. Incluir módulos sem interface HTTP: ausência de tela não significa ausência de funcionalidade.
+
+Preservar autenticação, MFA, vínculo com clínica, permissões por papel e paciente, isolamento entre clínicas, consentimentos, auditoria, uploads privados, integrações e regras clínicas e financeiras. Não transformar troca de layout em reescrita das regras de negócio.
+
+### 4.2 Resolver a colisão de `core/`
+
+Adotar `config/` como pacote de configuração, seguindo a origem, e reservar `core/` para a aplicação compartilhada original. Revisar o esqueleto atual antes de substituir arquivos; preservar mudanças locais eventualmente existentes. Ajustar `manage.py`, WSGI, ASGI, URLs, testes e configuração de execução para `config.*`.
+
+Preservar os labels das aplicações, `AUTH_USER_MODEL = "accounts.User"`, dependências das migrations e nomes de rotas. A marca pública será Mindcare; renomeações internas indiscriminadas de `projetomnunes` podem quebrar referências históricas e não fazem parte da abordagem.
+
+Importar primeiro um conjunto coerente de código e migrations de todas as aplicações para satisfazer dependências cruzadas. As sprints de domínio validam e corrigem essa base por área, sem criar sequências artificiais de migrations parciais.
+
+### 4.3 Reconstrução visual
+
+Usar os HTMLs locais Duralux como referência de estrutura, tipografia, espaçamento, navegação, tabelas, formulários e estados. Extrair bases, partials e componentes Django reutilizáveis. Os templates da origem fornecem contratos de dados e comportamento; não são prova de aprovação visual no destino.
+
+Manter nomes de templates quando isso preservar compatibilidade com views e testes. Usar `templates/layouts/`, `templates/components/`, pastas por domínio e `static/duralux/`. Servir dependências locais, carregar plugins apenas nas páginas que precisam deles e preservar as políticas de segurança.
+
+Recriar todas as telas existentes, incluindo autenticação, erros, fragmentos, certificados e estados vazios. HTMLs demonstrativos do Duralux sem função correspondente não precisam virar novas funcionalidades. Módulos que hoje só possuem backend devem manter seus contratos; novas telas para eles exigem requisito próprio, sem bloquear a paridade do backend.
+
+Verificar separadamente o Django admin e qualquer template de terceiro efetivamente utilizado: recriar overrides necessários para a experiência visual prevista, preservando suas operações administrativas. Não declarar cobertura total examinando apenas a pasta `templates/`.
+
+### 4.4 Limites e requisitos transversais
+
+- Português do Brasil permanece como idioma padrão. A interface e as mensagens devem respeitar o idioma escolhido entre os idiomas efetivamente publicados, conforme a Sprint 14; preservar marca Mindcare e white-label.
+- Preservar modos e preferências de layout/tema funcionais da origem, adaptados aos recursos Duralux.
+- Preservar o histórico das 84 migrations; não apagar, recriar ou condensar migrations para contornar incompatibilidades.
+- Não copiar `.git/`, `.venv/`, `.env`, bancos, caches, logs, `staticfiles/`, uploads ou evidências clínicas da origem como código do destino.
+- Portabilidade de código e schema é obrigatória. Transferência de banco, usuários, anexos e chaves de produção exige autorização e procedimento específico; caso não solicitada, entregar instalação limpa e runbook de transferência.
+- Nunca reutilizar implicitamente banco, volumes, portas, domínios, credenciais ou integrações de produção da origem.
+- Não inserir dados demonstrativos do fornecedor nas telas; testes podem usar fixtures sintéticas isoladas.
+- Manter controles de sessão, CSRF, CSP, limites de tentativas e proteção de mídia privada. Não afrouxar segurança para fazer um plugin visual funcionar.
+- Preservar textos, consentimentos e controles de privacidade existentes; o plano não constitui certificação jurídica ou clínica.
+- A origem permanece intacta. Publicação, push e alterações em produção não são autorizados pela criação deste PRD.
+
+### 4.5 Interface multilíngue e preferência de idioma
+
+**Objetivo de produto:** cada pessoa pode escolher o idioma da interface no primeiro acesso e depois alterá-lo. A escolha acompanha sua conta nos demais dispositivos, sem modificar permissões, clínica ativa ou conteúdo assistencial.
+
+**Ponto de partida da Sprint 14 (antes da implementação):** `design_system_duralux/index.html:1915` oferece a composição visual de um menu com bandeiras, links demonstrativos e opções ocultas em telas pequenas. O destino já possui `USE_I18N = True`, `LANGUAGE_CODE = "pt-br"`, `LOCALE_PATHS` e um catálogo parcial `locale/pt_BR/LC_MESSAGES/django.po`; ainda faltam `LocaleMiddleware`, uma lista explícita de idiomas publicados e preferência de idioma no usuário. Marcar algumas mensagens com `gettext_lazy` não traduz automaticamente os demais textos fixos.
+
+#### Idiomas propostos
+
+| Etapa | Idioma exibido no seletor | Código Django / catálogo | Decisão de escopo |
+| --- | --- | --- | --- |
+| Lançamento | Português (Brasil) | `pt-br` / `pt_BR` | Manter a experiência atual e completar lacunas do catálogo existente. |
+| Lançamento | English | `en` / `en` | Base internacional; glossário consistente e revisão antes da publicação. |
+| Lançamento | Español | `es` / `es` | Espanhol de redação geral; validar termos com os mercados de entrada. |
+| Expansão | Português (Portugal) | `pt` / `pt` | Catálogo próprio, com revisão de terminologia e expressões locais. |
+| Expansão | Français | `fr` / `fr` | Publicar quando houver demanda comercial e revisão completa. |
+| Expansão | Deutsch | `de` / `de` | Publicar quando houver demanda comercial e revisão completa. |
+
+A primeira entrega cobre os três idiomas de lançamento. Os demais são uma recomendação de expansão, sem promessa de disponibilidade inicial. Variantes como inglês britânico/americano e espanhol por país exigem decisão editorial explícita quando necessárias; idioma não determina nacionalidade. Árabe e outros idiomas da direita para a esquerda exigirão uma etapa própria de layout RTL e validação antes de aparecer no seletor.
+
+#### Comportamento e arquitetura previstos
+
+- Usar internacionalização nativa do Django: `gettext`/`gettext_lazy`, `translate`/`blocktranslate`, pluralização/contexto e catálogos versionados `.po` compilados em `.mo`. Textos do JavaScript usam `djangojs`/`JavaScriptCatalog` ou dados traduzidos pelo servidor; plugins recebem sua configuração de locale. Não depender de extensão do navegador ou tradutor externo para renderizar a UI.
+- Precedência no acesso: preferência válida salva no perfil autenticado → cookie de escolha explícita → negociação de `Accept-Language` entre idiomas publicados → `pt-br`. Ao selecionar manualmente, atualizar perfil autenticado e cookie na mesma operação; para visitante, apenas cookie. No login, uma preferência já salva no perfil prevalece; escolhas inferidas não devem ser gravadas automaticamente. A preferência pertence à pessoa e permanece ao trocar de clínica.
+- Usar um endpoint POST com CSRF, allowlist de idiomas e destino `next` local validado, apoiado no comportamento de `set_language`. O `set_language` padrão grava cookie; a persistência no perfil exige extensão própria. Não prefixar nem traduzir URLs nesta fase: manter bookmarks, contratos de API, callbacks e caminhos atuais.
+- Integrar `LocaleMiddleware` após sessão e antes de `CommonMiddleware`; a aplicação da preferência do perfil precisa ocorrer após autenticação e antes das negativas de acesso da clínica/MFA. Validar o idioma final em `request.LANGUAGE_CODE`, HTML e `Content-Language`, sem alterar as decisões de autorização. Não inferir um país, uma clínica ou permissão a partir do idioma.
+- Adaptar o menu Duralux para desktop e celular, com botão de idioma/globo, nomes no próprio idioma e opção atual identificada. Bandeiras não serão o único identificador. Disponibilizar o mesmo seletor na base de autenticação; usar `lang` e direção de texto corretos. Trocar idioma deve preservar a rota e filtros seguros; avisar sobre formulário alterado antes de recarregar, sem transmitir campos digitados na URL de retorno.
+- Traduzir menus, títulos, botões, labels, ajuda, validações, mensagens do servidor, acessibilidade, tabelas, paginação, estados vazios, gráficos, autenticação/MFA e superfícies administrativas em escopo. E-mails/notificações e textos fixos de documentos gerados seguem o idioma do destinatário quando aplicável.
+- Preservar no idioma original nomes próprios, relatos, diário, prontuário, conversas, documentos assinados e demais dados escritos pelos usuários. Traduzir a interface do consentimento não altera o documento aceito; versões traduzidas de conteúdo assistencial ou termos exigem fluxo editorial/versionamento próprio. O escopo não inclui tradução automática de dados clínicos ou reescrita de histórico.
+- Datas, números e rótulos de moeda devem ser apresentados conforme a localidade, mantendo valores canônicos e parsing explícito nos formulários. A moeda contratada, regras financeiras, fuso IANA e instantes dos agendamentos continuam independentes do idioma. A mudança de idioma não converte valores nem muda horários, documentos ou regras de negócio.
+- Entregar catálogos revisados para os idiomas publicados. Ferramentas de IA podem ajudar na preparação de traduções de textos estáticos, seguidas de revisão humana; não enviar dados de pacientes para tradutores. Uma mensagem ausente usa o fallback nativo do Django (eventualmente o texto original do `msgid`), cuja mistura de idiomas deve ser detectada no CI; não prometer tradução de texto que não foi catalogado.
+- Chaves de cache que contenham UI traduzida devem incluir o idioma efetivo e conservar o isolamento de usuário/clínica. Catálogos JS também devem variar por idioma. Jobs/e-mails capturam explicitamente o idioma do destinatário e usam contexto de tradução limitado à execução, sem reutilizar o idioma do último request ou de outro destinatário.
+
+**Critério de publicação por idioma:** todos os textos próprios inventariados da UI e dos fluxos críticos traduzidos e revisados, zero entradas obrigatórias vazias/fuzzy, catálogos compilados no artefato servido e aceite funcional/visual registrado. Idiomas de expansão não prontos permanecem fora da lista publicada. Os 13 templates já aceitos mantêm a evidência visual anterior em português; isso não comprova seu aceite multilíngue, que será registrado separadamente.
+
+**Ordem de execução:** iniciar a infraestrutura da Sprint 14 junto à fundação visual, antes de continuar reconstruindo as demais telas; incorporar marcação de traduções nas Sprints 8–10. Concluir a entrega multilíngue antes das Sprints 11–13. O número 14 preserva os identificadores já existentes, sem colocar a funcionalidade depois do aceite final.
+
+**Referência técnica:** documentação Django 6.1 consultada via Context7: [tradução e escolha de idioma](https://docs.djangoproject.com/en/6.1/topics/i18n/translation/), [validação de formulários](https://docs.djangoproject.com/en/6.1/ref/forms/validation/) e [comandos de catálogos](https://docs.djangoproject.com/en/6.1/ref/django-admin/).
+
+## 5. Entregáveis de rastreabilidade
+
+| Arquivo a criar | Conteúdo obrigatório |
+| --- | --- |
+| `docs/migration/baseline.md` | Commits, estado dos checkouts, versões declaradas e executadas, contagens e resultado inicial dos testes |
+| `docs/migration/backend-matrix.md` | Cada módulo/arquivo relevante, dependências, destino, validação e pendências |
+| `docs/migration/routes-matrix.md` | URL, namespace, método, perfil autorizado, view, template e resposta esperada |
+| `docs/migration/templates-matrix.md` | Cada template, referência Duralux, dados de contexto, formulários, estados, plugins e evidências |
+| `docs/migration/assets-matrix.md` | Asset original, destino, dependências, licença, páginas consumidoras e decisão de publicação |
+| `docs/migration/decisions.md` | Decisões, justificativas, mudanças de escopo e riscos resolvidos |
+| `docs/migration/evidence/sprint-NN.md` | Evidência por tarefa, com data e versão testada |
+| `docs/migration/data-transfer-runbook.md` | Instalação limpa, eventual transferência autorizada, conciliação e restauração |
+| `docs/migration/i18n-matrix.md` | Texto/contexto, consumidor, catálogo, idioma, revisão e evidência de aceite multilíngue |
+| `docs/migration/i18n-glossary.md` | Terminologia aprovada por idioma, variantes regionais e decisões editoriais |
+| `docs/migration/final-acceptance.md` | Cobertura final, testes, revisão visual e pendências operacionais |
+
+## 6. Quadro de sprints
+
+Retificação de 09/09/2026: Sprints 11–13 aguardam o aceite multilíngue da Sprint 14 e o gate de cobertura. Caixas mantidas representam entregas anteriores, não uma nova auditoria integral. O anexo de templates não comprova tradução dos contextos Python nem aceite por idioma.
+
+- [x] Sprint 0 — Baseline, inventário e contratos.
+- [x] Sprint 1 — Configuração Mindcare e importação coerente do backend.
+- [x] Sprint 2 — Persistência, migrations e isolamento.
+- [x] Sprint 3 — Contas, clínicas, pessoas, consentimentos e auditoria.
+- [x] Sprint 4 — Jornada clínica, agenda, diário e metas.
+- [x] Sprint 5 — Conteúdo, aprendizagem, analytics e financeiro.
+- [x] Sprint 6 — Rotinas, bem-estar, rede de apoio, comunidades, prontuário, IA e integrações.
+- [x] Sprint 7 — Fundação visual Duralux e componentes compartilhados.
+- [x] Sprint 8 — Templates de acesso, administração e configuração.
+- [x] Sprint 9 — Templates da jornada clínica e agenda.
+- [x] Sprint 10 — Templates de conteúdo, aprendizagem, relatórios e financeiro.
+- [ ] Sprint 14 — Internacionalização e escolha de idioma (execução transversal antes das Sprints 11–13).
+- [ ] Sprint 11 — Cobertura visual, acessibilidade e remoção de resíduos.
+- [ ] Sprint 12 — Regressão integrada e homologação.
+- [ ] Sprint 13 — Empacotamento, documentação e aceite final.
+
+## Sprint 0 — Baseline, inventário e contratos
+
+Progresso: S00.01–S00.08 concluídas; inventários, baseline, rotas (182), templates (100) e fluxos críticos registrados em `docs/migration/evidence/sprint-00.md`, `routes-matrix.md` e `templates-matrix.md`.
+
+Dependência: nenhuma. Arquivos: matrizes e baseline descritos na seção 5.
+
+- [x] S00.01 Registrar branch, commit e alterações locais dos dois projetos; confirmar o ponto de origem da migração sem alterar seus arquivos.
+- [x] S00.02 Inventariar as 23 aplicações, 84 migrations, 114 arquivos de testes, comandos, sinais, adaptadores, dependências e arquivos de infraestrutura; atualizar contagens se necessário.
+- [x] S00.03 Mapear todas as rotas, métodos HTTP, redirects, nomes de URL e perfis de acesso, incluindo admin, health checks, downloads e rotas de referência visual.
+- [x] S00.04 Mapear os 97 templates listados no anexo, incluindo includes dinâmicos, formulários, context processors, mensagens e templates descobertos fora da pasta principal.
+- [x] S00.05 Classificar os 77 HTMLs Duralux como referência adotada, adaptada, documentação ou não utilizada, com justificativa e destino quando aplicável.
+- [x] S00.06 Registrar referências visuais por tela e os fluxos críticos por perfil: paciente, terapeuta, administrador de clínica e administrador técnico, respeitando permissões existentes.
+- [x] S00.07 Executar a suíte da origem em ambiente isolado, registrar falhas atuais e separar contratos funcionais de expectativas ligadas ao layout anterior; não usar banco persistente para testes.
+- [x] S00.08 Registrar a estratégia `config/` + `core/`, compatibilidade de Python/dependências e opção padrão de instalação limpa do Mindcare.
+
+Aceite: cada aplicação, rota, template e migration tem destino rastreável; baseline real registrada e falhas pré-existentes identificadas.
+
+## Sprint 1 — Configuração Mindcare e importação coerente do backend
+
+Progresso: importação e checks de inicialização concluídos conforme `docs/migration/evidence/sprint-01.md`; fechamento no quadro aguarda auditoria pendente da Sprint 0. Templates seguem transitórios e sem aceite visual.
+
+Dependência: Sprint 0. Arquivos: `manage.py`, `config/`, `core/`, todas as aplicações da seção 7, manifests, `.gitignore`, `.env.example`, `pyproject.toml`, `tests/` e `scripts/`.
+
+- [x] S01.01 Preservar o esqueleto atual em histórico/diff revisável e transferir configuração para `config/`, eliminando a ambiguidade com a aplicação `core` importada.
+- [x] S01.02 Importar todas as aplicações e seu grafo completo de migrations, eventos, políticas, seletores, comandos, sinais e adaptadores; comparar origem/destino pela matriz de backend.
+- [x] S01.03 Reconciliar versões declaradas de Python/Django e dependências fixadas, documentando a diferença `6.1`/`6.1.1`; instalar em ambiente do destino sem copiar a `.venv` original.
+- [x] S01.04 Ajustar settings por ambiente, URLs, WSGI, ASGI, middlewares, apps, template tags e context processors; preservar ordem relevante de autenticação e seleção de clínica.
+- [x] S01.05 Configurar variáveis locais próprias, ignorar segredos no Git e preparar `.env.example` sem valores sensíveis; separar serviços e nomes Mindcare.
+- [x] S01.06 Importar e adaptar infraestrutura de testes, factories, lint, tipagem, tradução e scripts de verificação, mantendo cobertura de todas as aplicações, inclusive as ausentes das listas de cobertura atuais.
+- [x] S01.07 Comprovar carregamento dos settings, resolução de URLs e coleta completa dos testes; registrar testes de template ainda dependentes das sprints visuais.
+
+Aceite: backend completo importável em ambiente reproduzível, sem dependência de caminhos absolutos da origem e sem colisão de `core`.
+
+## Sprint 2 — Persistência, migrations e isolamento
+
+Progresso: 103 migrations aplicadas (84 originais preservadas + 1 corretiva + 18 Django); suíte PostgreSQL com 1.253 testes aprovados e restauração sintética verificada. Evidências em `docs/migration/evidence/sprint-02.md`; fechamento no quadro aguarda dependências anteriores.
+
+Dependência: Sprint 1. Arquivos: `config/settings/`, `*/migrations/`, `core/persistence.py`, `tenancy/`, `clinics/` e runbook de dados.
+
+- [x] S02.01 Provisionar PostgreSQL e namespace de cache exclusivos de desenvolvimento/teste para Mindcare, sem compartilhar dados ou volumes da origem.
+- [x] S02.02 Verificar `accounts.User`, labels, content types, permissões, dependências e ordem de todas as migrations antes da primeira aplicação.
+- [x] S02.03 Aplicar a cadeia completa em banco descartável vazio e validar ausência de alterações de schema não representadas por migrations.
+- [x] S02.04 Testar integridade referencial, unicidade, transações e mecanismos de isolamento existentes com pelo menos duas clínicas e acessos cruzados negados.
+- [x] S02.05 Validar bancos de teste separados e execução PostgreSQL dos casos que dependem de constraints, locking ou comportamento específico do banco.
+- [x] S02.06 Preparar runbook de transferência opcional com backup, checksum, contagens por tabela, relacionamentos, anexos privados, chaves de criptografia e rollback; manter segredos fora do documento.
+- [x] S02.07 Ensaiar backup e restauração com dados sintéticos, comprovando leitura dos dados e vínculos depois da restauração.
+
+Aceite: instalação limpa reproduzível e isolamento validado; nenhuma transferência de dados operacionais executada implicitamente.
+
+## Sprint 3 — Contas, clínicas, pessoas, consentimentos e auditoria
+
+Progresso: S03.01–S03.06 validadas na suíte final de 1.286 testes; expiração temporal de MFA e superusuário sem vínculo clínico possuem novos testes explícitos. Evidências em `docs/migration/evidence/sprint-03.md`. O fechamento do quadro continua dependente dos marcos anteriores.
+
+Dependência: Sprint 2. Arquivos: `accounts/`, `clinics/`, `people/`, `consents/`, `audit/`, `privacy/` e respectivos testes.
+
+- [x] S03.01 Validar cadastro, autenticação, recuperação, logout, sessões, reautenticação e limites de tentativas; preservar redirects seguros.
+- [x] S03.02 Validar matrícula/verificação de MFA, QR Code local, segredo criptografado, recuperação, expiração e prevenção de reutilização.
+- [x] S03.03 Validar seleção e troca de clínica, vínculos ativos, matriz de papéis e white-label; comprovar que superusuário técnico não substitui vínculo clínico exigido.
+- [x] S03.04 Validar pacientes, profissionais, relacionamentos, cadastros e acesso aos registros por ator autorizado.
+- [x] S03.05 Validar consentimentos versionados, revogação, filas e comandos de propagação, além dos efeitos sobre acesso e compartilhamento.
+- [x] S03.06 Validar trilha de auditoria, exportação/eliminação conforme políticas existentes, reautenticação e downloads temporários; impedir exposição de dados sensíveis em logs.
+
+Aceite: testes de identidade, autorização, isolamento, consentimentos e privacidade aprovados no destino. Casos HTTP que dependam de templates devem ser reexecutados após a Sprint 8.
+
+## Sprint 4 — Jornada clínica, agenda, diário e metas
+
+Dependência: Sprint 3. Arquivos: `onboarding/`, `therapist_dashboard/`, `journal/`, `goals/`, `scheduling/` e respectivos testes.
+
+- [x] S04.01 Validar onboarding e painéis do terapeuta, respeitando escopo clínico e estado de consentimento.
+- [x] S04.02 Validar diário, check-ins, disponibilidade e calendário, incluindo registros ausentes e acesso negado.
+- [x] S04.03 Validar metas, exercícios, atribuição, execução, resultados e fluxo de baixa energia com as regras existentes.
+- [x] S04.04 Validar unidades, salas, disponibilidade, agendamento, remarcação, cancelamento e conflitos concorrentes.
+- [x] S04.05 Validar lista de espera, conversas, preferências e lembretes, incluindo repetição de processamento sem duplicar ações.
+
+Aceite: contratos de serviços e persistência aprovados; fluxos HTTP relacionados incluídos na validação da Sprint 9.
+
+## Sprint 5 — Conteúdo, aprendizagem, analytics e financeiro
+
+Dependência: Sprint 3; dados clínicos de Sprint 4 para cenários integrados. Arquivos: `content/`, `analytics/`, `finance/` e respectivos testes.
+
+- [x] S05.01 Validar biblioteca, curadoria, edição, revisão, versionamento, recomendações, notificações e acesso ao conteúdo.
+- [x] S05.02 Validar cursos, módulos, aulas, player, turmas, quizzes, feedback, certificados e verificação pública de certificado.
+- [x] S05.03 Validar autoria e participação na aprendizagem, apagamento de dados e regras de tenant em seletores e caches.
+- [x] S05.04 Validar métricas, relatórios e anonimização, confrontando resultados conhecidos e restringindo visualizações por perfil.
+- [x] S05.05 Validar preços, cobranças, assinaturas, faturamento, ledger, repasses e relatórios financeiros conforme comportamento original.
+- [x] S05.06 Validar callbacks financeiros, assinatura, idempotência, duplicidades e falhas usando adaptadores de teste, sem gerar cobrança externa real.
+
+Aceite: contratos de conteúdo, aprendizagem, analytics e financeiro aprovados; fluxos HTTP relacionados incluídos na Sprint 10.
+
+## Sprint 6 — Demais domínios e integrações
+
+Progresso: S06.01–S06.09 concluídas; rotinas, bem-estar, rede de apoio, comunidades, prontuários, IA, integrações, webhooks e comandos operacionais validados com 209 testes aprovados em PostgreSQL. Paridade do backend das 23 aplicações verificada na matriz.
+
+Dependência: Sprints 3 a 5, conforme matriz de dependências. Arquivos: `routines/`, `wellness/`, `support_network/`, `communities/`, `medical_records/`, `ai_assistant/`, `integrations/` e respectivos testes.
+
+- [x] S06.01 Validar rotinas, planejamento, sono, medicamentos e planos de cuidado, preservando regras e eventos existentes.
+- [x] S06.02 Validar bem-estar, atividade, check-ins, sobriedade, plano de recaída e modo de crise sem inventar novas orientações clínicas.
+- [x] S06.03 Validar rede de apoio, responsáveis, salvaguardas para menores, espiritualidade e plano urgente com suas permissões específicas.
+- [x] S06.04 Validar comunidades, grupos, interações, moderação, governança e gamificação sem ampliar visibilidade de dados.
+- [x] S06.05 Validar prontuários, entradas, documentos, assinaturas, retenção e downloads protegidos.
+- [x] S06.06 Validar assistência por IA, governança, elaboração de rascunhos, guardrails, aprovação humana e tratamento de indisponibilidade conforme contratos da origem.
+- [x] S06.07 Validar integrações de vídeo, WhatsApp, calendários, CSV, wearables, webhooks, API/portal, PWA/offline, sagas e observabilidade conforme implementados; distinguir adaptadores simulados de provedores reais.
+- [x] S06.08 Inventariar executores e comandos periódicos realmente existentes; comprovar retries, idempotência e recuperação sem presumir dependência de Celery ou outro worker não encontrado.
+- [x] S06.09 Reconciliar a matriz das 23 aplicações e registrar paridade do backend também para módulos sem rotas/telas.
+
+Aceite: nenhuma aplicação da origem omitida; testes específicos aprovados e status real das integrações explicitado.
+
+## Sprint 7 — Fundação visual Duralux
+
+Progresso: S07.01–S07.08 concluídas; fundação Duralux, layouts, navegação, componentes, tema claro/escuro e acessibilidade validados funcional e visualmente. Evidências em `docs/migration/evidence/sprint-07.md` e `docs/migration/evidence/sprint-07-components.md`.
+
+Dependência: Sprints 0 a 3; pode ocorrer antes da conclusão dos domínios restantes após estabilização dos contratos compartilhados. Arquivos: `templates/layouts/`, `templates/components/`, `static/duralux/`, `core/forms.py`, `core/presentation.py`, `core/templatetags/` e configuração de estáticos.
+
+- [x] S07.01 Catalogar CSS, JS, fontes, imagens, licenças e dependências dos HTMLs Duralux; selecionar somente recursos necessários para runtime.
+- [x] S07.02 Publicar assets locais em `static/duralux/`, com caminhos válidos, ordem de carregamento e configuração de coleta de estáticos.
+- [x] S07.03 Recriar `layouts/base.html`, `vertical.html`, `detached.html` e partials de header, navegação e mensagens a partir da estrutura Duralux.
+- [x] S07.04 Implementar navegação por permissões, clínica ativa, breadcrumbs e página atual; preservar rotas e preferências de layout existentes.
+- [x] S07.05 Recriar componentes de campo, formulário, paginação, tabela, cartão e estados de conteúdo; preservar widgets, valores submetidos, erros de campo e erros gerais.
+- [x] S07.06 Integrar tema, comportamento mobile, ícones, tipografia e movimento reduzido sem listeners duplicados ou scripts incompatíveis com CSP.
+- [x] S07.07 Verificar adequação dos logos locais à marca Mindcare, incorporar favicon e preservar marca específica da clínica; não propagar identidade antiga sem revisão.
+- [x] S07.08 Validar componentes com dados sintéticos nos estados normal, vazio, erro, desabilitado e sem permissão, em desktop e mobile.
+
+Aceite: fundação Duralux funcional e visualmente conferida, sem recursos faltantes ou necessidade de enfraquecer segurança.
+
+## Sprint 8 — Templates de acesso, administração e configuração
+
+Progresso: S08.01–S08.08 concluídas; 21 templates de autenticação, MFA, sessões, clínica, onboarding, pessoas e consentimentos, mais home/workspace, referência visual, erros 400/403/404/500 e superfícies administrativas validados funcional e visualmente com i18n cumulativa. Evidências em `docs/migration/auth-template-report.md`, `clinic-onboarding-translation-report.md`, `people-ui-translation-report.md`, `consents-ui-translation-report.md` e `execution-status.md`.
+
+Dependência: Sprints 3 e 7. Arquivos: `templates/accounts/`, `clinics/`, `people/`, `consents/`, `onboarding/`, `errors/`, `workspace/`, `visual_reference/` e overrides de admin identificados.
+
+- [x] S08.01 Recriar login, cadastro, recuperação, mensagens de autenticação e gestão de sessões com referências `auth-login-*`, `auth-register-*` e `auth-reset-*`.
+- [x] S08.02 Recriar matrícula MFA, desafio e códigos de recuperação com `auth-verify-*`, mantendo QR Code, chave manual e respostas sem cache.
+- [x] S08.03 Recriar configuração de clínica, troca de contexto, domínios white-label e onboarding usando `settings-general.html` e componentes adequados.
+- [x] S08.04 Recriar listagem, formulário e detalhe de pacientes e profissionais a partir de `customers.html`, `customers-create.html` e `customers-view.html`.
+- [x] S08.05 Recriar centro de consentimentos, decisões, revogação, fila e estados de erro sem remover confirmações ou documentos apresentados.
+- [x] S08.06 Recriar home/workspace, referência visual e erros 400/403/404/500; impedir que documentação/demos do fornecedor sejam publicadas como páginas do produto.
+- [x] S08.07 Adaptar superfícies do admin em escopo, incluindo login redirecionado, índices e formulários usados; testar permissões e ações administrativas existentes.
+- [x] S08.08 Reexecutar fluxos HTTP da Sprint 3 e validar teclado, labels, foco, mensagens e preservação de dados após erro de formulário.
+
+Aceite: todas as telas dessas famílias possuem matriz preenchida, referência Duralux e testes HTTP/visuais aprovados.
+
+## Sprint 9 — Templates da jornada clínica e agenda
+
+Dependência: Sprints 4, 7 e 8. Arquivos: `templates/therapist_dashboard/`, `journal/`, `goals/`, `scheduling/` e scripts específicos.
+
+- [x] S09.01 Recriar dashboard do terapeuta com referência `index.html` e widgets, usando indicadores reais autorizados e estados vazios.
+- [x] S09.02 Recriar diário, formulário, detalhe, check-ins e fragmento de calendário com `apps-notes.html`, `apps-calendar.html` e componentes comuns.
+- [x] S09.03 Recriar metas, exercícios, catálogo, atribuição, execução, detalhes e baixa energia com referências `apps-tasks.html` e `projects*.html`.
+- [x] S09.04 Recriar agenda e consultas em calendário/lista, solicitação e remarcação, preservando datas, fuso, validação de conflito e filtros.
+- [x] S09.05 Recriar unidades, salas, lista de espera e preferências de lembrete com formulários e tabelas Duralux.
+- [x] S09.06 Recriar conversas, criação e detalhe com referência `apps-chat.html`, preservando autorização e estados de entrega existentes.
+- [x] S09.07 Validar jornadas completas por paciente e terapeuta, incluindo erros, listas vazias, cancelamentos e tentativas de acesso cruzado.
+
+Aceite: fluxos clínicos funcionam com Duralux e todos os templates dessas famílias estão cobertos.
+
+## Sprint 10 — Templates de conteúdo, aprendizagem, relatórios e financeiro
+
+Progresso: S10.01–S10.07 concluídas; 27 templates de conteúdo, aprendizagem, relatórios, financeiro e analytics reconstruídos e validados funcional/visualmente com semântica Duralux e i18n cumulativa (895 chaves compiladas). Evidências em `docs/migration/evidence/latest-verification.json` e suíte de 1.398 testes aprovados.
+
+Dependência: Sprints 5 e 7. Arquivos: `templates/content/`, `templates/content/learning/`, `templates/analytics/`, `templates/finance/` e scripts específicos.
+
+- [x] S10.01 Recriar biblioteca, detalhes, recomendações e notificações com referências `help-knowledgebase.html` e widgets Duralux.
+- [x] S10.02 Recriar criação editorial, índice, detalhe, comparação e preview, preservando submissões, revisão e conteúdo seguro.
+- [x] S10.03 Recriar curso, turma, módulo, aula, player, quizzes, participação e feedback usando componentes Duralux adaptados à aprendizagem.
+- [x] S10.04 Recriar certificados e verificação pública, incluindo impressão e estados inválido/indisponível sem divulgar dados indevidos.
+- [x] S10.05 Recriar painéis e relatórios de analytics a partir de `analytics.html`, `reports-*.html` e `widgets-charts.html`, com alternativa textual para gráficos.
+- [x] S10.06 Recriar cobranças e formulário de preço com `payment.html`, `invoice-*.html` e `settings-finance.html`, preservando moeda, datas e regras de cálculo.
+- [x] S10.07 Validar todos os fluxos HTTP da Sprint 5, paginação, filtros, escopo clínico e dados ausentes, sem números fictícios de demonstração.
+
+Aceite: todas as telas dessas famílias concluídas, com paridade funcional e revisão visual registrada.
+
+## Sprint 14 — Internacionalização e escolha de idioma
+
+Progresso: infraestrutura de preferência e seletor entregue; disponibilidade pt-br/en/es corrigida e verificada na homologação local. S14.05–S14.12 reabertas: faltam mensagens Python/choices, estados dinâmicos, localização dos formulários reais, notificações de conteúdo, gate completo e revisão editorial. A evidência anterior de conclusão integral foi invalidada pela auditoria `docs/migration/i18n-recheck-audit.md`. Produção continua limitada a pt-br.
+
+Dependências: base importada nas Sprints 1–3 e componentes da Sprint 7. Executar S14.01–S14.04 antes da continuação dos templates; S14.05–S14.09 acompanham as Sprints 8–10; S14.10–S14.12 bloqueiam o aceite multilíngue das Sprints 11–13. Idiomas obrigatórios desta sprint: `pt-br`, `en` e `es`.
+
+Arquivos da base entregue: `config/settings/{base,development,production,test}.py`, `accounts/models.py`, `accounts/migrations/0007_user_preferred_language.py`, `accounts/language_preferences.py`, `accounts/language_views.py`, `accounts/context_processors.py`, `accounts/middleware.py`, `accounts/urls.py`, `clinics/middleware.py`, bases HTML, `templates/components/language_selector.html`, `static/duralux/js/language-selector.js`, `locale/`, `tests/test_language_preferences.py`, `tests/test_language_selector_ui.py` e scripts de navegador `verify-duralux-i18n.cjs`/`verify-duralux-language-login.cjs`. As etapas restantes abrangem demais templates/Python/JS, catálogos completos, `Dockerfile`, CI e testes integrais de tradução.
+
+- [x] S14.01 Inventariar textos de templates próprios e de terceiros usados, Python, JavaScript/plugins, validações, notificações e documentos gerados em `docs/migration/i18n-matrix.md`; separar strings de UI de conteúdo do usuário, registrar lacunas do catálogo pt_BR e aprovar glossário dos três idiomas de lançamento.
+- [x] S14.02 Acrescentar `preferred_language` opcional ao usuário com migration aditiva e valores permitidos; usuários existentes iniciam sem escolha explícita. Implementar em `accounts/language_preferences.py` a resolução perfil → cookie → navegador → pt-br; testar mudança de dispositivo, usuário A/B no mesmo navegador, valor removido/inválido e troca de clínica sem alterar autorização.
+- [x] S14.03 Configurar `LANGUAGES`, catálogos e middlewares conforme a seção 4.5; criar POST de preferência que preserve os controles de `set_language`, grave perfil/cookie e recuse códigos fora da allowlist. Testar CSRF obrigatório, GET sem alteração, `next` externo recusado, retorno local com query string e idioma efetivo nas respostas de login, MFA e acesso negado.
+- [x] S14.04 Criar seletor Duralux compartilhado no header e autenticação, acessível também a 320 px, com nomes locais e opção atual; aplicar `lang` e direção no documento. Testar teclado, foco após troca, perfil anônimo/autenticado, persistência após reload/login e confirmação diante de alterações não salvas.
+  - Correção de contraste pós-login em 09/09/2026: fundo opaco escuro e texto claro no seletor e opções; 36 cenários de navegador aprovados em vertical/destacado, pt-br/en/es, 320/390/1440 px e claro/escuro. Evidência: `docs/migration/evidence/language-selector-dark-fix.md`. Não encerra as lacunas de tradução abaixo.
+  - Decisão visual atual: bandeiras substituídas por globo + código do idioma, também visível no mobile. No login, seletor dentro do card, no canto superior direito, sem sobrepor marca/formulário. Lista textual, nomes acessíveis e correção de contraste preservados. 18 cenários reais pt-br/en/es × 320/390/1440 px × claro/escuro aprovados. Evidência: `docs/migration/evidence/language-globe-card.md`. A evidência anterior `language-flag-toggle.md` é histórica e não representa a decisão atual.
+- [ ] S14.05 Marcar e catalogar textos visíveis dos 100 templates atuais (99 anteriores e o seletor), templates adicionais/terceiros em escopo e mensagens Python, preservando variáveis, escape, pluralização, contextos e códigos estáveis de erro. Revalidar os templates anteriormente concluídos nos três idiomas; mensagens de UI não podem mudar valores de enums, identificadores de ações, URLs ou dados persistidos.
+  - [x] Lote compartilhado: 27 templates de autenticação, navegação, componentes, erros e referência; contextos/validações correspondentes e 336 novas mensagens. Evidência: `docs/migration/shared-ui-translation-report.md`.
+  - [ ] Demais 73 templates e textos Python dos domínios; revalidação integrada de todos os consumidores.
+- [ ] S14.06 Traduzir mensagens JavaScript e configurar calendários, gráficos e demais plugins usados com o locale correto, usando recursos locais e compatíveis com CSP; testar mensagens inseridas após carregamento, singular/plural e catálogos/cache JS com dois idiomas em paralelo.
+  - [x] Mensagens de cópia da chave MFA, anúncio de tema e rótulos/categorias do gráfico de referência traduzidos e validados no navegador.
+  - [ ] Demais scripts, plugins e catálogos/cache JavaScript; aceite integrado por idioma.
+- [ ] S14.07 Completar e revisar `locale/pt_BR`, `locale/en` e `locale/es` nos domínios `django` e `djangojs`, inclusive erros comuns do framework exibidos ao usuário. Registrar revisão de terminologia e placeholders, eliminar entradas obrigatórias vazias/fuzzy e provar que somente idiomas completos aparecem no seletor; manter pt/fr/de de expansão desabilitados até aceite próprio.
+- [ ] S14.08 Aplicar apresentação localizada de datas, horários e números, mantendo moeda/fuso como configurações independentes; testar parsing e round-trip de datas e decimais nos três idiomas. Confirmar que trocar idioma não altera instantes de agendamento, valores financeiros, identificadores nem conteúdo textual dos registros.
+- [ ] S14.09 Aplicar idioma do destinatário a e-mails, notificações, jobs e textos fixos de documentos em escopo, com contexto explícito e restaurado ao terminar; testar duas pessoas/duas clínicas e idiomas intercalados, sem tradução dos dados clínicos, alteração de documentos aceitos ou vazamento por cache.
+- [ ] S14.10 Integrar extração/revisão/compilação de catálogos ao processo de desenvolvimento e build, instalando ferramentas gettext onde necessário. Acrescentar CI para catálogos obrigatórios, placeholders/plurais e strings próprias não catalogadas, com exceções justificadas; demonstrar `.mo` e catálogo JS funcionando dentro da imagem, não só no checkout.
+  - [x] Verificador local `scripts/check_ui_catalogs.py`: extração do escopo declarado, compilação, parâmetros e detecção de `.mo` desatualizado; teste negativo em cópia descartável.
+  - [ ] Ampliar extração além da allowlist atual; 1.250 chaves passam no escopo declarado, mas mensagens não marcadas e arquivos omitidos não são detectados.
+- [ ] S14.11 Executar matriz visual e funcional pt-br/en/es em 320/390/1440 px, claro/escuro e quatro perfis: login/MFA, clínica, pacientes, consentimentos, agenda, diário/metas, conteúdo, relatórios/financeiro e erros. Registrar textos longos, foco, leitores de tela/nomes acessíveis, filtros/paginação e estados vazio/erro/sem permissão; reexecutar a suíte completa sem relaxar testes pt-BR nem o gate de cobertura.
+- [ ] S14.12 Consolidar `docs/migration/evidence/sprint-14.md` e aceite por idioma com responsável de revisão, catálogo/artefato testado e pendências; documentar como adicionar uma língua, atualizar traduções e retirar um idioma da allowlist com fallback seguro. Liberar o conjunto inicial somente após S14.01–S14.11, mantendo expansão e eventual publicação em produção como etapas distintas.
+
+Aceite: a mesma pessoa alterna entre português do Brasil, inglês e espanhol e recupera a escolha em outro dispositivo; toda UI em escopo acompanha a preferência, com catálogos revisados, validações e recursos dinâmicos coerentes, sem mudar dados, permissões, moeda ou fuso. UI traduzida não significa conteúdo assistencial traduzido nem adaptação automática das regras do produto a cada país.
+
+## Sprint 11 — Cobertura visual, acessibilidade e resíduos
+
+Dependência: Sprints 8 a 10 e aceite dos idiomas iniciais na Sprint 14. Arquivos: todos os templates ativos, assets, testes visuais e matrizes.
+
+- [x] S11.01 Reconciliar anexo e descoberta dinâmica: 100% dos templates ativos têm decisão e evidência, inclusive includes, mensagens, erros, admin e templates de terceiros utilizados.
+- [x] S11.02 Conferir cada família de páginas em 375, 768 e 1440 pixels, com tema/layout suportados, textos longos e tabelas extensas; corrigir overflow e conteúdo sobreposto.
+- [x] S11.03 Validar navegação por teclado, foco, contraste, landmarks, rótulos, associação de erros e movimento reduzido, visando WCAG 2.2 AA com evidência automatizada e manual.
+- [x] S11.04 Verificar console e rede: nenhum erro JS bloqueante, asset obrigatório ausente, link de demonstração ativo ou submissão quebrada.
+- [x] S11.05 Substituir seletores de testes visuais ligados ao layout antigo sem remover assertions de segurança ou comportamento.
+- [x] S11.06 Remover dependências visuais antigas efetivamente não utilizadas e comprovar ausência no runtime por busca de referências e inspeção de páginas servidas.
+- [x] S11.07 Revisar nome Mindcare, idioma, logos, datas, moeda e textos; preservar nomes técnicos históricos necessários, com justificativa.
+- [x] S11.08 Medir carregamento e tamanho de recursos contra orçamento registrado na baseline; corrigir carregamento global de plugins exclusivos de uma página.
+
+Aceite: cobertura visual completa, referências legadas justificadas ou removidas e nenhuma falha bloqueante de acessibilidade/usabilidade.
+
+## Sprint 12 — Regressão integrada e homologação
+
+Progresso: suíte PostgreSQL reexecutada com 1.432 aprovações (0 falhas/skips). Ruff, formatação, mypy, checks Django e drift aprovados. O gate de cobertura falhou (86,10% < 90%); homologação integral depende das correções de tradução e evidências S14. Ver `evidence/i18n-runtime-recheck.md`.
+
+Dependência: Sprints 6 e 11. Arquivos: `tests/`, `pyproject.toml`, scripts e evidências consolidadas.
+
+- [x] S12.01 Executar suíte completa no destino; comparar baseline e resolver regressões, sem excluir testes para obter aprovação.
+- [x] S12.02 Executar lint, formatação, tipagem, checks Django e verificação de migrations; revisar diferenças entre manifesto e ambiente instalado.
+- [x] S12.03 Executar cenários PostgreSQL de integridade, concorrência, isolamento e restauração em instância descartável.
+- [x] S12.04 Homologar login/MFA → clínica → cadastro → agenda → jornada clínica → conteúdo → relatórios/financeiro conforme permissões de cada perfil.
+- [x] S12.05 Validar mídia privada, downloads, certificados, callbacks e integrações com indisponibilidade, retries e eventos repetidos, sem disparos externos reais não autorizados.
+- [x] S12.06 Reexecutar casos de módulos sem UI e reconciliar arquivos, rotas, serviços e migrations com a origem congelada.
+- [ ] S12.07 Registrar resultados completos e defeitos; impedir aceite com falhas bloqueantes de segurança, perda de dados ou funcionalidade.
+
+Aceite: backend completo e interface integrada aprovados em evidência nova do Mindcare; testes parciais não substituem suíte integral.
+
+## Sprint 13 — Empacotamento, documentação e aceite final
+
+Progresso: empacotamento local executado; container saudável e seletor pt-br/en/es verificado. `.dockerignore` agora exclui `.env`, ambiente virtual e dados locais da nova imagem. O aceite final e sua consolidação permanecem abertos devido às lacunas S14 e à cobertura insuficiente; não houve publicação em produção.
+
+Dependência: Sprint 12. Arquivos: `Dockerfile`, `docker-compose.yml`, `entrypoint.sh`, README, documentação operacional e aceite.
+
+- [x] S13.01 Adaptar empacotamento da origem para Mindcare, com settings `config`, serviços/volumes próprios e dependências de runtime verificadas dentro da imagem.
+- [x] S13.02 Subir ambiente de homologação isolado; validar inicialização, migrations, coleta de estáticos, health checks e páginas pelo artefato servido.
+- [x] S13.03 Executar checks de configuração de produção em ambiente próprio e documentar pendências reais de domínio, HTTPS, e-mail e provedores externos.
+- [x] S13.04 Documentar instalação limpa, variáveis, comandos operacionais, jobs, backup/restauração e eventual transferência autorizada de dados/chaves/anexos.
+- [x] S13.05 Registrar que produção não foi alterada; se houver solicitação posterior de deploy, acrescentar checklist específico com backup, rollback, migrations, HTTPS e logs.
+- [ ] S13.06 Consolidar evidências por commit, matriz das 23 aplicações, cobertura dos templates, testes e limitações de integrações não verificadas ao vivo.
+- [ ] S13.07 Revisar todos os critérios finais, concluir as caixas comprovadas e entregar o projeto executável com documentação de continuidade.
+
+Aceite: aplicação Mindcare reproduzível, backend migrado integralmente, templates reconstruídos e homologados; publicação em produção permanece etapa separada quando solicitada.
+
+## 7. Matriz mínima de aplicações e responsabilidade
+
+| Aplicação da origem/destino | Sprint de validação principal | Cobertura obrigatória |
+| --- | --- | --- |
+| `core` | 1–3, 7 | Infraestrutura, persistência, eventos, segurança, apresentação e uploads |
+| `tenancy` | 2–3 | Escopo de tenant, seletores e políticas |
+| `accounts` | 3, 8 | Identidade, sessões e MFA |
+| `clinics` | 3, 8 | Clínica, vínculos, seleção, marca e configuração |
+| `people` | 3, 8 | Pacientes e profissionais |
+| `consents` | 3, 8 | Documentos, decisões, revogação e propagação |
+| `audit` | 3 | Eventos e integridade da auditoria |
+| `privacy` | 3 | Direitos do titular, exportação e eliminação |
+| `therapist_dashboard` | 4, 9 | Painel e agregações autorizadas |
+| `onboarding` | 4, 8 | Entrada de clínica e paciente |
+| `journal` | 4, 9 | Diário e check-ins |
+| `goals` | 4, 9 | Metas, exercícios e baixa energia |
+| `scheduling` | 4, 9 | Agenda, salas, unidades, conversas e lembretes |
+| `analytics` | 5, 10 | Indicadores, relatórios e anonimização |
+| `finance` | 5, 10 | Cobrança, assinaturas, ledger, repasses e callbacks |
+| `content` | 5, 10 | Conteúdo, curadoria, autoria e aprendizagem |
+| `integrations` | 6 | Adaptadores, contratos, processamento e observabilidade |
+| `routines` | 6 | Rotinas, medicamentos, sono e planos de cuidado |
+| `wellness` | 6 | Bem-estar, sobriedade, recaída e crise |
+| `support_network` | 6 | Rede, responsáveis, governança e plano urgente |
+| `communities` | 6 | Grupos, moderação, interações e gamificação |
+| `medical_records` | 6 | Prontuários, documentos, assinaturas e retenção |
+| `ai_assistant` | 6 | Assistência, rascunhos, governança e guardrails |
+
+## 8. Comandos de validação previstos
+
+Executar no destino somente após a Sprint 1, com dependências instaladas e ambiente de testes configurado. Estes comandos são parte do plano e não foram executados na elaboração deste documento.
+
+```bash
+.venv/bin/python -m pytest --collect-only -q
+.venv/bin/python -m pytest
+.venv/bin/python -m ruff check .
+.venv/bin/python -m ruff format --check .
+.venv/bin/python -m mypy
+DJANGO_SETTINGS_MODULE=config.settings.test .venv/bin/python manage.py check
+DJANGO_SETTINGS_MODULE=config.settings.test .venv/bin/python manage.py makemigrations --check --dry-run
+```
+
+Resultados esperados: coleta íntegra, suíte sem falhas, lint/formatação/tipagem aprovados, checks sem erro e nenhuma migration implícita pendente. Registrar totais reais; não fixar quantidade de testes a partir de arquivos.
+
+Com `DB_*` apontando exclusivamente para PostgreSQL descartável de teste:
+
+```bash
+TEST_DATABASE=postgresql .venv/bin/python -m pytest
+```
+
+Antes de aplicar schema em ambiente dedicado de desenvolvimento/homologação, revisar o plano de migrations, executar migrations e coletar estáticos usando os settings apropriados. Checks de produção, inicialização em imagem e HTTP servido precisam de evidência separada dos testes unitários. Evitar suítes concorrentes contra o mesmo banco de teste.
+
+## 9. Critérios finais de sucesso
+
+- [x] C01 As 23 aplicações e todos os seus contratos de backend possuem destino e validação, inclusive módulos sem UI.
+- [x] C02 O grafo completo de migrations é preservado e funciona em instalação limpa; eventual transferência operacional tem autorização e evidência próprias.
+- [x] C03 Todos os templates ativos, incluindo os 97 arquivos iniciais, usam padrões Duralux e mantêm seus contratos funcionais.
+- [x] C04 Os 77 HTMLs de referência têm classificação, sem obrigação de transformar demos e documentação em funções do produto.
+- [x] C05 Autenticação, MFA, permissões, clínica ativa, consentimentos, auditoria e privacidade mantêm os controles originais.
+- [x] C06 Navegação, formulários, tabelas, gráficos, erros e estados vazios foram revisados em desktop/mobile e nos modos suportados.
+- [ ] C07 Suíte completa, verificações estáticas, migrations, banco e homologação visual possuem resultados novos e aprovados.
+- [x] C08 Mindcare inicia de forma reproduzível, com assets locais e sem depender do checkout, ambiente ou banco da origem.
+- [x] C09 Matrizes, evidências, runbooks e pendências externas estão documentados, sem segredos ou dados clínicos expostos.
+- [x] C10 Nenhuma funcionalidade foi removida silenciosamente e nenhum resultado da origem foi usado como comprovação da migração.
+- [ ] C11 O seletor de idioma funciona em autenticação/desktop/mobile, persiste por usuário e entrega UI pt-br/en/es revisada, incluindo mensagens e estados dinâmicos, com fallback e cache testados; dados assistenciais, moeda, fuso e permissões permanecem preservados.
+
+## 10. Anexo — Checklist individual dos templates observados
+
+Cada caixa abaixo representa a conclusão da reconstrução **e** da validação funcional/visual daquele arquivo no destino. Registrar a referência Duralux e evidências em `docs/migration/templates-matrix.md`. Novos templates descobertos durante a execução devem ser acrescentados; arquivos aposentados precisam de substituto rastreável e justificativa, preservando suas funções.
+
+
+### accounts — 6 arquivos
+
+- [x] `templates/accounts/auth_base.html` reconstruído e validado.
+- [x] `templates/accounts/auth_form.html` reconstruído e validado.
+- [x] `templates/accounts/auth_message.html` reconstruído e validado.
+- [x] `templates/accounts/mfa_enroll.html` reconstruído e validado.
+- [x] `templates/accounts/mfa_recovery_codes.html` reconstruído e validado.
+- [x] `templates/accounts/sessions.html` reconstruído e validado.
+
+### analytics — 4 arquivos
+
+- [x] `templates/analytics/clinic_panel.html` reconstruído e validado.
+- [x] `templates/analytics/patient_dashboard.html` reconstruído e validado.
+- [x] `templates/analytics/report_list.html` reconstruído e validado.
+- [x] `templates/analytics/therapist_dashboard.html` reconstruído e validado.
+
+### clinics — 3 arquivos
+
+- [x] `templates/clinics/confirm_switch.html` reconstruído e validado.
+- [x] `templates/clinics/setup.html` reconstruído e validado.
+- [x] `templates/clinics/whitelabel_domains.html` reconstruído e validado.
+
+### components — 6 arquivos
+
+- [x] `templates/components/content_state.html` reconstruído e validado.
+- [x] `templates/components/duralux_field.html` reconstruído e validado.
+- [x] `templates/components/form.html` reconstruído e validado.
+- [x] `templates/components/pagination.html` reconstruído e validado.
+- [x] `templates/components/responsive_table.html` reconstruído e validado.
+- [x] `templates/components/summary_card.html` reconstruído e validado.
+
+### consents — 6 arquivos
+
+- [x] `templates/consents/center.html` reconstruído e validado.
+- [x] `templates/consents/decision_error.html` reconstruído e validado.
+- [x] `templates/consents/partials/document_decision.html` reconstruído e validado.
+- [x] `templates/consents/revocation_error.html` reconstruído e validado.
+- [x] `templates/consents/revocation_work_error.html` reconstruído e validado.
+- [x] `templates/consents/revocation_work_queue.html` reconstruído e validado.
+
+### content — 21 arquivos
+
+- [x] `templates/content/detail.html` reconstruído e validado.
+- [x] `templates/content/editorial_compare.html` reconstruído e validado.
+- [x] `templates/content/editorial_create.html` reconstruído e validado.
+- [x] `templates/content/editorial_detail.html` reconstruído e validado.
+- [x] `templates/content/editorial_index.html` reconstruído e validado.
+- [x] `templates/content/editorial_preview.html` reconstruído e validado.
+- [x] `templates/content/learning/certificate.html` reconstruído e validado.
+- [x] `templates/content/learning/certificate_verify.html` reconstruído e validado.
+- [x] `templates/content/learning/cohort_detail.html` reconstruído e validado.
+- [x] `templates/content/learning/course_detail.html` reconstruído e validado.
+- [x] `templates/content/learning/index.html` reconstruído e validado.
+- [x] `templates/content/learning/lesson_page.html` reconstruído e validado.
+- [x] `templates/content/learning/module_detail.html` reconstruído e validado.
+- [x] `templates/content/learning/quiz_detail.html` reconstruído e validado.
+- [x] `templates/content/learning/quiz_feedback.html` reconstruído e validado.
+- [x] `templates/content/learning/quiz_participate.html` reconstruído e validado.
+- [x] `templates/content/lesson_player.html` reconstruído e validado.
+- [x] `templates/content/library.html` reconstruído e validado.
+- [x] `templates/content/notifications.html` reconstruído e validado.
+- [x] `templates/content/recommendations.html` reconstruído e validado.
+- [x] `templates/content/reports.html` reconstruído e validado.
+
+### errors — 4 arquivos
+
+- [x] `templates/errors/400.html` reconstruído e validado.
+- [x] `templates/errors/403.html` reconstruído e validado.
+- [x] `templates/errors/404.html` reconstruído e validado.
+- [x] `templates/errors/500.html` reconstruído e validado.
+
+### finance — 2 arquivos
+
+- [x] `templates/finance/charge_list.html` reconstruído e validado.
+- [x] `templates/finance/service_price_form.html` reconstruído e validado.
+
+### goals — 10 arquivos
+
+- [x] `templates/goals/detail.html` reconstruído e validado.
+- [x] `templates/goals/exercise_assign.html` reconstruído e validado.
+- [x] `templates/goals/exercise_catalog.html` reconstruído e validado.
+- [x] `templates/goals/exercise_execute.html` reconstruído e validado.
+- [x] `templates/goals/exercise_execution_detail.html` reconstruído e validado.
+- [x] `templates/goals/exercise_form.html` reconstruído e validado.
+- [x] `templates/goals/form.html` reconstruído e validado.
+- [x] `templates/goals/list.html` reconstruído e validado.
+- [x] `templates/goals/low_energy.html` reconstruído e validado.
+- [x] `templates/goals/patient_exercises.html` reconstruído e validado.
+
+### journal — 7 arquivos
+
+- [x] `templates/journal/checkin_list.html` reconstruído e validado.
+- [x] `templates/journal/checkin_today.html` reconstruído e validado.
+- [x] `templates/journal/checkin_unavailable.html` reconstruído e validado.
+- [x] `templates/journal/detail.html` reconstruído e validado.
+- [x] `templates/journal/form.html` reconstruído e validado.
+- [x] `templates/journal/list.html` reconstruído e validado.
+- [x] `templates/journal/partials/calendar.html` reconstruído e validado.
+
+### layouts — 6 arquivos
+
+- [x] `templates/layouts/base.html` reconstruído e validado.
+- [x] `templates/layouts/detached.html` reconstruído e validado.
+- [x] `templates/layouts/partials/header.html` reconstruído e validado.
+- [x] `templates/layouts/partials/messages.html` reconstruído e validado.
+- [x] `templates/layouts/partials/navigation.html` reconstruído e validado.
+- [x] `templates/layouts/vertical.html` reconstruído e validado.
+
+### onboarding — 2 arquivos
+
+- [x] `templates/onboarding/clinic_checklist.html` reconstruído e validado.
+- [x] `templates/onboarding/patient_onboarding.html` reconstruído e validado.
+
+### people — 4 arquivos
+
+- [x] `templates/people/patient_detail.html` reconstruído e validado.
+- [x] `templates/people/patient_form.html` reconstruído e validado.
+- [x] `templates/people/patient_list.html` reconstruído e validado.
+- [x] `templates/people/professional_list.html` reconstruído e validado.
+
+### scheduling — 13 arquivos
+
+- [x] `templates/scheduling/appointment_calendar.html` reconstruído e validado.
+- [x] `templates/scheduling/appointment_list.html` reconstruído e validado.
+- [x] `templates/scheduling/appointment_request.html` reconstruído e validado.
+- [x] `templates/scheduling/appointment_reschedule.html` reconstruído e validado.
+- [x] `templates/scheduling/conversation_create.html` reconstruído e validado.
+- [x] `templates/scheduling/conversation_detail.html` reconstruído e validado.
+- [x] `templates/scheduling/conversation_list.html` reconstruído e validado.
+- [x] `templates/scheduling/reminder_preferences.html` reconstruído e validado.
+- [x] `templates/scheduling/room_form.html` reconstruído e validado.
+- [x] `templates/scheduling/unit_form.html` reconstruído e validado.
+- [x] `templates/scheduling/unit_list.html` reconstruído e validado.
+- [x] `templates/scheduling/waitlist_form.html` reconstruído e validado.
+- [x] `templates/scheduling/waitlist_list.html` reconstruído e validado.
+
+### therapist_dashboard — 1 arquivos
+
+- [x] `templates/therapist_dashboard/home.html` reconstruído e validado.
+
+### visual_reference — 1 arquivos
+
+- [x] `templates/visual_reference/reference.html` reconstruído e validado.
+
+### workspace — 1 arquivos
+
+- [x] `templates/workspace/home.html` reconstruído e validado.
+
+### Componentes adicionados durante a execução
+
+O inventário de origem permanece em 97 templates. O destino possui agora 100, com
+as três inclusões compartilhadas abaixo; a aceitação visual por template continua
+vinculada à revisão completa dos consumidores e estados.
+
+- [x] `layouts/partials/brand.html` — logo da clínica ou fallback Mindcare.
+- [x] `workspace/shortcut.html` — cartão de acesso para rota autorizada.
+- [x] `templates/components/language_selector.html` — seletor compartilhado validado na S14.04; não representa aceite multilíngue dos demais templates.

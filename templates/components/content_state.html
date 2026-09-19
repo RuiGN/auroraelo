@@ -1,0 +1,10 @@
+<section class="alert {% if state.kind == 'error' %}alert-danger{% elif state.kind == 'restricted' %}alert-warning{% elif state.kind == 'loading' %}alert-info{% elif state.kind == 'empty' or state.kind == 'no_results' %}alert-secondary{% else %}alert-light{% endif %} d-flex align-items-start gap-3 product-content-state" data-state-kind="{% if state.kind == 'loading' or state.kind == 'empty' or state.kind == 'no_results' or state.kind == 'unavailable' or state.kind == 'error' or state.kind == 'restricted' %}{{ state.kind }}{% else %}unavailable{% endif %}"{% if state.announce %} role="status" aria-live="polite"{% endif %}>
+  <span class="fs-4" aria-hidden="true">{% if state.kind == 'loading' %}◌{% elif state.kind == 'empty' %}◇{% elif state.kind == 'no_results' %}⌕{% elif state.kind == 'error' %}!{% elif state.kind == 'restricted' %}⊘{% else %}○{% endif %}</span>
+  <div>
+    <h2 class="fs-16 fw-semibold mb-2">{{ state.title }}</h2>
+    <p class="mb-0">{{ state.message }}</p>
+    {% if state.action %}
+      <a class="btn btn-sm btn-outline-primary mt-3" href="{{ state.action.url }}">{{ state.action.label }}</a>
+    {% endif %}
+  </div>
+</section>

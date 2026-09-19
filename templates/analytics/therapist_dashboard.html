@@ -1,0 +1,52 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="therapist-panel-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Visão longitudinal autorizada" %}</span>
+    <h1 id="therapist-panel-title" class="mb-0">{% translate "Painel profissional" %}</h1>
+    <p class="product-page-meta">{% blocktranslate with start=data.period_start|date:"SHORT_DATE_FORMAT" end=data.period_end|date:"SHORT_DATE_FORMAT" %}{{ start }} – {{ end }}{% endblocktranslate %}</p>
+  </header>
+  <aside class="product-notice" role="note">{{ non_diagnostic_notice }}</aside>
+  <section class="product-metric-grid" aria-label="{% translate 'Indicadores profissionais' %}">
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Pacientes ativos" %}</p><p class="product-metric-value">{{ data.active_patients }}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Triagem pendente" %}</p><p class="product-metric-value">{{ data.pending_triage }}</p></article>
+    <article class="product-metric-card"><p class="product-metric-label">{% translate "Próximas consultas" %}</p><p class="product-metric-value">{{ data.upcoming_appointments }}</p></article>
+  </section>
+  <section aria-labelledby="triage-heading">
+    <h2 id="triage-heading" class="h5">{% translate "Sinalizações para revisão humana" %}</h2>
+    {% if data.triage_items %}
+      <div class="product-stack">
+        {% for item in data.triage_items %}
+          <article class="product-table-card">
+            <p><strong>{{ item.patient_name }}</strong> — {{ item.reason }}</p>
+            <p class="product-muted">{% blocktranslate with rule=item.rule_name window=item.monitoring_window %}Regra: {{ rule }} · Monitoramento: {{ window }}{% endblocktranslate %}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="product-empty-state"><p>{% translate "Nenhuma sinalização pendente para revisão." %}</p></div>
+    {% endif %}
+  </section>
+  <section aria-labelledby="activity-heading">
+    <h2 id="activity-heading" class="h5">{% translate "Check-ins compartilhados por paciente" %}</h2>
+    {% if data.activity_rows %}
+      <div class="product-table-card product-table-scroll">
+        <table class="table product-table">
+          <thead><tr><th scope="col">{% translate "Paciente" %}</th><th scope="col">{% translate "Check-ins" %}</th></tr></thead>
+          <tbody>
+            {% for row in data.activity_rows %}
+              <tr><td>{{ row.full_name }}</td><td>{{ row.checkin_count }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="product-empty-state"><p>{% translate "Nenhum check-in compartilhado no período." %}</p></div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

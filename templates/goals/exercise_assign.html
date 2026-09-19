@@ -1,0 +1,54 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+  <header class="product-page-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+    <div>
+      <a href="{% url 'exercise_catalog' %}" class="btn btn-outline-secondary btn-sm mb-2">← {% translate "Voltar ao catálogo" %}</a>
+      <h1 class="mb-0">{% blocktranslate with title=exercise.title %}Atribuir: {{ title }}{% endblocktranslate %}</h1>
+    </div>
+  </header>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+      <form method="post" class="d-grid gap-3">
+        {% csrf_token %}
+        <div>
+          <label for="id_patient_profile_id" class="form-label">{% translate "Paciente" %} *</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="patient_profile_id" id="id_patient_profile_id" class="form-select" required>
+            <option value="">{% translate "-- Selecione o paciente --" %}</option>
+            {% for patient in patients %}
+              <option value="{{ patient.pk }}">{{ patient.full_name }}</option>
+            {% endfor %}
+          </select></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="id_frequency" class="form-label">{% translate "Frequência" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input type="text" name="frequency" id="id_frequency" class="form-control" value="Pontual" placeholder="{% translate 'Ex.: Diária, Semanal, Pontual' %}"></div>
+          </div>
+          <div class="col-md-6">
+            <label for="id_due_date" class="form-label">{% translate "Prazo de conclusão (opcional)" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-calendar"></i></span><input type="date" name="due_date" id="id_due_date" class="form-control"></div>
+          </div>
+        </div>
+
+        <div>
+          <label for="id_notes" class="form-label">{% translate "Observações para o paciente (opcional)" %}</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea name="notes" id="id_notes" class="form-control" rows="3" placeholder="{% translate 'Orientações específicas para a realização deste exercício...' %}"></textarea></div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+          <a href="{% url 'exercise_catalog' %}" class="btn btn-outline-secondary">{% translate "Cancelar" %}</a>
+          <button type="submit" class="btn btn-primary">{% translate "Confirmar atribuição" %}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

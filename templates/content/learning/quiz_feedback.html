@@ -1,0 +1,27 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=quiz.title %}Resultado: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="quiz-feedback-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with title=quiz.course.title %}Curso: {{ title }}{% endblocktranslate %}</span>
+    <h1 id="quiz-feedback-title" class="mb-0">{% translate "Seu resultado" %}</h1>
+    <p class="alert {% if attempt.passed %}alert-success{% else %}alert-warning{% endif %}" role="status" aria-live="polite">
+      {% blocktranslate with score=attempt.score passed=attempt.passed|yesno:_("Aprovado,Não aprovado") %}Nota: {{ score }} · {{ passed }}{% endblocktranslate %}
+    </p>
+  </header>
+  <section class="product-table-card product-stack" aria-labelledby="feedback-title">
+    <h2 id="feedback-title" class="h5">{% translate "Revisão das respostas" %}</h2>
+    {% for item in feedback %}
+      <article class="border-top pt-3">
+        <p><strong>{% blocktranslate with counter=forloop.counter %}Questão {{ counter }}{% endblocktranslate %}</strong> — {{ item.correct|yesno:_("Correta,Incorreta") }}</p>
+        <p>{% blocktranslate with explanation=item.explanation %}Explicação: {{ explanation }}{% endblocktranslate %}</p>
+      </article>
+    {% empty %}
+      <p aria-live="polite">{% translate "Nenhum feedback disponível." %}</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

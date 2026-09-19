@@ -1,0 +1,478 @@
+[
+  {
+    "msgid": "A data de encerramento não pode preceder o início.",
+    "en": "The end date cannot precede the start date.",
+    "es": "La fecha de finalización no puede ser anterior a la de inicio."
+  },
+  {
+    "msgid": "A data de transferência excede o término do vínculo.",
+    "en": "The transfer date is after the relationship end date.",
+    "es": "La fecha de transferencia supera el final del vínculo."
+  },
+  {
+    "msgid": "A data de transferência não pode preceder o início.",
+    "en": "The transfer date cannot precede the start date.",
+    "es": "La fecha de transferencia no puede ser anterior a la de inicio."
+  },
+  {
+    "msgid": "A foto deve ser PNG ou JPEG.",
+    "en": "The photo must be PNG or JPEG.",
+    "es": "La foto debe ser PNG o JPEG."
+  },
+  {
+    "msgid": "A foto excede o limite de 2 MB.",
+    "en": "The photo exceeds the 2 MB limit.",
+    "es": "La foto supera el límite de 2 MB."
+  },
+  {
+    "msgid": "Acessibilidade",
+    "en": "Accessibility",
+    "es": "Accesibilidad"
+  },
+  {
+    "msgid": "Acesso",
+    "en": "Access",
+    "es": "Acceso"
+  },
+  {
+    "msgid": "Administrador da clínica",
+    "en": "Clinic administrator",
+    "es": "Administrador de la clínica"
+  },
+  {
+    "msgid": "Agendado",
+    "en": "Scheduled",
+    "es": "Programado"
+  },
+  {
+    "msgid": "Aplicar filtros",
+    "en": "Apply filters",
+    "es": "Aplicar filtros"
+  },
+  {
+    "msgid": "Ativo",
+    "en": "Active",
+    "es": "Activo"
+  },
+  {
+    "msgid": "Ações",
+    "en": "Actions",
+    "es": "Acciones"
+  },
+  {
+    "msgid": "CEP",
+    "en": "Postal code",
+    "es": "Código postal"
+  },
+  {
+    "msgid": "Cadastrar paciente",
+    "en": "Register patient",
+    "es": "Registrar paciente"
+  },
+  {
+    "msgid": "Cadastro mínimo",
+    "en": "Minimum registration",
+    "es": "Registro mínimo"
+  },
+  {
+    "msgid": "Cadastros autorizados",
+    "en": "Authorized records",
+    "es": "Registros autorizados"
+  },
+  {
+    "msgid": "Cancelar",
+    "en": "Cancel",
+    "es": "Cancelar"
+  },
+  {
+    "msgid": "Cidade",
+    "en": "City",
+    "es": "Ciudad"
+  },
+  {
+    "msgid": "Conta vinculada",
+    "en": "Linked account",
+    "es": "Cuenta vinculada"
+  },
+  {
+    "msgid": "Contato",
+    "en": "Contact",
+    "es": "Contacto"
+  },
+  {
+    "msgid": "Contato de emergência",
+    "en": "Emergency contact",
+    "es": "Contacto de emergencia"
+  },
+  {
+    "msgid": "Contato de emergência — nome",
+    "en": "Emergency contact — name",
+    "es": "Contacto de emergencia — nombre"
+  },
+  {
+    "msgid": "Contato de emergência — telefone",
+    "en": "Emergency contact — phone",
+    "es": "Contacto de emergencia — teléfono"
+  },
+  {
+    "msgid": "Convidar profissional",
+    "en": "Invite professional",
+    "es": "Invitar profesional"
+  },
+  {
+    "msgid": "Dados cadastrais autorizados da clínica ativa.",
+    "en": "Authorized registration data for the active clinic.",
+    "es": "Datos de registro autorizados de la clínica activa."
+  },
+  {
+    "msgid": "Data de nascimento",
+    "en": "Date of birth",
+    "es": "Fecha de nacimiento"
+  },
+  {
+    "msgid": "E-mail",
+    "en": "Email",
+    "es": "Correo electrónico"
+  },
+  {
+    "msgid": "Encerrado",
+    "en": "Ended",
+    "es": "Finalizado"
+  },
+  {
+    "msgid": "Endereço",
+    "en": "Address",
+    "es": "Dirección"
+  },
+  {
+    "msgid": "Enviar convite",
+    "en": "Send invitation",
+    "es": "Enviar invitación"
+  },
+  {
+    "msgid": "Equipe administrativa",
+    "en": "Administrative staff",
+    "es": "Personal administrativo"
+  },
+  {
+    "msgid": "Equipe da clínica ativa",
+    "en": "Active clinic team",
+    "es": "Equipo de la clínica activa"
+  },
+  {
+    "msgid": "Especialidade técnica",
+    "en": "Technical specialty",
+    "es": "Especialidad técnica"
+  },
+  {
+    "msgid": "Especialidades",
+    "en": "Specialties",
+    "es": "Especialidades"
+  },
+  {
+    "msgid": "Esta credencial já está revogada.",
+    "en": "This credential has already been revoked.",
+    "es": "Esta credencial ya está revocada."
+  },
+  {
+    "msgid": "Filtros de profissionais",
+    "en": "Professional filters",
+    "es": "Filtros de profesionales"
+  },
+  {
+    "msgid": "Finalidade",
+    "en": "Purpose",
+    "es": "Finalidad"
+  },
+  {
+    "msgid": "Finalidade do contato de emergência",
+    "en": "Purpose of the emergency contact",
+    "es": "Finalidad del contacto de emergencia"
+  },
+  {
+    "msgid": "Finalidade do endereço",
+    "en": "Purpose of the address",
+    "es": "Finalidad de la dirección"
+  },
+  {
+    "msgid": "Foi encontrada uma possível duplicidade nesta clínica.",
+    "en": "A possible duplicate was found in this clinic.",
+    "es": "Se encontró un posible duplicado en esta clínica."
+  },
+  {
+    "msgid": "Fuso horário",
+    "en": "Time zone",
+    "es": "Zona horaria"
+  },
+  {
+    "msgid": "Gênero",
+    "en": "Gender",
+    "es": "Género"
+  },
+  {
+    "msgid": "Gênero (opcional)",
+    "en": "Gender (optional)",
+    "es": "Género (opcional)"
+  },
+  {
+    "msgid": "Homem",
+    "en": "Man",
+    "es": "Hombre"
+  },
+  {
+    "msgid": "Identificação",
+    "en": "Identification",
+    "es": "Identificación"
+  },
+  {
+    "msgid": "Idioma",
+    "en": "Language",
+    "es": "Idioma"
+  },
+  {
+    "msgid": "Informe a finalidade para o contato de emergência.",
+    "en": "Enter the purpose for the emergency contact.",
+    "es": "Indique la finalidad del contacto de emergencia."
+  },
+  {
+    "msgid": "Informe a finalidade para registrar o endereço.",
+    "en": "Enter the purpose for recording the address.",
+    "es": "Indique la finalidad para registrar la dirección."
+  },
+  {
+    "msgid": "Informe a função do profissional no vínculo.",
+    "en": "Enter the professional's role in the relationship.",
+    "es": "Indique la función del profesional en el vínculo."
+  },
+  {
+    "msgid": "Informe conselho, número e jurisdição em conjunto.",
+    "en": "Enter the council, number and jurisdiction together.",
+    "es": "Indique el consejo, el número y la jurisdicción en conjunto."
+  },
+  {
+    "msgid": "Informe especialidades técnicas válidas e sem repetição.",
+    "en": "Enter valid technical specialties without duplicates.",
+    "es": "Indique especialidades técnicas válidas y sin repeticiones."
+  },
+  {
+    "msgid": "Informe nome e e-mail da pessoa paciente.",
+    "en": "Enter the patient's name and email.",
+    "es": "Indique el nombre y el correo electrónico del paciente."
+  },
+  {
+    "msgid": "Informe nome e e-mail profissional.",
+    "en": "Enter the professional name and email.",
+    "es": "Indique el nombre y el correo electrónico profesional."
+  },
+  {
+    "msgid": "Informe o motivo da revogação.",
+    "en": "Enter the reason for revocation.",
+    "es": "Indique el motivo de la revocación."
+  },
+  {
+    "msgid": "Informe somente os dados necessários. Gênero é opcional e preferências podem ser revisadas.",
+    "en": "Enter only the necessary information. Gender is optional and preferences can be reviewed.",
+    "es": "Indique solo los datos necesarios. El género es opcional y las preferencias pueden revisarse."
+  },
+  {
+    "msgid": "Lista de pacientes",
+    "en": "Patient list",
+    "es": "Lista de pacientes"
+  },
+  {
+    "msgid": "Lista de profissionais",
+    "en": "Professional list",
+    "es": "Lista de profesionales"
+  },
+  {
+    "msgid": "Mulher",
+    "en": "Woman",
+    "es": "Mujer"
+  },
+  {
+    "msgid": "Nenhum paciente cadastrado",
+    "en": "No patients registered",
+    "es": "No hay pacientes registrados"
+  },
+  {
+    "msgid": "Nenhum profissional encontrado",
+    "en": "No professionals found",
+    "es": "No se encontraron profesionales"
+  },
+  {
+    "msgid": "Nome",
+    "en": "Name",
+    "es": "Nombre",
+    "msgctxt": "person full name"
+  },
+  {
+    "msgid": "Nome completo",
+    "en": "Full name",
+    "es": "Nombre completo"
+  },
+  {
+    "msgid": "Nome social",
+    "en": "Chosen name",
+    "es": "Nombre elegido"
+  },
+  {
+    "msgid": "Nome social:",
+    "en": "Chosen name:",
+    "es": "Nombre elegido:"
+  },
+  {
+    "msgid": "Não informada",
+    "en": "Not provided",
+    "es": "No indicada"
+  },
+  {
+    "msgid": "Não informadas",
+    "en": "Not provided",
+    "es": "No indicadas"
+  },
+  {
+    "msgid": "Não informado",
+    "en": "Not provided",
+    "es": "No indicado"
+  },
+  {
+    "msgid": "O novo profissional deve ser diferente do atual.",
+    "en": "The new professional must be different from the current one.",
+    "es": "El nuevo profesional debe ser diferente del actual."
+  },
+  {
+    "msgid": "Outro",
+    "en": "Other",
+    "es": "Otro"
+  },
+  {
+    "msgid": "Paciente",
+    "en": "Patient",
+    "es": "Paciente"
+  },
+  {
+    "msgid": "Pacientes",
+    "en": "Patients",
+    "es": "Pacientes"
+  },
+  {
+    "msgid": "Papel",
+    "en": "Role",
+    "es": "Rol"
+  },
+  {
+    "msgid": "Perfis, vínculos e credenciais informadas, sem confirmação automática pela plataforma.",
+    "en": "Reported profiles, relationships and credentials, without automatic verification by the platform.",
+    "es": "Perfiles, vínculos y credenciales declarados, sin verificación automática por la plataforma."
+  },
+  {
+    "msgid": "Pessoa não binária",
+    "en": "Non-binary person",
+    "es": "Persona no binaria"
+  },
+  {
+    "msgid": "Pessoas cadastradas",
+    "en": "Registered people",
+    "es": "Personas registradas"
+  },
+  {
+    "msgid": "Preferências de acessibilidade",
+    "en": "Accessibility preferences",
+    "es": "Preferencias de accesibilidad"
+  },
+  {
+    "msgid": "Prefiro não informar",
+    "en": "Prefer not to say",
+    "es": "Prefiero no indicarlo"
+  },
+  {
+    "msgid": "Profissionais",
+    "en": "Professionals",
+    "es": "Profesionales"
+  },
+  {
+    "msgid": "Reativar",
+    "en": "Reactivate",
+    "es": "Reactivar"
+  },
+  {
+    "msgid": "Resultado",
+    "en": "Results",
+    "es": "Resultados"
+  },
+  {
+    "msgid": "Revise os campos indicados",
+    "en": "Review the highlighted fields",
+    "es": "Revise los campos indicados"
+  },
+  {
+    "msgid": "Revise os filtros ou convide o primeiro profissional.",
+    "en": "Review the filters or invite the first professional.",
+    "es": "Revise los filtros o invite al primer profesional."
+  },
+  {
+    "msgid": "Salvar cadastro",
+    "en": "Save registration",
+    "es": "Guardar registro"
+  },
+  {
+    "msgid": "Selecione uma categoria profissional válida.",
+    "en": "Select a valid professional category.",
+    "es": "Seleccione una categoría profesional válida."
+  },
+  {
+    "msgid": "Selecione uma opção de gênero válida.",
+    "en": "Select a valid gender option.",
+    "es": "Seleccione una opción de género válida."
+  },
+  {
+    "msgid": "Status",
+    "en": "Status",
+    "es": "Estado"
+  },
+  {
+    "msgid": "Suspender",
+    "en": "Suspend",
+    "es": "Suspender"
+  },
+  {
+    "msgid": "Suspenso",
+    "en": "Suspended",
+    "es": "Suspendido"
+  },
+  {
+    "msgid": "Telefone",
+    "en": "Phone",
+    "es": "Teléfono"
+  },
+  {
+    "msgid": "Terapeuta",
+    "en": "Therapist",
+    "es": "Terapeuta"
+  },
+  {
+    "msgid": "Todos",
+    "en": "All",
+    "es": "Todos"
+  },
+  {
+    "msgid": "UF",
+    "en": "State",
+    "es": "Estado"
+  },
+  {
+    "msgid": "Unidade",
+    "en": "Unit",
+    "es": "Unidad"
+  },
+  {
+    "msgid": "Use a ação principal para iniciar um cadastro mínimo.",
+    "en": "Use the main action to start a minimum registration.",
+    "es": "Use la acción principal para iniciar un registro mínimo."
+  },
+  {
+    "msgid": "Voltar à lista de pacientes",
+    "en": "Back to patient list",
+    "es": "Volver a la lista de pacientes"
+  }
+]

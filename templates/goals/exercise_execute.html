@@ -1,0 +1,53 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<section class="card shadow-sm border-0">
+  <div class="card-body d-grid gap-4">
+    <header class="d-grid gap-2">
+      <a href="{% url 'patient_exercise_list' %}" class="btn btn-outline-secondary align-self-start">← {% translate "Voltar aos exercícios" %}</a>
+      <p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with approach=exercise.approach minutes=exercise.estimated_minutes %}{{ approach }} (Aproximadamente {{ minutes }} min){% endblocktranslate %}</p>
+      <h1 class="h3 mb-0">{{ exercise.title }}</h1>
+    </header>
+
+    <div class="border rounded-3 p-3 p-md-4">
+      <h2 class="h5">{% translate "Instruções" %}</h2>
+      <p class="mb-2">{{ exercise.instructions }}</p>
+      {% if exercise.accessibility_notes %}
+        <p class="mb-0">{% translate "Nota de acessibilidade" %}: {{ exercise.accessibility_notes }}</p>
+      {% endif %}
+    </div>
+
+    <form method="post" class="d-grid gap-4">
+      {% csrf_token %}
+      <div class="d-grid gap-2">
+        <label for="id_response_text" class="form-label">{% translate "Sua reflexão / Resposta" %} *</label>
+        <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea name="response_text" id="id_response_text" class="form-control" rows="5" required placeholder="{% translate 'Escreva aqui suas impressões, respostas ou reflexões...' %}">{{ execution.response_data.text|default:'' }}</textarea></div>
+      </div>
+
+      <fieldset class="d-grid gap-2">
+        <legend class="fs-6 fw-semibold mb-0">{% translate "Semáforo de compartilhamento" %} *</legend>
+        <p class="text-body-secondary mb-0">{% translate "Você escolhe o que o profissional pode ver. Esta decisão é sua e pode ser alterada a qualquer momento." %}</p>
+        <div class="d-grid gap-2">
+          {% for code, label in visibilities %}
+            <label class="border rounded-3 p-3 d-flex align-items-center gap-2">
+              <input type="radio" name="visibility" value="{{ code }}" {% if execution.visibility == code or forloop.first %}checked{% endif %}>
+              <span class="visibility-badge {% if code == 'shareable' %}visibility-shareable{% elif code == 'confirmation_required' %}visibility-confirmation{% else %}visibility-private{% endif %}">
+                <span aria-hidden="true">●</span> {{ label }}
+              </span>
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      <div class="d-flex flex-wrap gap-2">
+        <button type="submit" name="action" value="draft" class="btn btn-outline-secondary">{% translate "Salvar rascunho" %}</button>
+        <button type="submit" name="action" value="submit" class="btn btn-primary">{% translate "Concluir e enviar" %}</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
+

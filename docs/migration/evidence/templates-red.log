@@ -1,0 +1,432 @@
+...................................................................F.... [ 72%]
+.F.......................FF                                              [100%]
+=================================== FAILURES ===================================
+____________ test_application_template_compiles[journal/list.html] _____________
+
+self = <django.template.defaulttags.TemplateIfParser object at 0x79b1644d1240>
+token = 'selected_period=="7d"'
+
+    def translate_token(self, token):
+        try:
+>           op = OPERATORS[token]
+                 ^^^^^^^^^^^^^^^^
+E           KeyError: 'selected_period=="7d"'
+
+.venv/lib/python3.14/site-packages/django/template/smartif.py:186: KeyError
+
+During handling of the above exception, another exception occurred:
+
+template_name = 'journal/list.html'
+
+    @pytest.mark.parametrize("template_name", TEMPLATE_NAMES)
+    def test_application_template_compiles(template_name: str) -> None:
+        """Every application template must be accepted by Django's actual parser."""
+>       get_template(template_name)
+
+tests/test_template_compilation.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/template/loader.py:15: in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:79: in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:602: in parse
+    raise self.error(token, e)
+.venv/lib/python3.14/site-packages/django/template/base.py:600: in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:307: in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:602: in parse
+    raise self.error(token, e)
+.venv/lib/python3.14/site-packages/django/template/base.py:600: in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader_tags.py:235: in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:602: in parse
+    raise self.error(token, e)
+.venv/lib/python3.14/site-packages/django/template/base.py:600: in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/defaulttags.py:993: in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/defaulttags.py:926: in __init__
+    super().__init__(*args, **kwargs)
+.venv/lib/python3.14/site-packages/django/template/smartif.py:177: in __init__
+    mapped_tokens.append(self.translate_token(token))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/smartif.py:188: in translate_token
+    return self.create_var(token)
+           ^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/defaulttags.py:929: in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:693: in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <FilterExpression 'selected_period=="7d"'>
+token = 'selected_period=="7d"'
+parser = <Parser tokens=[<Block token: "endblock...">, <Text token: "  </section></div>...">, <Block token: "endif...">, <Text ...ected_period==...">, <Text token: ">Últimos 7 dias</opt...">, <Block token: "endif...">, <Text token: " selected...">]>
+
+    def __init__(self, token, parser):
+        self.token = token
+        matches = filter_re.finditer(token)
+        var_obj = None
+        filters = []
+        upto = 0
+        for match in matches:
+            start = match.start()
+            if upto != start:
+                raise TemplateSyntaxError(
+                    "Could not parse some characters: "
+                    "%s|%s|%s" % (token[:upto], token[upto:start], token[start:])
+                )
+            if var_obj is None:
+                if constant := match["constant"]:
+                    try:
+                        var_obj = Variable(constant).resolve({})
+                    except VariableDoesNotExist:
+                        var_obj = None
+                elif (var := match["var"]) is None:
+                    raise TemplateSyntaxError(
+                        "Could not find variable at start of %s." % token
+                    )
+                else:
+                    var_obj = Variable(var)
+            else:
+                filter_name = match["filter_name"]
+                args = []
+                if constant_arg := match["constant_arg"]:
+                    args.append((False, Variable(constant_arg).resolve({})))
+                elif var_arg := match["var_arg"]:
+                    args.append((True, Variable(var_arg)))
+                filter_func = parser.find_filter(filter_name)
+                self.args_check(filter_name, filter_func, args)
+                filters.append((filter_func, args))
+            upto = match.end()
+        if upto != len(token):
+>           raise TemplateSyntaxError(
+                "Could not parse the remainder: '%s' "
+                "from '%s'" % (token[upto:], token)
+            )
+E           django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/journal/list.html, Could not parse the remainder: '=="7d"' from 'selected_period=="7d"'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:793: TemplateSyntaxError
+_____ test_application_template_compiles[layouts/partials/navigation.html] _____
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+template_name = 'layouts/partials/navigation.html'
+
+    @pytest.mark.parametrize("template_name", TEMPLATE_NAMES)
+    def test_application_template_compiles(template_name: str) -> None:
+        """Every application template must be accepted by Django's actual parser."""
+>       get_template(template_name)
+
+tests/test_template_compilation.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/template/loader.py:15: in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:79: in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+_________________ test_summary_card_renders_the_danger_branch __________________
+
+    def test_summary_card_renders_the_danger_branch() -> None:
+        """Broken multiline elif tags must not silently select a neutral icon."""
+        html = render_to_string(
+            "components/summary_card.html",
+            {"card": {"id": "urgent", "tone": "danger", "title": "Atenção", "value": 2}},
+        )
+>       assert "feather-alert-octagon" in html
+E       assert 'feather-alert-octagon' in '<article class="card h-100 stretch stretch-full border-0 shadow-sm product-summary-card"\n  data-tone="danger"\n  ari...data value="">2</data></div>\n      <h2 id="urgent-title">Atenção</h2>\n      \n    </div>\n    \n  </div>\n</article>'
+
+tests/test_template_compilation.py:27: AssertionError
+_______________ test_navigation_renders_pending_revocation_count _______________
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+parse_until = []
+
+    def parse(self, parse_until=None):
+        """
+        Iterate through the parser tokens and compiles each one into a node.
+    
+        If parse_until is provided, parsing will stop once one of the
+        specified tokens has been reached. This is formatted as a list of
+        tokens, e.g. ['elif', 'else', 'endif']. If no matching token is
+        reached, raise an exception with the unclosed block tag details.
+        """
+        if parse_until is None:
+            parse_until = []
+        nodelist = NodeList()
+        while self.tokens:
+            token = self.next_token()
+            # Use the raw values here for TokenType.* for a tiny performance
+            # boost.
+            token_type = token.token_type.value
+            if token_type == 0:  # TokenType.TEXT
+                self.extend_nodelist(nodelist, TextNode(token.contents), token)
+            elif token_type == 1:  # TokenType.VAR
+                if not token.contents:
+                    raise self.error(
+                        token, "Empty variable tag on line %d" % token.lineno
+                    )
+                try:
+                    filter_expression = self.compile_filter(token.contents)
+                except TemplateSyntaxError as e:
+                    raise self.error(token, e)
+                var_node = VariableNode(filter_expression)
+                if ".." in str(filter_expression.var):
+                    warnings.warn(
+                        "Support for double-dot lookups '..' which maps to a "
+                        "lookup of the empty string is deprecated.\n"
+                        f"  Template: {self.origin.name}\n"
+                        f"  Line: {token.lineno}",
+                        RemovedInDjango70Warning,
+                        skip_file_prefixes=django_file_prefixes(),
+                    )
+    
+                    # RemovedInDjango70Warning
+                    # When deprecation ends elevate the warning to an error.
+                    # raise self.error(
+                    #     token,
+                    #     ("Variable contains '..' on line %d" % token.lineno),
+                    # )
+    
+                self.extend_nodelist(nodelist, var_node, token)
+            elif token_type == 2:  # TokenType.BLOCK
+                try:
+                    command = token.contents.split()[0]
+                except IndexError:
+                    raise self.error(token, "Empty block tag on line %d" % token.lineno)
+                if command in parse_until:
+                    # A matching token has been reached. Return control to
+                    # the caller. Put the token back on the token list so the
+                    # caller knows where it terminated.
+                    self.prepend_token(token)
+                    return nodelist
+                # Add the token to the command stack. This is used for error
+                # messages if further parsing fails due to an unclosed block
+                # tag.
+                self.command_stack.append((command, token))
+                # Get the tag callback function from the ones registered with
+                # the parser.
+                try:
+>                   compile_func = self.tags[command]
+                                   ^^^^^^^^^^^^^^^^^^
+E                   KeyError: 'endif'
+
+.venv/lib/python3.14/site-packages/django/template/base.py:594: KeyError
+
+During handling of the above exception, another exception occurred:
+
+    def test_navigation_renders_pending_revocation_count() -> None:
+        """A multiline interpolation must not leak raw template syntax to users."""
+>       html = render_to_string(
+            "layouts/partials/navigation.html", {"pending_consent_revocation_count": 2}
+        )
+
+tests/test_template_compilation.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/template/loader.py:61: in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loader.py:15: in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/backends/django.py:79: in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:186: in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/engine.py:159: in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/cached.py:57: in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/loaders/base.py:28: in get_template
+    return Template(
+.venv/lib/python3.14/site-packages/django/template/base.py:157: in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:199: in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/django/template/base.py:596: in parse
+    self.invalid_block_tag(token, command, parse_until)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Parser tokens=[<Text token: "  </ul></nav>...">, <Block token: "endif...">, <Text token: "    ...">, <Block token: "e... is_clinic_admin...">, <Text token: "        ...">, <Block token: "endif...">, <Text token: ">            <span ...">]>
+token = <Block token: "endif...">, command = 'endif', parse_until = []
+
+    def invalid_block_tag(self, token, command, parse_until=None):
+        if parse_until:
+            raise self.error(
+                token,
+                "Invalid block tag on line %d: '%s', expected %s. Did you "
+                "forget to register or load this tag?"
+                % (
+                    token.lineno,
+                    command,
+                    get_text_list(["'%s'" % p for p in parse_until], "or"),
+                ),
+            )
+>       raise self.error(
+            token,
+            "Invalid block tag on line %d: '%s'. Did you forget to register "
+            "or load this tag?" % (token.lineno, command),
+        )
+E       django.template.exceptions.TemplateSyntaxError: Template: /mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/templates/layouts/partials/navigation.html, Invalid block tag on line 72: 'endif'. Did you forget to register or load this tag?
+
+.venv/lib/python3.14/site-packages/django/template/base.py:661: TemplateSyntaxError
+=========================== short test summary info ============================
+FAILED tests/test_template_compilation.py::test_application_template_compiles[journal/list.html]
+FAILED tests/test_template_compilation.py::test_application_template_compiles[layouts/partials/navigation.html]
+FAILED tests/test_template_compilation.py::test_summary_card_renders_the_danger_branch
+FAILED tests/test_template_compilation.py::test_navigation_renders_pending_revocation_count
+4 failed, 95 passed in 1.61s

@@ -1,0 +1,4 @@
+Operations to perform:
+  Apply all migrations: accounts, admin, ai_assistant, analytics, audit, auth, clinics, communities, consents, content, contenttypes, finance, goals, integrations, journal, medical_records, onboarding, people, privacy, routines, scheduling, sessions, support_network, wellness
+Running migrations:
+  Applying accounts.0007_user_preferred_language... OK

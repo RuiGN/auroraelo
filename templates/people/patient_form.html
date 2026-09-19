@@ -1,0 +1,27 @@
+{% extends layout_template %}
+{% load accessible_forms i18n static %}
+
+{% block title %}{% translate "Cadastrar paciente" %}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="patient-form-title">
+<section class="product-page-header" aria-labelledby="patient-form-title"><div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Cadastro mínimo" %}</p><h1 id="patient-form-title">{% translate "Cadastrar paciente" %}</h1><p class="lead mb-0">{% translate "Informe somente os dados necessários. Gênero é opcional e preferências podem ser revisadas." %}</p></div></section>
+<form method="post" class="product-form-card product-form-grid" novalidate>
+  {% csrf_token %}
+  {% if form.errors %}
+  <div class="form-error-summary" role="alert" tabindex="-1" data-focus-error-summary aria-labelledby="patient-form-error-title">
+    <h2 id="patient-form-error-title">{% translate "Revise os campos indicados" %}</h2>
+    <ul>
+      {% for field in form %}{% for error in field.errors %}<li><a href="#{{ field|error_target_id }}">{{ field.label }}: {{ error }}</a></li>{% endfor %}{% endfor %}
+      {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% for field in form %}{% include "components/duralux_field.html" with field=field only %}{% endfor %}
+  <div class="d-flex flex-wrap align-items-center gap-2"><button type="submit" class="btn btn-primary">{% translate "Salvar cadastro" %}</button><a class="btn btn-outline-secondary" href="{% url 'patient_list' %}">{% translate "Cancelar" %}</a></div>
+</form></div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

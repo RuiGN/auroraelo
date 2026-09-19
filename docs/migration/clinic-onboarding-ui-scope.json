@@ -1,0 +1,18 @@
+{
+  "description": "Clinic/onboarding templates and Python copy; excludes remaining domains and outbound messages",
+  "files": [
+    "templates/clinics/confirm_switch.html",
+    "templates/clinics/setup.html",
+    "templates/clinics/whitelabel_domains.html",
+    "templates/onboarding/clinic_checklist.html",
+    "templates/onboarding/patient_onboarding.html",
+    "clinics/forms.py",
+    "clinics/views.py",
+    "clinics/services.py",
+    "onboarding/forms.py",
+    "onboarding/views.py",
+    "onboarding/selectors.py",
+    "onboarding/services.py",
+    "core/uploads.py"
+  ]
+}

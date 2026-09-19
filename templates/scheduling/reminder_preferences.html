@@ -1,0 +1,31 @@
+{% extends layout_template %}
+{% load accessible_forms static i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="reminder-preferences-title">
+  <header class="product-page-header"><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Comunicação" %}</p><h1 id="reminder-preferences-title">{% translate "Preferências de lembrete" %}</h1><p class="product-page-meta">{% translate "Escolha quando e como quer ser lembrado, sem excesso." %}</p></header>
+  <section class="product-stack" aria-labelledby="configured-reminders-title">
+    <h2 id="configured-reminders-title" class="h5 mb-0">{% translate "Lembretes configurados" %}</h2>
+    {% if preferences %}
+      {% for preference in preferences %}
+        <article class="product-table-card product-list-item"><div><strong>{{ preference.get_reminder_type_display }}</strong><p class="product-muted mt-1">{{ preference.get_channel_display }} · {% blocktranslate with minutes=preference.advance_minutes max_daily=preference.max_daily %}{{ minutes }} min antes · máx. {{ max_daily }} por dia{% endblocktranslate %}{% if preference.silence_start %}{% blocktranslate with start=preference.silence_start end=preference.silence_end %} · silêncio {{ start }}–{{ end }}{% endblocktranslate %}{% endif %}</p></div><span class="badge {% if preference.enabled %}text-bg-success{% else %}text-bg-secondary{% endif %}">{% if preference.enabled %}{% translate "Ativado" %}{% else %}{% translate "Desativado" %}{% endif %}</span></article>
+      {% endfor %}
+    {% else %}<div class="product-empty-state" role="status"><p>{% translate "Nenhuma preferência configurada ainda." %}</p></div>{% endif %}
+  </section>
+  <section class="product-form-card" aria-labelledby="reminder-form-title">
+    <h2 id="reminder-form-title" class="h5">{% translate "Configurar lembrete" %}</h2>
+    <form class="product-form-grid" method="post" novalidate data-form-guard>
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}{% include "components/duralux_field.html" with field=field only %}{% endfor %}
+      <div><button type="submit" class="btn btn-primary" data-submit-button>{{ submit_label }}</button></div>
+    </form>
+  </section>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/form-behaviors.js' %}"></script>
+{% endblock %}

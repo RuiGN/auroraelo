@@ -1,0 +1,58 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Paciente" %}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="patient-detail-title">
+<section class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3" aria-labelledby="patient-detail-title">
+  <div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Cadastro mínimo" %}</p><h1 id="patient-detail-title">{{ patient.full_name }}{% if patient.social_name %} <small>({{ patient.social_name }})</small>{% endif %}</h1><p class="lead mb-0">{% translate "Dados cadastrais autorizados da clínica ativa." %}</p></div>
+  <a class="btn btn-primary" href="{% url 'patient_list' %}">{% translate "Voltar à lista de pacientes" %}</a>
+</section>
+
+<section class="d-grid gap-3" aria-labelledby="detail-identity-title">
+  <h2 id="detail-identity-title">{% translate "Identificação" %}</h2>
+  <dl class="product-data-grid">
+    <div><dt>{% translate "Nome completo" %}</dt><dd>{{ patient.full_name }}</dd></div>
+    <div><dt>{% translate "Nome social" %}</dt><dd>{{ patient.social_name|default:"—" }}</dd></div>
+    <div><dt>{% translate "Data de nascimento" %}</dt><dd>{{ patient.birth_date|date:"SHORT_DATE_FORMAT" }}</dd></div>
+    <div><dt>{% translate "Gênero" %}</dt><dd>{{ gender_label }}</dd></div>
+    <div><dt>{% translate "E-mail" %}</dt><dd>{{ patient.email }}</dd></div>
+    <div><dt>{% translate "Telefone" %}</dt><dd>{{ patient.phone|default:"—" }}</dd></div>
+    <div><dt>{% translate "Idioma" %}</dt><dd>{{ patient.language_code }}</dd></div>
+    <div><dt>{% translate "Fuso horário" %}</dt><dd>{{ patient.timezone_name }}</dd></div>
+  </dl>
+</section>
+
+{% if patient.accessibility_preferences %}
+<section class="d-grid gap-3" aria-labelledby="detail-accessibility-title">
+  <h2 id="detail-accessibility-title">{% translate "Acessibilidade" %}</h2>
+  <p>{{ patient.accessibility_preferences }}</p>
+</section>
+{% endif %}
+
+{% if patient.address %}
+<section class="d-grid gap-3" aria-labelledby="detail-address-title">
+  <h2 id="detail-address-title">{% translate "Endereço" %}</h2>
+  <dl class="product-data-grid">
+    <div><dt>{% translate "Finalidade" %}</dt><dd>{{ patient.address_purpose|default:"—" }}</dd></div>
+    <div><dt>{% translate "Endereço" %}</dt><dd>{{ patient.address.line }}</dd></div>
+    <div><dt>{% translate "Cidade" %}</dt><dd>{{ patient.address.city }}</dd></div>
+    <div><dt>{% translate "UF" %}</dt><dd>{{ patient.address.state }}</dd></div>
+    <div><dt>{% translate "CEP" %}</dt><dd>{{ patient.address.postal_code }}</dd></div>
+  </dl>
+</section>
+{% endif %}
+
+{% if patient.emergency_contact %}
+<section class="d-grid gap-3" aria-labelledby="detail-emergency-title">
+  <h2 id="detail-emergency-title">{% translate "Contato de emergência" %}</h2>
+  <dl class="product-data-grid">
+    <div><dt>{% translate "Finalidade" %}</dt><dd>{{ patient.emergency_contact_purpose|default:"—" }}</dd></div>
+    <div><dt>{% translate "Nome" context "person full name" %}</dt><dd>{{ patient.emergency_contact.name }}</dd></div>
+    <div><dt>{% translate "Telefone" %}</dt><dd>{{ patient.emergency_contact.phone }}</dd></div>
+  </dl>
+</section>
+{% endif %}
+ </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Prática terapêutica" %}</span>
+      <h1 class="mb-0">{% translate "Catálogo de exercícios" %}</h1>
+    </div>
+    <a href="{% url 'exercise_create' %}" class="btn btn-primary">
+      <span aria-hidden="true">+</span> {% translate "Novo exercício" %}
+    </a>
+  </header>
+
+  <div class="product-stack">
+    {% if exercises %}
+      <div class="d-grid gap-3">
+        {% for exercise in exercises %}
+          <article class="product-table-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+              <div>
+                <span class="badge text-bg-light border mb-1">{{ exercise.approach }}</span>
+                <h2 class="h5 mb-0">{{ exercise.title }} <span class="text-muted small fw-normal">(v{{ exercise.version }})</span></h2>
+              </div>
+              <span class="badge {% if exercise.status == 'published' %}text-bg-success{% else %}text-bg-warning{% endif %}">
+                {{ exercise.get_status_display }}
+              </span>
+            </div>
+            <p class="text-muted mb-3">{{ exercise.instructions|truncatewords:30 }}</p>
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pt-2 border-top small text-muted">
+              <div>
+                <span class="me-3">{% blocktranslate with minutes=exercise.estimated_minutes %}Dur: {{ minutes }} min{% endblocktranslate %}</span>
+                <span>{% translate "Formato" %}: {{ exercise.get_response_format_display }}</span>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="{% url 'exercise_edit' exercise.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Editar" %}</a>
+                {% if exercise.status == 'published' %}
+                  <a href="{% url 'exercise_assign' exercise.pk %}" class="btn btn-sm btn-primary">{% translate "Atribuir a paciente" %}</a>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="product-empty-state" role="status">
+        <h2 class="h5">{% translate "Nenhum exercício cadastrado no catálogo." %}</h2>
+        <a href="{% url 'exercise_create' %}" class="btn btn-primary mt-2">{% translate "Novo exercício" %}</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,248 @@
+{% extends layout_template %}
+{% load accessible_forms i18n %}
+
+{% block title %}{% translate "Diário Emocional" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="journal-layout product-page">
+  <header class="journal-header product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Acompanhamento pessoal" %}</span>
+      <h1 class="mb-0">{% translate "Diário Emocional" %}</h1>
+    </div>
+    <div class="journal-actions">
+      <a href="{% url 'journal_create' %}" class="btn btn-primary">
+        <span aria-hidden="true">+</span> {% translate "Novo registro" %}
+      </a>
+    </div>
+  </header>
+
+  {# Pending Access Requests from Therapist #}
+  {% if pending_access_requests %}
+  <section class="card mb-4" aria-labelledby="pending-requests-title">
+    <div class="card-body">
+      <h2 id="pending-requests-title" class="h5">
+        {% blocktranslate with count=pending_access_requests|length %}Solicitações de Acesso Pendentes ({{ count }}){% endblocktranslate %}
+      </h2>
+      <p class="text-muted">
+        {% translate "Seu terapeuta solicitou permissão para visualizar os registros abaixo. Você decide se autoriza ou recusa cada solicitação." %}
+      </p>
+      <div class="d-grid gap-3">
+        {% for req in pending_access_requests %}
+        <div class="p-3 border rounded">
+          <div>
+            <p class="mb-1">
+              <strong>{% translate "Terapeuta" %}:</strong> {{ req.therapist.get_full_name|default:req.therapist.email }}
+            </p>
+            <p class="mb-1">
+              <strong>{% translate "Finalidade declarada" %}:</strong> {{ req.purpose }}
+            </p>
+            <p class="mb-2 text-muted small">
+              {% blocktranslate with date=req.journal_entry.created_at|date:"SHORT_DATETIME_FORMAT" mood=req.journal_entry.get_mood_display %}Registro de {{ date }} ({{ mood }}){% endblocktranslate %}
+            </p>
+          </div>
+          <form method="post" action="{% url 'journal_respond_access_request' req.pk %}" class="d-flex flex-wrap gap-2 align-items-center">
+            {% csrf_token %}
+            <label class="form-label mb-0" for="id_expires_days_{{ req.pk }}">{% translate "Validade da autorização" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="expires_days" id="id_expires_days_{{ req.pk }}" class="form-select form-select-sm w-auto">
+              <option value="7">{% translate "Válido por 7 dias" %}</option>
+              <option value="30" selected>{% translate "Válido por 30 dias" %}</option>
+              <option value="90">{% translate "Válido por 90 dias" %}</option>
+              <option value="">{% translate "Sem data de expiração" %}</option>
+            </select></div>
+            <button type="submit" name="decision" value="approve" class="btn btn-sm btn-primary">
+              {% translate "Autorizar" %}
+            </button>
+            <button type="submit" name="decision" value="reject" class="btn btn-sm btn-outline-secondary">
+              {% translate "Recusar" %}
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {# Emotional Calendar #}
+  {% include "journal/partials/calendar.html" %}
+
+  {# Filters & History #}
+  <section class="journal-history-section product-stack mt-4" aria-labelledby="history-heading">
+    <div>
+      <h2 id="history-heading" class="h5">
+        {% translate "Histórico de Registros" %}
+        {% if total_entries_count %}
+        <span class="text-muted small">
+          {% blocktranslate count counter=total_entries_count %}(1 encontrado){% plural %}({{ counter }} encontrados){% endblocktranslate %}
+        </span>
+        {% endif %}
+      </h2>
+
+      <form method="get" class="product-form-card d-flex flex-wrap gap-3 align-items-end mb-3" aria-label="{% translate 'Filtrar histórico do diário' %}">
+        <input type="hidden" name="year" value="{{ calendar_data.year }}">
+        <input type="hidden" name="month" value="{{ calendar_data.month }}">
+
+        <div>
+          <label for="id_period" class="form-label small mb-1">{% translate "Período" %}:</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="period" id="id_period" class="form-select form-select-sm">
+            <option value="7d" {% if selected_period == "7d" %} selected{% endif %}>{% translate "Últimos 7 dias" %}</option>
+            <option value="30d" {% if selected_period == "30d" or not selected_period %} selected{% endif %}>{% translate "Últimos 30 dias" %}</option>
+            <option value="90d" {% if selected_period == "90d" %} selected{% endif %}>{% translate "Últimos 90 dias" %}</option>
+            <option value="all" {% if selected_period == "all" %} selected{% endif %}>{% translate "Todo o histórico" %}</option>
+          </select></div>
+        </div>
+
+        <div>
+          <label for="id_emotion" class="form-label small mb-1">{% translate "Emoção" %}:</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="emotion" id="id_emotion" class="form-select form-select-sm">
+            <option value="">{% translate "Todas as emoções" %}</option>
+            {% for emo_key, emo_lbl in filter_form.fields.emotion.choices %}
+            {% if emo_key %}
+            <option value="{{ emo_key }}" {% if selected_emotion == emo_key %} selected{% endif %}>{{ emo_lbl }}</option>
+            {% endif %}
+            {% endfor %}
+          </select></div>
+        </div>
+
+        <div>
+          <label for="id_mood" class="form-label small mb-1">{% translate "Humor" %}:</label>
+          <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select name="mood" id="id_mood" class="form-select form-select-sm">
+            <option value="">{% translate "Todos os humores" %}</option>
+            {% for mood_val, mood_lbl in filter_form.fields.mood.choices %}
+            {% if mood_val %}
+            <option value="{{ mood_val }}" {% if selected_mood == mood_val %} selected{% endif %}>{{ mood_lbl }}</option>
+            {% endif %}
+            {% endfor %}
+          </select></div>
+        </div>
+
+        <button type="submit" class="btn btn-sm btn-outline-primary">{% translate "Filtrar" %}</button>
+        {% if selected_period != "30d" or selected_emotion or selected_mood %}
+        <a href="?year={{ calendar_data.year }}&month={{ calendar_data.month }}"
+          class="btn btn-sm btn-outline-secondary">{% translate "Limpar filtros" %}</a>
+        {% endif %}
+      </form>
+    </div>
+
+    {# Entries List #}
+    {% if entries.object_list %}
+    <div class="d-grid gap-3">
+      {% for entry in entries %}
+      <article class="journal-entry-card product-table-card" aria-labelledby="entry-title-{{ entry.pk }}">
+        <header class="journal-entry-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-2">
+          <div class="journal-entry-meta d-flex flex-wrap align-items-center gap-2">
+            <span class="badge text-bg-secondary mood-{{ entry.mood }}">
+              {% translate "Humor" %}: {{ entry.get_mood_display }} ({{ entry.mood }}/5)
+            </span>
+            <span class="journal-entry-date text-muted small">
+              {{ entry.created_at|date:"SHORT_DATETIME_FORMAT" }}
+            </span>
+            {% if entry.visibility == "shareable" %}
+            <span class="visibility-badge visibility-shareable badge text-bg-success" title="{% translate 'Visível para o terapeuta vinculado' %}">
+              <span aria-hidden="true">●</span> {% translate "Verde — Compartilhável" %}
+            </span>
+            {% elif entry.visibility == "confirmation_required" %}
+            <span class="visibility-badge visibility-confirmation badge text-bg-warning"
+              title="{% translate 'Requer sua confirmação antes de liberar ao terapeuta' %}">
+              <span aria-hidden="true">●</span> {% translate "Amarelo — Confirmar antes" %}
+            </span>
+            {% else %}
+            <span class="visibility-badge visibility-private badge text-bg-danger" title="{% translate 'Privado: somente você tem acesso' %}">
+              <span aria-hidden="true">●</span> {% translate "Vermelho — Privado" %}
+            </span>
+            {% endif %}
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="{% url 'journal_detail' entry.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Ver detalhes" %}</a>
+            <a href="{% url 'journal_edit' entry.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Editar" %}</a>
+          </div>
+        </header>
+
+        <div class="journal-entry-body mb-2">
+          <p class="mb-0">{{ entry.context|linebreaksbr }}</p>
+        </div>
+
+        {% if entry.emotions %}
+        <div class="emotion-list d-flex flex-wrap gap-1 mb-2" aria-label="{% translate 'Emoções identificadas' %}">
+          {% for emo in entry.emotions %}
+          <span class="emotion-tag badge text-bg-light border">{{ emo }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if entry.triggers or entry.reactions or entry.strategies %}
+        <div class="journal-entry-details border-top pt-2 small text-muted d-grid gap-1">
+          {% if entry.triggers %}
+          <div class="journal-detail-item">
+            <strong>{% translate "Gatilhos" %}:</strong> <span>{{ entry.triggers }}</span>
+          </div>
+          {% endif %}
+          {% if entry.reactions %}
+          <div class="journal-detail-item">
+            <strong>{% translate "Reações físicas" %}:</strong> <span>{{ entry.reactions }}</span>
+          </div>
+          {% endif %}
+          {% if entry.strategies %}
+          <div class="journal-detail-item">
+            <strong>{% translate "O que me ajudou" %}:</strong> <span>{{ entry.strategies }}</span>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+
+    {# Pagination #}
+    {% if entries.paginator.num_pages > 1 %}
+    <nav class="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3"
+      aria-label="{% translate 'Paginação do diário' %}">
+      <p class="product-muted mb-0">
+        {% blocktranslate with current=entries.number total=entries.paginator.num_pages %}Página {{ current }} de {{ total }}{% endblocktranslate %}
+      </p>
+      <ul class="list-unstyled d-flex align-items-center gap-2 mb-0 pagination-common-style">
+        {% if entries.has_previous %}
+        <li><a
+            href="?page={{ entries.previous_page_number }}&period={{ selected_period }}&emotion={{ selected_emotion }}&mood={{ selected_mood }}&year={{ calendar_data.year }}&month={{ calendar_data.month }}"
+            aria-label="{% translate 'Página anterior' %}"><i class="feather-arrow-left"></i></a></li>
+        {% endif %}
+
+        {% for num in entries.paginator.page_range %}
+        {% if num == entries.number %}
+        <li><span class="active" aria-current="page">{{ num }}</span></li>
+        {% else %}
+        <li><a
+            href="?page={{ num }}&period={{ selected_period }}&emotion={{ selected_emotion }}&mood={{ selected_mood }}&year={{ calendar_data.year }}&month={{ calendar_data.month }}">{{ num }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if entries.has_next %}
+        <li><a
+            href="?page={{ entries.next_page_number }}&period={{ selected_period }}&emotion={{ selected_emotion }}&mood={{ selected_mood }}&year={{ calendar_data.year }}&month={{ calendar_data.month }}"
+            aria-label="{% translate 'Próxima página' %}"><i class="feather-arrow-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <div class="product-empty-state" role="status">
+      <h2 class="h5">{% translate "Nenhum registro encontrado" %}</h2>
+      <p>
+        {% if selected_emotion or selected_mood or selected_period != "30d" %}
+        {% translate "Não há registros correspondentes aos filtros selecionados." %}
+        {% else %}
+        {% translate "Você ainda não criou registros no seu diário emocional. Comece registrando como você se sente hoje." %}
+        {% endif %}
+      </p>
+      {% if selected_emotion or selected_mood or selected_period != "30d" %}
+      <a href="?year={{ calendar_data.year }}&month={{ calendar_data.month }}" class="btn btn-outline-secondary">{% translate "Limpar filtros" %}</a>
+      {% else %}
+      <a href="{% url 'journal_create' %}" class="btn btn-primary">{% translate "Criar primeiro registro" %}</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

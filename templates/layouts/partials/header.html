@@ -1,0 +1,144 @@
+{% load i18n %}
+<header class="nxl-header">
+  <div class="header-wrapper">
+    <!-- Header Left -->
+    <div class="header-left d-flex align-items-center gap-4">
+      <!-- Mobile Toggler -->
+      <button type="button" class="nxl-head-mobile-toggler d-xl-none product-icon-button" id="mobile-collapse" data-sidebar-open
+        aria-expanded="false" aria-controls="mobile-sidebar" aria-label="{% translate 'Abrir menu' %}">
+        <div class="hamburger hamburger--arrowturn">
+          <div class="hamburger-box">
+            <div class="hamburger-inner"></div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Navigation Toggle (Desktop) -->
+      <div class="nxl-navigation-toggle d-none d-xl-flex">
+        <button type="button" class="product-icon-button" id="menu-mini-button" data-sidebar-mini aria-label="{% translate 'Recolher navegação' %}">
+          <i aria-hidden="true" class="feather-align-left"></i>
+        </button>
+        <button type="button" class="product-icon-button" id="menu-expend-button" style="display: none;" data-sidebar-expand
+          aria-label="{% translate 'Expandir navegação' %}">
+          <i aria-hidden="true" class="feather-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Clinic Context Badge -->
+      <div class="clinic-context d-flex align-items-center gap-2">
+        <div class="avatar-text avatar-sm bg-primary text-white rounded">
+          <i aria-hidden="true" class="feather-home"></i>
+        </div>
+        <div class="d-none d-sm-block">
+          <span class="fs-11 text-muted d-block lh-1">{% translate "Clínica ativa" %}</span>
+          <strong class="fs-13 text-dark">{{ active_clinic.name }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Right -->
+    <div class="header-right ms-auto">
+      <div class="d-flex align-items-center gap-1">
+        {% include "components/language_selector.html" with selector_id="header" %}
+        <!-- Notifications Bell -->
+        <div class="dropdown nxl-h-item">
+          <button type="button" class="nxl-head-link me-0" data-bs-toggle="dropdown" role="button"
+            data-bs-auto-close="outside" aria-label="{% translate 'Notificações' %}">
+            <i aria-hidden="true" class="feather-bell"></i>
+            {% if pending_consent_revocation_count %}
+            <span class="badge bg-danger nxl-h-badge">{{ pending_consent_revocation_count }}</span>
+
+            {% endif %}
+          </button>
+          <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-notifications-menu p-3"
+            style="min-width: 280px;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="fw-bold text-dark mb-0">{% translate "Notificações" %}</h6>
+              <span class="fs-11 text-muted">{% translate "Central de avisos" %}</span>
+            </div>
+            <div class="py-2 text-center">
+              {% if pending_consent_revocation_count %}
+              <a href="{% url 'consent_revocation_work_queue' %}" class="alert alert-warning d-block py-2 px-3 fs-12 mb-0 text-start">
+                <i aria-hidden="true" class="feather-alert-triangle me-1"></i>
+                {% blocktranslate count count=pending_consent_revocation_count %}{{ count }} revogação operacional pendente{% plural %}{{ count }} revogações operacionais pendentes{% endblocktranslate %}
+              </a>
+              {% else %}
+                <p class="fs-12 text-muted mb-0">{% translate "Nenhuma notificação pendente." %}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Clinic Switcher (if multiple clinics available) -->
+        {% if available_clinics|length > 1 %}
+        <div class="dropdown nxl-h-item">
+          <button type="button" class="nxl-head-link me-0" data-bs-toggle="dropdown"
+            data-bs-auto-close="outside" aria-label="{% translate 'Trocar clínica' %}" title="{% translate 'Trocar clínica' %}">
+            <i aria-hidden="true" class="feather-repeat"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end p-3 shadow-sm" style="min-width: 280px;">
+            <h6 class="dropdown-header px-0 text-dark fw-bold mb-2">{% translate "Alternar clínica" %}</h6>
+            <form method="get" action="{% url 'clinic_switch_review' %}">
+              <div class="mb-2">
+                <label class="form-label fs-12 mb-1" for="clinic-id">{% translate "Selecionar clínica" %}</label>
+                <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select form-select-sm" id="clinic-id" name="clinic_id">
+                  {% for clinic in available_clinics %}
+                  <option value="{{ clinic.pk }}"{% if clinic.pk == active_clinic.pk %} selected{% endif %}>{{ clinic.name }}</option>
+                  {% endfor %}
+                </select></div>
+              </div>
+              <input type="hidden" name="next" value="{{ request.path }}">
+              <button class="btn btn-sm btn-primary w-100" type="submit">{% translate "Revisar troca" %}</button>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- User Profile Dropdown -->
+        <div class="dropdown nxl-h-item">
+          <button type="button" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside"
+            aria-expanded="false" class="d-flex align-items-center product-icon-button" aria-label="{% translate 'Menu da conta' %}">
+            <div class="avatar-text avatar-md bg-primary text-white rounded-circle fw-bold">
+              {{ user.first_name|first|default:user.email|first|upper }}
+            </div>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown p-2 shadow-sm"
+            style="min-width: 260px;">
+            <div class="dropdown-header px-3 py-2 mb-2 bg-light-subtle rounded">
+              <h6 class="text-dark mb-0 fw-bold fs-13">{{ user.get_full_name|default:user.email }}</h6>
+              <span class="fs-11 text-muted text-truncate d-block">{{ user.email }}</span>
+              <span class="badge bg-soft-primary text-primary mt-1 fs-10">
+                {% if is_clinic_admin %}{% translate "Administrador" %}{% elif is_therapist %}{% translate "Profissional" %}{% elif is_patient %}{% translate "Paciente" %}{% else %}{% translate "Usuário" %}{% endif %}
+              </span>
+            </div>
+
+            <div class="px-3 py-1 mb-2">
+              <form method="post" action="{% url 'workspace_layout_preference' %}">
+                {% csrf_token %}
+                <label class="form-label fs-11 text-muted text-uppercase fw-semibold mb-1" for="preferred-layout">{% translate "Modo de navegação" %}</label>
+                <div class="input-group input-group-sm">
+                  <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select form-select-sm" id="preferred-layout" name="layout">
+                    <option value="vertical"{% if user.preferred_layout == 'vertical' %} selected{% endif %}>{% translate "Vertical" %}</option>
+                    <option value="detached"{% if user.preferred_layout == 'detached' %} selected{% endif %}>{% translate "Destacado" %}</option>
+                  </select></div>
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                  <button class="btn btn-primary btn-sm" type="submit">{% translate "OK" %}</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <form method="post" action="{% url 'account_logout' %}" class="m-0 p-0">
+              {% csrf_token %}
+              <button type="submit" class="dropdown-item d-flex align-items-center gap-2 text-danger">
+                <i aria-hidden="true" class="feather-log-out"></i>
+                <span>{% translate "Sair da conta" %}</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,65 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+  <header class="product-page-header mb-4">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Minha jornada" %}</span>
+    <h1 class="mb-0">{% translate "Exercícios terapêuticos" %}</h1>
+  </header>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+      {% if assignments %}
+        <div class="d-grid gap-4">
+          {% for assignment in assignments %}
+            <article class="border rounded-3 p-3 p-md-4">
+              <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                <div>
+                  <span class="badge text-bg-light border mb-1">{{ assignment.exercise.approach }}</span>
+                  <h2 class="h5 mb-0">{{ assignment.exercise.title }}</h2>
+                </div>
+                <span class="badge {% if assignment.status == 'completed' %}text-bg-success{% else %}text-bg-warning{% endif %}">
+                  {{ assignment.get_status_display }}
+                </span>
+              </div>
+              <p class="text-muted mb-2">{{ assignment.exercise.instructions|truncatewords:25 }}</p>
+              {% if assignment.notes %}
+                <p class="small text-body-secondary mb-3">
+                  <strong>{% translate "Nota do terapeuta" %}:</strong> {{ assignment.notes }}
+                </p>
+              {% endif %}
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pt-2 border-top small text-muted">
+                <div>
+                  <span class="me-3">{% translate "Frequência" %}: {{ assignment.frequency }}</span>
+                  {% if assignment.due_date %}
+                    <span>{% translate "Prazo" %}: {{ assignment.due_date|date:"SHORT_DATE_FORMAT" }}</span>
+                  {% endif %}
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                  {% if not assignment.confirmed_by_patient %}
+                    <form method="post" action="{% url 'patient_confirm_assignment' assignment.pk %}" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-secondary">{% translate "Confirmar recebimento" %}</button>
+                    </form>
+                  {% endif %}
+                  <a href="{% url 'patient_exercise_execute' assignment.pk %}" class="btn btn-sm btn-primary">
+                    {% if assignment.status == 'completed' %}{% translate "Refazer / Ver" %}{% else %}{% translate "Realizar exercício" %}{% endif %}
+                  </a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="product-empty-state py-4 text-center" role="status">
+          <p class="text-body-secondary mb-0">{% translate "Você não possui exercícios atribuídos no momento." %}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

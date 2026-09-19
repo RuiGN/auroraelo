@@ -1,0 +1,29 @@
+tunnel: auroraelo
+credentials-file: /Users/USERNAME/.cloudflared/auroraelo.json
+logfile: /Users/USERNAME/.cloudflared/auroraelo.log
+loglevel: info
+
+ingress:
+  - hostname: auroraelo.rgnsystems.com.br
+    service: http://localhost:4132
+    originRequest:
+      connectTimeout: 30s
+      tlsTimeout: 30s
+      tcpKeepAlive: 30s
+      noHappyEyeballs: false
+      keepAliveConnections: 100
+      keepAliveTimeout: 90s
+      http2Origin: false
+
+  # CORS headers
+  - hostname: auroraelo.rgnsystems.com.br
+    path: /api/*
+    service: http://localhost:4132
+    originRequest:
+      http2Origin: false
+      headers:
+        add:
+          X-Forwarded-Proto: https
+
+  # Catch all - 404
+  - service: http_status:404

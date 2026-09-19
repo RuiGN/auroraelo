@@ -1,0 +1,24 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="conversation-list-title">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Comunicação" %}</p><h1 id="conversation-list-title">{% translate "Mensagens" %}</h1><p class="product-page-meta">{{ non_emergency_notice }}</p></div>
+    <a href="{% url 'conversation_create' %}" class="btn btn-primary"><span aria-hidden="true">+</span> {% translate "Nova conversa" %}</a>
+  </header>
+  {% if conversations %}
+    <section class="product-stack" aria-label="{% translate 'Conversas' %}">
+      {% for conversation in conversations %}
+        <article class="product-table-card product-list-item">
+          <div><a href="{% url 'conversation_detail' conversation.pk %}" class="fw-semibold stretched-link">{% if conversation.subject %}{{ conversation.subject }}{% else %}{% translate "Conversa sem assunto" %}{% endif %}</a><p class="product-muted mt-1">{% if conversation.kind == "clinical" %}{% translate "Clínica" %}{% elif conversation.kind == "administrative" %}{% translate "Administrativa" %}{% else %}{{ conversation.get_kind_display }}{% endif %}</p></div>
+        </article>
+      {% endfor %}
+    </section>
+  {% else %}
+    <div class="product-empty-state" role="status"><h2 class="h5">{% translate "Nenhuma conversa ainda" %}</h2><p>{% translate "Inicie uma conversa quando precisar falar com sua equipe de cuidado." %}</p><a href="{% url 'conversation_create' %}" class="btn btn-primary mt-2">{% translate "Iniciar conversa" %}</a></div>
+  {% endif %}
+</div>
+{% endblock %}

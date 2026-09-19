@@ -1,0 +1,502 @@
+........................................................................ [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 16%]
+........................................................................ [ 21%]
+........................................................................ [ 27%]
+........................................................................ [ 32%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+........................................................................ [ 49%]
+........................................................................ [ 54%]
+........................................................................ [ 60%]
+........................................................................ [ 65%]
+...............................................F........................ [ 71%]
+........................................................................ [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 87%]
+........................................................................ [ 93%]
+........................................................................ [ 98%]
+..............                                                           [100%]
+=================================== FAILURES ===================================
+________ test_consent_center_static_copy_comes_from_translation_catalog ________
+
+client = <django.test.client.Client object at 0x75f7037b7390>
+
+    def test_consent_center_static_copy_comes_from_translation_catalog(
+        client: Client,
+    ) -> None:
+        _, clinic = member_context(client)
+        administrator = UserFactory.create()
+        ClinicMembershipFactory.create(
+            clinic=clinic,
+            user=administrator,
+            role=ClinicMembership.Role.CLINIC_ADMIN,
+        )
+        publish_document(clinic=clinic, actor=administrator)
+    
+        with translation.override("en-us"):
+            content = client.get(reverse("consent_center")).content.decode()
+    
+>       assert "Terms and consents" in content
+E       assert 'Terms and consents' in '\n\n\n<!doctype html>\n<html lang="pt-br" dir="ltr">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" con...e.min.js"></script>\n  <script defer src="/static/duralux/js/language-selector.js"></script>\n  \n</body>\n\n</html>\n'
+
+tests/test_versioned_consents.py:513: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T21:13:40.445257+00:00","level":"INFO","logger":"application.request","request_id":"0b09443e35dd42bda11e7c24d78f2275","tenant_id":"a77aafd4-c00d-4674-b34f-07df99c9282d","actor_ref":"actor_d417fd710c494a44","event":"request.completed","outcome":"success","latency_ms":69.937}
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.14.7-final-0 ________________
+
+Name                                                                                                Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------------------------------------------------------------------------
+accounts/__init__.py                                                                                    0      0      0      0   100%
+accounts/admin.py                                                                                       4      0      0      0   100%
+accounts/apps.py                                                                                        3      0      0      0   100%
+accounts/context_processors.py                                                                         15      0      0      0   100%
+accounts/events.py                                                                                      9      0      0      0   100%
+accounts/forms.py                                                                                      50      5      6      3    86%   57-61, 62->67, 65-66, 144
+accounts/language_preferences.py                                                                       15      0      2      0   100%
+accounts/language_views.py                                                                             13      0      2      0   100%
+accounts/middleware.py                                                                                 91      3     22      3    95%   63, 71, 76
+accounts/migrations/0001_initial.py                                                                     9      0      0      0   100%
+accounts/migrations/0002_user_preferred_layout.py                                                       5      0      0      0   100%
+accounts/migrations/0003_email_identity_security.py                                                    25      0     10      0   100%
+accounts/migrations/0004_clinic_invitation.py                                                           8      0      0      0   100%
+accounts/migrations/0005_accountsession_usermfa_mfarecoverycode.py                                      8      0      0      0   100%
+accounts/migrations/0006_alter_clinicinvitation_initial_role.py                                         4      0      0      0   100%
+accounts/migrations/0007_user_preferred_language.py                                                     4      0      0      0   100%
+accounts/migrations/__init__.py                                                                         0      0      0      0   100%
+accounts/models.py                                                                                    139      3      6      2    97%   85, 87, 163
+accounts/policies.py                                                                                    3      0      0      0   100%
+accounts/selectors.py                                                                                   9      1      2      1    82%   31
+accounts/services.py                                                                                  469     33    112     20    91%   156-158, 185-186, 194-195, 309-310, 312->322, 314->322, 365-366, 377-378, 392-393, 464, 466, 469, 530, 579, 600, 621, 638, 641, 676->684, 695, 745, 749->exit, 781, 789->799, 814-816, 928, 971, 1010
+accounts/urls.py                                                                                        4      0      0      0   100%
+accounts/views.py                                                                                     252     22     60      8    90%   165-166, 175, 182-195, 208, 224, 290->302, 298-299, 317, 392, 415, 431, 572-584, 671->681, 674-675
+ai_assistant/__init__.py                                                                                0      0      0      0   100%
+ai_assistant/apps.py                                                                                    5      0      0      0   100%
+ai_assistant/contracts.py                                                                              34      0      0      0   100%
+ai_assistant/events.py                                                                                 11      0      0      0   100%
+ai_assistant/guardrails.py                                                                             43      1     30      1    97%   103
+ai_assistant/migrations/0001_initial.py                                                                 9      0      0      0   100%
+ai_assistant/migrations/__init__.py                                                                     0      0      0      0   100%
+ai_assistant/models.py                                                                                115     12      8      0    84%   33-35, 43-51
+ai_assistant/policies.py                                                                               43     12     16      4    63%   50-57, 63, 72, 75, 81
+ai_assistant/selectors.py                                                                              26      7      2      0    68%   22-25, 32, 39, 58
+ai_assistant/services.py                                                                               80      7     28      7    87%   48, 114->112, 121, 177, 180, 187, 196, 201
+analytics/__init__.py                                                                                   0      0      0      0   100%
+analytics/advanced_reporting.py                                                                        39      0     12      0   100%
+analytics/anonymization.py                                                                             44      4     12      4    86%   23, 34, 50, 65
+analytics/apps.py                                                                                       3      0      0      0   100%
+analytics/events.py                                                                                     5      0      0      0   100%
+analytics/forms.py                                                                                     11      1      2      1    85%   25
+analytics/metrics.py                                                                                   65      0      0      0   100%
+analytics/metrics_dictionary.py                                                                        28      0      0      0   100%
+analytics/migrations/0001_initial.py                                                                   11      0      0      0   100%
+analytics/migrations/__init__.py                                                                        0      0      0      0   100%
+analytics/models.py                                                                                    49      1      0      0    98%   39
+analytics/policies.py                                                                                   2      0      0      0   100%
+analytics/selectors.py                                                                                 13      1      2      1    87%   24
+analytics/services.py                                                                                 137      5     32      7    92%   64, 130->129, 180->177, 220, 256->258, 510, 520-523
+analytics/storage.py                                                                                    6      0      0      0   100%
+analytics/urls.py                                                                                       3      0      0      0   100%
+analytics/views.py                                                                                    100     21     12      5    75%   41-42, 48, 51, 61-62, 69-70, 72, 105-113, 129-137, 187, 201-212
+audit/__init__.py                                                                                       0      0      0      0   100%
+audit/apps.py                                                                                           6      0      0      0   100%
+audit/events.py                                                                                         2      0      0      0   100%
+audit/migrations/0001_initial.py                                                                        9      0      0      0   100%
+audit/migrations/0002_auditcheckpoint.py                                                                5      0      0      0   100%
+audit/migrations/0003_auditevent_justification_digest.py                                                4      0      0      0   100%
+audit/migrations/0004_alter_auditevent_action.py                                                        4      0      0      0   100%
+audit/migrations/0005_expand_action_namespace.py                                                        4      0      0      0   100%
+audit/migrations/__init__.py                                                                            0      0      0      0   100%
+audit/models.py                                                                                       114      5     16      4    93%   25, 77, 200, 202, 209
+audit/policies.py                                                                                      11      0      0      0   100%
+audit/receivers.py                                                                                     68      0      0      0   100%
+audit/selectors.py                                                                                      2      0      0      0   100%
+audit/services.py                                                                                      69      0     24      0   100%
+clinics/__init__.py                                                                                     0      0      0      0   100%
+clinics/admin.py                                                                                       31      4      2      0    88%   25, 33-34, 48
+clinics/apps.py                                                                                         3      0      0      0   100%
+clinics/context_processors.py                                                                          18      0      2      0   100%
+clinics/events.py                                                                                      10      0      0      0   100%
+clinics/forms.py                                                                                       49      1      8      1    96%   83
+clinics/management/__init__.py                                                                          0      0      0      0   100%
+clinics/management/commands/__init__.py                                                                 0      0      0      0   100%
+clinics/management/commands/seed_demo.py                                                               54      4     22      4    89%   74, 87, 92, 116
+clinics/middleware.py                                                                                  29      0      4      0   100%
+clinics/migrations/0001_initial.py                                                                      9      0      0      0   100%
+clinics/migrations/0002_add_clinic_is_demo.py                                                           4      0      0      0   100%
+clinics/migrations/0003_name_persistence_indexes.py                                                     4      0      0      0   100%
+clinics/migrations/0004_add_clinic_slug_invariant.py                                                    5      0      0      0   100%
+clinics/migrations/0005_document_membership_roles.py                                                    4      0      0      0   100%
+clinics/migrations/0006_require_canonical_clinic_slug.py                                                4      0      0      0   100%
+clinics/migrations/0007_tighten_canonical_clinic_slug.py                                                4      0      0      0   100%
+clinics/migrations/0008_alter_clinicmembership_role.py                                                  4      0      0      0   100%
+clinics/migrations/0009_clinicconfiguration.py                                                          7      0      0      0   100%
+clinics/migrations/0010_clinicconfiguration_language_code_and_more.py                                   4      0      0      0   100%
+clinics/migrations/0011_alter_clinicconfiguration_service_channels_and_more.py                          4      0      0      0   100%
+clinics/migrations/0012_clinicconfiguration_logo_and_more.py                                            5      0      0      0   100%
+clinics/migrations/0013_clinicconfiguration_enabled_modules_and_more.py                                 6      0      0      0   100%
+clinics/migrations/0014_clinicmembership_authorized_by_and_more.py                                      6      0      0      0   100%
+clinics/migrations/0015_brandthemeversion_communicationtemplate_customdomain.py                         8      0      0      0   100%
+clinics/migrations/0016_clinicconfiguration_icon_and_more.py                                            4      0      0      0   100%
+clinics/migrations/__init__.py                                                                          0      0      0      0   100%
+clinics/models.py                                                                                     143      4     10      1    97%   115, 183, 302, 307
+clinics/policies.py                                                                                    17      0      2      0   100%
+clinics/selectors.py                                                                                   67     11     18      6    75%   27, 41, 87, 119, 161-169, 202
+clinics/services.py                                                                                   274     33     78     23    84%   133, 197, 199, 261, 361, 401-402, 404, 411, 422, 429, 433-434, 436, 446, 453-454, 518, 522, 526, 530, 533, 541-542, 553, 581, 584, 592, 602-603, 647, 676, 694
+clinics/typing.py                                                                                       3      0      0      0   100%
+clinics/urls.py                                                                                         3      0      0      0   100%
+clinics/views.py                                                                                      105     13     34      4    88%   59, 66-67, 78, 113->128, 169-170, 185-186, 197-198, 209-210, 234
+clinics/whitelabel_models.py                                                                          117     12      0      0    90%   25, 30, 35, 83, 93, 98, 103, 162, 172, 177, 182, 258
+clinics/whitelabel_services.py                                                                        317     28     94     20    87%   43, 45, 50-51, 117, 168, 173-179, 227, 299, 307, 351, 492, 495, 497->502, 537, 569-570, 652, 653->648, 655->648, 664, 754, 788, 815, 875
+communities/__init__.py                                                                                 0      0      0      0   100%
+communities/apps.py                                                                                     5      0      0      0   100%
+communities/community_models.py                                                                       114      7      6      2    91%   37-39, 116, 120, 176, 182
+communities/contracts.py                                                                               78      0      0      0   100%
+communities/events.py                                                                                  29      0      0      0   100%
+communities/gamification_models.py                                                                     49      2      0      0    96%   50, 75
+communities/gamification_services.py                                                                   85     18     20      5    76%   49-52, 76, 98, 116-137, 181-182, 206->215
+communities/governance_models.py                                                                       34      1      0      0    97%   35
+communities/interaction_models.py                                                                      64      1      0      0    98%   58
+communities/interaction_services.py                                                                   137     27     46     17    74%   58, 99, 125, 130, 134, 169, 190, 198, 202, 206, 237, 241, 248, 256-263, 282, 331-348, 364, 372
+communities/migrations/0001_initial.py                                                                  9      0      0      0   100%
+communities/migrations/__init__.py                                                                      0      0      0      0   100%
+communities/models.py                                                                                   6      0      0      0   100%
+communities/moderation_models.py                                                                       76      1      0      0    99%   107
+communities/moderation_services.py                                                                    145     22     52     13    78%   93-98, 170, 174, 229, 272-273, 280-281, 297, 299, 302, 340, 344, 361-362, 373-375
+communities/policies.py                                                                                65     22     30      8    58%   42-47, 56-69, 80, 82, 85, 104, 106, 124, 147, 158
+communities/rollout_services.py                                                                        48      3     22     11    80%   33, 101->104, 119->121, 121->123, 123->125, 125->127, 127->129, 129->131, 132, 133->141, 135
+communities/selectors.py                                                                               53      4     14      4    88%   144, 148, 160, 201
+communities/services.py                                                                                98     19     20      8    77%   114, 156, 158-160, 190-194, 218, 222, 239-244, 296
+config/__init__.py                                                                                      0      0      0      0   100%
+config/asgi.py                                                                                          4      4      0      0     0%   3-9
+config/settings/__init__.py                                                                             0      0      0      0   100%
+config/settings/base.py                                                                                68      0      2      0   100%
+config/settings/development.py                                                                          8      0      0      0   100%
+config/settings/production.py                                                                          31      2      4      2    89%   84, 88
+config/settings/test.py                                                                                14      1      2      1    88%   68
+config/urls.py                                                                                          8      0      0      0   100%
+config/views.py                                                                                       150      6     22      5    94%   82, 87-88, 274, 277, 385
+config/wsgi.py                                                                                          4      4      0      0     0%   3-9
+consents/__init__.py                                                                                    0      0      0      0   100%
+consents/adapters.py                                                                                   42      1      6      1    96%   71
+consents/apps.py                                                                                        3      0      0      0   100%
+consents/context_processors.py                                                                         17      0      4      0   100%
+consents/events.py                                                                                      8      0      0      0   100%
+consents/forms.py                                                                                      11      0      0      0   100%
+consents/integrity.py                                                                                  17      0      2      0   100%
+consents/management/__init__.py                                                                         0      0      0      0   100%
+consents/management/commands/__init__.py                                                                0      0      0      0   100%
+consents/management/commands/process_revocation_dispatches.py                                          44      3      8      1    92%   36-37, 40
+consents/management/commands/review_access_lifecycle.py                                                31      5      2      1    82%   20-21, 38, 44-45
+consents/migrations/0001_initial.py                                                                     9      0      0      0   100%
+consents/migrations/0002_consentmanifestation_revocation_reason_digest_and_more.py                      4      0      0      0   100%
+consents/migrations/0003_consentrevocationdispatch.py                                                   7      0      0      0   100%
+consents/migrations/0004_legalrepresentation.py                                                         8      0      0      0   100%
+consents/migrations/0005_consentrevocationdispatch_adapter_identity_and_more.py                         4      0      0      0   100%
+consents/migrations/0006_accessreviewrun_accessreviewexception_and_more.py                              8      0      0      0   100%
+consents/migrations/0007_consentrevocationworkitem.py                                                   8      0      0      0   100%
+consents/migrations/0008_remove_consentrevocationworkitem_consent_work_item_queue_idx_and_more.py       5      0      0      0   100%
+consents/migrations/__init__.py                                                                         0      0      0      0   100%
+consents/models.py                                                                                    352     29     34      9    89%   23, 77, 80, 83, 90, 104, 116, 245-246, 250, 294->302, 379, 387, 436-441, 449, 518, 534, 580-584, 588, 590, 734, 738, 799, 809
+consents/policies.py                                                                                   46      0      0      0   100%
+consents/selectors.py                                                                                  50      5     18      6    84%   25, 41->43, 44, 46, 56, 103
+consents/services.py                                                                                  405     44    170     45    84%   115, 124, 163, 168-170, 186, 257, 277->279, 280, 282, 335, 337, 353, 357-358, 360, 365, 367, 412, 414, 464, 467, 474, 510->513, 513->515, 564, 675, 677->672, 727, 737, 739, 810, 819, 825, 904->915, 968, 993, 1002, 1005, 1119->1134, 1156, 1159, 1166, 1177-1184, 1195, 1236, 1300->1298, 1327
+consents/urls.py                                                                                        3      0      0      0   100%
+consents/views.py                                                                                     100      6     14      3    92%   54, 180, 221, 242-244
+content/__init__.py                                                                                     0      0      0      0   100%
+content/apps.py                                                                                         6      0      0      0   100%
+content/events.py                                                                                       5      0      0      0   100%
+content/forms.py                                                                                      156     31     44      7    72%   23-26, 45, 57-59, 98-101, 106-121, 151, 162->164, 169, 174-175, 242, 302
+content/learning_authoring.py                                                                         209     20     96     18    88%   53, 58, 63, 75-76, 130, 185, 187, 190, 198, 207-208, 239, 354, 409, 463, 470, 484, 534, 538
+content/learning_selectors.py                                                                          11      0      0      0   100%
+content/learning_urls.py                                                                                3      0      0      0   100%
+content/learning_views.py                                                                             429    128     54     12    69%   67-68, 74, 77, 101, 132-133, 144-145, 149, 159-162, 186-188, 200-201, 205, 221-223, 273-275, 279-280, 296-297, 318-320, 324-326, 335-336, 375-405, 412-428, 448-488, 495-517, 532-533, 536-537, 557, 579-580, 614, 666-667, 672-674, 688-689, 716-719, 746-748, 751-752, 755-756, 770-772, 815-817
+content/migrations/0001_initial.py                                                                     11      0      0      0   100%
+content/migrations/0002_learning_products.py                                                            8      0      0      0   100%
+content/migrations/0003_learning_access_products.py                                                     8      0      0      0   100%
+content/migrations/0004_learning_experience.py                                                          8      0      0      0   100%
+content/migrations/0005_content_recommendations.py                                                      8      0      0      0   100%
+content/migrations/0006_quiz_attempt_request_idempotency.py                                             6      0      0      0   100%
+content/migrations/0007_review_governance_wave.py                                                       8      0      0      0   100%
+content/migrations/0008_managed_taxonomy.py                                                             7      0      0      0   100%
+content/migrations/0009_content_same_tenant_invariant.py                                               32     12     16      4    50%   133-135, 137-139, 148-150, 152-154
+content/migrations/0010_contentversioncomment.py                                                        8      0      0      0   100%
+content/migrations/0011_remove_enrollment_unique_active_enrollment_per_course_and_more.py               5      0      0      0   100%
+content/migrations/0012_lesson_captions_lesson_transcript.py                                            4      0      0      0   100%
+content/migrations/0013_content_successor_contentreport.py                                              8      0      0      0   100%
+content/migrations/__init__.py                                                                          0      0      0      0   100%
+content/models.py                                                                                     422     13      2      0    97%   50, 68, 104, 132, 192, 202, 281, 289, 345, 355, 408, 415, 418
+content/policies.py                                                                                     2      0      0      0   100%
+content/receivers.py                                                                                   27      2      8      1    86%   54-55
+content/selectors.py                                                                                   54      8     12      1    80%   82, 88-95, 152
+content/services.py                                                                                   938    115    402    113    83%   124, 128, 137, 144, 179, 237, 256, 269, 325, 368->379, 401, 403, 406, 434, 442, 449, 453->464, 483, 490, 506, 550, 557, 573, 599, 623, 625, 627, 667, 683, 717, 723, 793, 795, 839, 846, 848, 871->875, 907, 939, 941->954, 981, 987, 995-996, 1027, 1033, 1036, 1042-1059, 1191, 1193, 1195, 1233-1234, 1240, 1290, 1292, 1294, 1325-1326, 1337, 1374, 1377, 1379, 1419, 1426, 1431, 1472->exit, 1476-1479, 1484->exit, 1485->exit, 1488->1485, 1497, 1514, 1567->1571, 1579->1583, 1611, 1613, 1615, 1685, 1727, 1778, 1781, 1818, 1820, 1862, 1864, 1869, 1873, 1875, 1930, 1945, 1949, 1952, 2007, 2009, 2044, 2105, 2150, 2152, 2215, 2218, 2258, 2260, 2262, 2302, 2303->2293, 2332, 2353, 2386, 2391, 2393, 2397, 2442, 2452, 2491, 2496, 2513, 2536->2532
+content/storage.py                                                                                      6      0      0      0   100%
+content/urls.py                                                                                         3      0      0      0   100%
+content/views.py                                                                                      321     65     54     14    75%   79-80, 89, 104, 107, 112, 138-141, 152-153, 193-194, 258, 278-279, 287, 319-320, 324, 345-346, 350, 372-373, 377, 400-401, 420-423, 441-444, 459-460, 481-484, 497-498, 537, 572-574, 609-641, 686-687
+core/__init__.py                                                                                        0      0      0      0   100%
+core/apps.py                                                                                            3      0      0      0   100%
+core/events.py                                                                                          8      0      0      0   100%
+core/forms.py                                                                                          28      0      2      0   100%
+core/middleware.py                                                                                     32      0      2      0   100%
+core/observability.py                                                                                  45      2     14      2    93%   44, 85
+core/persistence.py                                                                                     8      0      0      0   100%
+core/policies.py                                                                                       11      0      0      0   100%
+core/presentation.py                                                                                   15      0      8      0   100%
+core/security.py                                                                                       14      0      0      0   100%
+core/selectors.py                                                                                       5      0      0      0   100%
+core/services.py                                                                                       13      0      0      0   100%
+core/templatetags/__init__.py                                                                           0      0      0      0   100%
+core/templatetags/accessible_forms.py                                                                  56      1     26      1    98%   36
+core/templatetags/presentation.py                                                                      12      3      2      1    71%   17, 19-20
+core/uploads.py                                                                                       129     12     28      9    87%   45, 86, 104, 141, 159, 172-173, 199, 201, 227, 241-242
+finance/__init__.py                                                                                     0      0      0      0   100%
+finance/apps.py                                                                                         3      0      0      0   100%
+finance/billing_models.py                                                                             101      9      0      0    91%   28, 33, 36, 97, 102, 105, 172, 177, 180
+finance/billing_services.py                                                                           129     15     44     15    83%   54, 77, 87, 134-136, 137->148, 168, 180, 184, 226, 228, 237->240, 270, 272, 322, 324
+finance/events.py                                                                                       6      0      0      0   100%
+finance/forms.py                                                                                       15      0      0      0   100%
+finance/ledger_models.py                                                                              165     16      2      0    90%   38, 43, 46, 81, 86, 89, 151, 166, 171, 174, 215, 220, 225, 287, 292, 295
+finance/ledger_services.py                                                                            113      5     30      6    92%   84, 95, 234->236, 278, 323, 325
+finance/migrations/0001_initial.py                                                                     10      0      0      0   100%
+finance/migrations/0002_plan_planprice_subscription_coupon_and_more.py                                  9      0      0      0   100%
+finance/migrations/0003_webhookevent.py                                                                 7      0      0      0   100%
+finance/migrations/0004_adhoccharge_exceptionqueueitem_refundrequest.py                                 8      0      0      0   100%
+finance/migrations/0005_ledgeraccount_ledgerentry_periodclosure_and_more.py                             9      0      0      0   100%
+finance/migrations/0006_fiscaldocument_payoutbatch_payoutrule.py                                        9      0      0      0   100%
+finance/migrations/__init__.py                                                                          0      0      0      0   100%
+finance/models.py                                                                                      86      4      0      0    95%   100, 155, 165, 260
+finance/payment_adapter.py                                                                             40      0      4      0   100%
+finance/payout_models.py                                                                              104      9      0      0    91%   18, 23, 26, 99, 104, 107, 174, 179, 182
+finance/payout_services.py                                                                            145     12     46     12    87%   103, 115, 168, 193, 257, 259, 293, 338, 345, 353, 401, 403
+finance/policies.py                                                                                     2      0      0      0   100%
+finance/reporting_services.py                                                                         115      7     24      6    91%   105, 106->96, 115-116, 125, 158, 249, 265
+finance/selectors.py                                                                                   40      6     10      5    78%   50, 68, 73, 75, 77, 80
+finance/services.py                                                                                    91      5     22      5    91%   71, 131, 204, 249, 251
+finance/storage.py                                                                                      6      0      0      0   100%
+finance/subscription_models.py                                                                        135     15      0      0    89%   43, 48, 51, 92, 97, 102, 105, 159, 164, 167, 172, 212, 217, 220, 282
+finance/subscription_services.py                                                                      121     12     32     12    84%   65, 112, 116, 118, 177, 185, 238, 243, 248, 295, 297, 332
+finance/urls.py                                                                                         3      0      0      0   100%
+finance/views.py                                                                                       70     18      6      3    72%   41-42, 48, 51, 96-97, 100, 116-123, 130-137, 144-154
+finance/webhook_models.py                                                                              37      4      0      0    89%   22, 27, 30, 74
+finance/webhook_services.py                                                                            48      2      8      2    93%   52, 57
+goals/__init__.py                                                                                       1      0      0      0   100%
+goals/apps.py                                                                                           3      0      0      0   100%
+goals/events.py                                                                                        11      0      0      0   100%
+goals/exercise_models.py                                                                              131      5      0      0    96%   49, 110, 123, 194, 260
+goals/exercise_services.py                                                                            145     23     36     14    80%   65, 68, 182, 184, 227, 253-262, 288, 320, 345, 356, 392, 419, 456, 463
+goals/exercise_views.py                                                                               118     25     28     12    73%   47-48, 54, 57, 68-74, 93-99, 124, 139, 164, 188-189, 211, 236-243, 267-275, 287, 313, 320
+goals/forms.py                                                                                         22      2      4      2    85%   76, 83
+goals/low_energy_models.py                                                                             70      5      2      1    92%   26, 90, 98, 103, 108
+goals/low_energy_services.py                                                                           86      5     22      5    91%   40, 43, 53, 182, 198
+goals/low_energy_views.py                                                                              54      5      6      3    87%   30-31, 37, 40, 94
+goals/migrations/0001_initial.py                                                                        9      0      0      0   100%
+goals/migrations/0002_lowenergyactiontemplate_lowenergymode.py                                          8      0      0      0   100%
+goals/migrations/0003_exerciseassignment_exerciseexecution_exercisecomment_and_more.py                  8      0      0      0   100%
+goals/migrations/__init__.py                                                                            0      0      0      0   100%
+goals/models.py                                                                                       117      5      0      0    96%   43, 154, 209, 214, 217
+goals/policies.py                                                                                       2      0      0      0   100%
+goals/selectors.py                                                                                     36      5     10      4    80%   32, 45, 57-59, 91, 95->97
+goals/services.py                                                                                     146     19     62     17    81%   55, 103, 176, 180, 182, 196->214, 248, 259, 262, 307, 314, 325, 328, 372-380, 404, 418, 454
+goals/urls.py                                                                                           5      0      0      0   100%
+goals/views.py                                                                                         97     21     14      4    76%   34-35, 41, 44, 56, 70, 150-172, 206-216, 223-231
+integrations/__init__.py                                                                                0      0      0      0   100%
+integrations/apps.py                                                                                    5      0      0      0   100%
+integrations/calendars.py                                                                             124     15     32     11    82%   69, 78, 82, 86-87, 112->131, 117, 122->131, 128-129, 159, 269, 279->291, 311, 328-335
+integrations/contracts.py                                                                             141     13     10      4    87%   235-236, 266, 280-285, 333, 340-341, 380, 395
+integrations/events.py                                                                                 37      0      0      0   100%
+integrations/migrations/0001_initial.py                                                                 8      0      0      0   100%
+integrations/migrations/0002_whatsappinboundmessage_whatsappconsentrecord_and_more.py                   8      0      0      0   100%
+integrations/migrations/0003_videoaccesstoken_videoqualitytelemetry.py                                  8      0      0      0   100%
+integrations/migrations/0004_alter_videoaccesstoken_role_and_more.py                                    9      0      0      0   100%
+integrations/migrations/__init__.py                                                                     0      0      0      0   100%
+integrations/models.py                                                                                365     13      8      1    95%   47, 56-64, 108, 152, 372
+integrations/observability.py                                                                          94      6     38      9    89%   42, 63, 66, 75, 77->79, 79->81, 126, 190->206, 221
+integrations/policies.py                                                                               55     35     22      0    26%   18-19, 34-39, 48-50, 59-61, 70-72, 81-83, 92-94, 103-105, 114-116, 125-127, 136-138
+integrations/pwa.py                                                                                    68      7     18      7    84%   173, 185, 219, 222, 261, 264, 269
+integrations/sagas.py                                                                                 155     25     34      9    80%   60-65, 75, 121, 152-155, 164, 198, 201->219, 214-216, 272-286, 289->308, 296->308, 305-306
+integrations/selectors.py                                                                              77     35     12      1    48%   51, 63, 72-75, 83->85, 92, 103, 112, 121, 145, 150, 155, 164, 175, 184, 197-202, 207, 212, 219, 234-239, 246-249, 256, 267
+integrations/services.py                                                                              420     34    140     36    88%   127, 135->141, 184, 234, 244, 270, 304, 306, 338->344, 352-353, 388, 391, 396->399, 444, 451->463, 518, 561, 597, 632, 685, 699, 702, 724-725, 842, 868, 888, 898, 958-959, 979, 1179, 1187, 1212->exit, 1234, 1240->1245, 1306, 1341, 1383
+integrations/video.py                                                                                 132     13     38     15    84%   38, 46, 87, 119, 122, 126, 162, 187, 202, 212->216, 233, 249->254, 281, 328, 340
+integrations/video_models.py                                                                           43      0      0      0   100%
+integrations/whatsapp.py                                                                              142     38     40      6    70%   52, 105, 196-197, 236, 275-279, 298, 309-313, 392-431
+integrations/whatsapp_models.py                                                                        99      3      6      2    95%   120, 148->exit, 156, 201
+journal/__init__.py                                                                                     0      0      0      0   100%
+journal/apps.py                                                                                         5      0      0      0   100%
+journal/checkin_forms.py                                                                               21      1      8      1    93%   37
+journal/events.py                                                                                      13      0      0      0   100%
+journal/forms.py                                                                                       39      5     10      5    80%   116, 118, 127, 135, 143
+journal/migrations/0001_initial.py                                                                     10      0      0      0   100%
+journal/migrations/0002_journalaccessrequest.py                                                         8      0      0      0   100%
+journal/migrations/0003_checkinquestionnaire_dailycheckin_and_more.py                                   8      0      0      0   100%
+journal/migrations/0004_clinicalsignalrule_humantriageitem_and_more.py                                  8      0      0      0   100%
+journal/migrations/0005_alter_humantriageitem_checkin.py                                                5      0      0      0   100%
+journal/migrations/__init__.py                                                                          0      0      0      0   100%
+journal/models.py                                                                                     226     11      0      0    95%   30, 121-122, 132, 212, 219, 224, 332, 414, 494, 501
+journal/policies.py                                                                                     2      0      0      0   100%
+journal/selectors.py                                                                                  171     14     54     14    88%   124-127, 134-137, 163, 165, 170->192, 215->228, 244-245, 251-252, 286, 367, 373->375, 392, 405->407, 418
+journal/services.py                                                                                   337     51    144     35    80%   69, 121, 125, 128, 185, 194, 196, 199, 240, 291->305, 333, 355, 407, 411, 414, 420->422, 486, 517, 522, 524, 526, 531, 534, 575-578, 593-597, 606-609, 641, 746, 776-779, 791-795, 833-834, 890, 892, 898, 900, 943, 947
+journal/urls.py                                                                                         3      0      0      0   100%
+journal/views.py                                                                                      202     35     48     15    79%   52-53, 59, 62, 73, 90-91, 95-96, 144, 163-164, 189, 226, 263->274, 271-272, 336->339, 354-370, 380, 409, 442, 456-464, 474-475, 482, 488, 491
+medical_records/__init__.py                                                                             0      0      0      0   100%
+medical_records/apps.py                                                                                 5      0      0      0   100%
+medical_records/contracts.py                                                                          103      0      0      0   100%
+medical_records/document_models.py                                                                     52      2      0      0    96%   96, 137
+medical_records/document_services.py                                                                   56      3     16      4    90%   57, 62, 89, 145->148
+medical_records/entry_models.py                                                                       111      8      8      3    91%   39, 48, 51-52, 106, 179, 222, 274
+medical_records/events.py                                                                              30      0      0      0   100%
+medical_records/governance_models.py                                                                   70      3      0      0    96%   61, 108, 160
+medical_records/migrations/0001_initial.py                                                              9      0      0      0   100%
+medical_records/migrations/__init__.py                                                                  0      0      0      0   100%
+medical_records/models.py                                                                               6      0      0      0   100%
+medical_records/policies.py                                                                            73     20     34     10    66%   53-59, 76-78, 90, 92, 105, 112, 125, 127, 143, 145, 158, 169
+medical_records/retention_models.py                                                                   108      6      0      0    94%   65, 117, 145, 199, 230, 266
+medical_records/retention_services.py                                                                  93      4     20      5    92%   78->89, 107, 148, 234, 277
+medical_records/rollout_services.py                                                                    60      2     10      3    93%   54->56, 61, 63
+medical_records/selectors.py                                                                           57     24     12      0    54%   51-67, 81-94, 137, 198-224, 236
+medical_records/services.py                                                                            87      4     20      5    92%   185, 186->188, 189, 191, 193
+medical_records/signature_models.py                                                                    51      2      0      0    96%   53, 126
+medical_records/signature_services.py                                                                  50      0      6      0   100%
+onboarding/__init__.py                                                                                  0      0      0      0   100%
+onboarding/apps.py                                                                                      3      0      0      0   100%
+onboarding/events.py                                                                                    2      0      0      0   100%
+onboarding/forms.py                                                                                    15      0      0      0   100%
+onboarding/migrations/0001_initial.py                                                                   8      0      0      0   100%
+onboarding/migrations/__init__.py                                                                       0      0      0      0   100%
+onboarding/models.py                                                                                   35      3      0      0    91%   17, 24, 27
+onboarding/policies.py                                                                                  2      0      0      0   100%
+onboarding/selectors.py                                                                                25      1      2      0    96%   91
+onboarding/services.py                                                                                 49      5     12      5    84%   34, 56, 78, 97, 104
+onboarding/urls.py                                                                                      3      0      0      0   100%
+onboarding/views.py                                                                                    74     12     24      7    79%   32-33, 39, 47-52, 65, 69, 78->125, 98->125, 114->125, 137
+people/__init__.py                                                                                      0      0      0      0   100%
+people/apps.py                                                                                          6      0      0      0   100%
+people/events.py                                                                                       13      0      0      0   100%
+people/forms.py                                                                                        36      1      6      1    95%   71
+people/migrations/0001_initial.py                                                                       9      0      0      0   100%
+people/migrations/0002_professionalprofile_professionalcredential_and_more.py                           9      0      0      0   100%
+people/migrations/0003_carerelationship_authorized_by_and_more.py                                       8      0      0      0   100%
+people/migrations/0004_review_governance_wave.py                                                        4      0      0      0   100%
+people/migrations/__init__.py                                                                           0      0      0      0   100%
+people/models.py                                                                                      144      3      0      0    98%   35, 146, 245
+people/policies.py                                                                                     17      0      6      0   100%
+people/receivers.py                                                                                    16      1      6      2    86%   35, 36->42
+people/selectors.py                                                                                    81      6     26      6    89%   56, 71, 188, 231, 259, 272
+people/services.py                                                                                    239     49     80     29    74%   68-98, 117, 122, 124, 126, 185, 190, 192, 200, 208, 231, 234, 296, 298, 300, 362-371, 377, 403, 405, 445, 452, 454, 499, 501, 538, 540, 542, 545, 600-610, 643->648, 649
+people/urls.py                                                                                          3      0      0      0   100%
+people/views.py                                                                                        80     11      6      1    86%   40-41, 50, 88-95, 101-108, 141-142
+privacy/__init__.py                                                                                     0      0      0      0   100%
+privacy/adapters.py                                                                                    50      6      8      1    84%   69, 134-145
+privacy/apps.py                                                                                         4      0      0      0   100%
+privacy/events.py                                                                                       1      0      0      0   100%
+privacy/migrations/0001_initial.py                                                                      7      0      0      0   100%
+privacy/migrations/0002_datasubjectrequest_identity_evidence_digest_and_more.py                         4      0      0      0   100%
+privacy/migrations/0003_lifecycle_adapter_evidence.py                                                   4      0      0      0   100%
+privacy/migrations/__init__.py                                                                          0      0      0      0   100%
+privacy/models.py                                                                                     111      4      0      0    96%   23, 37, 163, 175
+privacy/policies.py                                                                                     1      0      0      0   100%
+privacy/selectors.py                                                                                    1      0      0      0   100%
+privacy/services.py                                                                                   231     25     66     20    85%   118, 156, 160, 209, 215, 255, 257, 259, 270->289, 409-410, 440, 482-483, 485, 502, 510, 551, 564, 569, 582-588, 610, 612, 617
+routines/__init__.py                                                                                    0      0      0      0   100%
+routines/apps.py                                                                                        5      0      0      0   100%
+routines/care_plan_models.py                                                                           65      1      0      0    98%   79
+routines/care_plan_services.py                                                                         67      7     20      6    85%   63, 107, 113, 155, 159, 174-175
+routines/contracts.py                                                                                  30      0      0      0   100%
+routines/events.py                                                                                     17      0      0      0   100%
+routines/medication_models.py                                                                          72      1      0      0    99%   75
+routines/medication_services.py                                                                        69     12     20      6    80%   81, 131, 134, 150-154, 187-189, 219
+routines/migrations/0001_initial.py                                                                     9      0      0      0   100%
+routines/migrations/0002_alter_careplan_options_alter_careplanaction_options_and_more.py                5      0      0      0   100%
+routines/migrations/__init__.py                                                                         0      0      0      0   100%
+routines/models.py                                                                                      6      0      0      0   100%
+routines/policies.py                                                                                   49     21     20      3    48%   36-41, 52-59, 70-77, 89, 93, 118
+routines/routine_models.py                                                                            112      3      2      1    96%   30, 105, 166
+routines/selectors.py                                                                                  95     27     26      4    68%   37-122, 165, 167, 168->171, 203-208, 351
+routines/services.py                                                                                  151     42     44      6    65%   83->82, 115, 160-199, 212, 226, 238-244, 265, 301
+routines/sleep_models.py                                                                               47      1      0      0    98%   64
+routines/sleep_services.py                                                                             39      0      4      0   100%
+scheduling/__init__.py                                                                                  0      0      0      0   100%
+scheduling/appointment_models.py                                                                       79      5      0      0    94%   31, 131, 136, 141, 144
+scheduling/apps.py                                                                                      3      0      0      0   100%
+scheduling/availability_models.py                                                                     101     10      0      0    90%   17, 22, 27, 103, 108, 113, 118, 187, 192, 195
+scheduling/availability_services.py                                                                    72      8     20      8    83%   74, 76, 78, 120, 157, 159, 203, 205
+scheduling/delivery_templates.py                                                                       15      2      0      0    87%   19-20
+scheduling/events.py                                                                                   14      0      0      0   100%
+scheduling/forms.py                                                                                    57      2      0      0    96%   89-90
+scheduling/messaging_models.py                                                                        139     11      0      0    92%   30-32, 42, 81, 91, 155, 203, 208, 211, 268
+scheduling/messaging_services.py                                                                      129     22     48     11    80%   54, 68, 95, 99->101, 110, 112->115, 159, 204, 228-232, 249, 253-283, 301, 340
+scheduling/migrations/0001_initial.py                                                                  10      0      0      0   100%
+scheduling/migrations/0002_alter_messageattachment_file.py                                              6      0      0      0   100%
+scheduling/migrations/0003_waitlistentry.py                                                             8      0      0      0   100%
+scheduling/migrations/__init__.py                                                                       0      0      0      0   100%
+scheduling/models.py                                                                                   87      6      0      0    93%   85, 120, 130, 171, 181, 225
+scheduling/operating_hours.py                                                                          26      2      6      0    94%   30-31
+scheduling/policies.py                                                                                  2      0      0      0   100%
+scheduling/reminder_models.py                                                                         108      7      0      0    94%   38, 95, 100, 103, 170, 175, 178
+scheduling/reminder_services.py                                                                       122     37     54     19    62%   66, 68, 70, 72, 76, 78, 109, 120, 126, 193-204, 213, 229-235, 263, 265, 267, 273, 278-281, 292-309, 323, 331, 333
+scheduling/selectors.py                                                                                63     11     26      7    78%   76, 86, 106, 109, 146, 158-161, 182, 187
+scheduling/services.py                                                                                210     27     64     17    83%   95-96, 102, 126-130, 170, 216, 219, 224, 307, 317, 320, 333, 341, 371, 382, 486, 543, 558, 589, 642-661
+scheduling/storage.py                                                                                   6      0      0      0   100%
+scheduling/unit_services.py                                                                            82     11     22      8    82%   46, 93, 99, 134, 143-155, 172, 175, 213
+scheduling/unit_views.py                                                                               86     28     12      4    63%   41-42, 48, 51, 92-93, 96, 112-135, 151-155, 177-178, 181, 197-201
+scheduling/urls.py                                                                                      5      0      0      0   100%
+scheduling/views.py                                                                                   217     76     40     10    61%   75-76, 82, 85, 92-93, 141->146, 144-145, 159->157, 216, 248-267, 282-289, 295-305, 311-318, 324-331, 343-365, 387-389, 404-425, 432-451, 473, 477-484, 500, 505-506, 513, 520, 551-564, 571-579
+scheduling/waitlist_models.py                                                                          40      2      0      0    95%   28, 101
+scheduling/waitlist_services.py                                                                        64      7     20      7    83%   65, 70, 113, 151, 153, 160, 165
+scheduling/waitlist_views.py                                                                           65     14      6      3    76%   39-40, 46, 49, 109-110, 113, 129-136, 143-152
+support_network/__init__.py                                                                             0      0      0      0   100%
+support_network/apps.py                                                                                 5      0      0      0   100%
+support_network/contracts.py                                                                           61      0      0      0   100%
+support_network/events.py                                                                              24      0      0      0   100%
+support_network/governance_models.py                                                                   32      0      0      0   100%
+support_network/guardian_models.py                                                                     65      1      4      1    97%   143
+support_network/guardian_services.py                                                                  102      3     16      5    93%   161, 210, 227->232, 259, 284->289
+support_network/migrations/0001_initial.py                                                              9      0      0      0   100%
+support_network/migrations/__init__.py                                                                  0      0      0      0   100%
+support_network/models.py                                                                               6      0      0      0   100%
+support_network/network_models.py                                                                      76      1      2      1    97%   33
+support_network/policies.py                                                                            63     31     26      3    42%   42-47, 58-65, 76-83, 103, 126, 133, 153-157, 164-171
+support_network/rollout_services.py                                                                    26      2      6      2    88%   31, 97
+support_network/selectors.py                                                                           47     12      8      0    75%   41-52, 62, 74-84, 151-158
+support_network/services.py                                                                           107      7     32      8    89%   119, 153->152, 198, 201, 236, 272, 329, 339
+support_network/spirituality_models.py                                                                 53      0      0      0   100%
+support_network/spirituality_services.py                                                               40      2      6      2    91%   112, 139
+support_network/urgent_plan_models.py                                                                  60      0      0      0   100%
+support_network/urgent_services.py                                                                     43      3      8      3    88%   81, 128, 183
+tenancy/__init__.py                                                                                     0      0      0      0   100%
+tenancy/apps.py                                                                                         3      0      0      0   100%
+tenancy/events.py                                                                                       2      0      0      0   100%
+tenancy/policies.py                                                                                     2      0      0      0   100%
+tenancy/selectors.py                                                                                    2      0      0      0   100%
+tenancy/services.py                                                                                     2      0      0      0   100%
+therapist_dashboard/__init__.py                                                                         0      0      0      0   100%
+therapist_dashboard/apps.py                                                                             3      0      0      0   100%
+therapist_dashboard/events.py                                                                           2      0      0      0   100%
+therapist_dashboard/policies.py                                                                         2      0      0      0   100%
+therapist_dashboard/selectors.py                                                                       42      0      6      0   100%
+therapist_dashboard/services.py                                                                         2      0      0      0   100%
+therapist_dashboard/urls.py                                                                             3      0      0      0   100%
+therapist_dashboard/views.py                                                                           34      4      8      4    81%   24, 34, 41, 50
+wellness/__init__.py                                                                                    0      0      0      0   100%
+wellness/activity_models.py                                                                            66      3      2      1    94%   30, 103, 133
+wellness/apps.py                                                                                        5      0      0      0   100%
+wellness/contracts.py                                                                                  20      0      0      0   100%
+wellness/crisis_models.py                                                                              53      3      0      0    94%   44, 80, 110
+wellness/crisis_services.py                                                                            28      0      2      0   100%
+wellness/events.py                                                                                     24      0      0      0   100%
+wellness/migrations/0001_initial.py                                                                     9      0      0      0   100%
+wellness/migrations/__init__.py                                                                         0      0      0      0   100%
+wellness/models.py                                                                                      7      0      0      0   100%
+wellness/policies.py                                                                                   48     21     18      3    45%   36-41, 52-59, 70-77, 87, 104, 108
+wellness/relapse_plan_models.py                                                                        73      4      0      0    95%   54, 85, 122, 159
+wellness/relapse_services.py                                                                           59      3     14      3    92%   112, 118, 154
+wellness/selectors.py                                                                                  49      3      8      1    93%   58, 149, 223
+wellness/services.py                                                                                  112     12     26      6    87%   121, 194, 272-278, 343, 347, 392
+wellness/sobriety_models.py                                                                            76      4      0      0    95%   56, 94, 123, 155
+wellness/sobriety_services.py                                                                          58      3     14      5    89%   95, 99->101, 101->104, 173, 179
+wellness/wellness_models.py                                                                            87      4      0      0    95%   50, 90, 142, 177
+-----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                               21703   2250   4062   1024    86%
+=========================== short test summary info ============================
+FAILED tests/test_versioned_consents.py::test_consent_center_static_copy_comes_from_translation_catalog
+1 failed, 1309 passed in 240.77s (0:04:00)

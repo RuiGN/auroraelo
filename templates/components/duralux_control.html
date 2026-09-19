@@ -1,0 +1,4 @@
+{% load accessible_forms %}
+{% with icon=field|field_icon %}
+{% if icon %}<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="{{ icon }}"></i></span>{{ field|accessible_widget }}</div>{% else %}{{ field|accessible_widget }}{% endif %}
+{% endwith %}

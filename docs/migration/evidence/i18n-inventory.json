@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "inventory_date": "2026-09-08",
+  "scope": "S14.01 read-only source inventory",
+  "limitations": [
+    "Candidate counts are conservative heuristic occurrences, not proof of completeness.",
+    "No runtime, catalog extraction, compilation, browser acceptance or native-language review was executed.",
+    "No clinical data or private environment values were read."
+  ],
+  "templates": {
+    "active_first_party_files": 100,
+    "preexisting_application_files": 99,
+    "new_foundation_files": ["components/language_selector.html"],
+    "gettext_tag_occurrences": 32,
+    "gettext_files": {"components/language_selector.html": 4, "consents/center.html": 7, "consents/decision_error.html": 5, "consents/partials/document_decision.html": 13, "consents/revocation_error.html": 3},
+    "conservative_unmarked_candidate_occurrences": 869,
+    "source_vendor_html_files_excluded": 77,
+    "source_vendor_root": "design_system_duralux/",
+    "per_file": {
+      "accounts/auth_base.html": 2, "accounts/auth_form.html": 0, "accounts/auth_message.html": 0, "accounts/mfa_enroll.html": 10, "accounts/mfa_recovery_codes.html": 3, "accounts/sessions.html": 8,
+      "analytics/clinic_panel.html": 11, "analytics/patient_dashboard.html": 9, "analytics/report_list.html": 5, "analytics/therapist_dashboard.html": 11,
+      "clinics/confirm_switch.html": 8, "clinics/setup.html": 27, "clinics/whitelabel_domains.html": 6,
+      "components/content_state.html": 0, "components/duralux_field.html": 0, "components/form.html": 2, "components/language_selector.html": 0, "components/pagination.html": 1, "components/responsive_table.html": 8, "components/summary_card.html": 0,
+      "consents/center.html": 0, "consents/decision_error.html": 0, "consents/partials/document_decision.html": 0, "consents/revocation_error.html": 0, "consents/revocation_work_error.html": 3, "consents/revocation_work_queue.html": 9,
+      "content/detail.html": 3, "content/editorial_compare.html": 5, "content/editorial_create.html": 43, "content/editorial_detail.html": 44, "content/editorial_index.html": 4, "content/editorial_preview.html": 3,
+      "content/learning/certificate.html": 8, "content/learning/certificate_verify.html": 5, "content/learning/cohort_detail.html": 4, "content/learning/course_detail.html": 13, "content/learning/index.html": 14, "content/learning/lesson_page.html": 2, "content/learning/module_detail.html": 6, "content/learning/quiz_detail.html": 12, "content/learning/quiz_feedback.html": 4, "content/learning/quiz_participate.html": 2,
+      "content/lesson_player.html": 11, "content/library.html": 8, "content/notifications.html": 3, "content/recommendations.html": 6, "content/reports.html": 6,
+      "errors/400.html": 2, "errors/403.html": 2, "errors/404.html": 2, "errors/500.html": 2,
+      "finance/charge_list.html": 14, "finance/service_price_form.html": 3,
+      "goals/detail.html": 10, "goals/exercise_assign.html": 8, "goals/exercise_catalog.html": 7, "goals/exercise_execute.html": 9, "goals/exercise_execution_detail.html": 11, "goals/exercise_form.html": 12, "goals/form.html": 8, "goals/list.html": 11, "goals/low_energy.html": 20, "goals/patient_exercises.html": 6,
+      "journal/checkin_list.html": 16, "journal/checkin_today.html": 12, "journal/checkin_unavailable.html": 3, "journal/detail.html": 20, "journal/form.html": 8, "journal/list.html": 42, "journal/partials/calendar.html": 12,
+      "layouts/base.html": 2, "layouts/detached.html": 5, "layouts/partials/brand.html": 0, "layouts/partials/header.html": 19, "layouts/partials/messages.html": 1, "layouts/partials/navigation.html": 18, "layouts/vertical.html": 5,
+      "onboarding/clinic_checklist.html": 6, "onboarding/patient_onboarding.html": 14,
+      "people/patient_detail.html": 8, "people/patient_form.html": 6, "people/patient_list.html": 11, "people/professional_list.html": 11,
+      "scheduling/appointment_calendar.html": 13, "scheduling/appointment_list.html": 14, "scheduling/appointment_request.html": 3, "scheduling/appointment_reschedule.html": 4, "scheduling/conversation_create.html": 3, "scheduling/conversation_detail.html": 8, "scheduling/conversation_list.html": 4, "scheduling/reminder_preferences.html": 6, "scheduling/room_form.html": 3, "scheduling/unit_form.html": 3, "scheduling/unit_list.html": 13, "scheduling/waitlist_form.html": 3, "scheduling/waitlist_list.html": 9,
+      "therapist_dashboard/home.html": 29, "visual_reference/reference.html": 74, "workspace/home.html": 5, "workspace/shortcut.html": 0
+    }
+  },
+  "python": {
+    "gettext_calls": 3,
+    "gettext_files": {"core/forms.py": 1, "consents/forms.py": 2},
+    "validation_exception_literal_candidates": 428,
+    "form_metadata_literal_candidates": 166,
+    "django_message_literal_candidates": 8,
+    "docstrings_excluded_as_developer_text": 1685,
+    "context_processors": [
+      "django.template.context_processors.request",
+      "django.contrib.auth.context_processors.auth",
+      "django.contrib.messages.context_processors.messages",
+      "accounts.context_processors.language_preferences",
+      "clinics.context_processors.clinic_navigation",
+      "consents.context_processors.revocation_work_notifications"
+    ]
+  },
+  "javascript": {
+    "first_party_files_used": 6,
+    "visible_literal_occurrences": 10,
+    "files": {
+      "static/duralux/js/dashboard-charts.js": 2,
+      "static/duralux/js/product-shell.js": 4,
+      "static/duralux/js/visual-reference-charts.js": 4,
+      "static/duralux/js/form-behaviors.js": 0,
+      "static/duralux/js/lesson-player.js": 0,
+      "static/duralux/js/language-selector.js": 0
+    },
+    "third_party_used": [
+      "static/duralux/vendors/apexcharts/apexcharts.min.js",
+      "static/duralux/js/bootstrap.bundle.min.js"
+    ],
+    "djangojs_catalogs": []
+  },
+  "catalogs": {
+    "files": ["locale/pt_BR/LC_MESSAGES/django.po", "locale/pt_BR/LC_MESSAGES/django.mo", "locale/en/LC_MESSAGES/django.po", "locale/en/LC_MESSAGES/django.mo", "locale/es/LC_MESSAGES/django.po", "locale/es/LC_MESSAGES/django.mo"],
+    "pt_BR_django_po": {"non_header_entries": 32, "translated": 24, "empty": 8, "fuzzy": 0},
+    "pt_BR_django_mo_non_header_messages": 24,
+    "en_django_po_partial_bootstrap": {"non_header_entries": 4, "translated": 4, "empty": 0, "fuzzy": 0, "published": false},
+    "es_django_po_partial_bootstrap": {"non_header_entries": 4, "translated": 4, "empty": 0, "fuzzy": 0, "published": false},
+    "missing": ["locale/en/LC_MESSAGES/djangojs.po", "locale/es/LC_MESSAGES/djangojs.po", "locale/pt_BR/LC_MESSAGES/djangojs.po"],
+    "stale_header_project_id": "projetomnunes 1.0"
+  },
+  "acceptance": {
+    "inventory_and_engineering_glossary": "reviewed",
+    "catalogs_complete": false,
+    "english_public_enablement": false,
+    "spanish_public_enablement": false,
+    "clinical_or_legal_translation_approval": false
+  }
+}

@@ -1,0 +1,6 @@
+consents/policies.py:112: error: Dict entry 0 has incompatible type "ConsentPurpose": "_StrPromise"; expected "ConsentPurpose": "str"  [dict-item]
+consents/policies.py:113: error: Dict entry 1 has incompatible type "ConsentPurpose": "_StrPromise"; expected "ConsentPurpose": "str"  [dict-item]
+consents/policies.py:114: error: Dict entry 2 has incompatible type "ConsentPurpose": "_StrPromise"; expected "ConsentPurpose": "str"  [dict-item]
+consents/policies.py:115: error: Dict entry 3 has incompatible type "ConsentPurpose": "_StrPromise"; expected "ConsentPurpose": "str"  [dict-item]
+consents/policies.py:116: error: Dict entry 4 has incompatible type "ConsentPurpose": "_StrPromise"; expected "ConsentPurpose": "str"  [dict-item]
+Found 5 errors in 1 file (checked 582 source files)

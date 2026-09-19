@@ -1,0 +1,24 @@
+{
+  "scope": "docs/migration/translated-ui-scope.json",
+  "source_files": 67,
+  "required_catalog_keys_including_plural_forms": 639,
+  "missing": {
+    "pt_BR": [
+      "Identificador da solicitação"
+    ],
+    "en": [
+      "Identificador da solicitação"
+    ],
+    "es": [
+      "Identificador da solicitação"
+    ]
+  },
+  "placeholder_errors": {
+    "pt_BR": [],
+    "en": [],
+    "es": []
+  },
+  "stale_compiled_catalogs": [],
+  "passed": false,
+  "publication_acceptance": false
+}

@@ -1,0 +1,44 @@
+{% extends layout_template %}
+{% load accessible_forms i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="reports-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Exportações" %}</span>
+    <h1 id="reports-title" class="mb-0">{% translate "Relatórios" %}</h1>
+    <p class="product-page-meta">{% translate "Relatórios expiram e cada download é registrado." %}</p>
+  </header>
+  {% if can_generate %}
+    <section class="product-form-card" aria-label="{% translate 'Gerar relatório' %}">
+      <form class="product-form-grid" method="post" action="{% url 'report_generate' %}" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        {% include "components/duralux_field.html" with field=field only %}
+      {% endfor %}
+        <div class="d-flex flex-wrap gap-2">
+          <button type="submit" class="btn btn-primary">{% translate "Gerar relatório" %}</button>
+        </div>
+      </form>
+    </section>
+  {% endif %}
+  {% if reports %}
+    <section class="product-stack" aria-label="{% translate 'Relatórios disponíveis' %}">
+      {% for report in reports %}
+        <article class="product-table-card product-list-item">
+          <div>
+            <strong>{{ report.title }}</strong> <span class="badge text-bg-secondary">{{ report.get_kind_display }}</span>
+            <p class="product-muted">{% blocktranslate with start=report.period_start|date:"SHORT_DATE_FORMAT" end=report.period_end|date:"SHORT_DATE_FORMAT" %}{{ start }} – {{ end }}{% endblocktranslate %}</p>
+          </div>
+          <a href="{% url 'report_download' report.pk %}?key={{ report.download_key }}" class="btn btn-outline-primary">{% translate "Baixar" %}</a>
+        </article>
+      {% endfor %}
+    </section>
+  {% else %}
+    <section class="product-empty-state" role="status">
+      <p>{% translate "Nenhum relatório gerado ainda." %}</p>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

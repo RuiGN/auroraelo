@@ -1,0 +1,107 @@
+[
+  {
+    "msgid": "Selecione um papel profissional válido.",
+    "en": "Select a valid professional role.",
+    "es": "Seleccione un rol profesional válido."
+  },
+  {
+    "msgid": "A data final não pode ser anterior à data inicial.",
+    "en": "The end date cannot be before the start date.",
+    "es": "La fecha de finalización no puede ser anterior a la fecha de inicio."
+  },
+  {
+    "msgid": "Preencha os dados institucionais obrigatórios.",
+    "en": "Complete the required institutional details.",
+    "es": "Complete los datos institucionales obligatorios."
+  },
+  {
+    "msgid": "Selecione um fuso horário IANA válido.",
+    "en": "Select a valid IANA time zone.",
+    "es": "Seleccione una zona horaria IANA válida."
+  },
+  {
+    "msgid": "Selecione um idioma suportado.",
+    "en": "Select a supported language.",
+    "es": "Seleccione un idioma compatible."
+  },
+  {
+    "msgid": "Selecione canais de atendimento válidos e únicos.",
+    "en": "Select valid service channels without duplicates.",
+    "es": "Seleccione canales de atención válidos y sin duplicados."
+  },
+  {
+    "msgid": "Informe os horários de todos os dias da semana.",
+    "en": "Enter the hours for every day of the week.",
+    "es": "Ingrese los horarios de todos los días de la semana."
+  },
+  {
+    "msgid": "Informe início e fim para cada intervalo.",
+    "en": "Enter a start and end time for each interval.",
+    "es": "Ingrese una hora de inicio y de fin para cada intervalo."
+  },
+  {
+    "msgid": "Use horários no formato HH:MM.",
+    "en": "Use times in HH:MM format.",
+    "es": "Use horas en formato HH:MM."
+  },
+  {
+    "msgid": "Os intervalos devem ser válidos e não sobrepostos.",
+    "en": "Time intervals must be valid and must not overlap.",
+    "es": "Los intervalos deben ser válidos y no deben superponerse."
+  },
+  {
+    "msgid": "As orientações fora do horário são muito extensas.",
+    "en": "The out-of-hours instructions are too long.",
+    "es": "Las instrucciones fuera del horario de atención son demasiado extensas."
+  },
+  {
+    "msgid": "Conclua primeiro os dados institucionais.",
+    "en": "Complete the institutional details first.",
+    "es": "Complete primero los datos institucionales."
+  },
+  {
+    "msgid": "Use cores no formato hexadecimal #RRGGBB.",
+    "en": "Use colors in hexadecimal #RRGGBB format.",
+    "es": "Use colores en formato hexadecimal #RRGGBB."
+  },
+  {
+    "msgid": "A cor primária não tem contraste suficiente no tema claro.",
+    "en": "The primary color does not have enough contrast in the light theme.",
+    "es": "El color primario no tiene suficiente contraste en el tema claro."
+  },
+  {
+    "msgid": "A cor secundária não tem contraste suficiente no tema escuro.",
+    "en": "The secondary color does not have enough contrast in the dark theme.",
+    "es": "El color secundario no tiene suficiente contraste en el tema oscuro."
+  },
+  {
+    "msgid": "O logotipo excede o limite de 2 MB.",
+    "en": "The logo exceeds the 2 MB limit.",
+    "es": "El logotipo supera el límite de 2 MB."
+  },
+  {
+    "msgid": "O logotipo deve ser PNG ou JPEG.",
+    "en": "The logo must be PNG or JPEG.",
+    "es": "El logotipo debe ser PNG o JPEG."
+  },
+  {
+    "msgid": "Não repita módulos na configuração.",
+    "en": "Do not repeat modules in the configuration.",
+    "es": "No repita módulos en la configuración."
+  },
+  {
+    "msgid": "A configuração contém módulos desconhecidos.",
+    "en": "The configuration contains unknown modules.",
+    "es": "La configuración contiene módulos desconocidos."
+  },
+  {
+    "msgid": "Ative os pré-requisitos antes dos módulos dependentes: %(modules)s",
+    "en": "Enable prerequisites before dependent modules: %(modules)s",
+    "es": "Active los requisitos previos antes de los módulos dependientes: %(modules)s"
+  },
+  {
+    "msgid": "Etapa de onboarding inválida.",
+    "en": "Invalid onboarding step.",
+    "es": "Paso de incorporación no válido."
+  }
+]

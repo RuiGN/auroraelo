@@ -1,0 +1,27 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Notificações" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="notifications-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Avisos da plataforma" %}</span>
+    <h1 id="notifications-title" class="mb-0">{% translate "Notificações" %}</h1>
+  </header>
+
+  {% if notifications %}
+    <ul class="list-unstyled product-stack mb-0">
+      {% for notification in notifications %}
+        <li class="product-table-card">
+          <p class="mb-2">{{ notification.body }}</p>
+          <p class="product-muted mb-0"><time datetime="{{ notification.created_at|date:'c' }}">{{ notification.created_at }}</time></p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="product-empty-state" role="status">{% translate "Nenhuma notificação." %}</div>
+  {% endif %}
+</div>
+{% endblock %}
+

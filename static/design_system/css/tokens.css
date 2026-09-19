@@ -1,0 +1,110 @@
+/* ==========================================================================
+   AURORA ELO DESIGN SYSTEM - DESIGN TOKENS
+   Tailwind CSS v4 Modern Theme Variables & CSS Custom Properties
+   Inspired by Aurora Elo Psychiatric Clinic & Mental Wellness Ecosystem
+   ========================================================================== */
+
+@theme {
+  /* Brand Primary: Aurora Midnight Navy (Base of Trust, Stability, Clinical Rigor) */
+  --color-aurora-50: #f0f7ff;
+  --color-aurora-100: #e0f0fe;
+  --color-aurora-200: #bae0fd;
+  --color-aurora-300: #7cc7fb;
+  --color-aurora-400: #38a9f8;
+  --color-aurora-500: #0ea5e9;
+  --color-aurora-600: #0284c7;
+  --color-aurora-700: #0369a1;
+  --color-aurora-800: #075985;
+  --color-aurora-900: #0a2540;
+  --color-aurora-950: #051424;
+
+  /* Brand Secondary: Elo Cerulean & Cyan Glow (Hope, Dawn, Neural Connection) */
+  --color-elo-50: #ecfeff;
+  --color-elo-100: #cffafe;
+  --color-elo-200: #a5f3fc;
+  --color-elo-300: #67e8f9;
+  --color-elo-400: #22d3ee;
+  --color-elo-500: #06b6d4;
+  --color-elo-600: #0891b2;
+  --color-elo-700: #0e7490;
+  --color-elo-800: #155e75;
+  --color-elo-900: #164e63;
+
+  /* Semantic - Clinical Stability & Healing (Euthymic, Recovery, Adherence) */
+  --color-healing-50: #f0fdf4;
+  --color-healing-100: #dcfce7;
+  --color-healing-500: #10b981;
+  --color-healing-600: #059669;
+  --color-healing-700: #047857;
+
+  /* Semantic - Observation & Warning (Attention, Side effects, Moderate Risk) */
+  --color-alert-50: #fffbeb;
+  --color-alert-100: #fef3c7;
+  --color-alert-500: #f59e0b;
+  --color-alert-600: #d97706;
+  --color-alert-700: #b45309;
+
+  /* Semantic - Psychiatric Crisis & SOS (High Risk, Emergency, Immediate Support) */
+  --color-crisis-50: #fff1f2;
+  --color-crisis-100: #ffe4e6;
+  --color-crisis-500: #f43f5e;
+  --color-crisis-600: #e11d48;
+  --color-crisis-700: #be123c;
+
+  /* Semantic - Mindfulness & Neuro / Sleep (B2C App, Meditation, CBT) */
+  --color-zen-50: #f5f3ff;
+  --color-zen-100: #ede9fe;
+  --color-zen-500: #8b5cf6;
+  --color-zen-600: #7c3aed;
+  --color-zen-700: #6d28d9;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Border Radii */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+  --radius-full: 9999px;
+
+  /* Elevation & Shadows */
+  --shadow-aurora-sm: 0 2px 8px -2px rgba(10, 37, 64, 0.08);
+  --shadow-aurora: 0 8px 24px -4px rgba(10, 37, 64, 0.12), 0 2px 6px -1px rgba(2, 132, 199, 0.06);
+  --shadow-aurora-lg: 0 16px 40px -8px rgba(10, 37, 64, 0.16), 0 4px 12px -2px rgba(2, 132, 199, 0.1);
+  --shadow-aurora-glow: 0 0 24px rgba(14, 165, 233, 0.25);
+  --shadow-crisis-glow: 0 0 24px rgba(244, 63, 94, 0.25);
+}
+
+:root {
+  /* CSS Variables for Dynamic Customization */
+  --aurora-primary: #0a2540;
+  --aurora-secondary: #0284c7;
+  --aurora-cyan: #06b6d4;
+  --aurora-bg: #f8fafc;
+  --aurora-card-bg: #ffffff;
+  --aurora-border: #e2e8f0;
+  --aurora-text: #0f172a;
+  --aurora-text-muted: #64748b;
+  --aurora-ring: rgba(14, 165, 233, 0.4);
+
+  /* Gradients inspired by the logo */
+  --gradient-aurora-brand: linear-gradient(135deg, #0a2540 0%, #0369a1 50%, #06b6d4 100%);
+  --gradient-aurora-subtle: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
+  --gradient-aurora-dark: linear-gradient(145deg, #07172c 0%, #0a2540 60%, #0d3862 100%);
+  --gradient-aurora-glow: linear-gradient(90deg, #0ea5e9, #06b6d4, #10b981);
+}
+
+.dark {
+  --aurora-bg: #07172c;
+  --aurora-card-bg: #0a2540;
+  --aurora-border: #1e3a5f;
+  --aurora-text: #f8fafc;
+  --aurora-text-muted: #94a3b8;
+  --aurora-ring: rgba(56, 189, 248, 0.4);
+}

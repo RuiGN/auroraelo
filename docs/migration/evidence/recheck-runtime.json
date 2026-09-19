@@ -1,0 +1,37 @@
+{
+  "settings": "config.settings.development",
+  "languages": [
+    [
+      "pt-br",
+      "Português (Brasil)"
+    ],
+    [
+      "en",
+      "English"
+    ],
+    [
+      "es",
+      "Español"
+    ]
+  ],
+  "excluded_paths_present": [],
+  "translations": {
+    "en": "Sign in to the platform",
+    "es": "Iniciar sesión en la plataforma"
+  },
+  "container_image_id": "sha256:2e4b9dfd18a3e4b96efc308cd47fd0364db5d3bb7c83ed648116875dc928b120",
+  "health": {
+    "live": {
+      "http_status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "ready": {
+      "http_status": 200,
+      "body": {
+        "status": "ok"
+      }
+    }
+  }
+}

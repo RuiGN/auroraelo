@@ -1,0 +1,173 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block title %}{% translate "Área de trabalho" %}{% endblock %}
+{% block header_title %}{% translate "Área de trabalho" %}{% endblock %}
+{% block breadcrumb_active %}{% translate "Área de trabalho" %}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .sidebar-toggle {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    transition: width 0.3s ease;
+    width: 250px;
+  }
+
+  .sidebar.collapsed {
+    width: 80px;
+  }
+
+  .sidebar.collapsed .sidebar-text {
+    display: none;
+  }
+
+  .sidebar-logo-container {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+  }
+
+  .sidebar-logo-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sidebar.collapsed .sidebar-logo-container {
+    padding: 1rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Sidebar Estendido -->
+<div class="d-flex">
+  <nav class="sidebar bg-light border-end" id="sidebar">
+    <div class="sidebar-logo-container">
+      <img src="{% static 'images/aurora-elo-sidebar-full.webp' %}" alt="Aurora Elo" id="sidebar-logo">
+    </div>
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#workspace">
+          <i class="feather-home"></i>
+          <span class="sidebar-text ms-2">{% translate "Painel" %}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#journal">
+          <i class="feather-book-open"></i>
+          <span class="sidebar-text ms-2">{% translate "Diário" %}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#goals">
+          <i class="feather-target"></i>
+          <span class="sidebar-text ms-2">{% translate "Metas" %}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#appointments">
+          <i class="feather-calendar"></i>
+          <span class="sidebar-text ms-2">{% translate "Agendamentos" %}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#messages">
+          <i class="feather-message-square"></i>
+          <span class="sidebar-text ms-2">{% translate "Mensagens" %}</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="mt-auto p-3 border-top">
+      <button class="btn btn-sm btn-outline-primary w-100 sidebar-toggle" id="toggle-sidebar">
+        <i class="feather-chevron-left"></i>
+        <span class="sidebar-text ms-2">{% translate "Recolher" %}</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-grow-1 p-4">
+    <section class="mb-4" aria-labelledby="workspace-title">
+      <p class="text-primary fs-12 fw-semibold mb-2">{% translate "SEU ESPAÇO DE CUIDADO" %}</p>
+      {% translate "seja bem-vindo" as welcome_fallback %}
+      <h1 id="workspace-title" class="h3 mb-2">{% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}</h1>
+      <p class="text-body-secondary mb-0">{% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}</p>
+    </section>
+
+    <section id="workspace-shortcuts" aria-labelledby="shortcut-title">
+      <h2 id="shortcut-title" class="fs-16 fw-semibold mb-3">{% translate "Por onde começar" %}</h2>
+      <div class="row g-4">
+        {% if is_patient %}
+          {% translate "Minha evolução" as shortcut_label %}{% translate "Acompanhe os registros do seu cuidado." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="patient_dashboard" icon="feather-trending-up" label=shortcut_label description=shortcut_description only %}
+          {% translate "Diário emocional" as shortcut_label %}{% translate "Reserve um momento para registrar como você está." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="journal_list" icon="feather-book-open" label=shortcut_label description=shortcut_description only %}
+          {% translate "Minhas metas" as shortcut_label %}{% translate "Retome seus objetivos e próximos passos." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="goal_list" icon="feather-target" label=shortcut_label description=shortcut_description only %}
+        {% endif %}
+        {% if is_therapist %}
+          {% translate "Painel profissional" as shortcut_label %}{% translate "Acompanhe os pacientes vinculados a você." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="therapist_dashboard" icon="feather-activity" label=shortcut_label description=shortcut_description only %}
+        {% endif %}
+        {% if is_clinic_admin %}
+          {% translate "Painel operacional" as shortcut_label %}{% translate "Consulte os indicadores da clínica ativa." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="clinic_panel" icon="feather-bar-chart-2" label=shortcut_label description=shortcut_description only %}
+        {% endif %}
+        {% if can_manage_active_clinic %}
+          {% translate "Pacientes" as shortcut_label %}{% translate "Consulte e organize os cadastros da clínica." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="patient_list" icon="feather-users" label=shortcut_label description=shortcut_description only %}
+          {% translate "Configurar clínica" as shortcut_label %}{% translate "Revise os dados e a identidade da sua clínica." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="clinic_setup" icon="feather-settings" label=shortcut_label description=shortcut_description only %}
+        {% endif %}
+          {% translate "Agenda" as shortcut_label %}{% translate "Veja as consultas disponíveis para o seu perfil." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="appointment_list" icon="feather-calendar" label=shortcut_label description=shortcut_description only %}
+          {% translate "Mensagens" as shortcut_label %}{% translate "Acesse suas conversas na plataforma." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="conversation_list" icon="feather-message-square" label=shortcut_label description=shortcut_description only %}
+          {% translate "Segurança da conta" as shortcut_label %}{% translate "Confira os dispositivos e as sessões da sua conta." as shortcut_description %}
+          {% include "workspace/shortcut.html" with route="account_sessions" icon="feather-shield" label=shortcut_label description=shortcut_description only %}
+      </div>
+    </section>
+  </main>
+</div>
+
+{% block page_scripts %}
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const sidebarLogo = document.getElementById('sidebar-logo');
+  const toggleBtn = document.getElementById('toggle-sidebar');
+
+  // Recuperar estado do localStorage
+  const sidebarState = localStorage.getItem('sidebar-collapsed') === 'true';
+  if (sidebarState) {
+    sidebar.classList.add('collapsed');
+    sidebarLogo.src = "{% static 'images/aurora-elo-sidebar-collapsed.webp' %}";
+    toggleBtn.innerHTML = '<i class="feather-chevron-right"></i><span class="sidebar-text ms-2">{% translate "Expandir" %}</span>';
+  }
+
+  // Toggle sidebar
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('collapsed');
+
+    if (sidebar.classList.contains('collapsed')) {
+      sidebarLogo.src = "{% static 'images/aurora-elo-sidebar-collapsed.webp' %}";
+      toggleBtn.innerHTML = '<i class="feather-chevron-right"></i><span class="sidebar-text ms-2">{% translate "Expandir" %}</span>';
+      localStorage.setItem('sidebar-collapsed', 'true');
+    } else {
+      sidebarLogo.src = "{% static 'images/aurora-elo-sidebar-full.webp' %}";
+      toggleBtn.innerHTML = '<i class="feather-chevron-left"></i><span class="sidebar-text ms-2">{% translate "Recolher" %}</span>';
+      localStorage.setItem('sidebar-collapsed', 'false');
+    }
+  });
+</script>
+{% endblock %}
+
+{% endblock %}

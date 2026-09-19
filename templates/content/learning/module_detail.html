@@ -1,0 +1,36 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=module.title %}Módulo: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="module-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with title=course.title %}Curso: {{ title }}{% endblocktranslate %}</span>
+    <h1 id="module-title" class="mb-0">{{ module.title }}</h1>
+  </header>
+  <section class="product-table-card" aria-labelledby="lessons-title">
+    <h2 id="lessons-title" class="h5">{% translate "Aulas" %}</h2>
+    <ol class="product-stack mb-0">
+      {% for lesson in lessons %}
+        <li>{% blocktranslate with pos=lesson.position title=lesson.title duration=lesson.duration_minutes status=lesson.get_status_display %}Aula {{ pos }}: {{ title }} · {{ duration }} min · {{ status }}{% endblocktranslate %}</li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhuma aula ainda." %}</li>
+      {% endfor %}
+    </ol>
+  </section>
+  <section class="product-form-card" aria-labelledby="add-lesson-title">
+    <h2 id="add-lesson-title" class="h5">{% translate "Adicionar aula" %}</h2>
+    <form class="product-form-grid" method="post" action="{% url 'content_course_lesson_create' course.pk module.pk %}">
+      {% csrf_token %}
+      <div class="field-span field-span--md d-grid gap-2"><label for="lesson-title">{% translate "Título da aula" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="lesson-title" name="title" type="text" required maxlength="255" placeholder="{% translate 'Título da aula' %}" /></div></div>
+      <div class="field-span field-span--sm d-grid gap-2"><label for="lesson-duration">{% translate "Duração (minutos)" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-clock"></i></span><input class="form-control" id="lesson-duration" name="duration_minutes" type="number" min="1" value="30" required placeholder="1" /></div></div>
+      <div class="field-span field-span--sm d-grid gap-2"><label for="lesson-position">{% translate "Posição" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="lesson-position" name="position" type="number" min="1" value="{{ lessons|length|add:1 }}" required placeholder="1" /></div></div>
+      <button class="btn btn-primary" type="submit">{% translate "Adicionar aula" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

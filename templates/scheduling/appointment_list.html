@@ -1,0 +1,67 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="appointment-list-title">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Coordenação de consultas" %}</p>
+      <h1 id="appointment-list-title">{% translate "Agenda" %}</h1>
+      <p class="product-page-meta">{{ non_emergency_notice }}</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+      <a href="{% url 'appointment_calendar' %}" class="btn btn-outline-secondary">{% translate "Visão semanal" %}</a>
+      <a href="{% url 'appointment_request' %}" class="btn btn-primary"><span aria-hidden="true">+</span> {% translate "Solicitar consulta" %}</a>
+    </div>
+  </header>
+
+  <nav class="d-flex flex-wrap gap-2" aria-label="{% translate 'Filtrar consultas por estado' %}">
+    <a href="{% url 'appointment_list' %}" class="btn btn-sm {% if not selected_status %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if not selected_status %} aria-current="page"{% endif %}>{% translate "Todas" %}</a>
+    <a href="?status=requested" class="btn btn-sm {% if selected_status == 'requested' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'requested' %} aria-current="page"{% endif %}>{% translate "Solicitadas" %}</a>
+    <a href="?status=confirmed" class="btn btn-sm {% if selected_status == 'confirmed' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'confirmed' %} aria-current="page"{% endif %}>{% translate "Confirmadas" %}</a>
+    <a href="?status=completed" class="btn btn-sm {% if selected_status == 'completed' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'completed' %} aria-current="page"{% endif %}>{% translate "Realizadas" %}</a>
+  </nav>
+
+  {% if appointments %}
+    <section class="product-stack" aria-label="{% translate 'Consultas' %}">
+      {% for appointment in appointments %}
+        <article class="product-table-card product-list-item" aria-labelledby="appt-{{ appointment.pk }}">
+          <div>
+            <h2 id="appt-{{ appointment.pk }}" class="h6 mb-1">{{ appointment.service.name }}</h2>
+            <p class="product-muted mb-2"><time datetime="{{ appointment.start_at|date:'c' }}">{{ appointment.start_at|date:"SHORT_DATETIME_FORMAT" }}</time> – {{ appointment.end_at|date:"H:i" }}</p>
+            <span class="badge {% if appointment.status == 'confirmed' %}text-bg-success{% elif appointment.status == 'canceled' %}text-bg-danger{% else %}text-bg-secondary{% endif %}">
+              {% if appointment.status == 'requested' %}{% translate "Solicitada" %}
+              {% elif appointment.status == 'confirmed' %}{% translate "Confirmada" %}
+              {% elif appointment.status == 'reschedule_requested' %}{% translate "Remarcação solicitada" %}
+              {% elif appointment.status == 'canceled' %}{% translate "Cancelada" %}
+              {% elif appointment.status == 'completed' %}{% translate "Realizada" %}
+              {% elif appointment.status == 'no_show' %}{% translate "Falta" %}
+              {% else %}{{ appointment.get_status_display }}{% endif %}
+            </span>
+            {% if appointment.cancel_reason %}<p class="product-muted mt-2">{% translate "Motivo do cancelamento" %}: {{ appointment.cancel_reason }}</p>{% endif %}
+          </div>
+          <div class="d-flex flex-wrap gap-2" aria-label="{% blocktranslate with service=appointment.service.name %}Ações da consulta {{ service }}{% endblocktranslate %}">
+            {% if can_manage %}
+              {% if appointment.status == 'requested' or appointment.status == 'reschedule_requested' %}<form method="post" action="{% url 'appointment_confirm' appointment.pk %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-primary">{% translate "Confirmar consulta" %}</button></form>{% endif %}
+              {% if appointment.status == 'requested' or appointment.status == 'confirmed' or appointment.status == 'reschedule_requested' %}<a href="{% url 'appointment_reschedule' appointment.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Remarcar consulta" %}</a>{% endif %}
+              {% if appointment.status == 'confirmed' %}
+                <form method="post" action="{% url 'appointment_complete' appointment.pk %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-primary">{% translate "Marcar como concluída" %}</button></form>
+                <form method="post" action="{% url 'appointment_no_show' appointment.pk %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-secondary">{% translate "Registrar falta" %}</button></form>
+              {% endif %}
+            {% endif %}
+            {% if appointment.status == 'requested' or appointment.status == 'confirmed' or appointment.status == 'reschedule_requested' %}<form method="post" action="{% url 'appointment_cancel' appointment.pk %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-danger">{% translate "Cancelar consulta" %}</button></form>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </section>
+  {% else %}
+    <div class="product-empty-state" role="status">
+      <h2 class="h5">{% translate "Nenhuma consulta aqui ainda" %}</h2>
+      <p>{% translate "Solicite uma consulta para começar a organizar seu acompanhamento." %}</p>
+      <a href="{% url 'appointment_request' %}" class="btn btn-primary mt-2">{% translate "Solicitar consulta" %}</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

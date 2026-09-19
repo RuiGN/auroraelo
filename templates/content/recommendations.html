@@ -1,0 +1,28 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Minhas Recomendações" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow" aria-labelledby="recommendations-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Curadoria clínica" %}</span>
+    <h1 id="recommendations-title" class="mb-0">{% translate "Minhas Recomendações" %}</h1>
+  </header>
+
+  {% if recommendations %}
+    <ul class="list-unstyled product-stack mb-0">
+      {% for item in recommendations %}
+        <li class="product-table-card">
+          <h2 class="h5 mb-1">{{ item.objective }}</h2>
+          <p class="product-muted mb-1">{% blocktranslate with author=item.recommended_by %}Recomendado por {{ author }}{% endblocktranslate %}</p>
+          {% if item.valid_until %}<p class="small text-muted mb-0">{% blocktranslate with date=item.valid_until %}Válido até {{ date }}{% endblocktranslate %}</p>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="product-empty-state" role="status">{% translate "Nenhuma recomendação ativa no momento." %}</div>
+  {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,4680 @@
+# Shared UI translation draft; human terminology review pending.
+msgid ""
+msgstr ""
+"Project-Id-Version: Mindcare UI\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-11 03:44-0300\n"
+"PO-Revision-Date: 2026-09-08 22:00+0000\n"
+"Last-Translator: Mindcare engineering review\n"
+"Language-Team: Mindcare\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Administrador da clínica"
+msgstr "Clinic administrator"
+
+msgid "Terapeuta"
+msgstr "Therapist"
+
+msgid "Equipe administrativa"
+msgstr "Administrative staff"
+
+msgid "Paciente"
+msgstr "Patient"
+
+msgid "E-mail"
+msgstr "Email"
+
+msgid "seu@email.com"
+msgstr "you@email.com"
+
+msgid "Senha"
+msgstr "Password"
+
+msgid "Digite sua senha"
+msgstr "Enter your password"
+
+msgid "Informe o e-mail cadastrado"
+msgstr "Enter your registered email"
+
+msgid "Nova senha"
+msgstr "New password"
+
+msgid "Crie uma senha forte"
+msgstr "Create a strong password"
+
+msgid "Confirme a nova senha"
+msgstr "Confirm new password"
+
+msgid "Repita a nova senha"
+msgstr "Repeat the new password"
+
+msgid "As senhas informadas não coincidem."
+msgstr "The passwords do not match."
+
+msgid "Senha atual"
+msgstr "Current password"
+
+msgid "E-mail da pessoa convidada"
+msgstr "Invitee email"
+
+msgid "Papel inicial"
+msgstr "Initial role"
+
+msgid "Validade em horas"
+msgstr "Validity in hours"
+
+msgid "Nome"
+msgstr "First name"
+
+msgid "Sobrenome"
+msgstr "Last name"
+
+msgid "Confirme a senha"
+msgstr "Confirm password"
+
+msgid "Unsupported language."
+msgstr "Unsupported language."
+
+msgid "Não foi possível entrar com os dados informados."
+msgstr "We could not sign you in with the information provided."
+
+msgid ""
+"Se existir uma conta ativa para este e-mail, você receberá as instruções."
+msgstr ""
+"If an active account exists for this email, you will receive the "
+"instructions."
+
+msgid "Recuperação de acesso"
+msgstr "Access recovery"
+
+#, python-format
+msgid ""
+"Recebemos uma solicitação para redefinir sua senha.\n"
+"\n"
+"Acesse o link a seguir: %(reset_url)s\n"
+"\n"
+"Se você não fez esta solicitação, ignore esta mensagem."
+msgstr ""
+"We received a request to reset your password.\n"
+"\n"
+"Access the following link: %(reset_url)s\n"
+"\n"
+"If you did not make this request, please ignore this message."
+
+msgid "Entrar na plataforma"
+msgstr "Sign in to the platform"
+
+msgid "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+msgstr "Use your email and password to access an authorized clinic."
+
+msgid "Entrar"
+msgstr "Sign in"
+
+msgid "Esqueci minha senha"
+msgstr "I forgot my password"
+
+msgid "Convite para acessar a clínica"
+msgstr "Invitation to access the clinic"
+
+#, python-format
+msgid ""
+"Você recebeu um convite para acessar a clínica.\n"
+"\n"
+"Acesse: %(accept_url)s\n"
+"\n"
+"O convite é individual, temporário e pode ser usado uma única vez."
+msgstr ""
+"You received an invitation to access the clinic.\n"
+"\n"
+"Access: %(accept_url)s\n"
+"\n"
+"The invitation is individual, temporary, and can only be used once."
+
+msgid "Convite enviado"
+msgstr "Invitation sent"
+
+msgid "O convite foi enviado para o endereço informado."
+msgstr "The invitation was sent to the address provided."
+
+msgid "Enviar outro convite"
+msgstr "Send another invitation"
+
+msgid "Convidar pessoa"
+msgstr "Invite a person"
+
+msgid "Defina o acesso inicial e a validade do convite."
+msgstr "Set the initial access and invitation validity."
+
+msgid "Enviar convite"
+msgstr "Send invitation"
+
+msgid "Convite inválido ou expirado."
+msgstr "Invalid or expired invitation."
+
+msgid "Aceitar convite"
+msgstr "Accept invitation"
+
+msgid "Confirme seus dados para criar o acesso à clínica."
+msgstr "Confirm your details to create access to the clinic."
+
+msgid "Solicitação recebida"
+msgstr "Request received"
+
+msgid "Verifique seu e-mail"
+msgstr "Check your email"
+
+msgid "Voltar para entrar"
+msgstr "Back to sign in"
+
+msgid "Recuperar acesso"
+msgstr "Recover access"
+
+msgid "Informe seu e-mail para receber instruções de recuperação."
+msgstr "Enter your email to receive recovery instructions."
+
+msgid "Enviar instruções"
+msgstr "Send instructions"
+
+msgid "Link inválido"
+msgstr "Invalid link"
+
+msgid "Link inválido ou expirado."
+msgstr "Invalid or expired link."
+
+msgid "Solicite novas instruções para recuperar seu acesso."
+msgstr "Request new instructions to recover your access."
+
+msgid "Solicitar novo link"
+msgstr "Request a new link"
+
+msgid "Definir nova senha"
+msgstr "Set a new password"
+
+msgid "Escolha uma nova senha para proteger sua conta."
+msgstr "Choose a new password to protect your account."
+
+msgid "Salvar nova senha"
+msgstr "Save new password"
+
+msgid "Senha alterada"
+msgstr "Password changed"
+
+msgid "Senha alterada com segurança"
+msgstr "Password changed securely"
+
+msgid "Entre novamente em todos os seus dispositivos."
+msgstr "Sign in again on all your devices."
+
+msgid "Muitas tentativas. Tente novamente mais tarde."
+msgstr "Too many attempts. Try again later."
+
+msgid "Não foi possível confirmar sua senha atual."
+msgstr "We could not confirm your current password."
+
+msgid ""
+"Estes indicadores descrevem autorrelatos e fatos registrados. Eles não "
+"constituem diagnóstico, recomendação clínica ou relação de causalidade."
+msgstr ""
+"These indicators describe self-reports and recorded facts. They do not "
+"constitute a diagnosis, clinical recommendation, or causal relationship."
+
+msgid "Minha evolução"
+msgstr "My progress"
+
+msgid "Muito mal"
+msgstr "Very bad"
+
+msgid "Mal"
+msgstr "Bad"
+
+msgid "Neutro"
+msgstr "Neutral"
+
+msgid "Bem"
+msgstr "Good"
+
+msgid "Muito bem"
+msgstr "Very good"
+
+msgid "Painel profissional"
+msgstr "Professional dashboard"
+
+msgid "Painel operacional"
+msgstr "Operations dashboard"
+
+msgid "Relatórios"
+msgstr "Reports"
+
+msgid "Segunda-feira"
+msgstr "Monday"
+
+msgid "Terça-feira"
+msgstr "Tuesday"
+
+msgid "Quarta-feira"
+msgstr "Wednesday"
+
+msgid "Quinta-feira"
+msgstr "Thursday"
+
+msgid "Sexta-feira"
+msgstr "Friday"
+
+msgid "Sábado"
+msgstr "Saturday"
+
+msgid "Domingo"
+msgstr "Sunday"
+
+msgid "Pacientes"
+msgstr "Patients"
+
+msgid "Agenda"
+msgstr "Schedule"
+
+msgid "Registros clínicos"
+msgstr "Clinical records"
+
+msgid "Financeiro"
+msgstr "Finance"
+
+msgid "Cobrança"
+msgstr "Billing"
+
+msgid "Documentos"
+msgstr "Documents"
+
+msgid "Indicadores"
+msgstr "Indicators"
+
+msgid "Notificações"
+msgstr "Notifications"
+
+msgid "Razão social"
+msgstr "Legal name"
+
+msgid "Nome de exibição"
+msgstr "Display name"
+
+msgid "Documento aplicável"
+msgstr "Applicable identifier"
+
+msgid "E-mail administrativo"
+msgstr "Administrative email"
+
+msgid "Telefone administrativo"
+msgstr "Administrative phone"
+
+msgid "Endereço"
+msgstr "Address"
+
+msgid "Complemento"
+msgstr "Address line 2"
+
+msgid "Cidade"
+msgstr "City"
+
+msgid "Estado ou região"
+msgstr "State or region"
+
+msgid "Código postal"
+msgstr "Postal code"
+
+msgid "País (ISO)"
+msgstr "Country (ISO)"
+
+msgid "Fuso horário"
+msgstr "Time zone"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Português do Brasil"
+msgstr "Brazilian Portuguese"
+
+msgid "English (US)"
+msgstr "English (US)"
+
+msgid "Canais institucionais"
+msgstr "Institutional channels"
+
+msgid "Presencial"
+msgstr "In person"
+
+msgid "Videochamada"
+msgstr "Video call"
+
+msgid "Telefone"
+msgstr "Phone"
+
+msgid "Orientação fora do expediente"
+msgstr "Out-of-hours guidance"
+
+#, python-format
+msgid "%(weekday)s: início"
+msgstr "%(weekday)s: start"
+
+#, python-format
+msgid "%(weekday)s: fim"
+msgstr "%(weekday)s: end"
+
+msgid "Informe início e fim, ou deixe os dois campos vazios."
+msgstr "Enter both start and end times, or leave both fields blank."
+
+msgid "Logotipo (PNG ou JPEG, até 2 MB)"
+msgstr "Logo (PNG or JPEG, up to 2 MB)"
+
+msgid "Cor primária"
+msgstr "Primary color"
+
+msgid "Cor secundária"
+msgstr "Secondary color"
+
+msgid "Módulos ativos"
+msgstr "Active modules"
+
+#, python-format
+msgid "Ative os pré-requisitos antes dos módulos dependentes: %(modules)s"
+msgstr "Enable prerequisites before dependent modules: %(modules)s"
+
+msgid "Selecione um papel profissional válido."
+msgstr "Select a valid professional role."
+
+msgid "A data final não pode ser anterior à data inicial."
+msgstr "The end date cannot be before the start date."
+
+msgid "Preencha os dados institucionais obrigatórios."
+msgstr "Complete the required institutional details."
+
+msgid "Selecione um fuso horário IANA válido."
+msgstr "Select a valid IANA time zone."
+
+msgid "Selecione um idioma suportado."
+msgstr "Select a supported language."
+
+msgid "Selecione canais de atendimento válidos e únicos."
+msgstr "Select valid service channels without duplicates."
+
+msgid "Informe os horários de todos os dias da semana."
+msgstr "Enter the hours for every day of the week."
+
+msgid "Informe início e fim para cada intervalo."
+msgstr "Enter a start and end time for each interval."
+
+msgid "Use horários no formato HH:MM."
+msgstr "Use times in HH:MM format."
+
+msgid "Os intervalos devem ser válidos e não sobrepostos."
+msgstr "Time intervals must be valid and must not overlap."
+
+msgid "As orientações fora do horário são muito extensas."
+msgstr "The out-of-hours instructions are too long."
+
+msgid "Conclua primeiro os dados institucionais."
+msgstr "Complete the institutional details first."
+
+msgid "Use cores no formato hexadecimal #RRGGBB."
+msgstr "Use colors in hexadecimal #RRGGBB format."
+
+msgid "A cor primária não tem contraste suficiente no tema claro."
+msgstr "The primary color does not have enough contrast in the light theme."
+
+msgid "A cor secundária não tem contraste suficiente no tema escuro."
+msgstr "The secondary color does not have enough contrast in the dark theme."
+
+msgid "O logotipo excede o limite de 2 MB."
+msgstr "The logo exceeds the 2 MB limit."
+
+msgid "O logotipo deve ser PNG ou JPEG."
+msgstr "The logo must be PNG or JPEG."
+
+msgid "Não repita módulos na configuração."
+msgstr "Do not repeat modules in the configuration."
+
+msgid "A configuração contém módulos desconhecidos."
+msgstr "The configuration contains unknown modules."
+
+msgid "Dados institucionais"
+msgstr "Institutional details"
+
+msgid "Atendimento e horários"
+msgstr "Care and hours"
+
+msgid "Identidade visual"
+msgstr "Visual identity"
+
+msgid "Módulos"
+msgstr "Modules"
+
+msgid "Revisão"
+msgstr "Review"
+
+msgid "Pendente"
+msgstr "Pending"
+
+msgid "Verificado"
+msgstr "Verified"
+
+msgid "Ativo"
+msgstr "Active"
+
+msgid "Falhou"
+msgstr "Failed"
+
+msgid "Revogado"
+msgstr "Revoked"
+
+msgid "Renovação pendente"
+msgstr "Renewal due"
+
+msgid "Configuração inicial"
+msgstr "Initial setup"
+
+msgid "Concluída"
+msgstr "Completed"
+
+msgid "Permissões da equipe"
+msgstr "Team permissions"
+
+msgid "Revisão pendente"
+msgstr "Review pending"
+
+msgid "Configurada"
+msgstr "Configured"
+
+msgid "Disponível"
+msgstr "Available"
+
+msgid "Horários de atendimento"
+msgstr "Service hours"
+
+#, python-format
+msgid "Página %(current)s de %(total)s"
+msgstr "Page %(current)s of %(total)s"
+
+#, python-format
+msgid "Abrir %(name)s"
+msgstr "Open %(name)s"
+
+msgid "Atividade"
+msgstr "Activity"
+
+msgid "Situação"
+msgstr "Status"
+
+msgid "decrescente"
+msgstr "descending"
+
+msgid "crescente"
+msgstr "ascending"
+
+msgid "Módulos disponíveis"
+msgstr "Available modules"
+
+msgid "Recursos operacionais liberados para a clínica ativa."
+msgstr "Operational resources enabled for the active clinic."
+
+msgid "sem alteração no período"
+msgstr "no change during the period"
+
+msgid "Configurações pendentes"
+msgstr "Pending settings"
+
+msgid "Ajustes factuais que ainda precisam de revisão."
+msgstr "Factual settings that still need review."
+
+msgid "1 revisão concluída"
+msgstr "1 review completed"
+
+msgid "Revisar configurações"
+msgstr "Review settings"
+
+msgid "Informações disponíveis"
+msgstr "Available information"
+
+msgid "Exemplo de indicador informativo."
+msgstr "Example of an informational indicator."
+
+msgid "2 novos registros"
+msgstr "2 new records"
+
+msgid "Etapas concluídas"
+msgstr "Completed steps"
+
+msgid "Conclusões confirmadas no fluxo operacional."
+msgstr "Completions confirmed in the operational workflow."
+
+msgid "2 conclusões no período"
+msgstr "2 completions during the period"
+
+msgid "Falhas operacionais"
+msgstr "Operational failures"
+
+msgid "Erros técnicos que exigem nova tentativa."
+msgstr "Technical errors that require another attempt."
+
+msgid "sem dados sensíveis"
+msgstr "no sensitive data"
+
+msgid "Carregando conteúdo"
+msgstr "Loading content"
+
+msgid "Aguarde enquanto os dados autorizados são preparados."
+msgstr "Please wait while authorized data is prepared."
+
+msgid "Nenhum item cadastrado"
+msgstr "No items registered"
+
+msgid "Cadastre o primeiro item quando estiver pronto."
+msgstr "Register the first item when you are ready."
+
+msgid "Nenhum resultado encontrado"
+msgstr "No results found"
+
+msgid "Revise os filtros aplicados."
+msgstr "Review the applied filters."
+
+msgid "Conteúdo temporariamente indisponível"
+msgstr "Content temporarily unavailable"
+
+msgid "Tente novamente em alguns instantes."
+msgstr "Try again in a few moments."
+
+msgid "Não foi possível carregar o conteúdo"
+msgstr "The content could not be loaded"
+
+msgid "Tente novamente sem reenviar dados."
+msgstr "Try again without resubmitting data."
+
+msgid "Acesso não autorizado"
+msgstr "Access denied"
+
+msgid "Você não tem permissão para acessar este conteúdo."
+msgstr "You do not have permission to access this content."
+
+msgid "Atividades operacionais recentes"
+msgstr "Recent operational activities"
+
+msgid "Plataforma terapêutica disponível."
+msgstr "Therapeutic platform available."
+
+msgid "Área de trabalho"
+msgstr "Workspace"
+
+msgid "Preferência de layout inválida."
+msgstr "Invalid layout preference."
+
+msgid "Solicitação inválida"
+msgstr "Invalid request"
+
+msgid "Não foi possível processar sua solicitação."
+msgstr "Your request could not be processed."
+
+msgid "Página não encontrada"
+msgstr "Page not found"
+
+msgid "A página solicitada não foi encontrada."
+msgstr "The requested page was not found."
+
+msgid "Erro inesperado"
+msgstr "Unexpected error"
+
+msgid "Ocorreu um erro inesperado."
+msgstr "An unexpected error occurred."
+
+msgid "Identificador da solicitação"
+msgstr "Request identifier"
+
+msgid "Sua decisão"
+msgstr "Your decision"
+
+msgid "Aceitou"
+msgstr "Accepted"
+
+msgid "Recusou"
+msgstr "Refused"
+
+msgid "Reason for revocation"
+msgstr "Reason for revocation"
+
+msgid ""
+"I understand that revocation stops future use for this purpose and does not "
+"erase the historical evidence."
+msgstr ""
+"I understand that revocation stops future use for this purpose and does not "
+"erase the historical evidence."
+
+msgid "Termos de uso"
+msgstr "Terms of use"
+
+msgid "Limites do atendimento"
+msgstr "Care limitations"
+
+msgid "Acompanhamento clínico"
+msgstr "Clinical follow-up"
+
+msgid "Comunicação"
+msgstr "Communication"
+
+msgid "Operação da equipe"
+msgstr "Staff operations"
+
+msgid "É necessário possuir acesso ativo à clínica."
+msgstr "Active clinic access is required."
+
+msgid "Somente a administração pode reconhecer esta tarefa."
+msgstr "Only clinic administration can acknowledge this task."
+
+msgid "Informe a referência do atendimento operacional."
+msgstr "Enter the operational service reference."
+
+msgid "Tarefa operacional indisponível."
+msgstr "Operational task unavailable."
+
+msgid "Despacho de revogação indisponível."
+msgstr "Revocation dispatch unavailable."
+
+msgid "Titular sem vínculo ativo com esta clínica."
+msgstr "The data subject has no active relationship with this clinic."
+
+msgid "Referências textuais não comprovam representação legal."
+msgstr "Text references do not prove legal representation."
+
+msgid ""
+"A decisão explícita deve ser aceite ou recusa; revogações usam o fluxo "
+"próprio."
+msgstr ""
+"The explicit decision must be acceptance or refusal; revocations use their "
+"own flow."
+
+msgid "Documento indisponível ou ainda não vigente."
+msgstr "Document unavailable or not yet effective."
+
+msgid "Documento não destinado a este titular."
+msgstr "This document is not intended for this data subject."
+
+msgid "A chave idempotente já foi usada com outra decisão."
+msgstr "The idempotency key has already been used for another decision."
+
+msgid "Uma autorização aceita só pode ser retirada pelo fluxo de revogação."
+msgstr "An accepted authorization can only be withdrawn through revocation."
+
+msgid "Esta versão foi revogada e não pode ser reativada por uma nova decisão."
+msgstr ""
+"This version has been revoked and cannot be reactivated by a new decision."
+
+msgid "Somente o titular ativo pode revogar esta autorização."
+msgstr "Only the active data subject can revoke this authorization."
+
+msgid "Informe o motivo da revogação."
+msgstr "Enter the reason for revocation."
+
+msgid "Documento indisponível para revogação."
+msgstr "Document unavailable for revocation."
+
+msgid "Este documento não é uma autorização opcional revogável neste fluxo."
+msgstr ""
+"This document is not an optional authorization that can be revoked through "
+"this flow."
+
+msgid "Não existe autorização vigente para revogar."
+msgstr "There is no active authorization to revoke."
+
+msgid "Nenhum destino de revogação está configurado."
+msgstr "No revocation destination is configured."
+
+msgid "Acesso à clínica indisponível."
+msgstr "Clinic access unavailable."
+
+msgid "Direito básico disponível independentemente de consentimento."
+msgstr "Basic right available regardless of consent."
+
+msgid ""
+"Finalidade não configurada para autorização; operação bloqueada por "
+"segurança."
+msgstr ""
+"Purpose not configured for authorization; operation blocked for safety."
+
+#, python-format
+msgid ""
+"%(consequence)s Alternativa: %(alternative)s Contato da clínica: %(contact)s "
+"Seus direitos básicos permanecem acessíveis."
+msgstr ""
+"%(consequence)s Alternative: %(alternative)s Clinic contact: %(contact)s "
+"Your basic rights remain accessible."
+
+msgid "Finalidade autorizada."
+msgstr "Purpose authorized."
+
+msgid "Revogou"
+msgstr "Revoked"
+
+msgid "Identificador"
+msgstr "Identifier"
+
+msgid "Título"
+msgstr "Title"
+
+msgid "Tipo"
+msgstr "Type"
+
+msgid "Profissional"
+msgstr "Professional"
+
+msgid "Público"
+msgstr "Audience"
+
+msgid "Categorias"
+msgstr "Categories"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Contraindicações"
+msgstr "Contraindications"
+
+msgid "Referência da fonte"
+msgstr "Source reference"
+
+msgid "Válido até"
+msgstr "Valid until"
+
+msgid "Conteúdo em blocos"
+msgstr "Block content"
+
+msgid "Parágrafo"
+msgstr "Paragraph"
+
+msgid "Item de lista"
+msgstr "List item"
+
+msgid "Tipo de bloco"
+msgstr "Block type"
+
+msgid "Texto do bloco"
+msgstr "Block text"
+
+msgid "Informe o conteúdo em blocos."
+msgstr "Enter the block content."
+
+msgid "Cada termo deve ter no máximo 64 caracteres."
+msgstr "Each term must have at most 64 characters."
+
+msgid "Agendar publicação"
+msgstr "Schedule publication"
+
+msgid "Comentário editorial"
+msgstr "Editorial comment"
+
+msgid "Parecer"
+msgstr "Review opinion"
+
+msgid "Validade da revisão em dias"
+msgstr "Review validity in days"
+
+msgid "Versão de destino"
+msgstr "Target version"
+
+msgid "Arquivo de mídia"
+msgstr "Media file"
+
+msgid "Uma recomendação de conteúdo foi atribuída a você."
+msgstr "A content recommendation was assigned to you."
+
+msgid "Uma recomendação foi retirada."
+msgstr "A recommendation was withdrawn."
+
+msgid "Um conteúdo recomendado a você não está mais disponível."
+msgstr "Content recommended to you is no longer available."
+
+msgid "Uma recomendação foi retirada (credencial profissional revogada)."
+msgstr "A recommendation was withdrawn (professional credential revoked)."
+
+msgid "Esta recomendação já está retirada."
+msgstr "This recommendation has already been withdrawn."
+
+msgid "Informe o motivo da retirada."
+msgstr "Enter the reason for withdrawal."
+
+msgid "Informe uma prioridade válida."
+msgstr "Enter a valid priority."
+
+msgid "Informe o contexto clínico da recomendação."
+msgstr "Enter the clinical context for the recommendation."
+
+msgid "Informe um período de validade positivo."
+msgstr "Enter a positive validity period."
+
+msgid "Este conteúdo expirou e não pode mais ser recomendado."
+msgstr "This content has expired and can no longer be recommended."
+
+msgid "Informe o paciente ou a coorte destinatária."
+msgstr "Select the recipient patient or cohort."
+
+msgid "Conteúdo criado como rascunho."
+msgstr "Content created as a draft."
+
+msgid "Nova versão criada."
+msgstr "New version created."
+
+msgid "Metadados atualizados."
+msgstr "Metadata updated."
+
+msgid "Comentário adicionado ao histórico."
+msgstr "Comment added to history."
+
+msgid "Conteúdo publicado."
+msgstr "Content published."
+
+msgid "Recomendação atribuída."
+msgstr "Recommendation assigned."
+
+msgid "Não foi possível resolver a denúncia."
+msgstr "The report could not be resolved."
+
+msgid "Denúncia resolvida."
+msgstr "Report resolved."
+
+#, python-format
+msgid "Informe no máximo %(limit_value)d dígitos."
+msgstr "Enter no more than %(limit_value)d digits."
+
+msgid "Use um nome reconhecível para a equipe autorizada."
+msgstr "Use a name the authorized team will recognize."
+
+msgid "Categoria"
+msgstr "Category"
+
+msgid "Individual"
+msgstr "Individual"
+
+msgid "Grupo"
+msgstr "Group"
+
+msgid "Data de início"
+msgstr "Start date"
+
+msgid "Documento"
+msgstr "Document"
+
+msgid "Observações administrativas"
+msgstr "Administrative notes"
+
+msgid "Confirmo os dados"
+msgstr "I confirm the details"
+
+msgid "Contato preferencial"
+msgstr "Preferred contact method"
+
+msgid "Recurso ativo"
+msgstr "Feature enabled"
+
+msgid "Anexo"
+msgstr "Attachment"
+
+msgid "nome@dominio.com"
+msgstr "name@example.com"
+
+msgid "contato@clinica.com"
+msgstr "contact@clinic.com"
+
+msgid "Nome e sobrenome"
+msgstr "First and last name"
+
+msgid "Como prefere ser chamado(a)"
+msgstr "What would you like to be called?"
+
+msgid "Razão social completa"
+msgstr "Full legal name"
+
+msgid "Nome público da clínica"
+msgstr "Public clinic name"
+
+msgid "Informe o nome"
+msgstr "Enter the name"
+
+msgid "Rua, número e bairro"
+msgstr "Street, number and neighborhood"
+
+msgid "Apartamento, sala, referência"
+msgstr "Apartment, suite, landmark"
+
+msgid "Título curto e objetivo"
+msgstr "Short, clear title"
+
+msgid "identificador-sem-espacos"
+msgstr "identifier-without-spaces"
+
+msgid "1 a 10"
+msgstr "1 to 10"
+
+msgid "Tipo de arquivo não permitido."
+msgstr "File type not allowed."
+
+msgid "O tipo declarado do arquivo é inválido."
+msgstr "The declared file type is invalid."
+
+msgid "O arquivo está vazio ou excede o limite permitido."
+msgstr "The file is empty or exceeds the allowed limit."
+
+msgid "O conteúdo do arquivo não corresponde ao tipo informado."
+msgstr "The file content does not match the declared type."
+
+msgid "A varredura de segurança do arquivo está indisponível."
+msgstr "File security scanning is unavailable."
+
+msgid "O arquivo não foi aprovado na varredura de segurança."
+msgstr "The file did not pass security scanning."
+
+msgid "Serviço"
+msgstr "Service"
+
+msgid "Valor (R$)"
+msgstr "Amount (BRL)"
+
+msgid "Moeda"
+msgstr "Currency"
+
+msgid "Vigência inicial"
+msgstr "Initial role"
+
+msgid "Vigência final (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Motivo"
+msgstr "Active"
+
+msgid "Contas a receber"
+msgstr "Accounts receivable"
+
+msgid "Cadastrar preço"
+msgstr "Register price"
+
+msgid "Salvar preço"
+msgstr "Register price"
+
+msgid "Catálogo de exercícios terapêuticos"
+msgstr "Exercise catalog"
+
+msgid "Novo exercício"
+msgstr "New exercise"
+
+msgid "Editar exercício"
+msgstr "Perform exercise"
+
+msgid "Atribuir exercício a paciente"
+msgstr "Assign to patient"
+
+msgid "Meus exercícios terapêuticos"
+msgstr "Therapeutic exercises"
+
+#, python-format
+msgid "Resposta: %(title)s"
+msgstr "Answer: %(title)s"
+
+msgid "Qual é a sua meta?"
+msgstr "What is your goal?"
+
+msgid "Ex.: Retomar caminhadas diárias"
+msgstr "E.g.: Resume daily walks"
+
+msgid "Detalhes (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Opcional. Máximo de 4000 caracteres."
+msgstr "Optional. Maximum 4,000 characters."
+
+msgid "Horizonte de tempo"
+msgstr "Service hours"
+
+msgid "Prioridade"
+msgstr "Priority"
+
+msgid "Prazo (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Você pode alterar ou remover o prazo quando quiser, sem penalidade."
+msgstr ""
+"You can change or remove the deadline whenever you want, without penalty."
+
+msgid "Pequenas etapas"
+msgstr "Small steps"
+
+msgid ""
+"Uma etapa por linha. Ex.:\n"
+"Separe os tênis\n"
+"Caminhe 5 minutos hoje"
+msgstr ""
+"One step per line. E.g.:\n"
+"Set out your sneakers\n"
+"Walk for 5 minutes today"
+
+msgid ""
+"Uma etapa por linha. Pequenas etapas tornam a meta mais fácil de seguir."
+msgstr "One step per line. Small steps make the goal easier to follow."
+
+msgid "Compartilhamento"
+msgstr "Address line 2"
+
+msgid ""
+"Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes; Vermelho = "
+"Somente eu (privado)."
+msgstr "Green — Shareable: linked therapist can see this record."
+
+msgid "Dê um título à sua meta."
+msgstr "Give your goal a title."
+
+msgid "Uma meta pode ter no máximo 50 etapas."
+msgstr "A goal can have at most 50 steps."
+
+msgid "Modo baixa energia"
+msgstr "Low-energy mode"
+
+msgid "Ativa"
+msgstr "Active"
+
+msgid "Pausada"
+msgstr "Paused"
+
+msgid "Arquivada"
+msgstr "Archived"
+
+msgid "Baixa"
+msgstr "Low"
+
+msgid "Média"
+msgstr "Medium"
+
+msgid "Alta"
+msgstr "High"
+
+msgid "Curto prazo"
+msgstr "Short term"
+
+msgid "Médio prazo"
+msgstr "Medium term"
+
+msgid "Longo prazo"
+msgstr "Long term"
+
+msgid "Verde — Compartilhável"
+msgstr "Green — Shareable"
+
+msgid "Amarelo — Confirmar antes"
+msgstr "Yellow — Confirm first"
+
+msgid "Vermelho — Privado"
+msgstr "Red — Private"
+
+msgid "Rascunho"
+msgstr "Draft"
+
+msgid "Publicado"
+msgstr "Published"
+
+msgid "Arquivado"
+msgstr "Archived"
+
+msgid "Texto livre"
+msgstr "Free text"
+
+msgid "Escala de 1 a 5"
+msgstr "Scale from 1 to 5"
+
+msgid "Escolha única"
+msgstr "Technical specialty"
+
+msgid "Múltipla escolha"
+msgstr "Multiple choice"
+
+msgid "Atribuído"
+msgstr "Assigned"
+
+msgid "Concluído"
+msgstr "Complete"
+
+msgid "Cancelado"
+msgstr "Canceled"
+
+msgid "Verde (compartilhado)"
+msgstr "Green (Shareable)"
+
+msgid "Amarelo (perguntar antes)"
+msgstr "Yellow (Ask first)"
+
+msgid "Vermelho (somente eu)"
+msgstr "Red — Only you"
+
+msgid "Minhas Metas"
+msgstr "My Goals"
+
+msgid "Nova Meta"
+msgstr "New goal"
+
+msgid "Criar meta"
+msgstr "Create item"
+
+msgid "Detalhe da Meta"
+msgstr "Record Details"
+
+msgid "Editar Meta"
+msgstr "Edit"
+
+msgid "Salvar alterações"
+msgstr "Cancel changes"
+
+msgid "Prefiro não responder"
+msgstr "Prefer not to say"
+
+msgid "1 — Muito baixo"
+msgstr "1 — Very low"
+
+msgid "2 — Baixo"
+msgstr "2 — Low"
+
+msgid "3 — Médio"
+msgstr "3 — Medium"
+
+msgid "4 — Alto"
+msgstr "4 — High"
+
+msgid "5 — Muito alto"
+msgstr "Very bad"
+
+msgid "Sim"
+msgstr "Yes"
+
+msgid "Não"
+msgstr "Action"
+
+msgid "Opcional. Máximo de 2000 caracteres."
+msgstr "Optional. Maximum 2,000 characters."
+
+msgid "Como você está se sentindo?"
+msgstr "How are you? (optional)"
+
+msgid ""
+"Selecione como você avalia seu humor geral neste momento (1 = Muito mal a 5 "
+"= Muito bem)."
+msgstr ""
+"Select how you rate your overall mood right now (1 = Very bad to 5 = Very "
+"good)."
+
+msgid "Quais emoções você identifica?"
+msgstr "Identified emotions"
+
+msgid "Você pode selecionar mais de uma emoção."
+msgstr "You can select more than one emotion."
+
+msgid "Intensidade emocional (1 a 5)"
+msgstr "Emotional intensity (1 to 5)"
+
+msgid "1 = muito leve, 5 = muito intensa"
+msgstr "1 = very light, 5 = very intense"
+
+msgid "Relato do diário"
+msgstr "Journal Entry"
+
+msgid "Descreva o que aconteceu ou como você está se sentindo..."
+msgstr "Describe what happened or how you are feeling..."
+
+#, python-format
+msgid "Máximo de %(max)d caracteres."
+msgstr "Maximum %(max)d characters."
+
+msgid "Gatilhos"
+msgstr "Triggers"
+
+msgid ""
+"Situações, pensamentos ou eventos que desencadearam este momento (opcional)"
+msgstr "Situations, thoughts, or events that triggered this moment (optional)"
+
+#, python-format
+msgid "Opcional. Máximo de %(max)d caracteres."
+msgstr "Optional. Maximum %(max)d characters."
+
+msgid "Reações físicas"
+msgstr "Physical reactions"
+
+msgid "Ex.: tensão muscular, respiração curta, aperto no peito (opcional)"
+msgstr "E.g.: muscle tension, shortness of breath, chest tightness (optional)"
+
+msgid "O que me ajudou"
+msgstr "What helped me"
+
+msgid ""
+"Ações, pensamentos ou técnicas que ajudaram a lidar com a situação (opcional)"
+msgstr ""
+"Actions, thoughts, or techniques that helped you cope with the situation "
+"(optional)"
+
+msgid ""
+"Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes de "
+"compartilhar; Vermelho = Somente eu (privado)."
+msgstr ""
+"Green = Shareable with therapist; Yellow = Ask before sharing; Red = Only me "
+"(private)."
+
+msgid "Descreva o relato do diário."
+msgstr "Journal Entry"
+
+#, python-format
+msgid "O relato do diário deve ter no máximo %(max)d caracteres."
+msgstr "The journal entry can have at most %(max)d characters."
+
+#, python-format
+msgid "O campo gatilhos deve ter no máximo %(max)d caracteres."
+msgstr "The triggers field can have at most %(max)d characters."
+
+#, python-format
+msgid "O campo reações deve ter no máximo %(max)d caracteres."
+msgstr "The reactions field can have at most %(max)d characters."
+
+#, python-format
+msgid "O campo estratégias deve ter no máximo %(max)d caracteres."
+msgstr "The strategies field can have at most %(max)d characters."
+
+msgid "Últimos 7 dias"
+msgstr "Last 7 days"
+
+msgid "Últimos 30 dias"
+msgstr "Last 30 days"
+
+msgid "Últimos 90 dias"
+msgstr "Last 90 days"
+
+msgid "Todo o histórico"
+msgstr "All history"
+
+msgid "Período"
+msgstr "Period"
+
+msgid "Emoção"
+msgstr "Emotion"
+
+msgid "Todas as emoções"
+msgstr "All emotions"
+
+msgid "Humor"
+msgstr "Mood"
+
+msgid "Todos os humores"
+msgstr "All moods"
+
+msgid "Ansiedade"
+msgstr "Anxiety"
+
+msgid "Tristeza"
+msgstr "Sadness"
+
+msgid "Raiva"
+msgstr "Anger"
+
+msgid "Alegria"
+msgstr "Joy"
+
+msgid "Medo"
+msgstr "Fear"
+
+msgid "Calma"
+msgstr "Calm"
+
+msgid "Frustração"
+msgstr "Foundation"
+
+msgid "Esperança"
+msgstr "Billing"
+
+msgid "Amarelo — Confirmação necessária"
+msgstr "Yellow — Confirm first"
+
+msgid "Diário Emocional"
+msgstr "Emotional Journal"
+
+msgid "Novo Registro no Diário"
+msgstr "Journal Entry"
+
+msgid "Salvar registro"
+msgstr "No record"
+
+msgid "Detalhe do Registro"
+msgstr "Record Details"
+
+msgid "Editar Registro no Diário"
+msgstr "Filter journal history"
+
+msgid "Histórico de Check-ins"
+msgstr "Check-in History"
+
+msgid "Check-in Diário"
+msgstr "Daily Check-in"
+
+msgid "Objetivos pessoais"
+msgstr "Personal goals"
+
+msgid "Um objetivo por linha."
+msgstr "One goal per line."
+
+msgid "Como você prefere ser contatado(a)?"
+msgstr "How do you prefer to be contacted?"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Melhores horários para lembretes"
+msgstr "Best times for reminders"
+
+msgid "Manhã"
+msgstr "Morning"
+
+msgid "Tarde"
+msgstr "Afternoon"
+
+msgid "Noite"
+msgstr "Evening"
+
+msgid "Perfil da clínica completo"
+msgstr "Clinic profile complete"
+
+msgid "Identidade, operação, identidade visual e módulos configurados."
+msgstr "Identity, operations, visual identity, and modules configured."
+
+msgid "Profissionais convidados"
+msgstr "Professionals invited"
+
+msgid "Pelo menos um profissional ou membro administrativo associado."
+msgstr "At least one professional or administrative staff member associated."
+
+msgid "Termos publicados"
+msgstr "Terms published"
+
+msgid "Documentos de consentimento publicados e vigentes."
+msgstr "Consent documents published and currently valid."
+
+msgid "Permissões configuradas"
+msgstr "Permissions configured"
+
+msgid "Administrador da clínica definido."
+msgstr "Clinic administrator assigned."
+
+msgid "Primeiro paciente"
+msgstr "First patient"
+
+msgid "Pelo menos um paciente cadastrado ou convidado."
+msgstr "At least one patient registered or invited."
+
+msgid "Etapa de onboarding inválida."
+msgstr "Invalid onboarding step."
+
+msgid "Objetivos"
+msgstr "Goals"
+
+msgid "Preferências"
+msgstr "Preferences"
+
+msgid "Termos"
+msgstr "Terms"
+
+msgid "Nome completo"
+msgstr "Full name"
+
+msgid "Nome social"
+msgstr "Chosen name"
+
+msgid "Data de nascimento"
+msgstr "Date of birth"
+
+msgid "Gênero (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Não informado"
+msgstr "Not provided"
+
+msgid "Preferências de acessibilidade"
+msgstr "Accessibility preferences"
+
+msgid "UF"
+msgstr "State"
+
+msgid "CEP"
+msgstr "Postal code"
+
+msgid "Finalidade do endereço"
+msgstr "Purpose of the address"
+
+msgid "Contato de emergência — nome"
+msgstr "Emergency contact — name"
+
+msgid "Contato de emergência — telefone"
+msgstr "Emergency contact — phone"
+
+msgid "Finalidade do contato de emergência"
+msgstr "Purpose of the emergency contact"
+
+msgid "Informe a finalidade para registrar o endereço."
+msgstr "Enter the purpose for recording the address."
+
+msgid "Informe a finalidade para o contato de emergência."
+msgstr "Enter the purpose for the emergency contact."
+
+msgid "Mulher"
+msgstr "Woman"
+
+msgid "Homem"
+msgstr "Man"
+
+msgid "Pessoa não binária"
+msgstr "Non-binary person"
+
+msgid "Outro"
+msgstr "Other"
+
+msgid "Prefiro não informar"
+msgstr "Prefer not to say"
+
+msgid "Agendado"
+msgstr "Scheduled"
+
+msgid "Suspenso"
+msgstr "Suspended"
+
+msgid "Encerrado"
+msgstr "Ended"
+
+msgid "Perfil pendente"
+msgstr "Profile pending"
+
+msgid "Esta credencial já está revogada."
+msgstr "This credential has already been revoked."
+
+msgid "Informe nome e e-mail profissional."
+msgstr "Enter the professional name and email."
+
+msgid "Selecione uma categoria profissional válida."
+msgstr "Select a valid professional category."
+
+msgid "Informe especialidades técnicas válidas e sem repetição."
+msgstr "Enter valid technical specialties without duplicates."
+
+msgid "Informe conselho, número e jurisdição em conjunto."
+msgstr "Enter the council, number and jurisdiction together."
+
+msgid "A foto excede o limite de 2 MB."
+msgstr "The photo exceeds the 2 MB limit."
+
+msgid "A foto deve ser PNG ou JPEG."
+msgstr "The photo must be PNG or JPEG."
+
+msgid "Informe nome e e-mail da pessoa paciente."
+msgstr "Enter the patient's name and email."
+
+msgid "Selecione uma opção de gênero válida."
+msgstr "Select a valid gender option."
+
+msgid "Foi encontrada uma possível duplicidade nesta clínica."
+msgstr "A possible duplicate was found in this clinic."
+
+msgid "Informe a função do profissional no vínculo."
+msgstr "Enter the professional's role in the relationship."
+
+msgid "A data de encerramento não pode preceder o início."
+msgstr "The end date cannot precede the start date."
+
+msgid "O novo profissional deve ser diferente do atual."
+msgstr "The new professional must be different from the current one."
+
+msgid "A data de transferência não pode preceder o início."
+msgstr "The transfer date cannot precede the start date."
+
+msgid "A data de transferência excede o término do vínculo."
+msgstr "The transfer date is after the relationship end date."
+
+#, python-format
+msgid ""
+"Lembrete: sua consulta de %(service_name)s está marcada para %(date)s às "
+"%(time)s."
+msgstr ""
+"Reminder: your appointment for %(service_name)s is scheduled for %(date)s at "
+"%(time)s."
+
+#, python-format
+msgid "Você tem uma nova mensagem de %(sender_name)s na plataforma."
+msgstr "You have a new message from %(sender_name)s on the platform."
+
+msgid "Consulta"
+msgstr "Appointment"
+
+msgid "Check-in"
+msgstr "Check-in"
+
+msgid "Exercício"
+msgstr "Exercise"
+
+msgid "Push"
+msgstr "Push"
+
+msgid "Tipo de consulta"
+msgstr "No appointments"
+
+msgid "Unidade"
+msgstr "Unit"
+
+msgid "Data e horário"
+msgstr "Start date"
+
+msgid "Novo data e horário"
+msgstr "Time zone"
+
+msgid "Tipo de lembrete"
+msgstr "Reminder preferences"
+
+msgid "Canal"
+msgstr "Channel"
+
+msgid "Ativado"
+msgstr "Enabled"
+
+msgid "Antecedência (minutos)"
+msgstr "Advance notice (minutes)"
+
+msgid "Início do horário de silêncio (opcional)"
+msgstr "Start of quiet hours (optional)"
+
+msgid "Fim do horário de silêncio (opcional)"
+msgstr "End of quiet hours (optional)"
+
+msgid "Frequência máxima diária"
+msgstr "Maximum daily frequency"
+
+msgid "Tipo de conversa"
+msgstr "New conversation"
+
+msgid "Assunto (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Participantes"
+msgstr "Patients"
+
+msgid "Mensagem"
+msgstr "Messages"
+
+msgid "Este canal não atende emergências."
+msgstr "Emergency contact"
+
+msgid "Motivo (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Período preferido (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Contato (opcional)"
+msgstr "Gender (optional)"
+
+msgid "Informe o nome da unidade."
+msgstr "Enter the unit name."
+
+msgid "Já existe uma unidade com este nome."
+msgstr "A unit with this name already exists."
+
+msgid "Unidades e salas"
+msgstr "Units and rooms"
+
+msgid "Nova unidade"
+msgstr "New unit"
+
+msgid "Salvar unidade"
+msgstr "Deactivate unit"
+
+msgid "Editar unidade"
+msgstr "Edit unit"
+
+msgid "Nova sala"
+msgstr "New room"
+
+msgid "Salvar sala"
+msgstr "New room"
+
+msgid "Agenda semanal"
+msgstr "Weekly schedule"
+
+msgid "Selecione um serviço válido."
+msgstr "Select a valid professional role."
+
+msgid "Solicitar consulta"
+msgstr "Request appointment"
+
+msgid "Remarcar consulta"
+msgstr "Reschedule appointment"
+
+msgid "Propor novo horário"
+msgstr "Time zone"
+
+msgid "Preferências de lembrete"
+msgstr "Reminder preferences"
+
+msgid "Salvar preferência"
+msgstr "Save exercise"
+
+msgid "Mensagens"
+msgstr "Messages"
+
+msgid "Nova conversa"
+msgstr "New conversation"
+
+msgid "Iniciar conversa"
+msgstr "Start conversation"
+
+msgid "Conversa"
+msgstr "Conversations"
+
+msgid "Enviar"
+msgstr "Submitted"
+
+msgid "Lista de espera"
+msgstr "Waitlist"
+
+msgid "Adicionar à lista de espera"
+msgstr "Add to waitlist"
+
+msgid "Adicionar"
+msgstr "Add lesson"
+
+msgid "Ir para o conteúdo principal"
+msgstr "Skip to main content"
+
+msgid "Sessões e dispositivos"
+msgstr "Sessions and devices"
+
+msgid "Revise os acessos à sua conta e encerre os que não reconhecer."
+msgstr ""
+"Review access to your account and end any sessions you do not recognize."
+
+msgid "Última atividade:"
+msgstr "Last activity:"
+
+msgid "Encerrada"
+msgstr "Ended"
+
+msgid "Sessão atual"
+msgstr "Current session"
+
+#, python-format
+msgid "Encerrar %(device_label)s"
+msgstr "End %(device_label)s"
+
+msgid "Encerrar sessão"
+msgstr "End session"
+
+msgid "Encerrar todas as outras sessões"
+msgstr "End all other sessions"
+
+msgid "Nenhuma sessão registrada."
+msgstr "No sessions recorded."
+
+msgid "Clínica"
+msgstr "Clinic"
+
+msgid "Operação"
+msgstr "Operations"
+
+#, python-format
+msgid "%(start)s – %(end)s · atualizado em %(updated)s"
+msgstr "%(start)s – %(end)s · updated on %(updated)s"
+
+msgid ""
+"Métricas operacionais agregadas e anonimizadas. Recortes abaixo do limiar "
+"foram suprimidos."
+msgstr ""
+"Aggregated and anonymized operational metrics. Data cuts below the threshold "
+"were suppressed."
+
+msgid "Indicadores operacionais"
+msgstr "Operational indicators"
+
+msgid "Consultas no período"
+msgstr "Appointments in period"
+
+msgid "Ocupação da agenda"
+msgstr "Schedule occupancy"
+
+msgid "Taxa de faltas"
+msgstr "No-show rate"
+
+msgid "Pacientes ativos"
+msgstr "Active patients"
+
+msgid "oculto"
+msgstr "hidden"
+
+msgid "Resumos por unidade e profissional"
+msgstr "Summaries by unit and professional"
+
+msgid "Consultas por unidade"
+msgstr "Appointments by unit"
+
+msgid "Consultas"
+msgstr "Appointments"
+
+msgid "Consultas por profissional"
+msgstr "Appointments by professional"
+
+msgid "Acompanhamento"
+msgstr "Follow-up"
+
+#, python-format
+msgid "%(start)s – %(end)s"
+msgstr "%(start)s – %(end)s"
+
+msgid "Indicadores do período"
+msgstr "Period indicators"
+
+msgid "Check-ins no período"
+msgstr "Check-ins in period"
+
+msgid "Metas em andamento"
+msgstr "Goals in progress"
+
+msgid "Exercícios concluídos"
+msgstr "Completed exercises"
+
+msgid "Próximas consultas"
+msgstr "Upcoming appointments"
+
+msgid "Distribuição de humor (diário)"
+msgstr "Mood distribution (daily)"
+
+msgid ""
+"A tabela textual equivalente mostra a contagem de registros por humor no "
+"período. Comparações são apenas com seus próprios períodos; não indicam "
+"diagnóstico nem causalidade."
+msgstr ""
+"The equivalent text table shows the count of records by mood in the period. "
+"Comparisons are only with your own periods; they do not indicate diagnosis "
+"or causality."
+
+msgid "Exportações"
+msgstr "Exports"
+
+msgid "Relatórios expiram e cada download é registrado."
+msgstr "Reports expire and each download is logged."
+
+msgid "Gerar relatório"
+msgstr "Generate report"
+
+msgid "Relatórios disponíveis"
+msgstr "Available reports"
+
+msgid "Baixar"
+msgstr "Download"
+
+msgid "Nenhum relatório gerado ainda."
+msgstr "No reports generated yet."
+
+msgid "Visão longitudinal autorizada"
+msgstr "Authorized longitudinal view"
+
+msgid "Indicadores profissionais"
+msgstr "Professional indicators"
+
+msgid "Triagem pendente"
+msgstr "Pending triage"
+
+msgid "Sinalizações para revisão humana"
+msgstr "Signals for human review"
+
+#, python-format
+msgid "Regra: %(rule)s · Monitoramento: %(window)s"
+msgstr "Rule: %(rule)s · Monitoring: %(window)s"
+
+msgid "Nenhuma sinalização pendente para revisão."
+msgstr "No pending signals for review."
+
+msgid "Check-ins compartilhados por paciente"
+msgstr "Shared check-ins by patient"
+
+msgid "Check-ins"
+msgstr "Check-ins"
+
+msgid "Nenhum check-in compartilhado no período."
+msgstr "No shared check-ins in the period."
+
+msgid "Confirmar troca de clínica"
+msgstr "Confirm clinic switch"
+
+msgid "Confirmação de contexto"
+msgstr "Context confirmation"
+
+msgid "Trocar clínica ativa?"
+msgstr "Switch active clinic?"
+
+#, python-format
+msgid ""
+"Você está em <strong>%(current_clinic_name)s</strong> e solicitou acesso a "
+"<strong>%(target_clinic_name)s</strong>."
+msgstr ""
+"You are in <strong>%(current_clinic_name)s</strong> and requested access to "
+"<strong>%(target_clinic_name)s</strong>."
+
+msgid ""
+"A troca atualiza o contexto das próximas páginas. Nenhum dado é copiado "
+"entre clínicas."
+msgstr ""
+"Switching updates the context for the following pages. No data is copied "
+"between clinics."
+
+msgid "Confirmar troca"
+msgstr "Confirm switch"
+
+msgid "Manter clínica atual"
+msgstr "Keep current clinic"
+
+msgid "Configurar clínica"
+msgstr "Configure clinic"
+
+msgid "Configuração da clínica ativa"
+msgstr "Active clinic setup"
+
+#, python-format
+msgid ""
+"Revise cada etapa na ordem. As mudanças ficam restritas a %(clinic_name)s e "
+"são registradas na auditoria."
+msgstr ""
+"Review each step in order. Changes are restricted to %(clinic_name)s and "
+"recorded in the audit log."
+
+msgid "Etapas da configuração"
+msgstr "Setup steps"
+
+msgid "Etapa 1 de 5"
+msgstr "Step 1 of 5"
+
+msgid "Informe identificação, contato administrativo e endereço estruturado."
+msgstr ""
+"Enter identification, administrative contact, and structured address details."
+
+msgid "Etapa 2 de 5"
+msgstr "Step 2 of 5"
+
+msgid ""
+"Defina fuso, idioma, canais, semana operacional e orientação fora do horário."
+msgstr ""
+"Set the time zone, language, channels, operating week, and out-of-hours "
+"guidance."
+
+msgid "Etapa 3 de 5"
+msgstr "Step 3 of 5"
+
+msgid "Envie um logotipo raster seguro e escolha cores com contraste adequado."
+msgstr "Upload a safe raster logo and choose colors with adequate contrast."
+
+msgid "Etapa 4 de 5"
+msgstr "Step 4 of 5"
+
+msgid ""
+"Ative somente recursos necessários. Pré-requisitos são verificados pelo "
+"servidor."
+msgstr ""
+"Enable only the necessary features. Prerequisites are checked by the server."
+
+msgid "Etapa 5 de 5"
+msgstr "Step 5 of 5"
+
+msgid "Nenhum"
+msgstr "None"
+
+msgid "Comece pelos dados institucionais para montar a revisão."
+msgstr "Start with the institutional details to build the review."
+
+msgid "Há alterações não salvas."
+msgstr "You have unsaved changes."
+
+msgid "Revise os campos informados"
+msgstr "Review the fields provided"
+
+msgid "Pré-visualização da marca"
+msgstr "Brand preview"
+
+#, python-format
+msgid "Pré-visualização do logotipo de %(clinic_name)s"
+msgstr "Preview of the %(clinic_name)s logo"
+
+msgid ""
+"As cores serão aplicadas aos tokens permitidos nos temas claro e escuro após "
+"a validação de contraste."
+msgstr ""
+"The colors will be applied to the allowed tokens in the light and dark "
+"themes after contrast validation."
+
+msgid "Exemplo de ação principal"
+msgstr "Primary action example"
+
+msgid "Salvar e continuar"
+msgstr "Save and continue"
+
+msgid "Domínios personalizados"
+msgstr "Custom domains"
+
+msgid "White label"
+msgstr "White label"
+
+msgid "Domínios desta clínica"
+msgstr "Domains for this clinic"
+
+#, python-format
+msgid "%(domain)s · %(status)s · TLS: %(tls_status)s"
+msgstr "%(domain)s · %(status)s · TLS: %(tls_status)s"
+
+msgid "Nenhum domínio personalizado cadastrado."
+msgstr "No custom domains registered."
+
+msgid "Revise os campos indicados"
+msgstr "Review the highlighted fields"
+
+msgid "Não foi possível salvar. Corrija os problemas abaixo."
+msgstr "Unable to save. Fix the problems below."
+
+msgid "Selecione o idioma"
+msgstr "Select Language"
+
+#, python-format
+msgid "%(count)s idioma disponível!"
+msgid_plural "%(count)s idiomas disponíveis!"
+msgstr[0] "%(count)s language available!"
+msgstr[1] "%(count)s languages available!"
+
+msgid "Idiomas disponíveis"
+msgstr "Available languages"
+
+msgid ""
+"Há alterações não salvas. Alterar o idioma e descartar essas alterações?"
+msgstr ""
+"You have unsaved changes. Change the language and discard these changes?"
+
+msgid "Paginação"
+msgstr "Pagination"
+
+msgid "Primeira"
+msgstr "First"
+
+msgid "Anterior"
+msgstr "Previous"
+
+#, python-format
+msgid "Ir para a página %(number)s"
+msgstr "Go to page %(number)s"
+
+msgid "Próxima"
+msgstr "Next"
+
+msgid "Última"
+msgstr "Last"
+
+#, python-format
+msgid "Ordenar por %(label)s"
+msgstr "Sort by %(label)s"
+
+msgid "Ações"
+msgstr "Actions"
+
+msgid "Sem ações"
+msgstr "No actions"
+
+msgid "Nenhum registro disponível."
+msgstr "No records available."
+
+msgid "Ordenação da lista"
+msgstr "List sorting"
+
+#, python-format
+msgid "Ordenar por %(label)s em ordem %(direction)s"
+msgstr "Sort by %(label)s in %(direction)s order"
+
+msgid "; ordem atual crescente"
+msgstr "; currently sorted in ascending order"
+
+msgid "; ordem atual decrescente"
+msgstr "; currently sorted in descending order"
+
+#, python-format
+msgid "Tendência: %(trend)s"
+msgstr "Trend: %(trend)s"
+
+msgid "Terms and consents"
+msgstr "Terms and consents"
+
+msgid ""
+"Read each document and record your decision. Optional authorizations are not "
+"preselected and may be refused without blocking your basic rights."
+msgstr ""
+"Read each document and record your decision. Optional authorizations are not "
+"preselected and may be refused without blocking your basic rights."
+
+msgid "Required acceptances"
+msgstr "Required acceptances"
+
+msgid "There are no required acceptances pending."
+msgstr "There are no required acceptances pending."
+
+msgid "Optional authorizations"
+msgstr "Optional authorizations"
+
+msgid "There are no optional authorizations available."
+msgstr "There are no optional authorizations available."
+
+msgid "Review your decision"
+msgstr "Review your decision"
+
+msgid "Select accept or refuse before continuing."
+msgstr "Select accept or refuse before continuing."
+
+msgid "The decision could not be recorded."
+msgstr "The decision could not be recorded."
+
+msgid "Back to terms"
+msgstr "Back to terms"
+
+#, python-format
+msgid "Version %(version)s · Purpose: %(purpose)s"
+msgstr "Version %(version)s · Purpose: %(purpose)s"
+
+msgid "If you refuse:"
+msgstr "If you refuse:"
+
+msgid "Alternative:"
+msgstr "Alternative:"
+
+msgid "Clinic contact:"
+msgstr "Clinic contact:"
+
+msgid "Recorded decision:"
+msgstr "Recorded decision:"
+
+msgid "Choose an option"
+msgstr "Choose an option"
+
+msgid "I accept for the stated purpose"
+msgstr "I accept for the stated purpose"
+
+msgid "I do not accept"
+msgstr "I do not accept"
+
+msgid "Record decision"
+msgstr "Record decision"
+
+msgid ""
+"A revogação interrompe novos usos para esta finalidade, preservando a "
+"evidência histórica e obrigações legais aplicáveis."
+msgstr ""
+"Revocation stops new uses for this purpose while preserving historical "
+"evidence and applicable legal obligations."
+
+msgid "Motivo da revogação"
+msgstr "Reason for revocation"
+
+msgid "Entendo o escopo e desejo revogar esta autorização."
+msgstr "I understand the scope and wish to revoke this authorization."
+
+msgid "Revogar autorização"
+msgstr "Revoke authorization"
+
+msgid "Não foi possível revogar a autorização"
+msgstr "The authorization could not be revoked"
+
+msgid "Voltar aos termos e consentimentos"
+msgstr "Back to terms and consents"
+
+msgid "Não foi possível confirmar o atendimento"
+msgstr "The processing could not be confirmed"
+
+msgid "Voltar para a fila"
+msgstr "Back to the queue"
+
+msgid "Revogações aguardando tratamento"
+msgstr "Revocations awaiting processing"
+
+msgid ""
+"Confirme cada bloqueio operacional somente após concluir o atendimento no "
+"sistema de destino."
+msgstr ""
+"Confirm each operational restriction only after completing the work in the "
+"destination system."
+
+msgid "Fila operacional de revogações"
+msgstr "Operational revocation queue"
+
+msgid "Titular:"
+msgstr "Data subject:"
+
+msgid "Finalidade:"
+msgstr "Purpose:"
+
+msgid "Documento:"
+msgstr "Document:"
+
+#, python-format
+msgid "%(title)s — version %(version)s"
+msgstr "%(title)s — version %(version)s"
+
+msgid "Despacho:"
+msgstr "Dispatch:"
+
+msgid "Criada em:"
+msgstr "Created at:"
+
+msgid "Referência do atendimento operacional"
+msgstr "Operational service reference"
+
+msgid "Confirmar atendimento"
+msgstr "Confirm processing"
+
+msgid "Não há revogações aguardando tratamento."
+msgstr "There are no revocations awaiting processing."
+
+msgid "Voltar à biblioteca"
+msgstr "Back to library"
+
+msgid "Recomendar a um paciente"
+msgstr "Recommend to a patient"
+
+msgid "Atribuir recomendação"
+msgstr "Assign recommendation"
+
+#, python-format
+msgid "Comparar versões: %(title)s"
+msgstr "Compare versions: %(title)s"
+
+msgid "Histórico editorial"
+msgstr "Editorial history"
+
+#, python-format
+msgid "Comparar versões %(before_ver)s e %(after_ver)s"
+msgstr "Compare versions %(before_ver)s and %(after_ver)s"
+
+msgid "Diferenças entre versões"
+msgstr "Differences between versions"
+
+#, python-format
+msgid "Versão %(ver)s"
+msgstr "Version %(ver)s"
+
+msgid "Voltar ao editor"
+msgstr "Back to editor"
+
+msgid "Criar conteúdo"
+msgstr "Create content"
+
+msgid "CMS"
+msgstr "CMS"
+
+msgid "Editor de blocos"
+msgstr "Block editor"
+
+msgid ""
+"Estruture o texto com títulos, parágrafos e listas. Cada bloco é mantido na "
+"ordem definida abaixo."
+msgstr ""
+"Structure text with headings, paragraphs and lists. Each block is kept in "
+"the order defined below."
+
+msgid "Tipo do bloco 1"
+msgstr "Block 1 type"
+
+msgid "Texto do bloco 1"
+msgstr "Block 1 text"
+
+msgid "Mover bloco 1 para cima"
+msgstr "Move block 1 up"
+
+msgid "Mover para cima"
+msgstr "Move up"
+
+msgid "Mover bloco 1 para baixo"
+msgstr "Move block 1 down"
+
+msgid "Mover para baixo"
+msgstr "Move down"
+
+msgid "Remover bloco 1"
+msgstr "Remove block 1"
+
+msgid "Remover bloco"
+msgstr "Remove block"
+
+msgid "Tipo do bloco 2"
+msgstr "Block 2 type"
+
+msgid "Texto do bloco 2"
+msgstr "Block 2 text"
+
+msgid "Mover bloco 2 para cima"
+msgstr "Move block 2 up"
+
+msgid "Mover bloco 2 para baixo"
+msgstr "Move block 2 down"
+
+msgid "Remover bloco 2"
+msgstr "Remove block 2"
+
+msgid "Tipo do bloco 3"
+msgstr "Block 3 type"
+
+msgid "Texto do bloco 3"
+msgstr "Block 3 text"
+
+msgid "Mover bloco 3 para cima"
+msgstr "Move block 3 up"
+
+msgid "Mover bloco 3 para baixo"
+msgstr "Move block 3 down"
+
+msgid "Remover bloco 3"
+msgstr "Remove block 3"
+
+msgid "Adicionar bloco"
+msgstr "Add block"
+
+msgid "Mover último bloco para cima"
+msgstr "Move last block up"
+
+msgid "Mover último para cima"
+msgstr "Move last up"
+
+msgid "Editar HTML bruto (fallback)"
+msgstr "Edit raw HTML (fallback)"
+
+msgid "Salvar rascunho"
+msgstr "Save draft"
+
+#, python-format
+msgid "Editor: %(title)s"
+msgstr "Editor: %(title)s"
+
+#, python-format
+msgid "versão %(version)s"
+msgstr "version %(version)s"
+
+msgid "Pré-visualizar"
+msgstr "Preview"
+
+msgid "Novos blocos"
+msgstr "New blocks"
+
+msgid ""
+"Use títulos, parágrafos e listas. Uma nova versão preserva todo o histórico."
+msgstr ""
+"Use headings, paragraphs and lists. A new version preserves the full history."
+
+msgid "Criar nova versão"
+msgstr "Create new version"
+
+msgid "Fluxo editorial"
+msgstr "Editorial workflow"
+
+msgid "Enviar para revisão"
+msgstr "Submit for review"
+
+msgid "Publicar"
+msgstr "Publish"
+
+msgid "Arquivar"
+msgstr "Archive"
+
+msgid "Aprovar versão"
+msgstr "Approve version"
+
+msgid "Atualizar metadados"
+msgstr "Update metadata"
+
+msgid "Reverter versão"
+msgstr "Revert version"
+
+msgid "Anexar mídia"
+msgstr "Attach media"
+
+msgid "Histórico de versões"
+msgstr "Version history"
+
+#, python-format
+msgid "Versão %(ver)s · %(status)s"
+msgstr "Version %(ver)s · %(status)s"
+
+msgid "Comparar primeira e atual"
+msgstr "Compare first and current"
+
+#, python-format
+msgid "Comentários da versão %(version)s"
+msgstr "Comments for version %(version)s"
+
+msgid "Nenhum comentário."
+msgstr "No comments."
+
+msgid "Comentários são permanentes e não podem ser editados ou removidos."
+msgstr "Comments are permanent and cannot be edited or removed."
+
+msgid "Adicionar comentário"
+msgstr "Add comment"
+
+msgid "Voltar à gestão editorial"
+msgstr "Back to editorial management"
+
+msgid "Gestão editorial"
+msgstr "Editorial management"
+
+msgid "Conteúdos"
+msgstr "Contents"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Versão"
+msgstr "Version"
+
+msgid "Ação"
+msgstr "Action"
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Nenhum conteúdo editorial."
+msgstr "No editorial content."
+
+#, python-format
+msgid "Pré-visualização: %(title)s"
+msgstr "Preview: %(title)s"
+
+#, python-format
+msgid "Pré-visualização responsiva · versão %(ver)s"
+msgstr "Responsive preview · version %(ver)s"
+
+msgid "Conteúdo pré-visualizado"
+msgstr "Previewed content"
+
+#, python-format
+msgid "Certificado: %(title)s"
+msgstr "Certificate: %(title)s"
+
+#, python-format
+msgid "Curso: %(title)s"
+msgstr "Course: %(title)s"
+
+msgid "Certificado de conclusão"
+msgstr "Certificate of completion"
+
+msgid "Certificado emitido"
+msgstr "Certificate issued"
+
+msgid "Código de verificação:"
+msgstr "Verification code:"
+
+msgid "Compartilhe este código para verificação pública."
+msgstr "Share this code for public verification."
+
+msgid "Certificado ainda não emitido"
+msgstr "Certificate not yet issued"
+
+msgid "Você concluiu todas as aulas. Emita seu certificado abaixo."
+msgstr "You completed all lessons. Issue your certificate below."
+
+msgid "Emitir certificado"
+msgstr "Issue certificate"
+
+msgid "Conclua todas as aulas do curso para emitir o certificado."
+msgstr "Complete all course lessons to issue the certificate."
+
+msgid "Verificação de certificado"
+msgstr "Certificate verification"
+
+msgid "Certificado válido"
+msgstr "Valid certificate"
+
+msgid "Certificado revogado"
+msgstr "Certificate revoked"
+
+msgid "Certificado não encontrado"
+msgstr "Certificate not found"
+
+#, python-format
+msgid "Coorte: %(name)s"
+msgstr "Cohort: %(name)s"
+
+msgid "Coortes"
+msgstr "Cohorts"
+
+msgid "Membros"
+msgstr "Members"
+
+msgid "Nenhum membro ainda."
+msgstr "No members yet."
+
+msgid "Adicionar membro"
+msgstr "Add member"
+
+msgid "Usuário (ID)"
+msgstr "User (ID)"
+
+#, python-format
+msgid "Construtor: %(title)s"
+msgstr "Builder: %(title)s"
+
+msgid "Cursos"
+msgstr "Courses"
+
+#, python-format
+msgid "versão de currículo %(version)s"
+msgstr "curriculum version %(version)s"
+
+#, python-format
+msgid "Módulo %(pos)s: %(title)s"
+msgstr "Module %(pos)s: %(title)s"
+
+msgid "Nenhum módulo ainda."
+msgstr "No modules yet."
+
+msgid "Adicionar módulo"
+msgstr "Add module"
+
+msgid "Título do módulo"
+msgstr "Module title"
+
+msgid "Posição"
+msgstr "Position"
+
+msgid "Pré-requisito"
+msgstr "Prerequisite"
+
+msgid "Curso de pré-requisito (ID)"
+msgstr "Prerequisite course (ID)"
+
+msgid "Vincular pré-requisito"
+msgstr "Link prerequisite"
+
+msgid "Publicação"
+msgstr "Publication"
+
+msgid "Publicar curso"
+msgstr "Publish course"
+
+msgid "Questionário educacional"
+msgstr "Educational quiz"
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Nota mínima (0–100)"
+msgstr "Minimum grade (0–100)"
+
+msgid "Tentativas"
+msgstr "Attempts"
+
+msgid "Embaralhar questões"
+msgstr "Shuffle questions"
+
+msgid "Criar questionário"
+msgstr "Create quiz"
+
+msgid "Autoria de aprendizagem"
+msgstr "Learning authoring"
+
+msgid "Cursos e coortes"
+msgstr "Courses and cohorts"
+
+msgid "Nenhum curso ainda."
+msgstr "No courses yet."
+
+msgid "Slug do curso"
+msgstr "Course slug"
+
+msgid "Duração total (minutos)"
+msgstr "Total duration (minutes)"
+
+msgid "Instrutor (ID)"
+msgstr "Instructor (ID)"
+
+msgid "Criar curso"
+msgstr "Create course"
+
+msgid "Nenhuma coorte ainda."
+msgstr "No cohorts yet."
+
+msgid "Nome da coorte"
+msgstr "Cohort name"
+
+msgid "Criar coorte"
+msgstr "Create cohort"
+
+msgid "Questionários educacionais"
+msgstr "Educational quizzes"
+
+msgid "Nenhum questionário ainda."
+msgstr "No quizzes yet."
+
+msgid ""
+"Nenhum curso selecionado — use a página de um curso para criar questionários."
+msgstr "No course selected — use a course page to create quizzes."
+
+#, python-format
+msgid "Aula: %(title)s"
+msgstr "Lesson: %(title)s"
+
+msgid "Concluir aula"
+msgstr "Complete lesson"
+
+msgid "Marcar como concluída"
+msgstr "Mark as completed"
+
+#, python-format
+msgid "Módulo: %(title)s"
+msgstr "Module: %(title)s"
+
+msgid "Aulas"
+msgstr "Lessons"
+
+#, python-format
+msgid "Aula %(pos)s: %(title)s · %(duration)s min · %(status)s"
+msgstr "Lesson %(pos)s: %(title)s · %(duration)s min · %(status)s"
+
+msgid "Nenhuma aula ainda."
+msgstr "No lessons yet."
+
+msgid "Adicionar aula"
+msgstr "Add lesson"
+
+msgid "Título da aula"
+msgstr "Lesson title"
+
+msgid "Duração (minutos)"
+msgstr "Duration (minutes)"
+
+#, python-format
+msgid "Questionário: %(title)s"
+msgstr "Quiz: %(title)s"
+
+#, python-format
+msgid "Nota mínima: %(grade)s · Tentativas: %(attempts)s · %(status)s"
+msgstr "Minimum grade: %(grade)s · Attempts: %(attempts)s · %(status)s"
+
+msgid "Questões"
+msgstr "Questions"
+
+#, python-format
+msgid "Questão %(pos)s: %(prompt)s"
+msgstr "Question %(pos)s: %(prompt)s"
+
+msgid "Nenhuma questão ainda."
+msgstr "No questions yet."
+
+msgid "Adicionar questão"
+msgstr "Add question"
+
+msgid "Enunciado"
+msgstr "Prompt"
+
+msgid "Opção A"
+msgstr "Option A"
+
+msgid "Opção B"
+msgstr "Option B"
+
+msgid "Opção C"
+msgstr "Option C"
+
+msgid "Opção D"
+msgstr "Option D"
+
+msgid "Chave correta"
+msgstr "Correct key"
+
+msgid "Publicação do questionário"
+msgstr "Quiz publication"
+
+msgid "Publicar questionário"
+msgstr "Publish quiz"
+
+#, python-format
+msgid "Resultado: %(title)s"
+msgstr "Result: %(title)s"
+
+msgid "Seu resultado"
+msgstr "Your result"
+
+msgid "Aprovado,Não aprovado"
+msgstr "Passed,Not passed"
+
+#, python-format
+msgid "Nota: %(score)s · %(passed)s"
+msgstr "Grade: %(score)s · %(passed)s"
+
+msgid "Revisão das respostas"
+msgstr "Review of answers"
+
+#, python-format
+msgid "Questão %(counter)s"
+msgstr "Question %(counter)s"
+
+msgid "Correta,Incorreta"
+msgstr "Correct,Incorrect"
+
+#, python-format
+msgid "Explicação: %(explanation)s"
+msgstr "Explanation: %(explanation)s"
+
+msgid "Nenhum feedback disponível."
+msgstr "No feedback available."
+
+msgid "Este questionário ainda não possui perguntas."
+msgstr "This quiz does not have any questions yet."
+
+msgid "Enviar respostas"
+msgstr "Submit answers"
+
+#, python-format
+msgid "Reprodução da aula %(title)s"
+msgstr "Playback of lesson %(title)s"
+
+msgid "Legendas em português"
+msgstr "Portuguese subtitles"
+
+msgid "Seu navegador não suporta reprodução de vídeo."
+msgstr "Your browser does not support video playback."
+
+msgid "Controles de reprodução"
+msgstr "Playback controls"
+
+msgid "Velocidade"
+msgstr "Speed"
+
+#, python-format
+msgid "%(duration)s minutos"
+msgstr "%(duration)s minutes"
+
+msgid "Transcrição da aula"
+msgstr "Lesson transcript"
+
+msgid "Biblioteca de Conteúdo"
+msgstr "Content Library"
+
+msgid "Acompanhamento e educação"
+msgstr "Follow-up and education"
+
+msgid "Filtros da biblioteca"
+msgstr "Library filters"
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "Página anterior"
+msgstr "Previous page"
+
+msgid "Próxima página"
+msgstr "Next page"
+
+msgid "Nenhum conteúdo publicado encontrado."
+msgstr "No published content found."
+
+msgid "Avisos da plataforma"
+msgstr "Platform notices"
+
+msgid "Nenhuma notificação."
+msgstr "No notifications."
+
+msgid "Minhas Recomendações"
+msgstr "My Recommendations"
+
+msgid "Curadoria clínica"
+msgstr "Clinical curation"
+
+#, python-format
+msgid "Recomendado por %(author)s"
+msgstr "Recommended by %(author)s"
+
+#, python-format
+msgid "Válido até %(date)s"
+msgstr "Valid until %(date)s"
+
+msgid "Nenhuma recomendação ativa no momento."
+msgstr "No active recommendations at this time."
+
+msgid "Denúncias de conteúdo"
+msgstr "Content reports"
+
+msgid "Curadoria"
+msgstr "Curation"
+
+msgid "Denúncias abertas"
+msgstr "Open reports"
+
+#, python-format
+msgid "reportado por %(reporter)s"
+msgstr "reported by %(reporter)s"
+
+msgid "Resolução"
+msgstr "Resolution"
+
+msgid "Resolvido"
+msgstr "Resolved"
+
+msgid "Descartado"
+msgstr "Dismissed"
+
+msgid "Nota"
+msgstr "Note"
+
+msgid "Resolver denúncia"
+msgstr "Resolve report"
+
+msgid "Nenhuma denúncia aberta."
+msgstr "No open reports."
+
+#, python-format
+msgid "Erro %(code)s"
+msgstr "Error %(code)s"
+
+msgid "Referência:"
+msgstr "Reference:"
+
+msgid "Voltar ao início"
+msgstr "Back to home"
+
+msgid "Valores líquidos, vencimentos e estados das cobranças da clínica ativa."
+msgstr "Net amounts, due dates, and statuses of charges for the active clinic."
+
+msgid "Cadastrar preço de serviço"
+msgstr "Register service price"
+
+msgid "Filtrar cobranças"
+msgstr "Filter charges"
+
+msgid "Status da cobrança"
+msgstr "Charge status"
+
+msgid "Todos"
+msgstr "All"
+
+msgid "Em aberto"
+msgstr "Open"
+
+msgid "Pago"
+msgstr "Paid"
+
+msgid "Vencido"
+msgstr "Overdue"
+
+msgid "Filtrar"
+msgstr "Filter"
+
+msgid "Cobranças"
+msgstr "Charges"
+
+msgid "Valor líquido e moeda"
+msgstr "Net amount and currency"
+
+msgid "Vencimento"
+msgstr "Due date"
+
+msgid "Ações financeiras"
+msgstr "Financial actions"
+
+msgid "Registrar pagamento"
+msgstr "Record payment"
+
+msgid "Motivo do cancelamento"
+msgstr "Cancellation reason"
+
+msgid "Informe o motivo"
+msgstr "Enter reason"
+
+msgid "Cancelar cobrança"
+msgstr "Cancel charge"
+
+msgid "Nenhuma cobrança encontrada"
+msgstr "No charges found"
+
+msgid "Revise o filtro ou aguarde a geração de uma cobrança."
+msgstr "Check your filter or wait for a charge to be generated."
+
+msgid "Informe o valor monetário, a moeda e a vigência do preço do serviço."
+msgstr ""
+"Enter the monetary amount, currency, and validity period for the service "
+"price."
+
+msgid "Cancelar cadastro"
+msgstr "Cancel registration"
+
+msgid "Voltar"
+msgstr "Back"
+
+msgid "Vermelho — Somente você"
+msgstr "Red — Only you"
+
+msgid "Prazo"
+msgstr "Deadline"
+
+#, python-format
+msgid "Progresso: %(done)s de %(total)s etapas concluídas (%(percent)s%%)"
+msgstr "Progress: %(done)s of %(total)s steps completed (%(percent)s%%)"
+
+#, python-format
+msgid "Progresso da meta %(title)s"
+msgstr "Progress for goal %(title)s"
+
+msgid "Reabrir etapa"
+msgstr "Reopen step"
+
+msgid "Concluir etapa"
+msgstr "Complete step"
+
+msgid ""
+"Esta meta ainda não tem etapas. Você pode editar a meta e adicionar pequenas "
+"etapas quando quiser."
+msgstr ""
+"This goal does not have steps yet. You can edit the goal and add small steps "
+"whenever you want."
+
+msgid "Estado da meta:"
+msgstr "Goal status:"
+
+msgid "Ativar"
+msgstr "Activate"
+
+msgid "Pausar (descansar é ok)"
+msgstr "Pause (resting is ok)"
+
+msgid "Voltar ao catálogo"
+msgstr "Back to catalog"
+
+#, python-format
+msgid "Atribuir: %(title)s"
+msgstr "Assign: %(title)s"
+
+msgid "-- Selecione o paciente --"
+msgstr "-- Select patient --"
+
+msgid "Frequência"
+msgstr "Frequency"
+
+msgid "Ex.: Diária, Semanal, Pontual"
+msgstr "E.g.: Daily, Weekly, One-off"
+
+msgid "Prazo de conclusão (opcional)"
+msgstr "Completion deadline (optional)"
+
+msgid "Observações para o paciente (opcional)"
+msgstr "Notes for patient (optional)"
+
+msgid "Orientações específicas para a realização deste exercício..."
+msgstr "Specific guidance for carrying out this exercise..."
+
+msgid "Cancelar"
+msgstr "Cancel"
+
+msgid "Confirmar atribuição"
+msgstr "Confirm assignment"
+
+msgid "Prática terapêutica"
+msgstr "Therapeutic practice"
+
+msgid "Catálogo de exercícios"
+msgstr "Exercise catalog"
+
+#, python-format
+msgid "Dur: %(minutes)s min"
+msgstr "Dur: %(minutes)s min"
+
+msgid "Formato"
+msgstr "Format"
+
+msgid "Atribuir a paciente"
+msgstr "Assign to patient"
+
+msgid "Nenhum exercício cadastrado no catálogo."
+msgstr "No exercises registered in the catalog."
+
+msgid "Voltar aos exercícios"
+msgstr "Back to exercises"
+
+#, python-format
+msgid "%(approach)s (Aproximadamente %(minutes)s min)"
+msgstr "%(approach)s (Approx. %(minutes)s min)"
+
+msgid "Instruções"
+msgstr "Instructions"
+
+msgid "Nota de acessibilidade"
+msgstr "Accessibility note"
+
+msgid "Sua reflexão / Resposta"
+msgstr "Your reflection / Response"
+
+msgid "Escreva aqui suas impressões, respostas ou reflexões..."
+msgstr "Write your impressions, answers or reflections here..."
+
+msgid "Semáforo de compartilhamento"
+msgstr "Sharing indicator"
+
+msgid ""
+"Você escolhe o que o profissional pode ver. Esta decisão é sua e pode ser "
+"alterada a qualquer momento."
+msgstr ""
+"You choose what the professional can see. This decision is yours and can be "
+"changed at any time."
+
+msgid "Concluir e enviar"
+msgstr "Complete and send"
+
+#, python-format
+msgid "Concluído em: %(completed)s"
+msgstr "Completed on: %(completed)s"
+
+msgid "Pode compartilhar com o profissional."
+msgstr "Can share with professional."
+
+msgid "Confirme antes de compartilhar com o profissional."
+msgstr "Confirm before sharing with the professional."
+
+msgid "Somente você pode ver este registro."
+msgstr "Only you can see this record."
+
+msgid "Resposta registrada:"
+msgstr "Recorded response:"
+
+msgid "Sem resposta em texto."
+msgstr "No text response."
+
+msgid "Comentários do profissional"
+msgstr "Professional comments"
+
+msgid "Nenhum comentário registrado ainda."
+msgstr "No comments recorded yet."
+
+msgid "Adicionar comentário profissional (assíncrono)"
+msgstr "Add professional comment (asynchronous)"
+
+msgid "Escreva uma orientação ou comentário de apoio..."
+msgstr "Write guidance or a supportive comment..."
+
+msgid "Enviar comentário"
+msgstr "Send comment"
+
+msgid "Título do exercício"
+msgstr "Exercise title"
+
+msgid "Ex.: Respiração e ancoragem"
+msgstr "E.g.: Breathing and grounding"
+
+msgid "Abordagem"
+msgstr "Approach"
+
+msgid "Ex.: TCC, Mindfulness, ACT"
+msgstr "E.g.: CBT, Mindfulness, ACT"
+
+msgid "Duração estimada (minutos)"
+msgstr "Estimated duration (minutes)"
+
+msgid "Instruções detalhadas"
+msgstr "Detailed instructions"
+
+msgid "Descreva os passos para o paciente realizar o exercício..."
+msgstr "Describe the steps for the patient to perform the exercise..."
+
+msgid "Formato da resposta"
+msgstr "Response format"
+
+msgid "Status de publicação"
+msgstr "Publication status"
+
+msgid "Notas de acessibilidade (opcional)"
+msgstr "Accessibility notes (optional)"
+
+msgid "Ex.: Leitura simples, pode ser feito sentado"
+msgstr "E.g.: Simple reading, can be done seated"
+
+msgid "Salvar exercício"
+msgstr "Save exercise"
+
+msgid "Voltar às metas"
+msgstr "Back to goals"
+
+msgid "Compartilhável"
+msgstr "Shareable"
+
+msgid "Confirmar antes"
+msgstr "Confirm first"
+
+msgid "Privado"
+msgstr "Private"
+
+msgid "Meu acompanhamento"
+msgstr "My follow-up"
+
+msgid ""
+"Celebre cada pequena etapa. Pausar ou reabrir uma meta nunca é uma falha."
+msgstr ""
+"Celebrate each small step. Pausing or reopening a goal is never a failure."
+
+msgid "Nova meta"
+msgstr "New goal"
+
+msgid "Filtrar metas por estado"
+msgstr "Filter goals by status"
+
+msgid "Todas"
+msgstr "All"
+
+msgid "Ativas"
+msgstr "Active"
+
+msgid "Pausadas"
+msgstr "Paused"
+
+msgid "Concluídas"
+msgstr "Completed"
+
+msgid "Arquivadas"
+msgstr "Archived"
+
+msgid "Verde"
+msgstr "Green"
+
+msgid "Amarelo"
+msgstr "Yellow"
+
+msgid "Vermelho (Privado)"
+msgstr "Red (Private)"
+
+msgid "Abrir"
+msgstr "Open"
+
+msgid "Nenhuma meta aqui ainda"
+msgstr "No goals here yet"
+
+msgid "Não há metas neste estado. Que tal começar com algo pequeno?"
+msgstr "No goals in this status. How about starting with something small?"
+
+msgid ""
+"Metas são mais fáceis quando divididas em pequenas etapas. Comece com algo "
+"simples hoje."
+msgstr ""
+"Goals are easier when broken down into small steps. Start with something "
+"simple today."
+
+msgid "Criar minha primeira meta"
+msgstr "Create my first goal"
+
+msgid "Descanse sem culpa"
+msgstr "Rest without guilt"
+
+#, python-format
+msgid "Modo ativo até %(ends)s — você está cuidando de si."
+msgstr "Mode active until %(ends)s — you are taking care of yourself."
+
+msgid ""
+"Notificações não essenciais estão pausadas. Consultas e lembretes essenciais "
+"continuam."
+msgstr ""
+"Non-essential notifications are paused. Essential appointments and reminders "
+"continue."
+
+msgid "Uma ação por vez, no seu ritmo:"
+msgstr "One action at a time, at your pace:"
+
+msgid "Encerrar modo baixa energia agora"
+msgstr "End low-energy mode now"
+
+msgid ""
+"Em dias difíceis, o modo baixa energia mostra apenas algumas ações mínimas "
+"que você escolheu antes. Nada de cobrança — pausar é permitido."
+msgstr ""
+"On difficult days, low-energy mode shows only a few minimal actions you "
+"chose earlier. No pressure — pausing is allowed."
+
+msgid "Suas ações configuradas:"
+msgstr "Your configured actions:"
+
+msgid "Observação (opcional)"
+msgstr "Note (optional)"
+
+msgid "Como você está? (opcional)"
+msgstr "How are you? (optional)"
+
+msgid "Ativar modo baixa energia"
+msgstr "Activate low-energy mode"
+
+msgid "Configure até 3 ações mínimas:"
+msgstr "Configure up to 3 minimal actions:"
+
+msgid "Ação 1"
+msgstr "Action 1"
+
+msgid "Beber um copo de água"
+msgstr "Drink a glass of water"
+
+msgid "Ação 2"
+msgstr "Action 2"
+
+msgid "Abrir a janela"
+msgstr "Open the window"
+
+msgid "Ação 3"
+msgstr "Action 3"
+
+msgid "Realizar uma etapa curta de uma meta"
+msgstr "Complete a short step of a goal"
+
+msgid "Salvar ações"
+msgstr "Save actions"
+
+msgid ""
+"Este modo não substitui orientação de crise. Em perigo imediato, acione os "
+"serviços de emergência da sua localidade."
+msgstr ""
+"This mode does not replace crisis guidance. In immediate danger, call local "
+"emergency services."
+
+msgid "Minha jornada"
+msgstr "My journey"
+
+msgid "Exercícios terapêuticos"
+msgstr "Therapeutic exercises"
+
+msgid "Nota do terapeuta"
+msgstr "Therapist note"
+
+msgid "Confirmar recebimento"
+msgstr "Confirm receipt"
+
+msgid "Refazer / Ver"
+msgstr "Redo / View"
+
+msgid "Realizar exercício"
+msgstr "Perform exercise"
+
+msgid "Você não possui exercícios atribuídos no momento."
+msgstr "You have no exercises assigned at this time."
+
+msgid "Acompanhamento pessoal"
+msgstr "Personal follow-up"
+
+#, python-format
+msgid "1 registro no total"
+msgid_plural "%(counter)s registros no total"
+msgstr[0] "1 record in total"
+msgstr[1] "%(counter)s records in total"
+
+msgid "Fazer check-in de hoje"
+msgstr "Complete today's check-in"
+
+msgid "Voltar ao diário"
+msgstr "Back to journal"
+
+msgid "Respostas enviadas por dia"
+msgstr "Responses submitted per day"
+
+msgid "Data"
+msgstr "Date"
+
+msgid "Estado geral"
+msgstr "General state"
+
+msgid "Energia"
+msgstr "Energy"
+
+msgid "Sono"
+msgstr "Sleep"
+
+msgid "Enviado"
+msgstr "Submitted"
+
+msgid "Paginação do histórico de check-ins"
+msgstr "Check-in history pagination"
+
+msgid "Nenhum check-in registrado ainda"
+msgstr "No check-ins recorded yet"
+
+msgid ""
+"O check-in diário é rápido e ajuda você a acompanhar seu dia a dia. Comece "
+"agora."
+msgstr ""
+"The daily check-in is quick and helps you track your day-to-day. Start now."
+
+msgid "Fazer meu primeiro check-in"
+msgstr "Complete my first check-in"
+
+#, python-format
+msgid "%(today)s — leva menos de um minuto"
+msgstr "%(today)s — takes less than a minute"
+
+msgid "Ver histórico"
+msgstr "View history"
+
+msgid ""
+"Você já enviou seu check-in hoje. Você pode revisar e atualizar suas "
+"respostas abaixo enquanto a janela de edição estiver aberta."
+msgstr ""
+"You already submitted your check-in today. You can review and update your "
+"responses below while the edit window is open."
+
+msgid "Progresso"
+msgstr "Progress"
+
+#, python-format
+msgid "%(pct)s%% (%(count)s perguntas)"
+msgstr "%(pct)s%% (%(count)s questions)"
+
+msgid "Progresso do check-in"
+msgstr "Check-in progress"
+
+msgid "Revise as respostas indicadas"
+msgstr "Review the indicated responses"
+
+msgid "Não foi possível enviar. Corrija os problemas abaixo."
+msgstr "Could not submit. Correct the issues below."
+
+msgid "Atualizar respostas"
+msgstr "Update answers"
+
+msgid "Confirmar e enviar"
+msgstr "Confirm and send"
+
+msgid "Salvar e continuar depois"
+msgstr "Save and continue later"
+
+msgid ""
+"Este aplicativo não atende emergências. Se você estiver em risco, procure "
+"imediatamente os serviços de emergência da sua localidade."
+msgstr ""
+"This application does not handle emergencies. If you are at risk, contact "
+"your local emergency services immediately."
+
+msgid "Check-in indisponível"
+msgstr "Check-in unavailable"
+
+msgid "No momento não há nenhum questionário de check-in ativo nesta clínica."
+msgstr "There is currently no active check-in questionnaire in this clinic."
+
+msgid "Fale com sua equipe de atendimento se precisar de ajuda."
+msgstr "Contact your care team if you need help."
+
+msgid "Detalhes do Registro"
+msgstr "Record Details"
+
+#, python-format
+msgid "Registro de %(date)s"
+msgstr "Record of %(date)s"
+
+msgid "Intensidade"
+msgstr "Intensity"
+
+msgid "Amarelo — Requer confirmação"
+msgstr "Yellow — Requires confirmation"
+
+msgid "Vermelho — Somente você (Privado)"
+msgstr "Red — Only you (Private)"
+
+msgid "Relato do Diário"
+msgstr "Journal Entry"
+
+msgid "Emoções Identificadas"
+msgstr "Identified Emotions"
+
+msgid "Alterar visibilidade deste registro:"
+msgstr "Change visibility of this record:"
+
+msgid "Verde (Compartilhável)"
+msgstr "Green (Shareable)"
+
+msgid "Amarelo (Perguntar antes)"
+msgstr "Yellow (Ask first)"
+
+msgid "Revogar todo o compartilhamento deste registro"
+msgstr "Revoke all sharing of this record"
+
+msgid "Histórico de solicitações de acesso deste registro:"
+msgstr "Access request history for this record:"
+
+msgid "Finalidade"
+msgstr "Purpose"
+
+msgid "Solicitado em"
+msgstr "Requested on"
+
+msgid "Expira em"
+msgstr "Expires on"
+
+msgid "Revogado em"
+msgstr "Revoked on"
+
+msgid "Voltar para o diário"
+msgstr "Back to journal"
+
+msgid "Há alterações não salvas no registro."
+msgstr "There are unsaved changes in the record."
+
+msgid "Não foi possível salvar seu registro. Corrija os problemas abaixo."
+msgstr "Could not save your record. Correct the issues below."
+
+msgid "Você tem controle total sobre o compartilhamento de cada registro:"
+msgstr "You have full control over the sharing of each record:"
+
+msgid "Verde — Compartilhável: o terapeuta vinculado poderá ver este registro."
+msgstr "Green — Shareable: linked therapist can see this record."
+
+msgid ""
+"Amarelo — Confirmação necessária: o terapeuta sabe que existe um registro, "
+"mas só terá acesso se você autorizar explicitamente."
+msgstr ""
+"Yellow — Confirmation required: therapist knows a record exists, but only "
+"has access if you explicitly authorize it."
+
+msgid ""
+"Vermelho — Privado: somente você tem acesso. O terapeuta não vê e não é "
+"notificado."
+msgstr ""
+"Red — Private: only you have access. Therapist cannot see and is not "
+"notified."
+
+msgid "Novo registro"
+msgstr "New record"
+
+#, python-format
+msgid "Solicitações de Acesso Pendentes (%(count)s)"
+msgstr "Pending Access Requests (%(count)s)"
+
+msgid ""
+"Seu terapeuta solicitou permissão para visualizar os registros abaixo. Você "
+"decide se autoriza ou recusa cada solicitação."
+msgstr ""
+"Your therapist requested permission to view the records below. You decide "
+"whether to authorize or refuse each request."
+
+msgid "Finalidade declarada"
+msgstr "Stated purpose"
+
+#, python-format
+msgid "Registro de %(date)s (%(mood)s)"
+msgstr "Record of %(date)s (%(mood)s)"
+
+msgid "Validade da autorização"
+msgstr "Authorization validity"
+
+msgid "Válido por 7 dias"
+msgstr "Valid for 7 days"
+
+msgid "Válido por 30 dias"
+msgstr "Valid for 30 days"
+
+msgid "Válido por 90 dias"
+msgstr "Valid for 90 days"
+
+msgid "Sem data de expiração"
+msgstr "No expiration date"
+
+msgid "Autorizar"
+msgstr "Authorize"
+
+msgid "Recusar"
+msgstr "Decline"
+
+msgid "Histórico de Registros"
+msgstr "Record History"
+
+#, python-format
+msgid "(1 encontrado)"
+msgid_plural "(%(counter)s encontrados)"
+msgstr[0] "(1 found)"
+msgstr[1] "(%(counter)s found)"
+
+msgid "Filtrar histórico do diário"
+msgstr "Filter journal history"
+
+msgid "Limpar filtros"
+msgstr "Clear filters"
+
+msgid "Visível para o terapeuta vinculado"
+msgstr "Visible to linked therapist"
+
+msgid "Requer sua confirmação antes de liberar ao terapeuta"
+msgstr "Requires your confirmation before releasing to therapist"
+
+msgid "Privado: somente você tem acesso"
+msgstr "Private: only you have access"
+
+msgid "Ver detalhes"
+msgstr "View details"
+
+msgid "Emoções identificadas"
+msgstr "Identified emotions"
+
+msgid "Paginação do diário"
+msgstr "Journal pagination"
+
+msgid "Nenhum registro encontrado"
+msgstr "No records found"
+
+msgid "Não há registros correspondentes aos filtros selecionados."
+msgstr "No records match the selected filters."
+
+msgid ""
+"Você ainda não criou registros no seu diário emocional. Comece registrando "
+"como você se sente hoje."
+msgstr ""
+"You have not created records in your emotional journal yet. Start by "
+"recording how you feel today."
+
+msgid "Criar primeiro registro"
+msgstr "Create first record"
+
+#, python-format
+msgid "Calendário Emocional — %(month_name)s"
+msgstr "Emotional Calendar — %(month_name)s"
+
+msgid "Navegação do calendário por mês"
+msgstr "Monthly calendar navigation"
+
+msgid "Mês anterior"
+msgstr "Previous month"
+
+msgid "Próximo mês"
+msgstr "Next month"
+
+msgid "Próximo"
+msgstr "Next"
+
+#, python-format
+msgid "Dias de %(month)s"
+msgstr "Days of %(month)s"
+
+msgid "Dom"
+msgstr "Sun"
+
+msgid "Seg"
+msgstr "Mon"
+
+msgid "Ter"
+msgstr "Tue"
+
+msgid "Qua"
+msgstr "Wed"
+
+msgid "Qui"
+msgstr "Thu"
+
+msgid "Sex"
+msgstr "Fri"
+
+msgid "Sáb"
+msgstr "Sat"
+
+msgid "Legenda de cores do humor"
+msgstr "Mood color legend"
+
+msgid "Legenda"
+msgstr "Legend"
+
+msgid "Sem registro"
+msgstr "No record"
+
+msgid "Ver resumo textual do mês (tabela acessível)"
+msgstr "View textual summary of the month (accessible table)"
+
+#, python-format
+msgid "Registros de humor de %(month)s"
+msgstr "Mood records of %(month)s"
+
+#, python-format
+msgid "Histórico diário em %(month)s"
+msgstr "Daily history in %(month)s"
+
+msgid "Humor predominante"
+msgstr "Predominant mood"
+
+msgid "Total de registros"
+msgstr "Total records"
+
+msgid "Navegação principal"
+msgstr "Main navigation"
+
+msgid "Início da plataforma"
+msgstr "Platform home"
+
+msgid "Fechar menu"
+msgstr "Close menu"
+
+msgid "Navegação destacada"
+msgstr "Detached navigation"
+
+msgid "Caminho de navegação"
+msgstr "Breadcrumb"
+
+msgid "Início"
+msgstr "Home"
+
+msgid "Abrir menu"
+msgstr "Open menu"
+
+msgid "Recolher navegação"
+msgstr "Collapse navigation"
+
+msgid "Expandir navegação"
+msgstr "Expand navigation"
+
+msgid "Clínica ativa"
+msgstr "Active clinic"
+
+msgid "Central de avisos"
+msgstr "Notification center"
+
+#, python-format
+msgid "%(count)s revogação operacional pendente"
+msgid_plural "%(count)s revogações operacionais pendentes"
+msgstr[0] "%(count)s pending operational revocation"
+msgstr[1] "%(count)s pending operational revocations"
+
+msgid "Nenhuma notificação pendente."
+msgstr "No pending notifications."
+
+msgid "Trocar clínica"
+msgstr "Switch clinic"
+
+msgid "Alternar clínica"
+msgstr "Switch clinic"
+
+msgid "Selecionar clínica"
+msgstr "Select clinic"
+
+msgid "Revisar troca"
+msgstr "Review switch"
+
+msgid "Menu da conta"
+msgstr "Account menu"
+
+msgid "Administrador"
+msgstr "Administrator"
+
+msgid "Usuário"
+msgstr "User"
+
+msgid "Modo de navegação"
+msgstr "Navigation mode"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Destacado"
+msgstr "Detached"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Sair da conta"
+msgstr "Sign out"
+
+msgid "Mensagens do sistema"
+msgstr "System messages"
+
+msgid "Geral"
+msgstr "General"
+
+msgid "Navegação vertical"
+msgstr "Vertical navigation"
+
+msgid "Gestão da clínica"
+msgstr "Clinic management"
+
+msgid "Administração"
+msgstr "Administration"
+
+msgid "Profissionais"
+msgstr "Professionals"
+
+msgid "Cuidado e prática"
+msgstr "Care and practice"
+
+msgid "Rotina terapêutica"
+msgstr "Therapeutic routine"
+
+msgid "Diário emocional"
+msgstr "Emotional journal"
+
+msgid "Minhas metas"
+msgstr "My goals"
+
+msgid "Exercícios"
+msgstr "Exercises"
+
+msgid "Modo de baixa energia"
+msgstr "Low-energy mode"
+
+msgid "Comunicação e agenda"
+msgstr "Communication and schedule"
+
+msgid "Atendimento"
+msgstr "Care"
+
+msgid "Agenda de consultas"
+msgstr "Appointment schedule"
+
+msgid "Painéis de evolução"
+msgstr "Progress dashboards"
+
+msgid "Onboarding da clínica"
+msgstr "Clinic onboarding"
+
+msgid "Preparação operacional"
+msgstr "Operational preparation"
+
+msgid "Pendências factuais para liberar a operação inicial."
+msgstr "Factual outstanding items before initial operations can begin."
+
+msgid "Checklist de preparação"
+msgstr "Preparation checklist"
+
+msgid "concluído"
+msgstr "complete"
+
+msgid "pendente"
+msgstr "pending"
+
+msgid "Primeiros passos"
+msgstr "Getting started"
+
+msgid "Boas-vindas"
+msgstr "Welcome"
+
+msgid "Sua jornada"
+msgstr "Your journey"
+
+msgid "Registre objetivos e preferências. Tudo pode ser revisado depois."
+msgstr "Record your goals and preferences. You can review everything later."
+
+msgid "Etapas do onboarding"
+msgstr "Onboarding steps"
+
+msgid ""
+"Declare, se quiser, o que espera trabalhar. Não há nota, risco ou "
+"diagnóstico."
+msgstr ""
+"If you wish, share what you hope to work on. There is no score, risk "
+"assessment, or diagnosis."
+
+msgid "Continuar"
+msgstr "Continue"
+
+msgid "Preferências de contato e lembretes"
+msgstr "Contact and reminder preferences"
+
+msgid "Termos e limites"
+msgstr "Terms and limits"
+
+msgid ""
+"Esta plataforma não substitui atendimento profissional nem serviço de "
+"emergência. Em perigo imediato, acione o serviço de emergência da sua "
+"localidade."
+msgstr ""
+"This platform does not replace professional care or emergency services. If "
+"you are in immediate danger, contact your local emergency service."
+
+msgid "Nenhum termo publicado ainda."
+msgstr "No terms have been published yet."
+
+msgid "Li e entendi os limites"
+msgstr "I have read and understand the limits"
+
+msgid "Onboarding concluído"
+msgstr "Onboarding complete"
+
+msgid ""
+"Seus objetivos e preferências foram registrados. Você pode revisá-los a "
+"qualquer momento."
+msgstr ""
+"Your goals and preferences have been recorded. You can review them at any "
+"time."
+
+msgid "Ir para a área inicial"
+msgstr "Go to the home area"
+
+msgid "Cadastro mínimo"
+msgstr "Minimum registration"
+
+msgid "Dados cadastrais autorizados da clínica ativa."
+msgstr "Authorized registration data for the active clinic."
+
+msgid "Voltar à lista de pacientes"
+msgstr "Back to patient list"
+
+msgid "Identificação"
+msgstr "Identification"
+
+msgid "Gênero"
+msgstr "Gender"
+
+msgid "Acessibilidade"
+msgstr "Accessibility"
+
+msgid "Contato de emergência"
+msgstr "Emergency contact"
+
+msgctxt "person full name"
+msgid "Nome"
+msgstr "Name"
+
+msgid "Cadastrar paciente"
+msgstr "Register patient"
+
+msgid ""
+"Informe somente os dados necessários. Gênero é opcional e preferências podem "
+"ser revisadas."
+msgstr ""
+"Enter only the necessary information. Gender is optional and preferences can "
+"be reviewed."
+
+msgid "Salvar cadastro"
+msgstr "Save registration"
+
+msgid "Cadastros autorizados"
+msgstr "Authorized records"
+
+msgid "Pessoas cadastradas"
+msgstr "Registered people"
+
+msgid "Lista de pacientes"
+msgstr "Patient list"
+
+msgid "Contato"
+msgstr "Contact"
+
+msgid "Acesso"
+msgstr "Access"
+
+msgid "Nome social:"
+msgstr "Chosen name:"
+
+msgid "Conta vinculada"
+msgstr "Linked account"
+
+msgid "Nenhum paciente cadastrado"
+msgstr "No patients registered"
+
+msgid "Use a ação principal para iniciar um cadastro mínimo."
+msgstr "Use the main action to start a minimum registration."
+
+msgid "Equipe da clínica ativa"
+msgstr "Active clinic team"
+
+msgid ""
+"Perfis, vínculos e credenciais informadas, sem confirmação automática pela "
+"plataforma."
+msgstr ""
+"Reported profiles, relationships and credentials, without automatic "
+"verification by the platform."
+
+msgid "Convidar profissional"
+msgstr "Invite professional"
+
+msgid "Filtros de profissionais"
+msgstr "Professional filters"
+
+msgid "Papel"
+msgstr "Role"
+
+msgid "Especialidade técnica"
+msgstr "Technical specialty"
+
+msgid "Aplicar filtros"
+msgstr "Apply filters"
+
+msgid "Resultado"
+msgstr "Results"
+
+msgid "Lista de profissionais"
+msgstr "Professional list"
+
+msgid "Especialidades"
+msgstr "Specialties"
+
+msgid "Não informada"
+msgstr "Not provided"
+
+msgid "Não informadas"
+msgstr "Not provided"
+
+msgid "Reativar"
+msgstr "Reactivate"
+
+msgid "Suspender"
+msgstr "Suspend"
+
+msgid "Nenhum profissional encontrado"
+msgstr "No professionals found"
+
+msgid "Revise os filtros ou convide o primeiro profissional."
+msgstr "Review the filters or invite the first professional."
+
+msgid "Coordenação de consultas"
+msgstr "Appointment coordination"
+
+#, python-format
+msgid "Semana de %(start)s. A lista textual abaixo é equivalente à grade."
+msgstr "Week of %(start)s. The text list below is equivalent to the grid."
+
+msgid "Navegação da agenda semanal"
+msgstr "Weekly schedule navigation"
+
+msgid "Semana anterior"
+msgstr "Previous week"
+
+msgid "Ver como lista"
+msgstr "View as list"
+
+msgid "Próxima semana"
+msgstr "Next week"
+
+msgid "Grade da agenda semanal"
+msgstr "Weekly schedule grid"
+
+msgid "Consultas por dia da semana"
+msgstr "Appointments by day of the week"
+
+msgid "Sem consultas"
+msgstr "No appointments"
+
+msgid "Lista textual equivalente"
+msgstr "Equivalent text list"
+
+msgid "Solicitada"
+msgstr "Requested"
+
+msgid "Confirmada"
+msgstr "Confirmed"
+
+msgid "Remarcação solicitada"
+msgstr "Rescheduling requested"
+
+msgid "Cancelada"
+msgstr "Canceled"
+
+msgid "Realizada"
+msgstr "Conducted"
+
+msgid "Falta"
+msgstr "No-show"
+
+msgid "Confirmar consulta"
+msgstr "Confirm appointment"
+
+msgid "Nenhuma consulta nesta semana."
+msgstr "No appointments this week."
+
+msgid "Visão semanal"
+msgstr "Weekly view"
+
+msgid "Filtrar consultas por estado"
+msgstr "Filter appointments by status"
+
+msgid "Solicitadas"
+msgstr "Requested"
+
+msgid "Confirmadas"
+msgstr "Confirmed"
+
+msgid "Realizadas"
+msgstr "Conducted"
+
+#, python-format
+msgid "Ações da consulta %(service)s"
+msgstr "Actions for appointment %(service)s"
+
+msgid "Registrar falta"
+msgstr "Record no-show"
+
+msgid "Cancelar consulta"
+msgstr "Cancel appointment"
+
+msgid "Nenhuma consulta aqui ainda"
+msgstr "No appointments here yet"
+
+msgid "Solicite uma consulta para começar a organizar seu acompanhamento."
+msgstr "Request an appointment to start organizing your care."
+
+msgid "Voltar à agenda"
+msgstr "Back to schedule"
+
+msgid "Cancelar solicitação"
+msgstr "Cancel request"
+
+msgid "Informe o novo horário para continuar a remarcação."
+msgstr "Enter the new time to continue rescheduling."
+
+msgid "Cancelar remarcação"
+msgstr "Cancel rescheduling"
+
+msgid "Voltar às conversas"
+msgstr "Back to conversations"
+
+msgid "Cancelar nova conversa"
+msgstr "Cancel new conversation"
+
+msgid "Histórico da conversa"
+msgstr "Conversation history"
+
+msgid "Baixar anexo"
+msgstr "Download attachment"
+
+msgid "aguardando aprovação de segurança"
+msgstr "awaiting safety approval"
+
+msgid "Envie a primeira mensagem."
+msgstr "Send the first message."
+
+msgid "Paginação do histórico"
+msgstr "History pagination"
+
+msgid "Mais antigas"
+msgstr "Older"
+
+msgid "Mais recentes"
+msgstr "Newer"
+
+msgid "Conversas"
+msgstr "Conversations"
+
+msgid "Conversa sem assunto"
+msgstr "Conversation without subject"
+
+msgid "Administrativa"
+msgstr "Administrative"
+
+msgid "Nenhuma conversa ainda"
+msgstr "No conversations yet"
+
+msgid "Inicie uma conversa quando precisar falar com sua equipe de cuidado."
+msgstr "Start a conversation when you need to speak with your care team."
+
+msgid "Escolha quando e como quer ser lembrado, sem excesso."
+msgstr "Choose when and how you want to be reminded, without excess."
+
+msgid "Lembretes configurados"
+msgstr "Configured reminders"
+
+#, python-format
+msgid "%(minutes)s min antes · máx. %(max_daily)s por dia"
+msgstr "%(minutes)s min before · max %(max_daily)s per day"
+
+#, python-format
+msgid " · silêncio %(start)s–%(end)s"
+msgstr " · quiet %(start)s–%(end)s"
+
+msgid "Desativado"
+msgstr "Disabled"
+
+msgid "Nenhuma preferência configurada ainda."
+msgstr "No preferences configured yet."
+
+msgid "Configurar lembrete"
+msgstr "Configure reminder"
+
+msgid "Estrutura da agenda"
+msgstr "Schedule structure"
+
+msgid "Cadastre a sala dentro de uma unidade da clínica ativa."
+msgstr "Register the room within a unit of the active clinic."
+
+msgid "Defina a identificação e o fuso horário da unidade."
+msgstr "Set unit identification and time zone."
+
+msgid "Cancelar alterações"
+msgstr "Cancel changes"
+
+msgid "Gerencie locais de atendimento da clínica ativa."
+msgstr "Manage care locations of the active clinic."
+
+msgid "Unidades e salas cadastradas"
+msgstr "Registered units and rooms"
+
+msgid "Salas"
+msgstr "Rooms"
+
+msgid "Inativa"
+msgstr "Inactive"
+
+msgid "inativa"
+msgstr "inactive"
+
+msgid "Inativar unidade"
+msgstr "Deactivate unit"
+
+msgid "Nenhuma unidade cadastrada"
+msgstr "No units registered"
+
+msgid "Cadastre uma unidade para organizar salas e atendimentos."
+msgstr "Register a unit to organize rooms and appointments."
+
+msgid "Cadastrar unidade"
+msgstr "Register unit"
+
+msgid ""
+"Registre a preferência para que a equipe possa oferecer uma vaga compatível."
+msgstr "Register preference so team can offer a compatible slot."
+
+msgid "Cancelar inclusão"
+msgstr "Cancel inclusion"
+
+msgid "Acompanhe pedidos por unidade, serviço e período."
+msgstr "Track requests by unit, service, and period."
+
+msgid "Adicionar à lista"
+msgstr "Add to list"
+
+msgid "Filtrar lista de espera"
+msgstr "Filter waitlist"
+
+msgid "Aguardando"
+msgstr "Waiting"
+
+msgid "Vaga oferecida"
+msgstr "Slot offered"
+
+msgid "Encaixado"
+msgstr "Placed"
+
+msgid "Entradas na lista de espera"
+msgstr "Waitlist entries"
+
+msgid "Cancelar entrada"
+msgstr "Cancel entry"
+
+msgid "Nenhuma entrada na lista de espera"
+msgstr "No entries on waitlist"
+
+msgid "Revise o filtro ou adicione uma nova solicitação."
+msgstr "Check your filter or add a new request."
+
+msgid "Painel do terapeuta"
+msgstr "Therapist dashboard"
+
+msgid "Painel do Terapeuta"
+msgstr "Therapist Dashboard"
+
+msgid "Pacientes vinculados"
+msgstr "Linked patients"
+
+msgid "Revisar pendências"
+msgstr "Review pending items"
+
+msgid "Indicadores factuais"
+msgstr "Factual indicators"
+
+msgid "Vigentes"
+msgstr "Active"
+
+msgid "Pacientes ativos vinculados"
+msgstr "Active linked patients"
+
+msgid "Vínculos terapêuticos vigentes."
+msgstr "Current therapeutic links."
+
+msgid "30 dias"
+msgstr "30 days"
+
+msgid "Novos vínculos"
+msgstr "New links"
+
+msgid "Criados nos últimos 30 dias."
+msgstr "Created in the last 30 days."
+
+msgid "Cadastros incompletos"
+msgstr "Incomplete registrations"
+
+msgid "Sem telefone registrado."
+msgstr "No phone recorded."
+
+msgid "Ação requerida"
+msgstr "Action required"
+
+msgid "Consentimentos pendentes"
+msgstr "Pending consents"
+
+msgid "Pacientes vinculados sem aceite registrado."
+msgstr "Linked patients without registered acceptance."
+
+msgid "Cadastros por período"
+msgstr "Registrations by period"
+
+msgid ""
+"Registros de pacientes vinculados, por mês. A tabela abaixo é o equivalente "
+"acessível do gráfico."
+msgstr ""
+"Records of linked patients, per month. The table below is the accessible "
+"equivalent of the chart."
+
+msgid "Gráfico de cadastros por mês"
+msgstr "Registrations per month chart"
+
+msgid "Cadastros"
+msgstr "Registrations"
+
+msgid "Sem cadastros no período."
+msgstr "No registrations in the period."
+
+msgid "Cadastros por mês"
+msgstr "Registrations per month"
+
+msgid "Mês"
+msgstr "Month"
+
+msgid "Buscar paciente..."
+msgstr "Search patient..."
+
+msgid "Última atividade"
+msgstr "Last activity"
+
+msgid "Telefone não informado"
+msgstr "Phone not provided"
+
+msgid "Abrir ficha"
+msgstr "Open record"
+
+msgid "Nenhum paciente vinculado"
+msgstr "No linked patients"
+
+msgid "Cadastre um paciente ou aguarde novos vínculos."
+msgstr "Register a patient or wait for new links."
+
+msgid "Referência do sistema visual — Catálogo Duralux"
+msgstr "Visual system reference — Duralux catalog"
+
+msgid "Referência interna de interface"
+msgstr "Internal interface reference"
+
+msgid "Seções do catálogo"
+msgstr "Catalog sections"
+
+msgid "Formulários"
+msgstr "Forms"
+
+msgid "Conteúdo"
+msgstr "Content"
+
+msgid "Sobreposições"
+msgstr "Overlays"
+
+msgid "Fundação Duralux"
+msgstr "Duralux foundation"
+
+msgid "Referência do sistema visual"
+msgstr "Visual system reference"
+
+msgid ""
+"Exemplos baseados em Bootstrap e nas integrações do produto, com estrutura "
+"semântica, rótulos visíveis e estados que não dependem apenas de cor."
+msgstr ""
+"Examples based on Bootstrap and the product integrations, with semantic "
+"structure, visible labels, and states that do not rely on color alone."
+
+msgid "Botões e ações"
+msgstr "Buttons and actions"
+
+msgid "Use o texto da ação para comunicar seu resultado."
+msgstr "Use the action text to communicate its outcome."
+
+msgid "Ação principal"
+msgstr "Primary action"
+
+msgid "Ação secundária"
+msgstr "Secondary action"
+
+msgid "Ação alternativa"
+msgstr "Alternative action"
+
+msgid "Excluir"
+msgstr "Delete"
+
+msgid "Ação indisponível"
+msgstr "Action unavailable"
+
+msgid "Formulário acessível"
+msgstr "Accessible form"
+
+msgid ""
+"Cada campo possui um rótulo associado; a validação do servidor é a fonte de "
+"verdade."
+msgstr ""
+"Each field has an associated label; server validation is the source of truth."
+
+msgid "Exemplo validado pelo servidor. Nenhum dado foi armazenado."
+msgstr "Example validated by the server. No data was stored."
+
+msgid "Salvar exemplo"
+msgstr "Save example"
+
+msgid "Cards, alertas e badges"
+msgstr "Cards, alerts, and badges"
+
+msgid "Componentes de conteúdo combinam hierarquia, texto e contexto."
+msgstr "Content components combine hierarchy, text, and context."
+
+msgid "Informativo"
+msgstr "Informational"
+
+msgid "Card básico"
+msgstr "Basic card"
+
+msgid "Agrupa informações relacionadas e uma ação contextual."
+msgstr "Groups related information and a contextual action."
+
+msgid "Ver inventário"
+msgstr "View inventory"
+
+msgid "Card com rodapé"
+msgstr "Card with footer"
+
+msgid "O rodapé pode separar metadados do conteúdo principal."
+msgstr "The footer can separate metadata from the main content."
+
+msgid "Atualizado pelo próprio sistema"
+msgstr "Updated by the system"
+
+msgid "Exemplos de alertas"
+msgstr "Alert examples"
+
+msgid "<strong>Sucesso:</strong> operação concluída."
+msgstr "<strong>Success:</strong> operation completed."
+
+msgid "<strong>Atenção:</strong> revise os campos antes de continuar."
+msgstr "<strong>Attention:</strong> review the fields before continuing."
+
+msgid "<strong>Erro:</strong> não foi possível concluir a operação."
+msgstr "<strong>Error:</strong> the operation could not be completed."
+
+msgid "<strong>Informação:</strong> há orientações adicionais disponíveis."
+msgstr "<strong>Information:</strong> additional guidance is available."
+
+msgid "Tabela responsiva"
+msgstr "Responsive table"
+
+msgid "Disponibilidade dos componentes apresentados neste catálogo"
+msgstr "Availability of the components presented in this catalog"
+
+msgid "Componente"
+msgstr "Component"
+
+msgid "Fundação"
+msgstr "Foundation"
+
+msgid "Estado"
+msgstr "Status"
+
+msgid "Botões"
+msgstr "Buttons"
+
+msgid "Suportado"
+msgstr "Supported"
+
+msgid "Estados de conteúdo"
+msgstr "Content states"
+
+msgid "Integração do produto"
+msgstr "Product integration"
+
+msgid "Paginação do catálogo"
+msgstr "Catalog pagination"
+
+msgid "O nome do estado e a orientação permanecem disponíveis em texto."
+msgstr "The state name and guidance remain available as text."
+
+msgid "Nenhum item encontrado"
+msgstr "No items found"
+
+msgid "Altere os filtros ou crie o primeiro item."
+msgstr "Change the filters or create the first item."
+
+msgid "Criar item"
+msgstr "Create item"
+
+msgid "Falha ao carregar"
+msgstr "Failed to load"
+
+msgid "Verifique sua conexão e tente novamente."
+msgstr "Check your connection and try again."
+
+msgid "Tentar novamente"
+msgstr "Try again"
+
+msgid "Carregando"
+msgstr "Loading"
+
+msgid "Aguarde enquanto as informações são preparadas."
+msgstr "Please wait while the information is prepared."
+
+msgid "Cards de resumo"
+msgstr "Summary cards"
+
+msgid ""
+"Indicadores factuais combinam texto, valor e contexto sem conclusão clínica."
+msgstr ""
+"Factual indicators combine text, value, and context without a clinical "
+"conclusion."
+
+msgid "Tabela responsiva e paginação"
+msgstr "Responsive table and pagination"
+
+msgid ""
+"A mesma informação permanece disponível em tabela no desktop e em cards no "
+"celular."
+msgstr ""
+"The same information remains available in a table on desktop and in cards on "
+"mobile."
+
+msgid "Estados gerados pelo produto"
+msgstr "Product-generated states"
+
+msgid ""
+"Cada estado combina texto, contexto e semântica; não depende apenas da cor."
+msgstr ""
+"Each state combines text, context, and semantics; it does not rely on color "
+"alone."
+
+msgid "Formatação e privacidade"
+msgstr "Formatting and privacy"
+
+msgid "A densidade nunca reduz os alvos de interação nem oculta o contexto."
+msgstr "Density never reduces interaction targets or hides context."
+
+msgid ""
+"<strong>Fuso horário efetivo:</strong> datas exibem o contexto temporal "
+"aplicável."
+msgstr ""
+"<strong>Effective time zone:</strong> dates display the applicable time "
+"context."
+
+msgid ""
+"<strong>Identificadores pessoais:</strong> valores chegam mascarados pelo "
+"backend."
+msgstr ""
+"<strong>Personal identifiers:</strong> values arrive masked by the backend."
+
+msgid ""
+"<strong>Truncamento:</strong> o valor integral permanece disponível no "
+"detalhe autorizado."
+msgstr ""
+"<strong>Truncation:</strong> the full value remains available in the "
+"authorized detail view."
+
+msgid ""
+"<strong>Ausência de dados:</strong> zero, dado ausente e indisponibilidade "
+"são estados diferentes."
+msgstr ""
+"<strong>No data:</strong> zero, missing data, and unavailability are "
+"different states."
+
+msgid "Gráfico de registros operacionais"
+msgstr "Operational records chart"
+
+msgid ""
+"Registros por semana: 4 na Semana 1, 7 na Semana 2 e 5 na Semana 3. Apenas "
+"registros agregados autorizados; não representa diagnóstico ou causalidade."
+msgstr ""
+"Records by week: 4 in Week 1, 7 in Week 2, and 5 in Week 3. Authorized "
+"aggregated records only; this does not represent a diagnosis or causality."
+
+msgid "Registros operacionais por semana"
+msgstr "Operational records by week"
+
+msgid "Registros"
+msgstr "Records"
+
+msgid "Quantidade de registros"
+msgstr "Number of records"
+
+msgid "Semana 1"
+msgstr "Week 1"
+
+msgid "Semana 2"
+msgstr "Week 2"
+
+msgid "Semana 3"
+msgstr "Week 3"
+
+msgid "Registros por semana"
+msgstr "Records by week"
+
+msgid "Modal e painel lateral"
+msgstr "Modal and side panel"
+
+msgid "Os controles usam o comportamento acessível fornecido pelo Bootstrap."
+msgstr "The controls use the accessible behavior provided by Bootstrap."
+
+msgid "Abrir modal"
+msgstr "Open modal"
+
+msgid "Abrir painel lateral"
+msgstr "Open side panel"
+
+msgid ""
+"Catálogo interno dos componentes disponíveis na fundação visual do produto."
+msgstr ""
+"Internal catalog of the components available in the product's visual "
+"foundation."
+
+msgid "Confirmar ação"
+msgstr "Confirm action"
+
+msgid "Fechar"
+msgstr "Close"
+
+msgid "Revise as informações antes de confirmar."
+msgstr "Review the information before confirming."
+
+msgid "Confirmar"
+msgstr "Confirm"
+
+msgid "Detalhes do componente"
+msgstr "Component details"
+
+msgid ""
+"O painel lateral mantém o contexto da página enquanto apresenta informações "
+"complementares."
+msgstr ""
+"The side panel preserves the page context while presenting additional "
+"information."
+
+msgid "Concluir"
+msgstr "Finish"
+
+msgid "SEU ESPAÇO DE CUIDADO"
+msgstr "YOUR CARE SPACE"
+
+msgid "seja bem-vindo"
+msgstr "welcome"
+
+#, python-format
+msgid "Olá, %(name)s."
+msgstr "Hello, %(name)s."
+
+#, python-format
+msgid "Acesse seus recursos em %(clinic_name)s."
+msgstr "Access your resources at %(clinic_name)s."
+
+msgid "Por onde começar"
+msgstr "Where to start"
+
+msgid "Acompanhe os registros do seu cuidado."
+msgstr "Follow your care records."
+
+msgid "Reserve um momento para registrar como você está."
+msgstr "Take a moment to record how you are feeling."
+
+msgid "Retome seus objetivos e próximos passos."
+msgstr "Review your goals and next steps."
+
+msgid "Acompanhe os pacientes vinculados a você."
+msgstr "Follow the patients assigned to you."
+
+msgid "Consulte os indicadores da clínica ativa."
+msgstr "View the active clinic's indicators."
+
+msgid "Consulte e organize os cadastros da clínica."
+msgstr "View and organize the clinic's records."
+
+msgid "Revise os dados e a identidade da sua clínica."
+msgstr "Review your clinic's details and identity."
+
+msgid "Veja as consultas disponíveis para o seu perfil."
+msgstr "View the appointments available for your profile."
+
+msgid "Acesse suas conversas na plataforma."
+msgstr "Access your conversations on the platform."
+
+msgid "Segurança da conta"
+msgstr "Account security"
+
+msgid "Confira os dispositivos e as sessões da sua conta."
+msgstr "Review your account devices and sessions."
+
+#~ msgid "Código de verificação"
+#~ msgstr "Verification code"
+
+#~ msgid "000000"
+#~ msgstr "000000"
+
+#~ msgid "Identificador da pessoa"
+#~ msgstr "Person identifier"
+
+#~ msgid "Justificativa"
+#~ msgstr "Reason"
+
+#~ msgid "Redefinir autenticação multifator"
+#~ msgstr "Reset multi-factor authentication"
+
+#~ msgid "Confirme a ação sensível e registre a justificativa."
+#~ msgstr "Confirm the sensitive action and record the reason."
+
+#~ msgid "Redefinir MFA"
+#~ msgstr "Reset MFA"
+
+#~ msgid "Ativar autenticação em duas etapas"
+#~ msgstr "Enable two-step authentication"
+
+#~ msgid "Código inválido ou expirado."
+#~ msgstr "Invalid or expired code."
+
+#~ msgid "Códigos de recuperação"
+#~ msgstr "Recovery codes"
+
+#~ msgid ""
+#~ "Guarde estes códigos antes de continuar; eles não serão exibidos "
+#~ "novamente."
+#~ msgstr "Save these codes before continuing; they will not be shown again."
+
+#~ msgid "Confirmar autenticação em duas etapas"
+#~ msgstr "Confirm two-step authentication"
+
+#~ msgid "Informe o código do aplicativo ou de recuperação."
+#~ msgstr "Enter the app or recovery code."
+
+#~ msgid "Verificar"
+#~ msgstr "Verify"
+
+#~ msgid "Código inválido ou já utilizado."
+#~ msgstr "Invalid or already used code."
+
+#~ msgid "Informe o código do aplicativo ou um código de recuperação."
+#~ msgstr "Enter the app code or a recovery code."
+
+#~ msgid "Tema"
+#~ msgstr "Theme"
+
+#~ msgid "Alternar tema claro e escuro"
+#~ msgstr "Switch between light and dark theme"
+
+#~ msgid "Tema escuro"
+#~ msgstr "Dark theme"
+
+#~ msgid "Tema claro"
+#~ msgstr "Light theme"
+
+#~ msgid "Tema do sistema"
+#~ msgstr "System theme"
+
+#~ msgid "Proteção da conta"
+#~ msgstr "Account protection"
+
+#~ msgid ""
+#~ "No Google Authenticator, adicione uma conta e escaneie o código abaixo."
+#~ msgstr "In Google Authenticator, add an account and scan the code below."
+
+#~ msgid "QR Code para cadastrar esta conta no Google Authenticator"
+#~ msgstr "QR code to add this account to Google Authenticator"
+
+#~ msgid "Não consegue escanear?"
+#~ msgstr "Can't scan it?"
+
+#~ msgid "Cadastre manualmente usando esta chave:"
+#~ msgstr "Add it manually using this key:"
+
+#~ msgid "Chave copiada."
+#~ msgstr "Key copied."
+
+#~ msgid "Não foi possível copiar. Selecione a chave manualmente."
+#~ msgstr "Could not copy. Select the key manually."
+
+#~ msgid "Copiar chave"
+#~ msgstr "Copy key"
+
+#~ msgid "Gerar um novo QR Code e reiniciar o cadastro"
+#~ msgstr "Generate a new QR code and restart setup"
+
+#~ msgid "Não foi possível confirmar"
+#~ msgstr "Could not confirm"
+
+#~ msgid "Ativar proteção"
+#~ msgstr "Enable protection"
+
+#~ msgid "Proteção ativa"
+#~ msgstr "Protection enabled"
+
+#~ msgid ""
+#~ "Estes códigos são exibidos apenas agora. Guarde-os em um local seguro e "
+#~ "não os compartilhe."
+#~ msgstr ""
+#~ "These codes are shown only now. Keep them in a safe place and do not "
+#~ "share them."
+
+#~ msgid "Configurações de aparência"
+#~ msgstr "Pending settings"
+
+#~ msgid "Abrir configurações de aparência"
+#~ msgstr "Abrir configurações de aparência"
+
+#~ msgid "Fechar configurações de aparência"
+#~ msgstr "Review settings"
+
+#~ msgid "Navegação"
+#~ msgstr "Pagination"
+
+#~ msgid "Light"
+#~ msgstr "Light"
+
+#~ msgid "Dark"
+#~ msgstr "Dark"
+
+#~ msgid "Cabeçalho"
+#~ msgstr "Header"
+
+#~ msgid "Aparência"
+#~ msgstr "Frequency"
+
+#~ msgid "Restaurar"
+#~ msgstr "Reset"
+
+#~ msgid "••••••••"
+#~ msgstr "••••••••"
+
+#~ msgid "Idioma da interface"
+#~ msgstr "Interface language"
+
+#~ msgid "Aplicar idioma"
+#~ msgstr "Apply language"

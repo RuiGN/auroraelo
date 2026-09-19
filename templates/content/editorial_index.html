@@ -1,0 +1,48 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Gestão editorial" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="editorial-index-title">
+  <header class="product-page-header d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "CMS" %}</span>
+      <h1 id="editorial-index-title" class="mb-0">{% translate "Gestão editorial" %}</h1>
+    </div>
+    <a class="btn btn-primary" href="{% url 'content_editorial_create' %}">
+      {% translate "Criar conteúdo" %}
+    </a>
+  </header>
+  <section class="product-table-card" aria-labelledby="content-list-title">
+    <h2 id="content-list-title" class="h5 mb-3">{% translate "Conteúdos" %}</h2>
+    {% if contents %}
+      <div class="product-table-scroll">
+        <table class="table product-table align-middle">
+          <thead>
+            <tr>
+              <th scope="col">{% translate "Título" %}</th>
+              <th scope="col">{% translate "Status" %}</th>
+              <th scope="col">{% translate "Versão" %}</th>
+              <th scope="col">{% translate "Ação" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in contents %}
+              <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.get_status_display }}</td>
+                <td>{{ item.current_version }}</td>
+                <td><a href="{% url 'content_editorial_detail' content_id=item.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Editar" %}</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="product-empty-state" role="status">{% translate "Nenhum conteúdo editorial." %}</div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+

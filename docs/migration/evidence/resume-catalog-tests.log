@@ -1,0 +1,19 @@
+F..F                                                                     [100%]
+=================================== FAILURES ===================================
+___________ test_catalog_gate_rejects_incomplete_delivered_ui[valid] ___________
+tests/test_ui_catalog_gate.py:63: in test_catalog_gate_rejects_incomplete_delivered_ui
+    assert result.returncode == (0 if scenario == "valid" else 1), result.stderr
+E   AssertionError: 
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['/mnt/2c8d19a3-3bbb-4f90-b09f-9e17c780ce6a/Projects/mindcare/.venv/bin/python', '/tmp/pytest-of...est_catalog_gate_rejects_inco0/scope.pot'], returncode=1, stdout='Scoped catalog check: failed; 639 keys\n', stderr='').returncode
+___________ test_catalog_gate_rejects_incomplete_delivered_ui[stale] ___________
+tests/test_ui_catalog_gate.py:69: in test_catalog_gate_rejects_incomplete_delivered_ui
+    assert not any(report["missing"].values())
+E   AssertionError: assert not True
+E    +  where True = any(dict_values([['Identificador da solicitação'], ['Identificador da solicitação'], ['Identificador da solicitação']]))
+E    +    where dict_values([['Identificador da solicitação'], ['Identificador da solicitação'], ['Identificador da solicitação']]) = <built-in method values of dict object at 0x7a2ead8e6ec0>()
+E    +      where <built-in method values of dict object at 0x7a2ead8e6ec0> = {'en': ['Identificador da solicitação'], 'es': ['Identificador da solicitação'], 'pt_BR': ['Identificador da solicitação']}.values
+=========================== short test summary info ============================
+FAILED tests/test_ui_catalog_gate.py::test_catalog_gate_rejects_incomplete_delivered_ui[valid]
+FAILED tests/test_ui_catalog_gate.py::test_catalog_gate_rejects_incomplete_delivered_ui[stale]
+2 failed, 2 passed in 6.00s

@@ -1,0 +1,21 @@
+{% load accessible_forms %}
+{% if field.is_hidden %}{{ field }}{% else %}
+{% if field.use_fieldset %}
+<fieldset class="field-span {{ field|field_span }} d-grid gap-2">
+  <legend class="fs-6 fw-semibold mb-0">{{ field.label }}</legend>
+{% else %}
+<div class="field-span {{ field|field_span }} d-grid gap-2">
+  {% if field.field.widget.input_type != 'checkbox' %}<label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
+{% endif %}
+  {% if field.field.widget.input_type == 'checkbox' and not field.use_fieldset %}
+  <div class="form-check{% if field.name == 'enabled' %} form-switch{% endif %}">
+    {{ field|accessible_widget }}
+    <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  </div>
+  {% else %}
+    {% include "components/duralux_control.html" with field=field only %}
+  {% endif %}
+  {% if field.help_text %}<p id="{{ field.auto_id }}_helptext" class="form-text m-0">{{ field.help_text }}</p>{% endif %}
+  {% for error in field.errors %}<p id="{{ field.auto_id }}_error_{{ forloop.counter0 }}" class="invalid-feedback d-block m-0" role="alert">{{ error }}</p>{% endfor %}
+{% if field.use_fieldset %}</fieldset>{% else %}</div>{% endif %}
+{% endif %}

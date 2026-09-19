@@ -1,0 +1,38 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Denúncias de conteúdo" %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="reports-page-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Curadoria" %}</span>
+    <h1 id="reports-page-title" class="mb-0">{% translate "Denúncias de conteúdo" %}</h1>
+  </header>
+  <section class="product-table-card product-stack" aria-labelledby="reports-title">
+    <h2 id="reports-title" class="h5">{% translate "Denúncias abertas" %}</h2>
+    {% for report in reports %}
+    <article class="border-top pt-3">
+      <p><strong>{{ report.content.title }}</strong> — {% blocktranslate with reporter=report.reporter.email %}reportado por {{ reporter }}{% endblocktranslate %}</p>
+      <p>{{ report.reason }}</p>
+      <form class="product-stack" method="post" action="{% url 'content_report_resolve' report.pk %}">
+        {% csrf_token %}
+        <label for="resolution-{{ report.pk }}" class="form-label">{% translate "Resolução" %}</label>
+        <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="resolution-{{ report.pk }}" name="resolution">
+          <option value="resolved">{% translate "Resolvido" %}</option>
+          <option value="dismissed">{% translate "Descartado" %}</option>
+        </select></div>
+        <label for="note-{{ report.pk }}" class="form-label">{% translate "Nota" %}</label>
+        <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="note-{{ report.pk }}" name="note" rows="2" placeholder="{% translate 'Nota' %}"></textarea></div>
+        <div>
+          <button class="btn btn-primary" type="submit">{% translate "Resolver denúncia" %}</button>
+        </div>
+      </form>
+    </article>
+    {% empty %}
+    <div class="product-empty-state" role="status" aria-live="polite">{% translate "Nenhuma denúncia aberta." %}</div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}
+

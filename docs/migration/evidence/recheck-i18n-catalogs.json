@@ -1,0 +1,18 @@
+{
+  "scope": "docs/migration/translated-ui-scope.json",
+  "source_files": 126,
+  "required_catalog_keys_including_plural_forms": 1250,
+  "missing": {
+    "pt_BR": [],
+    "en": [],
+    "es": []
+  },
+  "placeholder_errors": {
+    "pt_BR": [],
+    "en": [],
+    "es": []
+  },
+  "stale_compiled_catalogs": [],
+  "passed": true,
+  "publication_acceptance": false
+}

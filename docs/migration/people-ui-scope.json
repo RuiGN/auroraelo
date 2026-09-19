@@ -1,0 +1,14 @@
+{
+  "description": "People UI fixed copy, presentation labels and service validations; excludes authored data and model schema",
+  "files": [
+    "templates/people/patient_detail.html",
+    "templates/people/patient_form.html",
+    "templates/people/patient_list.html",
+    "templates/people/professional_list.html",
+    "people/forms.py",
+    "people/views.py",
+    "people/selectors.py",
+    "people/presentation.py",
+    "people/services.py"
+  ]
+}

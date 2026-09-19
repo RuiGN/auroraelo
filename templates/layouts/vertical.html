@@ -1,0 +1,54 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block workspace %}
+<div class="layout-vertical product-shell">
+  <aside id="mobile-sidebar" class="nxl-navigation" data-mobile-sidebar
+    aria-label="{% translate 'Navegação principal' %}">
+    <div class="navbar-wrapper">
+      <div class="m-header d-flex align-items-center justify-content-between">
+        <a class="b-brand" href="{% url 'workspace_vertical' %}" aria-label="{% translate 'Início da plataforma' %}">
+          {% include "layouts/partials/brand.html" %}
+        </a>
+        <button type="button" class="nxl-head-mobile-toggler d-xl-none product-icon-button" data-sidebar-close
+          aria-label="{% translate 'Fechar menu' %}">
+          <i class="feather-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="navbar-content">
+        {% translate "Navegação vertical" as navigation_label %}
+        {% include "layouts/partials/navigation.html" with navigation_label=navigation_label %}
+      </div>
+    </div>
+  </aside>
+
+  {% include "layouts/partials/header.html" %}
+  <main class="nxl-container">
+    <div class="nxl-content">
+      <nav aria-label="{% translate 'Caminho de navegação' %}"
+        class="page-header product-breadcrumbs d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+        <div class="page-header-left d-flex align-items-center flex-wrap gap-2">
+          <div class="page-header-title">
+            <h5 class="m-b-10 mb-0">{% block header_title %}{{ page_title|default:_('Área de trabalho') }}{% endblock %}
+            </h5>
+          </div>
+          <ol class="breadcrumb mb-0 ms-md-3">
+            <li class="breadcrumb-item"><a href="{% url 'workspace_vertical' %}">{% translate "Início" %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{% block breadcrumb_active %}{{ page_title|default:_('Área de trabalho') }}{% endblock %}</li>
+          </ol>
+        </div>
+        <div class="page-header-right ms-auto">
+          {% block header_actions %}{% endblock %}
+        </div>
+      </nav>
+      {% include "layouts/partials/messages.html" %}
+      <div id="main-content" class="main-content" tabindex="-1">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </main>
+
+  <div class="nxl-menu-overlay product-drawer-overlay" data-sidebar-overlay hidden tabindex="-1"
+    aria-label="{% translate 'Fechar menu' %}"></div>
+</div>
+{% endblock %}

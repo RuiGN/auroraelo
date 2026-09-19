@@ -1,0 +1,8 @@
+{
+  "scope": "Anonymous login selector on local Compose; not full-domain visual or editorial acceptance",
+  "base": "http://127.0.0.1:8000",
+  "results": [],
+  "errors": [
+    "page.goto: net::ERR_CONNECTION_RESET at http://127.0.0.1:8000/accounts/login/?next=%2Fworkspace%2F\nCall log:\n  - navigating to \"http://127.0.0.1:8000/accounts/login/?next=%2Fworkspace%2F\", waiting until \"load\"\n"
+  ]
+}

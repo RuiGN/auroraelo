@@ -1,0 +1,30 @@
+{% extends layout_template %}
+{% load i18n static %}
+
+{% block title %}{% blocktranslate with title=lesson.title %}Aula: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="lesson-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with title=course.title %}Curso: {{ title }}{% endblocktranslate %}</span>
+    <h1 id="lesson-title" class="mb-0">{{ lesson.title }}</h1>
+  </header>
+  {% include "content/lesson_player.html" with player=player only %}
+  <section class="product-form-card" aria-labelledby="complete-title">
+    <h2 id="complete-title" class="h5">{% translate "Concluir aula" %}</h2>
+    <form method="post" action="{% url 'content_lesson_event' course.pk lesson.pk %}">
+      {% csrf_token %}
+      <input type="hidden" name="client_event_id" value="{{ request_id|default:'' }}">
+      <input type="hidden" name="kind" value="complete">
+      <input type="hidden" name="position_seconds" value="0">
+      <input type="hidden" name="active_seconds" value="0">
+      <input type="hidden" name="user_initiated" value="true">
+      <button class="btn btn-primary" type="submit">{% translate "Marcar como concluída" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script defer src="{% static 'duralux/js/lesson-player.js' %}"></script>
+{% endblock %}

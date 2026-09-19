@@ -1,0 +1,56 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=quiz.title %}Questionário: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="quiz-page-title">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% blocktranslate with title=course.title %}Curso: {{ title }}{% endblocktranslate %}</span>
+    <h1 id="quiz-page-title" class="mb-0">{{ quiz.title }}</h1>
+    <p class="product-notice" role="note" aria-live="polite">
+      {{ disclaimer }}
+    </p>
+    <p class="product-page-meta">{% blocktranslate with grade=quiz.minimum_grade attempts=quiz.max_attempts status=quiz.get_status_display %}Nota mínima: {{ grade }} · Tentativas: {{ attempts }} · {{ status }}{% endblocktranslate %}</p>
+  </header>
+  <section class="product-table-card" aria-labelledby="questions-title">
+    <h2 id="questions-title" class="h5">{% translate "Questões" %}</h2>
+    <ol class="product-stack mb-0">
+      {% for question in questions %}
+        <li>{% blocktranslate with pos=question.position prompt=question.prompt %}Questão {{ pos }}: {{ prompt }}{% endblocktranslate %}</li>
+      {% empty %}
+        <li aria-live="polite">{% translate "Nenhuma questão ainda." %}</li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% if quiz.status == "draft" %}
+    <section class="product-form-card" aria-labelledby="add-question-title">
+      <h2 id="add-question-title" class="h5">{% translate "Adicionar questão" %}</h2>
+      <form class="product-form-grid" method="post" action="{% url 'content_quiz_question_create' quiz.pk %}">
+        {% csrf_token %}
+        <div class="field-span field-span--lg d-grid gap-2"><label for="question-prompt">{% translate "Enunciado" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="question-prompt" name="prompt" rows="2" required maxlength="2000" placeholder="{% translate 'Enunciado' %}"></textarea></div></div>
+        <div class="field-span field-span--md d-grid gap-2"><label for="option-a">{% translate "Opção A" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="option-a" name="option_a" type="text" required placeholder="{% translate 'Opção A' %}" /></div></div>
+        <div class="field-span field-span--md d-grid gap-2"><label for="option-b">{% translate "Opção B" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="option-b" name="option_b" type="text" required placeholder="{% translate 'Opção B' %}" /></div></div>
+        <div class="field-span field-span--md d-grid gap-2"><label for="option-c">{% translate "Opção C" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="option-c" name="option_c" type="text" placeholder="{% translate 'Opção C' %}" /></div></div>
+        <div class="field-span field-span--md d-grid gap-2"><label for="option-d">{% translate "Opção D" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-edit-2"></i></span><input class="form-control" id="option-d" name="option_d" type="text" placeholder="{% translate 'Opção D' %}" /></div></div>
+        <div class="field-span field-span--sm d-grid gap-2"><label for="correct-key">{% translate "Chave correta" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="correct-key" name="correct_key" type="text" maxlength="4" required placeholder="{% translate 'Chave correta' %}" /></div></div>
+        <div class="field-span field-span--sm d-grid gap-2"><label for="question-position">{% translate "Posição" %}</label>
+<div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-hash"></i></span><input class="form-control" id="question-position" name="position" type="number" min="1" value="{{ questions|length|add:1 }}" required placeholder="1" /></div></div>
+        <button class="btn btn-primary" type="submit">{% translate "Adicionar questão" %}</button>
+      </form>
+    </section>
+    <section class="product-form-card" aria-label="{% translate 'Publicação do questionário' %}">
+      <form method="post" action="{% url 'content_quiz_publish' quiz.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">{% translate "Publicar questionário" %}</button>
+      </form>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_unlinked_therapist_remains_denied_in_english _______________
+
+client = <django.test.client.Client object at 0x75736a850e10>
+
+        assert (
+            PatientProfile.infrastructure_objects.filter(clinic_id=clinic.pk).count() == 0
+        )
+    
+    
+    @override_settings(LANGUAGES=LAUNCH_LANGUAGES)
+    def test_unlinked_therapist_remains_denied_in_english(client: Client) -> None:
+        clinic, administrator = _authenticated_admin(client)
+        therapist = UserFactory.create()
+        ClinicMembershipFactory.create(
+            clinic=clinic, user=therapist, role=ClinicMembership.Role.THERAPIST
+        )
+        patient = register_patient_profile(
+            clinic_id=clinic.pk,
+            actor=administrator,
+            request_id=uuid4(),
+            **_patient_payload(email="private@example.test"),
+        )
+        client.force_login(therapist)
+        # A different authenticated user starts a new session without clinic state.
+>       session = client.session
+E       assert 400 == 403
+E        +  where 400 = <JsonResponse status_code=400, "application/json">.status_code
+
+tests/test_people_ui_translations.py:327: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T22:57:18.936401+00:00","level":"INFO","logger":"application.request","request_id":"078bac22332c4765a98fc5da0f7e32b8","tenant_id":"unknown","actor_ref":"actor_9a8f6bc5ebfbe3eb","event":"request.completed","outcome":"success","latency_ms":20.178}
+{"timestamp":"2026-09-08T22:57:18.936827+00:00","level":"WARNING","logger":"django.request","request_id":"unknown","tenant_id":"unknown","actor_ref":"anonymous","event":"log.event","outcome":"unknown"}
+=========================== short test summary info ============================
+FAILED tests/test_people_ui_translations.py::test_unlinked_therapist_remains_denied_in_english
+1 failed in 198.10s (0:03:18)

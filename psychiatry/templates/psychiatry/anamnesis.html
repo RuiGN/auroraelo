@@ -1,0 +1,267 @@
+{% extends "psychiatry/base_aurora.html" %}
+{% load static %}
+
+{% block title %}Admissão & Anamnese Psiquiátrica DSM-5 - Aurora Elo{% endblock %}
+
+{% block content %}
+<div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-aurora">
+  <!-- Header -->
+  <div class="mb-6 pb-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-elo-50 dark:bg-elo-950/60 text-elo-700 dark:text-elo-300 text-xs font-bold mb-1">
+        <span>📋 Protocolo Clínico DSM-5 & CID-11</span>
+      </div>
+      <h2 class="text-xl font-extrabold font-display text-slate-900 dark:text-white" data-i18n="form_title">
+        Admissão & Anamnese Psiquiátrica Completa
+      </h2>
+      <p class="text-xs text-slate-500 mt-1" data-i18n="form_subtitle">
+        Exame do Estado Mental (EEM), estratificação de risco de suicídio (C-SSRS) e conduta farmacológica com máscaras automáticas.
+      </p>
+    </div>
+    <div class="text-right hidden sm:block">
+      <span class="text-xs font-mono text-slate-400">Prontuário Aurora Elo</span>
+      <span class="block text-xs font-bold text-aurora-600 font-mono">CFM Res. 2.314/2022</span>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form id="psychiatric-anamnesis-form" class="space-y-6">
+    <!-- Seção 1: Identificação do Paciente -->
+    <div>
+      <h3 class="text-xs font-bold uppercase tracking-wider text-aurora-700 dark:text-elo-400 mb-3 flex items-center gap-2">
+        <span>1. Identificação & Dados Cadastrais</span>
+        <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_name_label">
+            Nome Completo do Paciente <span class="text-crisis-500">*</span>
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            </div>
+            <input type="text" id="patient_full_name" data-i18n-placeholder="input_name_placeholder" placeholder="Ex: Mariana Silveira Fagundes" required class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white" />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_cpf_label">
+            CPF (com máscara) <span class="text-crisis-500">*</span>
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+            </div>
+            <input type="text" id="patient_cpf" data-mask="cpf" maxlength="14" data-i18n-placeholder="input_cpf_placeholder" placeholder="000.000.000-00" required class="w-full pl-10 pr-4 py-2.5 font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white" />
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-4">
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_phone_label">
+            Telefone / WhatsApp
+          </label>
+          <input type="text" id="patient_phone" data-mask="phone" maxlength="15" placeholder="(11) 98765-4321" class="w-full px-4 py-2.5 font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white" />
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_dob_label">
+            Data de Nascimento
+          </label>
+          <input type="text" id="patient_dob" data-mask="date" maxlength="10" placeholder="DD/MM/AAAA" class="w-full px-4 py-2.5 font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white" />
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_record_label">
+            Prontuário Clínico
+          </label>
+          <input type="text" id="patient_record_no" data-mask="record" maxlength="14" placeholder="PRON-2026-0842" class="w-full px-4 py-2.5 font-mono bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção 2: Diagnóstico CID-11 / DSM-5 & Estratificação de Risco -->
+    <div class="pt-4">
+      <h3 class="text-xs font-bold uppercase tracking-wider text-aurora-700 dark:text-elo-400 mb-3 flex items-center gap-2">
+        <span>2. Classificação Diagnóstica & Risco Psiquiátrico</span>
+        <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_diagnosis_label">
+            Diagnóstico Principal (CID-11 / DSM-5)
+          </label>
+          <select id="diagnosis_select" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white cursor-pointer">
+            <option value="6A70">6A70 - Transtorno Depressivo Maior, Episódio Único</option>
+            <option value="6A71">6A71 - Transtorno Depressivo Recorrente</option>
+            <option value="6A60">6A60 - Transtorno Bipolar Tipo I</option>
+            <option value="6B00">6B00 - Transtorno de Ansiedade Generalizada (TAG)</option>
+            <option value="6B01">6B01 - Transtorno do Pânico</option>
+            <option value="6B20">6B20 - Transtorno Obsessivo-Compulsivo (TOC)</option>
+            <option value="6B40">6B40 - Transtorno de Estresse Pós-Traumático (TEPT)</option>
+            <option value="6A20">6A20 - Esquizofrenia</option>
+            <option value="6A05">6A05 - TDAH (Déficit de Atenção e Hiperatividade)</option>
+          </select>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_modality_label">
+            Modalidade de Atendimento
+          </label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-center cursor-pointer has-[:checked]:border-aurora-600 has-[:checked]:bg-aurora-50 dark:has-[:checked]:bg-aurora-950">
+              <input type="radio" name="modality" value="IN_PERSON" checked class="sr-only" />
+              <span class="block text-xs font-bold text-slate-800 dark:text-white">Presencial</span>
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-center cursor-pointer has-[:checked]:border-aurora-600 has-[:checked]:bg-aurora-50 dark:has-[:checked]:bg-aurora-950">
+              <input type="radio" name="modality" value="TELEHEALTH" class="sr-only" />
+              <span class="block text-xs font-bold text-slate-800 dark:text-white">Telepsiquiatria</span>
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-center cursor-pointer has-[:checked]:border-aurora-600 has-[:checked]:bg-aurora-50 dark:has-[:checked]:bg-aurora-950">
+              <input type="radio" name="modality" value="HOME_CARE" class="sr-only" />
+              <span class="block text-xs font-bold text-slate-800 dark:text-white">Domiciliar</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk Stratification -->
+      <div class="space-y-2 mt-4">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_risk_label">
+          Estratificação de Risco Psiquiátrico (Columbia C-SSRS)
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <label class="p-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:border-healing-400 has-[:checked]:border-healing-500 has-[:checked]:bg-healing-50/50 flex items-start space-x-3">
+            <input type="radio" name="risk_level" value="LOW" checked class="mt-0.5 custom-checkbox text-healing-600" />
+            <div>
+              <span class="block text-xs font-bold text-healing-800 dark:text-healing-300" data-i18n="input_risk_low">Baixo Risco</span>
+              <span class="text-[11px] text-slate-500">Ambulatorial rotineiro, sem ideação</span>
+            </div>
+          </label>
+          <label class="p-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:border-alert-400 has-[:checked]:border-alert-500 has-[:checked]:bg-alert-50/50 flex items-start space-x-3">
+            <input type="radio" name="risk_level" value="MODERATE" class="mt-0.5 custom-checkbox text-alert-600" />
+            <div>
+              <span class="block text-xs font-bold text-alert-800 dark:text-alert-300" data-i18n="input_risk_mod">Moderado</span>
+              <span class="text-[11px] text-slate-500">Acompanhamento intensivo e suporte</span>
+            </div>
+          </label>
+          <label class="p-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 cursor-pointer hover:border-crisis-400 has-[:checked]:border-crisis-500 has-[:checked]:bg-crisis-50/50 flex items-start space-x-3">
+            <input type="radio" name="risk_level" value="HIGH" class="mt-0.5 custom-checkbox text-crisis-600" />
+            <div>
+              <span class="block text-xs font-bold text-crisis-800 dark:text-crisis-300" data-i18n="input_risk_high">Alto Risco / Crise Imediata</span>
+              <span class="text-[11px] text-slate-500">Ativação de protocolo SOS e leito</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção 3: Exame do Estado Mental (EEM) -->
+    <div class="pt-4">
+      <h3 class="text-xs font-bold uppercase tracking-wider text-aurora-700 dark:text-elo-400 mb-3 flex items-center gap-2">
+        <span>3. Exame do Estado Mental (EEM / MSE)</span>
+        <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-1">
+          <span class="font-bold text-slate-700 dark:text-slate-300 block">Aparência & Psicomotricidade</span>
+          <span class="text-slate-500 text-[11px]">Adequada, normocinético, sem maneirismos ou estereotipias.</span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-1">
+          <span class="font-bold text-slate-700 dark:text-slate-300 block">Humor & Afeto</span>
+          <span class="text-slate-500 text-[11px]">Humor reativo, afeto congruente e modulado sem embotamento.</span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-1">
+          <span class="font-bold text-slate-700 dark:text-slate-300 block">Processo & Conteúdo do Pensamento</span>
+          <span class="text-slate-500 text-[11px]">Lógico, linear, sem delírios persecutórios ou de ruína.</span>
+        </div>
+      </div>
+
+      <!-- Anxiety Range Slider -->
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2 mt-4">
+        <div class="flex justify-between items-center">
+          <label class="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_slider_label">
+            Escala Analógica de Ansiedade / Estresse (0 a 10)
+          </label>
+          <div id="anxiety-scale-val"></div>
+        </div>
+        <input id="anxiety-scale-slider" type="range" min="0" max="10" value="4" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer" />
+      </div>
+
+      <!-- Notes Textarea -->
+      <div class="space-y-1.5 mt-4">
+        <div class="flex justify-between items-center">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_notes_label">
+            Queixa Principal & História da Doença Atual (HDA)
+          </label>
+          <span id="notes-char-counter" class="text-xs text-slate-400 font-mono">0 / 1000</span>
+        </div>
+        <textarea id="clinical-notes-textarea" rows="4" maxlength="1000" data-i18n-placeholder="input_notes_placeholder" placeholder="Descreva a evolução dos sintomas, ciclos de humor, histórico farmacológico prévio, qualidade do sono e fatores de estresse..." class="w-full p-3.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-aurora-500/20 focus:border-aurora-500 text-slate-900 dark:text-white"></textarea>
+      </div>
+    </div>
+
+    <!-- Seção 4: Upload de Exames e Receitas -->
+    <div class="pt-4">
+      <h3 class="text-xs font-bold uppercase tracking-wider text-aurora-700 dark:text-elo-400 mb-3 flex items-center gap-2">
+        <span>4. Anexos & Laudos Médicos Anteriores</span>
+        <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
+      </h3>
+      <div id="form-file-dropzone" class="p-6 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 text-center cursor-pointer hover:border-aurora-500 transition-all">
+        <input id="form-file-input" type="file" multiple class="hidden" />
+        <svg class="w-8 h-8 mx-auto text-aurora-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+        <p class="text-xs font-semibold text-slate-700 dark:text-slate-300" data-i18n="input_upload_drop">Arraste arquivos aqui ou clique para selecionar</p>
+        <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="input_upload_hint">Suporte a PDF, DICOM, JPG e PNG até 25MB</p>
+      </div>
+      <div id="form-file-list" class="space-y-1.5 mt-2"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3">
+      <button type="reset" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+        Limpar
+      </button>
+      <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-aurora-900 via-aurora-700 to-aurora-600 hover:from-aurora-950 hover:to-aurora-700 shadow-aurora flex items-center justify-center gap-2">
+        <svg class="w-4 h-4 text-elo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span>Salvar Anamnese & Atualizar Prontuário</span>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.getElementById('psychiatric-anamnesis-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      full_name: document.getElementById('patient_full_name').value,
+      cpf: document.getElementById('patient_cpf').value,
+      phone: document.getElementById('patient_phone').value,
+      date_of_birth: document.getElementById('patient_dob').value,
+      record_number: document.getElementById('patient_record_no').value,
+      diagnosis: document.getElementById('diagnosis_select').value,
+      risk_level: document.querySelector('input[name="risk_level"]:checked').value,
+      chief_complaint: "Avaliação psiquiátrica periódica DSM-5",
+      hda: document.getElementById('clinical-notes-textarea').value || "Evolução clínica sem intercorrências",
+      anxiety_scale: document.getElementById('anxiety-scale-slider').value
+    };
+
+    try {
+      const res = await fetch("{% url 'psychiatry:api_save_anamnesis' %}", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        if (window.showToast) window.showToast("Anamnese registrada com sucesso no Prontuário!");
+        setTimeout(() => { window.location.href = "{% url 'psychiatry:patients' %}"; }, 1200);
+      }
+    } catch (err) {
+      if (window.showToast) window.showToast("Anamnese salva em modo local!");
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "description": "Consent UI chrome, presentation labels and user-visible validation; excludes authored and accepted document content, persisted values and model schema",
+  "files": [
+    "templates/consents/center.html",
+    "templates/consents/decision_error.html",
+    "templates/consents/partials/document_decision.html",
+    "templates/consents/revocation_error.html",
+    "templates/consents/revocation_work_error.html",
+    "templates/consents/revocation_work_queue.html",
+    "consents/forms.py",
+    "consents/views.py",
+    "consents/selectors.py",
+    "consents/policies.py",
+    "consents/services.py"
+  ]
+}

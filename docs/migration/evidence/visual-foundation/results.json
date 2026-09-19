@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "layout": "vertical",
+      "width": 1440,
+      "theme": "light",
+      "result": "passed"
+    },
+    {
+      "layout": "vertical",
+      "width": 1440,
+      "theme": "dark",
+      "result": "passed"
+    },
+    {
+      "layout": "vertical",
+      "width": 390,
+      "theme": "light",
+      "result": "passed"
+    },
+    {
+      "layout": "vertical",
+      "width": 390,
+      "theme": "dark",
+      "result": "passed"
+    },
+    {
+      "layout": "detached/",
+      "width": 1440,
+      "theme": "light",
+      "result": "passed"
+    },
+    {
+      "layout": "detached/",
+      "width": 1440,
+      "theme": "dark",
+      "result": "passed"
+    },
+    {
+      "layout": "detached/",
+      "width": 390,
+      "theme": "light",
+      "result": "passed"
+    },
+    {
+      "layout": "detached/",
+      "width": 390,
+      "theme": "dark",
+      "result": "passed"
+    },
+    {
+      "page": "login-validation",
+      "width": 1440,
+      "theme": "light",
+      "result": "passed"
+    },
+    {
+      "page": "login-validation",
+      "width": 1440,
+      "theme": "dark",
+      "result": "passed"
+    },
+    {
+      "page": "login-validation",
+      "width": 390,
+      "theme": "light",
+      "result": "passed"
+    },
+    {
+      "page": "login-validation",
+      "width": 390,
+      "theme": "dark",
+      "result": "passed"
+    }
+  ],
+  "errors": []
+}

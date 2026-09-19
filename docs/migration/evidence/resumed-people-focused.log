@@ -1,0 +1,37 @@
+..........F.......                                                       [100%]
+=================================== FAILURES ===================================
+______________ test_unlinked_therapist_remains_denied_in_english _______________
+
+client = <django.test.client.Client object at 0x716e5f6d5450>
+
+    @override_settings(LANGUAGES=LAUNCH_LANGUAGES)
+    def test_unlinked_therapist_remains_denied_in_english(client: Client) -> None:
+        clinic, administrator = _authenticated_admin(client)
+        therapist = UserFactory.create()
+        ClinicMembershipFactory.create(
+            clinic=clinic, user=therapist, role=ClinicMembership.Role.THERAPIST
+        )
+        patient = register_patient_profile(
+            clinic_id=clinic.pk,
+            actor=administrator,
+            request_id=uuid4(),
+            **_patient_payload(email="private@example.test"),
+        )
+        client.force_login(therapist)
+    
+        response = client.get(
+            reverse("patient_detail", args=(patient.pk,)),
+            HTTP_ACCEPT_LANGUAGE="en",
+        )
+    
+>       assert response.status_code == 403
+E       assert 400 == 403
+E        +  where 400 = <JsonResponse status_code=400, "application/json">.status_code
+
+tests/test_people_ui_translations.py:327: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T22:49:36.134778+00:00","level":"INFO","logger":"application.request","request_id":"1d738dfebcb44628997948c94284e4ef","tenant_id":"unknown","actor_ref":"actor_7bb989c01a1282df","event":"request.completed","outcome":"success","latency_ms":2.223}
+{"timestamp":"2026-09-08T22:49:36.134915+00:00","level":"WARNING","logger":"django.request","request_id":"unknown","tenant_id":"unknown","actor_ref":"anonymous","event":"log.event","outcome":"unknown"}
+=========================== short test summary info ============================
+FAILED tests/test_people_ui_translations.py::test_unlinked_therapist_remains_denied_in_english
+1 failed, 17 passed in 124.06s (0:02:04)

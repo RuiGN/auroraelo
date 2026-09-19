@@ -1,0 +1,7 @@
+{
+  "config/settings/development.py": "7fbef0078594d6f7a3f3d587102f9357f506815b5c369845dd0e316ce213388e",
+  "tests/test_language_preferences.py": "073bd8229c4b1196c4cebdfc1aac80eab6ec7c88199dcf4fc3cae59718d80447",
+  "tests/test_runtime_language_publication.py": "ae3aace4ca4a18f4a5cce790b741344e979c339764bcbe34acb33f063301a44c",
+  ".dockerignore": "453fa57179cdeb166d4b86bb9d7a4c46262bb3a88c16aa3bf7850740f4436c06",
+  "scripts/verify-runtime-languages.cjs": "bf1f4791c04e8b74075b58d7317e81fb3021701c2423db363351e1be943ef1a2"
+}

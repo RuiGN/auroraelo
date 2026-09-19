@@ -1,0 +1,30 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="unit-list-title">
+  <header class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Estrutura da agenda" %}</p><h1 id="unit-list-title">{% translate "Unidades e salas" %}</h1><p class="product-page-meta">{% translate "Gerencie locais de atendimento da clínica ativa." %}</p></div>
+    <div class="d-flex flex-wrap gap-2"><a href="{% url 'unit_create' %}" class="btn btn-primary">{% translate "Nova unidade" %}</a><a href="{% url 'room_create' %}" class="btn btn-outline-primary">{% translate "Nova sala" %}</a></div>
+  </header>
+  {% if units %}
+    <div class="product-table-card product-table-scroll" role="region" aria-label="{% translate 'Unidades e salas cadastradas' %}" tabindex="0">
+      <table class="table product-table">
+        <thead><tr><th scope="col">{% translate "Unidade" %}</th><th scope="col">{% translate "Fuso horário" %}</th><th scope="col">{% translate "Salas" %}</th><th scope="col">{% translate "Ações" %}</th></tr></thead>
+        <tbody>
+          {% for unit in units %}
+            <tr>
+              <th scope="row">{{ unit.name }}{% if not unit.is_active %} <span class="badge text-bg-secondary">{% translate "Inativa" %}</span>{% endif %}</th>
+              <td>{{ unit.timezone_name }}</td>
+              <td>{% for room in unit.rooms.all %}{{ room.name }}{% if not room.is_active %} ({% translate "inativa" %}){% endif %}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}</td>
+              <td><div class="d-flex flex-wrap gap-2"><a href="{% url 'unit_update' unit.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Editar unidade" %}</a>{% if unit.is_active %}<form method="post" action="{% url 'unit_deactivate' unit.pk %}">{% csrf_token %}<button type="submit" class="btn btn-sm btn-outline-danger">{% translate "Inativar unidade" %}</button></form>{% endif %}</div></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}<div class="product-empty-state" role="status"><h2 class="h5">{% translate "Nenhuma unidade cadastrada" %}</h2><p>{% translate "Cadastre uma unidade para organizar salas e atendimentos." %}</p><a href="{% url 'unit_create' %}" class="btn btn-primary mt-2">{% translate "Cadastrar unidade" %}</a></div>{% endif %}
+</div>
+{% endblock %}

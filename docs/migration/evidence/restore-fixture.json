@@ -1,0 +1,15 @@
+{
+  "membership_ids": [
+    "3d50eb95-9bf2-4e66-b43c-70247e2f83cf",
+    "a73cd616-0584-4fe4-b458-1693b7c1f0e2"
+  ],
+  "clinic_ids": [
+    "513c6af8-896d-4f52-949f-fa76fe2abb2f",
+    "5e7a73d1-8268-4ef5-bc96-691cdad4fb96"
+  ],
+  "user_ids": [
+    "1ad8960f-c0b3-4add-b1dd-7391c6f7187f",
+    "a8ed8a9d-d4d0-4626-b881-b22ed31980d3"
+  ],
+  "cross_clinic_query_visible": false
+}

@@ -1,0 +1,113 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% blocktranslate with title=content.title %}Editor: {{ title }}{% endblocktranslate %} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="editor-title-page">
+  <header class="product-page-header d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{{ content.get_status_display }} · {% blocktranslate with version=content.current_version %}versão {{ version }}{% endblocktranslate %}</span>
+      <h1 id="editor-title-page" class="mb-0">{{ content.title }}</h1>
+    </div>
+    {% if current %}
+      <a class="btn btn-outline-primary" href="{% url 'content_editorial_preview' content_id=content.pk version=current.version %}">{% translate "Pré-visualizar" %}</a>
+    {% endif %}
+  </header>
+
+  <section class="product-form-card" aria-labelledby="editor-title">
+    <h2 id="editor-title" class="h5">{% translate "Editor de blocos" %}</h2>
+    <form class="product-stack" method="post" action="{% url 'content_editorial_version' content_id=content.pk %}">
+      {% csrf_token %}
+      <fieldset id="block-editor" class="product-stack border rounded p-3">
+        <legend class="h6 mb-2">{% translate "Novos blocos" %}</legend>
+        <p id="editor-help" class="product-muted">{% translate "Use títulos, parágrafos e listas. Uma nova versão preserva todo o histórico." %}</p>
+        <div id="block-list" class="product-stack">
+          <div class="block-row product-stack border rounded p-3">
+            <label for="id_block_type_0">{% translate "Tipo do bloco 1" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="id_block_type_0" name="block_type" aria-label="{% translate 'Tipo do bloco 1' %}">
+              <option value="paragraph">{% translate "Parágrafo" %}</option>
+              <option value="heading">{% translate "Título" %}</option>
+              <option value="list_item">{% translate "Item de lista" %}</option>
+            </select></div>
+            <label for="id_block_text_0">{% translate "Texto do bloco 1" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="id_block_text_0" name="block_text" rows="3" aria-label="{% translate 'Texto do bloco 1' %}" placeholder="{% translate 'Texto do bloco 1' %}"></textarea></div>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-outline-secondary" type="button" data-block-move="up" aria-label="{% translate 'Mover bloco 1 para cima' %}">{% translate "Mover para cima" %}</button>
+              <button class="btn btn-outline-secondary" type="button" data-block-move="down" aria-label="{% translate 'Mover bloco 1 para baixo' %}">{% translate "Mover para baixo" %}</button>
+              <button class="btn btn-outline-danger" type="button" data-block-remove aria-label="{% translate 'Remover bloco 1' %}">{% translate "Remover bloco" %}</button>
+            </div>
+          </div>
+          <div class="block-row product-stack border rounded p-3">
+            <label for="id_block_type_1">{% translate "Tipo do bloco 2" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-list"></i></span><select class="form-select" id="id_block_type_1" name="block_type" aria-label="{% translate 'Tipo do bloco 2' %}">
+              <option value="paragraph">{% translate "Parágrafo" %}</option>
+              <option value="heading">{% translate "Título" %}</option>
+              <option value="list_item">{% translate "Item de lista" %}</option>
+            </select></div>
+            <label for="id_block_text_1">{% translate "Texto do bloco 2" %}</label>
+            <div class="field-control"><span class="field-control-icon" aria-hidden="true"><i class="feather-align-left"></i></span><textarea class="form-control" id="id_block_text_1" name="block_text" rows="3" aria-label="{% translate 'Texto do bloco 2' %}" placeholder="{% translate 'Texto do bloco 2' %}"></textarea></div>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-outline-secondary" type="button" data-block-move="up" aria-label="{% translate 'Mover bloco 2 para cima' %}">{% translate "Mover para cima" %}</button>
+              <button class="btn btn-outline-secondary" type="button" data-block-move="down" aria-label="{% translate 'Mover bloco 2 para baixo' %}">{% translate "Mover para baixo" %}</button>
+              <button class="btn btn-outline-danger" type="button" data-block-remove aria-label="{% translate 'Remover bloco 2' %}">{% translate "Remover bloco" %}</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-outline-primary" type="button" data-block-add aria-label="{% translate 'Adicionar bloco' %}">{% translate "Adicionar bloco" %}</button>
+        <details class="border rounded p-3">
+          <summary>{% translate "Editar HTML bruto (fallback)" %}</summary>
+          {% for field in version_form %}<div><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}</div>{% endfor %}
+        </details>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">{% translate "Criar nova versão" %}</button>
+    </form>
+  </section>
+
+  <section class="product-form-card product-stack" aria-labelledby="workflow-title">
+    <h2 id="workflow-title" class="h5">{% translate "Fluxo editorial" %}</h2>
+    <div class="d-flex flex-wrap gap-2">
+      <form method="post" action="{% url 'content_editorial_submit' content_id=content.pk %}">{% csrf_token %}<button class="btn btn-outline-primary" type="submit">{% translate "Enviar para revisão" %}</button></form>
+      <form method="post" action="{% url 'content_publish' content_id=content.pk %}">{% csrf_token %}<button class="btn btn-primary" type="submit">{% translate "Publicar" %}</button></form>
+      <form method="post" action="{% url 'content_editorial_archive' content_id=content.pk %}">{% csrf_token %}<button class="btn btn-outline-secondary" type="submit">{% translate "Arquivar" %}</button></form>
+    </div>
+    <form class="product-stack" method="post" action="{% url 'content_editorial_approve' content_id=content.pk %}">{% csrf_token %}{{ approval_form.as_div }}<button class="btn btn-outline-primary" type="submit">{% translate "Aprovar versão" %}</button></form>
+    <form class="product-stack" method="post" action="{% url 'content_editorial_metadata' content_id=content.pk %}">{% csrf_token %}{{ metadata_form.as_div }}<button class="btn btn-outline-primary" type="submit">{% translate "Atualizar metadados" %}</button></form>
+    <form class="product-stack" method="post" action="{% url 'content_editorial_rollback' content_id=content.pk %}">{% csrf_token %}{{ rollback_form.as_div }}<button class="btn btn-outline-secondary" type="submit">{% translate "Reverter versão" %}</button></form>
+    <form class="product-stack" method="post" enctype="multipart/form-data" action="{% url 'content_editorial_media' content_id=content.pk %}">{% csrf_token %}{{ media_form.as_div }}<button class="btn btn-outline-primary" type="submit">{% translate "Anexar mídia" %}</button></form>
+  </section>
+
+  <section class="product-table-card" aria-labelledby="history-title">
+    <h2 id="history-title" class="h5">{% translate "Histórico de versões" %}</h2>
+    <ul>
+      {% for version in versions %}
+        <li>{% blocktranslate with ver=version.version status=version.get_status_display %}Versão {{ ver }} · {{ status }}{% endblocktranslate %} · <a href="{% url 'content_editorial_preview' content_id=content.pk version=version.version %}">{% translate "Pré-visualizar" %}</a></li>
+      {% endfor %}
+    </ul>
+    {% if versions|length > 1 %}
+      <a href="{% url 'content_editorial_compare' content_id=content.pk %}?from={{ versions.0.version }}&amp;to={{ current.version }}">{% translate "Comparar primeira e atual" %}</a>
+    {% endif %}
+  </section>
+
+  {% if current %}
+    <section class="product-form-card" aria-labelledby="comments-title">
+      <h2 id="comments-title" class="h5">{% blocktranslate with version=current.version %}Comentários da versão {{ version }}{% endblocktranslate %}</h2>
+      <ol>
+        {% for comment in comments %}
+          <li><strong>{{ comment.author }}</strong> — {{ comment.body }} <time datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at }}</time></li>
+        {% empty %}
+          <li>{% translate "Nenhum comentário." %}</li>
+        {% endfor %}
+      </ol>
+      <form class="product-stack" method="post" action="{% url 'content_editorial_comment' content_id=content.pk version=current.version %}">
+        {% csrf_token %}
+        {{ comment_form.as_div }}
+        <p class="product-muted">{% translate "Comentários são permanentes e não podem ser editados ou removidos." %}</p>
+        <button class="btn btn-primary" type="submit">{% translate "Adicionar comentário" %}</button>
+      </form>
+    </section>
+  {% endif %}
+
+  <a class="btn btn-outline-secondary align-self-start" href="{% url 'content_editorial_index' %}">{% translate "Voltar à gestão editorial" %}</a>
+</div>
+{% endblock %}

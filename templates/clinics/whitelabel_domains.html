@@ -1,0 +1,23 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Domínios personalizados" %}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+  <header class="product-page-header">
+    <span class="text-primary-emphasis fw-semibold text-uppercase small">{% translate "White label" %}</span>
+    <h1>{% translate "Domínios personalizados" %}</h1>
+  </header>
+  <section class="product-table-card product-stack" aria-labelledby="domains-title">
+    <h2 id="domains-title">{% translate "Domínios desta clínica" %}</h2>
+    <ul class="product-stack">
+      {% for presentation in domain_presentations %}
+      <li>{% blocktranslate with domain=presentation.domain.domain status=presentation.status_label tls_status=presentation.tls_status_label %}{{ domain }} · {{ status }} · TLS: {{ tls_status }}{% endblocktranslate %}</li>
+      {% empty %}
+      <li aria-live="polite">{% translate "Nenhum domínio personalizado cadastrado." %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

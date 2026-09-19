@@ -1,0 +1,13 @@
+{
+  "backup_sha256": "6a88fff49fda9e47b22392ddc0fa483f0624a4ad7628da6b8010d453952c877d",
+  "backup_mode": "0600",
+  "schema_migrations": 102,
+  "users": 2,
+  "clinics": 2,
+  "memberships": 2,
+  "source_counts": "102|2|2|2",
+  "restored_counts": "102|2|2|2",
+  "elapsed_seconds": 3.63,
+  "scope": "Synthetic local database rehearsal only. No files or production encryption keys transferred.",
+  "application_readback": "All synthetic membership, clinic and user IDs preserved; related objects readable; passwords remain unusable."
+}

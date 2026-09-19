@@ -1,0 +1,50 @@
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %}{% if page_title %}{{ page_title }}{% else %}{{ title }}{% endif %}{% endblock %} · Aurora Elo</title>
+  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <script src="{% static 'duralux/js/product-shell.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/css/theme.min.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/css/product-integration.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/css/auth.css' %}">
+  {% block page_styles %}{% endblock %}
+</head>
+
+<body class="bg-body-tertiary product-auth-body">
+  <a class="skip-link" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
+  <main id="main-content" class="auth-minimal-wrapper">
+    <div class="auth-minimal-inner">
+      <div class="minimal-card-wrapper product-auth-inner">
+        <div class="card product-auth-card position-relative mb-4 mt-5 mx-3 mx-sm-0">
+          <div class="product-auth-emblem bg-body p-2 rounded-circle shadow-lg position-absolute translate-middle top-0 start-50" aria-hidden="true">
+            <img src="{% static 'images/aurora-elo-sidebar-collapsed.webp' %}" alt="" width="40" height="40">
+          </div>
+          <div class="card-body p-4 p-sm-5">
+            <div class="product-auth-toolbar d-flex align-items-center justify-content-end mb-3">
+              {% include "components/language_selector.html" with selector_id="auth" %}
+            </div>
+            <header class="product-auth-brand mb-4 text-center">
+              {% include "layouts/partials/brand.html" %}
+            </header>
+          {% block auth_content %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script defer src="{% static 'duralux/js/bootstrap.bundle.min.js' %}"></script>
+  <script defer src="{% static 'duralux/js/language-selector.js' %}"></script>
+  {% block page_scripts %}{% endblock %}
+</body>
+
+</html>

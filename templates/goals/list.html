@@ -1,0 +1,88 @@
+{% extends layout_template %}
+{% load accessible_forms i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page">
+  <header class="journal-header product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+    <div>
+      <span class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Meu acompanhamento" %}</span>
+      <h1 class="mb-0">{% translate "Minhas Metas" %}</h1>
+      <p class="product-page-meta mb-0">
+        {% translate "Celebre cada pequena etapa. Pausar ou reabrir uma meta nunca é uma falha." %}
+      </p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+      <a href="{% url 'goal_create' %}" class="btn btn-primary">
+        <span aria-hidden="true">+</span> {% translate "Nova meta" %}
+      </a>
+    </div>
+  </header>
+
+  <nav class="d-flex flex-wrap gap-2 mb-4" aria-label="{% translate 'Filtrar metas por estado' %}">
+    <a href="{% url 'goal_list' %}" class="btn btn-sm {% if not selected_status %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if not selected_status %} aria-current="page"{% endif %}>{% translate "Todas" %}</a>
+    <a href="?status=active" class="btn btn-sm {% if selected_status == 'active' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'active' %} aria-current="page"{% endif %}>{% translate "Ativas" %}</a>
+    <a href="?status=paused" class="btn btn-sm {% if selected_status == 'paused' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'paused' %} aria-current="page"{% endif %}>{% translate "Pausadas" %}</a>
+    <a href="?status=completed" class="btn btn-sm {% if selected_status == 'completed' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'completed' %} aria-current="page"{% endif %}>{% translate "Concluídas" %}</a>
+    <a href="?status=archived" class="btn btn-sm {% if selected_status == 'archived' %}btn-primary{% else %}btn-outline-secondary{% endif %}"{% if selected_status == 'archived' %} aria-current="page"{% endif %}>{% translate "Arquivadas" %}</a>
+  </nav>
+
+  {% if rows %}
+    <div class="product-stack d-grid gap-3">
+      {% for row in rows %}
+        <article class="journal-entry-card product-table-card" aria-labelledby="goal-title-{{ row.goal.pk }}">
+          <header class="journal-entry-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-2">
+            <div>
+              <h2 id="goal-title-{{ row.goal.pk }}" class="h5 mb-1">
+                <a href="{% url 'goal_detail' row.goal.pk %}">{{ row.goal.title }}</a>
+              </h2>
+              <div class="d-flex flex-wrap align-items-center gap-2 small">
+                <span class="badge text-bg-secondary">{{ row.goal.get_horizon_display }}</span>
+                <span class="badge text-bg-light border">{% translate "Prioridade" %} {{ row.goal.get_priority_display }}</span>
+                {% if row.goal.visibility == 'shareable' %}
+                  <span class="badge text-bg-success"><span aria-hidden="true">●</span> {% translate "Verde" %}</span>
+                {% elif row.goal.visibility == 'confirmation_required' %}
+                  <span class="badge text-bg-warning"><span aria-hidden="true">●</span> {% translate "Amarelo" %}</span>
+                {% else %}
+                  <span class="badge text-bg-danger"><span aria-hidden="true">●</span> {% translate "Vermelho (Privado)" %}</span>
+                {% endif %}
+                {% if row.goal.due_date %}
+                  <span class="text-muted">{% translate "Prazo" %}: {{ row.goal.due_date|date:"SHORT_DATE_FORMAT" }}</span>
+                {% endif %}
+                <span class="badge text-bg-info">
+                  {{ row.goal.get_status_display }}
+                </span>
+              </div>
+            </div>
+            <a href="{% url 'goal_detail' row.goal.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Abrir" %}</a>
+          </header>
+          <div class="mt-2">
+            <div class="d-flex justify-content-between small text-muted mb-1">
+              <span aria-live="polite">
+                {% blocktranslate with done=row.done total=row.total percent=row.percent %}Progresso: {{ done }} de {{ total }} etapas concluídas ({{ percent }}%){% endblocktranslate %}
+              </span>
+              <span>{{ row.percent }}%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{ row.percent }}" aria-valuemin="0" aria-valuemax="100" aria-label="{% blocktranslate with title=row.goal.title %}Progresso da meta {{ title }}{% endblocktranslate %}"></div>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="product-empty-state" role="status">
+      <h2 class="h5">{% translate "Nenhuma meta aqui ainda" %}</h2>
+      <p>
+        {% if selected_status %}
+          {% translate "Não há metas neste estado. Que tal começar com algo pequeno?" %}
+        {% else %}
+          {% translate "Metas são mais fáceis quando divididas em pequenas etapas. Comece com algo simples hoje." %}
+        {% endif %}
+      </p>
+      <a href="{% url 'goal_create' %}" class="btn btn-primary mt-2">{% translate "Criar minha primeira meta" %}</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

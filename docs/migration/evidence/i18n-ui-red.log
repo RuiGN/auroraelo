@@ -1,0 +1,93 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_________ test_default_publication_does_not_offer_unreviewed_languages _________
+
+client = <django.test.client.Client object at 0x70679a620f50>
+
+    @pytest.mark.django_db
+    def test_default_publication_does_not_offer_unreviewed_languages(client: Client) -> None:
+        response = client.get(reverse("account_login"))
+        parser = Elements()
+        parser.feed(response.content.decode())
+        values = [attrs["value"] for tag, attrs in parser.items if tag == "option"]
+>       assert values == ["pt-br"]
+E       AssertionError: assert [] == ['pt-br']
+E         
+E         Right contains one more item: 'pt-br'
+E         Use -v to get more diff
+
+tests/test_language_selector_ui.py:62: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T20:58:11.822428+00:00","level":"INFO","logger":"application.request","request_id":"8e029458c9e54525a4560ace91c80cd7","tenant_id":"unknown","actor_ref":"anonymous","event":"request.completed","outcome":"success","latency_ms":42.683}
+_____ test_login_and_workspace_use_effective_language_and_expose_selector ______
+
+client = <django.test.client.Client object at 0x70679a3a5cd0>
+
+    @pytest.mark.django_db
+    @override_settings(LANGUAGES=[("pt-br", "Português (Brasil)"), ("es", "Español")])
+    def test_login_and_workspace_use_effective_language_and_expose_selector(
+        client: Client,
+    ) -> None:
+        user = UserFactory.create()
+        clinic = ClinicFactory.create()
+        ClinicMembershipFactory.create(user=user, clinic=clinic, role="clinic_admin")
+        client.cookies["django_language"] = "es"
+        anonymous = client.get(reverse("account_login"))
+>       assert 'lang="es"' in anonymous.content.decode()
+E       assert 'lang="es"' in '\n<!doctype html>\n<html lang="pt-BR">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=de...ndle.min.js"></script>\n  \n<script defer src="/static/duralux/js/form-behaviors.js"></script>\n\n</body>\n\n</html>\n'
+E        +  where '\n<!doctype html>\n<html lang="pt-BR">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=de...ndle.min.js"></script>\n  \n<script defer src="/static/duralux/js/form-behaviors.js"></script>\n\n</body>\n\n</html>\n' = <built-in method decode of bytes object at 0x57d077831de0>()
+E        +    where <built-in method decode of bytes object at 0x57d077831de0> = b'\n<!doctype html>\n<html lang="pt-BR">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=d...ndle.min.js"></script>\n  \n<script defer src="/static/duralux/js/form-behaviors.js"></script>\n\n</body>\n\n</html>\n'.decode
+E        +      where b'\n<!doctype html>\n<html lang="pt-BR">\n\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=d...ndle.min.js"></script>\n  \n<script defer src="/static/duralux/js/form-behaviors.js"></script>\n\n</body>\n\n</html>\n' = <TemplateResponse status_code=200, "text/html; charset=utf-8">.content
+
+tests/test_language_selector_ui.py:75: AssertionError
+----------------------------- Captured stderr call -----------------------------
+{"timestamp":"2026-09-08T20:58:11.958564+00:00","level":"INFO","logger":"application.request","request_id":"bed73081700d402698b82af2104885d5","tenant_id":"unknown","actor_ref":"anonymous","event":"request.completed","outcome":"success","latency_ms":3.314}
+_____ test_selector_preserves_current_choice_csrf_and_escaped_return_path ______
+
+    def test_selector_preserves_current_choice_csrf_and_escaped_return_path() -> None:
+>       html = render_to_string(
+            "components/language_selector.html",
+            {
+                "selector_id": "example",
+                "ui_languages": [
+                    {"code": "pt-br", "name_local": "Português (Brasil)"},
+                    {"code": "en", "name_local": "English"},
+                ],
+                "current_ui_language": "en",
+                "ui_language_next": '/workspace/?q="<script>private</script>',
+                "csrf_token": "synthetic-csrf-token",
+            },
+        )
+
+tests/test_language_selector_ui.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.14/site-packages/django/template/loader.py:61: in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+template_name = 'components/language_selector.html', using = None
+
+    def get_template(template_name, using=None):
+        """
+        Load and return a template for the given name.
+    
+        Raise TemplateDoesNotExist if no such template exists.
+        """
+        chain = []
+        engines = _engine_list(using)
+        for engine in engines:
+            try:
+                return engine.get_template(template_name)
+            except TemplateDoesNotExist as e:
+                chain.append(e)
+    
+>       raise TemplateDoesNotExist(template_name, chain=chain)
+E       django.template.exceptions.TemplateDoesNotExist: components/language_selector.html
+
+.venv/lib/python3.14/site-packages/django/template/loader.py:19: TemplateDoesNotExist
+=========================== short test summary info ============================
+FAILED tests/test_language_selector_ui.py::test_default_publication_does_not_offer_unreviewed_languages
+FAILED tests/test_language_selector_ui.py::test_login_and_workspace_use_effective_language_and_expose_selector
+FAILED tests/test_language_selector_ui.py::test_selector_preserves_current_choice_csrf_and_escaped_return_path
+3 failed in 2.49s

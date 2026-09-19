@@ -1,0 +1,2913 @@
+{
+  "source_commit": "453eab77867f6c199887946b11996a1a4558f4db",
+  "files": [
+    {
+      "path": ".env.example",
+      "sha256": "6602b1e5cf0a3c773ef061cba565228740e14ccd0578e7c4cff43d4e9742d98d"
+    },
+    {
+      "path": ".flake8",
+      "sha256": "b8f964fdcacb23c182fa9501d1c76f81fc6f839c08210dac9a5713982dbac7d6"
+    },
+    {
+      "path": ".github/workflows/quality.yml",
+      "sha256": "7cfe46b7655a6d62efa13bd859937b00a2fe46b000a073762626313cdeb8896a"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "a9476bfea9dc0e67cbc66e003bc159b46fdf4031f4f59beeaf810f5b29b34eeb"
+    },
+    {
+      "path": "MUDANCALAYOUT.prd",
+      "sha256": "a5ea9f7cf95707931b0d49fce962fc910092c5fba17c85bae73e8c7bfa2f349d"
+    },
+    {
+      "path": "PRD.md",
+      "sha256": "fb9e4d36e8ba41099d915cf68bb8ff1594ae6a6ea7cee90e075bc771791ba8c0"
+    },
+    {
+      "path": "accounts/__init__.py",
+      "sha256": "89af7817465b72b0f8b997f9811e12ac50562917cbe18ee586ed4b2f6739db66"
+    },
+    {
+      "path": "accounts/admin.py",
+      "sha256": "dd0473d71d423c077f0e60d4be7103f66b74b701f9eda3508c6d7d1c99380b66"
+    },
+    {
+      "path": "accounts/apps.py",
+      "sha256": "45bdf3a21d1629d4dc15b443de84aafbebe3b9579b42480d5786197fe0bc10a6"
+    },
+    {
+      "path": "accounts/events.py",
+      "sha256": "50b4d78f07e12dee43a1b547b24a2f7193ab521ec2f85a42074542c53631b347"
+    },
+    {
+      "path": "accounts/forms.py",
+      "sha256": "1e21be888d27fd771e5962f193c5f93cf12337470d2cf77b14adc824efa9fc4d"
+    },
+    {
+      "path": "accounts/middleware.py",
+      "sha256": "0abf6f7ce5d3418fc482afc5a2aa62385ca92a72877c5cbe2bef7395879e1c78"
+    },
+    {
+      "path": "accounts/migrations/0001_initial.py",
+      "sha256": "618c553a4607ff80eea7e249bd4291e7fd5807e4eeefc8a2ccd43bea8fa83a55"
+    },
+    {
+      "path": "accounts/migrations/0002_user_preferred_layout.py",
+      "sha256": "29deb172535d163e26539ca5abb741d7a955b77911e090cbe849916d85825b76"
+    },
+    {
+      "path": "accounts/migrations/0003_email_identity_security.py",
+      "sha256": "8b125cf57200d92f67370c329b7fd58cdc0bd6c1e7bd4ec9f19c98e5fb0cb162"
+    },
+    {
+      "path": "accounts/migrations/0004_clinic_invitation.py",
+      "sha256": "94c7aadbb2093235f25e9384fa57f4b28f2e94814e684f503b0e9c4929cd4d63"
+    },
+    {
+      "path": "accounts/migrations/0005_accountsession_usermfa_mfarecoverycode.py",
+      "sha256": "b258cd353be2087fd92f8b3b9f7fbb1e6cb3a8e95116d6c68fdc3db8bff7789f"
+    },
+    {
+      "path": "accounts/migrations/0006_alter_clinicinvitation_initial_role.py",
+      "sha256": "1bba9d2eeeb3cce996fcb81b4d163f3652cab0dc27e1108a86a8d1754720642e"
+    },
+    {
+      "path": "accounts/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "accounts/models.py",
+      "sha256": "2fc5e4888557b4ccb0fa2354e8e5f16d2c99459fb5491d7a49aac316a3f9d993"
+    },
+    {
+      "path": "accounts/policies.py",
+      "sha256": "91148b2dd1d175f57716fd045e5798581c1df99c59384b9786db795ddf298637"
+    },
+    {
+      "path": "accounts/selectors.py",
+      "sha256": "0587e2b92fba861e1322f27d34c53dffd08c7f846a27d74675fc7cfa0032700a"
+    },
+    {
+      "path": "accounts/services.py",
+      "sha256": "743b05614382a6aeab98e323f2feef87f442422bae04ace1873a4e380b2f4bbc"
+    },
+    {
+      "path": "accounts/urls.py",
+      "sha256": "fe7f214a4a04106d8a7bdea47b30a11016351cbe9b6f31a1ce043a7fb948323e"
+    },
+    {
+      "path": "accounts/views.py",
+      "sha256": "de165149bd276cdae01db8efa7b44c6f08187e4d244562df43a68e9245021da6"
+    },
+    {
+      "path": "ai_assistant/__init__.py",
+      "sha256": "791a349c4c95153bba87aed786fadfb72bbd00c36d5d40e44f47d34a07314505"
+    },
+    {
+      "path": "ai_assistant/apps.py",
+      "sha256": "92ad22ad259119a6f93ee51a800587e538502d17d249d6c91dbcc58cd22f8841"
+    },
+    {
+      "path": "ai_assistant/contracts.py",
+      "sha256": "85009f280e8fecfe0e498f63649f7d814a11dc4ae8090c2f8ab4ccfd7ae916d2"
+    },
+    {
+      "path": "ai_assistant/events.py",
+      "sha256": "2a8acc7745e59cd17205ae77658c1a1e2f66b0c88de46511b9c452c57c15be10"
+    },
+    {
+      "path": "ai_assistant/guardrails.py",
+      "sha256": "b80b17898379bd981839c68a7259bc98b51fa575fded572863db81e96613f7df"
+    },
+    {
+      "path": "ai_assistant/migrations/0001_initial.py",
+      "sha256": "d5a81893e95fe2d853fd72d5eeb9f3abf3f641e6ebd7fd7c41c7f54467d42a10"
+    },
+    {
+      "path": "ai_assistant/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ai_assistant/models.py",
+      "sha256": "1c8b95b4afb0981b6c00f56ec4e65e7b92c9dc1b1656aa3001d3dc6abc950a06"
+    },
+    {
+      "path": "ai_assistant/policies.py",
+      "sha256": "5b215a7400b1225d21564f72332714c5f67c5d5700bf30aa1032fd9a12f3adda"
+    },
+    {
+      "path": "ai_assistant/selectors.py",
+      "sha256": "5df6f99b91cc763a169f7dc6a4f30abc8d0892b7495021f460d875dc1a487a2c"
+    },
+    {
+      "path": "ai_assistant/services.py",
+      "sha256": "debc9587d7b1119e0e262679a374e78e1a543b6b80ef8998000b78bfea69ad27"
+    },
+    {
+      "path": "analytics/__init__.py",
+      "sha256": "f647c4ab13c8be022aeef9b795808f248727949c1d4af4d43769a8c4b900316f"
+    },
+    {
+      "path": "analytics/advanced_reporting.py",
+      "sha256": "87d18ed89d552c295c57f0f78474fc08923bb49b962db9a0e94ad79a9cfb5766"
+    },
+    {
+      "path": "analytics/anonymization.py",
+      "sha256": "99da7b7a5c56ac284c7edb48e81f967f9bcfcd62dbbbed54ba34539e9ada5bbb"
+    },
+    {
+      "path": "analytics/apps.py",
+      "sha256": "42d6f8083c928d48c847e3aca6bf409d04e368c9313d1bec3788edd36cfe5c7e"
+    },
+    {
+      "path": "analytics/events.py",
+      "sha256": "c4f71ff100e368baab7fb913e1d129ac90a45b86b952421106ad28948def4398"
+    },
+    {
+      "path": "analytics/forms.py",
+      "sha256": "709ebcbf89ac2b012f88a8f77b59991cf6dd7ab3abfa027d58419915b3c6b1c6"
+    },
+    {
+      "path": "analytics/metrics.py",
+      "sha256": "c628424934c4ff79760d90d7fb6ae45214e1d92bd44bb05498fde41536606cb1"
+    },
+    {
+      "path": "analytics/metrics_dictionary.py",
+      "sha256": "817ca391d3923b0588d8412eabd31868d2e2c8abbc99cfaa0327ca4810276cc7"
+    },
+    {
+      "path": "analytics/migrations/0001_initial.py",
+      "sha256": "96b7efee0148ef38413da645b6534e829123f29b3fb6da4ee79e99ac1184e722"
+    },
+    {
+      "path": "analytics/migrations/__init__.py",
+      "sha256": "c7fe607923c74dd3d08059fe7b6005e2236fa802162642d127853d87b2bf1d3a"
+    },
+    {
+      "path": "analytics/models.py",
+      "sha256": "e58ad83b44261232e07a3ea5235b1b0a113ee48325691723c820584627e3374c"
+    },
+    {
+      "path": "analytics/policies.py",
+      "sha256": "81b60edfa6ac5381a86872be877a29e338a3b52482d2777a235ca6db4fb3468f"
+    },
+    {
+      "path": "analytics/selectors.py",
+      "sha256": "20f9e761728f8dc5ec3e2b43b644da14000388a3fd1f57313881745c57eea1f4"
+    },
+    {
+      "path": "analytics/services.py",
+      "sha256": "1f667257594e92dc361f02fd03537930a7c1d8e5a0eb84229cd5359329fefdb6"
+    },
+    {
+      "path": "analytics/storage.py",
+      "sha256": "91dcf72a4749ff98da6440d5fbf2adf03dfc9034082564423dc9e24d88cc13de"
+    },
+    {
+      "path": "analytics/urls.py",
+      "sha256": "1f48be08a2d5ce5ffa243a666584654f85742146a3e6029e3286b41389eb9c6b"
+    },
+    {
+      "path": "analytics/views.py",
+      "sha256": "2d5146b727fdcfa49d29267e965921756412f96f29a32d0040bc69a49d93cf9d"
+    },
+    {
+      "path": "audit/__init__.py",
+      "sha256": "1e2c850e93e80dd30c19d34b5a9945491e1c1fc60241958ac7dcd061119d44e7"
+    },
+    {
+      "path": "audit/apps.py",
+      "sha256": "d0f1a4600718126d4923accbff29b767e4fb76eb1729a29eae060332af521464"
+    },
+    {
+      "path": "audit/events.py",
+      "sha256": "1955c6e5232f152f76b977ddcf8542fb0d488d5832b4c56dc9653b243b1fab92"
+    },
+    {
+      "path": "audit/migrations/0001_initial.py",
+      "sha256": "fb58069b6598deebd4abdafdadef1235f8279c0d0184fdfc4151e3af2d4c9d6e"
+    },
+    {
+      "path": "audit/migrations/0002_auditcheckpoint.py",
+      "sha256": "64b618077c00899130a7608388eb8a15cea03720c2f6954acafcebdd4e2ee682"
+    },
+    {
+      "path": "audit/migrations/0003_auditevent_justification_digest.py",
+      "sha256": "ac6217b3fff58613b43513134f3a2cffc95ee87b31fc9d5cae11332ddbba4f2f"
+    },
+    {
+      "path": "audit/migrations/0004_alter_auditevent_action.py",
+      "sha256": "849c2f660c41962e601b823fb01cbed80fb3832ee48722b8b028a16642161a43"
+    },
+    {
+      "path": "audit/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "audit/models.py",
+      "sha256": "d7a6284a8bbecd24f28d1ac65ce37180e64301f3042606d9ec263abf56be4a1b"
+    },
+    {
+      "path": "audit/policies.py",
+      "sha256": "f9e0b6dcc1721eef2ed63b9b6993c82323501012895ee17fb7a9d8e5c4d02b59"
+    },
+    {
+      "path": "audit/receivers.py",
+      "sha256": "1c76ace3089ce0b71c76937c6e3ef847e3fbb35b79631dd8f225364801e29c74"
+    },
+    {
+      "path": "audit/selectors.py",
+      "sha256": "4b87080820016e94d4cb9c873b9fa2e3248438ada615d4a6b28df7fd1cab8fe2"
+    },
+    {
+      "path": "audit/services.py",
+      "sha256": "fbca937b76a4407238b67b51814f733ff6c6ab17f79c9bf24b5e4ad5f11e1625"
+    },
+    {
+      "path": "clinics/__init__.py",
+      "sha256": "25634b19e0acd88e3e4d2a2019ee45dd5c0d821a04a286199aa77e8352ace141"
+    },
+    {
+      "path": "clinics/admin.py",
+      "sha256": "fd77c405ac3d29c78058db2987fac047d6bb779c291b90b8f362499cdeb3003e"
+    },
+    {
+      "path": "clinics/apps.py",
+      "sha256": "50ecec491faec938112e45163931b6b042569b31cb05eb1141e1ef2cd79be19d"
+    },
+    {
+      "path": "clinics/context_processors.py",
+      "sha256": "17c4c88c98ec6d015dcee61ce7ab7460540c40574b60d937c61e0a6d65f35d70"
+    },
+    {
+      "path": "clinics/events.py",
+      "sha256": "2b17782f47368fcda011411b5ae5b7eca4ed38f5035bdc9d9e93dc5fca0c8406"
+    },
+    {
+      "path": "clinics/forms.py",
+      "sha256": "1140857b928501bc37875a90df14aeb0388e67be4476d0ad98c2fb5d1faefa77"
+    },
+    {
+      "path": "clinics/management/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "clinics/management/commands/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "clinics/management/commands/seed_demo.py",
+      "sha256": "046b2b8c223303c35982bcb4a9b6f07db6e82f0c7c5cd4d5e670752f3f4d8c1e"
+    },
+    {
+      "path": "clinics/middleware.py",
+      "sha256": "e055adc91b949081c6f7cc5095c23fac31b56fa5dd0a64511ba5d9d42b075b5c"
+    },
+    {
+      "path": "clinics/migrations/0001_initial.py",
+      "sha256": "991ab6d8642130ba893efe66c0a54df5e4c35439846c865f32d28f4c86b88453"
+    },
+    {
+      "path": "clinics/migrations/0002_add_clinic_is_demo.py",
+      "sha256": "fb17a5d55cee6e554a62e8c83455d6eaf14171070397ae29789fa70a82a9edef"
+    },
+    {
+      "path": "clinics/migrations/0003_name_persistence_indexes.py",
+      "sha256": "012a4a4e233338b87ce38a121c5bc31ab2825d89259f041021383b1addab6cc0"
+    },
+    {
+      "path": "clinics/migrations/0004_add_clinic_slug_invariant.py",
+      "sha256": "92f0b355d81d4ec70c2d048e8960ab2ec417d3d3313f8f47d4714c6dda051ffc"
+    },
+    {
+      "path": "clinics/migrations/0005_document_membership_roles.py",
+      "sha256": "a50cc1f477c27cb64d333bb912cf56c9ba63b8f03e1c128cdcbf5f1f773dccad"
+    },
+    {
+      "path": "clinics/migrations/0006_require_canonical_clinic_slug.py",
+      "sha256": "a54b252fa1f3672904d5c1d1ce144e0af9b93d0ddb8e9bdc8da2da270fefe1fd"
+    },
+    {
+      "path": "clinics/migrations/0007_tighten_canonical_clinic_slug.py",
+      "sha256": "a9c5f68964703a765bc8b7d846ef13e6447f0df6c141c86e1d3650b923e727f9"
+    },
+    {
+      "path": "clinics/migrations/0008_alter_clinicmembership_role.py",
+      "sha256": "50c65f1e65bb4ca37151edff8a0812beb5b0062c89f02e06766a81bddd27131e"
+    },
+    {
+      "path": "clinics/migrations/0009_clinicconfiguration.py",
+      "sha256": "1dc0906b3f451e03861f61d5a24f18e8546f89c87adda04d222d2bcb0e47f776"
+    },
+    {
+      "path": "clinics/migrations/0010_clinicconfiguration_language_code_and_more.py",
+      "sha256": "6c72d77df4132244c52ef87fabbc05017840cde5b7c6f3f5ca7d48623fbb9379"
+    },
+    {
+      "path": "clinics/migrations/0011_alter_clinicconfiguration_service_channels_and_more.py",
+      "sha256": "f668b5068ad890414e6ac37807d9f292ecc5207b1d596b0428f30d72e82bf84a"
+    },
+    {
+      "path": "clinics/migrations/0012_clinicconfiguration_logo_and_more.py",
+      "sha256": "7f52d62b8c876bd9f41a0a350bf78c81965777eb48bacccfea1f5eabc4f5a914"
+    },
+    {
+      "path": "clinics/migrations/0013_clinicconfiguration_enabled_modules_and_more.py",
+      "sha256": "e8db332b11c47d2f6ef7f6903dac841263515bb74c97bafe5ed0f2d760c86a3c"
+    },
+    {
+      "path": "clinics/migrations/0014_clinicmembership_authorized_by_and_more.py",
+      "sha256": "921efa5d6eab35779901547785feaf5241a1a38d88d56fcdb7218e8476fcaebd"
+    },
+    {
+      "path": "clinics/migrations/0015_brandthemeversion_communicationtemplate_customdomain.py",
+      "sha256": "a62fa22cc94cdcac3d8852cea3d67415eb1581bafa8543a261cdf203a135cc90"
+    },
+    {
+      "path": "clinics/migrations/0016_clinicconfiguration_icon_and_more.py",
+      "sha256": "eed2474c93f0b261ee421954172ed60e1a52dd6a364b050918e420b84b938e4c"
+    },
+    {
+      "path": "clinics/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "clinics/models.py",
+      "sha256": "f4a3279045d33b29a38ca8129f6b23239ecc89aa07bb30d1f7efc968c8664c55"
+    },
+    {
+      "path": "clinics/policies.py",
+      "sha256": "7a747e73a02ab6daa5609b5ed34ec465c1be5beb04170a78c6ab0905eb9ef5c5"
+    },
+    {
+      "path": "clinics/selectors.py",
+      "sha256": "9060936338c66205fbee3b81d21fab67754c981e73982f14def496eb7ecf3359"
+    },
+    {
+      "path": "clinics/services.py",
+      "sha256": "3e67795063fb0fecb90f3e41ba7b06fcaa5836c4ddfcfa5c15159c6719adca8d"
+    },
+    {
+      "path": "clinics/typing.py",
+      "sha256": "40b2a05f5dd3c5126caf2d040e02086d25ddd2cae542793b0a5c294308bcff5d"
+    },
+    {
+      "path": "clinics/urls.py",
+      "sha256": "30f89f540843c974b5920d66ea17c4b35822dd024daa10915b2d32e516e13c11"
+    },
+    {
+      "path": "clinics/views.py",
+      "sha256": "b4f90fd0cfb2a3407ffa79c302c95dc53b87d8f9ccdd3d4b120f8313e12495e7"
+    },
+    {
+      "path": "clinics/whitelabel_models.py",
+      "sha256": "309d8b4cdda7a8a7c14e905e9ee1890e8b596bc3cb0977ceb5eb7d72e73cf70c"
+    },
+    {
+      "path": "clinics/whitelabel_services.py",
+      "sha256": "38043f1abb3c04db2e9b63dccef2192afce3aa537f2a1daf9a7e38101f0c1527"
+    },
+    {
+      "path": "communities/__init__.py",
+      "sha256": "95f5fd8cdea14e3bfa470c3ee76984a28e8ae271d3003169be71daa1b6b55078"
+    },
+    {
+      "path": "communities/apps.py",
+      "sha256": "f019cf91a91decfb3df13302f9dca92a4b2f33fb15aeb888ce351e8c7afe99ff"
+    },
+    {
+      "path": "communities/community_models.py",
+      "sha256": "d7f8db12ff7e0c90e6fa7909cce6553558c4bc4bba10fb37d09034641056424e"
+    },
+    {
+      "path": "communities/contracts.py",
+      "sha256": "5956b1cec0dcbff6e80d057957371bac88e74da333e6a25d9fa69aa598d2acc2"
+    },
+    {
+      "path": "communities/events.py",
+      "sha256": "972944c5a8f495e1d1e67e7302868a4da2a15562b10c43274d1cbdb7e0b7e65c"
+    },
+    {
+      "path": "communities/gamification_models.py",
+      "sha256": "075c95954fa587d8553b3da14f91d4820284db4861eaf32b2b7955d3ebf02a18"
+    },
+    {
+      "path": "communities/gamification_services.py",
+      "sha256": "d1c8503608e35334062d154b02b80bc2aa5711f66cf44f3815fc1d8f3ff4fb76"
+    },
+    {
+      "path": "communities/governance_models.py",
+      "sha256": "e857385a0362a0cf655ae646102ebaa20ea7e86f19adbb37495742de1cebd43e"
+    },
+    {
+      "path": "communities/interaction_models.py",
+      "sha256": "e72b8c315badba59b021726300fc7ac5e4917d6ee6910cdfe5f5c04b37fa2d5a"
+    },
+    {
+      "path": "communities/interaction_services.py",
+      "sha256": "2514be1d1c78b824545a58caeffb0c39c041498e519aa79361a6e67cd82d8de7"
+    },
+    {
+      "path": "communities/migrations/0001_initial.py",
+      "sha256": "2402b8d2f5087d52aca3400b055fa9bee93b94e189211ac6a648fa57171a3039"
+    },
+    {
+      "path": "communities/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "communities/models.py",
+      "sha256": "872a895b354d0df44de2bc4df3bb2ebd7e91138d665238a2447a1c23b829a3d0"
+    },
+    {
+      "path": "communities/moderation_models.py",
+      "sha256": "e5cf092a8a1e6d50719e481b0ab353cc618ee7eb31666eb327d3e4b48b98eefb"
+    },
+    {
+      "path": "communities/moderation_services.py",
+      "sha256": "16c342062c62cc717844eb4dee29dee89bbfd1257c1de8ce8619bf788309f14c"
+    },
+    {
+      "path": "communities/policies.py",
+      "sha256": "931a5a3a0945d529d3cf5f4ba59de396d219918c6372a53c89d65d225010fa84"
+    },
+    {
+      "path": "communities/rollout_services.py",
+      "sha256": "eef35ffbda1e22423312ed132ef6685280e2c927a5079125b621650a789e967d"
+    },
+    {
+      "path": "communities/selectors.py",
+      "sha256": "1dbc4eae4c99d85a75a3f36b36d1eebf03aa12cf57f801e4d8c3bd2d88f43512"
+    },
+    {
+      "path": "communities/services.py",
+      "sha256": "38f8cdf53c7ed5013288a74e7fc845e39ed66ef946cede0c2d0ce2439f1bac92"
+    },
+    {
+      "path": "config/__init__.py",
+      "sha256": "19d3aa070f03526a3bdac1f317b30ec57b4b0271f39bb2bfb04102070e9b26f4"
+    },
+    {
+      "path": "config/asgi.py",
+      "sha256": "6bfc68fedb07f95fa4958e21ded45c469121e9e3f3236502df166a19a8f29647"
+    },
+    {
+      "path": "config/settings/__init__.py",
+      "sha256": "e6637188f270869299b3325da41913d109c09bfda35a17de3d9db8cb666c7c2d"
+    },
+    {
+      "path": "config/settings/base.py",
+      "sha256": "a307d20340455c032dea855136b900f25bfac7f674c1538e60513f745031666e"
+    },
+    {
+      "path": "config/settings/development.py",
+      "sha256": "3c47d8cb82d9b9137ecb4bba24bba2415268510f035998f922d27413fd30cf84"
+    },
+    {
+      "path": "config/settings/production.py",
+      "sha256": "e0a47d3e2fab68542632f3a595f3b6855fa39eba7aa291b3d0cb6496f6678375"
+    },
+    {
+      "path": "config/settings/test.py",
+      "sha256": "458b118a5dedfcca20b59dccfaffbd47beaff34ba51555e554741926353fd11e"
+    },
+    {
+      "path": "config/urls.py",
+      "sha256": "5343954ea703e595d972ca053bdc1035acbd999c0fe28ae604013bdef3e99774"
+    },
+    {
+      "path": "config/views.py",
+      "sha256": "dbc39ea702ea38343b4c0258f7f0f36bf5b04e61b02850162cb0459aa8053aff"
+    },
+    {
+      "path": "config/wsgi.py",
+      "sha256": "4cc925d51f00e43d8fb47cead7b84d8aca082c185b46fce762bbf7937130fc3b"
+    },
+    {
+      "path": "consents/__init__.py",
+      "sha256": "dd5ba6718466ea2cfbee1bcf89871f9318337834551de8f560f9bb290a9b83e2"
+    },
+    {
+      "path": "consents/adapters.py",
+      "sha256": "aad67ea2b12f10ee2b7b07cc946fc565212e94f62accd9e0f9ba374e28063b30"
+    },
+    {
+      "path": "consents/apps.py",
+      "sha256": "6befc56e42fc9991091cb696e04f0bb13154e95b0337de6f1c1ad6ddfdcd2fb7"
+    },
+    {
+      "path": "consents/context_processors.py",
+      "sha256": "63b9d0bcf8736aaec7ef490966120f0e1edb23e0d626dda7b95acc98db4b845a"
+    },
+    {
+      "path": "consents/events.py",
+      "sha256": "e05563ca739d1b04c5efcfeabea2fa0e167d412ff87579eb558954def6d239c6"
+    },
+    {
+      "path": "consents/forms.py",
+      "sha256": "885ec51112245420cb3d8a05f739cd2d2d41d88d9c0d92dd22b45d748fb4bde8"
+    },
+    {
+      "path": "consents/integrity.py",
+      "sha256": "8ed8650d4c8f6b9a67718bedf0240933e89214dd3b271991bb66ab58b09b3bd5"
+    },
+    {
+      "path": "consents/management/__init__.py",
+      "sha256": "368d5296e9b6cd27d30be9cf390f6cf8eac319a2be94746a1524e861f50c596d"
+    },
+    {
+      "path": "consents/management/commands/__init__.py",
+      "sha256": "3427738e24c59067b8000ce2453439bb9736117832e353c1d6a65d97e27c7fd2"
+    },
+    {
+      "path": "consents/management/commands/process_revocation_dispatches.py",
+      "sha256": "60b087f56f1705fbbb7aa0b761f9090dca9327482479da35822c94d30f404064"
+    },
+    {
+      "path": "consents/management/commands/review_access_lifecycle.py",
+      "sha256": "ba224cc28d3a79bdbb9e4a10aaf8e97198f7bc32948ad917de96ffba64a0eb1a"
+    },
+    {
+      "path": "consents/migrations/0001_initial.py",
+      "sha256": "0728810c94b5cd8d05cd07b74e7890cedf42b77cbc174f5001434ff62d681a4b"
+    },
+    {
+      "path": "consents/migrations/0002_consentmanifestation_revocation_reason_digest_and_more.py",
+      "sha256": "bbad71c07c789c6eb6e7c8e4b7208eb20cd7766704e3ff62ac50ce6800e6f282"
+    },
+    {
+      "path": "consents/migrations/0003_consentrevocationdispatch.py",
+      "sha256": "7babd0a4caf4bc5200d0384738347034a7ba2a35155c2329dbc4f032eb4925d3"
+    },
+    {
+      "path": "consents/migrations/0004_legalrepresentation.py",
+      "sha256": "f98d3cb5764d3c906c19d916f40b5cd0f0d96ee6fc87f394f8ab9cd09e8ac29a"
+    },
+    {
+      "path": "consents/migrations/0005_consentrevocationdispatch_adapter_identity_and_more.py",
+      "sha256": "09c11bb2873ba2fa20e78f11011c427e010586a45c7a9b42f130287660c09c9a"
+    },
+    {
+      "path": "consents/migrations/0006_accessreviewrun_accessreviewexception_and_more.py",
+      "sha256": "8ff4ded98702ccd3b5782b4e3d4b97d523dd42f110d1edd843493aecc0a3d835"
+    },
+    {
+      "path": "consents/migrations/0007_consentrevocationworkitem.py",
+      "sha256": "bb0c35fb6db8ab0f651d61e4cfd8336b51e97c48fbb8775bd95753474017690a"
+    },
+    {
+      "path": "consents/migrations/0008_remove_consentrevocationworkitem_consent_work_item_queue_idx_and_more.py",
+      "sha256": "90bd6b681e9686d58452a41e4eb4a2649bec94e99b4fc34202529c453676a4a5"
+    },
+    {
+      "path": "consents/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "consents/models.py",
+      "sha256": "fb3e668e6aadb3a031c06acb9cb205ac1589f622d9a821cf473f624e0bea6cc7"
+    },
+    {
+      "path": "consents/policies.py",
+      "sha256": "291dd2a10b8341a11d9bdbeeb90a381825821a63bb97fe29cc26a80fe1acc9b6"
+    },
+    {
+      "path": "consents/selectors.py",
+      "sha256": "94aa4382fdd59235957c5f8bbd74c18e8d09cfc354685dfac5cf2b79118f528e"
+    },
+    {
+      "path": "consents/services.py",
+      "sha256": "a15d677ad3984424f204d6c84b0ecbf1f2382ed9862ee8d2f274149d3a278967"
+    },
+    {
+      "path": "consents/urls.py",
+      "sha256": "03f44c37cb31aa660e4e6768fd5d018f13c0b80425aad3296495f529d97e1891"
+    },
+    {
+      "path": "consents/views.py",
+      "sha256": "aec6d9abf63e1de3bb967a7e76651ddd643371a361b79e6c759e1c91aaac42e3"
+    },
+    {
+      "path": "content/__init__.py",
+      "sha256": "2c010fa4659eca7a84830af3dee0b820716f053486193c782378fc109d7128c8"
+    },
+    {
+      "path": "content/apps.py",
+      "sha256": "5723785d7716756bb4aae82bfbd8a0fad005e883d284edc171236acea20ea0ab"
+    },
+    {
+      "path": "content/events.py",
+      "sha256": "4ee22309e69cef6d2a2ddf604ffc894957021344dfd2a1ac69379668a459a8de"
+    },
+    {
+      "path": "content/forms.py",
+      "sha256": "0eccfd813a2877fc8ceeece4faf60ae9324b986d4aaf67f36d5f9c42a85b66a7"
+    },
+    {
+      "path": "content/learning_authoring.py",
+      "sha256": "09e4481873bb03085819337b9a511d2903c5200e2b85601ae76fafd88bb963d8"
+    },
+    {
+      "path": "content/learning_selectors.py",
+      "sha256": "af0db409fa2966ed346dfbb09e9d6eb0b894df164378e95615423321ae0c343b"
+    },
+    {
+      "path": "content/learning_urls.py",
+      "sha256": "6da8e0370aaf4591b0565851b2198d807f09c8b1289005f0cf5264ced8efca42"
+    },
+    {
+      "path": "content/learning_views.py",
+      "sha256": "3062d75ee671b7e3764850424c7cf57054890bd01841e02f2e1acdf1671c7544"
+    },
+    {
+      "path": "content/migrations/0001_initial.py",
+      "sha256": "8fadb47833611c91ce871eb50dcdd7f53ddf92ba4fcfd1d1b6b6ecf06338fe3d"
+    },
+    {
+      "path": "content/migrations/0002_learning_products.py",
+      "sha256": "f7c7de2d34656dd02ca76736338a7f84b847ca3350ea726f685bfffd932e0965"
+    },
+    {
+      "path": "content/migrations/0003_learning_access_products.py",
+      "sha256": "ebde1aa9a66250d88d3342851375741bdfc0fb1f8e5ff4bc1a834290771f19fd"
+    },
+    {
+      "path": "content/migrations/0004_learning_experience.py",
+      "sha256": "c30a2d15c106d2920c1c68c95ac8a8409bb565c932b821edf48aa4c2603338e8"
+    },
+    {
+      "path": "content/migrations/0005_content_recommendations.py",
+      "sha256": "e15eb866f8796b1e506508335ab3e9e09e59d0336720e85f641fe0f6287661ea"
+    },
+    {
+      "path": "content/migrations/0006_quiz_attempt_request_idempotency.py",
+      "sha256": "e79c5bb45ffeb449f08157600f773b6561dd1b383e01d2c094d654908b8a279d"
+    },
+    {
+      "path": "content/migrations/0007_review_governance_wave.py",
+      "sha256": "f9d63fb584b1f4d0caba02bd3721020d4e558245238b4e95651ec3aad50d9cd7"
+    },
+    {
+      "path": "content/migrations/0008_managed_taxonomy.py",
+      "sha256": "4031d8e29d36b56adf92fe4da06e72fe49b56398a7fb42290c272f6bb5236ae9"
+    },
+    {
+      "path": "content/migrations/0009_content_same_tenant_invariant.py",
+      "sha256": "a52cfbf193da416e51975337d12e724baf3071500dd3c9219be6105814b28635"
+    },
+    {
+      "path": "content/migrations/0010_contentversioncomment.py",
+      "sha256": "96b7411f46f3cc6e820e75b351ee22e2da0328566c0f06f3d74f11744890cfad"
+    },
+    {
+      "path": "content/migrations/0011_remove_enrollment_unique_active_enrollment_per_course_and_more.py",
+      "sha256": "5ea228bcccd379b49b79611aafa2d0ae0df759fcd09045466133ccdb8b119208"
+    },
+    {
+      "path": "content/migrations/0012_lesson_captions_lesson_transcript.py",
+      "sha256": "43885d7e714a749bd23b7b7665b78db77aadb1fc1c69e922bec5d92aafd56f6d"
+    },
+    {
+      "path": "content/migrations/0013_content_successor_contentreport.py",
+      "sha256": "090875eea5b6cfe09373825c2b158091c8a7a8527f91b7f1e022bccd655ca2a8"
+    },
+    {
+      "path": "content/migrations/__init__.py",
+      "sha256": "1b3a7416dae224905d7454ccc2637b9d1395d079e8d1061252962573f7badb33"
+    },
+    {
+      "path": "content/models.py",
+      "sha256": "cec4c5b87917596d40120bd0c795f41492804d89bb60ddf7e596228790bc460d"
+    },
+    {
+      "path": "content/policies.py",
+      "sha256": "c609620ad0a86019339284e6a9390b5963e4ca0ff265baca7990499077f2d31e"
+    },
+    {
+      "path": "content/receivers.py",
+      "sha256": "3d979ff63693615157b8b64383e7d4573d9df8224160763360260a4b8c847e9b"
+    },
+    {
+      "path": "content/selectors.py",
+      "sha256": "af70ec055f883548c51f22c62dedff57a4f39c3ab252a05fd851efa37e2609bd"
+    },
+    {
+      "path": "content/services.py",
+      "sha256": "3dcdf5cfffa1559d5fb947a7519e3791bb7c3a83d08c84c7c96c5aacf2a5264d"
+    },
+    {
+      "path": "content/storage.py",
+      "sha256": "23be036a986201f78a8e0143cb4d4f3ddeec7b6c892312011d834ecd462e2661"
+    },
+    {
+      "path": "content/urls.py",
+      "sha256": "e9b51d7aafb208e7f2debe9ffa42d0948f698093392e346105bd3e3900db3393"
+    },
+    {
+      "path": "content/views.py",
+      "sha256": "b6b47175cebb1022943bb81dac5936990cda2662e382f76cbd8e045e6d65a4dc"
+    },
+    {
+      "path": "core/__init__.py",
+      "sha256": "892f916749d62d17bf6cf02a1dca2be288c8212c6e838b2063ceda74512492a8"
+    },
+    {
+      "path": "core/apps.py",
+      "sha256": "fd29c4cb92e5270b3ce6bf2b563a62e2645032def02a7171950cd5ccf5e44c42"
+    },
+    {
+      "path": "core/events.py",
+      "sha256": "224b9bf74295dbcda0f376bd7f7434df4b0ee3ee986138328d0f418f08f09b0b"
+    },
+    {
+      "path": "core/forms.py",
+      "sha256": "3d2a7db87d3fd9023499d86db5b38f4467a6a3cd3ac4b5d5a12a508b19b8b85d"
+    },
+    {
+      "path": "core/middleware.py",
+      "sha256": "14a8ff9fc730a0f318845f47918036ba5f8271b47495f7a489aacf1ee8eacaf7"
+    },
+    {
+      "path": "core/observability.py",
+      "sha256": "a06f16e8ba1369bacd67f33219bfd15c632e80fc77daf7ae1e6ceea5dd11652e"
+    },
+    {
+      "path": "core/persistence.py",
+      "sha256": "585e2852c7bb13ef8070f35265d1bfea5b2ac8c06c9f5d57a9d80c06e6517438"
+    },
+    {
+      "path": "core/policies.py",
+      "sha256": "ea373130fb284d7e5859eee03bb2280f334e36d33c02ff9eed9da637e4dbed14"
+    },
+    {
+      "path": "core/presentation.py",
+      "sha256": "a886c1af72c8e1ab1a51b6028913e38ff023dc780ba62ab8811b4dac416a6036"
+    },
+    {
+      "path": "core/security.py",
+      "sha256": "2252c0b9e802ffad9c26a26b090b3edc6b39a959f57037aab8809b381f15bd75"
+    },
+    {
+      "path": "core/selectors.py",
+      "sha256": "2bacbbeeaacdac56d062fd60e8a396d177fd3534e6b6237c220cdc8fd7d1dcda"
+    },
+    {
+      "path": "core/services.py",
+      "sha256": "9aa8676598a61a8b963a8f1ed55b70669887714f6698d379f96ce7f3407ef8e3"
+    },
+    {
+      "path": "core/templatetags/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "core/templatetags/accessible_forms.py",
+      "sha256": "ca07e499eca1217bcf6632711d412cdcd1bc085ff950a59b782189e53ce9c59c"
+    },
+    {
+      "path": "core/templatetags/presentation.py",
+      "sha256": "ef10e43dea91d3b902e74c468a654aa80adb1a552715ce3e25b149e87537f0da"
+    },
+    {
+      "path": "core/uploads.py",
+      "sha256": "26fea5f7e73814f8f64e134ded843a09f99e3e16be4b39f70afd7e1330a5998b"
+    },
+    {
+      "path": "docs/accessibility/learning-experience-manual-session.md",
+      "sha256": "287d3a2f32a757b390f3cd68c49e20a04e22c5905ccbb3083bfc7911e0a450bb"
+    },
+    {
+      "path": "docs/authorization-matrix.md",
+      "sha256": "32862c866e93cb36aaa52b90f9a7f51c0fb9f08cfc72c0948e58570729b438b4"
+    },
+    {
+      "path": "docs/compliance/cfp-crp02-matrix.json",
+      "sha256": "72c1706cb771ba84f6860a374b5e750334874b8acfa36e2459159fe390a7687c"
+    },
+    {
+      "path": "docs/compliance/regulatory-verification-procedures.md",
+      "sha256": "6a0dc42096543526235b933d81e7ae8ce01da647ba68b69b03b33bb5d6d8af54"
+    },
+    {
+      "path": "docs/domain-architecture.md",
+      "sha256": "3c74f0a87586d378b1bfb0ec8170efe8a6172a6d6adea96587ebd6078bd8de34"
+    },
+    {
+      "path": "docs/duralux/application-template-coverage.md",
+      "sha256": "dd882fe56287e8eda8622f1a927ac6fea213caadcd162d7c036da7fb9d1e05c6"
+    },
+    {
+      "path": "docs/duralux/final-verification.md",
+      "sha256": "733481ca753ebfe26ca582e701fa59339f1d97b3af8e41476d21571512823947"
+    },
+    {
+      "path": "docs/duralux/licenses/apexcharts-3.52.0-MIT.txt",
+      "sha256": "14be6fe808239df4558b61291b91822dbf5de32f2121e1ce5ebd1b0123f6a6aa"
+    },
+    {
+      "path": "docs/duralux/licenses/bootstrap-5.3.3-MIT.txt",
+      "sha256": "8c14611ae41ac6fd543c13349f22188eb12c69b3e59105c5eca3925a8e4eca3e"
+    },
+    {
+      "path": "docs/duralux/licenses/popper-2.11.8-MIT.txt",
+      "sha256": "bf67e2c9b7974543bb18ced3a0b37f53729aaff953b442dd89a3adaf90fd93e8"
+    },
+    {
+      "path": "docs/duralux/progress.md",
+      "sha256": "2c25060b0273b113dfcefff79d39c8ccdd9d9ee5fc514877b6a9479ab108f7f6"
+    },
+    {
+      "path": "docs/duralux/runtime-asset-manifest.md",
+      "sha256": "c66ff92df7c9ea3ddc6efd49773b3c84ef0b091415fdf5cd551ea902af08e0a1"
+    },
+    {
+      "path": "docs/duralux/sprint4-corrective-verification.md",
+      "sha256": "51368f52ea2f86738ea9c907611902b897f201edc961c19f0bc0d9db8982e7f7"
+    },
+    {
+      "path": "docs/duralux/template-migration-matrix.md",
+      "sha256": "97092d4ed8b2c9bc354393ce751a83a5826acf3547167c552f701427df889679"
+    },
+    {
+      "path": "docs/migration-policy.md",
+      "sha256": "8539fbd67f0da4f2b734cc87c91484536dd9ecdf4dfe84240fb1b0b2f74e93be"
+    },
+    {
+      "path": "docs/privacy/data-flows.md",
+      "sha256": "7174f0f8c7db4c557be40ff8fdce182c18cd6ca063b02781eea126d511215076"
+    },
+    {
+      "path": "docs/privacy/data-inventory.md",
+      "sha256": "934fefda634dc30a3e80d0dcee41ad9d7e2628f42c100612a805a030f5fe4936"
+    },
+    {
+      "path": "docs/privacy/data-subject-rights.md",
+      "sha256": "175cfa6306dde33ca832dfbbba5c410a3bf415e56a1c7be6fe8823e360b8d25b"
+    },
+    {
+      "path": "docs/privacy/feature-privacy-checklist.md",
+      "sha256": "d033333c8711ab3e684324c516e9fa573decfb6b1eb2769858529e76ece61dbb"
+    },
+    {
+      "path": "docs/privacy/processing-register.md",
+      "sha256": "efc90bc0b523e5fd47123ae37bab80321935ceb59018eee1b59e9bc030bed5c5"
+    },
+    {
+      "path": "docs/quality-and-observability.md",
+      "sha256": "ad74170b11179a4ad6feecdb26b2e827cf9d2e7cd942d8b8b6b63fe92d1ff6a0"
+    },
+    {
+      "path": "docs/security/audit-trail.md",
+      "sha256": "eea7cafd9e0b971d5f47f9a5a7bf9d531cd0da479be547513d63aeddb8e022e0"
+    },
+    {
+      "path": "docs/security/consent-access-lifecycle.md",
+      "sha256": "e438bea84e63ca3715935dec70b378c9a59fd24016a6ff79b85997affd63784b"
+    },
+    {
+      "path": "docs/security/controls.md",
+      "sha256": "b25d043fe77021c88e31939401b3ebd0cbf7435797727dd6f370e97e01feaae2"
+    },
+    {
+      "path": "docs/security/identity-invitations-authentication.md",
+      "sha256": "063af602945fe348db348fbf7e184a340e0339bcc52c065fac909133e115dc1d"
+    },
+    {
+      "path": "docs/security/incident-response-runbook.md",
+      "sha256": "aba86fac8948618fb658ae1bac44d97bccdb8bd7589ef187409a8f36a72999c2"
+    },
+    {
+      "path": "docs/security/versioned-consents.md",
+      "sha256": "678d6e3aeef84c9818481f4c77a35113b61f35cf6c81b44542a87b7c4fef20d6"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-08-31-application-owned-design-assets.md",
+      "sha256": "01d9799c9961e10a0bab4c625b4646372f5878e65659dd26e130f953607bc359"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-08-31-cards-tables-states.md",
+      "sha256": "aaf765e1d01f523b1a910140d883b98102c124e0a1d136147a579f414bb201f4"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-08-31-layouts.md",
+      "sha256": "7460e142de0f0a40d181222e4be907520a57aacd0131da7b29e7e4708afe75fb"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-08-31-sliced-tokens-assets.md",
+      "sha256": "99ae1e324ec42b1c4dbe22acf5128b66d1819fe201c79c0777ea76716d44337d"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-01-prd-8-4-5-independent-review.md",
+      "sha256": "31c31d9cd554ddbefaed8881d8e54ece63a0221e5b57398dbbf1a872f7d29239"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-03-sprint12-fix-wave.md",
+      "sha256": "fdecf53e5bb4bbb9c7bd93a49196917bb75ea9a09251ba0301fe499ae41532a2"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-08-31-application-owned-design-assets.md",
+      "sha256": "8a7f8bfb3a3800b3e8c7530c3d8d626434fbb1e24e173506c16d6b02b1d08c81"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-08-31-cards-tables-states-design.md",
+      "sha256": "6f11ee3f0afa7e74eab661032549c2b5df70742d4393f22d0ee124c20cde3267"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-08-31-layouts-design.md",
+      "sha256": "4c6389f345b33bda616d2673170eb719a2ae2017f12f86e5b121303f08b3d0e2"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-08-31-sliced-tokens-assets-design.md",
+      "sha256": "a4f10101c3a8a7f8f1890e985f765d725c420ce6f248094dd299acd2a2a13c19"
+    },
+    {
+      "path": "finance/__init__.py",
+      "sha256": "c843bd4d55ae699d3704c40fbf0641577fecab836461331a2d8015fbe2607c69"
+    },
+    {
+      "path": "finance/apps.py",
+      "sha256": "d7b0c15658b8a2a480b874970d77ee227d00b11a24470027465207429fe06d64"
+    },
+    {
+      "path": "finance/billing_models.py",
+      "sha256": "8e28532e42b848a88c0533a2edb946827c3204c098980cbc5ace1fdd15e5817d"
+    },
+    {
+      "path": "finance/billing_services.py",
+      "sha256": "bcaa8e9e9986b4f9c2a0b925bf79e97fdb35908a812078de7132d7861fa65e37"
+    },
+    {
+      "path": "finance/events.py",
+      "sha256": "ac21c28fe96538bab7b408fe278dcd366e7c281ad508e366687506230f8e4dda"
+    },
+    {
+      "path": "finance/forms.py",
+      "sha256": "f678e25e3209be94b25a4d40cbb899e6d172f589152c7d106b33ef2f218cc202"
+    },
+    {
+      "path": "finance/ledger_models.py",
+      "sha256": "5059fce00779d6aef67be9e6e047116a31bdc3cb84547bb6af4314a6e058b92b"
+    },
+    {
+      "path": "finance/ledger_services.py",
+      "sha256": "4b605714e65e64a28f81c0f781877205ece536e1ec73da33f7147875d750fb72"
+    },
+    {
+      "path": "finance/migrations/0001_initial.py",
+      "sha256": "32225afd84aabe66b2d5a8bf8232a8cb27b4d0b4abb3aa1db582a330fc6204ba"
+    },
+    {
+      "path": "finance/migrations/0002_plan_planprice_subscription_coupon_and_more.py",
+      "sha256": "bc120629c471a58b0d2d4f744aed0c1660994dfdf2de23a6b57769d4ea338787"
+    },
+    {
+      "path": "finance/migrations/0003_webhookevent.py",
+      "sha256": "34139198b6f7a3c1b674fbbfd7ca5c130943518251656470b0b355edba1865a6"
+    },
+    {
+      "path": "finance/migrations/0004_adhoccharge_exceptionqueueitem_refundrequest.py",
+      "sha256": "c55f0b57b56a7217fb44c9d88ed67060d7087438b3ab82358728f631a2038cb6"
+    },
+    {
+      "path": "finance/migrations/0005_ledgeraccount_ledgerentry_periodclosure_and_more.py",
+      "sha256": "1c81444b8b35347b950f5d7ba5e85a7a4bd9836576eefc7b6efac336c67abab2"
+    },
+    {
+      "path": "finance/migrations/0006_fiscaldocument_payoutbatch_payoutrule.py",
+      "sha256": "2137bc4f22c716295a1c13eb94ee1d715711a9435987d4a8b062170baac8f0a6"
+    },
+    {
+      "path": "finance/migrations/__init__.py",
+      "sha256": "c7fe607923c74dd3d08059fe7b6005e2236fa802162642d127853d87b2bf1d3a"
+    },
+    {
+      "path": "finance/models.py",
+      "sha256": "a03e8122939ecd4b2e99e63f3f191fd4418a9fd0cce091e5cd1cf9a659760ebb"
+    },
+    {
+      "path": "finance/payment_adapter.py",
+      "sha256": "a8106a97b4c91b90de3c8e149164d2bc6e8b6cae9f3fac750ca3c85e256bbc71"
+    },
+    {
+      "path": "finance/payout_models.py",
+      "sha256": "513f92050086a366051974e13c547691df7374ae9c10ac025fd983be9c017b87"
+    },
+    {
+      "path": "finance/payout_services.py",
+      "sha256": "7c1ed557d04427fdb2fb5843860e08f3abd4551ed6985d5c2ef0359d51c45724"
+    },
+    {
+      "path": "finance/policies.py",
+      "sha256": "b2d459ae8f1f1e89364299e10419f3c13616a7923cd10666333c6a8241fd1edd"
+    },
+    {
+      "path": "finance/reporting_services.py",
+      "sha256": "34322e8779dd058e8973855b8cf0915b8b8739790d98f38b298f15989a7ecb1b"
+    },
+    {
+      "path": "finance/selectors.py",
+      "sha256": "f2f6046615df13bcb6dfd6f5c482cebb8a37dd7e84290781bee3ea2128d0f8f6"
+    },
+    {
+      "path": "finance/services.py",
+      "sha256": "b9efaf396b0bfaee52eff80c9013093c5616276731062e3d41e6307dedb5722c"
+    },
+    {
+      "path": "finance/storage.py",
+      "sha256": "c422e26d0d0b0d55985b312a786804ae20b95c92602447cc9ae448c8d02a56ac"
+    },
+    {
+      "path": "finance/subscription_models.py",
+      "sha256": "6ba934fb98a62ee5ed1d426e06349abe1c204a69a9ff6ae393e72339da81c5a8"
+    },
+    {
+      "path": "finance/subscription_services.py",
+      "sha256": "acf6baae74cfef83dea370c325f55e477b710208b6a45ed5d321b1bae59f655f"
+    },
+    {
+      "path": "finance/urls.py",
+      "sha256": "5af25bad6a8157ab6962ab3fedda08bfa3062e2822b429dd2c2487d491449044"
+    },
+    {
+      "path": "finance/views.py",
+      "sha256": "fff5982c562499d48ff41018b436c0357aa9f442f4d7ac981feb3b1a0da3d13a"
+    },
+    {
+      "path": "finance/webhook_models.py",
+      "sha256": "b1490b20aa2f41ea0cde65f8650f85adc76299fc26133e15d3c42be80f386f91"
+    },
+    {
+      "path": "finance/webhook_services.py",
+      "sha256": "ec5583c5b490624258f552d4c8ceae1e3b89d056c845aba1b37e5494ed9e61e3"
+    },
+    {
+      "path": "goals/__init__.py",
+      "sha256": "c9c14bb637ecff2c02c72ba6409b7f56391c12d1a09906b4435f1c670c8b6de5"
+    },
+    {
+      "path": "goals/apps.py",
+      "sha256": "83d9bcaee04c8e8139d4c88303af54c92d5986809d797509475774f2844711c3"
+    },
+    {
+      "path": "goals/events.py",
+      "sha256": "6f0c1748e842d92113bc1798f2ccc12c8ad07476917d369e28338c95dcfdd3aa"
+    },
+    {
+      "path": "goals/exercise_models.py",
+      "sha256": "58a0fdb964e592a39282c4dd9e0e893f4a5d8c932cb4ed35c93745bfa390c42f"
+    },
+    {
+      "path": "goals/exercise_services.py",
+      "sha256": "8df69f7d853fabe04d275f4d8747d88fda696e669360d87105b8819c987c60b7"
+    },
+    {
+      "path": "goals/exercise_views.py",
+      "sha256": "347b041d3a44bb5ebfccf57c0e709f59d7201922ec4c052ed0aa7f5a1af4a7ad"
+    },
+    {
+      "path": "goals/forms.py",
+      "sha256": "b08750a9511a72a464fdf040b3369f33049a9d6044f8bfc587fd8b94b7b0bcb0"
+    },
+    {
+      "path": "goals/low_energy_models.py",
+      "sha256": "af9cdea731b98f17cdacba09932198777097090d0e91cabb8b75c24fd3f6bc80"
+    },
+    {
+      "path": "goals/low_energy_services.py",
+      "sha256": "642bad67fe3ed810af39defd026bfdffb66c6adc03d7ee474e5c8f9c884b8a63"
+    },
+    {
+      "path": "goals/low_energy_views.py",
+      "sha256": "a4cf9d32ab3d5f1a3ca55b9d19b6f491b248b6f3af5fd686470db38fac0b987f"
+    },
+    {
+      "path": "goals/migrations/0001_initial.py",
+      "sha256": "d279f5c44a333a31b0a806bab3299104b9a8d3bf8b779c3ffcc1df5dbd22f007"
+    },
+    {
+      "path": "goals/migrations/0002_lowenergyactiontemplate_lowenergymode.py",
+      "sha256": "26c68f5e60952f25b0c74e106e50d5374d473cb8144ff77c0c810009a06d8342"
+    },
+    {
+      "path": "goals/migrations/0003_exerciseassignment_exerciseexecution_exercisecomment_and_more.py",
+      "sha256": "d305650f5dc95356bd56fdc8b3f445062fbde2387785adefbe9834d383a00539"
+    },
+    {
+      "path": "goals/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "goals/models.py",
+      "sha256": "6d92a29f703d1460a20bc23eb92ff6f2b431eb56f34061676639f609814476bd"
+    },
+    {
+      "path": "goals/policies.py",
+      "sha256": "269d9a8c282fd9267bbe6f2a28f96a2008e0a56feb885eed71307bf21275a175"
+    },
+    {
+      "path": "goals/selectors.py",
+      "sha256": "c51f4c127b7862fba93d8834018b50fbf6f2b2c356e57634541f370132266e6a"
+    },
+    {
+      "path": "goals/services.py",
+      "sha256": "84d3e077b23f4035b610e0549fc524eb79970e26e1e06b891d4f222b6e453e88"
+    },
+    {
+      "path": "goals/urls.py",
+      "sha256": "d2de802b7b122e8e1d84fb40bc7c570aaa92b01188084f2fbeedfbaf3223a789"
+    },
+    {
+      "path": "goals/views.py",
+      "sha256": "dd90db708e86b2a1536e9ae396a53d1bf07907296316cbe72b554f7e8b8f9d80"
+    },
+    {
+      "path": "integrations/__init__.py",
+      "sha256": "a512fa6fd6f0240dc78095c463f25c4dab815894911ec0285c12249df5792052"
+    },
+    {
+      "path": "integrations/apps.py",
+      "sha256": "1f6849afbec0074dc61e85ddc27a5290baaf62c106eaa90532c801e50545e0fd"
+    },
+    {
+      "path": "integrations/calendars.py",
+      "sha256": "12473220f401c276aaf44defc746c266dbedf6d6ac14267771188d82b201c83e"
+    },
+    {
+      "path": "integrations/contracts.py",
+      "sha256": "dcb601f68a0e776b441cd41aba9bf795dfc4e3c5f81e83d9ad0238797bfc96d9"
+    },
+    {
+      "path": "integrations/events.py",
+      "sha256": "a448a15294588eca0bcc4b265672b344a3ce925ce6c8ffec4d84b5391feba968"
+    },
+    {
+      "path": "integrations/migrations/0001_initial.py",
+      "sha256": "5fe480540e4c215c91dc0663ff462dc879a2d8c912feaff6c1089373f649cdb7"
+    },
+    {
+      "path": "integrations/migrations/0002_whatsappinboundmessage_whatsappconsentrecord_and_more.py",
+      "sha256": "c910d0d0d27ebc3c0d473dd6957208bc091efa470220dc57cf3de912694fa09c"
+    },
+    {
+      "path": "integrations/migrations/0003_videoaccesstoken_videoqualitytelemetry.py",
+      "sha256": "c712a94ca64184b76e2ded494385b4857e070d7a0c1ff319042d481c662d1492"
+    },
+    {
+      "path": "integrations/migrations/0004_alter_videoaccesstoken_role_and_more.py",
+      "sha256": "48bf7ccd5f35bd40a222d770669eb2df927fc2d6c965ba6d7f74de0328d84c67"
+    },
+    {
+      "path": "integrations/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "integrations/models.py",
+      "sha256": "8144aec924aca121bb20f481be7d615faf673a55fab7db40bfa8138cadddc289"
+    },
+    {
+      "path": "integrations/observability.py",
+      "sha256": "c0268141cb0636f8fe1dd7a3469b79b038db8a9ea0791d600b06e3e27066870c"
+    },
+    {
+      "path": "integrations/policies.py",
+      "sha256": "b7f6d09aa85bb49caab123f64a4771214dd91404cf9f242d9499f102580f368c"
+    },
+    {
+      "path": "integrations/pwa.py",
+      "sha256": "a9f758eb5e935f2293d8d200a3502c3382947aa818fbfda50eedf41fa08eb147"
+    },
+    {
+      "path": "integrations/sagas.py",
+      "sha256": "439231bed077ed2ebb3d4eb99f48b8e1d82e19dd88e12da4a42dac0e785359c6"
+    },
+    {
+      "path": "integrations/selectors.py",
+      "sha256": "4861c6e3289fd81191b4d21a1a4d43261f24c17c4c00039f95ac74040a7b62d9"
+    },
+    {
+      "path": "integrations/services.py",
+      "sha256": "c59fc94da3bc1d6206de0b7e61d32e038a03b01033f12a6576d7424c5938666d"
+    },
+    {
+      "path": "integrations/video.py",
+      "sha256": "c58b8c83783d9ec7a009964a70d5860ea54ca95666160440eb37c2458d9a42da"
+    },
+    {
+      "path": "integrations/video_models.py",
+      "sha256": "d7b12aa850e41014cd700bf04ff8563c217f9e17f85a8947e201b662d091847e"
+    },
+    {
+      "path": "integrations/whatsapp.py",
+      "sha256": "01af35ace7a144cd840a45d8f9eb00682b7dfa960a788693dc4ceef8bc6af26f"
+    },
+    {
+      "path": "integrations/whatsapp_models.py",
+      "sha256": "d93b15427332206d94c90357ca19dee411455e20ca3c32013d410d54a1edebf6"
+    },
+    {
+      "path": "journal/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "journal/apps.py",
+      "sha256": "3699039934e230f7ab7af70c78c119b77c25e16303cf6567dabbe6da04546c5e"
+    },
+    {
+      "path": "journal/checkin_forms.py",
+      "sha256": "720a56030d04732b7dd81fc348d2ed76d30a3324c1a04f83e918c3f3023e69b1"
+    },
+    {
+      "path": "journal/events.py",
+      "sha256": "9ed74764da904cf8b971d3f7652f650f1f47d5ae9cdb253868b5c0fe3bab26e4"
+    },
+    {
+      "path": "journal/forms.py",
+      "sha256": "875c331e9a397e6990a71756af3ff3cf77a29001ce4520cc1a04077776a43f06"
+    },
+    {
+      "path": "journal/migrations/0001_initial.py",
+      "sha256": "d3a5c8271736dc800bb336cb0e28253a5b993666500cac9cc3144eb667c45a5f"
+    },
+    {
+      "path": "journal/migrations/0002_journalaccessrequest.py",
+      "sha256": "4a0de831d60ff965ecc77a03adef07f7a3171cfa0ee73853d2afee0bf21ff3c8"
+    },
+    {
+      "path": "journal/migrations/0003_checkinquestionnaire_dailycheckin_and_more.py",
+      "sha256": "4bb061456e0173a681f2d36972fbe322436550e8f7443a13d96eb9a5e9df741b"
+    },
+    {
+      "path": "journal/migrations/0004_clinicalsignalrule_humantriageitem_and_more.py",
+      "sha256": "f3e409c82c3d39d56b467af062f36d5263ff78500beda360dd08ce153e3d902d"
+    },
+    {
+      "path": "journal/migrations/0005_alter_humantriageitem_checkin.py",
+      "sha256": "fa83e5017d57608a69c507662411104fc74994bb593a6f5dbec1674a68bf54e8"
+    },
+    {
+      "path": "journal/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "journal/models.py",
+      "sha256": "842241e86e634a8199c68172db8318edf54d5690b9c4f571d4980c21a0ad6244"
+    },
+    {
+      "path": "journal/policies.py",
+      "sha256": "cf66a1765defb2f272e9f22f76217e0dc51882d695642d534627b87a98f52263"
+    },
+    {
+      "path": "journal/selectors.py",
+      "sha256": "afeab97c46739f7c81c1c3031f77f033601e2f7fb738d15d3261057826169c34"
+    },
+    {
+      "path": "journal/services.py",
+      "sha256": "8aa4e2946bd623bfec82f3599469010054956346d145e39dac0864dbcdcb4155"
+    },
+    {
+      "path": "journal/urls.py",
+      "sha256": "59630852a789cdbb1ed117ebdb8563e5361533e1b38e5716c49a8ab51e5b3110"
+    },
+    {
+      "path": "journal/views.py",
+      "sha256": "78a1f2b08253bb816f1d1f75acafee6d13ff41ca1fd2c1b0df2eb889f5b0a40e"
+    },
+    {
+      "path": "locale/pt_BR/LC_MESSAGES/django.mo",
+      "sha256": "4aa4fdbf33f94617336ef6d0bc8cfb707a21eb78aabe43fb4ee9f94e4066d688"
+    },
+    {
+      "path": "locale/pt_BR/LC_MESSAGES/django.po",
+      "sha256": "f0b0314d685a46980abde4ceac61d36725d7029bd1c50fd4cc1c79427e16074d"
+    },
+    {
+      "path": "manage.py",
+      "sha256": "6643f8701dcc750ce7bf3a7a664021af8f6aefb8c1ee296647a8dc61ec7896ca"
+    },
+    {
+      "path": "medical_records/__init__.py",
+      "sha256": "00ae53925fbfa434798cd313f50da19df37a1e8ba7148a7ba67190f28f363adb"
+    },
+    {
+      "path": "medical_records/apps.py",
+      "sha256": "bceed452f2b8dbaae75d823dd1317e51ba734a21070d83dde42aa95d9efa94e6"
+    },
+    {
+      "path": "medical_records/contracts.py",
+      "sha256": "5e2b5cf91613576a16bdd8951cf0c968f6c1a6db500249d3b72fdd646d981061"
+    },
+    {
+      "path": "medical_records/document_models.py",
+      "sha256": "0b2f67c15b6c4c247e6b074d652e19c740ce5c1287ba30d524b1fcebbf3cc239"
+    },
+    {
+      "path": "medical_records/document_services.py",
+      "sha256": "68daeb52bad5fd71177634a31c00063e3c5ae75f7e2772db8e91c3fa1949b24c"
+    },
+    {
+      "path": "medical_records/entry_models.py",
+      "sha256": "c0d4e0840a8fd8cac3e9be7139d015f6ab474d00823f29785d1e25ccb3619a7e"
+    },
+    {
+      "path": "medical_records/events.py",
+      "sha256": "5bc0db49ef7083620e0c5e7449e0e57d6e110c0d087391cf42fdbb40917ac78f"
+    },
+    {
+      "path": "medical_records/governance_models.py",
+      "sha256": "42efd5985f4c12c1c9fb180a793de79b5d18abadca9c5f217265166fa6026229"
+    },
+    {
+      "path": "medical_records/migrations/0001_initial.py",
+      "sha256": "077384be641caa4e1999750c9dff2a81711e93c82756582b8117782b6a18fb89"
+    },
+    {
+      "path": "medical_records/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "medical_records/models.py",
+      "sha256": "065b209f26c26bed5f96c651e0b865febff9d14010bf528c760da31b08dd97b4"
+    },
+    {
+      "path": "medical_records/policies.py",
+      "sha256": "060555a927460be8c389a52de9be60aedd2d3a2340b6502fc3fa29032fd6f0cb"
+    },
+    {
+      "path": "medical_records/retention_models.py",
+      "sha256": "d5e81e9e9857230318f05262f9168bf37961ec1da494f8ad18e7223112418a96"
+    },
+    {
+      "path": "medical_records/retention_services.py",
+      "sha256": "31ec1061c707a278dbe54eeee9252757702fd80ef4a5ef371aa964e8baa1639e"
+    },
+    {
+      "path": "medical_records/rollout_services.py",
+      "sha256": "de81e3c67836bed9f9b573dab9612138cbbe1c84cac1863ac46f0b4bda58e915"
+    },
+    {
+      "path": "medical_records/selectors.py",
+      "sha256": "2c996729c225841888104b99647e20c92eea74c656154d0260f5f6954382f583"
+    },
+    {
+      "path": "medical_records/services.py",
+      "sha256": "922164f6f718f5c0162457730225a5667b18d1a3aa484cf87a48c00cd424d3b2"
+    },
+    {
+      "path": "medical_records/signature_models.py",
+      "sha256": "cb65018087c24a2481cd70b94f3a4262e4d1bae77a175a216fec3f118d5e20e6"
+    },
+    {
+      "path": "medical_records/signature_services.py",
+      "sha256": "9db88d48437a4a716d07e863dd5ee0108dcafe15fe5a9dbcee8da63bbb96be76"
+    },
+    {
+      "path": "onboarding/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "onboarding/apps.py",
+      "sha256": "72d588b62de94fa4bab00a05a5e5f337282d60c4a9af5006f9c580527eadc144"
+    },
+    {
+      "path": "onboarding/events.py",
+      "sha256": "7d489314f0208c01bc78b3c341d64c0b1e0f1f283a131f9982b98c2a5e830f57"
+    },
+    {
+      "path": "onboarding/forms.py",
+      "sha256": "064a546c733f014a145686f34a264a07a5735d7ac13b024e3167fabd82a58962"
+    },
+    {
+      "path": "onboarding/migrations/0001_initial.py",
+      "sha256": "cda82d6fb7f8c8f25d938c13890a49290cb7216d102f1225e78b15bef6e54843"
+    },
+    {
+      "path": "onboarding/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "onboarding/models.py",
+      "sha256": "53e6544ae4d22b06f5a8f570c9ea20b1268dd6c6f0d6f3b7723f708568410144"
+    },
+    {
+      "path": "onboarding/policies.py",
+      "sha256": "5781fdc6f3564aae3b5fc278133d34d245fa03669cb9931b4a81b82ad2b88c80"
+    },
+    {
+      "path": "onboarding/selectors.py",
+      "sha256": "6c909597016f2cb7c575554db57de93bb276f1b6c2104e6633fb0c6770edc166"
+    },
+    {
+      "path": "onboarding/services.py",
+      "sha256": "afc230261bebe135c69c01dd1713177ff73b7e7824fa04df50aa9b96e4c8d418"
+    },
+    {
+      "path": "onboarding/urls.py",
+      "sha256": "4c4dd06cb4369f0ff7a7043c40ab6be4ace227a6a567c4c5706f25161b0322f7"
+    },
+    {
+      "path": "onboarding/views.py",
+      "sha256": "43e07ade30b81340be1c324f839f848b9cda3aca7c4c1f22989b8e9f82e7ae25"
+    },
+    {
+      "path": "people/__init__.py",
+      "sha256": "21e7df0662ef23f8a5896d3d82d73420d8953efe4a9cbabe455228a7a2c1b42f"
+    },
+    {
+      "path": "people/apps.py",
+      "sha256": "5a3172a700688c1d72912788286f12d7d48d7919fcd4bc1477fcd43167ee2e4e"
+    },
+    {
+      "path": "people/events.py",
+      "sha256": "1085573511284a3a4527c3e4aa99219b1c67fdc7feb67ac326a2d0bf2cdce5d4"
+    },
+    {
+      "path": "people/forms.py",
+      "sha256": "054b5af2e932a56e57b85ca610ac48f4fa70b869d3112db40372ed8c48adb998"
+    },
+    {
+      "path": "people/migrations/0001_initial.py",
+      "sha256": "c1533f77c7217f29299b12af1f6c4c19b26e760eeded936316afd50b264d4771"
+    },
+    {
+      "path": "people/migrations/0002_professionalprofile_professionalcredential_and_more.py",
+      "sha256": "14bb4c1f42e7c9fba99f7e20efde513c6cd53e9ac9608d858c9a7ba113d7f724"
+    },
+    {
+      "path": "people/migrations/0003_carerelationship_authorized_by_and_more.py",
+      "sha256": "e2ceae09a5c230b150f317bfc539df002a5614cb3a1a1c24a2009d076394816c"
+    },
+    {
+      "path": "people/migrations/0004_review_governance_wave.py",
+      "sha256": "0a481b2c875e47f0ec1782bf9c86d28f8a32b3c5a977d86fa43eae9a0e9e3a49"
+    },
+    {
+      "path": "people/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "people/models.py",
+      "sha256": "67e979c51f717832f3c5d5559a4a977451ecdfbcea142de9ba54c377c203d506"
+    },
+    {
+      "path": "people/policies.py",
+      "sha256": "646161c391d2b85f6de8682cc57373ad622da4ec77602c35643b5d521205e35b"
+    },
+    {
+      "path": "people/receivers.py",
+      "sha256": "ef2f9289f81a4f2b5f82cf5fde504893de951443b2428e70b260939747724afd"
+    },
+    {
+      "path": "people/selectors.py",
+      "sha256": "92b55bd16915a6e089d25bb167371a40e0fd780e2e6ba629335e4d49f71aad04"
+    },
+    {
+      "path": "people/services.py",
+      "sha256": "53df199aaed0fae36aafcb9c2d79ade2890a1f7762b3e7ea469ba419cb3e8220"
+    },
+    {
+      "path": "people/urls.py",
+      "sha256": "69b1e0c74d85294508a73abb1ae2dfb4260477da50f7ca4d6ccefbb6f86043b0"
+    },
+    {
+      "path": "people/views.py",
+      "sha256": "0c1669b5a81f24b8d397b278d8d04bca6d8d881b18b826da738e0499c6936a74"
+    },
+    {
+      "path": "privacy/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "privacy/adapters.py",
+      "sha256": "ed658f2115f63f5808e3b52ef416b88f9735a0d9f9906e54be5e4b858a0e6b15"
+    },
+    {
+      "path": "privacy/apps.py",
+      "sha256": "073fcd2ee1c3f82504d70f699c0425fa7926bd05641a9aaa5241453381a89b30"
+    },
+    {
+      "path": "privacy/events.py",
+      "sha256": "82d61b71f1634d7dcc4dab6a705e55549d28a4f6c54b5da7e535f7f1fec5a954"
+    },
+    {
+      "path": "privacy/migrations/0001_initial.py",
+      "sha256": "498c6d0e5694f112bf05ad51805ee3fc97a2dd43d3116fac6528265f481adf8d"
+    },
+    {
+      "path": "privacy/migrations/0002_datasubjectrequest_identity_evidence_digest_and_more.py",
+      "sha256": "b3e5bd8428ee615adf85720b2fb0cbf8b60653941872b66cb22186f826f1655b"
+    },
+    {
+      "path": "privacy/migrations/0003_lifecycle_adapter_evidence.py",
+      "sha256": "0e64db9472f079a42c687d1eebf4d3a46581df6ba67c33f34f14b8fc075f2702"
+    },
+    {
+      "path": "privacy/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "privacy/models.py",
+      "sha256": "2fab660447c663c5e2803c67e5e5a13196d45cbc1131f90950ea6aa2c67eddd7"
+    },
+    {
+      "path": "privacy/policies.py",
+      "sha256": "075e33fe0a4b07f14dc01e32101c4f4214a00db80ae327e8917b25949e359007"
+    },
+    {
+      "path": "privacy/selectors.py",
+      "sha256": "c0baeb7b85ac50a4ef1e83a2a8bf4dff81858f95e6e3312f8b2690eb014fa6b1"
+    },
+    {
+      "path": "privacy/services.py",
+      "sha256": "fd2230be44367033744a64682a35c16355d04a7d53699beb2565bba2dd343fbb"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "cb8a636fbf1d2c479e666b41a3c60e2c4bde55e7ac0526a8b9c72a14ae242e3a"
+    },
+    {
+      "path": "requirements-dev.txt",
+      "sha256": "85b0edbca164343f02fc5b3e46576e6d43907be111da9aeb8e803dd111af0585"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "49d93e0169358debe28525758c1691c90988410cbc50b921a8bb68b8a5b16a1c"
+    },
+    {
+      "path": "routines/__init__.py",
+      "sha256": "d8263ed9a5bd1e7f77e0b5b2a97b65bd257a49469c27c8dcbdb5ccd8390e1379"
+    },
+    {
+      "path": "routines/apps.py",
+      "sha256": "afc7ce328b3e59ed06ca6109a8ba379bf3cfb998e18f91f4b959695325f47eae"
+    },
+    {
+      "path": "routines/care_plan_models.py",
+      "sha256": "848d8e64e8f16cd45f857e263be47ddb0f8b5578f0a2a6fcf60a180045e42f4f"
+    },
+    {
+      "path": "routines/care_plan_services.py",
+      "sha256": "54e36557c0ccb02690fd8803c190cb4a627e0e37a606b266e7a62ed50029d45a"
+    },
+    {
+      "path": "routines/contracts.py",
+      "sha256": "402b0603ced24e4557c151c916966913b3ef2a98e896a98bff54687b28eda3aa"
+    },
+    {
+      "path": "routines/events.py",
+      "sha256": "f2a0a51e87294e84cf8f19d4db66b79261eda23b0f4a17119200bf393a0ebfab"
+    },
+    {
+      "path": "routines/medication_models.py",
+      "sha256": "b7556b7f9e105177586adc5d0de8168b0560c6c02c16bee7766a70025edcd7e2"
+    },
+    {
+      "path": "routines/medication_services.py",
+      "sha256": "73b6939af87cf84d276eb8465574d7275efde841f4566e92e8350f14e9d98d6a"
+    },
+    {
+      "path": "routines/migrations/0001_initial.py",
+      "sha256": "b6ed413c3762cd983c8439b4c9591f9891de367f33fe37a8dbc061e443d7905e"
+    },
+    {
+      "path": "routines/migrations/0002_alter_careplan_options_alter_careplanaction_options_and_more.py",
+      "sha256": "6eed80454a8299677427f3a7b507d3e014a3a1cee3f823ad0b785c1a080ff35a"
+    },
+    {
+      "path": "routines/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "routines/models.py",
+      "sha256": "9922b1e2467a33d08f1874f6b46909891d476d23c25f3c374d90341c793ea17f"
+    },
+    {
+      "path": "routines/policies.py",
+      "sha256": "7f4e9bd73e5762047d0c18773519029849a80971816eb46cbbdc228b46ea6afb"
+    },
+    {
+      "path": "routines/routine_models.py",
+      "sha256": "281212c87aaa26ac9f389e1fccacdd2042a700ff341e7588b86de24dc151631a"
+    },
+    {
+      "path": "routines/selectors.py",
+      "sha256": "97ae37b82b1518fd37de167d06802d6f5a27a2e6276b4fe6627d5af544a1d86f"
+    },
+    {
+      "path": "routines/services.py",
+      "sha256": "8e343bae3194d5db16ac733d9a9f19b7428760c4378f3dd9041af7d8ba373a31"
+    },
+    {
+      "path": "routines/sleep_models.py",
+      "sha256": "219aeab315f3485684d3304395072ab4fee0fdb1275ef8d165a9337153ca97aa"
+    },
+    {
+      "path": "routines/sleep_services.py",
+      "sha256": "98f13d4a5ef6d42c8dc5f76726b50849eb1202588e6b88af95329d266872d60e"
+    },
+    {
+      "path": "scheduling/__init__.py",
+      "sha256": "8302259b7677cbab52e93601a5b514b6ea3c2eecfc90f4f7b000f24d22bd4467"
+    },
+    {
+      "path": "scheduling/appointment_models.py",
+      "sha256": "a6a981ffcc295f892c7849fce4089136c0decb8b547010d65e46ce0d3ccb3ed8"
+    },
+    {
+      "path": "scheduling/apps.py",
+      "sha256": "67ff00a1105470722305b3a80b2f23ad1f89245ed703802c51061afef4314ea4"
+    },
+    {
+      "path": "scheduling/availability_models.py",
+      "sha256": "09c92e34322d8e2546e3a6fad34fb8140702ea29bbbf93f31eae325af9d4d0e3"
+    },
+    {
+      "path": "scheduling/availability_services.py",
+      "sha256": "31b392b7a95cc81de6b7bcf60421dbdd531dd2d2c46f70bc18ee7a4157e9b6ef"
+    },
+    {
+      "path": "scheduling/delivery_templates.py",
+      "sha256": "b64e43b03723036f2c7d21581ba60903fddf415ddaecf275a467a5b02b260122"
+    },
+    {
+      "path": "scheduling/events.py",
+      "sha256": "dc11a13547482fb694c88663ddb65e575229d97c6e9fec74360064a10d27d1d2"
+    },
+    {
+      "path": "scheduling/forms.py",
+      "sha256": "15f72227997634e62a8d672a16b8b0a0182f3d75df2aa21b89083397d89dda8e"
+    },
+    {
+      "path": "scheduling/messaging_models.py",
+      "sha256": "cc12ea9ab4431f1832527373c0e6bc787868e425f2ad51787fd6fa16a8db7c98"
+    },
+    {
+      "path": "scheduling/messaging_services.py",
+      "sha256": "55593ca995c72015d1471242ad4b219816da759577abb23b1f2b4e26e75b276d"
+    },
+    {
+      "path": "scheduling/migrations/0001_initial.py",
+      "sha256": "6ab4ad792aa52b435cee6aae5e4411cdd4f0ff5160421e9de92a323876c02ac9"
+    },
+    {
+      "path": "scheduling/migrations/0002_alter_messageattachment_file.py",
+      "sha256": "291c69d6f386006546d4c01072becdd05047e6ca1c2696364ec282829de83a43"
+    },
+    {
+      "path": "scheduling/migrations/0003_waitlistentry.py",
+      "sha256": "6b042da571a0d1a88293a4faac75484b44667251a5a9a3528fbe85e76bd96a7a"
+    },
+    {
+      "path": "scheduling/migrations/__init__.py",
+      "sha256": "176f99e857e168b5263428582d26d12f5e935c3663b05efad185e5b5df30d367"
+    },
+    {
+      "path": "scheduling/models.py",
+      "sha256": "db723cba6124ca1816b21f68c8ac9d1a28263810838b5a92d99fb0663d6f3155"
+    },
+    {
+      "path": "scheduling/operating_hours.py",
+      "sha256": "6884f9ec29e2d61d518baeeab50c5fd37041fa6d9c65540ce9ccc5d3670275b3"
+    },
+    {
+      "path": "scheduling/policies.py",
+      "sha256": "c0130d237d1f737ef0cd84f361eb198fe8c4a176d01b00900d3049560629c358"
+    },
+    {
+      "path": "scheduling/reminder_models.py",
+      "sha256": "fbba4aa7f5c8005f41e2f4f6127a4209971a009ba71fa941c405d0044d7c92d5"
+    },
+    {
+      "path": "scheduling/reminder_services.py",
+      "sha256": "6d3ff22490644a60a6d4d083e01a6a4a6eeed9a4f85667e58f03f644f3c62324"
+    },
+    {
+      "path": "scheduling/selectors.py",
+      "sha256": "7cfeb8e3124654c29fa03bfb18593506665eb4fde4bd591e34eb7a59beddeaf1"
+    },
+    {
+      "path": "scheduling/services.py",
+      "sha256": "64d962fd8524a4ecdbd3b51fffc6a546fd3deb64ebf4776f1d7ed8b217b01c63"
+    },
+    {
+      "path": "scheduling/storage.py",
+      "sha256": "eec88b1e5aa7d286f0964695b335840663cf2d07d5b6330531819beafed03b64"
+    },
+    {
+      "path": "scheduling/unit_services.py",
+      "sha256": "a02473e82a09edaf00080e795c412021d9fc976bf0860b3eaec3908f99e938b5"
+    },
+    {
+      "path": "scheduling/unit_views.py",
+      "sha256": "4623dfc2e27ff067c6953d3b0c98f0ccf491d9e03d1bb6968e7ac5cd3eeb8b9c"
+    },
+    {
+      "path": "scheduling/urls.py",
+      "sha256": "9bfcec575ba80d9c64caa2497cf497024ee92c30ebcb35ce2875d8932ca31a91"
+    },
+    {
+      "path": "scheduling/views.py",
+      "sha256": "3f39117e8d045e1ac3b9e437d2b7b85fcc9258835d27d84446fd664a279e548a"
+    },
+    {
+      "path": "scheduling/waitlist_models.py",
+      "sha256": "16c8357675c68dec8f0d09b4d345439cebf809282aec34ff98fe0ba617b5ca8e"
+    },
+    {
+      "path": "scheduling/waitlist_services.py",
+      "sha256": "3f202acd2fad01460c7483a11724f59ab72dfa3711da2d845f5ae3e8bd1f16f2"
+    },
+    {
+      "path": "scheduling/waitlist_views.py",
+      "sha256": "ce959eb42049d6341c0a5e77a8d596d633c2455e74f2791ccde580430680f309"
+    },
+    {
+      "path": "scripts/__init__.py",
+      "sha256": "c0d5081fdbc224060d20e87c96f3ef9745cb0685c883893f67e012b1d880786e"
+    },
+    {
+      "path": "scripts/check_regulatory_matrix.py",
+      "sha256": "bfb84d00679284e455fdeadfec16f97c601825893bb859d578d3af19dd0a15f2"
+    },
+    {
+      "path": "scripts/check_secrets.py",
+      "sha256": "8b5248502c4ebe8d42bab57a84d7721ec14e2f430432de42551d0d89de5d346d"
+    },
+    {
+      "path": "scripts/incident_restore_drill.py",
+      "sha256": "f71ccbd6a79d236bd67e101b8887a40e2245eed62e64297a949a197d07faaf21"
+    },
+    {
+      "path": "scripts/postgres_restore_drill.py",
+      "sha256": "17512153085ba6a1fff238c7d5497625054560623f705a80386b5d4232de4295"
+    },
+    {
+      "path": "static/duralux/css/bootstrap.min.css",
+      "sha256": "26db49828d6701fcfce37a96da6ec3f0ed481abae49c8c9969a575b064413cad"
+    },
+    {
+      "path": "static/duralux/css/product-integration.css",
+      "sha256": "d4526c6df6e735414b8d7b0ff96a98d58d912519c3a193f4bcd1e04f3d864d59"
+    },
+    {
+      "path": "static/duralux/css/theme.min.css",
+      "sha256": "71257c55b10217bf94a0f71c3fda141545ad500a6bebec5bbeb29ee65c5d0be9"
+    },
+    {
+      "path": "static/duralux/images/favicon.svg",
+      "sha256": "d63db9ca2250589dd76fafc71d4029d8e5096ae80b8501f97903d5afa738c6f3"
+    },
+    {
+      "path": "static/duralux/images/logo_header.webp",
+      "sha256": "79e97f09938fecb76293b31c33e991c374e2f71a07ad4fa56be9318f6851042b"
+    },
+    {
+      "path": "static/duralux/images/logo_login.webp",
+      "sha256": "4e0c19623a22cca4705144a4763543dd344c14a3ecfc182838b418a2596fd386"
+    },
+    {
+      "path": "static/duralux/js/bootstrap.bundle.min.js",
+      "sha256": "073254afbfc06331b8b548b7fc0532b4ffe2cfdd588368dcc338e7abd50810e1"
+    },
+    {
+      "path": "static/duralux/js/dashboard-charts.js",
+      "sha256": "773ba64d6e553379af0f422633bd76fc3e3727a6ec5e770bdf41bb9601135fd2"
+    },
+    {
+      "path": "static/duralux/js/form-behaviors.js",
+      "sha256": "2aa3ea86ef5e59ba1b0091e3fc2a30d6e942a5a301eca4a63e0323a98336665f"
+    },
+    {
+      "path": "static/duralux/js/lesson-player.js",
+      "sha256": "ea7ec89f8b738db3d7cb467466c2a5803cdad380f7656855bd2d514ddc6169a7"
+    },
+    {
+      "path": "static/duralux/js/product-shell.js",
+      "sha256": "71885e15bc59532992cd5056b096a32999c8447e80d3c3af3ce8bf9d2c883c1d"
+    },
+    {
+      "path": "static/duralux/js/visual-reference-charts.js",
+      "sha256": "784d21260be824e0b58ebe000983ede4dbec762a68e4ec2bc87a3bc39d53c5ca"
+    },
+    {
+      "path": "static/duralux/vendors/apexcharts/apexcharts.min.js",
+      "sha256": "dacc69f7eb21440e4b331ce1831f9fa5e40f218d995a005db789a9e55d989fe1"
+    },
+    {
+      "path": "static/duralux/vendors/css/feather.min.css",
+      "sha256": "fc163d4b37fa11a3457978e56d33b1efe45f713fd7bb7f0a7ef0ff7ea6401ed6"
+    },
+    {
+      "path": "static/duralux/vendors/fonts/feather.eot",
+      "sha256": "2495770aa8837a3afb8084ea275c469d18965228579231ec5fae6e86d5c2cc84"
+    },
+    {
+      "path": "static/duralux/vendors/fonts/feather.ttf",
+      "sha256": "3bcfe225579659dbaf31019171840d5f4e4b02e63481706aa8f9a3841f450e7e"
+    },
+    {
+      "path": "static/duralux/vendors/fonts/feather.woff",
+      "sha256": "5495042500a1bbf616f91d717aa3637efca7eb4c646683818f5c6c1998500ff9"
+    },
+    {
+      "path": "support_network/__init__.py",
+      "sha256": "55d2173ead7684010ca79b8ff75408a6ec45292959a6530605685bc925548c3a"
+    },
+    {
+      "path": "support_network/apps.py",
+      "sha256": "bbe2f4eb96692f60c15e0c91e8bdaa20047feb17851390aca5f8b66b5e1ae724"
+    },
+    {
+      "path": "support_network/contracts.py",
+      "sha256": "c5afd38ae5d9322880aed02dab82126854ed4701347ed88025ab73fac78b7e06"
+    },
+    {
+      "path": "support_network/events.py",
+      "sha256": "d452614424ecc46811091310910092c6bc8115cc9c64a413a8351a6069514824"
+    },
+    {
+      "path": "support_network/governance_models.py",
+      "sha256": "d69bacfabd3d024540a07dc592093132d2a0ab20f8ce17a82991f4cfbf6f930d"
+    },
+    {
+      "path": "support_network/guardian_models.py",
+      "sha256": "43a4b758c6a3dddc53836dc983f2242a446ef457cfb91bb8f6aaad3b79033cb5"
+    },
+    {
+      "path": "support_network/guardian_services.py",
+      "sha256": "d7e5e5317c2df4a8df6004465ad12792fdb069bd256ebf464e13f681b31833cd"
+    },
+    {
+      "path": "support_network/migrations/0001_initial.py",
+      "sha256": "abea695f72a1f0dc8d4c47756eef281ba7a55dc54349f8e27aab3d3d1bc49b1e"
+    },
+    {
+      "path": "support_network/migrations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "support_network/models.py",
+      "sha256": "1e70c48e5a9ac883c28827240d8f87d935ec1c06ba093f67ac91f71f3b9c929a"
+    },
+    {
+      "path": "support_network/network_models.py",
+      "sha256": "03f434010c9ca5b7b75783190b0dc76c87a1381ae643028d97c7744e17dd98d0"
+    },
+    {
+      "path": "support_network/policies.py",
+      "sha256": "9de0a08f678445d4f67ae3190eb8cf047de26ad10e6eb7dcc2e201b1077c3a85"
+    },
+    {
+      "path": "support_network/rollout_services.py",
+      "sha256": "240d8624fd36f57912c5d9c954556711f89b9bc48688aecad43b5e3377e93346"
+    },
+    {
+      "path": "support_network/selectors.py",
+      "sha256": "6e5489cea03c8aefde36c14834e3475657cf72a36680048402f11ff320a44cfc"
+    },
+    {
+      "path": "support_network/services.py",
+      "sha256": "9ceddffe85d4a53de44c79fe4140b2dfa61f1d51028b950a4f95b03aa8b50d1a"
+    },
+    {
+      "path": "support_network/spirituality_models.py",
+      "sha256": "a905b39eb0d81bf6c1600cfcc24ffa16c72800b464e6e87186c4488ec75a2325"
+    },
+    {
+      "path": "support_network/spirituality_services.py",
+      "sha256": "ddf6c470252c0034a253c5b171d049435198c0790a27c23686d4a7236d20e909"
+    },
+    {
+      "path": "support_network/urgent_plan_models.py",
+      "sha256": "c8433ba85383b61239556edd0866181e843741f3e114fa3c949b0233404a59ef"
+    },
+    {
+      "path": "support_network/urgent_services.py",
+      "sha256": "7d7331519748dfe3cc7501d13d2307a34f912cfdeea28f0bed8c8fd71a7bb2aa"
+    },
+    {
+      "path": "templates/accounts/auth_base.html",
+      "sha256": "bd1d08f6e6d76631285021dd1cdb8f4c25a259a2b4da1af62c20b000dac1116b"
+    },
+    {
+      "path": "templates/accounts/auth_form.html",
+      "sha256": "6ee1f634679b6923cc33686376f119e4c33234012d6a22955c24b45e0874c8d3"
+    },
+    {
+      "path": "templates/accounts/auth_message.html",
+      "sha256": "68f5db996cc3f86b83dccc4943b7eb5590e32621a174fe850cbc18ec99558077"
+    },
+    {
+      "path": "templates/accounts/mfa_enroll.html",
+      "sha256": "66c6cf3c795250468e4834274e8d25c534e9c6d1f636c5c2542631e011ed5dbc"
+    },
+    {
+      "path": "templates/accounts/mfa_recovery_codes.html",
+      "sha256": "01f7b7f4113323d7f93b0754dda332b33204f1ab873602283cff3ca22459aa22"
+    },
+    {
+      "path": "templates/accounts/sessions.html",
+      "sha256": "a8ec794be483a6310ce379896512beafc2a7bd0ae77813d8477e65fb785d6215"
+    },
+    {
+      "path": "templates/analytics/clinic_panel.html",
+      "sha256": "c0ffb98b3a1c15a748a3bc8d49b577140241a75f45dba843526f6f99ee793d70"
+    },
+    {
+      "path": "templates/analytics/patient_dashboard.html",
+      "sha256": "abd7876f330dc6704b1e05e3685a24c8e4d3ca42f7840a71bfd2670ab262d60f"
+    },
+    {
+      "path": "templates/analytics/report_list.html",
+      "sha256": "45fa8ed7c0bc148ce7439ce083593ef3ad9ed1e4209859cdfc3645af5710a15a"
+    },
+    {
+      "path": "templates/analytics/therapist_dashboard.html",
+      "sha256": "a622af163ee59980475b3263ae55b5cb2cba0b2c183cf1c6e5d785328033bab9"
+    },
+    {
+      "path": "templates/clinics/confirm_switch.html",
+      "sha256": "2391e656596b03d83dd42ff5b40a70a99f1078d9a3acb6c4b22a1d51fc25aa5b"
+    },
+    {
+      "path": "templates/clinics/setup.html",
+      "sha256": "d33a7d5bea73064adbd188af4be317a1beed3b700bb274b69fd0b66591a0dba7"
+    },
+    {
+      "path": "templates/clinics/whitelabel_domains.html",
+      "sha256": "c276cc91ceccc578100eee0848be467c45bbac917b568500ccc61bfad6284229"
+    },
+    {
+      "path": "templates/components/content_state.html",
+      "sha256": "0dd29c37db326513a6d9a76dcb3f976994180793be859ebe37b5c1ee747610e1"
+    },
+    {
+      "path": "templates/components/duralux_field.html",
+      "sha256": "887bf87a662c6010fc89bcc024c36f7474c4ebe6392a624ee3a94a19823f3ff3"
+    },
+    {
+      "path": "templates/components/form.html",
+      "sha256": "1815dccf334ed4b964facb61dc884ae701ff192ebaa7ac1ceb6eca0e5de1aaf6"
+    },
+    {
+      "path": "templates/components/pagination.html",
+      "sha256": "fe162c08004550a6356996eff48a3bb74ee203f39da316cd37e083831325bc33"
+    },
+    {
+      "path": "templates/components/responsive_table.html",
+      "sha256": "75a15d3c1604f98a39fe9e71aa68e02e9649d1784d4b2404a5d4fbc7bb060e1a"
+    },
+    {
+      "path": "templates/components/summary_card.html",
+      "sha256": "5382b4d39745e4f7e8019d7d0bd990692305d2b4e668d3e15e2f2f3e416eaa29"
+    },
+    {
+      "path": "templates/consents/center.html",
+      "sha256": "0b06a274878f4c1b7d6232e275935ce8f400e3714073e0ed31cb4154d0f924dd"
+    },
+    {
+      "path": "templates/consents/decision_error.html",
+      "sha256": "b4895955cc06961478c3f2be39c4c2fb0cdb10cce31ad5de805de33b0365a1c0"
+    },
+    {
+      "path": "templates/consents/partials/document_decision.html",
+      "sha256": "4a01d381f030aa0ab30a836e8ff70ee3fa8ecaef00aa211ba238dd8874fdf960"
+    },
+    {
+      "path": "templates/consents/revocation_error.html",
+      "sha256": "d4c6f6fb62123becf40c7a844a75ab3c9cf0247c55303a0bdb787b1b1f758f9f"
+    },
+    {
+      "path": "templates/consents/revocation_work_error.html",
+      "sha256": "d8cad9e6470f73b66380b7b21a55278ccb9c397c9ffd9ab941a61358e467b620"
+    },
+    {
+      "path": "templates/consents/revocation_work_queue.html",
+      "sha256": "59828b6cdcc0c0a08da66255a326587caa454f5e3d17c71160528bdae18ef147"
+    },
+    {
+      "path": "templates/content/detail.html",
+      "sha256": "f2cdd2ef17a43c22624349ea5b392f9991670a6effbf944fe08ed272a5953e8d"
+    },
+    {
+      "path": "templates/content/editorial_compare.html",
+      "sha256": "9f8ac3b3209679a8760f31e16e68cc20f6a64a1e2b833da17f3dc9fc4f4364cd"
+    },
+    {
+      "path": "templates/content/editorial_create.html",
+      "sha256": "f335163cbbaabdfcef1cc874bc36c8c07f5dda0b02970b22405702f27f59b177"
+    },
+    {
+      "path": "templates/content/editorial_detail.html",
+      "sha256": "0bf58ea69ef74dfae9b02fb27c50192177258e05197f991768be0eea52cc4c2c"
+    },
+    {
+      "path": "templates/content/editorial_index.html",
+      "sha256": "f40db915200fdfca2993c796a1882cbf703b173d7edeca9b5d7c8a6a535d63e9"
+    },
+    {
+      "path": "templates/content/editorial_preview.html",
+      "sha256": "6ebe69a0182d64f82ba23acf3f2e384cc82bd026bec0f8e51b5805aba585c712"
+    },
+    {
+      "path": "templates/content/learning/certificate.html",
+      "sha256": "c94fbe50f8a420d2b2e7029ff87ea8e15c99eb0143ba4f9c572f947c47a36210"
+    },
+    {
+      "path": "templates/content/learning/certificate_verify.html",
+      "sha256": "d65204e4fe4e88b10b06dac10214b77a1903cbbcbf9d6eaa58ccc313f9ff9fcf"
+    },
+    {
+      "path": "templates/content/learning/cohort_detail.html",
+      "sha256": "f8acf7f7a6a907ec09479aa34598ce78803f3423729e3b09b5957e028636f4f9"
+    },
+    {
+      "path": "templates/content/learning/course_detail.html",
+      "sha256": "274d17090144c9cf1b48ed6696008379f803c5b73f9c5daf1cbeae4b72a17837"
+    },
+    {
+      "path": "templates/content/learning/index.html",
+      "sha256": "5291d23010a315501ec50062bec1907222fccfa27a2d97eb062e6294fc5a80f6"
+    },
+    {
+      "path": "templates/content/learning/lesson_page.html",
+      "sha256": "75efee1c91e6a3e025027116cb9c0c5cdf1bf76f0e6b71a43b6c7a0b9e6be4ce"
+    },
+    {
+      "path": "templates/content/learning/module_detail.html",
+      "sha256": "7650ce6f3fb8e4deccb22103aef602283deb4a84e7aa2743a1133cdfce0384b7"
+    },
+    {
+      "path": "templates/content/learning/quiz_detail.html",
+      "sha256": "ffcb5c4bd2a969e1b983cdf24d948e2506637bdf4d78d5d44ffc2e6a811e6ebe"
+    },
+    {
+      "path": "templates/content/learning/quiz_feedback.html",
+      "sha256": "861416afca28d1d586f00673acf90d082c05faf7b280e15bcd6918eca05f1bce"
+    },
+    {
+      "path": "templates/content/learning/quiz_participate.html",
+      "sha256": "d4a19324a5415ee6594f0987138fbff5680abe892f990bd98ad010089eff194b"
+    },
+    {
+      "path": "templates/content/lesson_player.html",
+      "sha256": "9e71907b1efa9997e508fd8f9834e722fa9d1deef92d7e22a2685977ffc11ffd"
+    },
+    {
+      "path": "templates/content/library.html",
+      "sha256": "21b602d0eb6b2224115c9956b6d1b04cc5647219a8f262af1b3fe59c21e20dae"
+    },
+    {
+      "path": "templates/content/notifications.html",
+      "sha256": "24740f539098d076ea311f08ab76c6ff98be495b7dfbd3e304812693d2015a06"
+    },
+    {
+      "path": "templates/content/recommendations.html",
+      "sha256": "08c311d47c586fecfe5fdb7b637bcd0cca354b79b715db1e3b88c02c59cd7ed0"
+    },
+    {
+      "path": "templates/content/reports.html",
+      "sha256": "596d1ba0fc7aa4e968bb4266b00f57309dd6dabae42feb2e7e52c2019b40d391"
+    },
+    {
+      "path": "templates/errors/400.html",
+      "sha256": "cca1a770961a83685d656e813be293d39c4284cc64d9d3264f511b4e598cc35f"
+    },
+    {
+      "path": "templates/errors/403.html",
+      "sha256": "a1f7ab90a2dce31b2a9f7e84b34ec254cdeebfdbddafe9e72ca29d9cce0a8557"
+    },
+    {
+      "path": "templates/errors/404.html",
+      "sha256": "4a1853f3abfee0955e26c2d5e7a3ebe15e8eaff19b8e1455fc9e42ede491b993"
+    },
+    {
+      "path": "templates/errors/500.html",
+      "sha256": "d35ee5c7ec2040d0333c89dc87d7907c2b8bedd1318d0013439cc14229cce65d"
+    },
+    {
+      "path": "templates/finance/charge_list.html",
+      "sha256": "eda4b143e5a5f1626f4502dbfbfcd211c1e77ae520869f4bc8416bdd9e8cf095"
+    },
+    {
+      "path": "templates/finance/service_price_form.html",
+      "sha256": "39c8289453e146ff51cda959894421f9bab6a20e68821e4348ef6cfd7a292317"
+    },
+    {
+      "path": "templates/goals/detail.html",
+      "sha256": "a777f1ef182bfa2613da42cdeec067fd486c043a705c2e74db29a1ed382bc804"
+    },
+    {
+      "path": "templates/goals/exercise_assign.html",
+      "sha256": "1eea3def242f8ab4f36fcc4f9d33729a2a8725d32f8a6fe49abc7b081f25d552"
+    },
+    {
+      "path": "templates/goals/exercise_catalog.html",
+      "sha256": "1e77c2f2e386f8557e7b9b7228fbd2e8d640a449cb015b901e6091f9b1e2068d"
+    },
+    {
+      "path": "templates/goals/exercise_execute.html",
+      "sha256": "cbe5b4ba7ba42285373b61e6d68928d99321b635f1270c29bb18fdfbea545db9"
+    },
+    {
+      "path": "templates/goals/exercise_execution_detail.html",
+      "sha256": "477af709cc4be3216a549c48f59c904fdb7d42a14054a5c002bab7b98781b5c6"
+    },
+    {
+      "path": "templates/goals/exercise_form.html",
+      "sha256": "52229e1177120a747c24d5894957e43b62b0f6d96614a96a3df414548c282e74"
+    },
+    {
+      "path": "templates/goals/form.html",
+      "sha256": "b3780b014bddb64bda0148054b457769d275b4f13be2e6b39271d560d0c95315"
+    },
+    {
+      "path": "templates/goals/list.html",
+      "sha256": "1ea1e15fbe0956c7419e45f4859b76424edae9618bf14d6a5db82ce55d72041c"
+    },
+    {
+      "path": "templates/goals/low_energy.html",
+      "sha256": "d07ca6ab54c36ec2e19af80e5e3e30ff8cbd86eeae88dc5ba6bc4135f58c305b"
+    },
+    {
+      "path": "templates/goals/patient_exercises.html",
+      "sha256": "f74bb119faf10bc08e9831837c8c0fbf480905450333b673e9361ff86ae96cf5"
+    },
+    {
+      "path": "templates/journal/checkin_list.html",
+      "sha256": "dd4fa9f3518743bbee83b36f36331d6c430b10675e5182303136a49f2c0dec33"
+    },
+    {
+      "path": "templates/journal/checkin_today.html",
+      "sha256": "c50a8bdbf8a462b911ca50ab0c5af8b12b4e0d092276c14fe6f9771808f14da1"
+    },
+    {
+      "path": "templates/journal/checkin_unavailable.html",
+      "sha256": "ce70fb7b23ef16a2a6e3f00645bf5a0cc91ca15a3b2efcee61b1158f46823f16"
+    },
+    {
+      "path": "templates/journal/detail.html",
+      "sha256": "199b5b75d81b17ac2025d195176f93110b4ecfa8669c467e11fa955f49f2a794"
+    },
+    {
+      "path": "templates/journal/form.html",
+      "sha256": "db4269034e77904356e0afb0a68dbdc1746adaef978d2cb5daaf49a53ec10175"
+    },
+    {
+      "path": "templates/journal/list.html",
+      "sha256": "1447c8ff174f8e470ef4f45de0b2d7f7531eb89b1c6453602b058e975ee46200"
+    },
+    {
+      "path": "templates/journal/partials/calendar.html",
+      "sha256": "161e3b3d66a4444ea888e57e2992fd35e5b7c9a985abf45ac4b95f6d6ff2abf0"
+    },
+    {
+      "path": "templates/layouts/base.html",
+      "sha256": "03866cf567b9d9e19bb6ef38849781deda954004ff8ad79c559b5821fe6d783f"
+    },
+    {
+      "path": "templates/layouts/detached.html",
+      "sha256": "2f98767e925400b5d7f262cdb4fbf2db30a86cff146c9045ae3c16c058c286ee"
+    },
+    {
+      "path": "templates/layouts/partials/header.html",
+      "sha256": "e2e183057d2880fe11eec0214d40d232dc9d60385e416b20960d4d4e0701cd2d"
+    },
+    {
+      "path": "templates/layouts/partials/messages.html",
+      "sha256": "a748c8e217fe05fed450b7aacbb536746d11a0787e867e4e7aebb93e280a4690"
+    },
+    {
+      "path": "templates/layouts/partials/navigation.html",
+      "sha256": "8b32650e4a70900acaa506f3544ff7c341aaac4657afde31f393b430389bfc15"
+    },
+    {
+      "path": "templates/layouts/vertical.html",
+      "sha256": "c24fec52752bef48f6c5dcaec0492c7cfa6f1f1d359642dca510be0775395667"
+    },
+    {
+      "path": "templates/onboarding/clinic_checklist.html",
+      "sha256": "8eeece8da9fa684b2105320f97d9ea79f4af6be4990dbd4057978e4eb38d8e46"
+    },
+    {
+      "path": "templates/onboarding/patient_onboarding.html",
+      "sha256": "93d4767724ca963de6d07c88e89dbc809774d3cde292a7f08754a617ca821fbb"
+    },
+    {
+      "path": "templates/people/patient_detail.html",
+      "sha256": "3e4391aa8dfc341598a4887861fde929278389ca28d2d7116383a05f14fc717e"
+    },
+    {
+      "path": "templates/people/patient_form.html",
+      "sha256": "b8f8c49a894d490b419b4c38d24c53c373bd39af0bf9cabdf51f2e74527f1eb2"
+    },
+    {
+      "path": "templates/people/patient_list.html",
+      "sha256": "e29cb402573ea2db5e5d4c42d2e78cf51b657e3b6d6780d0a1171363331a8f9b"
+    },
+    {
+      "path": "templates/people/professional_list.html",
+      "sha256": "e2425177864b5b1b3a763f67f4329cd66bb01304066265a357088850be208a65"
+    },
+    {
+      "path": "templates/scheduling/appointment_calendar.html",
+      "sha256": "b852f061ed29658a4c7fd3bcdf7535d723c3ef146b4a4bc874780903281cdd95"
+    },
+    {
+      "path": "templates/scheduling/appointment_list.html",
+      "sha256": "426fcb8b9e9d85f169ea0aee43f72ab106e628fa14b85d95363f5367cd39480d"
+    },
+    {
+      "path": "templates/scheduling/appointment_request.html",
+      "sha256": "12575709dee069f1af7679bbb72165ca2da37c0d768b5ad99ea82f14f95919b4"
+    },
+    {
+      "path": "templates/scheduling/appointment_reschedule.html",
+      "sha256": "d9ac5d0a1e1fb65bd4ae795cd4dd931f89b801a964c1a4caf6b66cf1a35659bd"
+    },
+    {
+      "path": "templates/scheduling/conversation_create.html",
+      "sha256": "f717e1cb74f4c3448f3aa27bcc34408b51c97c865b339a70e26ad02a551690ff"
+    },
+    {
+      "path": "templates/scheduling/conversation_detail.html",
+      "sha256": "3cb952cdbe928c5f4474902bf59783b59cc2830c539fcae0aba7b36bee6c5fa3"
+    },
+    {
+      "path": "templates/scheduling/conversation_list.html",
+      "sha256": "b3b97b1a7b75edc365545be668ac4a0a9cba90f2ee250002279759639028460c"
+    },
+    {
+      "path": "templates/scheduling/reminder_preferences.html",
+      "sha256": "0b28265794b7729c03566f8365d1677cc3594c7650c2f2d21b92ba33ee9ec754"
+    },
+    {
+      "path": "templates/scheduling/room_form.html",
+      "sha256": "a49fe44b25cc708e0dc32f8dcbb4d4d106977698ed3e2cfd77ce692d56debb0d"
+    },
+    {
+      "path": "templates/scheduling/unit_form.html",
+      "sha256": "f7b0eb488b75d7c231e0bf5fd98ffb1196206a61a3e8bd560459828b1ab02e56"
+    },
+    {
+      "path": "templates/scheduling/unit_list.html",
+      "sha256": "1c12d08d57ef13d7263b2b5d2bfbabb308311ece9024e1737984ea63e811b3ee"
+    },
+    {
+      "path": "templates/scheduling/waitlist_form.html",
+      "sha256": "a3cc9962e699c00ec18a0a3980c1bfa150fca96fd9c339beafd2d13f68547303"
+    },
+    {
+      "path": "templates/scheduling/waitlist_list.html",
+      "sha256": "aa10be02dc83381a72a7b2eb1453409b30ec50b19de329dbff658be5367be384"
+    },
+    {
+      "path": "templates/therapist_dashboard/home.html",
+      "sha256": "8c61e23a235eacb4d005f8b09d2604b3f08fd5d2b9f373c7b2beaa8eaa5c5665"
+    },
+    {
+      "path": "templates/visual_reference/reference.html",
+      "sha256": "f098526e2320fabe2f9a3ce7b334f6ed3a0816ba1c6baa5ae4029ac1bb022711"
+    },
+    {
+      "path": "templates/workspace/home.html",
+      "sha256": "ae5ec8541abe2724a9a72ed37b48822a42540da9d0e879a7826e05fa846e96b8"
+    },
+    {
+      "path": "tenancy/__init__.py",
+      "sha256": "80fcb7bdd6953609913a1084543240fcfa87e737db5fb223e07339be9464ce28"
+    },
+    {
+      "path": "tenancy/apps.py",
+      "sha256": "6363449aa4d26b3bedba73dfb70640bbc47572a0a40446c9c9f1867113235c4b"
+    },
+    {
+      "path": "tenancy/events.py",
+      "sha256": "a04edc4383123e5d90105a93aa6feafb33504d51c7914929479161c0be40a2d5"
+    },
+    {
+      "path": "tenancy/policies.py",
+      "sha256": "cdd73276a620fcf54b06ba1cbea9ed1f686556756878445e5716171c2810d8ab"
+    },
+    {
+      "path": "tenancy/selectors.py",
+      "sha256": "6849a5fe3d11b2089f636a0c60921de0a595996b55504fadce5159fdf4573add"
+    },
+    {
+      "path": "tenancy/services.py",
+      "sha256": "6081e85335c4828f61a3c03a30e68fd032989e6482c8daac9617ff0ec1361683"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "08b8e5387013e869a19974637957373870abb44c916683d143d1209df831dd61"
+    },
+    {
+      "path": "tests/architecture_helpers.py",
+      "sha256": "f2d50195cfcfe572efe37d596ab5ae7b766e89557a306521a2be322b2d686e71"
+    },
+    {
+      "path": "tests/factories.py",
+      "sha256": "c307da1d448f691e18d61ad20ea2a708b7e78b98e130040e15e1b483dc33a15b"
+    },
+    {
+      "path": "tests/test_account_session_mfa.py",
+      "sha256": "9f3c9ccac3dd00a2829aafab1f5ae20947b3d937d30859f880cba7c5b974ca05"
+    },
+    {
+      "path": "tests/test_accounts_authentication.py",
+      "sha256": "af5f8878ae51de24cd85205b3ad3088889954d6bc9a260aa4d30793968cd7ddb"
+    },
+    {
+      "path": "tests/test_accounts_identity.py",
+      "sha256": "f63b04cff5db821bc1c8c0a047ebbd79a617e23b0c6a0c6038fd7917daf7c554"
+    },
+    {
+      "path": "tests/test_ai_assistant_drafting.py",
+      "sha256": "ffa197f8d1b8ee5fa8017a97c3ce68741cfc52fe6a770b7ae000d990835f81a0"
+    },
+    {
+      "path": "tests/test_ai_assistant_governance.py",
+      "sha256": "d844de9529c17cbc003bd68a48e6c724daf4454598a07c9ca37375338337b259"
+    },
+    {
+      "path": "tests/test_ai_assistant_guardrails.py",
+      "sha256": "d750992a5283ae8f1cfccb03c275cba356762ffb72b8c2083677773b0eeccac4"
+    },
+    {
+      "path": "tests/test_analytics.py",
+      "sha256": "53e44324d1966ed55bf761f554004ec84749de7d1b238b8055ea8681f88d75f3"
+    },
+    {
+      "path": "tests/test_analytics_advanced_reports.py",
+      "sha256": "a30501e5d49db46bb7114380bac9cf2db1b1335679934b80978c15d0c0aeb157"
+    },
+    {
+      "path": "tests/test_analytics_anonymization.py",
+      "sha256": "1d0b3cdf5525bd884f88b4a65450d1a2ae2564ea7c939df14e34bd2f3bcce24b"
+    },
+    {
+      "path": "tests/test_audit_trail.py",
+      "sha256": "2f02a95897150e143d9fec807e154e015a98a5c545f224212d5c0f3d93a8d423"
+    },
+    {
+      "path": "tests/test_availability.py",
+      "sha256": "88fcd54169f93d013a9ad2e8c24b0aba9a2bae2e1cd289974ad8668022ace440"
+    },
+    {
+      "path": "tests/test_billing.py",
+      "sha256": "3bfd006c2d96dd5daa136a425fbad4b4b65c19cbd152afe80eac61e368e36335"
+    },
+    {
+      "path": "tests/test_checkin.py",
+      "sha256": "b49a271c4d1017a78c58efa6d44950d668a3597855c74269d41b1616525ad396"
+    },
+    {
+      "path": "tests/test_clinic_admin.py",
+      "sha256": "c0d9e4f20007f8490e7ffa8500657da928a99ac5fa9aab3fbd183ceea9099f59"
+    },
+    {
+      "path": "tests/test_clinic_authorization.py",
+      "sha256": "bdf721760b16f7a0497762681025c4c27172f27e6f1a3b04fd91b12fb3c39bb5"
+    },
+    {
+      "path": "tests/test_clinic_models.py",
+      "sha256": "df1058034739b1299e721f72bc01961c797cac6c3c3844752a72cdcd856dbde8"
+    },
+    {
+      "path": "tests/test_clinic_role_matrix.py",
+      "sha256": "da282a082a99a1c92b5d451d484130199c8ba338120b9439b5a703342e14a900"
+    },
+    {
+      "path": "tests/test_clinic_setup.py",
+      "sha256": "e81688fb47f4c49994edfc4dc0000a2b72a1091b2759d93bbc22723f71105410"
+    },
+    {
+      "path": "tests/test_communities_gamification.py",
+      "sha256": "3483bda75a3364f7b83b9d082a0c0bda60587df17f56cf1b41d43504e704f724"
+    },
+    {
+      "path": "tests/test_communities_governance.py",
+      "sha256": "da25a084729840823133593b00300e442076d8eb0aff5f7e8cdeaab01c5af8bd"
+    },
+    {
+      "path": "tests/test_communities_groups.py",
+      "sha256": "16d6816aa77f24293bc759133e7cbb458438d03716103c490170320eeb1f92c8"
+    },
+    {
+      "path": "tests/test_communities_interactions.py",
+      "sha256": "158df8acca61528ca0df95fcaebd4dee1b9c04944644696692636ca3b84a7c9b"
+    },
+    {
+      "path": "tests/test_communities_moderation.py",
+      "sha256": "b442c3f522cab2e33b1468e45243783a02768d2d041e231386af0a1d74b85732"
+    },
+    {
+      "path": "tests/test_consent_access_lifecycle.py",
+      "sha256": "4f3f5a6fdbe41ae508462163ae710e13c8d44b4fdc1d81c5d94450491caa1354"
+    },
+    {
+      "path": "tests/test_content.py",
+      "sha256": "158c7610c2011711411440f48d11c9fd69b544e86c6ad502431c090321256aa6"
+    },
+    {
+      "path": "tests/test_content_components.py",
+      "sha256": "fe6d54ca9a33895ad4c13bd316e126aeb761c40c645fe92eda7f4c3f082b8969"
+    },
+    {
+      "path": "tests/test_content_courses.py",
+      "sha256": "613786998d2fffa26971b34d0d60af663c5a2799b0b1ae7281ca7675b62bd26b"
+    },
+    {
+      "path": "tests/test_content_courses_review_fixes.py",
+      "sha256": "4dc27e415eed5a9f0a2f9730b7a1ca08620ffaefc498229539b613f1914e40a3"
+    },
+    {
+      "path": "tests/test_content_curation.py",
+      "sha256": "eee2723c97f71eb83f1cf19f3803cfcb4a72faf07166c6d3a01c9437fa3437e7"
+    },
+    {
+      "path": "tests/test_content_curation_governance.py",
+      "sha256": "58e1c30fbf2b49d88bd5ca45371b8cfded493c8e7313186daed535407cd044d0"
+    },
+    {
+      "path": "tests/test_content_curation_review_fixes.py",
+      "sha256": "3f50f7086982f73c3a5f9a928e8d0666fb342de87c6b24f9f392e4c64e7d9193"
+    },
+    {
+      "path": "tests/test_content_http.py",
+      "sha256": "6b42c517ae34d6a040a21e5b81fc0a80dcf8fc49c906b050d65300f130fe9f26"
+    },
+    {
+      "path": "tests/test_content_learning_authoring.py",
+      "sha256": "bb008a45afeb20ad323b2f80a67e05dd43fa978a21e2ba89c8cf5064b575fc08"
+    },
+    {
+      "path": "tests/test_content_learning_authoring_http.py",
+      "sha256": "420b2fb322395f89e182658627d886cbfc2d325259a202105f9fbbc1c6df521d"
+    },
+    {
+      "path": "tests/test_content_learning_authoring_http_round5.py",
+      "sha256": "6f53894a784ee839efe8d2cea0b902710f78f094502adac7db87e0f4e2bf75a0"
+    },
+    {
+      "path": "tests/test_content_learning_participant_http_round5.py",
+      "sha256": "e6acd86dd72eb837d5efd39cd7a45bca6047adf9135a01edbdeb3f8dc67ae357"
+    },
+    {
+      "path": "tests/test_content_regressions.py",
+      "sha256": "379f177dffc77a5ba099aa676550f2d4ca844fd20fb6a2f3f4cb65c5bd2b29c7"
+    },
+    {
+      "path": "tests/test_content_taxonomy_cache_fixes.py",
+      "sha256": "63834e05b1dee20ec665a22c7fa16da93558b0136e00309aad910a28d34ec06e"
+    },
+    {
+      "path": "tests/test_content_tenant_invariant.py",
+      "sha256": "7a1ca212a67fb712c135431b889994d68e939cb9cc821bb9e7a04c5f5c7e5f23"
+    },
+    {
+      "path": "tests/test_data_subject_rights.py",
+      "sha256": "20e4bc3401c38e5a6c03540984e77e04e4094584d8696af58c12e20aeb069197"
+    },
+    {
+      "path": "tests/test_design_system.py",
+      "sha256": "faf4a5841a2d2477922e12b4d565aa53666e8af53014a90718db023a0a54aa12"
+    },
+    {
+      "path": "tests/test_domain_architecture.py",
+      "sha256": "ad3717c13cad6e6d266b1e5ff0e8ae06067ae6d0a4a80d134443a2b49c2efd0d"
+    },
+    {
+      "path": "tests/test_duralux_domain_templates.py",
+      "sha256": "e2b3749498e583d4d6fac6bed5ac0b8e784f9308ba7397a68ccee38dfa630673"
+    },
+    {
+      "path": "tests/test_duralux_form_regressions.py",
+      "sha256": "98c71a26e0d6d5e887cb5291e3ae188c552284b04f489cb2c0bb68fda4945988"
+    },
+    {
+      "path": "tests/test_duralux_legacy_removal.py",
+      "sha256": "866562d455febaddb6edecd00ef362297bc72a2ee61b8f8d82a3218e4a48723d"
+    },
+    {
+      "path": "tests/test_duralux_static_foundation.py",
+      "sha256": "024f9b8c8da609ff926c34fba54f422ff7011c6d8f6b42464ae3d724045e9671"
+    },
+    {
+      "path": "tests/test_exercises.py",
+      "sha256": "3bdd6430db20ab1cf5c77c01065605a8d2426fc4f650c7dd985622f2481eb9a3"
+    },
+    {
+      "path": "tests/test_finance.py",
+      "sha256": "3c1a1c899fa18c347c8fac2a0f5fa874af41f2d32f82f3d1a97077af573ac4a9"
+    },
+    {
+      "path": "tests/test_finance_reporting.py",
+      "sha256": "ac4c3c1162ff3d1d3c216e4777a50e0d8036c7ac9995826965a51f22ccabf8d4"
+    },
+    {
+      "path": "tests/test_form_components.py",
+      "sha256": "c14006cdd9d44f8aa163c43246aa7d701222601ea702127bda031f850961f8d4"
+    },
+    {
+      "path": "tests/test_goals.py",
+      "sha256": "f05600d2dd1b7fc07b412fcd85638c39169abd307941c0dbfba5a633c377d303"
+    },
+    {
+      "path": "tests/test_incident_readiness.py",
+      "sha256": "59ea212033914014a290df6faa9689db8d9e2cd9347df4af1a6031033fa88147"
+    },
+    {
+      "path": "tests/test_integration_calendars.py",
+      "sha256": "b695487abe1a935f86d595493d2ba545d5d975bafff4ef8752675a1a7655c23a"
+    },
+    {
+      "path": "tests/test_integration_platform.py",
+      "sha256": "8eb968e27a370a78b53aa131cd0c6b02fd638c0bffef69c59c35ae290f882b57"
+    },
+    {
+      "path": "tests/test_integration_sagas.py",
+      "sha256": "3eeaa6c229f5e92bd7f50785c544d03f7bccf467df17703d3cd3ed1824e722fb"
+    },
+    {
+      "path": "tests/test_integration_video.py",
+      "sha256": "ac506eab0a5c3938a597bb3959d2e9c999bc300e3c200aa5e50fa331cfa73e7c"
+    },
+    {
+      "path": "tests/test_integration_whatsapp.py",
+      "sha256": "f3e12b9c8c710a4885f23a3b1b8a7922c7a93224b74195b2fbd620c8716d22cc"
+    },
+    {
+      "path": "tests/test_integrations_api_portal.py",
+      "sha256": "e1b97f5537a1d05bd782546446b55890c80446c6915b0b8d8e30a9a191dc3de9"
+    },
+    {
+      "path": "tests/test_integrations_observability_rollout.py",
+      "sha256": "5724ed1f468fcefea4183abfb4b58535e0034c5bdc74957579da9113ef7c8f01"
+    },
+    {
+      "path": "tests/test_integrations_pwa_offline.py",
+      "sha256": "e068a00734fb7f660a4b270a4f297dc6e85d3214c8f04e87b4424be43e5163b2"
+    },
+    {
+      "path": "tests/test_integrations_webhooks_csv_wearables.py",
+      "sha256": "1dc4b336ffe67592ce6682388efe3404bb1a0e0eb9c51b739949d356cd08530a"
+    },
+    {
+      "path": "tests/test_journal.py",
+      "sha256": "ce3997faf4aa08e2fe2707eefee6f97320e65272f3e0a8a4711551ac7272e83f"
+    },
+    {
+      "path": "tests/test_layouts.py",
+      "sha256": "19aac6a74eef06fc15b8571f32e027cce69ef40eb767d725db458bcc739b9cc2"
+    },
+    {
+      "path": "tests/test_learning_data_erasure.py",
+      "sha256": "528ea57f146464551de644792bc4bf294ede5a0d067d0363c3532a872f6935d6"
+    },
+    {
+      "path": "tests/test_learning_experience.py",
+      "sha256": "f41e61fd626d7b670e1128dd380eafbfa046e45645ecc9cdf0291ae3d554fb18"
+    },
+    {
+      "path": "tests/test_learning_experience_round3.py",
+      "sha256": "c43458caff393377a5d0f3f002fd54b4f2ad70acfa16f3c5858d70ac63c0ad43"
+    },
+    {
+      "path": "tests/test_learning_player_http.py",
+      "sha256": "2ecfbf7859dcb9e7e388dc5653ad84ffdddf8395f7bb75b81282bf698bf30efb"
+    },
+    {
+      "path": "tests/test_ledger.py",
+      "sha256": "c00a8c5dbdff93dbae0da3f51cba5a10b5c04822135b7e23c99e8cbb144aef8e"
+    },
+    {
+      "path": "tests/test_low_energy.py",
+      "sha256": "b8fc8620924de0b7e61bae0ba27c981a5361d4b878f34e5205d328abc7d825c4"
+    },
+    {
+      "path": "tests/test_medical_records_documents.py",
+      "sha256": "79832456c2fccc1d2d8f3d1639f89c6fdcb0f104839f816ec900c107f4815670"
+    },
+    {
+      "path": "tests/test_medical_records_entries.py",
+      "sha256": "ef203f66a9b291938e718495e67eeb114cd3d580a52ec74c2b4a068f36622321"
+    },
+    {
+      "path": "tests/test_medical_records_governance.py",
+      "sha256": "02aea4d9065eab5414d288e519e13d8624e8999f168af76ebdb369ed78c4cc7c"
+    },
+    {
+      "path": "tests/test_medical_records_retention.py",
+      "sha256": "9a9ac6c6a7601b2350d0d21664b35eecfac68e63ff42ab3baa004f4bc793ec36"
+    },
+    {
+      "path": "tests/test_medical_records_signatures.py",
+      "sha256": "c0b828cf73212a09428a8407e8571f7f91f6f8f8c3a945911c611f70e68bf437"
+    },
+    {
+      "path": "tests/test_observability.py",
+      "sha256": "9f34ba0e29512e0f64d1d61c6b31b8756fa1a0364af34ec3cc0929febb9d7e96"
+    },
+    {
+      "path": "tests/test_onboarding.py",
+      "sha256": "c22a83175618a9808c7c389a8fec13621db2e4943df36c99d5a66f54c95a3c9d"
+    },
+    {
+      "path": "tests/test_patient_authorization.py",
+      "sha256": "4f0e8ec1a510066b309dfabc24847fde2506fd6062249c6832748e7cb0323c44"
+    },
+    {
+      "path": "tests/test_patient_management.py",
+      "sha256": "ee32e7025ca96cf997b6c267f62c99ce4788c3796ad3432ff23b1756acef53e5"
+    },
+    {
+      "path": "tests/test_payouts.py",
+      "sha256": "92e6c63d90fff0793dc1a734aabf7a4869b0925fdb6e69916b7d96da67fb3bc9"
+    },
+    {
+      "path": "tests/test_persistence_and_demo_data.py",
+      "sha256": "ddad72c015b3c6c8b14daa7b06e016f871f2ae6cf9a4cee3e7de317f5dd5d140"
+    },
+    {
+      "path": "tests/test_privacy_governance.py",
+      "sha256": "4fe65e8e11c6a7f961e15d8f8a334666651b19bc39a369c4bb77ce3e18391e24"
+    },
+    {
+      "path": "tests/test_professional_management.py",
+      "sha256": "79ae19d275bb1a4ddaf9060796b053877c77e782c36d76bacb7cec49a1bddede"
+    },
+    {
+      "path": "tests/test_regulatory_governance.py",
+      "sha256": "e92eaa9e2461810b9a0996798b565e7f5774c9e485cff3dea33baa8bd2edfc46"
+    },
+    {
+      "path": "tests/test_routines_care_plans.py",
+      "sha256": "da0431a9192a5b6f121efb086290e504fa9413e7721013d8d2b6e996cda95d99"
+    },
+    {
+      "path": "tests/test_routines_checkins.py",
+      "sha256": "0ed849e2d8e67d77f6caec782baf8156f042acd10efe34b0a3cb954fd4d4e9eb"
+    },
+    {
+      "path": "tests/test_routines_medications.py",
+      "sha256": "5368ca083b068f2a8d5ccca39b8098f1492bf9d7d4d81ada01b25947d6a6670d"
+    },
+    {
+      "path": "tests/test_routines_planning.py",
+      "sha256": "c792d2f8c864035e8e7410d22db2b596534a4649aae53991113f04442768b991"
+    },
+    {
+      "path": "tests/test_routines_sleep.py",
+      "sha256": "7a247877205fda16cca92e290787baf27836ead6e91249bd36f70bcf1952ce83"
+    },
+    {
+      "path": "tests/test_scheduling.py",
+      "sha256": "9e912b456f069569a535ea6aec1ab7801f36c6f440408a5f912b842212f1a978"
+    },
+    {
+      "path": "tests/test_security_controls.py",
+      "sha256": "d27458704a47855e5de72cd5cb53b4a9d235cac75c382b548374ad5a043a6edc"
+    },
+    {
+      "path": "tests/test_smoke.py",
+      "sha256": "53b5b585e73960d6505d379399509ab47ddbcf88efd29a05c4fa7b5fe8750341"
+    },
+    {
+      "path": "tests/test_sprint4_duralux_templates.py",
+      "sha256": "b9e80e296fdafb306f67fffbeb3a67952a45ed0ba6b8591b76eac529c48893fe"
+    },
+    {
+      "path": "tests/test_subscriptions.py",
+      "sha256": "173e88eb2dd5aabc73382e20642f912630cc5440e9397db035b50a0b21f868a6"
+    },
+    {
+      "path": "tests/test_support_network_governance.py",
+      "sha256": "59bd91503d0b1fb27355e6300fc303bbbf73a29245348107a368d64fe590a168"
+    },
+    {
+      "path": "tests/test_support_network_minor_safeguards.py",
+      "sha256": "ad300108b706f3d31d0b38f6dff04acbc7e4c0490c5ce109e97663c02a5f65c5"
+    },
+    {
+      "path": "tests/test_support_network_relationships.py",
+      "sha256": "0328bdefa19437ff7d9243f4686733814bbe88e09b27d95449fc0dd2fd508e3f"
+    },
+    {
+      "path": "tests/test_support_network_spirituality.py",
+      "sha256": "e9c0792802a0ecfc271b620f92a624793e9cab9f0d5087eb3fec780d410f394b"
+    },
+    {
+      "path": "tests/test_support_network_urgent_plan.py",
+      "sha256": "37cac1bf73affa5c9676057eb1889f18d1e43328130241fa842fe14b641f8d99"
+    },
+    {
+      "path": "tests/test_tenant_middleware.py",
+      "sha256": "0453e9db73c0be148d2e0a19d7f6ccd8e27ea782d9496e0faf5f4da3b912bdba"
+    },
+    {
+      "path": "tests/test_theme_charts.py",
+      "sha256": "c5c727d82d777a6e7efcb786ab45f75ff282459988ecad3fd4700c5ebef29992"
+    },
+    {
+      "path": "tests/test_therapist_dashboard.py",
+      "sha256": "5e7bd39ecb4d10e597bbc9f2ea92f129a7e1dcf3824e792aa52cd5b11fdee4ed"
+    },
+    {
+      "path": "tests/test_triage.py",
+      "sha256": "b6ea440caa4550a930a4afc268025712e5c7a743f1f0db7d841070ad4db2a766"
+    },
+    {
+      "path": "tests/test_units.py",
+      "sha256": "c92de2ef714c2d230c743315c51024e006ec6fd05bb11eeeed2faca3beacf9bc"
+    },
+    {
+      "path": "tests/test_versioned_consents.py",
+      "sha256": "7dff9976662e63cb0a41b3911ef4e240a9449e5f5c0ced738bfbe14e2093721d"
+    },
+    {
+      "path": "tests/test_waitlist.py",
+      "sha256": "0d1023a428ea06efccdf61352aeddd4607ead178693c834f921f19805e5296ce"
+    },
+    {
+      "path": "tests/test_webhooks.py",
+      "sha256": "9b8f76658e6f9813d1a285c241c35874b3564898e00611934589de6f45c328fe"
+    },
+    {
+      "path": "tests/test_wellness_activity.py",
+      "sha256": "10635c135445e5ca05d47ac4ce69679f1c62de5668f142a0bd9349fbaeb127ef"
+    },
+    {
+      "path": "tests/test_wellness_checkins_movement.py",
+      "sha256": "d294c320ac7b6dc4151f4dd5a615703c2eb3d9fc1b9fa6a21c9a23e1a1c1322d"
+    },
+    {
+      "path": "tests/test_wellness_crisis_mode.py",
+      "sha256": "9912f985d7ae1b6dcf2e2db8aba5885ed459423cbe4345f942cf93ba9312ded5"
+    },
+    {
+      "path": "tests/test_wellness_relapse_plan.py",
+      "sha256": "4f6b7b66151e9398473a4554630122d526a66d0ebe6f5428b574c581513eb494"
+    },
+    {
+      "path": "tests/test_wellness_sobriety.py",
+      "sha256": "9ff3ccc020648549c36ee132d31788d334f622a0a783f9644b593d0a6818c43e"
+    },
+    {
+      "path": "tests/test_whitelabel.py",
+      "sha256": "373cec00f474d290c18432e2804f9edc96dda5a8f9d14ca5fa51c20e4daf89a6"
+    },
+    {
+      "path": "tests/test_whitelabel_brand_schema.py",
+      "sha256": "c7ce641bdb7b24cc781aa075a2a5007279e46e18e5c95444423031c23f7f2195"
+    },
+    {
+      "path": "tests/test_whitelabel_round4.py",
+      "sha256": "65133fabb603a1b29ae56bb1fa7ad6d6044939ccfea8bd86b818d538f1a34fe5"
+    },
+    {
+      "path": "therapist_dashboard/__init__.py",
+      "sha256": "29d13b2c1f2a2606e465c352ea171c719de6be70012d10b8eee5c2fdbd76d6f5"
+    },
+    {
+      "path": "therapist_dashboard/apps.py",
+      "sha256": "540fd3ea99156ec3acd1dc9c67539edee2b37c15e50969b0ef8959da01935ebb"
+    },
+    {
+      "path": "therapist_dashboard/events.py",
+      "sha256": "46507f3bc857ba9c977888a8253f9e2d05629e71109638ef9170d336b50669d5"
+    },
+    {
+      "path": "therapist_dashboard/policies.py",
+      "sha256": "024dbaeb4c7bc6ee3ca5c7b1abb97c6342ae1723678ba85a4aedd8dc7fbec74b"
+    },
+    {
+      "path": "therapist_dashboard/selectors.py",
+      "sha256": "a1b37f13641a7fff99a050e1d5bef13301b1bf462f94d5efc6104f20e5620e77"
+    },
+    {
+      "path": "therapist_dashboard/services.py",
+      "sha256": "557a4525ea99a53fa850bbac963269577ee8f374397e4819b70940bc06df7ec2"
+    },
+    {
+      "path": "therapist_dashboard/urls.py",
+      "sha256": "2b1eabb2dc573fa2a32e11718f6a7782112fa1e5869fde9a8455d78a4bf4d9f1"
+    },
+    {
+      "path": "therapist_dashboard/views.py",
+      "sha256": "dbfdfe6df8635a7fbeb00a9292a019fd18592f30cae1ca5c0510c9de0a2ad8db"
+    },
+    {
+      "path": "wellness/__init__.py",
+      "sha256": "2d32071f7b06c43eb9d0158c633a188591ae8a2acffb0ed1f914cccdfd4fba07"
+    },
+    {
+      "path": "wellness/activity_models.py",
+      "sha256": "7b7a28a032555a4a95ae27feeda875c2fc8d64acea1ae0fbf1f8619134b0422c"
+    },
+    {
+      "path": "wellness/apps.py",
+      "sha256": "42a754c2421f8086ee743f6c1a06f258599eaa097411b685af3354cf5c9f9d62"
+    },
+    {
+      "path": "wellness/contracts.py",
+      "sha256": "44073e58fe5345ff5a4ac51c83e07eeeb3373659ae29f098ae3a45859645c43a"
+    },
+    {
+      "path": "wellness/crisis_models.py",
+      "sha256": "2a262289a0d3403f0ce67392d17bd04e1fe05d41bf529261af7fb25dec683d03"
+    },
+    {
+      "path": "wellness/crisis_services.py",
+      "sha256": "f86c3bee094c91c293ff2bbf37751c0799fb43a5c60855f2fce1a593c393b0ff"
+    },
+    {
+      "path": "wellness/events.py",
+      "sha256": "ae7f35e1ea6d328619c8895b5531c0a8c56b82bd996a4bd1881fb9fcf7a8d3ed"
+    },
+    {
+      "path": "wellness/migrations/0001_initial.py",
+      "sha256": "9140cb60167c044eaed539e9386d8bddd12df0f1d507d8e4158bb332b7647c39"
+    },
+    {
+      "path": "wellness/migrations/__init__.py",
+      "sha256": "6d8e4a89cc1d975bfd2b381e4cb07c1ef9373bb6478f44e4a3ad956dafdf634d"
+    },
+    {
+      "path": "wellness/models.py",
+      "sha256": "9d9128da153cecdc83355e8148976a7fa527a492093b33f431cda1e9bd8cb7c8"
+    },
+    {
+      "path": "wellness/policies.py",
+      "sha256": "01b967ed2d6b1abf5138ad27f2c8801173fb473d66641b136acf029a6d38640e"
+    },
+    {
+      "path": "wellness/relapse_plan_models.py",
+      "sha256": "2c099591ae17f6c4c50b5d94da4170376b6115f2e6fc9820dc30f0e7bcc025a4"
+    },
+    {
+      "path": "wellness/relapse_services.py",
+      "sha256": "74bbafba966ebcf15237b97e079617aabfdc3c4ee776bcba3add8cea577faa24"
+    },
+    {
+      "path": "wellness/selectors.py",
+      "sha256": "4cb22f37c683e689a9b019f34ec23ba538939d84fde50da597ec94e3b1fd4c22"
+    },
+    {
+      "path": "wellness/services.py",
+      "sha256": "6d897dc91a8edb1eddba3f82c8c642ac2f4630c4490ae49722471ece1d57c5ec"
+    },
+    {
+      "path": "wellness/sobriety_models.py",
+      "sha256": "c8404eba4d786ef1f00f6b0b83775e5603f581a3e3146a80eecbd168d5e15071"
+    },
+    {
+      "path": "wellness/sobriety_services.py",
+      "sha256": "4d1524fbb7a9861c1dd92a50573abd8a09dffcda204f3142fcc53007fa740ab3"
+    },
+    {
+      "path": "wellness/wellness_models.py",
+      "sha256": "12b0db89fe7ff0d6cfee6d3bdec7b9ace114909ae1f0bf7915de4d5b2ebb55f2"
+    }
+  ]
+}

@@ -1,0 +1,1947 @@
+{
+  "scope": "Clinic/onboarding UI, synthetic preview; en/es unpublished",
+  "results": [
+    {
+      "surface": "setup-identity",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "pt-br",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "pt-br",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-error",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "retainedData": true,
+      "focusedInvalidField": true
+    },
+    {
+      "surface": "onboarding-error",
+      "language": "pt-br",
+      "width": 320,
+      "theme": "dark",
+      "retainedData": true,
+      "focusedInvalidField": true,
+      "submittedStepPreserved": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "pt-br",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "pt-br",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "pt-br",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "pt-br",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "pt-br",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "pt-br",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "pt-br",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "pt-br",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "pt-br",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "setup-identity",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "en",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "en",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "en",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "en",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "en",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-error",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "retainedData": true,
+      "focusedInvalidField": true
+    },
+    {
+      "surface": "onboarding-error",
+      "language": "en",
+      "width": 320,
+      "theme": "dark",
+      "retainedData": true,
+      "focusedInvalidField": true,
+      "submittedStepPreserved": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "en",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "en",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "en",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "en",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "en",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "en",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "en",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "en",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "en",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "setup-identity",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "es",
+      "width": 320,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "es",
+      "width": 390,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "es",
+      "width": 390,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "es",
+      "width": 1440,
+      "theme": "light",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-identity",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-operations",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-branding",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-modules",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-review",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "domains",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "checklist",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-goals",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-preferences",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-terms",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "patient-complete",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "switch",
+      "language": "es",
+      "width": 1440,
+      "theme": "dark",
+      "translatedHeading": true,
+      "overflow": false
+    },
+    {
+      "surface": "setup-error",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "retainedData": true,
+      "focusedInvalidField": true
+    },
+    {
+      "surface": "onboarding-error",
+      "language": "es",
+      "width": 320,
+      "theme": "dark",
+      "retainedData": true,
+      "focusedInvalidField": true,
+      "submittedStepPreserved": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "es",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "es",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "es",
+      "role": "patient",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "es",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "es",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "es",
+      "role": "therapist",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/setup/",
+      "language": "es",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "/clinics/white-label/dominios/",
+      "language": "es",
+      "role": "administrative_staff",
+      "denied": true
+    },
+    {
+      "surface": "/onboarding/clinic/",
+      "language": "es",
+      "role": "administrative_staff",
+      "denied": true
+    }
+  ],
+  "errors": []
+}

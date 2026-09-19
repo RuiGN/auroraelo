@@ -1,0 +1,187 @@
+/* Account entry flows adapted from Duralux minimal authentication references. */
+.product-auth-body {
+  min-width: 20rem;
+  min-height: 100vh;
+  background-color: #eaf1f8;
+  background-image: url('../images/auth/mindcare-peace-light.svg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+html.app-skin-dark .product-auth-body,
+html[data-bs-theme="dark"] .product-auth-body {
+  background-color: #0a1220;
+  background-image: url('../images/auth/mindcare-peace-dark.svg');
+}
+
+.product-auth-body .auth-minimal-inner {
+  padding: 2rem 0 3rem;
+}
+
+.product-auth-body .product-auth-inner {
+  width: 100%;
+  max-width: 28.125rem;
+  padding: 0;
+}
+
+.product-auth-body .card.product-auth-card {
+  max-width: none;
+  background-color: #ffffff;
+  border: 1px solid #e6ebf2;
+  border-radius: 1rem;
+  box-shadow: 0 24px 48px -20px rgba(15, 23, 42, 0.28);
+}
+
+html.app-skin-dark .product-auth-body .card.product-auth-card,
+html[data-bs-theme="dark"] .product-auth-body .card.product-auth-card {
+  background-color: #0f172a;
+  border: 1px solid #24324d;
+  box-shadow: 0 28px 56px -18px rgba(0, 0, 0, 0.65);
+}
+
+/* Inputs with leading icons */
+.product-auth-control {
+  position: relative;
+  display: block;
+}
+
+.product-auth-control .product-auth-control-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.875rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
+  color: var(--bs-secondary-color);
+}
+
+.product-auth-control .product-auth-control-icon i {
+  font-size: 1.1rem;
+}
+
+.product-auth-control .form-control {
+  padding-left: 2.75rem;
+  min-height: 3rem;
+  border-radius: 0.75rem;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+html.app-skin-dark .product-auth-control .form-control,
+html[data-bs-theme="dark"] .product-auth-control .form-control {
+  background-color: #0b1322;
+  border-color: #24324d;
+  color: #e2e8f0;
+}
+
+.product-auth-control .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  opacity: 0.75;
+}
+
+.product-auth-control .form-control:focus {
+  border-color: var(--product-primary, #3454d1);
+  box-shadow: 0 0 0 0.2rem rgba(52, 84, 209, 0.15);
+}
+
+/* Secondary auth link (e.g. password recovery) reads as a link. */
+.product-auth-form > .mt-4 a {
+  color: var(--product-primary, #3454d1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+html.app-skin-dark .product-auth-form > .mt-4 a,
+html[data-bs-theme="dark"] .product-auth-form > .mt-4 a {
+  color: #7cb3ff;
+}
+
+html.app-skin-dark .product-auth-control .form-control:focus,
+html[data-bs-theme="dark"] .product-auth-control .form-control:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.18);
+}
+
+.product-auth-toolbar {
+  position: relative;
+  z-index: 10;
+}
+
+.product-auth-emblem {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid var(--bs-border-color);
+  background: var(--bs-body-bg);
+  box-shadow: 0 8px 18px -10px rgba(15, 23, 42, 0.22);
+}
+
+.product-auth-emblem img {
+  display: block;
+}
+
+.product-auth-brand {
+  padding-top: 0.5rem;
+}
+
+.product-auth-brand .product-wordmark,
+.product-auth-brand .product-brand-logo {
+  margin-inline: auto;
+}
+
+.product-auth-brand .product-brand-logo {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+}
+
+.product-auth-state-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-auth-state-icon i {
+  font-size: 1.5rem;
+}
+
+.product-auth-qr img,
+html.app-skin-dark .product-auth-qr img {
+  width: min(15rem, 100%);
+  height: auto;
+  aspect-ratio: 1;
+  background-color: #fff !important;
+}
+
+.product-auth-manual {
+  background: var(--bs-tertiary-bg);
+}
+
+.product-recovery-codes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.product-recovery-codes .list-group-item {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 359.98px) {
+  .product-recovery-codes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-auth-body * {
+    scroll-behavior: auto !important;
+  }
+}

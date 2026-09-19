@@ -1,0 +1,19 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{{ page_title }} | {% translate "Clínica" as default_clinic_name %}{{ active_clinic.name|default:default_clinic_name }}{% endblock %}
+
+{% block content %}
+<div class="product-page product-page--narrow">
+  <div class="product-empty-state" role="status">
+    <h1 class="h4 mb-2">{% translate "Check-in indisponível" %}</h1>
+    <p>
+      {% translate "No momento não há nenhum questionário de check-in ativo nesta clínica." %}
+      {% translate "Fale com sua equipe de atendimento se precisar de ajuda." %}
+    </p>
+    <a href="{% url 'journal_list' %}" class="btn btn-outline-secondary mt-2">
+      {% translate "Voltar ao diário" %}
+    </a>
+  </div>
+</div>
+{% endblock %}
