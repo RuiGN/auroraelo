@@ -83,6 +83,18 @@ def selected_clinic_id(request: HttpRequest) -> UUID:
         raw_value = request.headers[CLINIC_HEADER]
     else:
         raw_value = request.session.get(CLINIC_SESSION_KEY)
+        if raw_value is None and hasattr(request, "user") and getattr(request.user, "is_authenticated", False):
+            today = timezone.localdate()
+            membership = (
+                ClinicMembership.infrastructure_objects.get_queryset()
+                .active_on(today)
+                .filter(user_id=request.user.pk, clinic__is_active=True)
+                .first()
+            )
+            if membership is not None:
+                raw_value = str(membership.clinic_id)
+                request.session[CLINIC_SESSION_KEY] = raw_value
+
         if raw_value is None:
             raise MissingClinicSelectionError
 
