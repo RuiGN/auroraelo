@@ -275,3 +275,16 @@ REDIS_STATE_URL = os.environ.get("REDIS_STATE_URL", "redis://redis:6379/3")
 # AI / OpenAI Cognitive Relapse Prevention Plan Generator
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.6-terra")
+
+# CSRF and Proxy Security Configuration
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "https://auroraelo.rgnsystems.com.br,http://localhost:4130,http://127.0.0.1:4130,http://localhost:4132,http://127.0.0.1:4132",
+    ).split(",")
+    if origin.strip()
+]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True

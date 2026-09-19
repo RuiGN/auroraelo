@@ -70,3 +70,17 @@ ALLOWED_HOSTS = [
 ]
 DATABASES = {"default": postgres_database_from_environment()}
 ALLOW_DEMO_SEED = environment_flag("DJANGO_ALLOW_DEMO_SEED")
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "https://auroraelo.rgnsystems.com.br,http://localhost:4130,http://127.0.0.1:4130,http://localhost:4132,http://127.0.0.1:4132",
+    ).split(",")
+    if origin.strip()
+]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
