@@ -151,7 +151,7 @@ def _request_id(request: HttpRequest) -> UUID:
     candidate = getattr(request, "request_id", None)
     try:
         return UUID(str(candidate))
-    except TypeError, ValueError, AttributeError:
+    except (TypeError, ValueError, AttributeError):
         return uuid4()
 
 

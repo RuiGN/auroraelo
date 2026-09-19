@@ -1,0 +1,20 @@
+{
+  "name": "aurora-elo-design-system",
+  "version": "1.0.0",
+  "description": "Design System for Aurora Elo Psychiatric Clinic & Mental Wellness Mobile Ecosystem",
+  "author": "Aurora Elo Health Systems",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "start": "npx serve . -l 3000"
+  },
+  "keywords": [
+    "design-system",
+    "tailwindcss",
+    "psychiatry",
+    "clinical",
+    "mental-health",
+    "mobile-app",
+    "telepsychiatry"
+  ]
+}

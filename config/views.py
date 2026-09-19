@@ -297,28 +297,9 @@ def readiness(request: HttpRequest) -> JsonResponse:
     return JsonResponse({"status": "ok"})
 
 
-@login_required(login_url="/admin/login/")
-def design_system_reference(request: HttpRequest) -> TemplateResponse:
-    """Render the tenant-scoped visual inventory for authorized staff only."""
-    if not cast(User, request.user).is_staff:
-        raise PermissionDenied
-    reference_form = DesignSystemExampleForm(
-        request.POST or None,
-        request.FILES or None,
-    )
-    form_validated = request.method == "POST" and reference_form.is_valid()
-    context = _component_examples(request)
-    context.update(
-        {
-            "reference_form": reference_form,
-            "reference_form_validated": form_validated,
-        }
-    )
-    return TemplateResponse(
-        request,
-        "visual_reference/reference.html",
-        context,
-    )
+def design_system_reference(request: HttpRequest) -> HttpResponse:
+    """Redirect to the comprehensive Aurora Elo Tailwind Design System showcase."""
+    return redirect("/static/design_system/index.html")
 
 
 def _workspace_response(request: HttpRequest, layout_variant: str) -> TemplateResponse:
