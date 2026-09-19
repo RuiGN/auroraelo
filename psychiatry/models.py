@@ -353,3 +353,278 @@ class B2CSubscription(models.Model):
     class Meta:
         verbose_name = "Assinatura B2C Aurora Mind"
         verbose_name_plural = "Assinaturas B2C Aurora Mind"
+
+
+# ==============================================================================
+# 4. ADDICTOLOGY & 12 STEPS RECOVERY MODULE (Apostas, Álcool e Drogas)
+# ==============================================================================
+
+class AddictionProfile(models.Model):
+    """Specialized psychiatric addiction profile for Gambling, Alcohol, and Chemical Dependency."""
+
+    class AddictionCategory(models.TextChoices):
+        GAMBLING = "GAMBLING", "Transtorno do Jogo / Ludopatia (Bets & Cassinos)"
+        ALCOHOL = "ALCOHOL", "Dependência Alcoólica (Alcoolismo)"
+        CHEMICAL = "CHEMICAL", "Dependência Química (Cocaína, Crack, Opioides, Estimulantes)"
+        POLYADDICTION = "POLYADDICTION", "Polidependência / Adicção Cruzada"
+
+    class SeverityLevel(models.TextChoices):
+        MILD = "MILD", "Leve (Ambulatorial Inicial)"
+        MODERATE = "MODERATE", "Moderada (Acompanhamento Intensivo)"
+        SEVERE = "SEVERE", "Grave (Indicação de Internação / Desintoxicação)"
+        CRITICAL = "CRITICAL", "Crítica (Risco Iminente / Fissura Incontrolável)"
+
+    patient = models.OneToOneField(
+        PsychiatricPatientProfile,
+        on_delete=models.CASCADE,
+        related_name="addiction_profile",
+        verbose_name="Paciente",
+    )
+    category = models.CharField(
+        max_length=30,
+        choices=AddictionCategory.choices,
+        default=AddictionCategory.GAMBLING,
+        verbose_name="Categoria Aditiva Principal",
+    )
+    severity = models.CharField(
+        max_length=20,
+        choices=SeverityLevel.choices,
+        default=SeverityLevel.MODERATE,
+        verbose_name="Gravidade Clínica",
+    )
+
+    # Jogos de Azar / Ludopatia (CID-11 6C50)
+    gambling_modalities = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Modalidades de Aposta (Bets Esportivas, Slots, Tigrinho, Pôquer, Roleta)",
+    )
+    estimated_financial_debt = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0.00,
+        verbose_name="Dívida Financeira Acumulada em R$",
+    )
+    chasing_losses = models.BooleanField(
+        default=True,
+        verbose_name="Comportamento de Correr Atrás do Prejuízo (Chasing)",
+    )
+    pgsi_score = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name="Escore PGSI (Problem Gambling Severity Index: 0-27)",
+    )
+
+    # Álcool e Substâncias Psicoativas (CID-11 6C40, 6C45, etc.)
+    primary_substance = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Substância Psicoativa Principal",
+    )
+    secondary_substances = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Substâncias Secundárias",
+    )
+    audit_score = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name="Escore AUDIT (Álcool: 0-40)",
+    )
+    dast_score = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name="Escore DAST-10 (Drogas: 0-10)",
+    )
+    ciwa_score = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name="Escore CIWA-Ar (Abstinência Alcoólica: 0-67)",
+    )
+
+    # Sobriedade & 12 Passos
+    sobriety_since = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name="Data de Início da Sobriedade Atual (Clean Time)",
+    )
+    longest_sobriety_days = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Recorde de Dias Limpos",
+    )
+    relapse_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Número de Recaídas Pregressas",
+    )
+    sponsor_name = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name="Nome do Padrinho/Madrinha dos 12 Passos",
+    )
+    sponsor_phone = models.CharField(
+        max_length=25,
+        blank=True,
+        verbose_name="Telefone de Apoio do Padrinho",
+    )
+    fellowship_group = models.CharField(
+        max_length=120,
+        blank=True,
+        default="A.A. / N.A. / J.A.",
+        verbose_name="Irmandade de Mútuo Apoio Frequentada",
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Perfil de Adictologia (Apostas, Álcool e Drogas)"
+        verbose_name_plural = "Perfis de Adictologia"
+
+    def clean_days_count(self) -> int:
+        """Calculate continuous clean/sober days."""
+        if not self.sobriety_since:
+            return 0
+        delta = timezone.now().date() - self.sobriety_since
+        return max(0, delta.days)
+
+    def __str__(self):
+        return f"{self.patient.full_name} - {self.get_category_display()} ({self.clean_days_count()} dias limpos)"
+
+
+class TwelveStepsAnamnesis(models.Model):
+    """Clinical 12-Step Psychiatric Anamnesis backed by Redis state engine."""
+
+    class Status(models.TextChoices):
+        DRAFT = "DRAFT", "Rascunho no Redis (Em Preenchimento)"
+        IN_PROGRESS = "IN_PROGRESS", "Em Análise pela Equipe Multidisciplinar"
+        CONSOLIDATED = "CONSOLIDATED", "Consolidada com Plano de Prevenção de Recaída"
+
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    patient = models.ForeignKey(
+        PsychiatricPatientProfile,
+        on_delete=models.CASCADE,
+        related_name="twelve_steps_records",
+        verbose_name="Paciente",
+    )
+    session_date = models.DateTimeField(default=timezone.now)
+    completed_steps_count = models.PositiveSmallIntegerField(default=1, verbose_name="Passos Concluídos (1-12)")
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.DRAFT)
+
+    # Os 12 Passos Clínicos Adaptados
+    step1_powerlessness = models.TextField(
+        blank=True,
+        verbose_name="Passo 1: Reconhecimento da impotência e ingovernabilidade da vida",
+    )
+    step2_restoration_hope = models.TextField(
+        blank=True,
+        verbose_name="Passo 2: Crença na restauração da sanidade e equilíbrio",
+    )
+    step3_surrender_care = models.TextField(
+        blank=True,
+        verbose_name="Passo 3: Decisão de entregar o controle ao cuidado terapêutico",
+    )
+    step4_moral_inventory = models.TextField(
+        blank=True,
+        verbose_name="Passo 4: Inventário moral, financeiro, culpas e segredos",
+    )
+    step5_confession_admission = models.TextField(
+        blank=True,
+        verbose_name="Passo 5: Admissão da natureza exata dos erros e padrões aditivos",
+    )
+    step6_readiness = models.TextField(
+        blank=True,
+        verbose_name="Passo 6: Prontidão para transformar defeitos de caráter e impulsividade",
+    )
+    step7_humility = models.TextField(
+        blank=True,
+        verbose_name="Passo 7: Superação humilde das próprias fraquezas e limitações",
+    )
+    step8_amends_list = models.TextField(
+        blank=True,
+        verbose_name="Passo 8: Lista de familiares, credores e pessoas prejudicadas",
+    )
+    step9_reparations_plan = models.TextField(
+        blank=True,
+        verbose_name="Passo 9: Plano de reparação direta, solvência e reconciliação",
+    )
+    step10_daily_inventory = models.TextField(
+        blank=True,
+        verbose_name="Passo 10: Vigilância diária e admissão imediata de deslizes",
+    )
+    step11_mindfulness_prayer = models.TextField(
+        blank=True,
+        verbose_name="Passo 11: Práticas meditativas, conexão interior e serenidade",
+    )
+    step12_service_purpose = models.TextField(
+        blank=True,
+        verbose_name="Passo 12: Despertar terapêutico e transmissão da mensagem de sobriedade",
+    )
+
+    # Análise de Risco & IA Relapse Prevention
+    relapse_triggers = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Gatilhos Críticos de Recaída Identificados (HALT)",
+    )
+    relapse_risk_index = models.PositiveSmallIntegerField(
+        default=50,
+        verbose_name="Índice de Risco de Recaída (0-100)",
+    )
+    ai_prevention_plan = models.TextField(
+        blank=True,
+        verbose_name="Plano Individual de Prevenção de Recaída (Gerado por IA)",
+    )
+    doctor_conclusions = models.TextField(
+        blank=True,
+        verbose_name="Parecer do Médico Psiquiatra Especialista",
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Anamnese Psiquiátrica dos 12 Passos"
+        verbose_name_plural = "Anamneses dos 12 Passos"
+        ordering = ["-session_date"]
+
+    def __str__(self):
+        return f"12 Passos - {self.patient.full_name} ({self.session_date.strftime('%d/%m/%Y')})"
+
+
+class CravingTrackingLog(models.Model):
+    """Real-time craving and urge tracking for gambling, alcohol, or substance cravings."""
+
+    patient = models.ForeignKey(
+        PsychiatricPatientProfile,
+        on_delete=models.CASCADE,
+        related_name="craving_logs",
+        verbose_name="Paciente",
+    )
+    timestamp = models.DateTimeField(default=timezone.now)
+    craving_intensity = models.PositiveSmallIntegerField(
+        default=5,
+        verbose_name="Intensidade da Fissura (0 a 10)",
+    )
+    target_urge = models.CharField(
+        max_length=80,
+        verbose_name="Objeto da Fissura (ex: Bet/Cassino, Cerveja, Cocaína)",
+    )
+    trigger_detail = models.TextField(
+        blank=True,
+        verbose_name="Gatilho Desencadeante",
+    )
+    halt_factors = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Fatores HALT Ativos (Hungry, Angry, Lonely, Tired)",
+    )
+    coping_technique = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name="Técnica de Enfrentamento Utilizada",
+    )
+    urge_surfed_successfully = models.BooleanField(
+        default=True,
+        verbose_name="Fissura Superada sem Recaída (Urge Surfing)",
+    )
+
+    class Meta:
+        verbose_name = "Registro de Fissura / Craving"
+        verbose_name_plural = "Registros de Fissura / Craving"
+        ordering = ["-timestamp"]

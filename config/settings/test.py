@@ -72,3 +72,5 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 # Test clients commonly use force_login(), which bypasses the real login service that
 # registers managed sessions. Security tests override this to False explicitly.
 ACCOUNT_SESSION_ALLOW_UNKNOWN = True
+CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_EAGER_PROPAGATES = True

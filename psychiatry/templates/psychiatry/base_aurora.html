@@ -133,6 +133,7 @@
         <a href="{% url 'psychiatry:anamnesis' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'anamnesis' %}bg-aurora-50 text-aurora-700 dark:bg-aurora-900/60 dark:text-aurora-300{% else %}text-slate-600 dark:text-slate-300 hover:text-aurora-600{% endif %}">Anamnese DSM-5</a>
         <a href="{% url 'psychiatry:telepsychiatry' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'telepsychiatry' %}bg-aurora-50 text-aurora-700 dark:bg-aurora-900/60 dark:text-aurora-300{% else %}text-slate-600 dark:text-slate-300 hover:text-aurora-600{% endif %}" data-i18n="nav_telepsychiatry">Telepsiquiatria HD</a>
         <a href="{% url 'psychiatry:inpatient_beds' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'beds' %}bg-aurora-50 text-aurora-700 dark:bg-aurora-900/60 dark:text-aurora-300{% else %}text-slate-600 dark:text-slate-300 hover:text-aurora-600{% endif %}" data-i18n="nav_inpatient">Leitos & Internação</a>
+        <a href="{% url 'psychiatry:addiction_dashboard' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'addiction' %}bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:text-amber-600{% endif %}">🎲 12 Passos & Apostas</a>
         <a href="{% url 'psychiatry:mobile_connected' %}" target="_blank" class="px-3 py-1.5 rounded-lg text-elo-600 font-bold hover:underline">📱 App Conectado</a>
         <a href="{% url 'psychiatry:mobile_b2c' %}" target="_blank" class="px-3 py-1.5 rounded-lg text-zen-600 font-bold hover:underline">🌿 App Mind B2C</a>
         <a href="{% static 'design_system/index.html' %}" target="_blank" class="px-3 py-1.5 rounded-lg text-aurora-600 dark:text-elo-400 font-bold hover:underline">🎨 Design System</a>
@@ -190,6 +191,13 @@
                   <span data-i18n="nav_telepsychiatry">Telepsiquiatria</span>
                 </div>
                 <span class="w-2 h-2 rounded-full bg-elo-400 live-indicator"></span>
+              </a>
+              <a href="{% url 'psychiatry:addiction_dashboard' %}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if active_nav == 'addiction' %}bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-sm">🎲</span>
+                  <span>12 Passos & Adictologia</span>
+                </div>
+                <span class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-[10px] font-bold text-amber-700 dark:text-amber-300">Bets</span>
               </a>
             </div>
           </div>

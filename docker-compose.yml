@@ -7,13 +7,16 @@ services:
     container_name: auroraelo-web
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${WEB_PORT:-4132}:8000"
+      - "127.0.0.1:${WEB_PORT:-4130}:8000"
     env_file:
       - .env
     environment:
       DB_HOST: db
       DB_PORT: "5432"
       CACHE_URL: redis://redis:6379/1
+      REDIS_STATE_URL: redis://redis:6379/3
+      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672//
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
     volumes:
       - media_volume:/app/media
       - private_media_volume:/app/private_media
@@ -22,6 +25,8 @@ services:
       db:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS -H 'X-Forwarded-Proto: https' http://127.0.0.1:8000/health/live/ >/dev/null || exit 1"]
@@ -35,18 +40,48 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  worker:
+    image: auroraelo:latest
+    container_name: auroraelo-celery-worker
+    restart: unless-stopped
+    command: celery -A config worker -l INFO -c 2
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      CACHE_URL: redis://redis:6379/1
+      REDIS_STATE_URL: redis://redis:6379/3
+      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672//
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    volumes:
+      - media_volume:/app/media
+      - private_media_volume:/app/private_media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   db:
     image: postgres:17-alpine
     container_name: auroraelo-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME:-mindcare}
-      POSTGRES_USER: ${DB_USER:-mindcare}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-mindcare}
+      POSTGRES_DB: ${DB_NAME:-auroraelo}
+      POSTGRES_USER: ${DB_USER:-auroraelo}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-auroraelo-secure-database-password-2026}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-mindcare} -d ${DB_NAME:-mindcare}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-auroraelo} -d ${DB_NAME:-auroraelo}"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -75,9 +110,45 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: auroraelo-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: auroraelo-cloudflared-tunnel
+    restart: unless-stopped
+    network_mode: host
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+    depends_on:
+      - web
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 volumes:
   postgres_data:
   redis_data:
+  rabbitmq_data:
   media_volume:
   private_media_volume:
   static_volume:

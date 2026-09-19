@@ -20,6 +20,9 @@ from psychiatry.models import (
     B2CMindLog,
     B2CCBTDiary,
     B2CSubscription,
+    AddictionProfile,
+    TwelveStepsAnamnesis,
+    CravingTrackingLog,
 )
 
 
@@ -114,6 +117,20 @@ class Command(BaseCommand):
                 "name": "Transtorno por Uso de Álcool",
                 "category": "Transtornos por Uso de Substâncias",
                 "specifiers": "Dependência grave com síndrome de abstinência moderada.",
+            },
+            {
+                "cid11": "6C50",
+                "dsm5": "312.31",
+                "name": "Transtorno do Jogo / Ludopatia (Gambling Disorder)",
+                "category": "Transtornos Devido a Comportamentos Aditivos",
+                "specifiers": "Padrão persistente de apostas online (Bets e cassinos virtuais), perseguição de perdas e endividamento crítico.",
+            },
+            {
+                "cid11": "6C45",
+                "dsm5": "304.20",
+                "name": "Transtorno por Uso de Cocaína e Estimulantes",
+                "category": "Transtornos por Uso de Substâncias",
+                "specifiers": "Dependência com fissura (craving) intensa associada ao consumo de álcool.",
             },
         ]
 
@@ -248,6 +265,40 @@ class Command(BaseCommand):
                 "guardian_phone": "",
                 "allergies": "Nenhuma conhecida",
                 "comorbidities": "Gastrite nervosa",
+            },
+            {
+                "full_name": "Thiago Ramos Mendonça",
+                "cpf": "631.902.847-11",
+                "dob": "1992-04-18",
+                "phone": "(11) 98112-9900",
+                "email": "thiago.mendonca@exemplo.com.br",
+                "record": "PR-2026-1301",
+                "cns": "892019283710007",
+                "postal_code": "04561-000",
+                "diagnosis": diagnoses.get("6C50"),
+                "status": PsychiatricPatientProfile.TreatmentStatus.ACTIVE,
+                "risk_level": PsychiatricPatientProfile.RiskLevel.MODERATE,
+                "guardian": "Camila Mendonça (Esposa)",
+                "guardian_phone": "(11) 98112-9901",
+                "allergies": "Nenhuma",
+                "comorbidities": "Insônia e ansiedade grave pós-perdas em apostas",
+            },
+            {
+                "full_name": "Fernando Castilho Prado",
+                "cpf": "742.019.384-22",
+                "dob": "1985-08-30",
+                "phone": "(11) 99445-6677",
+                "email": "fernando.castilho@exemplo.com.br",
+                "record": "PR-2026-1302",
+                "cns": "892019283710008",
+                "postal_code": "01311-200",
+                "diagnosis": diagnoses.get("6C40"),
+                "status": PsychiatricPatientProfile.TreatmentStatus.ACTIVE,
+                "risk_level": PsychiatricPatientProfile.RiskLevel.HIGH,
+                "guardian": "Marcos Castilho (Irmão)",
+                "guardian_phone": "(11) 99445-6678",
+                "allergies": "Sulfas",
+                "comorbidities": "Esteatose hepática",
             },
         ]
 
@@ -425,4 +476,86 @@ class Command(BaseCommand):
             }
         )
 
-        self.stdout.write(self.style.SUCCESS("✓ Seed psiquiátrico concluído com sucesso total!"))
+        # 9. Adictologia, Jogos de Azar e 12 Passos
+        p_thiago = next(p for p in created_patients if "Thiago" in p.full_name)
+        p_fernando = next(p for p in created_patients if "Fernando" in p.full_name)
+
+        # Perfil de Jogos de Azar / Ludopatia (Thiago)
+        AddictionProfile.objects.update_or_create(
+            patient=p_thiago,
+            defaults={
+                "category": AddictionProfile.AddictionCategory.GAMBLING,
+                "severity": AddictionProfile.SeverityLevel.SEVERE,
+                "gambling_modalities": ["Bets Esportivas", "Cassino Virtual (Tigrinho)", "Roleta"],
+                "estimated_financial_debt": 145000.00,
+                "chasing_losses": True,
+                "pgsi_score": 21,
+                "sobriety_since": (timezone.now() - timedelta(days=54)).date(),
+                "longest_sobriety_days": 54,
+                "relapse_count": 3,
+                "sponsor_name": "Eduardo M. (Jogadores Anônimos - J.A.)",
+                "sponsor_phone": "(11) 98777-1234",
+                "fellowship_group": "Jogadores Anônimos (J.A.) Grupo Esperança",
+            }
+        )
+
+        # Perfil de Polidependência Álcool + Cocaína (Fernando)
+        AddictionProfile.objects.update_or_create(
+            patient=p_fernando,
+            defaults={
+                "category": AddictionProfile.AddictionCategory.POLYADDICTION,
+                "severity": AddictionProfile.SeverityLevel.SEVERE,
+                "primary_substance": "Álcool e Cocaína",
+                "secondary_substances": ["Nicotina"],
+                "audit_score": 28,
+                "dast_score": 8,
+                "ciwa_score": 12,
+                "sobriety_since": (timezone.now() - timedelta(days=92)).date(),
+                "longest_sobriety_days": 92,
+                "relapse_count": 4,
+                "sponsor_name": "Carlos B. (Alcoólicos Anônimos - A.A.)",
+                "sponsor_phone": "(11) 97666-5544",
+                "fellowship_group": "A.A. / N.A. Grupo Alvorada",
+            }
+        )
+
+        # Anamnese dos 12 Passos Consolidada com IA
+        TwelveStepsAnamnesis.objects.get_or_create(
+            patient=p_thiago,
+            defaults={
+                "completed_steps_count": 12,
+                "status": TwelveStepsAnamnesis.Status.CONSOLIDATED,
+                "step1_powerlessness": "Admito que perdi completamente o controle sobre as apostas online. Cheguei a pedir empréstimos bancários e comprometi o patrimônio familiar sem que minha esposa soubesse.",
+                "step2_restoration_hope": "Acredito que o acompanhamento psiquiátrico na Aurora Elo e o grupo dos Jogadores Anônimos podem me restaurar a sanidade e a paz mental.",
+                "step3_surrender_care": "Entreguei a custódia das contas bancárias à minha esposa e instalei software de bloqueio (Gamban) em todos os dispositivos móveis.",
+                "step4_moral_inventory": "Levantei a dívida exata de R$ 145.000,00 dividida em 3 instituições e 2 cartões de crédito. Reconheço que menti repetidamente para encobrir as perdas.",
+                "step5_confession_admission": "Confessei todos os valores e segredos diante do Dr. Marcelo Arantes e da minha esposa Camila sem reservas.",
+                "step6_readiness": "Estou plenamente disposto a tratar a ansiedade subjacente e abandonar a ilusão do dinheiro fácil e das recompensas rápidas.",
+                "step7_humility": "Peço humildemente a superação da impulsividade e aceito a medicação de estabilização dopaminérgica prescrita.",
+                "step8_amends_list": "Lista de pessoas: Camila (esposa), meus pais, e 2 amigos próximos dos quais tomei dinheiro emprestado sob falsos pretextos.",
+                "step9_reparations_plan": "Plano financeiro aprovado com a família para quitação em 36 parcelas com acompanhamento de consultoria financeira neutra.",
+                "step10_daily_inventory": "Realizo reflexão diária todas as noites. Se surge o impulso de apostar, relato imediatamente ao padrinho Eduardo.",
+                "step11_mindfulness_prayer": "Pratico 10 minutos de respiração 4-4-4-4 pela manhã para manter a mente no momento presente e sem ansiedade.",
+                "step12_service_purpose": "Participo como orador nas reuniões do J.A. para acolher recém-chegados que perderam economias em Bets.",
+                "relapse_triggers": ["Propaganda de Bets na TV e Internet", "Sexta-feira pós-expediente", "Frustração financeira", "Celular desprotegido"],
+                "relapse_risk_index": 35,
+                "ai_prevention_plan": "PLANO INDIVIDUALIZADO DE PREVENÇÃO DE RECAÍDA (AURORA ELO & MARLATT):\n1. Manter Gamban ativo em todos os dispositivos.\n2. Limite Pix diário travado em R$ 100.\n3. Presença semanal no grupo de Jogadores Anônimos.\n4. Se surgir fissura súbita: aplicar a regra dos 15 minutos e acionar o botão SOS no App Aurora Elo.",
+                "doctor_conclusions": "Paciente em evolução favorável no 2º mês limpo. Excelente insight terapêutico e cumprimento rigoroso das reparações do Passo 9.",
+            }
+        )
+
+        # Fissura Registrada no Histórico
+        CravingTrackingLog.objects.get_or_create(
+            patient=p_thiago,
+            target_urge="Apostas Online / Bets",
+            defaults={
+                "craving_intensity": 7,
+                "trigger_detail": "Notificação push durante partida da semifinal de futebol.",
+                "halt_factors": ["Angry", "Tired"],
+                "coping_technique": "Desligou o aparelho, realizou 5 min de respiração guiada 4-4-4-4 e ligou para o padrinho.",
+                "urge_surfed_successfully": True,
+            }
+        )
+
+        self.stdout.write(self.style.SUCCESS("✓ Seed psiquiátrico e adictologia concluído com sucesso total!"))
+

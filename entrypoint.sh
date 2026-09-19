@@ -18,11 +18,18 @@ except Exception:
 done
 echo "PostgreSQL is available and accepting connections."
 
-echo "Applying database migrations..."
-python manage.py migrate --noinput
+if [ "$1" = "gunicorn" ]; then
+  echo "Applying database migrations..."
+  python manage.py migrate --noinput
 
-echo "Collecting static files..."
-python manage.py collectstatic --noinput
+  echo "Collecting static files..."
+  python manage.py collectstatic --noinput
 
-echo "Starting Mindcare application with command: $@"
+  if [ "${DJANGO_ALLOW_DEMO_SEED}" = "true" ] || [ "${DJANGO_ALLOW_DEMO_SEED}" = "1" ]; then
+    echo "Running clinical seed command..."
+    python manage.py seed_psychiatry || true
+  fi
+fi
+
+echo "Starting Aurora Elo application with command: $@"
 exec "$@"

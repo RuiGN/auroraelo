@@ -1,0 +1,282 @@
+{% extends "psychiatry/base_aurora.html" %}
+{% load static %}
+
+{% block content %}
+<div class="space-y-6">
+  <!-- Header Banner -->
+  <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-aurora-950 via-aurora-900 to-slate-900 text-white shadow-aurora relative overflow-hidden">
+    <div class="relative z-10 max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-elo-500/20 border border-elo-400/30 text-elo-300 text-xs font-bold mb-3">
+        <span>🎲 Adictologia Clínica & Recuperação</span>
+        <span>•</span>
+        <span>12 Passos & Prevenção de Recaída</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold font-display tracking-tight text-white">
+        Unidade de Adictologia: Jogos de Azar, Álcool e Drogas
+      </h1>
+      <p class="text-xs sm:text-sm text-aurora-200 mt-2 leading-relaxed">
+        Tratamento intensivo para ludopatia (Bets esportivas, tigrinho, cassinos), dependência de álcool e substâncias psicoativas. Anamnese clínica estruturada nos 12 Passos com telemetria de fissura em tempo real no Redis e geração de planos preventivos por IA via Celery.
+      </p>
+
+      <div class="mt-5 flex flex-wrap items-center gap-3">
+        <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-elo-500 to-elo-600 hover:from-elo-400 hover:to-elo-500 text-aurora-950 font-extrabold text-xs shadow-lg transition-all flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          <span>Nova Anamnese dos 12 Passos (Redis)</span>
+        </a>
+        <button type="button" onclick="document.getElementById('craving-modal').classList.remove('hidden')" class="px-4 py-2.5 rounded-xl bg-crisis-500 hover:bg-crisis-600 text-white font-bold text-xs shadow-crisis-glow transition-all flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+          <span>Registrar Fissura Aguda (Craving Telemetry)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Card 1: Jogos de Azar -->
+    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+        <span>Jogos de Azar (Bets / Cassinos)</span>
+        <span class="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 text-sm">🎲</span>
+      </div>
+      <div class="text-2xl font-black font-display text-slate-900 dark:text-white">22 Pacientes</div>
+      <p class="text-[11px] text-slate-500 mt-1">Escore médio PGSI: <strong class="text-amber-600 font-mono">14.2 (Grave)</strong></p>
+    </div>
+
+    <!-- Card 2: Álcool e Substâncias -->
+    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+        <span>Álcool & Dependência Química</span>
+        <span class="p-2 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 text-sm">🧪</span>
+      </div>
+      <div class="text-2xl font-black font-display text-slate-900 dark:text-white">26 Pacientes</div>
+      <p class="text-[11px] text-slate-500 mt-1">Escore AUDIT: <strong class="text-red-500 font-mono">24/40</strong> • DAST: <strong class="font-mono">7/10</strong></p>
+    </div>
+
+    <!-- Card 3: Média de Dias Limpos -->
+    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+        <span>Tempo de Sobriedade (Clean Time)</span>
+        <span class="p-2 rounded-xl bg-healing-50 dark:bg-healing-950/40 text-healing-600 text-sm">🌱</span>
+      </div>
+      <div class="text-2xl font-black font-display text-healing-600 dark:text-healing-400">78 Dias Limpos</div>
+      <p class="text-[11px] text-slate-500 mt-1">Recorde da clínica: <strong class="font-mono text-slate-800 dark:text-white">412 dias</strong></p>
+    </div>
+
+    <!-- Card 4: Alertas de Fissura no Redis -->
+    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+        <span>Fissuras Ativas (Redis State)</span>
+        <span class="p-2 rounded-xl bg-crisis-50 dark:bg-crisis-950/40 text-crisis-600 text-sm">⚡</span>
+      </div>
+      <div class="text-2xl font-black font-display text-crisis-600 dark:text-crisis-400">2 Alertas</div>
+      <p class="text-[11px] text-slate-500 mt-1">Intervenção médica preventiva acionada</p>
+    </div>
+  </div>
+
+  <!-- Main Content Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Patients Table (2 cols) -->
+    <div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900 dark:text-white">Pacientes em Programa de Recuperação dos 12 Passos</h2>
+          <p class="text-[11px] text-slate-500">Monitoramento contínuo de dias limpos, modalidade aditiva e dívidas de jogo</p>
+        </div>
+        <span class="text-xs font-mono font-bold text-aurora-600 dark:text-elo-400">Total: {{ total_patients }}</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase text-[10px]">
+            <tr>
+              <th class="py-2.5 px-3">Paciente</th>
+              <th class="py-2.5 px-3">Modalidade</th>
+              <th class="py-2.5 px-3">Dias Limpos</th>
+              <th class="py-2.5 px-3">Gravidade / Escores</th>
+              <th class="py-2.5 px-3 text-right">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+            {% for profile in profiles %}
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+              <td class="py-3 px-3">
+                <span class="font-bold text-slate-900 dark:text-white block">{{ profile.patient.full_name }}</span>
+                <span class="text-[10px] text-slate-400 font-mono">{{ profile.patient.record_number }} • CPF: {{ profile.patient.cpf }}</span>
+              </td>
+              <td class="py-3 px-3">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold 
+                  {% if profile.category == 'GAMBLING' %}bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300
+                  {% elif profile.category == 'ALCOHOL' %}bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300
+                  {% else %}bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300{% endif %}">
+                  {{ profile.get_category_display }}
+                </span>
+                {% if profile.estimated_financial_debt > 0 %}
+                <span class="block text-[10px] text-crisis-500 font-semibold mt-0.5">Dívida: R$ {{ profile.estimated_financial_debt|floatformat:2 }}</span>
+                {% endif %}
+              </td>
+              <td class="py-3 px-3">
+                <span class="px-2 py-0.5 rounded-lg bg-healing-50 text-healing-700 dark:bg-healing-950/60 dark:text-healing-300 font-mono font-bold text-xs">
+                  🌱 {{ profile.clean_days_count }} dias
+                </span>
+                {% if profile.sponsor_name %}
+                <span class="block text-[10px] text-slate-400 mt-0.5">Padrinho: {{ profile.sponsor_name }}</span>
+                {% endif %}
+              </td>
+              <td class="py-3 px-3">
+                <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+                  {% if profile.category == 'GAMBLING' %}PGSI: {{ profile.pgsi_score }}/27
+                  {% elif profile.category == 'ALCOHOL' %}AUDIT: {{ profile.audit_score }}/40
+                  {% else %}DAST: {{ profile.dast_score }}/10{% endif %}
+                </span>
+                <span class="block text-[10px] text-slate-400 font-semibold">{{ profile.get_severity_display }}</span>
+              </td>
+              <td class="py-3 px-3 text-right">
+                <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="px-2.5 py-1 rounded-lg bg-aurora-50 text-aurora-700 dark:bg-aurora-900/40 dark:text-aurora-300 font-bold hover:bg-aurora-100">
+                  12 Passos →
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="py-6 text-center text-slate-400 text-xs">
+                Nenhum paciente cadastrado na unidade ainda. Execute o comando de seed ou inicie uma anamnese.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live Telemetry & 12 Steps Tools (1 col) -->
+    <div class="space-y-6">
+      <!-- 12 Steps Workflow Guide -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-3">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Fluxo Clínico dos 12 Passos</h3>
+        
+        <div class="space-y-2 text-xs">
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+            <span class="font-bold text-slate-800 dark:text-white block">1. Admissão & Impotência (Passos 1 a 3)</span>
+            <span class="text-[11px] text-slate-500">Reconhecimento da perda de controle com autosave no Redis.</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+            <span class="font-bold text-slate-800 dark:text-white block">2. Inventário Moral & Danos (Passos 4 a 7)</span>
+            <span class="text-[11px] text-slate-500">Mapeamento de dívidas de apostas e perdas patrimoniais.</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
+            <span class="font-bold text-slate-800 dark:text-white block">3. Reparações & Sobriedade (Passos 8 a 12)</span>
+            <span class="text-[11px] text-slate-500">Plano de solidez financeira e serviço aos novos acolhidos.</span>
+          </div>
+        </div>
+
+        <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="block text-center w-full py-2.5 rounded-xl bg-aurora-600 hover:bg-aurora-700 text-white font-bold text-xs shadow-aurora">
+          Abrir Formulário 12 Passos
+        </a>
+      </div>
+
+      <!-- Live Craving Stream -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Monitoramento de Fissura (Craving)</h3>
+          <span class="w-2 h-2 rounded-full bg-healing-500 live-indicator"></span>
+        </div>
+
+        <div class="space-y-2">
+          {% for cr in recent_cravings %}
+          <div class="p-3 rounded-xl {% if cr.craving_intensity >= 8 %}bg-crisis-50 dark:bg-crisis-950/40 border-crisis-200 dark:border-crisis-800{% else %}bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700{% endif %} border text-xs">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-slate-800 dark:text-white">{{ cr.patient.full_name }}</span>
+              <span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] 
+                {% if cr.craving_intensity >= 8 %}bg-crisis-600 text-white{% else %}bg-amber-100 text-amber-800{% endif %}">
+                Nível {{ cr.craving_intensity }}/10
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-500">Foco: <strong class="text-slate-700 dark:text-slate-300">{{ cr.target_urge }}</strong> • {{ cr.trigger_detail }}</p>
+          </div>
+          {% empty %}
+          <p class="text-xs text-slate-400 text-center py-3">Sem alertas de fissura recentes.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Registro de Fissura em Tempo Real -->
+<div id="craving-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-base font-bold text-slate-900 dark:text-white">Registrar Fissura Aguda (Craving)</h3>
+      <button type="button" onclick="document.getElementById('craving-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-sm">✕</button>
+    </div>
+    <p class="text-xs text-slate-500">Gera telemetria no Redis e aciona notificação médica assíncrona se a intensidade for ≥ 7.</p>
+
+    <form id="craving-form" class="space-y-3" onsubmit="handleCravingSubmit(event)">
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">CPF do Paciente</label>
+        <input type="text" id="cr-cpf" placeholder="000.000.000-00" required class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white" />
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Objeto da Fissura / Urgência</label>
+        <select id="cr-urge" class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white">
+          <option value="Apostas Online / Bets">Apostas Online / Bets</option>
+          <option value="Cassino Virtual / Tigrinho">Cassino Virtual / Tigrinho</option>
+          <option value="Álcool">Álcool</option>
+          <option value="Cocaína / Estimulantes">Cocaína / Estimulantes</option>
+          <option value="Outro impulso compulsivo">Outro impulso compulsivo</option>
+        </select>
+      </div>
+
+      <div>
+        <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+          <span>Intensidade da Fissura (0 a 10)</span>
+          <span id="cr-intensity-val" class="text-crisis-500 font-bold">7</span>
+        </div>
+        <input type="range" id="cr-intensity" min="1" max="10" value="7" oninput="document.getElementById('cr-intensity-val').innerText = this.value" class="w-full accent-crisis-500 cursor-pointer" />
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Gatilho / Situação Desencadeadora</label>
+        <input type="text" id="cr-trigger" placeholder="ex: Notificação de aposta no celular, solidão, estresse" class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white" />
+      </div>
+
+      <div class="pt-2 flex justify-end gap-2">
+        <button type="button" onclick="document.getElementById('craving-modal').classList.add('hidden')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400">Cancelar</button>
+        <button type="submit" class="px-4 py-2 rounded-xl bg-crisis-600 hover:bg-crisis-700 text-white font-bold text-xs shadow-crisis-glow">Salvar Telemetria (Redis)</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+async function handleCravingSubmit(e) {
+  e.preventDefault();
+  const payload = {
+    patient_cpf: document.getElementById('cr-cpf').value,
+    target_urge: document.getElementById('cr-urge').value,
+    intensity: parseInt(document.getElementById('cr-intensity').value),
+    trigger: document.getElementById('cr-trigger').value || 'Impulso repentino',
+  };
+
+  try {
+    const res = await fetch('/psiquiatria/api/v1/adictologia/craving/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert(`Telemetria de Fissura registrada no Redis com sucesso! Nível: ${data.intensity}/10 (${data.alert_level}).`);
+      document.getElementById('craving-modal').classList.add('hidden');
+      window.location.reload();
+    } else {
+      alert('Erro ao registrar: ' + (data.error || 'Verifique o CPF.'));
+    }
+  } catch (err) {
+    alert('Erro de comunicação: ' + err.message);
+  }
+}
+</script>
+{% endblock %}

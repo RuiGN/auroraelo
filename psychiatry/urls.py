@@ -17,6 +17,10 @@ urlpatterns = [
     path("mobile/conectado/", views.mobile_connected_view, name="mobile_connected"),
     path("mobile/b2c/", views.mobile_b2c_view, name="mobile_b2c"),
 
+    # Addiction, Gambling & 12 Steps Module
+    path("adictologia/", views.addiction_dashboard_view, name="addiction_dashboard"),
+    path("adictologia/12-passos/", views.twelve_steps_anamnesis_view, name="twelve_steps_anamnesis"),
+
     # REST APIs for Web Portal & Mobile Apps (Canonical & Aliased)
     path("api/v1/clinic/dashboard/", api.clinic_dashboard_kpis, name="api_clinic_dashboard"),
     path("api/v1/clinic/patients/", api.list_patients, name="api_list_patients"),
@@ -24,6 +28,13 @@ urlpatterns = [
     path("api/v1/dashboard/", api.clinic_dashboard_kpis),
     path("api/v1/patients/", api.list_patients),
     path("api/v1/anamnesis/save/", api.save_anamnesis),
+
+    # Addictology, Gambling & 12 Steps APIs
+    path("api/v1/adictologia/12-passos/step/", api.api_save_12steps_step, name="api_save_12steps_step"),
+    path("api/v1/adictologia/12-passos/draft/", api.api_get_12steps_draft, name="api_get_12steps_draft"),
+    path("api/v1/adictologia/12-passos/consolidate/", api.api_consolidate_12steps, name="api_consolidate_12steps"),
+    path("api/v1/adictologia/craving/", api.api_record_craving, name="api_record_craving"),
+    path("api/v1/adictologia/dashboard/", api.api_addiction_dashboard_kpis, name="api_addiction_kpis"),
 
     # Connected Mobile App APIs
     path("api/v1/patient/summary/", api.patient_mobile_summary, name="api_patient_summary"),

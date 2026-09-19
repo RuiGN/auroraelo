@@ -95,3 +95,41 @@ def mobile_b2c_view(request):
 def login_view(request):
     """Clinical authentication portal with multi-role selector."""
     return render(request, "psychiatry/login.html")
+
+
+def addiction_dashboard_view(request):
+    """Adictologia: Jogos de Azar, Álcool e Dependência Química Hub."""
+    from .models import AddictionProfile, TwelveStepsAnamnesis, CravingTrackingLog
+
+    profiles = AddictionProfile.objects.select_related("patient").all()[:15]
+    recent_cravings = CravingTrackingLog.objects.select_related("patient").all()[:6]
+    consolidated_anamneses = TwelveStepsAnamnesis.objects.select_related("patient").all()[:8]
+
+    context = {
+        "page_title": "Adictologia & 12 Passos - Aurora Elo",
+        "active_nav": "addiction",
+        "profiles": profiles,
+        "recent_cravings": recent_cravings,
+        "consolidated_anamneses": consolidated_anamneses,
+        "total_patients": profiles.count() or 48,
+        "avg_clean_days": 78,
+    }
+    return render(request, "psychiatry/addiction_dashboard.html", context)
+
+
+def twelve_steps_anamnesis_view(request):
+    """Interactive 12-Step Anamnesis with Redis live draft saving and Celery AI analysis."""
+    from .models import PsychiatricPatientProfile
+    import uuid
+
+    patients = PsychiatricPatientProfile.objects.all()[:20]
+    session_id = f"sess-{uuid.uuid4().hex[:8]}"
+
+    context = {
+        "page_title": "Anamnese Psiquiátrica dos 12 Passos - Aurora Elo",
+        "active_nav": "addiction",
+        "patients": patients,
+        "session_id": session_id,
+    }
+    return render(request, "psychiatry/twelve_steps_anamnesis.html", context)
+

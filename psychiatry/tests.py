@@ -37,6 +37,17 @@ class PsychiatricSeedTest(TestCase):
         self.assertTrue(B2CMindLog.objects.exists())
         self.assertTrue(B2CCBTDiary.objects.exists())
 
+    def test_create_aurora_users_command(self):
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        call_command("create_aurora_users")
+        self.assertTrue(User.objects.filter(email="admin@auroraelo.com.br").exists())
+        self.assertTrue(User.objects.filter(email="dr.marcelo@auroraelo.com.br").exists())
+        self.assertTrue(User.objects.filter(email="dra.camila@auroraelo.com.br").exists())
+        self.assertTrue(User.objects.filter(email="enfermagem@auroraelo.com.br").exists())
+        self.assertTrue(User.objects.filter(email="recepcao@auroraelo.com.br").exists())
+        self.assertTrue(User.objects.filter(email="paciente.thiago@auroraelo.com.br").exists())
+
 
 class PsychiatricWebViewsTest(TestCase):
     """Verifies that all psychiatric web views render with status 200."""
@@ -252,3 +263,82 @@ class PsychiatricAPITest(TestCase):
         )
         self.assertEqual(post_res.status_code, 200)
         self.assertTrue(post_res.json()["success"])
+
+    def test_addiction_dashboard_view(self):
+        response = self.client.get("/psiquiatria/adictologia/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Adictologia")
+        self.assertContains(response, "Jogos de Azar")
+
+    def test_twelve_steps_anamnesis_view(self):
+        response = self.client.get("/psiquiatria/adictologia/12-passos/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "12 Passos")
+
+    def test_redis_12steps_draft_api(self):
+        # 1. Save step draft to Redis
+        save_res = self.client.post(
+            "/psiquiatria/api/v1/adictologia/12-passos/step/",
+            data=json.dumps({
+                "session_id": "test-session-redis-001",
+                "step_number": 1,
+                "step_data": {"answer": "Admito a perda de controle sobre apostas esportivas online."}
+            }),
+            content_type="application/json"
+        )
+        self.assertEqual(save_res.status_code, 200)
+        self.assertTrue(save_res.json()["success"])
+
+        # 2. Get draft from Redis
+        get_res = self.client.get("/psiquiatria/api/v1/adictologia/12-passos/draft/?session_id=test-session-redis-001")
+        self.assertEqual(get_res.status_code, 200)
+        draft = get_res.json()["draft"]
+        self.assertIn("step_1", draft["steps"])
+
+    def test_craving_telemetry_api_and_celery(self):
+        patient = PsychiatricPatientProfile.objects.first()
+        payload = {
+            "patient_cpf": patient.cpf,
+            "intensity": 8,
+            "target_urge": "Bets / Cassino",
+            "trigger": "Mensagem com bônus de aposta no WhatsApp",
+            "halt_factors": ["Angry", "Tired"],
+            "coping": "Respiração 4-4-4-4 e ligação ao padrinho",
+        }
+        res = self.client.post(
+            "/psiquiatria/api/v1/adictologia/craving/",
+            data=json.dumps(payload),
+            content_type="application/json"
+        )
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertTrue(data["success"])
+        self.assertTrue(data["urgent_intervention_dispatched"])
+        self.assertEqual(data["alert_level"], "CRITICAL")
+
+    def test_consolidate_12steps_celery_task(self):
+        patient = PsychiatricPatientProfile.objects.first()
+        # Save a draft in Redis first
+        from psychiatry.redis_service import TwelveStepsRedisService
+        session_id = "test-session-consolidate-999"
+        TwelveStepsRedisService.save_step_draft(session_id, 1, {"answer": "Impotência perante as apostas online."})
+
+        # Consolidate via API (triggers Celery task in eager mode)
+        res = self.client.post(
+            "/psiquiatria/api/v1/adictologia/12-passos/consolidate/",
+            data=json.dumps({
+                "session_id": session_id,
+                "patient_cpf": patient.cpf
+            }),
+            content_type="application/json"
+        )
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(res.json()["success"])
+
+    def test_addiction_dashboard_kpis_api(self):
+        res = self.client.get("/psiquiatria/api/v1/adictologia/dashboard/")
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertTrue(data["success"])
+        self.assertIn("gambling_disorder_patients", data["data"])
+
