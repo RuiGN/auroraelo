@@ -1,0 +1,53 @@
+/* Product layer: scoped components over the existing Bootstrap foundation. */
+:root { --aurora-navy: #0c3c6e; --aurora-teal: #288d9e; }
+.aurora-auth { min-height: 100vh; display: flex; flex-direction: column; background: #eff6f7; color: #19334d; }
+.aurora-auth-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem clamp(1rem, 4vw, 4rem); background: white; border-bottom: 1px solid #d6e5e9; }
+.aurora-brand img { width: 180px; height: 48px; object-fit: contain; }
+.aurora-auth-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); align-items: center; gap: clamp(2rem, 6vw, 6rem); width: min(1080px, 100%); margin: auto; padding: 3rem 1.5rem; }
+.aurora-auth-intro h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--aurora-navy); line-height: 1.15; letter-spacing: -.025em; margin-bottom: 1.5rem; }
+.aurora-auth-intro p { font-size: 1rem; max-width: 40ch; line-height: 1.7; }
+.aurora-eyebrow { color: #166273; font-weight: 700; letter-spacing: .08em; }
+.aurora-auth-card { padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid #d6e5e9; border-top: 4px solid var(--aurora-teal); border-radius: 1.25rem; background: white; box-shadow: 0 16px 48px #0c3c6e12; }
+.aurora-auth-card .product-auth-card { box-shadow: none; border: 0; background: transparent; padding: 0; }
+.aurora-auth-card .form-control { min-height: 48px; border: 1px solid #8aa7b4; border-radius: .65rem; }
+.aurora-auth-card .btn-primary, .product-workspace-body .btn-primary { background: var(--aurora-navy); border-color: var(--aurora-navy); }
+.aurora-auth-card .btn-primary:hover, .product-workspace-body .btn-primary:hover { background: #155e75; border-color: #155e75; }
+.aurora-auth-card a { color: #155e75; }
+.aurora-auth-card a.btn-primary { color: white; }
+.aurora-auth-footer { padding: 1.5rem; background: #0c3c6e; color: #fff; text-align: center; font-size: .875rem; }
+.aurora-auth-footer p { margin: 0 auto .5rem; max-width: 85ch; }
+.aurora-auth :focus-visible, .aurora-portal :focus-visible { outline: 3px solid #288d9e; outline-offset: 3px; }
+.product-workspace-body .card { border-color: #d6e5e9; border-radius: 1rem; }
+.product-workspace-body .nxl-navigation { border-right-color: #d6e5e9; }
+.product-workspace-body .nxl-navigation .nxl-link:hover { background: #e7f4f5; color: #0c3c6e; }
+.aurora-section-card { padding: clamp(1.25rem, 3vw, 2rem); background: white; border: 1px solid #d6e5e9; border-radius: 1rem; box-shadow: 0 8px 24px #0c3c6e08; }
+.aurora-section-card h1, .aurora-section-card h2 { color: #0c3c6e; }
+.aurora-portal { min-height: 100vh; background: #f3f7f9; color: #19334d; }
+.aurora-portal-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 2rem; background: white; border-bottom: 1px solid #d6e5e9; }
+.aurora-portal-tools, .aurora-layout-controls { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.aurora-portal-grid { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 2rem; max-width: 1440px; margin: auto; padding: 2rem; }
+.aurora-portal-sidebar { align-self: start; background: white; border: 1px solid #d6e5e9; border-radius: 1rem; padding: .75rem; }
+.aurora-portal-nav { display: flex; flex-direction: column; gap: .25rem; }
+.aurora-portal-nav a { display: block; border-radius: .65rem; padding: .75rem; color: #244a65; font-weight: 600; text-decoration: none; }
+.aurora-portal-nav a:hover, .aurora-portal-nav a[aria-current] { color: #0c3c6e; background: #e7f4f5; box-shadow: inset 3px 0 #288d9e; }
+.aurora-portal-content { min-width: 0; display: flex; flex-direction: column; gap: 1.5rem; }
+.aurora-ai-status { display: flex; align-items: start; gap: 1rem; padding: 1.25rem; border-radius: 1rem; background: white; border: 1px solid #c5dce1; }
+.aurora-ai-status img { flex: 0 0 48px; }
+.aurora-ai-status h2 { margin: 0 0 .5rem; font-size: 1rem; color: #0c3c6e; }
+.aurora-ai-status p { margin: 0; font-size: .875rem; line-height: 1.6; }
+.aurora-portal-footer { padding: 1.5rem 2rem; border-top: 1px solid #d6e5e9; font-size: .875rem; }
+.aurora-nav-toggle { display: none; }
+.aurora-portal [hidden] { display: none !important; }
+.aurora-portal [aria-pressed="true"] { background: #0c3c6e; color: white; }
+@media (min-width: 768px) {
+  .aurora-portal[data-layout="horizontal"] .aurora-portal-grid { grid-template-columns: 1fr; }
+  .aurora-portal[data-layout="horizontal"] .aurora-portal-nav { flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 767px) {
+  .aurora-portal-grid { grid-template-columns: 1fr; padding: 1rem; gap: 1rem; }
+  .aurora-portal-header { padding: 1rem; }
+  .aurora-layout-controls { display: none; }
+  .aurora-nav-toggle { display: inline-block; }
+}
+@media (max-width: 767px) { .aurora-auth-main { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem 1rem; } .aurora-auth-intro p { max-width: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

@@ -1,4 +1,4 @@
-> Baseline histórico importado de Projetomnunes. Contagens, decisões de marca e hashes abaixo descrevem a origem. Para o runtime atual do Mindcare, consulte [runtime-assets.md](../migration/runtime-assets.md).
+> Baseline histórico importado de Projetomnunes. Contagens, decisões de marca e hashes abaixo descrevem a origem. Para o runtime atual do Aurora Elo, consulte [runtime-assets.md](../migration/runtime-assets.md). Somente este apontador é operacional; o corpo histórico permanece preservado.
 
 # Manifesto de assets e baseline de runtime
 

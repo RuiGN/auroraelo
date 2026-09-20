@@ -1,4 +1,4 @@
-"""Behavioral regressions for the Mindcare workspace presentation."""
+"""Behavioral regressions for the Aurora Elo workspace presentation."""
 
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ def test_workspace_offers_role_scoped_actions_without_demo_metrics(
     assert response.context_data is not None
     assert "summary_cards" not in response.context_data
     assert "activity_table" not in response.context_data
-    assert "Mindcare" in html
+    assert "Aurora Elo" in html
 
 
 @pytest.mark.django_db

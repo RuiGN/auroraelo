@@ -105,7 +105,8 @@ class UserLanguageMiddleware:
                     response.streaming_content = _localized_stream(
                         cast(Iterable[bytes], response.streaming_content), effective
                     )
-            response.headers["Content-Language"] = effective
+            # Respeitar conteúdo com idioma fixado explicitamente pela view.
+            response.headers.setdefault("Content-Language", effective)
             if response.get("Content-Type", "").split(";", 1)[0] == "text/html":
                 patch_vary_headers(response, ("Cookie", "Accept-Language"))
             return response

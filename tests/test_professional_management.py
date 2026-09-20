@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from datetime import date, timedelta
 from uuid import uuid4
 
@@ -41,7 +42,7 @@ def _admin_and_professional() -> tuple[Clinic, User, User]:
     return clinic, administrator, professional
 
 
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_admin_registers_complete_professional_profile_with_safe_photo_and_audit() -> (
     None
 ):

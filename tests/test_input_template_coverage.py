@@ -11,7 +11,7 @@ CONTROL = re.compile(
 )
 
 
-def test_manual_text_controls_have_icon_wrappers_and_hints():
+def test_manual_text_controls_have_icon_wrappers_and_hints() -> None:
     failures = []
     for path in ROOT.rglob("*.html"):
         source = path.read_text()
@@ -29,13 +29,11 @@ def test_manual_text_controls_have_icon_wrappers_and_hints():
                 r'type=["\'](?:date|time|datetime-local)["\']', tag
             )
             if needs_hint and "placeholder=" not in tag:
-                failures.append(
-                    f"{path.relative_to(ROOT)}: missing hint: {tag[:100]}"
-                )
+                failures.append(f"{path.relative_to(ROOT)}: missing hint: {tag[:100]}")
     assert not failures, "\n".join(failures)
 
 
-def test_widgets_use_shared_control_or_auth_renderer():
+def test_widgets_use_shared_control_or_auth_renderer() -> None:
     allowed = {
         "components/duralux_control.html",
         "components/duralux_field.html",
@@ -50,7 +48,7 @@ def test_widgets_use_shared_control_or_auth_renderer():
     assert not remaining, remaining
 
 
-def test_shared_form_has_direct_responsive_fields():
+def test_shared_form_has_direct_responsive_fields() -> None:
     source = (ROOT / "components/form.html").read_text()
     assert "product-form-grid" in source
     assert '<div class="mb-3">' not in source

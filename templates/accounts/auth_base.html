@@ -3,232 +3,49 @@
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="application-name" content="Aurora Elo (formerly Mindcare)">
+  <meta name="application-name" content="Aurora Elo">
   <title>{% block title %}{% if page_title %}{{ page_title }}{% else %}{{ title }}{% endif %}{% endblock %} · Aurora Elo</title>
-  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
-  <!-- Aurora Elo Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script>
-    (function() {
-      const origWarn = console.warn;
-      console.warn = function(...args) {
-        if (typeof args[0] === 'string' && (args[0].includes('cdn.tailwindcss.com') || args[0].includes('should not be used in production'))) return;
-        return origWarn.apply(console, args);
-      };
-    })();
-  </script>
-  <script src="{% static 'design_system/js/tailwind.js' %}"></script>
-  <script>
-    if (typeof tailwind !== 'undefined') {
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              aurora: {
-                50: '#f0f7ff', 100: '#e0f0fe', 200: '#bae0fd', 300: '#7cc7fb', 400: '#38a9f8',
-                500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0a2540', 950: '#051424'
-              },
-              elo: {
-                50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 300: '#67e8f9', 400: '#22d3ee',
-                500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63'
-              },
-              crisis: { 50: '#fff1f2', 100: '#ffe4e6', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c' },
-              healing: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#10b981', 600: '#059669', 700: '#047857' }
-            },
-            fontFamily: {
-              sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-              display: ['Outfit', 'sans-serif'],
-              mono: ['"JetBrains Mono"', 'monospace']
-            }
-          }
-        }
-      };
-    }
-  </script>
+  <link rel="icon" href="{% static 'duralux/images/favicon.svg' %}" type="image/svg+xml">
   <script src="{% static 'duralux/js/product-shell.js' %}"></script>
   <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/css/theme.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/css/product-integration.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/css/auth.css' %}">
-  <link rel="stylesheet" href="{% static 'design_system/css/tokens.css' %}">
-  <link rel="stylesheet" href="{% static 'design_system/css/custom.css' %}">
-  <link rel="stylesheet" href="{% static 'css/aurora-theme-override.css' %}">
+  <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
   {% block page_styles %}{% endblock %}
 </head>
-
-<body class="product-auth-body bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden font-sans">
-  <!-- Atmospheric Aurora Background with Clinic Imagery -->
-  <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-    <img src="{% static 'images/clinic-hero.jpg' %}" alt="" class="w-full h-full object-cover opacity-20 filter blur-sm scale-105" />
-    <div class="absolute inset-0 bg-gradient-to-tr from-[#051424] via-[#0a2540]/90 to-slate-950/95"></div>
-    <div class="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-sky-600/15 rounded-full blur-3xl pointer-events-none"></div>
-  </div>
-
+<body class="product-auth-body aurora-auth">
   <a class="skip-link" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
-
-  <!-- Top Header Bar -->
-  <header class="relative z-10 w-full px-4 sm:px-8 py-3.5 flex items-center justify-between border-b border-white/10 bg-white/5 backdrop-blur-md">
-    <div class="flex items-center space-x-3">
-      <div class="bg-white px-2.5 py-1 rounded-xl shadow-sm border border-white/20 d-inline-flex align-items-center">
-        {% include "layouts/partials/brand.html" %}
-      </div>
-      <div class="hidden sm:block">
-        <span class="text-xs text-cyan-300 tracking-wider font-semibold uppercase block">Saúde Mental & Psiquiatria Integrada</span>
-        <span class="text-[11px] text-slate-400">Dependência Química, Álcool, Jogos de Azar & Telepsiquiatria</span>
-      </div>
-    </div>
-    <div class="flex items-center space-x-3">
-      <div class="product-auth-toolbar">
-        {% include "components/language_selector.html" with selector_id="auth" %}
-      </div>
-      <a href="{% url 'design_system_reference' %}" class="text-xs font-semibold text-cyan-300 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
-        🎨 Design System
-      </a>
-    </div>
+  <header class="aurora-auth-header">
+    <a href="{% url 'home' %}" class="aurora-brand" aria-label="Aurora Elo">
+      <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" width="180" height="48">
+    </a>
+    <div class="product-auth-toolbar">{% include "components/language_selector.html" with selector_id="auth" %}</div>
   </header>
-
-  <!-- Main Login Area -->
-  <main id="main-content" class="auth-minimal-wrapper relative z-10 flex-1 flex items-center justify-center px-4 py-8 sm:py-12 my-auto">
-    <div class="auth-minimal-inner w-full" style="max-width: 500px; margin: 0 auto;">
-      <div class="minimal-card-wrapper product-auth-inner">
-        <div class="card product-auth-card position-relative w-full bg-white text-slate-900 rounded-4 p-4 p-sm-5 shadow-2xl border-0" style="box-shadow: 0 25px 50px -12px rgba(5, 20, 36, 0.4) !important;">
-          <div class="card-body p-0">
-            <!-- Aurora Brand Header with LOGO -->
-            <header class="product-auth-brand mb-4 text-center">
-              <div class="d-inline-flex align-items-center justify-content-center p-2 mb-3 bg-white rounded-3 shadow-sm border border-slate-100" style="background: rgba(255, 255, 255, 0.98);">
-                <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" class="product-brand-logo" style="max-height: 52px; width: auto; object-fit: contain;">
-              </div>
-              <h1 class="fs-20 fw-bold text-dark mb-1" style="font-family: 'Outfit', sans-serif; letter-spacing: -0.02em;">Portal Clínico Aurora Elo</h1>
-              <p class="fs-12 text-muted mb-0">Saúde Mental, Psiquiatria Integrada & Adictologia</p>
-            </header>
-
-            <!-- Profile Selector Demo Tabs (6 Clinical Roles) -->
-            <div class="mb-3">
-              <div class="d-flex align-items-center justify-content-between mb-1.5 px-0.5">
-                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Perfis Demo (1-Clique):</span>
-                <span class="text-[10px] text-sky-600 font-semibold bg-sky-50 border border-sky-200 px-1.5 py-0.5 rounded">Preenchimento Automático</span>
-              </div>
-              <div class="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-100/90 rounded-xl text-xs select-none" id="auth-role-tabs">
-                <button type="button" class="py-2 px-1 rounded-lg text-slate-600 border border-transparent hover:bg-white/70 transition-all role-tab text-center" onclick="selectRolePreset('dr.marcelo@auroraelo.com.br', 'Médico Psiquiatra (Dr. Marcelo)')">
-                  <span class="block font-bold text-[11px]">🩺 Psiquiatra</span>
-                  <span class="block text-[10px] text-slate-400 truncate">Dr. Marcelo</span>
-                </button>
-                <button type="button" class="py-2 px-1 rounded-lg text-slate-600 border border-transparent hover:bg-white/70 transition-all role-tab text-center" onclick="selectRolePreset('dra.camila@auroraelo.com.br', 'Psicóloga / Terapeuta (Dra. Camila)')">
-                  <span class="block font-bold text-[11px]">🧠 Psicóloga</span>
-                  <span class="block text-[10px] text-slate-400 truncate">Dra. Camila</span>
-                </button>
-                <button type="button" class="py-2 px-1 rounded-lg text-slate-600 border border-transparent hover:bg-white/70 transition-all role-tab text-center" onclick="selectRolePreset('admin@auroraelo.com.br', 'Administrador Geral')">
-                  <span class="block font-bold text-[11px]">⚙️ Admin</span>
-                  <span class="block text-[10px] text-slate-400 truncate">Gestão Total</span>
-                </button>
-                <button type="button" class="py-2 px-1 rounded-lg text-slate-600 border border-transparent hover:bg-white/70 transition-all role-tab text-center" onclick="selectRolePreset('recepcao@auroraelo.com.br', 'Recepção e Triagem')">
-                  <span class="block font-bold text-[11px]">📋 Recepção</span>
-                  <span class="block text-[10px] text-slate-400 truncate">Atendimento</span>
-                </button>
-                <button type="button" class="py-2 px-1 rounded-lg text-slate-600 border border-transparent hover:bg-white/70 transition-all role-tab text-center" onclick="selectRolePreset('enfermagem@auroraelo.com.br', 'Enfermagem & Leitos')">
-                  <span class="block font-bold text-[11px]">💉 Enfermagem</span>
-                  <span class="block text-[10px] text-slate-400 truncate">Plantão</span>
-                </button>
-                <button type="button" class="py-2 px-1 rounded-lg text-slate-600 border border-transparent hover:bg-white/70 transition-all role-tab text-center" onclick="selectRolePreset('paciente.thiago@auroraelo.com.br', 'Paciente (Thiago Silva)')">
-                  <span class="block font-bold text-[11px]">👤 Paciente</span>
-                  <span class="block text-[10px] text-slate-400 truncate">Thiago Silva</span>
-                </button>
-              </div>
-
-              <!-- Real-time preset feedback hint -->
-              <div id="auth-preset-hint" class="d-none mt-2 px-2.5 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg text-[11px] text-emerald-800 d-flex align-items-center justify-content-between">
-                <div>
-                  <i class="feather-check-circle text-emerald-600 me-1"></i> <strong id="preset-role-name"></strong> · Senha preenchida!
-                </div>
-                <span class="text-emerald-700 font-bold">Pronto para Entrar ↓</span>
-              </div>
-            </div>
-
-            {% block auth_content %}{% endblock %}
-          </div>
-        </div>
-      </div>
+  <main id="main-content" class="aurora-auth-main" tabindex="-1">
+    <div class="aurora-auth-intro">
+      <p class="aurora-eyebrow">Aurora Elo</p>
+      <h1>{% translate "Apoio à sua recuperação" %}</h1>
+      <p>{% translate "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito." %}</p>
+      <p>{% translate "Acesse sua conta para continuar." %}</p>
+    </div>
+    <div class="aurora-auth-card">
+      {% block auth_content %}{% endblock %}
     </div>
   </main>
-
-  <!-- Crisis Emergency Lifeline Banner -->
-  <footer class="relative z-10 w-full px-4 py-3 bg-[#051424]/90 border-t border-white/10 text-center backdrop-blur-md">
-    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
-          🚨 SOS Crise 24h
-        </span>
-        <span>Emergência ou ideação: <strong>Ligue 188 (CVV)</strong> ou <strong>192 (SAMU)</strong></span>
-      </div>
-      <div class="flex items-center gap-4 text-slate-400 text-[11px]">
-        <a href="{% url 'psychiatry:crisis_protocol' %}" class="hover:text-cyan-300 transition-colors">Protocolo de Risco</a>
-        <a href="{% url 'psychiatry:addiction_dashboard' %}" class="hover:text-cyan-300 transition-colors">12 Passos & Adictologia</a>
-        <span>Aurora Elo © {% now "Y" %}</span>
-      </div>
-    </div>
+  <footer class="aurora-auth-footer">
+    <p>{% translate "Este portal não é um serviço de emergência e não oferece monitoramento contínuo." %}</p>
+    <p>{% translate "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência." %}</p>
+    <span>Aurora Elo © {% now "Y" %}</span>
   </footer>
-
-  <script>
-    function selectRolePreset(email, roleName) {
-      const emailInput = document.querySelector('input[name="email"]') || document.querySelector('input[type="email"]');
-      const passwordInput = document.querySelector('input[name="password"]') || document.querySelector('input[type="password"]');
-      const defaultPassword = 'AuroraElo@2026!';
-
-      if (emailInput) {
-        emailInput.value = email;
-        emailInput.dispatchEvent(new Event('input', { bubbles: true }));
-        emailInput.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-      if (passwordInput) {
-        passwordInput.value = defaultPassword;
-        passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
-        passwordInput.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-
-      document.querySelectorAll('#auth-role-tabs .role-tab').forEach(tab => {
-        tab.classList.remove('bg-white', 'text-sky-900', 'shadow-sm', 'border-slate-300', 'font-bold');
-        tab.classList.add('text-slate-600', 'border-transparent');
-      });
-
-      if (window.event && window.event.currentTarget) {
-        window.event.currentTarget.classList.add('bg-white', 'text-sky-900', 'shadow-sm', 'border-slate-300', 'font-bold');
-        window.event.currentTarget.classList.remove('text-slate-600', 'border-transparent');
-      }
-
-      const hintEl = document.getElementById('auth-preset-hint');
-      const nameEl = document.getElementById('preset-role-name');
-      if (hintEl && nameEl) {
-        nameEl.textContent = roleName || email;
-        hintEl.classList.remove('d-none');
-      }
-    }
-
-    function fillDefaultPassword() {
-      const passwordInput = document.querySelector('input[name="password"]') || document.querySelector('input[type="password"]');
-      if (passwordInput) {
-        passwordInput.value = 'AuroraElo@2026!';
-        passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
-        passwordInput.dispatchEvent(new Event('change', { bubbles: true }));
-        passwordInput.focus();
-      }
-    }
-  </script>
-
   <script defer src="{% static 'duralux/js/bootstrap.bundle.min.js' %}"></script>
   <script defer src="{% static 'duralux/js/language-selector.js' %}"></script>
   {% block page_scripts %}{% endblock %}
 </body>
-
 </html>

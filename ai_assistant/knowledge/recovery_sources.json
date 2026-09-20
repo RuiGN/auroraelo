@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "niaaa-understanding-alcohol-use-disorder",
+      "title": "Understanding Alcohol Use Disorder",
+      "publisher": "NIAAA",
+      "url": "https://www.niaaa.nih.gov/publications/brochures-and-fact-sheets/understanding-alcohol-use-disorder",
+      "published_date": null,
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "alcohol",
+        "relapse_prevention",
+        "crisis"
+      ],
+      "summary_pt_br": "O transtorno por uso de álcool é uma condição médica tratável. O NIAAA descreve terapias comportamentais conduzidas por profissionais e apoio de pares; a recuperação pode incluir retornos ao uso. Pessoas com quadro grave podem precisar de assistência médica ao interromper o consumo, pois a síndrome de abstinência pode ameaçar a vida.",
+      "evidence_quote": "People with severe AUD may need medical help to avoid alcohol withdrawal if they decide to stop drinking.",
+      "evidence_limitations": "Ficha educativa, não ensaio clínico nem ferramenta diagnóstica. A página informa atualização em janeiro de 2025, mas não a data original de publicação. Não define quem pode interromper o álcool com segurança sem avaliação individual.",
+      "safety_notes": [
+        "Pessoas com dependência ou consumo intenso prolongado devem buscar avaliação médica antes de interromper o álcool; não oferecer desintoxicação autoguiada.",
+        "Suspeita de abstinência grave exige assistência humana urgente; o aplicativo não acompanha nem trata a abstinência.",
+        "Não diagnosticar nem recomendar medicamentos ou doses."
+      ]
+    },
+    {
+      "id": "niaaa-alcohol-treatment-faq",
+      "title": "FAQs: Searching for Alcohol Treatment",
+      "publisher": "NIAAA",
+      "url": "https://alcoholtreatment.niaaa.nih.gov/FAQs-searching-alcohol-treatment",
+      "published_date": null,
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "alcohol",
+        "relapse_prevention"
+      ],
+      "summary_pt_br": "A terapia cognitivo-comportamental (TCC/CBT) trabalha situações, pensamentos e habilidades de enfrentamento relacionadas ao consumo e ao retorno ao uso. A terapia de reforço motivacional apoia a exploração de motivos e planos de mudança. Desintoxicação isolada não equivale ao tratamento continuado.",
+      "evidence_quote": "This form of therapy is focused on identifying the feelings and situations (called “cues”) that lead to heavy drinking, and managing stress that can lead to relapse.",
+      "evidence_limitations": "Orientação educativa dos Estados Unidos, não comparação quantitativa de eficácia. Resultados de programas digitais específicos citados na página não validam um chatbot ou avatar do Aurora Elo. Não foi identificada data de publicação na página lida.",
+      "safety_notes": [
+        "Conteúdo psicoeducativo não deve ser apresentado como sessão de TCC ou entrevista motivacional profissional.",
+        "Planejamento de cuidado e manejo de recaída devem envolver profissionais; não substituir acompanhamento por mensagens automáticas."
+      ]
+    },
+    {
+      "id": "nice-gambling-harms-ng248",
+      "title": "Gambling-related harms: identification, assessment and management — Recommendations",
+      "publisher": "NICE",
+      "url": "https://www.nice.org.uk/guidance/ng248/chapter/Recommendations",
+      "published_date": "2025-01-28",
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "gambling",
+        "relapse_prevention",
+        "crisis"
+      ],
+      "summary_pt_br": "A diretriz recomenda TCC para reduzir gravidade e frequência do jogo de azar, com componente de prevenção de recaída e profissionais capacitados. Considera entrevista motivacional para fortalecer compromisso com a mudança. Retornos ao jogo não significam fracasso individual; situações de risco importante ou imediato requerem encaminhamento humano urgente.",
+      "evidence_quote": "Offer group CBT to reduce gambling severity and frequency.",
+      "evidence_limitations": "Diretriz clínica britânica, não validação do aplicativo. Recomendações para pessoas com jogo prejudicial não devem ser transferidas automaticamente para jogos digitais, crianças ou outras dependências. Os protocolos exigem competência clínica específica; adaptação ao Brasil requer revisão.",
+      "safety_notes": [
+        "Não confundir apostas/jogos de azar com uso problemático de videogames.",
+        "Não prometer prevenção de suicídio ou atendimento de crise por avatar.",
+        "Não usar culpa, punição ou perda de benefícios em resposta a recaída.",
+        "O corpus exclui as recomendações farmacológicas e posologias presentes no documento original."
+      ]
+    },
+    {
+      "id": "cochrane-motivational-interviewing-substance-use",
+      "title": "Does motivational interviewing help people reduce their use of alcohol, drugs, or both?",
+      "publisher": "Cochrane",
+      "url": "https://www.cochrane.org/evidence/CD008063_does-motivational-interviewing-help-people-reduce-their-use-alcohol-drugs-or-both",
+      "published_date": "2023-12-12",
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "alcohol",
+        "substances"
+      ],
+      "summary_pt_br": "A revisão de entrevista motivacional encontrou possível redução de uso de álcool ou drogas no curto prazo em comparação com nenhuma intervenção. Em comparação com cuidado habitual ou outra intervenção ativa, pode haver pouca ou nenhuma diferença. A confiança nos resultados varia e não sustenta promessas de superioridade universal.",
+      "evidence_quote": "Motivational interviewing may reduce substance use compared with no intervention up to a short follow-up period.",
+      "evidence_limitations": "Revisão sistemática de intervenções individuais presenciais; buscas até novembro de 2022. Heterogeneidade, risco de viés e imprecisão limitam as conclusões. A síntese em linguagem simples descreve confiança de moderada a nenhuma; não é evidência de eficácia de entrevista motivacional gerada por IA.",
+      "safety_notes": [
+        "Usar linguagem colaborativa e não coercitiva como escolha editorial, sem declarar que o avatar oferece terapia validada.",
+        "Não substituir tratamento ativo por aconselhamento automatizado nem garantir abstinência."
+      ]
+    },
+    {
+      "id": "who-psychoactive-drugs",
+      "title": "Drugs (psychoactive)",
+      "publisher": "WHO",
+      "url": "https://www.who.int/health-topics/drugs-psychoactive",
+      "published_date": null,
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "substances"
+      ],
+      "summary_pt_br": "A OMS diferencia substâncias psicoativas de dependência: a palavra psicoativo não implica necessariamente potencial de dependência. Descreve riscos de uso sem supervisão médica e uma resposta de saúde pública que inclui prevenção, cuidado e redução de danos.",
+      "evidence_quote": "“Psychoactive” does not necessarily imply dependence-producing,",
+      "evidence_limitations": "Página temática ampla, sem data única de publicação e sem avaliação comparativa de intervenções. Não permite inferir diagnóstico de um relato de uso; dados epidemiológicos não foram incorporados ao corpus.",
+      "safety_notes": [
+        "Não inferir dependência a partir de exposição ou de uma mensagem do usuário.",
+        "Não orientar mudança de medicamentos ou suspensão de substâncias sem avaliação clínica.",
+        "Tratar a pessoa com respeito e encaminhar necessidades de cuidado humano."
+      ]
+    },
+    {
+      "id": "nccih-yoga-effectiveness-safety",
+      "title": "Yoga: Effectiveness and Safety",
+      "publisher": "NCCIH",
+      "url": "https://www.nccih.nih.gov/health/yoga-what-you-need-to-know",
+      "published_date": null,
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "yoga",
+        "alcohol",
+        "substances"
+      ],
+      "summary_pt_br": "O NCCIH descreve uma quantidade pequena de pesquisas sobre yoga incorporada a programas de tratamento de transtornos por uso de substâncias. Os resultados citados combinam redução do consumo e melhora de sintomas como dor, estresse ou ansiedade. Yoga é considerada apenas uma possibilidade complementar, com prática adaptada e orientação qualificada.",
+      "evidence_quote": "A small amount of research has looked at the possible benefits of incorporating yoga into treatment programs for various types of substance use disorders (opioid, alcohol, or tobacco use disorders or others).",
+      "evidence_limitations": "Atualizada em agosto de 2023; data original de publicação não identificada. Estudos de diferentes substâncias e desfechos não demonstram, por si, prevenção de recaída duradoura. Melhorar ansiedade ou estresse não equivale a comprovar abstinência. Evidência específica para esta finalidade é limitada.",
+      "safety_notes": [
+        "Não substituir cuidado baseado em evidências por yoga.",
+        "A prática pode causar lesões; procurar instrutor qualificado e discutir necessidades individuais com profissional de saúde.",
+        "Não recomendar práticas extremas, respiração forçada ou rotinas físicas durante crise, intoxicação ou abstinência."
+      ]
+    },
+    {
+      "id": "who-arts-health-scoping-review",
+      "title": "What is the evidence on the role of the arts in improving health and well-being? A scoping review",
+      "publisher": "WHO Regional Office for Europe",
+      "url": "https://iris.who.int/server/api/core/bitstreams/e1cc8536-773d-446f-9822-8ae376f41415/content",
+      "published_date": "2019-11-05",
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "art_therapy",
+        "substances",
+        "alcohol"
+      ],
+      "summary_pt_br": "A revisão de escopo da OMS descreve, no contexto de dependências, achados de musicoterapia relacionados a controle percebido e fissura, mas incerteza sobre motivação e habilidades de enfrentamento. Artes podem ser consideradas apoio complementar de expressão e vínculo; isso não demonstra que arteterapia visual ou atividades criativas de um aplicativo previnam recaídas.",
+      "evidence_quote": "Studies on addiction have reported benefits of music therapy for improving perceived control (572) and reducing cravings (573), although whether there are other benefits such as for motivation or coping skills remains unclear (572,574).",
+      "evidence_limitations": "Leitura focal das páginas impressas 16–17, 30–32 e 51, entre outras seções pertinentes, a partir do PDF completo. Revisão de escopo de 2019, não revisão sistemática com busca exaustiva; reúne métodos e intervenções heterogêneos. Musicoterapia, arteterapia profissional e lazer criativo não são intercambiáveis. Evidência específica para arteterapia na prevenção de recaída é limitada neste corpus.",
+      "safety_notes": [
+        "Apresentar atividades artísticas como opcionais e complementares, nunca como cura ou tratamento equivalente à TCC.",
+        "Não interpretar desenhos ou produções pessoais como diagnóstico.",
+        "Não chamar uma atividade autoguiada de arteterapia profissional; respeitar privacidade e escolha de não compartilhar."
+      ]
+    },
+    {
+      "id": "who-physical-activity",
+      "title": "Physical activity",
+      "publisher": "WHO",
+      "url": "https://www.who.int/health-topics/physical-activity/",
+      "published_date": null,
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "exercise"
+      ],
+      "summary_pt_br": "A OMS descreve benefícios da atividade física para saúde mental, qualidade de vida e bem-estar, além de benefícios físicos. Caminhar, pedalar e atividades recreativas são exemplos de movimento; no corpus, a atividade física aparece como apoio geral de bem-estar, não como tratamento comprovado de dependência.",
+      "evidence_quote": "It also helps to maintain a healthy body weight and can improve mental health, quality of life and well-being.",
+      "evidence_limitations": "Página populacional geral, sem data única de publicação, não estudo de álcool, drogas ou jogo. Não estabelece efeito sobre fissura, abstinência ou prevenção de recaída nessas populações. Não foi feita busca sistemática de ensaios de exercício em dependências.",
+      "safety_notes": [
+        "Adaptar qualquer atividade à condição e às preferências individuais, com orientação profissional quando necessária.",
+        "Não prescrever intensidade, duração ou metas universais para pessoas em recuperação.",
+        "Não usar exercício como resposta a intoxicação, abstinência grave ou emergência."
+      ]
+    },
+    {
+      "id": "who-suicide-human-help",
+      "title": "Suicide — Questions and answers",
+      "publisher": "WHO",
+      "url": "https://www.who.int/news-room/questions-and-answers/item/suicide",
+      "published_date": "2026-08-31",
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "crisis"
+      ],
+      "summary_pt_br": "A OMS orienta procurar pessoas de confiança e profissionais de saúde diante de sofrimento e pensamentos suicidas. Em perigo imediato, recomenda contato com serviços de emergência ou linha de crise; quem acompanha uma pessoa em perigo imediato não deve deixá-la sozinha enquanto busca ajuda.",
+      "evidence_quote": "If you think someone is in immediate danger, don't leave them alone. Contact the emergency services, a crisis line, a health worker or a family member.",
+      "evidence_limitations": "Orientação pública geral, não avaliação individual de risco nem protocolo completo de intervenção. A fonte não especifica a rede de serviços brasileira; este corpus não publica números de telefone sem validação local.",
+      "safety_notes": [
+        "Crise suicida exige ajuda humana: orientar serviços de emergência locais e contato com alguém de confiança.",
+        "Não prometer vigilância, resposta em tempo real, resgate ou sigilo absoluto por parte de um avatar.",
+        "A conversa com IA não deve atrasar a procura de ajuda urgente."
+      ]
+    },
+    {
+      "id": "who-safe-ethical-ai-health",
+      "title": "WHO calls for safe and ethical AI for health",
+      "publisher": "WHO",
+      "url": "https://www.who.int/news/item/16-05-2023-who-calls-for-safe-and-ethical-ai-for-health",
+      "published_date": "2023-05-16",
+      "accessed_on": "2026-09-20",
+      "topics": [
+        "crisis",
+        "alcohol",
+        "substances",
+        "gambling"
+      ],
+      "summary_pt_br": "A OMS alerta que modelos de linguagem imitam a comunicação humana e podem produzir respostas plausíveis, porém incorretas, especialmente em saúde. Recomenda transparência, supervisão especializada e avaliação rigorosa. Para o Aurora Elo, isso fundamenta a exigência de apresentar qualquer avatar como apoio digital de IA, não como pessoa ou profissional humano.",
+      "evidence_quote": "LLMs generate responses that can appear authoritative and plausible to an end user; however, these responses may be completely incorrect or contain serious errors, especially for health-related responses;",
+      "evidence_limitations": "Comunicado de governança, não ensaio clínico e não certificação de um avatar. A exigência de avatar não humano e o bloqueio até API própria e revisão clínica são decisões de segurança do produto, não recomendações específicas da OMS sobre o Aurora Elo. Os tópicos indicam aplicação transversal, não evidência terapêutica.",
+      "safety_notes": [
+        "Declarar de forma visível: sou uma IA de apoio digital, não uma pessoa, psicólogo ou serviço de emergência.",
+        "Regra do produto: manter a IA desativada até API própria e revisão clínica independente; este corpus não altera o estado do sistema.",
+        "Não apresentar imagens, voz ou linguagem como prova de identidade humana, vínculo terapêutico ou habilitação profissional.",
+        "Não gerar diagnósticos, prescrições ou garantias de recuperação."
+      ]
+    }
+  ]
+}

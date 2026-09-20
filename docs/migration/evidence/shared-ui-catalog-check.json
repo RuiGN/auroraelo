@@ -1,7 +1,7 @@
 {
-  "scope": "docs/migration/shared-ui-scope.json",
-  "source_files": 32,
-  "required_catalog_keys_including_plural_forms": 317,
+  "scope": "docs/migration/translated-ui-scope.json",
+  "source_files": 160,
+  "required_catalog_keys_including_plural_forms": 1445,
   "missing": {
     "pt_BR": [],
     "en": [],

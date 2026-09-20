@@ -37,6 +37,8 @@ urlpatterns = [
     path("conteudos/", include("content.urls")),
     path("dashboard/", include("therapist_dashboard.urls")),
     path("psiquiatria/", include("psychiatry.urls")),
+    path("api/v1/clinical-operations/", include("clinical_operations.urls")),
+    path("", include("ai_assistant.urls")),
     path("design-system/", design_system_reference, name="design_system_reference"),
     path("workspace/", workspace_vertical, name="workspace_vertical"),
     path("workspace/detached/", workspace_detached, name="workspace_detached"),

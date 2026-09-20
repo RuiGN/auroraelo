@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import sys
 from datetime import date, timedelta
 from uuid import uuid4
 
@@ -344,7 +345,7 @@ def test_sanitize_body_neutralizes_single_quoted_href_injection() -> None:
     assert "https://safe.test/" in sanitized
 
 
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_attach_media_validates_type_and_size() -> None:
     clinic, submitter, reviewer, publisher = _governance_clinic()
     content = _content(clinic, publisher)
@@ -377,7 +378,7 @@ def test_attach_media_validates_type_and_size() -> None:
         )
 
 
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_attach_media_accepts_video_and_audio() -> None:
     """8.12.1 media policy admits mp4/mp3 declared in MEDIA_ALLOWED_TYPES."""
     clinic, submitter, reviewer, publisher = _governance_clinic()

@@ -1,12 +1,12 @@
 # Shared UI translation draft; human terminology review pending.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mindcare UI\n"
+"Project-Id-Version: Aurora Elo UI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-11 03:44-0300\n"
 "PO-Revision-Date: 2026-09-08 22:00+0000\n"
-"Last-Translator: Mindcare engineering review\n"
-"Language-Team: Mindcare\n"
+"Last-Translator: Aurora Elo technical draft; human review pending\n"
+"Language-Team: Aurora Elo pt_BR; terminology review pending\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4683,3 +4683,240 @@ msgstr "Confira os dispositivos e as sessões da sua conta."
 
 #~ msgid "Aplicar idioma"
 #~ msgstr "Aplicar idioma"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/accounts/auth_base.html:36
+msgid "Acesse sua conta para continuar."
+msgstr "Acesse sua conta para continuar."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:40
+msgid "Assistente de IA indisponível"
+msgstr "Assistente de IA indisponível"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:38
+msgid "Avatar de inteligência artificial"
+msgstr "Avatar de inteligência artificial"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:41
+msgid "A IA generativa está desativada até a integração com API própria e revisão clínica. Este avatar não representa um profissional de saúde."
+msgstr "A IA generativa está desativada até a integração com API própria e revisão clínica. Este avatar não representa um profissional de saúde."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:49 templates/accounts/auth_base.html:43 templates/workspace/home.html:53
+msgid "Este portal não é um serviço de emergência e não oferece monitoramento contínuo."
+msgstr "Este portal não é um serviço de emergência e não oferece monitoramento contínuo."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:50 templates/accounts/auth_base.html:44 templates/workspace/home.html:54
+msgid "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência."
+msgstr "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/accounts/auth_base.html:35
+msgid "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito."
+msgstr "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:26 psychiatry/templates/psychiatry/dashboard.html:12
+msgid "Anamnese"
+msgstr "Anamnese"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/layouts/partials/navigation.html:225
+msgid "Aplicativos e sistema de design"
+msgstr "Aplicativos e sistema de design"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/dashboard.html:8 templates/workspace/home.html:12
+msgid "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos."
+msgstr "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/accounts/auth_base.html:34
+msgid "Apoio à sua recuperação"
+msgstr "Apoio à sua recuperação"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:15
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:28 templates/layouts/partials/navigation.html:214
+msgid "Leitos e internação"
+msgstr "Leitos e internação"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:12
+msgid "Menu"
+msgstr "Menu"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:30 templates/layouts/partials/header.html:50 templates/layouts/partials/header.html:51 templates/layouts/partials/navigation.html:15 templates/layouts/partials/navigation.html:220 templates/workspace/home.html:52
+msgid "Orientações em crise"
+msgstr "Orientações em crise"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/dashboard.html:9
+msgid "Os indicadores clínicos deste painel ainda não estão disponíveis. Nenhum dado de demonstração é apresentado como atendimento real."
+msgstr "Os indicadores clínicos deste painel ainda não estão disponíveis. Nenhum dado de demonstração é apresentado como atendimento real."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:24 psychiatry/templates/psychiatry/dashboard.html:3
+msgid "Painel clínico"
+msgstr "Painel clínico"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/login.html:6
+msgid "Portal Aurora Elo"
+msgstr "Portal Aurora Elo"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:3 psychiatry/templates/psychiatry/dashboard.html:7 templates/workspace/home.html:13
+msgid "Portal de psiquiatria"
+msgstr "Portal de psiquiatria"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:32 templates/layouts/partials/navigation.html:236
+msgid "Prévia do aplicativo Aurora Elo"
+msgstr "Prévia do aplicativo Aurora Elo"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:31 templates/layouts/partials/navigation.html:230
+msgid "Prévia do aplicativo conectado"
+msgstr "Prévia do aplicativo conectado"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/layouts/partials/navigation.html:191
+msgid "Psiquiatria e recuperação"
+msgstr "Psiquiatria e recuperação"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/layouts/partials/navigation.html:202
+msgid "Recuperação e jogos"
+msgstr "Recuperação e jogos"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:29 psychiatry/templates/psychiatry/dashboard.html:13
+msgid "Recuperação: álcool, substâncias e jogos"
+msgstr "Recuperação: álcool, substâncias e jogos"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/layouts/partials/header.html:57 templates/layouts/partials/navigation.html:242
+msgid "Sistema de design"
+msgstr "Sistema de design"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/layouts/partials/header.html:56
+msgid "Sistema de design Aurora Elo"
+msgstr "Sistema de design Aurora Elo"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/base_aurora.html:27 templates/layouts/partials/header.html:53 templates/layouts/partials/header.html:54 templates/layouts/partials/navigation.html:208
+msgid "Telepsiquiatria"
+msgstr "Telepsiquiatria"
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: psychiatry/templates/psychiatry/login.html:7
+msgid "Use sua conta Aurora Elo para acessar o portal."
+msgstr "Use sua conta Aurora Elo para acessar o portal."
+
+#. Aurora Elo UI technical draft; human clinical/terminology review pending.
+#: templates/layouts/partials/navigation.html:196
+msgid "Álcool e outras substâncias"
+msgstr "Álcool e outras substâncias"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "A agenda, as prescrições, o registro de tomadas e o SOS estão indisponíveis nesta prévia. Esta página não confirma tratamento ou atendimento."
+msgstr "A agenda, as prescrições, o registro de tomadas e o SOS estão indisponíveis nesta prévia. Esta página não confirma tratamento ou atendimento."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "A consulta de ocupação, a admissão e as comunicações de internação estão indisponíveis nesta interface. Nenhuma vaga está confirmada."
+msgstr "A consulta de ocupação, a admissão e as comunicações de internação estão indisponíveis nesta interface. Nenhuma vaga está confirmada."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "A sala de vídeo, o registro da consulta e a emissão ou assinatura de documentos estão indisponíveis nesta interface."
+msgstr "A sala de vídeo, o registro da consulta e a emissão ou assinatura de documentos estão indisponíveis nesta interface."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Anamnese dos 12 passos"
+msgstr "Anamnese dos 12 passos"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Cadastro, edição e exportação estão indisponíveis nesta interface."
+msgstr "Cadastro, edição e exportação estão indisponíveis nesta interface."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Consulta somente leitura dos pacientes disponíveis para este acesso. A lista exibe até 50 registros autorizados; não representa o total da clínica."
+msgstr "Consulta somente leitura dos pacientes disponíveis para este acesso. A lista exibe até 50 registros autorizados; não representa o total da clínica."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Consulta somente leitura dos perfis de recuperação autorizados. A lista exibe até 15 registros; não representa o total da clínica."
+msgstr "Consulta somente leitura dos perfis de recuperação autorizados. A lista exibe até 15 registros; não representa o total da clínica."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Consultar disponibilidade da anamnese"
+msgstr "Consultar disponibilidade da anamnese"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Consultar disponibilidade da anamnese dos 12 passos"
+msgstr "Consultar disponibilidade da anamnese dos 12 passos"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Esta página não grava dados nem envia notificações."
+msgstr "Esta página não grava dados nem envia notificações."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Indisponível nesta interface"
+msgstr "Indisponível nesta interface"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Ligar para o CVV: 188 (Brasil)"
+msgstr "Ligar para o CVV: 188 (Brasil)"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Ligar para o SAMU: 192 (Brasil)"
+msgstr "Ligar para o SAMU: 192 (Brasil)"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Nenhum paciente disponível para este acesso."
+msgstr "Nenhum paciente disponível para este acesso."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "O acionamento de SOS pelo portal está indisponível. Não há plantão, monitoramento ou envio de ajuda por esta página."
+msgstr "O acionamento de SOS pelo portal está indisponível. Não há plantão, monitoramento ou envio de ajuda por esta página."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "O formulário de anamnese está indisponível até a homologação da integração. Não é possível inserir, salvar ou anexar dados nesta página."
+msgstr "O formulário de anamnese está indisponível até a homologação da integração. Não é possível inserir, salvar ou anexar dados nesta página."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "O formulário de etapas está indisponível até a homologação da integração. Não há avanço de etapas, salvamento automático ou consolidação nesta página."
+msgstr "O formulário de etapas está indisponível até a homologação da integração. Não há avanço de etapas, salvamento automático ou consolidação nesta página."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "O registro de fissura e os indicadores de recuperação estão indisponíveis nesta interface. Não há monitoramento nem intervenção automática."
+msgstr "O registro de fissura e os indicadores de recuperação estão indisponíveis nesta interface. Não há monitoramento nem intervenção automática."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "O registro de humor, o diário e a contratação de assinatura estão indisponíveis nesta prévia. Nenhum histórico ou benefício de assinatura é exibido."
+msgstr "O registro de humor, o diário e a contratação de assinatura estão indisponíveis nesta prévia. Nenhum histórico ou benefício de assinatura é exibido."
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Pacientes disponíveis para consulta"
+msgstr "Pacientes disponíveis para consulta"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Perfil vinculado à sua conta nesta clínica"
+msgstr "Perfil vinculado à sua conta nesta clínica"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Prontuário"
+msgstr "Prontuário"
+
+#. Technical draft: unavailable interface; human terminology review pending.
+msgid "Voltar para recuperação"
+msgstr "Voltar para recuperação"

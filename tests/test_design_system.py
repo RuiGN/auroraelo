@@ -94,9 +94,10 @@ def test_only_allowlisted_application_assets_are_in_static_storage() -> None:
 
 def test_design_assets_are_application_owned() -> None:
     base_dir = Path(settings.BASE_DIR)
-    source = base_dir / "design_system_duralux"
+    source = base_dir / "design_system"
 
     assert source.is_dir()
+    assert (source / "css" / "tokens.css").is_file()
     assert PRODUCT_CSS_PATH.is_file()
     assert find("duralux/css/product-integration.css") is not None
     assert not (STATIC_ROOT / "vendor").exists()

@@ -28,4 +28,30 @@ def current_actor_is_active(actor: AbstractBaseUser) -> bool:
     )
 
 
-__all__ = ["AuthorizationPolicy", "current_actor_is_active"]
+_TENANT_INDEPENDENT_PATHS = frozenset(
+    {
+        "/api/v1/recovery/library/",
+        "/api/v1/recovery/assistant/",
+        "/psiquiatria/login/",
+        "/psiquiatria/api/v1/mind/breathing/",
+        "/psiquiatria/api/v1/mobile/b2c/breathing/",
+        "/psiquiatria/api/v1/mind/mood/",
+        "/psiquiatria/api/v1/mind/cbt-diary/",
+        "/psiquiatria/api/v1/mind/subscription/",
+        "/psiquiatria/api/v1/mobile/b2c/mood/",
+        "/psiquiatria/api/v1/mobile/b2c/cbt-diary/",
+        "/psiquiatria/api/v1/mobile/b2c/subscription/",
+    }
+)
+
+
+def is_tenant_independent_path(path: str) -> bool:
+    """Dispensar somente tenant em rotas exatas; sessão/CSRF continuam obrigatórios."""
+    return path in _TENANT_INDEPENDENT_PATHS
+
+
+__all__ = [
+    "AuthorizationPolicy",
+    "current_actor_is_active",
+    "is_tenant_independent_path",
+]

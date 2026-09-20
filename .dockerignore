@@ -25,3 +25,9 @@ staticfiles
 docs/migration/evidence
 design_system_duralux
 tests
+.DS_Store
+**/.DS_Store
+.hermes.md
+novaversao.prd
+mobile
+.github

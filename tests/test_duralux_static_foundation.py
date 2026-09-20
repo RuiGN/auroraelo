@@ -18,8 +18,8 @@ DURALUX_RUNTIME_FILES = {
     "duralux/css/bootstrap.min.css",
     "duralux/css/product-integration.css",
     "duralux/css/theme.min.css",
-    "duralux/images/auth/mindcare-peace-dark.svg",
-    "duralux/images/auth/mindcare-peace-light.svg",
+    "duralux/images/auth/aurora-elo-peace-dark.svg",
+    "duralux/images/auth/aurora-elo-peace-light.svg",
     "duralux/images/favicon.svg",
     "duralux/images/flags/br.svg",
     "duralux/images/flags/us.svg",
@@ -59,13 +59,15 @@ def test_duralux_runtime_manifest_is_minimal_and_complete() -> None:
         assert _static_path(relative_path).is_file()
 
 
-def test_mindcare_brand_replaces_source_identity_in_runtime() -> None:
+def test_aurora_brand_replaces_source_identity_in_runtime() -> None:
     favicon = _static_path("duralux/images/favicon.svg").read_text()
-    assert 'aria-label="Mindcare"' in favicon
+    assert 'aria-label="Aurora Elo"' in favicon
+    assert "mindcare" not in favicon.casefold()
     assert "data:image" not in favicon
     templates = Path(settings.BASE_DIR) / "templates"
     for path in templates.rglob("*.html"):
         source = path.read_text()
+        assert "mindcare" not in source.casefold(), path
         assert "logo_header.webp" not in source
         assert "logo_login.webp" not in source
         assert "RGN Terapêutica" not in source
@@ -89,29 +91,13 @@ def test_duralux_styles_are_local_and_do_not_reference_missing_maps() -> None:
         assert external_urls == []
 
 
-def test_duralux_theme_is_exact_sanitized_source_derivation() -> None:
-    source = (
-        Path(settings.BASE_DIR)
-        / "design_system_duralux"
-        / "assets"
-        / "css"
-        / "theme.min.css"
-    ).read_text(encoding="utf-8")
-    expected, substitutions = re.subn(
-        r"@import url\(https://fonts\.googleapis\.com/.*?\);",
-        "",
-        source,
-    )
-    expected, map_substitutions = re.subn(
-        r"\n?/\*# sourceMappingURL=theme\.min\.css\.map \*/\n?\Z",
-        "\n",
-        expected,
-    )
+def test_legacy_theme_runtime_remains_sanitized() -> None:
+    # O pacote fonte foi excluído do escopo; o runtime ainda exige sanitização.
     promoted = _static_path("duralux/css/theme.min.css").read_text(encoding="utf-8")
 
-    assert substitutions == 1
-    assert map_substitutions == 1
-    assert promoted == expected
+    assert "@import" not in promoted
+    assert "fonts.googleapis.com" not in promoted
+    assert "sourceMappingURL=" not in promoted
     assert "*/500;600" not in promoted
 
 

@@ -5,6 +5,7 @@ from typing import cast
 
 from django.http import HttpRequest, HttpResponse, JsonResponse
 
+from core.policies import is_tenant_independent_path
 from core.services import update_observability_context
 
 from .services import (
@@ -20,8 +21,10 @@ TENANT_EXEMPT_PATH_PREFIXES = ("/accounts/", "/admin/", "/health/")
 
 
 def is_tenant_exempt_path(path: str) -> bool:
-    """Return whether a path is narrowly exempt infrastructure."""
-    return any(path.startswith(prefix) for prefix in TENANT_EXEMPT_PATH_PREFIXES)
+    """Preserve infrastructure and exact reviewed tenant-independent routes."""
+    return is_tenant_independent_path(path) or any(
+        path.startswith(prefix) for prefix in TENANT_EXEMPT_PATH_PREFIXES
+    )
 
 
 class ClinicTenantMiddleware:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import sys
 from datetime import UTC, date, timedelta
 from uuid import uuid4
 
@@ -266,7 +267,7 @@ def test_publish_action_denied_for_non_admin(client: Client) -> None:
     assert response.status_code == 302
 
 
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_editorial_http_surface_supports_complete_versioned_workflow(
     client: Client,
 ) -> None:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from uuid import uuid4
 
 import pytest
@@ -155,7 +156,7 @@ def test_learning_events_consolidate_progress_and_reject_duplicates() -> None:
         )
 
 
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_media_playback_grant_is_tenant_bound_and_expiring() -> None:
     """8.12.3.1 issues short-lived signed grants for authorized lesson media."""
     from content.models import ContentRecommendation
@@ -216,7 +217,7 @@ def test_media_playback_grant_is_tenant_bound_and_expiring() -> None:
         )
 
 
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_media_playback_grant_denies_draft_content_to_patients() -> None:
     """Unpublished media never reaches patients, even with a recommendation."""
     from content.models import ContentRecommendation

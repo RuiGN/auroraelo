@@ -1,13 +1,15 @@
-# Mindcare launch-language glossary
+# Aurora Elo launch-language glossary
 
-Reviewed proposal for S14.01, dated 2026-09-08. These terms guide fixed product UI
+Operational glossary; the terminology proposal originated in S14.01 on 2026-09-08.
+The current product name below supersedes the historical brand, not the clinical
+or legal review status. These terms guide fixed product UI
 for Brazilian Portuguese (`pt-br`), English (`en`) and Spanish (`es`). Context wins
 over mechanical substitution; translators must use `pgettext` where the same source
 word has different clinical or product meanings.
 
 | Concept / context | pt-BR | English | Español | Review note |
 | --- | --- | --- | --- | --- |
-| product name | Mindcare | Mindcare | Mindcare | Brand; never translate. |
+| product name | Aurora Elo | Aurora Elo | Aurora Elo | Brand; never translate. Technical identifiers for new installations use `auroraelo`. |
 | patient / person receiving care | paciente | patient | paciente | Prefer “pessoa atendida” only where person-first wording is deliberately required. |
 | therapist / treating professional | terapeuta | therapist | terapeuta | Do not broaden to physician. Use “profissional” / “professional” / “profesional” when role-neutral. |
 | clinic / tenant organization | clínica | clinic | clínica | Organization, not a physical room. |

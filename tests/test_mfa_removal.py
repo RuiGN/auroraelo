@@ -6,7 +6,7 @@ from django.urls import NoReverseMatch, reverse
 
 
 @pytest.mark.parametrize("name", ["UserMFA", "MFARecoveryCode"])
-def test_mfa_models_are_not_registered(name):
+def test_mfa_models_are_not_registered(name: str) -> None:
     with pytest.raises(LookupError):
         apps.get_model("accounts", name)
     assert apps.get_model("accounts", "AccountSession") is not None
@@ -15,6 +15,6 @@ def test_mfa_models_are_not_registered(name):
 @pytest.mark.parametrize(
     "name", ["mfa_enroll", "mfa_verify", "administrative_mfa_reset"]
 )
-def test_mfa_routes_are_removed(name):
+def test_mfa_routes_are_removed(name: str) -> None:
     with pytest.raises(NoReverseMatch):
         reverse(name)

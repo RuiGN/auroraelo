@@ -48,6 +48,14 @@ def environment_flag(name: str, default: bool = False) -> bool:
     return os.environ.get(name, fallback).lower() in {"1", "true", "yes"}
 
 
+CLINICAL_OPERATIONS_ENABLED = environment_flag("CLINICAL_OPERATIONS_ENABLED")
+
+# Sem opt-in B2C persistido e revisão clínica, ambiente não ativa esta vertical.
+RECOVERY_AI_ENABLED = False
+RECOVERY_AI_CLINICAL_APPROVED = False
+RECOVERY_CONSENT_RESOLVER = None
+
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -77,6 +85,7 @@ INSTALLED_APPS = [
     "support_network.apps.SupportNetworkConfig",
     "communities.apps.CommunitiesConfig",
     "medical_records.apps.MedicalRecordsConfig",
+    "clinical_operations.apps.ClinicalOperationsConfig",
     "ai_assistant.apps.AiAssistantConfig",
     "psychiatry.apps.PsychiatryConfig",
 ]

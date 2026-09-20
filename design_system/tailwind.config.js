@@ -1,10 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./**/*.{html,js,jsx,ts,tsx}",
-    "./components/**/*.{html,js}",
-    "./pages/**/*.{html,js}"
+    "../templates/**/*.html",
+    "../psychiatry/templates/**/*.html",
+    "../static/design_system/js/shell.js"
   ],
+  safelist: ['bg-aurora-900', 'bg-elo-600'],
+  // Bootstrap remains the legacy foundation; never install a second reset.
+  corePlugins: { preflight: false },
+  important: '.aurora-utilities',
   darkMode: 'class',
   theme: {
     extend: {
@@ -19,7 +23,7 @@ module.exports = {
           600: '#0284c7', // "Elo" primary cerulean
           700: '#0369a1',
           800: '#075985',
-          900: '#0a2540', // "Aurora" primary midnight navy
+          900: '#0c3c6e', // "Aurora" primary midnight navy
           950: '#051424',
         },
         elo: {
@@ -29,7 +33,7 @@ module.exports = {
           300: '#67e8f9',
           400: '#22d3ee',
           500: '#06b6d4', // Vibrant teal from ribbon
-          600: '#0891b2',
+          600: '#288d9e',
           700: '#0e7490',
           800: '#155e75',
           900: '#164e63',
@@ -76,10 +80,10 @@ module.exports = {
         'crisis-glow': '0 0 24px rgba(244, 63, 94, 0.3)',
       },
       backgroundImage: {
-        'aurora-gradient': 'linear-gradient(135deg, #0a2540 0%, #0369a1 50%, #06b6d4 100%)',
+        'aurora-gradient': 'linear-gradient(135deg, #0c3c6e 0%, #0369a1 50%, #06b6d4 100%)',
         'aurora-glow-gradient': 'linear-gradient(90deg, #0ea5e9, #06b6d4, #10b981)',
         'aurora-soft': 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%)',
-        'aurora-card-dark': 'linear-gradient(145deg, #07172c 0%, #0a2540 100%)',
+        'aurora-card-dark': 'linear-gradient(145deg, #07172c 0%, #0c3c6e 100%)',
       }
     },
   },

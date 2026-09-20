@@ -1,5 +1,5 @@
 {
-  "description": "Declared marked-message scope: 99 application templates and 49 Python files; not full UI or publication acceptance",
+  "description": "Cumulative marked-message scope, including Aurora Elo shells and sanitized psychiatry surfaces; not full UI or publication acceptance",
   "files": [
     "accounts/forms.py",
     "accounts/views.py",
@@ -148,6 +148,18 @@
     "journal/checkin_forms.py",
     "journal/presentation.py",
     "scheduling/unit_views.py",
-    "scheduling/waitlist_views.py"
+    "scheduling/waitlist_views.py",
+    "psychiatry/templates/psychiatry/base_aurora.html",
+    "psychiatry/templates/psychiatry/login.html",
+    "psychiatry/templates/psychiatry/dashboard.html",
+    "psychiatry/templates/psychiatry/addiction_dashboard.html",
+    "psychiatry/templates/psychiatry/anamnesis.html",
+    "psychiatry/templates/psychiatry/beds.html",
+    "psychiatry/templates/psychiatry/crisis_protocol.html",
+    "psychiatry/templates/psychiatry/mobile_b2c.html",
+    "psychiatry/templates/psychiatry/mobile_connected.html",
+    "psychiatry/templates/psychiatry/patients.html",
+    "psychiatry/templates/psychiatry/telepsychiatry_room.html",
+    "psychiatry/templates/psychiatry/twelve_steps_anamnesis.html"
   ]
 }

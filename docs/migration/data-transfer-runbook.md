@@ -5,8 +5,8 @@ or executed. A production transfer requires a deployment-specific reviewed plan.
 
 ## Clean installation
 
-1. Install the pinned dependencies into the Mindcare environment.
-2. Configure a database and cache dedicated to Mindcare. For disposable testing use
+1. Install the pinned dependencies into the Aurora Elo environment.
+2. Configure a database and cache dedicated to Aurora Elo. For disposable testing use
    `compose.test.yml`; its tmpfs data is not durable and must never hold real records.
 3. Set `DJANGO_SETTINGS_MODULE`, `DB_*`, and independent security keys as required by
    the chosen environment. Use the custom `accounts.User` from the first migration.
@@ -19,6 +19,11 @@ or executed. A production transfer requires a deployment-specific reviewed plan.
    files. Test authorization before enabling real uploads or download endpoints.
 
 ## If operational transfer is requested later
+
+The current Compose manifests use `auroraelo` for new installation/test database
+defaults. This naming convention does not rename existing databases, users,
+volumes, connection settings or VPS resources. Retain deployed identifiers until
+a separate migration is authorized; see [branding-scope.md](branding-scope.md).
 
 Record the exact source/destination release and database versions, authorization,
 maintenance window, acceptable downtime, rollback owner and consistency checkpoint.

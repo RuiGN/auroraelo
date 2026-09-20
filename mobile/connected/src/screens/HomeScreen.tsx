@@ -1,119 +1,162 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Alert, StyleSheet, Image } from 'react-native';
-import { AuroraApiService } from '../services/api';
-import { colors } from '../theme/tokens';
+import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Pressable,
+} from "react-native";
+import { Locale, localeLabels } from "../../../shared/i18n";
+import { useLocale } from "../hooks/useLocale";
+import { DIGITAL_SUPPORT } from "../../../shared/safety";
 
-export function HomeScreen({ navigation }: any) {
-  const [data, setData] = useState<any>(null);
-  const [meds, setMeds] = useState([
-    { id: 1, name: 'Escitalopram 15mg', time: '08:00', taken: true },
-    { id: 2, name: 'Quetiapina 25mg', time: '21:00', taken: false },
-  ]);
-
-  useEffect(() => {
-    AuroraApiService.getPatientSummary()
-      .then((res) => {
-        if (res.success) setData(res.data);
-      })
-      .catch(() => {});
-  }, []);
-
-  const toggleMed = async (id: number) => {
-    setMeds((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, taken: !m.taken } : m))
-    );
-    await AuroraApiService.logMedication(id, true);
-  };
-
-  const handleSOS = async () => {
-    Alert.alert(
-      'Acionar SOS Crise Psiquiátrica?',
-      'O plantão médico 24h da clínica e sua rede de apoio serão notificados imediatamente com sua localização.',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Confirmar SOS',
-          style: 'destructive',
-          onPress: async () => {
-            const res = await AuroraApiService.triggerSOS();
-            Alert.alert('Alerta Enviado', res.instructions || 'Plantão 24h notificado.');
-          },
-        },
-      ]
-    );
-  };
-
+export function HomeScreen() {
+  const { t, locale, busy, storageError, selectLocale } = useLocale();
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.greeting}>Olá, Mariana</Text>
-          <Text style={styles.subtitle}>Seu plano terapêutico está em dia</Text>
-        </View>
-        <View style={styles.statusBadge}>
-          <View style={styles.statusDot} />
-          <Text style={styles.statusText}>Conectado</Text>
-        </View>
+      <Text accessibilityRole="header" style={styles.brand}>
+        {t.brand}
+      </Text>
+      <Text style={styles.subtitle}>{t.connected}</Text>
+      <Text style={styles.status}>{t.local}</Text>
+      <Text style={styles.body}>{t.intro}</Text>
+      <View style={styles.card}>
+        <Text accessibilityRole="header" style={styles.title}>
+          {t.areas}
+        </Text>
+        <Text style={styles.item}>{t.substances}</Text>
+        <Text style={styles.item}>{t.gambling}</Text>
+        <Text style={styles.item}>{t.gaming}</Text>
+        <Text style={styles.body}>{t.areasNote}</Text>
       </View>
-
-      <!-- Telehealth Card -->
-      <View style={styles.teleCard}>
-        <View style={styles.teleHeader}>
-          <Text style={styles.teleBadge}>● Teleconsulta Hoje, 14:30</Text>
-          <Text style={styles.teleCountdown}>12 min</Text>
+      <View style={styles.card}>
+        <View
+          accessible
+          accessibilityRole="image"
+          accessibilityLabel={t.avatar}
+          style={styles.avatar}
+        >
+          <Text style={styles.avatarText}>{t.aiBadge}</Text>
         </View>
-        <Text style={styles.doctorName}>Dr. Marcelo Arantes • Psiquiatra</Text>
-        <Text style={styles.doctorCrm}>CRM/SP 148.920 • Reavaliação e receita</Text>
-        <TouchableOpacity style={styles.joinBtn} onPress={() => Alert.alert('Conectando à sala criptografada...')}>
-          <Text style={styles.joinBtnText}>Acessar Teleconsulta HD</Text>
-        </TouchableOpacity>
+        <Text accessibilityRole="header" style={styles.title}>
+          {t.aiTitle}
+        </Text>
+        <Text style={styles.body}>{t.aiOff}</Text>
+        <Text style={styles.item}>{t.consent}</Text>
+        <Switch
+          accessibilityLabel={t.consent}
+          accessibilityState={{ disabled: true, checked: false }}
+          value={DIGITAL_SUPPORT.consent}
+          disabled
+        />
+        <Text style={styles.body}>{t.consentNote}</Text>
+        <Pressable
+          testID="ai-start"
+          accessibilityRole="button"
+          accessibilityState={{ disabled: !DIGITAL_SUPPORT.enabled }}
+          disabled={!DIGITAL_SUPPORT.enabled}
+          style={styles.disabled}
+        >
+          <Text style={styles.buttonText}>{t.aiStart}</Text>
+        </Pressable>
       </View>
-
-      <!-- Medications Card -->
-      <View style={styles.medCard}>
-        <Text style={styles.sectionTitle}>MEDICAMENTOS DE HOJE</Text>
-        {meds.map((med) => (
-          <TouchableOpacity key={med.id} style={styles.medItem} onPress={() => toggleMed(med.id)}>
-            <Text style={[styles.medName, med.taken && styles.medTaken]}>
-              {med.name} • {med.time} {med.taken ? '✓ (Tomado)' : '(Pendente)'}
+      <View style={styles.card}>
+        <Text accessibilityRole="header" style={styles.title}>
+          {t.records}
+        </Text>
+        <Text style={styles.body}>{t.recordsOff}</Text>
+      </View>
+      <View style={styles.card}>
+        <Text accessibilityRole="header" style={styles.title}>
+          {t.help}
+        </Text>
+        <Text style={styles.item}>{t.nobody}</Text>
+        <Text style={styles.body}>{t.helpDetail}</Text>
+      </View>
+      <View style={styles.card}>
+        <Text accessibilityRole="header" style={styles.title}>
+          {t.language}
+        </Text>
+        {Object.entries(localeLabels).map(([code, label]) => (
+          <Pressable
+            key={code}
+            testID={"language-" + code}
+            accessibilityRole="button"
+            accessibilityState={{ selected: locale === code, disabled: busy }}
+            disabled={busy}
+            style={styles.languageButton}
+            onPress={() => void selectLocale(code as Locale)}
+          >
+            <Text style={styles.buttonText}>
+              {locale === code ? "✓ " : ""}
+              {label}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
+        {busy && (
+          <Text accessibilityLiveRegion="polite" style={styles.body}>
+            {t.loading}
+          </Text>
+        )}
+        {storageError && (
+          <Text accessibilityRole="alert" style={styles.body}>
+            {t.storageError}
+          </Text>
+        )}
       </View>
-
-      <!-- Emergency SOS Button -->
-      <TouchableOpacity style={styles.sosButton} onPress={handleSOS}>
-        <Text style={styles.sosButtonText}>🚨 Botão de Ajuda Imediata / SOS 24h</Text>
-        <Text style={styles.sosSubtext}>Plantão Aurora Elo & CVV 188</Text>
-      </TouchableOpacity>
+      <Text style={styles.body}>{t.privacy}</Text>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8fafc' },
-  content: { padding: 20, paddingBottom: 40 },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },
-  greeting: { fontSize: 22, fontWeight: '800', color: colors.aurora[900] },
-  subtitle: { fontSize: 13, color: '#64748b' },
-  statusBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.healing[50], paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20 },
-  statusDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.healing[500], marginRight: 6 },
-  statusText: { fontSize: 11, fontWeight: '700', color: colors.healing[600] },
-  teleCard: { backgroundColor: colors.aurora[900], padding: 18, borderRadius: 20, marginBottom: 20 },
-  teleHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
-  teleBadge: { color: colors.elo[400], fontSize: 12, fontWeight: '700' },
-  teleCountdown: { color: '#ffffff', fontSize: 11, backgroundColor: 'rgba(255,255,255,0.1)', paddingHorizontal: 6, borderRadius: 6 },
-  doctorName: { color: '#ffffff', fontSize: 14, fontWeight: '700' },
-  doctorCrm: { color: colors.aurora[200], fontSize: 11, marginBottom: 12 },
-  joinBtn: { backgroundColor: colors.elo[500], paddingVertical: 10, borderRadius: 12, alignItems: 'center' },
-  joinBtnText: { color: colors.aurora[950], fontWeight: '800', fontSize: 13 },
-  medCard: { backgroundColor: '#ffffff', padding: 16, borderRadius: 20, marginBottom: 20, borderWidth: 1, borderColor: '#e2e8f0' },
-  sectionTitle: { fontSize: 11, fontWeight: '800', color: '#64748b', marginBottom: 10 },
-  medItem: { paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#f1f5f9' },
-  medName: { fontSize: 13, color: '#1e293b', fontWeight: '600' },
-  medTaken: { textDecorationLine: 'line-through', color: '#94a3b8' },
-  sosButton: { backgroundColor: colors.crisis[500], padding: 16, borderRadius: 20, alignItems: 'center', shadowColor: colors.crisis[500], shadowOpacity: 0.3, shadowRadius: 10 },
-  sosButtonText: { color: '#ffffff', fontWeight: '800', fontSize: 14 },
-  sosSubtext: { color: '#ffe4e6', fontSize: 11, marginTop: 2 }
+  container: { flex: 1, backgroundColor: "#f0f7ff" },
+  content: {
+    padding: 20,
+    paddingBottom: 40,
+    width: "100%",
+    maxWidth: 720,
+    alignSelf: "center",
+    gap: 16,
+  },
+  brand: { color: "#0c3c6e", fontSize: 30, fontWeight: "800" },
+  subtitle: { color: "#165968", fontSize: 18 },
+  status: { color: "#334155", fontSize: 14, fontWeight: "600" },
+  card: {
+    backgroundColor: "#ffffff",
+    borderColor: "#cbd5e1",
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 20,
+    gap: 12,
+  },
+  title: { color: "#0c3c6e", fontSize: 22, fontWeight: "700" },
+  body: { color: "#334155", fontSize: 16, lineHeight: 24 },
+  item: { color: "#0c3c6e", fontSize: 17, fontWeight: "600", lineHeight: 25 },
+  avatar: {
+    backgroundColor: "#0c3c6e",
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatarText: { color: "#ffffff", fontSize: 22, fontWeight: "800" },
+  disabled: {
+    minHeight: 48,
+    padding: 12,
+    backgroundColor: "#e2e8f0",
+    borderRadius: 12,
+    justifyContent: "center",
+  },
+  languageButton: {
+    minHeight: 48,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#64748b",
+    borderRadius: 12,
+    justifyContent: "center",
+  },
+  buttonText: { color: "#334155", fontSize: 16, fontWeight: "600" },
 });

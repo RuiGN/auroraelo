@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from uuid import uuid4
 
@@ -161,7 +162,7 @@ def test_clinic_admin_records_operational_context_and_hours() -> None:
 
 
 @pytest.mark.django_db
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_clinic_admin_uploads_safe_logo_and_contrasting_brand_colors() -> None:
     assert hasattr(clinic_services, "update_clinic_branding")
     clinic = ClinicFactory.create()
@@ -464,7 +465,7 @@ def test_operations_stage_posts_hours_and_advances(client: Client) -> None:
 
 
 @pytest.mark.django_db
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_branding_stage_uploads_logo_and_advances(client: Client) -> None:
     clinic = ClinicFactory.create()
     administrator = UserFactory.create()
@@ -525,7 +526,7 @@ def test_branding_stage_uploads_logo_and_advances(client: Client) -> None:
 
 
 @pytest.mark.django_db
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_modules_stage_enforces_prerequisites_and_advances(client: Client) -> None:
     clinic = ClinicFactory.create()
     administrator = UserFactory.create()
@@ -675,7 +676,7 @@ def test_non_admin_roles_cannot_open_clinic_setup(client: Client, role: str) -> 
 
 
 @pytest.mark.django_db
-@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=("/bin/true",))
+@override_settings(PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND=(sys.executable, "-c", "pass"))
 def test_saved_branding_is_applied_to_the_active_tenant_workspace(
     client: Client,
 ) -> None:

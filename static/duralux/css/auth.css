@@ -3,7 +3,7 @@
   min-width: 20rem;
   min-height: 100vh;
   background-color: #eaf1f8;
-  background-image: url('../images/auth/mindcare-peace-light.svg');
+  background-image: url('../images/auth/aurora-elo-peace-light.svg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -12,7 +12,7 @@
 html.app-skin-dark .product-auth-body,
 html[data-bs-theme="dark"] .product-auth-body {
   background-color: #0a1220;
-  background-image: url('../images/auth/mindcare-peace-dark.svg');
+  background-image: url('../images/auth/aurora-elo-peace-dark.svg');
 }
 
 .product-auth-body .auth-minimal-inner {

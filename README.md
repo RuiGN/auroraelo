@@ -1,4 +1,4 @@
-# Mindcare
+# Aurora Elo
 
 Django application being migrated from the source snapshot `453eab7`.
 The authoritative migration checklist is [DURALUX.prd](DURALUX.prd).
@@ -34,7 +34,7 @@ Use the disposable local PostgreSQL/Redis services for database-specific checks:
 ```bash
 docker compose -f compose.test.yml up -d --wait
 export DJANGO_SETTINGS_MODULE=config.settings.test
-export DB_NAME=mindcare DB_USER=mindcare DB_PASSWORD=mindcare-test-only
+export DB_NAME=auroraelo DB_USER=auroraelo DB_PASSWORD=auroraelo-test-only
 export DB_HOST=127.0.0.1 DB_PORT=55439 TEST_DATABASE=postgresql
 .venv/bin/python -m pytest
 docker compose -f compose.test.yml down
@@ -43,6 +43,7 @@ docker compose -f compose.test.yml down
 These fixed credentials are exclusively for disposable localhost tests. The services
 store data in tmpfs; stopping/recreating them discards the test data. Never point them
 at real uploads or patient data. Do not run competing suites against the same test DB.
+These values match `compose.test.yml` (project `auroraelo-test`, PostgreSQL 17).
 
 ## Local development
 
@@ -56,6 +57,20 @@ from the source project.
 Production requires `config.settings.production`, explicit hosts, database TLS,
 shared cache and independent security keys. Cross-origin CSRF trust is empty unless
 explicitly configured. Production publication is outside the current execution.
+
+### New installations and existing deployments
+
+Use **Aurora Elo** for the product name and `auroraelo` for new installation
+identifiers. The current `docker-compose.yml` declares `auroraelo:latest` and
+PostgreSQL 17; database and user defaults are `auroraelo`. These defaults are not
+credentials to reuse in production: provision independent secrets explicitly.
+
+Branding changes do **not** rename or migrate an existing database, database user,
+Compose project, named volume, cache namespace or VPS deployment. Existing
+installations must retain their configured identifiers and connection settings
+until a separate migration is reviewed. Changing the Compose project name can
+select different volumes; never use `down -v` as part of a rebrand. No production
+state was inspected or changed. See [branding scope and historical exceptions](docs/migration/branding-scope.md).
 
 ## Translation catalogs
 
@@ -73,8 +88,8 @@ on Debian/Ubuntu). After editing a catalog, compile that locale explicitly, for 
 msgfmt --check locale/en/LC_MESSAGES/django.po -o locale/en/LC_MESSAGES/django.mo
 .venv/bin/python scripts/check_ui_catalogs.py \
   --scope docs/migration/translated-ui-scope.json \
-  --output /tmp/mindcare-ui-catalog-check.json \
-  --pot-output /tmp/mindcare-ui.pot
+  --output "${TMPDIR:-/tmp}/auroraelo-ui-catalog-check.json" \
+  --pot-output "${TMPDIR:-/tmp}/auroraelo-ui.pot"
 ```
 
 CI runs the same check. It extracts the delivered scope, compiles each catalog in
@@ -88,4 +103,7 @@ or replace human review and runtime/browser validation.
 
 `PRD.md`, `MUDANCALAYOUT.prd`, and imported `docs/` describe the source snapshot and
 support existing traceability tests. Their completion markers do not describe
-Mindcare. Fresh evidence and decisions belong to `docs/migration/`.
+the current Aurora Elo release. Fresh evidence and decisions belong to
+`docs/migration/`; dated reports there also remain historical evidence, not proof
+of current acceptance. The current naming policy and explicit exceptions are in
+`docs/migration/branding-scope.md`.

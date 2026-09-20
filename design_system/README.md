@@ -1,4 +1,9 @@
 # 🌌 Aurora Elo Design System
+
+> **Integração Django atual:** veja [INTEGRATION.md](INTEGRATION.md).
+> O texto abaixo descreve o showcase histórico, não funcionalidades clínicas
+> verificadas. O runtime integrado usa Tailwind 3.4.17 compilado localmente,
+> gettext e fontes de sistema; não usa o CDN nem o tradutor JavaScript.
 > **Sistema de Design Oficial para Clínica Psiquiátrica & Ecossistema de Aplicativos Mobile**  
 > Desenvolvido em **Tailwind CSS (Última Versão)** com suporte completo a **Português (pt-BR)**, **Inglês (en)** e **Espanhol (es)**.
 
