@@ -62,26 +62,21 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo & Title -->
         <div class="flex items-center space-x-3.5">
-          <div class="p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-            <img src="assets/images/logo.png" alt="Aurora Elo Logo" class="h-8 w-auto object-contain" />
+          <div class="px-2.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 shadow-sm">
+            <img src="assets/images/aurora-elo-horizontal.png" alt="Aurora Elo Logo" class="h-8 w-auto object-contain" />
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="font-display font-black text-lg text-aurora-950 dark:text-white tracking-tight leading-none">
-                Aurora <span class="text-elo-500">Elo</span>
-              </span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-aurora-100 text-aurora-800 dark:bg-aurora-900 dark:text-aurora-200">
-                Design System v1.0
-              </span>
-            </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium" data-i18n="clinic_subtitle">
+          <div class="hidden sm:block">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-aurora-100 text-aurora-800 dark:bg-aurora-900 dark:text-aurora-200">
+              Design System v1.0
+            </span>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-0.5" data-i18n="clinic_subtitle">
               Saúde Mental & Psiquiatria Integrada
             </p>
           </div>
         </div>
 
         <!-- Layout Switcher & Actions -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2 sm:space-x-3">
           <!-- Layout Switcher Toggle (Vertical Sidebar vs Horizontal Navbar) -->
           <div class="hidden md:flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-semibold">
             <button id="btn-layout-vertical" type="button" class="px-3 py-1.5 rounded-lg bg-white dark:bg-aurora-900 text-aurora-900 dark:text-white shadow-sm transition-all flex items-center gap-1.5" title="Ver Layout com Menu Vertical (Sidebar)">
@@ -94,12 +89,18 @@
             </button>
           </div>
 
-          <!-- Language Selector -->
-          <div class="relative">
-            <select class="aurora-lang-select bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl px-3 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-aurora-500">
-              <option value="pt-BR">🇧🇷 Português (Brasil)</option>
-              <option value="en">🇺🇸 English</option>
-              <option value="es">🇪🇸 Español</option>
+          <!-- Language Selector with Globe Icon -->
+          <div class="relative flex items-center">
+            <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-500 dark:text-slate-400">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                <path stroke-width="2" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <select class="aurora-lang-select bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl pl-8 pr-2.5 py-1.5 sm:py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-aurora-500">
+              <option value="pt-BR">🇧🇷 PT</option>
+              <option value="en">🇺🇸 EN</option>
+              <option value="es">🇪🇸 ES</option>
             </select>
           </div>
 

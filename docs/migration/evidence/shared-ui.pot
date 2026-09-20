@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 06:23-0300\n"
+"POT-Creation-Date: 2026-09-20 07:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Equipe administrativa"
 msgstr ""
 
-#: accounts/forms.py:18 templates/layouts/partials/header.html:122
+#: accounts/forms.py:18 templates/layouts/partials/header.html:129
 msgid "Paciente"
 msgstr ""
 
@@ -448,10 +448,10 @@ msgstr ""
 msgid "Atividades operacionais recentes"
 msgstr ""
 
-#: config/views.py:313 templates/layouts/detached.html:32
-#: templates/layouts/detached.html:37
+#: config/views.py:313 templates/layouts/detached.html:34
+#: templates/layouts/detached.html:39
 #: templates/layouts/partials/navigation.html:31
-#: templates/layouts/vertical.html:32 templates/layouts/vertical.html:37
+#: templates/layouts/vertical.html:34 templates/layouts/vertical.html:39
 #: templates/workspace/home.html:3 templates/workspace/home.html:4
 #: templates/workspace/home.html:5
 msgid "Área de trabalho"
@@ -714,21 +714,21 @@ msgstr ""
 msgid "Início da plataforma"
 msgstr ""
 
-#: templates/layouts/detached.html:14 templates/layouts/detached.html:52
-#: templates/layouts/vertical.html:14 templates/layouts/vertical.html:52
+#: templates/layouts/detached.html:16 templates/layouts/detached.html:54
+#: templates/layouts/vertical.html:16 templates/layouts/vertical.html:54
 msgid "Fechar menu"
 msgstr ""
 
-#: templates/layouts/detached.html:19
+#: templates/layouts/detached.html:21
 #: templates/layouts/partials/navigation.html:44
 msgid "Navegação destacada"
 msgstr ""
 
-#: templates/layouts/detached.html:28 templates/layouts/vertical.html:28
+#: templates/layouts/detached.html:30 templates/layouts/vertical.html:30
 msgid "Caminho de navegação"
 msgstr ""
 
-#: templates/layouts/detached.html:36 templates/layouts/vertical.html:36
+#: templates/layouts/detached.html:38 templates/layouts/vertical.html:38
 msgid "Início"
 msgstr ""
 
@@ -736,28 +736,28 @@ msgstr ""
 msgid "Abrir menu"
 msgstr ""
 
-#: templates/layouts/partials/header.html:18
+#: templates/layouts/partials/header.html:25
 msgid "Recolher navegação"
 msgstr ""
 
-#: templates/layouts/partials/header.html:22
+#: templates/layouts/partials/header.html:29
 msgid "Expandir navegação"
 msgstr ""
 
-#: templates/layouts/partials/header.html:33
+#: templates/layouts/partials/header.html:40
 msgid "Clínica ativa"
 msgstr ""
 
-#: templates/layouts/partials/header.html:57
-#: templates/layouts/partials/header.html:67
+#: templates/layouts/partials/header.html:64
+#: templates/layouts/partials/header.html:74
 msgid "Notificações"
 msgstr ""
 
-#: templates/layouts/partials/header.html:68
+#: templates/layouts/partials/header.html:75
 msgid "Central de avisos"
 msgstr ""
 
-#: templates/layouts/partials/header.html:74
+#: templates/layouts/partials/header.html:81
 #: templates/layouts/partials/navigation.html:8
 #, python-format
 msgid "%(count)s revogação operacional pendente"
@@ -765,59 +765,59 @@ msgid_plural "%(count)s revogações operacionais pendentes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/layouts/partials/header.html:77
+#: templates/layouts/partials/header.html:84
 msgid "Nenhuma notificação pendente."
 msgstr ""
 
-#: templates/layouts/partials/header.html:87
+#: templates/layouts/partials/header.html:94
 msgid "Trocar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:91
+#: templates/layouts/partials/header.html:98
 msgid "Alternar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:94
+#: templates/layouts/partials/header.html:101
 msgid "Selecionar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:102
+#: templates/layouts/partials/header.html:109
 msgid "Revisar troca"
 msgstr ""
 
-#: templates/layouts/partials/header.html:111
+#: templates/layouts/partials/header.html:118
 msgid "Menu da conta"
 msgstr ""
 
-#: templates/layouts/partials/header.html:122
+#: templates/layouts/partials/header.html:129
 msgid "Administrador"
 msgstr ""
 
-#: templates/layouts/partials/header.html:122
+#: templates/layouts/partials/header.html:129
 msgid "Profissional"
 msgstr ""
 
-#: templates/layouts/partials/header.html:122
+#: templates/layouts/partials/header.html:129
 msgid "Usuário"
 msgstr ""
 
-#: templates/layouts/partials/header.html:129
+#: templates/layouts/partials/header.html:136
 msgid "Modo de navegação"
 msgstr ""
 
-#: templates/layouts/partials/header.html:132
+#: templates/layouts/partials/header.html:139
 msgid "Vertical"
 msgstr ""
 
-#: templates/layouts/partials/header.html:133
+#: templates/layouts/partials/header.html:140
 msgid "Destacado"
 msgstr ""
 
-#: templates/layouts/partials/header.html:136
+#: templates/layouts/partials/header.html:143
 msgid "OK"
 msgstr ""
 
-#: templates/layouts/partials/header.html:147
+#: templates/layouts/partials/header.html:154
 msgid "Sair da conta"
 msgstr ""
 
@@ -830,7 +830,7 @@ msgid "Geral"
 msgstr ""
 
 #: templates/layouts/partials/navigation.html:38
-#: templates/layouts/vertical.html:19
+#: templates/layouts/vertical.html:21
 msgid "Navegação vertical"
 msgstr ""
 

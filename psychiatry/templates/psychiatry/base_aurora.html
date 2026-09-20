@@ -64,27 +64,29 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Brand Logo & Subtitle -->
-        <a href="{% url 'psychiatry:dashboard' %}" class="flex items-center space-x-3.5 group">
-          <div class="p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-            <img src="{% static 'design_system/assets/images/logo.png' %}" alt="Aurora Elo Logo" class="h-8 w-auto object-contain" />
-          </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="font-display font-black text-lg text-aurora-950 dark:text-white tracking-tight leading-none">
-                Aurora <span class="text-elo-500">Elo</span>
-              </span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-aurora-100 text-aurora-800 dark:bg-aurora-900 dark:text-aurora-200">
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <!-- Mobile Sidebar Toggle Button -->
+          <button id="btn-mobile-sidebar-toggle" type="button" class="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Abrir Menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+
+          <a href="{% url 'psychiatry:dashboard' %}" class="flex items-center space-x-3 group flex-shrink-0">
+            <div class="px-2.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 shadow-sm flex items-center">
+              <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" class="h-8 sm:h-9 w-auto object-contain" />
+            </div>
+            <div class="hidden sm:block">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-aurora-100 text-aurora-800 dark:bg-aurora-900 dark:text-aurora-200 inline-block">
                 Clínica Psiquiátrica
               </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-0.5" data-i18n="clinic_subtitle">
+                Saúde Mental & Psiquiatria Integrada
+              </p>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium" data-i18n="clinic_subtitle">
-              Saúde Mental & Psiquiatria Integrada
-            </p>
-          </div>
-        </a>
+          </a>
+        </div>
 
         <!-- Controls: Layout Switcher, Language & Theme -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2 sm:space-x-3">
           <!-- Layout Switcher (Vertical vs Horizontal Menu) -->
           <div class="hidden md:flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-semibold">
             <button id="btn-layout-vertical" type="button" class="px-3 py-1.5 rounded-lg bg-white dark:bg-aurora-900 text-aurora-900 dark:text-white shadow-sm transition-all flex items-center gap-1.5" title="Menu Vertical (Sidebar)">
@@ -97,12 +99,18 @@
             </button>
           </div>
 
-          <!-- Multi-language Selector -->
-          <div class="relative">
-            <select class="aurora-lang-select bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl px-3 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-aurora-500">
-              <option value="pt-BR">🇧🇷 Português (Brasil)</option>
-              <option value="en">🇺🇸 English</option>
-              <option value="es">🇪🇸 Español</option>
+          <!-- Multi-language Selector with Globe Icon -->
+          <div class="relative flex items-center">
+            <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-500 dark:text-slate-400">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                <path stroke-width="2" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <select class="aurora-lang-select bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl pl-8 pr-2.5 py-1.5 sm:py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-aurora-500">
+              <option value="pt-BR">🇧🇷 PT</option>
+              <option value="en">🇺🇸 EN</option>
+              <option value="es">🇪🇸 ES</option>
             </select>
           </div>
 
@@ -113,9 +121,10 @@
           </button>
 
           <!-- Emergency Crisis Button (Persistent SOS Hotline) -->
-          <a href="{% url 'psychiatry:crisis_protocol' %}" class="crisis-pulse px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-crisis-500 hover:bg-crisis-600 shadow-crisis-glow transition-all flex items-center gap-1.5">
+          <a href="{% url 'psychiatry:crisis_protocol' %}" class="crisis-pulse px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-crisis-500 hover:bg-crisis-600 shadow-crisis-glow transition-all flex items-center gap-1.5 flex-shrink-0">
             <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-            <span data-i18n="nav_emergency_btn">SOS Crise 24h</span>
+            <span data-i18n="nav_emergency_btn" class="hidden sm:inline">SOS Crise 24h</span>
+            <span class="sm:hidden">SOS</span>
           </a>
         </div>
       </div>
@@ -125,9 +134,9 @@
   <!-- ============================================================ -->
   <!-- HORIZONTAL NAVBAR (WHEN HORIZONTAL MODE ACTIVE)             -->
   <!-- ============================================================ -->
-  <div id="showcase-horizontal-navbar" class="hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between">
-      <nav class="flex items-center space-x-1 text-xs font-bold">
+  <div id="showcase-horizontal-navbar" class="hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all overflow-x-auto scrollbar-none">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between min-w-max">
+      <nav class="flex items-center space-x-1 text-xs font-bold whitespace-nowrap">
         <a href="{% url 'psychiatry:dashboard' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'dashboard' %}bg-aurora-50 text-aurora-700 dark:bg-aurora-900/60 dark:text-aurora-300{% else %}text-slate-600 dark:text-slate-300 hover:text-aurora-600{% endif %}" data-i18n="nav_dashboard">Painel Clínico</a>
         <a href="{% url 'psychiatry:patients' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'patients' %}bg-aurora-50 text-aurora-700 dark:bg-aurora-900/60 dark:text-aurora-300{% else %}text-slate-600 dark:text-slate-300 hover:text-aurora-600{% endif %}" data-i18n="nav_patients">Pacientes</a>
         <a href="{% url 'psychiatry:anamnesis' %}" class="px-3 py-1.5 rounded-lg {% if active_nav == 'anamnesis' %}bg-aurora-50 text-aurora-700 dark:bg-aurora-900/60 dark:text-aurora-300{% else %}text-slate-600 dark:text-slate-300 hover:text-aurora-600{% endif %}">Anamnese DSM-5</a>
@@ -139,8 +148,141 @@
         <a href="{% static 'design_system/index.html' %}" target="_blank" class="px-3 py-1.5 rounded-lg text-aurora-600 dark:text-elo-400 font-bold hover:underline">🎨 Design System</a>
         <a href="{% url 'psychiatry:login' %}" class="px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-white font-bold">🔒 Login</a>
       </nav>
-      <div class="flex items-center gap-2 text-xs">
+      <div class="hidden sm:flex items-center gap-2 text-xs pl-4">
         <span class="text-slate-400 font-mono">Dr. Marcelo Arantes • CRM 148.920</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MOBILE SIDEBAR DRAWER (FOR SMALL SCREENS < LG)              -->
+  <!-- ============================================================ -->
+  <div id="mobile-sidebar-drawer" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop overlay -->
+    <div id="mobile-sidebar-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"></div>
+    
+    <!-- Drawer sidebar panel -->
+    <div class="fixed inset-y-0 left-0 max-w-xs w-full bg-white dark:bg-slate-900 shadow-2xl p-5 overflow-y-auto flex flex-col justify-between z-10">
+      <div class="space-y-6">
+        <!-- Drawer Header with Logo and Close Button -->
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+          <div class="px-2.5 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+            <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" class="h-7 w-auto object-contain" />
+          </div>
+          <button id="btn-mobile-sidebar-close" type="button" class="p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Fechar Menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <!-- Clinic Status Card -->
+        <div class="p-3.5 rounded-2xl bg-gradient-to-br from-aurora-950 to-aurora-900 text-white relative overflow-hidden">
+          <div class="flex items-center justify-between text-[11px] text-elo-300 font-bold mb-1">
+            <span>Plantão Psiquiátrico</span>
+            <span class="w-2 h-2 rounded-full bg-healing-400 live-indicator"></span>
+          </div>
+          <p class="text-xs font-bold text-white">Equipe de Resposta Ativa</p>
+          <a href="{% url 'psychiatry:crisis_protocol' %}" class="mt-2.5 w-full py-1.5 rounded-xl bg-crisis-600 hover:bg-crisis-700 text-white text-[11px] font-bold flex items-center justify-center gap-1 shadow-crisis-glow">
+            <span>Protocolo SOS 24h</span>
+          </a>
+        </div>
+
+        <!-- Navigation Links for Mobile -->
+        <div class="space-y-4 text-xs font-semibold">
+          <div>
+            <span class="px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Atendimento Clínico</span>
+            <div class="mt-1 space-y-1">
+              <a href="{% url 'psychiatry:dashboard' %}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl {% if active_nav == 'dashboard' %}bg-aurora-50 dark:bg-aurora-900/40 text-aurora-700 dark:text-aurora-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <svg class="w-4 h-4 text-aurora-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span data-i18n="nav_dashboard">Painel Clínico</span>
+              </a>
+              <a href="{% url 'psychiatry:patients' %}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if active_nav == 'patients' %}bg-aurora-50 dark:bg-aurora-900/40 text-aurora-700 dark:text-aurora-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                  <span data-i18n="nav_patients">Pacientes</span>
+                </div>
+                <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] font-bold text-slate-600 dark:text-slate-400">128</span>
+              </a>
+              <a href="{% url 'psychiatry:anamnesis' %}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl {% if active_nav == 'anamnesis' %}bg-aurora-50 dark:bg-aurora-900/40 text-aurora-700 dark:text-aurora-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span>Anamnese & DSM-5</span>
+              </a>
+              <a href="{% url 'psychiatry:telepsychiatry' %}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if active_nav == 'telepsychiatry' %}bg-aurora-50 dark:bg-aurora-900/40 text-aurora-700 dark:text-aurora-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                  <span data-i18n="nav_telepsychiatry">Telepsiquiatria</span>
+                </div>
+                <span class="w-2 h-2 rounded-full bg-elo-400 live-indicator"></span>
+              </a>
+              <a href="{% url 'psychiatry:addiction_dashboard' %}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if active_nav == 'addiction' %}bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-sm">🎲</span>
+                  <span>12 Passos & Adictologia</span>
+                </div>
+                <span class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-[10px] font-bold text-amber-700 dark:text-amber-300">Bets</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <span class="px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Hospitalar & Unidades</span>
+            <div class="mt-1 space-y-1">
+              <a href="{% url 'psychiatry:inpatient_beds' %}" class="flex items-center justify-between px-3 py-2 rounded-xl {% if active_nav == 'beds' %}bg-aurora-50 dark:bg-aurora-900/40 text-aurora-700 dark:text-aurora-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                  <span data-i18n="nav_inpatient">Leitos & Internação</span>
+                </div>
+                <span class="font-mono text-[10px] text-slate-400">12/16</span>
+              </a>
+              <a href="{% url 'psychiatry:crisis_protocol' %}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl {% if active_nav == 'crisis' %}bg-crisis-50 dark:bg-crisis-950/50 text-crisis-700 dark:text-crisis-300 font-bold{% else %}text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800{% endif %}">
+                <svg class="w-4 h-4 text-crisis-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <span>Protocolo SOS 24h</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <span class="px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Ecossistema & Acessos</span>
+            <div class="mt-1 space-y-1">
+              <a href="{% url 'psychiatry:mobile_connected' %}" target="_blank" class="flex items-center justify-between px-3 py-2 rounded-xl text-aurora-700 dark:text-elo-400 hover:bg-aurora-50 dark:hover:bg-aurora-950 transition-colors">
+                <div class="flex items-center gap-2.5">
+                  <span>📱</span>
+                  <span>App Clínico Conectado</span>
+                </div>
+                <span class="text-[10px] font-mono">↗</span>
+              </a>
+              <a href="{% url 'psychiatry:mobile_b2c' %}" target="_blank" class="flex items-center justify-between px-3 py-2 rounded-xl text-zen-600 dark:text-zen-400 hover:bg-zen-50 dark:hover:bg-zen-950 transition-colors">
+                <div class="flex items-center gap-2.5">
+                  <span>🌿</span>
+                  <span>App Aurora Mind (B2C)</span>
+                </div>
+                <span class="text-[10px] font-mono">↗</span>
+              </a>
+              <a href="{% static 'design_system/index.html' %}" target="_blank" class="flex items-center justify-between px-3 py-2 rounded-xl text-aurora-600 dark:text-elo-400 hover:bg-aurora-50 dark:hover:bg-aurora-950 transition-colors">
+                <div class="flex items-center gap-2.5">
+                  <span>🎨</span>
+                  <span>Design System Showcase</span>
+                </div>
+                <span class="text-[10px] font-mono">↗</span>
+              </a>
+              <a href="{% url 'psychiatry:login' %}" class="flex items-center justify-between px-3 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <div class="flex items-center gap-2.5">
+                  <span>🔒</span>
+                  <span>Portal de Login</span>
+                </div>
+                <span class="text-[10px] font-mono">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attending Psychiatrist Footer inside drawer -->
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center space-x-3 mt-6">
+        <img src="{% static 'design_system/assets/images/doctor-male.jpg' %}" alt="Dr. Marcelo" class="w-9 h-9 rounded-xl object-cover ring-2 ring-aurora-500/20" />
+        <div class="truncate">
+          <span class="block text-xs font-bold text-slate-900 dark:text-white truncate">Dr. Marcelo Arantes</span>
+          <span class="text-[10px] text-elo-600 font-semibold" data-i18n="nav_doctor_crm">CRM/SP 148.920</span>
+        </div>
       </div>
     </div>
   </div>
@@ -274,8 +416,10 @@
   <!-- Global Footer -->
   <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 px-4">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-      <div class="flex items-center space-x-2">
-        <img src="{% static 'design_system/assets/images/logo.png' %}" alt="Aurora Elo" class="h-6 w-auto" />
+      <div class="flex items-center space-x-3">
+        <div class="px-2 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs">
+          <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" class="h-6 w-auto object-contain" />
+        </div>
         <span>© 2026 Aurora Elo Health Systems. Todos os direitos reservados.</span>
       </div>
       <div class="flex items-center space-x-4">
@@ -292,6 +436,30 @@
   <script src="{% static 'design_system/js/i18n.js' %}"></script>
   <script src="{% static 'design_system/js/masks.js' %}"></script>
   <script src="{% static 'design_system/js/app.js' %}"></script>
+  <script>
+    // Mobile Drawer Toggle
+    (function() {
+      const btnOpen = document.getElementById('btn-mobile-sidebar-toggle');
+      const btnClose = document.getElementById('btn-mobile-sidebar-close');
+      const drawer = document.getElementById('mobile-sidebar-drawer');
+      const backdrop = document.getElementById('mobile-sidebar-backdrop');
+
+      function setDrawer(open) {
+        if (!drawer) return;
+        if (open) {
+          drawer.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          drawer.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+
+      if (btnOpen) btnOpen.addEventListener('click', () => setDrawer(true));
+      if (btnClose) btnClose.addEventListener('click', () => setDrawer(false));
+      if (backdrop) backdrop.addEventListener('click', () => setDrawer(false));
+    })();
+  </script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

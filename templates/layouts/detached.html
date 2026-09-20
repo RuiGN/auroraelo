@@ -7,8 +7,10 @@
     aria-label="{% translate 'Navegação principal' %}">
     <div class="navbar-wrapper">
       <div class="m-header d-flex align-items-center justify-content-between">
-        <a class="b-brand" href="{% url 'workspace_vertical' %}" aria-label="{% translate 'Início da plataforma' %}">
-          {% include "layouts/partials/brand.html" %}
+        <a class="b-brand d-inline-flex align-items-center" href="{% url 'workspace_vertical' %}" aria-label="{% translate 'Início da plataforma' %}">
+          <div class="brand-logo-wrap bg-white px-2.5 py-1 rounded-3 shadow-sm d-inline-flex align-items-center border border-white/20">
+            {% include "layouts/partials/brand.html" %}
+          </div>
         </a>
         <button type="button" class="nxl-head-mobile-toggler d-xl-none product-icon-button" data-sidebar-close
           aria-label="{% translate 'Fechar menu' %}">

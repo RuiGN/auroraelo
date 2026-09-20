@@ -429,3 +429,194 @@ section.product-auth-form.product-auth-card {
   transform: translateY(-1px) !important;
 }
 
+/* ==========================================================================
+   BRAND LOGO IN HEADERS & SIDEBAR
+   ========================================================================== */
+.brand-logo-wrap {
+  background: #ffffff !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  padding: 4px 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: all 0.2s ease !important;
+}
+
+.brand-logo-wrap:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.header-mobile-brand {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.header-mobile-brand div {
+  background: #ffffff !important;
+  border-radius: 0.6rem !important;
+  padding: 3px 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.product-brand-logo {
+  max-height: 38px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+/* Mini sidebar mode */
+.nxl-navigation.mini-sidebar .m-header .brand-logo-wrap,
+[data-sidebar-mini="true"] .m-header .brand-logo-wrap {
+  padding: 4px !important;
+  max-width: 48px !important;
+  overflow: hidden !important;
+}
+
+/* ==========================================================================
+   LANGUAGE SELECTOR TRIGGER & ICON
+   ========================================================================== */
+.product-language-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 5px 9px !important;
+  border-radius: 0.75rem !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06) !important;
+  color: #1e293b !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+
+.product-language-toggle:hover,
+.product-language-toggle:focus {
+  background: #f8fafc !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15) !important;
+  transform: translateY(-1px);
+}
+
+.product-language-toggle::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  flex-shrink: 0;
+}
+
+.product-language-toggle::after {
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.nxl-header-language .product-language-code,
+.product-language-selector .product-language-code {
+  display: inline-block !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  letter-spacing: 0.04em !important;
+}
+
+.nxl-header-language .product-language-flag,
+.product-language-selector .product-language-flag {
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ==========================================================================
+   GLOBAL RESPONSIVENESS TWEAKS
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .nxl-header .header-wrapper {
+    padding: 0.5rem 0.75rem !important;
+  }
+  .clinic-context strong {
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 576px) {
+  .nxl-header .header-wrapper {
+    padding: 0.35rem 0.5rem !important;
+    gap: 0.25rem !important;
+  }
+  .header-left {
+    gap: 0.35rem !important;
+  }
+  .header-right {
+    gap: 0.25rem !important;
+  }
+  .product-language-toggle {
+    padding: 3px 6px !important;
+    gap: 4px !important;
+  }
+  .product-language-toggle::before {
+    width: 13px !important;
+    height: 13px !important;
+  }
+  .nxl-container {
+    padding: 0.75rem !important;
+  }
+  .nxl-content {
+    padding: 0 !important;
+  }
+  .page-header {
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* Touch scrolling for all tables */
+.table-responsive,
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: thin;
+}
+
+.table-responsive::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb,
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+@media (max-width: 640px) {
+  .card-body {
+    padding: 1rem !important;
+  }
+  .display-6 {
+    font-size: 1.5rem !important;
+  }
+  .fs-22 {
+    font-size: 1.25rem !important;
+  }
+}
+
+

@@ -1,8 +1,8 @@
-{% load i18n %}
+{% load i18n static %}
 <header class="nxl-header">
   <div class="header-wrapper">
     <!-- Header Left -->
-    <div class="header-left d-flex align-items-center gap-4">
+    <div class="header-left d-flex align-items-center gap-2 gap-sm-3">
       <!-- Mobile Toggler -->
       <button type="button" class="nxl-head-mobile-toggler d-xl-none product-icon-button" id="mobile-collapse" data-sidebar-open
         aria-expanded="false" aria-controls="mobile-sidebar" aria-label="{% translate 'Abrir menu' %}">
@@ -12,6 +12,13 @@
           </div>
         </div>
       </button>
+
+      <!-- Mobile Brand Logo -->
+      <a class="header-mobile-brand d-xl-none d-flex align-items-center me-1" href="{% url 'workspace_vertical' %}" aria-label="Aurora Elo">
+        <div class="bg-white px-2 py-1 rounded-2 shadow-sm border border-slate-200 d-flex align-items-center">
+          <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" style="max-height: 26px; width: auto; object-fit: contain;">
+        </div>
+      </a>
 
       <!-- Navigation Toggle (Desktop) -->
       <div class="nxl-navigation-toggle d-none d-xl-flex">
