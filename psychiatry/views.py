@@ -1,6 +1,6 @@
 """Web views for Aurora Elo Psychiatric Clinic & Mobile Ecosystem."""
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.utils import timezone
 from .models import (
     DiagnosticCategory,
@@ -93,8 +93,8 @@ def mobile_b2c_view(request):
 
 
 def login_view(request):
-    """Clinical authentication portal with multi-role selector."""
-    return render(request, "psychiatry/login.html")
+    """Clinical authentication portal redirect to canonical account login."""
+    return redirect("account_login")
 
 
 def addiction_dashboard_view(request):

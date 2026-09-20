@@ -47,22 +47,52 @@ class Command(BaseCommand):
         else:
             self.stdout.write("✓ Configuração institucional já vinculada.")
 
-        memberships_map = {
-            "admin@auroraelo.com.br": ClinicMembership.Role.CLINIC_ADMIN,
-            "dr.marcelo@auroraelo.com.br": ClinicMembership.Role.THERAPIST,
-            "dra.camila@auroraelo.com.br": ClinicMembership.Role.THERAPIST,
-            "enfermagem@auroraelo.com.br": ClinicMembership.Role.ADMINISTRATIVE_STAFF,
-            "recepcao@auroraelo.com.br": ClinicMembership.Role.ADMINISTRATIVE_STAFF,
-            "paciente.thiago@auroraelo.com.br": ClinicMembership.Role.PATIENT,
-        }
+        user_specs = [
+            # Primary (.com.br)
+            {"email": "admin@auroraelo.com.br", "first": "Administrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+            {"email": "dr.marcelo@auroraelo.com.br", "first": "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+            {"email": "dra.camila@auroraelo.com.br", "first": "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+            {"email": "recepcao@auroraelo.com.br", "first": "Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+            {"email": "enfermagem@auroraelo.com.br", "first": "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+            {"email": "paciente.thiago@auroraelo.com.br", "first": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+            {"email": "paciente@auroraelo.com.br", "first": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+
+            # Aliases (.med.br)
+            {"email": "admin@auroraelo.med.br", "first": "Administrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+            {"email": "dr.marcelo@auroraelo.med.br", "first": "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+            {"email": "dra.camila@auroraelo.med.br", "first": "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+            {"email": "recepcao@auroraelo.med.br", "first": "Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+            {"email": "enfermagem@auroraelo.med.br", "first": "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+            {"email": "paciente@auroraelo.med.br", "first": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+        ]
 
         admin_user = User.objects.filter(email="admin@auroraelo.com.br").first()
 
-        for email, role in memberships_map.items():
-            user = User.objects.filter(email=email).first()
+        for spec in user_specs:
+            user = User.objects.filter(email=spec["email"]).first()
             if not user:
-                self.stdout.write(self.style.WARNING(f"Usuário {email} não encontrado no banco."))
-                continue
+                user = User.objects.create_user(
+                    email=spec["email"],
+                    password="AuroraElo@2026!",
+                    first_name=spec["first"],
+                    last_name=spec["last"],
+                    is_staff=spec["staff"],
+                    is_superuser=spec["super"],
+                    is_active=True,
+                )
+                self.stdout.write(self.style.SUCCESS(f"✓ Usuário criado: {user.email}"))
+            else:
+                user.set_password("AuroraElo@2026!")
+                user.first_name = spec["first"]
+                user.last_name = spec["last"]
+                user.is_staff = spec["staff"]
+                user.is_superuser = spec["super"]
+                user.is_active = True
+                user.save()
+                self.stdout.write(f"✓ Credenciais e dados atualizados: {user.email}")
+
+            if not admin_user and user.is_superuser:
+                admin_user = user
 
             membership = ClinicMembership.infrastructure_objects.filter(
                 user=user,
@@ -73,19 +103,19 @@ class Command(BaseCommand):
                 ClinicMembership.infrastructure_objects.create(
                     user=user,
                     clinic=clinic,
-                    role=role,
-                    authorized_by=admin_user,
+                    role=spec["role"],
+                    authorized_by=admin_user or user,
                     is_active=True,
                     valid_from=date(2024, 1, 1),
                     valid_until=None,
                 )
-                self.stdout.write(self.style.SUCCESS(f"✓ Vínculo criado: {user.email} -> {role}"))
+                self.stdout.write(self.style.SUCCESS(f"✓ Vínculo criado: {user.email} -> {spec['role']}"))
             else:
                 membership.is_active = True
-                membership.role = role
+                membership.role = spec["role"]
                 membership.valid_from = date(2024, 1, 1)
                 membership.valid_until = None
                 membership.save(update_fields=["is_active", "role", "valid_from", "valid_until"])
-                self.stdout.write(f"✓ Vínculo atualizado: {user.email} -> {role}")
+                self.stdout.write(f"✓ Vínculo atualizado: {user.email} -> {spec['role']}")
 
-        self.stdout.write(self.style.SUCCESS("✓ Clínica Aurora Elo e todos os vínculos configurados com sucesso!"))
+        self.stdout.write(self.style.SUCCESS("✓ Clínica Aurora Elo e todos os usuários/vínculos configurados com sucesso!"))

@@ -121,6 +121,10 @@ def account_login(request: HttpRequest) -> HttpResponse:
         else:
             next_url = _safe_local_next(request, request.GET.get("next"))
             if next_url is not None:
+                if next_url.startswith("/admin/") and not (
+                    request.user.is_staff or request.user.is_superuser
+                ):
+                    return redirect("workspace_vertical")
                 return redirect(next_url)
             return redirect("workspace_vertical")
     response = _form_response(

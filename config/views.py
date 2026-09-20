@@ -414,9 +414,10 @@ def confirm_clinic_switch(request: HttpRequest) -> HttpResponse:
 
 def admin_login_redirect(request: HttpRequest) -> HttpResponse:
     """Route Django Admin authentication through the protected account entrypoint."""
+    next_param = request.GET.get("next") or "/admin/"
     response = HttpResponse(status=302)
     response.headers["Location"] = (
-        f"{reverse('account_login')}?{urlencode({'next': '/admin/'})}"
+        f"{reverse('account_login')}?{urlencode({'next': next_param})}"
     )
     return response
 

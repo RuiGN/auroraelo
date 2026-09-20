@@ -4,8 +4,6 @@
     "templates/accounts/auth_base.html",
     "templates/accounts/auth_form.html",
     "templates/accounts/auth_message.html",
-    "templates/accounts/mfa_enroll.html",
-    "templates/accounts/mfa_recovery_codes.html",
     "templates/accounts/sessions.html",
     "templates/layouts/base.html",
     "templates/layouts/detached.html",
