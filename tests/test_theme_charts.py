@@ -204,6 +204,22 @@ def test_workspace_theme_tokens_keep_text_and_surfaces_accessible() -> None:
     assert "--bs-btn-bg: var(--product-primary)" in css
 
 
+def test_field_controls_reserve_icon_space_over_theme_reset() -> None:
+    override = (
+        Path(settings.BASE_DIR) / "static" / "css" / "aurora-theme-override.css"
+    ).read_text(encoding="utf-8")
+
+    # O reset global de .form-control/.form-select usa padding !important e
+    # vence o padding-left do product-integration.css; sem esta regra o texto
+    # digitado cai embaixo do ícone de cada campo.
+    assert ".field-control .form-control" in override
+    assert ".field-control .form-select" in override
+    assert "padding-left: 2.6rem !important" in override
+    # O reset precisa continuar importante, senão volta o conteúdo colado à
+    # borda em campos sem ícone (o reset existe para uniformizar o ritmo).
+    assert "padding: 0.625rem 0.875rem !important" in override
+
+
 def test_theme_storage_has_a_safe_system_fallback() -> None:
     script = (
         Path(settings.BASE_DIR)

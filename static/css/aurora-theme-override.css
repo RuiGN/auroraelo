@@ -112,6 +112,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   transition: all 0.2s ease !important;
 }
 
+/* Campos com ícone: o reset acima (padding !important) vence o
+   padding-left do product-integration.css e o texto cai em cima do ícone.
+   Reserva explícita do espaço do ícone, com a mesma prioridade. */
+.field-control .form-control,
+.field-control .form-select {
+  padding-left: 2.6rem !important;
+}
+
 .form-control:focus, .form-select:focus {
   border-color: #0284c7 !important;
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2) !important;
