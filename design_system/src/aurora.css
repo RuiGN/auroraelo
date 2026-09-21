@@ -1,5 +1,5 @@
-@import "../../static/design_system/css/tokens.css";
-@import "../../static/design_system/css/custom.css";
+@import "./tokens.local.css";
+@import "./custom.local.css";
 @import "./shell.css";
 @tailwind base;
 @tailwind components;

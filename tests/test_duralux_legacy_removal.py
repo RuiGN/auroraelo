@@ -67,7 +67,11 @@ def test_base_loads_only_global_duralux_dependencies() -> None:
     assert "duralux/css/theme.min.css" in base
     assert "duralux/css/product-integration.css" in base
     assert "duralux/js/bootstrap.bundle.min.js" in base
-    assert "duralux/js/product-shell.js" in base
+    # O chrome do shell Aurora Elo substituiu os scripts legados de shell.
+    assert "duralux/js/product-shell.js" not in base
+    assert "duralux/js/language-selector.js" not in base
+    assert "design_system/js/shell.js" in base
+    assert "design_system/css/aurora.css" in base
     assert "apexcharts" not in base.lower()
     assert "lesson-player" not in base.lower()
     for forbidden in FORBIDDEN_RUNTIME_REFERENCES:

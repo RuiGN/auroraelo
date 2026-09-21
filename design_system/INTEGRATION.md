@@ -10,10 +10,19 @@ npm --prefix design_system run build
 ```
 
 Tailwind **3.4.17**, fixado em package.json e package-lock.json, é compatível com
-`tailwind.config.js` CommonJS. Os tokens publicados em
-`static/design_system/css/tokens.css` são propriedades CSS `:root`, não diretivas
-`@theme` v4. `src/aurora.css` compila tokens, customizações e `src/shell.css` em
-`static/design_system/css/aurora.css`; incluir esse resultado no deploy.
+`tailwind.config.js` CommonJS.
+Os arquivos publicados em `static/design_system/` são cópias de serviço do pacote:
+páginas (`index.html`, `login.html`, `mobile-*.html`), componentes, JS de showcase
+e assets são sincronizados do pacote (paridade visual total; o showcase pode usar
+o Tailwind do CDN e as fontes da Google, liberados na CSP). `css/tokens.css` e
+`css/custom.css` publicados são as cópias do pacote (diretivas `@theme` v4 e
+import de fontes).
+
+Os insumos do build ficam em `src/`: `src/tokens.local.css` e `src/custom.local.css`
+(sem `@theme` e sem fontes remotas) são importados por `src/aurora.css` junto com
+`src/shell.css` e compilados em `static/design_system/css/aurora.css`; incluir esse
+resultado no deploy. O CSS compilado não pode conter `@theme`, `@tailwind` nem
+`fonts.googleapis.com` (contrato de teste).
 Sem Node, CDN, compilador Tailwind ou fonte Google no navegador dos shells.
 
 A referência visual é exclusivamente **design_system/**. O Bootstrap/Duralux já

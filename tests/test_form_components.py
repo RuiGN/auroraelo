@@ -10,12 +10,8 @@ import pytest
 from django import forms
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.test import Client
-from django.urls import reverse
 
-from clinics.models import ClinicMembership
 from core.forms import DesignSystemExampleForm
-from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
 
 
 class ComponentExampleForm(forms.Form):
@@ -243,80 +239,6 @@ def test_form_component_escapes_user_controlled_values(unsafe: str) -> None:
 
 
 @pytest.mark.django_db
-def test_visual_reference_catalogs_the_accessible_form(client: Client) -> None:
-    user = UserFactory.create(is_staff=True)
-    clinic = ClinicFactory.create(name="Clínica Formulários")
-    ClinicMembershipFactory.create(
-        user=user,
-        clinic=clinic,
-        role=ClinicMembership.Role.CLINIC_ADMIN,
-    )
-    client.force_login(user)
-    session = client.session
-    session["active_clinic_id"] = str(clinic.pk)
-    session.save()
-
-    response = client.get(reverse("design_system_reference"))
-    content = response.content.decode("utf-8")
-
-    assert response.status_code == 200
-    assert "Formulário acessível" in content
-    assert 'id="reference-form"' in content
-    assert "Nome de exibição" in content
-    assert "Telefone" in content
-    assert "Documento" in content
-    assert "Contato preferencial" in content
-    assert "Anexo" in content
-
-
-@pytest.mark.django_db
-def test_visual_reference_validates_posted_form_on_the_server(client: Client) -> None:
-    user = UserFactory.create(is_staff=True)
-    clinic = ClinicFactory.create(name="Clínica Validação")
-    ClinicMembershipFactory.create(user=user, clinic=clinic)
-    client.force_login(user)
-    session = client.session
-    session["active_clinic_id"] = str(clinic.pk)
-    session.save()
-
-    response = client.post(
-        reverse("design_system_reference"),
-        {"display_name": "", "category": "invalid", "contact_method": ""},
-    )
-    content = response.content.decode("utf-8")
-
-    assert response.status_code == 200
-    assert "Revise os campos indicados" in content
-    assert 'aria-invalid="true"' in content
-    assert "Exemplo validado pelo servidor" not in content
-
-
-@pytest.mark.django_db
-def test_visual_reference_reports_a_valid_server_submission(client: Client) -> None:
-    user = UserFactory.create(is_staff=True)
-    clinic = ClinicFactory.create(name="Clínica Exemplo Válido")
-    ClinicMembershipFactory.create(user=user, clinic=clinic)
-    client.force_login(user)
-    session = client.session
-    session["active_clinic_id"] = str(clinic.pk)
-    session.save()
-
-    response = client.post(
-        reverse("design_system_reference"),
-        {
-            "display_name": "Unidade Centro",
-            "category": "individual",
-            "start_date": "2026-08-31",
-            "phone": "(11) 98765-4321",
-            "document": "123.456.789-00",
-            "contact_method": "email",
-        },
-    )
-
-    assert response.status_code == 200
-    assert "Exemplo validado pelo servidor" in response.content.decode("utf-8")
-
-
 def test_form_script_focuses_first_invalid_field_and_recovers_from_bfcache() -> None:
     script = (
         Path(settings.BASE_DIR) / "static" / "duralux" / "js" / "form-behaviors.js"

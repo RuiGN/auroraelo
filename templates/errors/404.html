@@ -2,11 +2,13 @@
 {% load i18n %}
 
 {% block auth_content %}
-<section class="product-auth-card text-center" aria-labelledby="error-title">
-  <p class="text-primary fw-semibold mb-2">{% blocktranslate with code=404 %}Erro {{ code }}{% endblocktranslate %}</p>
-  <h1 id="error-title" class="h3 mb-3">{{ title }}</h1>
-  <p class="text-body-secondary">{{ message }}</p>
-  {% if request_id %}<p class="small">{% translate 'Referência:' %} <code>{{ request_id }}</code></p>{% endif %}
-  <a class="btn btn-primary mt-2" href="{% url 'home' %}">{% translate 'Voltar ao início' %}</a>
+<section aria-labelledby="error-title">
+  <div class="text-center">
+    <p class="aurora-eyebrow mb-1">{% blocktranslate with code=404 %}Erro {{ code }}{% endblocktranslate %}</p>
+    <h1 id="error-title">{{ title }}</h1>
+    <p class="aurora-auth-subtitle">{{ message }}</p>
+    {% if request_id %}<p class="small">{% translate 'Referência:' %} <code>{{ request_id }}</code></p>{% endif %}
+    <a class="btn btn-primary mt-2" href="{% url 'home' %}">{% translate 'Voltar ao início' %}</a>
+  </div>
 </section>
 {% endblock %}

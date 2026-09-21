@@ -33,10 +33,12 @@ def test_public_auth_forms_use_the_minimal_shell_and_preserve_django_inputs(
     recovery_html = recovery.content.decode()
 
     assert 'lang="pt-br"' in login_html.lower()
-    assert 'href="/static/duralux/css/auth.css"' in login_html
-    # O shell de login usa o design Aurora Elo (aurora-auth-card), não o
-    # wrapper minimal do Duralux legado; os contratos de formulário abaixo
-    # continuam exigidos integralmente.
+    # O shell de login usa o design system Aurora Elo compilado (aurora.css),
+    # sem CSS do Duralux legado; os contratos de formulário abaixo continuam
+    # exigidos integralmente.
+    assert 'href="/static/design_system/css/aurora.css"' in login_html
+    assert 'href="/static/duralux/css/auth.css"' not in login_html
+    assert 'href="/static/duralux/css/theme.min.css"' not in login_html
     assert 'class="aurora-auth-card"' in login_html
     assert 'name="csrfmiddlewaretoken"' in login_html
     assert 'name="email"' in login_html

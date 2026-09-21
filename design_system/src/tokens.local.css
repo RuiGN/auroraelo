@@ -1,10 +1,10 @@
 /* ==========================================================================
    AURORA ELO DESIGN SYSTEM - DESIGN TOKENS
-   Tailwind CSS v4 Modern Theme Variables & CSS Custom Properties
+   CSS custom properties shared with the pinned Tailwind 3 build
    Inspired by Aurora Elo Psychiatric Clinic & Mental Wellness Ecosystem
    ========================================================================== */
 
-@theme {
+:root {
   /* Brand Primary: Aurora Midnight Navy (Base of Trust, Stability, Clinical Rigor) */
   --color-aurora-50: #f0f7ff;
   --color-aurora-100: #e0f0fe;
@@ -15,7 +15,7 @@
   --color-aurora-600: #0284c7;
   --color-aurora-700: #0369a1;
   --color-aurora-800: #075985;
-  --color-aurora-900: #0a2540;
+  --color-aurora-900: #0c3c6e;
   --color-aurora-950: #051424;
 
   /* Brand Secondary: Elo Cerulean & Cyan Glow (Hope, Dawn, Neural Connection) */
@@ -25,7 +25,7 @@
   --color-elo-300: #67e8f9;
   --color-elo-400: #22d3ee;
   --color-elo-500: #06b6d4;
-  --color-elo-600: #0891b2;
+  --color-elo-600: #288d9e;
   --color-elo-700: #0e7490;
   --color-elo-800: #155e75;
   --color-elo-900: #164e63;
@@ -83,7 +83,7 @@
 
 :root {
   /* CSS Variables for Dynamic Customization */
-  --aurora-primary: #0a2540;
+  --aurora-primary: #0c3c6e;
   --aurora-secondary: #0284c7;
   --aurora-cyan: #06b6d4;
   --aurora-bg: #f8fafc;
@@ -94,15 +94,15 @@
   --aurora-ring: rgba(14, 165, 233, 0.4);
 
   /* Gradients inspired by the logo */
-  --gradient-aurora-brand: linear-gradient(135deg, #0a2540 0%, #0369a1 50%, #06b6d4 100%);
+  --gradient-aurora-brand: linear-gradient(135deg, #0c3c6e 0%, #0369a1 50%, #06b6d4 100%);
   --gradient-aurora-subtle: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
-  --gradient-aurora-dark: linear-gradient(145deg, #07172c 0%, #0a2540 60%, #0d3862 100%);
+  --gradient-aurora-dark: linear-gradient(145deg, #07172c 0%, #0c3c6e 60%, #0d3862 100%);
   --gradient-aurora-glow: linear-gradient(90deg, #0ea5e9, #06b6d4, #10b981);
 }
 
 .dark {
   --aurora-bg: #07172c;
-  --aurora-card-bg: #0a2540;
+  --aurora-card-bg: #0c3c6e;
   --aurora-border: #1e3a5f;
   --aurora-text: #f8fafc;
   --aurora-text-muted: #94a3b8;

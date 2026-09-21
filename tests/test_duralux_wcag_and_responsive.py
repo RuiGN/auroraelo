@@ -86,7 +86,7 @@ def test_s11_03_landmarks_and_skip_links_present_in_base_layouts() -> None:
     header_source = (TEMPLATES_DIR / "layouts/partials/header.html").read_text(
         encoding="utf-8"
     )
-    assert '<header class="nxl-header"' in header_source
+    assert '<header class="aurora-workspace-header"' in header_source
 
     workspace_layouts = ("layouts/vertical.html", "layouts/detached.html")
     for layout in workspace_layouts:

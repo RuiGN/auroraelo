@@ -406,3 +406,49 @@ pendência para quando o baseline estiver saneado. As 27 falhas preexistentes
 não bloqueiam a publicação deste trabalho porque já existem em produção no
 HEAD de `main`; este commit não as introduz e a suíte focada de segurança
 (psiquiatria/operações clínicas/recuperação) permanece verde.
+
+# Fechamento do alinhamento visual (design system Aurora Elo, 2026-09-21)
+
+Demanda do usuário: o design system publicado e a tela de login não estavam
+conformes a `design_system/index.html` e `design_system/login.html`, e ainda
+havia itens do `design_system_duralux`. Ações e verificação:
+
+- Showcase `static/design_system/` sincronizado com o pacote (páginas,
+  componentes, JS e assets; `css/tokens.css`/`custom.css` agora são as cópias
+  do pacote, com `@theme` v4 e import de fontes Google — a CSP já libera).
+  Paridade é garantida por teste byte-a-byte (`test_static_showcase_matches_...`).
+- Insumos do build movidos para `design_system/src/tokens.local.css` e
+  `src/custom.local.css` (sem `@theme`, sem fontes remotas); `src/aurora.css`
+  compila para `static/design_system/css/aurora.css` (25,8 KB; sem
+  `@theme`/`@tailwind`/`fonts.googleapis.com` no artefato — contrato de teste).
+- Login reescrito conforme `design_system/login.html` (fundo escuro aurora,
+  card de vidro, abas de perfil, rodapé de crise 192/188 com msgids já
+  traduzidos). O login não carrega mais nenhum CSS/JS Duralux — só
+  `aurora.css` + `shell.js` + feather + `form-behaviors.js`.
+- Chrome do workspace (base/vertical/detached/header/navigation) sem classes
+  `nxl-*`/`product-auth`, sem `product-shell.js`/`language-selector.js`;
+  sidebar escura aurora, header claro, breadcrumb, `<main id="main-content">`.
+  Bootstrap/feather/`theme.min.css`/`product-integration.css` permanecem como
+  camada de compatibilidade de conteúdo (per INTEGRATION.md).
+- Seletor de idioma virou `<select>` nativo com POST (padrão da referência);
+  `shell.js` ganhou drawer/mini, envio com confirmação de alterações não
+  salvas, toggle de senha, abas de perfil e pin de tema claro.
+- Página staff antiga `templates/visual_reference/reference.html` (morta desde
+  o redirect do showcase) removida; 99 templates no disco (doc reconciliado).
+  Testes obsoletos da página removidos/reescritos para o contrato novo.
+- i18n: 8 msgids novos em pt_BR/en/es; check escopado passou (1357 chaves,
+  0 faltando). `ui-strings.json` regenerado para os 13 templates alterados;
+  `runtime-assets.json` com os novos hashes.
+- Testes de guardas obsoletos modernizados: test_design_system (allowlist e
+  showcase), test_theme_charts, test_auth_duralux_acceptance, test_layouts,
+  test_language_selector_ui, test_aurora_ui_translations,
+  test_consent_navigation_translations, test_runtime_language_publication,
+  test_duralux_legacy_removal, test_duralux_wcag_and_responsive,
+  test_content_components, test_form_components,
+  test_component_widget_contracts, test_duralux_domain_templates.
+
+Suíte completa final (SQLite, `--nomigrations`): **2581 passed, 13 failed,
+32 skipped**. Comparação JUnit contra o baseline: **14 falhas resolvidas,
+0 novas**. As 13 restantes são exatamente as preexistentes (SEC-01/psiquiatria,
+home-aurora-elo, publicação de idiomas e afins) e permanecem registradas como
+pendências, sem regressão introduzida por este trabalho.

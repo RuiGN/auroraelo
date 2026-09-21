@@ -75,8 +75,6 @@ SPRINT7_TEMPLATES = (
     "content/reports.html",
 )
 
-SPRINT8_TEMPLATES = ("visual_reference/reference.html",)
-
 PARTIALS = {
     "consents/partials/document_decision.html",
     "journal/partials/calendar.html",
@@ -171,18 +169,6 @@ def test_unconsumed_goal_placeholder_is_removed() -> None:
 def test_sprint7_templates_use_duralux_without_inline_or_legacy_visuals() -> None:
     for relative_path in SPRINT7_TEMPLATES:
         _assert_migrated(relative_path)
-
-
-def test_visual_reference_uses_only_the_duralux_foundation() -> None:
-    for relative_path in SPRINT8_TEMPLATES:
-        _assert_migrated(relative_path)
-    source = _source("visual_reference/reference.html")
-    assert "duralux/css/bootstrap.min.css" in source
-    assert "duralux/css/theme.min.css" in source
-    assert "duralux/css/product-integration.css" in source
-    assert "css/framework.css" not in source
-    assert "css/tokens.css" not in source
-    assert "css/workspace.css" not in source
 
 
 def test_public_certificate_uses_duralux_brand_favicon_and_css() -> None:

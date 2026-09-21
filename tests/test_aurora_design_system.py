@@ -113,8 +113,10 @@ def test_shell_language_uses_server_preference(
     assert f'lang="{language}"' in html
     assert 'action="/accounts/language/"' in html
     assert 'name="csrfmiddlewaretoken"' in html
+    assert 'name="language"' in html
     for code in ("pt-br", "en", "es"):
-        assert f'name="language" value="{code}"' in html
+        assert f'value="{code}"' in html
+    assert f'value="{language}" selected' in html
     assert "design_system/js/i18n.js" not in html
 
 

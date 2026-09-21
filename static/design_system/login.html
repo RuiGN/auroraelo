@@ -53,44 +53,43 @@
   </div>
 
   <!-- Top Bar: Logo & Language / Return -->
-  <header class="relative z-10 w-full px-4 sm:px-6 py-4 flex items-center justify-between">
+  <header class="relative z-10 w-full px-6 py-4 flex items-center justify-between">
     <a href="index.html" class="flex items-center space-x-3 group">
-      <div class="px-2.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-white/20 shadow-md">
-        <img src="assets/images/aurora-elo-horizontal.png" alt="Aurora Elo" class="h-8 sm:h-9 w-auto object-contain" />
+      <div class="p-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 group-hover:border-elo-400/50 transition-colors">
+        <img src="assets/images/logo.png" alt="Aurora Elo" class="h-9 w-auto filter drop-shadow" />
       </div>
-      <div class="hidden sm:block">
-        <span class="text-[10px] text-aurora-200 tracking-wider font-semibold uppercase block" data-i18n="clinic_subtitle">Saúde Mental & Psiquiatria Integrada</span>
+      <div>
+        <span class="font-display font-black text-xl text-white tracking-tight leading-none block">
+          Aurora <span class="text-elo-400">Elo</span>
+        </span>
+        <span class="text-[10px] text-aurora-200 tracking-wider font-semibold uppercase" data-i18n="clinic_subtitle">Saúde Mental & Psiquiatria Integrada</span>
       </div>
     </a>
 
-    <div class="flex items-center space-x-2 sm:space-x-3">
-      <!-- Language Dropdown with Globe Icon -->
-      <div class="relative flex items-center">
-        <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-300">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><path stroke-width="2" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
-        <select class="aurora-lang-select bg-white/10 border border-white/20 text-white text-xs rounded-xl pl-8 pr-2.5 py-1.5 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-elo-400 cursor-pointer appearance-none">
-          <option value="pt-BR" class="bg-slate-900 text-white">🇧🇷 PT</option>
+    <div class="flex items-center space-x-3">
+      <!-- Language Dropdown -->
+      <div class="relative">
+        <select class="aurora-lang-select bg-white/10 border border-white/20 text-white text-xs rounded-xl px-3 py-1.5 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-elo-400 cursor-pointer">
+          <option value="pt-BR" class="bg-slate-900 text-white">🇧🇷 PT-BR</option>
           <option value="en" class="bg-slate-900 text-white">🇺🇸 EN</option>
           <option value="es" class="bg-slate-900 text-white">🇪🇸 ES</option>
         </select>
       </div>
-      <a href="index.html" class="text-xs font-semibold text-aurora-200 hover:text-white bg-white/5 hover:bg-white/10 px-2.5 sm:px-3.5 py-1.5 rounded-xl border border-white/10 transition-colors">
-        <span class="hidden sm:inline">← Voltar ao Design System</span>
-        <span class="sm:hidden">← Design System</span>
+      <a href="index.html" class="text-xs font-semibold text-aurora-200 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/10 transition-colors">
+        ← Voltar ao Design System
       </a>
     </div>
   </header>
 
   <!-- Main Login Card Container -->
   <main class="relative z-10 flex-1 flex items-center justify-center p-4 sm:p-6 my-auto">
-    <div class="w-full max-w-md bg-white/95 dark:bg-aurora-950/90 text-slate-900 dark:text-white rounded-3xl p-6 sm:p-8 shadow-aurora border border-white/40 dark:border-aurora-800/80 backdrop-blur-xl">
+    <div class="w-full max-w-md bg-white/95 dark:bg-aurora-950/90 text-slate-900 dark:text-white rounded-3xl p-7 sm:p-9 shadow-aurora border border-white/40 dark:border-aurora-800/80 backdrop-blur-xl">
       <!-- Heading & Welcome -->
       <div class="text-center mb-6">
-        <div class="inline-flex p-2.5 rounded-2xl bg-white shadow-sm border border-slate-100 mb-3">
-          <img src="assets/images/aurora-elo-horizontal.png" alt="Aurora Elo" class="h-8 w-auto object-contain" />
+        <div class="inline-flex p-3 rounded-2xl bg-aurora-50 dark:bg-aurora-900/50 mb-3 text-aurora-600 dark:text-elo-400 ring-1 ring-aurora-200 dark:ring-aurora-800">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
         </div>
-        <h1 class="text-xl sm:text-2xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white" data-i18n="login_title">Portal Clínico Aurora Elo</h1>
+        <h1 class="text-2xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white" data-i18n="login_title">Portal Clínico Aurora Elo</h1>
         <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="login_subtitle">Acesse o ambiente seguro de gestão psiquiátrica e cuidado integrado.</p>
       </div>
 

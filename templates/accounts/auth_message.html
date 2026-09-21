@@ -1,14 +1,13 @@
 {% extends "accounts/auth_base.html" %}
+{% load i18n %}
 
 {% block auth_content %}
-<section class="product-auth-card" aria-labelledby="auth-message-title">
+<section aria-labelledby="auth-message-title">
   <div class="text-center">
-    <span class="product-auth-state-icon avatar-text avatar-lg bg-soft-primary text-primary mb-4" aria-hidden="true">
-      <i class="feather-info"></i>
-    </span>
-    <h1 id="auth-message-title" class="fs-20 fw-bolder mb-3">{{ title }}</h1>
-    <p class="fs-12 fw-medium text-body-secondary mb-4" role="status">{{ message }}</p>
-    <a class="btn btn-lg btn-primary w-100" href="{{ action_url }}">{{ action_label }}</a>
+    <span class="aurora-auth-icon" aria-hidden="true"><i class="feather-info w-8 h-8"></i></span>
+    <h1 id="auth-message-title">{{ title }}</h1>
+    <p class="aurora-auth-subtitle mb-3" role="status">{{ message }}</p>
+    <a class="btn btn-primary" href="{{ action_url }}">{{ action_label }}</a>
   </div>
 </section>
 {% endblock %}

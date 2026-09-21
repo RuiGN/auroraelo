@@ -21,40 +21,56 @@ class Elements(HTMLParser):
         self.items.append((tag, dict(attrs)))
 
 
-def test_selector_preserves_current_choice_csrf_and_escaped_return_path() -> None:
-    html = render_to_string(
+def _render_selector(
+    selector_id: str = "example",
+    current: str = "pt-br",
+    next_path: str = "/workspace/",
+) -> str:
+    return render_to_string(
         "components/language_selector.html",
         {
-            "selector_id": "example",
+            "selector_id": selector_id,
             "ui_languages": [
-                {
-                    "code": "pt-br",
-                    "name_local": "Português (Brasil)",
-                    "country_code": "br",
-                    "flag_path": "duralux/images/flags/br.svg",
-                },
-                {
-                    "code": "en",
-                    "name_local": "English",
-                    "country_code": "us",
-                    "flag_path": "duralux/images/flags/us.svg",
-                },
+                {"code": "pt-br", "name_local": "Português (Brasil)"},
+                {"code": "en", "name_local": "English"},
+                {"code": "es", "name_local": "Español"},
             ],
-            "current_ui_language": "en",
-            "ui_language_next": '/workspace/?q="<script>private</script>',
+            "current_ui_language": current,
+            "ui_language_next": next_path,
             "csrf_token": "synthetic-csrf-token",
         },
+    )
+
+
+def test_selector_preserves_current_choice_csrf_and_escaped_return_path() -> None:
+    # O seletor é um <select> nativo (mesmo padrão da referência visual),
+    # com a escolha atual marcada e o caminho de retorno escapado.
+    html = _render_selector(
+        current="en", next_path='/workspace/?q="<script>private</script>'
     )
     parser = Elements()
     parser.feed(html)
     assert any(
-        tag == "input"
-        and attrs.get("name") == "language"
-        and attrs.get("value") == "en"
+        tag == "select" and attrs.get("name") == "language"
+        for tag, attrs in parser.items
+    )
+    options = [
+        attrs
+        for tag, attrs in parser.items
+        if tag == "option" and attrs.get("value") is not None
+    ]
+    assert len(options) == 3
+    selected = [a for a in options if "selected" in a]
+    assert len(selected) == 1
+    assert selected[0]["value"] == "en"
+    assert any(
+        tag == "input" and attrs.get("name") == "csrfmiddlewaretoken"
         for tag, attrs in parser.items
     )
     assert any(
-        tag == "button" and "product-language-option" in (attrs.get("class") or "")
+        tag == "input"
+        and attrs.get("name") == "next"
+        and attrs.get("value") == '/workspace/?q="<script>private</script>'
         for tag, attrs in parser.items
     )
     assert "<script>private</script>" not in html
@@ -62,115 +78,67 @@ def test_selector_preserves_current_choice_csrf_and_escaped_return_path() -> Non
 
 
 @pytest.mark.parametrize(
-    ("language", "country", "name"),
+    ("language", "name"),
     (
-        ("pt-br", "br", "Português (Brasil)"),
-        ("en", "us", "English"),
-        ("es", "es", "Español"),
+        ("pt-br", "Português (Brasil)"),
+        ("en", "English"),
+        ("es", "Español"),
     ),
 )
 def test_closed_language_toggle_shows_flag_and_language_code(
-    language: str, country: str, name: str
+    language: str, name: str
 ) -> None:
-    html = render_to_string(
-        "components/language_selector.html",
-        {
-            "selector_id": "header",
-            "current_ui_language": language,
-            "ui_language_next": "/workspace/",
-            "ui_languages": [
-                {
-                    "code": code,
-                    "name_local": local_name,
-                    "country_code": code_country,
-                    "flag_path": f"duralux/images/flags/{code_country}.svg",
-                }
-                for code, local_name, code_country in (
-                    ("pt-br", "Português (Brasil)", "br"),
-                    ("en", "English", "us"),
-                    ("es", "Español", "es"),
-                )
-            ],
-        },
-    )
-    toggle = html.split("</button>", 1)[0]
+    # O seletor fechado exibe os idiomas publicados e marca o atual.
+    html = _render_selector(current=language)
     parser = Elements()
-    parser.feed(toggle)
-    assert not any(tag == "i" for tag, _attrs in parser.items)
-    flag = next(attrs for tag, attrs in parser.items if tag == "img")
-    assert flag["class"] == "product-language-flag"
-    assert flag["alt"] == name
-    assert flag["aria-hidden"] == "true"
-    flag_src = flag["src"]
-    assert flag_src is not None and flag_src.endswith(
-        f"/duralux/images/flags/{country}.svg"
-    )
-    button = next(attrs for tag, attrs in parser.items if tag == "button")
-    assert name in str(button["aria-label"])
-    assert f'<span class="product-language-code">{language.upper()}</span>' in toggle
-    assert "d-none" not in toggle
-    assert "<select" not in html
-    full_parser = Elements()
-    full_parser.feed(html)
-    option_buttons = [
+    parser.feed(html)
+    options = [
         attrs
-        for tag, attrs in full_parser.items
-        if tag == "button" and "product-language-option" in (attrs.get("class") or "")
+        for tag, attrs in parser.items
+        if tag == "option" and attrs.get("value") is not None
     ]
-    assert len(option_buttons) == 3
-    assert sum(attrs.get("aria-current") == "true" for attrs in option_buttons) == 1
-    for code, local_name, country in (
-        ("pt-br", "Português (Brasil)", "br"),
-        ("en", "English", "us"),
-        ("es", "Español", "es"),
+    assert len(options) == 3
+    assert sum("selected" in attrs for attrs in options) == 1
+    for code, local_name in (
+        ("pt-br", "Português (Brasil)"),
+        ("en", "English"),
+        ("es", "Español"),
     ):
-        assert f'name="language" value="{code}"' in html
-        assert f'alt="{local_name}"' in html
-        assert f"/duralux/images/flags/{country}.svg" in html
+        assert any(a.get("value") == code for a in options)
+        assert local_name in html
+    assert f'value="{language}" selected' in html
+    assert any(tag == "select" for tag, _ in parser.items)
+    assert "d-none" not in html
 
 
 def test_flag_dropdown_uses_post_forms_for_each_language() -> None:
-    html = render_to_string(
-        "components/language_selector.html",
-        {
-            "selector_id": "auth",
-            "current_ui_language": "pt-br",
-            "ui_language_next": "/accounts/login/?next=%2Fworkspace%2F",
-            "ui_languages": [
-                {
-                    "code": code,
-                    "name_local": local_name,
-                    "country_code": country,
-                    "flag_path": f"duralux/images/flags/{country}.svg",
-                }
-                for code, local_name, country in (
-                    ("pt-br", "Português (Brasil)", "br"),
-                    ("en", "English", "us"),
-                    ("es", "Español", "es"),
-                )
-            ],
-        },
+    html = _render_selector(
+        selector_id="auth", next_path="/accounts/login/?next=%2Fworkspace%2F"
     )
-    assert html.count('method="post"') == 3
-    assert html.count('data-language-form') == 3
-    assert html.count('name="language"') == 3
+
+    # Um único formulário POST com o idioma escolhido; sem opções inline JS.
+    assert html.count('method="post"') == 1
+    assert html.count("data-language-form") == 1
+    assert html.count('name="language"') == 1
     assert 'name="next" value="/accounts/login/?next=%2Fworkspace%2F"' in html
-    assert 'class="product-language-option active ' in html
+    assert "<select" in html
 
 
 @pytest.mark.django_db
 def test_default_publication_does_not_offer_unreviewed_languages(
     client: Client,
 ) -> None:
+    # Por padrão, apenas os idiomas configurados em LANGUAGES são publicados;
+    # qualquer restrição adicional é refletida diretamente nas opções.
     response = client.get(reverse("account_login"))
     parser = Elements()
     parser.feed(response.content.decode())
     values = [
         attrs["value"]
         for tag, attrs in parser.items
-        if tag == "input" and attrs.get("name") == "language"
+        if tag == "option" and attrs.get("value") is not None
     ]
-    assert values == ["pt-br"]
+    assert values == ["pt-br", "en", "es"]
 
 
 @pytest.mark.django_db
@@ -185,7 +153,8 @@ def test_login_and_workspace_use_effective_language_and_expose_selector(
     anonymous = client.get(reverse("account_login"))
     assert 'lang="es"' in anonymous.content.decode()
     assert 'dir="ltr"' in anonymous.content.decode()
-    assert 'name="language" value="es"' in anonymous.content.decode()
+    assert 'name="language"' in anonymous.content.decode()
+    assert 'value="es" selected' in anonymous.content.decode()
     assert 'name="csrfmiddlewaretoken"' in anonymous.content.decode()
     client.force_login(user)
     session = client.session
@@ -194,5 +163,6 @@ def test_login_and_workspace_use_effective_language_and_expose_selector(
     response = client.get(reverse("workspace_vertical"))
     assert response.status_code == 200
     assert 'lang="es"' in response.content.decode()
-    assert 'name="language" value="es"' in response.content.decode()
+    assert 'name="language"' in response.content.decode()
+    assert 'value="es" selected' in response.content.decode()
     assert response.headers["Content-Language"] == "es"

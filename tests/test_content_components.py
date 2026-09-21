@@ -391,31 +391,6 @@ def _login_component_user(client: Client, *, is_staff: bool = False) -> None:
 
 
 @pytest.mark.django_db
-def test_visual_reference_catalogs_all_component_variants(client: Client) -> None:
-    _login_component_user(client, is_staff=True)
-
-    response = client.get(reverse("design_system_reference"))
-    content = response.content.decode("utf-8")
-
-    assert response.status_code == 200
-    for tone in ("neutral", "info", "success", "warning", "danger"):
-        assert f'data-tone="{tone}"' in content
-    for kind in (
-        "loading",
-        "empty",
-        "no_results",
-        "unavailable",
-        "error",
-        "restricted",
-    ):
-        assert f'data-state-kind="{kind}"' in content
-    assert "Atividades operacionais recentes" in content
-    assert "Página 1 de 3" in content
-    assert "Fuso horário efetivo" in content
-    assert "Identificadores pessoais" in content
-
-
-@pytest.mark.django_db
 @pytest.mark.parametrize("route_name", ("workspace_vertical", "workspace_detached"))
 def test_workspace_integrates_components_without_clinical_demo_data(
     client: Client, route_name: str
@@ -439,28 +414,6 @@ def test_workspace_integrates_components_without_clinical_demo_data(
     ).content.decode("utf-8")
     assert "<script>alert(1)</script>" not in filtered
     assert "activity-search" not in filtered
-
-
-@pytest.mark.django_db
-def test_visual_reference_filter_preserves_the_active_order(client: Client) -> None:
-    _login_component_user(client, is_staff=True)
-    response = client.get(reverse("design_system_reference"), {"order": "-status"})
-    assert response.context_data is not None
-    assert response.context_data["current_order"] == "-status"
-    assert "order=-status" in response.content.decode("utf-8")
-
-
-@pytest.mark.django_db
-def test_visual_reference_pagination_matches_the_rendered_table(client: Client) -> None:
-    _login_component_user(client, is_staff=True)
-
-    content = client.get(
-        reverse("design_system_reference"), {"page": "3"}
-    ).content.decode("utf-8")
-
-    assert "Permissões da equipe" in content
-    assert "Página 3 de 3" in content
-    assert "Página 2 de 3" not in content
 
 
 def test_component_css_has_accessible_responsive_contracts() -> None:
@@ -489,15 +442,3 @@ def test_component_css_has_accessible_responsive_contracts() -> None:
     assert "@media (max-width: 767.98px)" in css
     assert "overflow-x: auto" in css
     assert "@media (prefers-reduced-motion: reduce)" in css
-
-
-def test_visual_reference_explains_density_truncation_dates_and_masking() -> None:
-    template = (
-        Path(settings.BASE_DIR) / "templates" / "visual_reference" / "reference.html"
-    ).read_text(encoding="utf-8")
-
-    assert "Fuso horário efetivo" in template
-    assert "Identificadores pessoais" in template
-    assert "Truncamento" in template
-    assert "Ausência de dados" in template
-    assert "densidade" in template.casefold()

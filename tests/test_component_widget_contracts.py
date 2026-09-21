@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from datetime import datetime
 from html.parser import HTMLParser
 from typing import Any
@@ -10,11 +9,8 @@ from typing import Any
 import pytest
 from django import forms
 from django.template.loader import render_to_string
-from django.test import Client
-from django.urls import reverse
 
 from core.templatetags.accessible_forms import accessible_widget, error_target_id
-from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
 
 
 class Elements(HTMLParser):
@@ -130,41 +126,3 @@ def test_hidden_date_and_grouped_checkbox_render_without_inaccessible_labels() -
     assert any(t == "fieldset" for t, a in elements)
     assert error_target_id(form["choices"]) == "id_choices_0"
     assert not any(t == "a" and a.get("href") == "#id_date_token" for t, a in elements)
-
-
-@pytest.mark.django_db
-def test_component_catalog_posts_with_real_csrf_validation() -> None:
-    user = UserFactory.create(is_staff=True)
-    clinic = ClinicFactory.create()
-    ClinicMembershipFactory.create(user=user, clinic=clinic, role="clinic_admin")
-    client = Client(enforce_csrf_checks=True)
-    client.force_login(user)
-    session = client.session
-    session["active_clinic_id"] = str(clinic.pk)
-    session.save()
-    page = client.get(reverse("design_system_reference"))
-    # Other independent POST forms (language choice) have their own CSRF token.
-    form_html = re.search(
-        r'<form id="reference-form"[^>]*>.*?</form>',
-        page.content.decode(),
-        flags=re.DOTALL,
-    )
-    assert form_html is not None
-    tokens = [
-        a["value"]
-        for t, a in _elements(form_html.group())
-        if t == "input" and a.get("name") == "csrfmiddlewaretoken"
-    ]
-    assert len(tokens) == 1
-    response = client.post(
-        reverse("design_system_reference"),
-        {
-            "csrfmiddlewaretoken": tokens[0],
-            "display_name": "Unidade de validação",
-            "category": "individual",
-            "start_date": "2026-09-08",
-            "contact_method": "email",
-        },
-    )
-    assert response.status_code == 200
-    assert "Exemplo validado pelo servidor" in response.content.decode()

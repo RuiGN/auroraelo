@@ -1,246 +1,144 @@
 {% load i18n %}
-<nav aria-label="{% translate 'Navegação principal' %}" class="nxl-navigation-content">
+<nav aria-label="{% translate 'Navegação principal' %}" class="aurora-sidebar-nav">
   {% if pending_consent_revocation_count %}
-  <div class="px-3 pt-2">
-    <a href="{% url 'consent_revocation_work_queue' %}" role="status"
-      class="alert alert-warning d-flex align-items-center mb-2 py-2 px-3 fs-12">
-      <i aria-hidden="true" class="feather-alert-triangle me-2"></i>
-      <span>{% blocktranslate count count=pending_consent_revocation_count %}{{ count }} revogação operacional pendente{% plural %}{{ count }} revogações operacionais pendentes{% endblocktranslate %}</span>
+  <a href="{% url 'consent_revocation_work_queue' %}" role="status" class="aurora-nav-alert">
+    <i aria-hidden="true" class="feather-alert-triangle"></i>
+    <span class="aurora-nav-text">{% blocktranslate count count=pending_consent_revocation_count %}{{ count }} revogação operacional pendente{% plural %}{{ count }} revogações operacionais pendentes{% endblocktranslate %}</span>
+  </a>
+  {% endif %}
+
+  <a href="{% url 'psychiatry:crisis_protocol' %}" class="aurora-nav-crisis">
+    <i class="feather-info" aria-hidden="true"></i>
+    <span class="aurora-nav-text">{% translate "Orientações em crise" %}</span>
+  </a>
+
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Geral" %}</span>
+    <a href="{% url 'workspace_vertical' %}"{% if request.resolver_match.url_name == 'workspace_vertical' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-sidebar"></i>
+      <span class="aurora-nav-text">{% translate "Navegação vertical" %}</span>
+    </a>
+    <a href="{% url 'workspace_detached' %}"{% if request.resolver_match.url_name == 'workspace_detached' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-layout"></i>
+      <span class="aurora-nav-text">{% translate "Navegação destacada" %}</span>
+    </a>
+  </div>
+
+  {% if can_manage_active_clinic or is_clinic_admin %}
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Gestão da clínica" %}</span>
+    {% if can_manage_active_clinic %}
+    <a href="{% url 'clinic_setup' %}"{% if request.resolver_match.url_name == 'clinic_setup' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-settings"></i>
+      <span class="aurora-nav-text">{% translate "Configurar clínica" %}</span>
+    </a>
+    <a href="{% url 'patient_list' %}"{% if request.resolver_match.url_name == 'patient_list' or request.resolver_match.url_name == 'patient_create' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-users"></i>
+      <span class="aurora-nav-text">{% translate "Pacientes" %}</span>
+    </a>
+    <a href="{% url 'professional_list' %}"{% if request.resolver_match.url_name == 'professional_list' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-user-check"></i>
+      <span class="aurora-nav-text">{% translate "Profissionais" %}</span>
+    </a>
+    {% endif %}
+    {% if is_clinic_admin %}
+    <a href="{% url 'clinic_panel' %}"{% if request.resolver_match.url_name == 'clinic_panel' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-bar-chart-2"></i>
+      <span class="aurora-nav-text">{% translate "Painel operacional" %}</span>
+    </a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if is_patient %}
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Cuidado e prática" %}</span>
+    <a href="{% url 'journal_list' %}"{% if 'journal' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-book-open"></i>
+      <span class="aurora-nav-text">{% translate "Diário emocional" %}</span>
+    </a>
+    <a href="{% url 'goal_list' %}"{% if 'goal' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-target"></i>
+      <span class="aurora-nav-text">{% translate "Minhas metas" %}</span>
+    </a>
+    <a href="{% url 'patient_exercise_list' %}"{% if 'exercicios' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-activity"></i>
+      <span class="aurora-nav-text">{% translate "Exercícios" %}</span>
+    </a>
+    <a href="{% url 'low_energy_home' %}"{% if request.resolver_match.url_name == 'low_energy_home' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-moon"></i>
+      <span class="aurora-nav-text">{% translate "Modo de baixa energia" %}</span>
     </a>
   </div>
   {% endif %}
 
-  <div class="px-3 pt-2 pb-1">
-    <a href="{% url 'psychiatry:crisis_protocol' %}" class="btn btn-outline-primary w-100">
-      <i class="feather-info" aria-hidden="true"></i> {% translate "Orientações em crise" %}
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Comunicação e agenda" %}</span>
+    <a href="{% url 'appointment_list' %}"{% if 'appointment' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-clock"></i>
+      <span class="aurora-nav-text">{% translate "Agenda de consultas" %}</span>
+    </a>
+    <a href="{% url 'conversation_list' %}"{% if 'conversation' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-message-square"></i>
+      <span class="aurora-nav-text">{% translate "Mensagens" %}</span>
     </a>
   </div>
 
-  <ul class="nxl-navbar">
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Geral" %}</label>
-    </li>
-    <li
-      class="nxl-item nxl-hasmenu{% if request.resolver_match.url_name == 'workspace_vertical' or request.resolver_match.url_name == 'workspace_detached' %} active nxl-trigger{% endif %}">
-      <button type="button" class="nxl-link" aria-expanded="false" aria-controls="navigation-group-1">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-airplay"></i></span>
-        <span class="nxl-mtext">{% translate "Área de trabalho" %}</span><span class="nxl-arrow"><i aria-hidden="true"
-            class="feather-chevron-right"></i></span>
-      </button>
-      <ul class="nxl-submenu" id="navigation-group-1">
-        <li class="nxl-item">
-          <a href="{% url 'workspace_vertical' %}" class="nxl-link{% if request.resolver_match.url_name == 'workspace_vertical' %} is-active{% endif %}"{% if request.resolver_match.url_name == 'workspace_vertical' %} aria-current="page"{% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-sidebar"></i></span>
-            <span class="nxl-mtext">{% translate "Navegação vertical" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'workspace_detached' %}" class="nxl-link{% if request.resolver_match.url_name == 'workspace_detached' %} is-active{% endif %}"{% if request.resolver_match.url_name == 'workspace_detached' %} aria-current="page"{% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-layout"></i></span>
-            <span class="nxl-mtext">{% translate "Navegação destacada" %}</span>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    {% if can_manage_active_clinic or is_clinic_admin %}
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Gestão da clínica" %}</label>
-    </li>
-    <li
-      class="nxl-item nxl-hasmenu{% if 'clinic' in request.resolver_match.url_name or 'patient' in request.resolver_match.url_name or 'professional' in request.resolver_match.url_name %} active nxl-trigger{% endif %}">
-      <button type="button" class="nxl-link" aria-expanded="false" aria-controls="navigation-group-2">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-briefcase"></i></span>
-        <span class="nxl-mtext">{% translate "Administração" %}</span><span class="nxl-arrow"><i aria-hidden="true" class="feather-chevron-right"></i></span>
-      </button>
-      <ul class="nxl-submenu" id="navigation-group-2">
-        {% if can_manage_active_clinic %}
-        <li class="nxl-item">
-          <a href="{% url 'clinic_setup' %}"
-            class="nxl-link{% if request.resolver_match.url_name == 'clinic_setup' %} is-active{% endif %}" {% if request.resolver_match.url_name == 'clinic_setup' %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-settings"></i></span>
-            <span class="nxl-mtext">{% translate "Configurar clínica" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'patient_list' %}"
-            class="nxl-link{% if request.resolver_match.url_name == 'patient_list' or request.resolver_match.url_name == 'patient_create' %} is-active{% endif %}"
-            {% if request.resolver_match.url_name == 'patient_list' or request.resolver_match.url_name == 'patient_create' %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-users"></i></span>
-            <span class="nxl-mtext">{% translate "Pacientes" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'professional_list' %}"
-            class="nxl-link{% if request.resolver_match.url_name == 'professional_list' %} is-active{% endif %}" {% if request.resolver_match.url_name == 'professional_list' %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-user-check"></i></span>
-            <span class="nxl-mtext">{% translate "Profissionais" %}</span>
-          </a>
-        </li>
-        {% endif %}
-        {% if is_clinic_admin %}
-        <li class="nxl-item">
-          <a href="{% url 'clinic_panel' %}"
-            class="nxl-link{% if request.resolver_match.url_name == 'clinic_panel' %} is-active{% endif %}" {% if request.resolver_match.url_name == 'clinic_panel' %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-bar-chart-2"></i></span>
-            <span class="nxl-mtext">{% translate "Painel operacional" %}</span>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-    </li>
-    {% endif %}
-
+  {% if is_patient or is_therapist %}
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Painéis de evolução" %}</span>
     {% if is_patient %}
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Cuidado e prática" %}</label>
-    </li>
-    <li
-      class="nxl-item nxl-hasmenu{% if 'journal' in request.resolver_match.url_name or 'goal' in request.resolver_match.url_name or 'exercicios' in request.resolver_match.url_name or 'low_energy' in request.resolver_match.url_name %} active nxl-trigger{% endif %}">
-      <button type="button" class="nxl-link" aria-expanded="false" aria-controls="navigation-group-3">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-heart"></i></span>
-        <span class="nxl-mtext">{% translate "Rotina terapêutica" %}</span><span class="nxl-arrow"><i aria-hidden="true"
-            class="feather-chevron-right"></i></span>
-      </button>
-      <ul class="nxl-submenu" id="navigation-group-3">
-        <li class="nxl-item">
-          <a href="{% url 'journal_list' %}"
-            class="nxl-link{% if 'journal' in request.resolver_match.url_name %} is-active{% endif %}" {% if 'journal' in request.resolver_match.url_name %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-book-open"></i></span>
-            <span class="nxl-mtext">{% translate "Diário emocional" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'goal_list' %}"
-            class="nxl-link{% if 'goal' in request.resolver_match.url_name %} is-active{% endif %}" {% if 'goal' in request.resolver_match.url_name %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-target"></i></span>
-            <span class="nxl-mtext">{% translate "Minhas metas" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'patient_exercise_list' %}"
-            class="nxl-link{% if 'exercicios' in request.resolver_match.url_name %} is-active{% endif %}" {% if 'exercicios' in request.resolver_match.url_name %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-activity"></i></span>
-            <span class="nxl-mtext">{% translate "Exercícios" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'low_energy_home' %}"
-            class="nxl-link{% if request.resolver_match.url_name == 'low_energy_home' %} is-active{% endif %}" {% if request.resolver_match.url_name == 'low_energy_home' %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-moon"></i></span>
-            <span class="nxl-mtext">{% translate "Modo de baixa energia" %}</span>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    {% endif %}
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Comunicação e agenda" %}</label>
-    </li>
-    <li
-      class="nxl-item nxl-hasmenu{% if 'appointment' in request.resolver_match.url_name or 'conversation' in request.resolver_match.url_name %} active nxl-trigger{% endif %}">
-      <button type="button" class="nxl-link" aria-expanded="false" aria-controls="navigation-group-4">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-calendar"></i></span>
-        <span class="nxl-mtext">{% translate "Atendimento" %}</span><span class="nxl-arrow"><i aria-hidden="true" class="feather-chevron-right"></i></span>
-      </button>
-      <ul class="nxl-submenu" id="navigation-group-4">
-        <li class="nxl-item">
-          <a href="{% url 'appointment_list' %}"
-            class="nxl-link{% if 'appointment' in request.resolver_match.url_name %} is-active{% endif %}" {% if 'appointment' in request.resolver_match.url_name %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-clock"></i></span>
-            <span class="nxl-mtext">{% translate "Agenda de consultas" %}</span>
-          </a>
-        </li>
-        <li class="nxl-item">
-          <a href="{% url 'conversation_list' %}"
-            class="nxl-link{% if 'conversation' in request.resolver_match.url_name %} is-active{% endif %}" {% if 'conversation' in request.resolver_match.url_name %} aria-current="page" {% endif %}>
-            <span class="nxl-micon"><i aria-hidden="true" class="feather-message-square"></i></span>
-            <span class="nxl-mtext">{% translate "Mensagens" %}</span>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    {% if is_patient or is_therapist %}
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Painéis de evolução" %}</label>
-    </li>
-    {% if is_patient %}
-    <li class="nxl-item">
-      <a href="{% url 'patient_dashboard' %}"
-        class="nxl-link{% if request.resolver_match.url_name == 'patient_dashboard' %} is-active{% endif %}" {% if request.resolver_match.url_name == 'patient_dashboard' %} aria-current="page" {% endif %}>
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-trending-up"></i></span>
-        <span class="nxl-mtext">{% translate "Minha evolução" %}</span>
-      </a>
-    </li>
+    <a href="{% url 'patient_dashboard' %}"{% if request.resolver_match.url_name == 'patient_dashboard' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-trending-up"></i>
+      <span class="aurora-nav-text">{% translate "Minha evolução" %}</span>
+    </a>
     {% endif %}
     {% if is_therapist %}
-    <li class="nxl-item">
-      <a href="{% url 'therapist_dashboard' %}"
-        class="nxl-link{% if request.resolver_match.url_name == 'therapist_dashboard' %} is-active{% endif %}" {% if request.resolver_match.url_name == 'therapist_dashboard' %} aria-current="page" {% endif %}>
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-pie-chart"></i></span>
-        <span class="nxl-mtext">{% translate "Painel profissional" %}</span>
-      </a>
-    </li>
+    <a href="{% url 'therapist_dashboard' %}"{% if request.resolver_match.url_name == 'therapist_dashboard' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-pie-chart"></i>
+      <span class="aurora-nav-text">{% translate "Painel profissional" %}</span>
+    </a>
     {% endif %}
-    {% endif %}
+  </div>
+  {% endif %}
 
-    <!-- Aurora Elo Specialized Clinical & Ecosystem Modules -->
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Psiquiatria e recuperação" %}</label>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:addiction_dashboard' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-shield"></i></span>
-        <span class="nxl-mtext">{% translate "Álcool e outras substâncias" %}</span>
-      </a>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-compass"></i></span>
-        <span class="nxl-mtext">{% translate "Recuperação e jogos" %}</span>
-      </a>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:telepsychiatry' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-video"></i></span>
-        <span class="nxl-mtext">{% translate "Telepsiquiatria" %}</span>
-      </a>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:inpatient_beds' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-grid"></i></span>
-        <span class="nxl-mtext">{% translate "Leitos e internação" %}</span>
-      </a>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:crisis_protocol' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-alert-triangle" style="color: #f43f5e;"></i></span>
-        <span class="nxl-mtext" style="color: #fca5a5;">{% translate "Orientações em crise" %}</span>
-      </a>
-    </li>
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Psiquiatria e recuperação" %}</span>
+    <a href="{% url 'psychiatry:addiction_dashboard' %}">
+      <i aria-hidden="true" class="feather-shield"></i>
+      <span class="aurora-nav-text">{% translate "Álcool e outras substâncias" %}</span>
+    </a>
+    <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}">
+      <i aria-hidden="true" class="feather-compass"></i>
+      <span class="aurora-nav-text">{% translate "Recuperação e jogos" %}</span>
+    </a>
+    <a href="{% url 'psychiatry:telepsychiatry' %}">
+      <i aria-hidden="true" class="feather-video"></i>
+      <span class="aurora-nav-text">{% translate "Telepsiquiatria" %}</span>
+    </a>
+    <a href="{% url 'psychiatry:inpatient_beds' %}">
+      <i aria-hidden="true" class="feather-grid"></i>
+      <span class="aurora-nav-text">{% translate "Leitos e internação" %}</span>
+    </a>
+    <a href="{% url 'psychiatry:crisis_protocol' %}">
+      <i aria-hidden="true" class="feather-alert-triangle" style="color: #f43f5e;"></i>
+      <span class="aurora-nav-text" style="color: #fca5a5;">{% translate "Orientações em crise" %}</span>
+    </a>
+  </div>
 
-    <li class="nxl-item nxl-caption">
-      <label>{% translate "Aplicativos e sistema de design" %}</label>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:mobile_connected' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-smartphone"></i></span>
-        <span class="nxl-mtext">{% translate "Prévia do aplicativo conectado" %}</span>
-      </a>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'psychiatry:mobile_b2c' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-shopping-bag"></i></span>
-        <span class="nxl-mtext">{% translate "Prévia do aplicativo Aurora Elo" %}</span>
-      </a>
-    </li>
-    <li class="nxl-item">
-      <a href="{% url 'design_system_reference' %}" class="nxl-link">
-        <span class="nxl-micon"><i aria-hidden="true" class="feather-layers" style="color: #38a9f8;"></i></span>
-        <span class="nxl-mtext" style="color: #7cc7fb;">{% translate "Sistema de design" %}</span>
-      </a>
-    </li>
-  </ul>
+  <div class="aurora-nav-section">
+    <span class="aurora-nav-label">{% translate "Aplicativos e sistema de design" %}</span>
+    <a href="{% url 'psychiatry:mobile_connected' %}">
+      <i aria-hidden="true" class="feather-smartphone"></i>
+      <span class="aurora-nav-text">{% translate "Prévia do aplicativo conectado" %}</span>
+    </a>
+    <a href="{% url 'psychiatry:mobile_b2c' %}">
+      <i aria-hidden="true" class="feather-shopping-bag"></i>
+      <span class="aurora-nav-text">{% translate "Prévia do aplicativo Aurora Elo" %}</span>
+    </a>
+    <a href="{% url 'design_system_reference' %}">
+      <i aria-hidden="true" class="feather-layers" style="color: #38a9f8;"></i>
+      <span class="aurora-nav-text" style="color: #7cc7fb;">{% translate "Sistema de design" %}</span>
+    </a>
+  </div>
 </nav>

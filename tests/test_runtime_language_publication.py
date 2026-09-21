@@ -78,7 +78,7 @@ print(json.dumps({
     assert f'lang="{language}"' in report["html"]
     assert title in report["html"]
     for code in ("pt-br", "en", "es"):
-        assert f'name="language" value="{code}"' in report["html"]
+        assert f'<option value="{code}"' in report["html"]
     assert report["post_status"] == 302
     assert report["location"] == "/accounts/login/?next=%2Fworkspace%2F"
     assert report["cookie"] == language

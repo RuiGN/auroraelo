@@ -2,18 +2,28 @@
   "note": "Msgids gettext das superfícies alteradas; inclui strings existentes. Atualizar catálogos e extrair blocktranslate com ferramentas Django.",
   "files": {
     "templates/accounts/auth_base.html": [
-      "Acesse sua conta para continuar.",
-      "Apoio à sua recuperação",
       "Este portal não é um serviço de emergência e não oferece monitoramento contínuo.",
       "Ir para o conteúdo principal",
-      "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência.",
+      "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência."
+    ],
+    "templates/accounts/auth_form.html": [
+      "Acesse sua conta para continuar.",
+      "Mostrar ou ocultar senha",
+      "Médico / Psi",
+      "Paciente",
+      "Perfil de acesso",
+      "Recepção",
+      "seu CPF ou e-mail",
+      "seu e-mail profissional",
+      "sua matrícula ou e-mail",
       "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito."
     ],
-    "templates/accounts/auth_form.html": [],
     "templates/layouts/base.html": [
       "Ir para o conteúdo principal"
     ],
     "templates/layouts/partials/header.html": [
+      "%(count)s revogação operacional pendente",
+      "%(count)s revogações operacionais pendentes",
       "Abrir menu",
       "Administrador",
       "Alternar clínica",
@@ -41,10 +51,10 @@
       "Vertical"
     ],
     "templates/layouts/partials/navigation.html": [
-      "Administração",
+      "%(count)s revogação operacional pendente",
+      "%(count)s revogações operacionais pendentes",
       "Agenda de consultas",
       "Aplicativos e sistema de design",
-      "Atendimento",
       "Comunicação e agenda",
       "Configurar clínica",
       "Cuidado e prática",
@@ -70,11 +80,9 @@
       "Prévia do aplicativo conectado",
       "Psiquiatria e recuperação",
       "Recuperação e jogos",
-      "Rotina terapêutica",
       "Sistema de design",
       "Telepsiquiatria",
-      "Álcool e outras substâncias",
-      "Área de trabalho"
+      "Álcool e outras substâncias"
     ],
     "templates/workspace/home.html": [
       "Acesse suas conversas na plataforma.",
@@ -143,6 +151,50 @@
       "Painel clínico",
       "Portal de psiquiatria",
       "Recuperação: álcool, substâncias e jogos"
+    ],
+    "templates/accounts/auth_message.html": [],
+    "templates/components/language_selector.html": [
+      "Aplicar idioma",
+      "Há alterações não salvas. Alterar o idioma e descartar essas alterações?",
+      "Idioma"
+    ],
+    "templates/layouts/vertical.html": [
+      "Caminho de navegação",
+      "Fechar menu",
+      "Início",
+      "Início da plataforma",
+      "Navegação principal",
+      "Navegação vertical",
+      "Área de trabalho"
+    ],
+    "templates/layouts/detached.html": [
+      "Caminho de navegação",
+      "Fechar menu",
+      "Início",
+      "Início da plataforma",
+      "Navegação destacada",
+      "Navegação principal",
+      "Área de trabalho"
+    ],
+    "templates/errors/400.html": [
+      "Erro %(code)s",
+      "Referência:",
+      "Voltar ao início"
+    ],
+    "templates/errors/403.html": [
+      "Erro %(code)s",
+      "Referência:",
+      "Voltar ao início"
+    ],
+    "templates/errors/404.html": [
+      "Erro %(code)s",
+      "Referência:",
+      "Voltar ao início"
+    ],
+    "templates/errors/500.html": [
+      "Erro %(code)s",
+      "Referência:",
+      "Voltar ao início"
     ]
   }
 }

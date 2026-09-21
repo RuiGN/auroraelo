@@ -1,31 +1,27 @@
 {% load i18n static %}
-<header class="nxl-header">
-  <div class="header-wrapper">
+<header class="aurora-workspace-header">
+  <div class="d-flex align-items-center gap-2 gap-sm-3 w-100">
     <!-- Header Left -->
-    <div class="header-left d-flex align-items-center gap-2 gap-sm-3">
+    <div class="d-flex align-items-center gap-2 gap-sm-3">
       <!-- Mobile Toggler -->
-      <button type="button" class="nxl-head-mobile-toggler d-xl-none product-icon-button" id="mobile-collapse" data-sidebar-open
+      <button type="button" class="btn btn-light border d-xl-none" id="mobile-collapse" data-sidebar-open
         aria-expanded="false" aria-controls="mobile-sidebar" aria-label="{% translate 'Abrir menu' %}">
-        <div class="hamburger hamburger--arrowturn">
-          <div class="hamburger-box">
-            <div class="hamburger-inner"></div>
-          </div>
-        </div>
+        <i aria-hidden="true" class="feather-menu"></i>
       </button>
 
       <!-- Mobile Brand Logo -->
-      <a class="header-mobile-brand d-xl-none d-flex align-items-center me-1" href="{% url 'workspace_vertical' %}" aria-label="Aurora Elo">
-        <div class="bg-white px-2 py-1 rounded-2 shadow-sm border border-slate-200 d-flex align-items-center">
+      <a class="d-xl-none d-flex align-items-center me-1" href="{% url 'workspace_vertical' %}" aria-label="Aurora Elo">
+        <div class="bg-white px-2 py-1 rounded-2 shadow-sm border d-flex align-items-center">
           <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" style="max-height: 26px; width: auto; object-fit: contain;">
         </div>
       </a>
 
       <!-- Navigation Toggle (Desktop) -->
-      <div class="nxl-navigation-toggle d-none d-xl-flex">
-        <button type="button" class="product-icon-button" id="menu-mini-button" data-sidebar-mini aria-label="{% translate 'Recolher navegação' %}">
+      <div class="d-none d-xl-flex align-items-center gap-1">
+        <button type="button" class="btn btn-light border" id="menu-mini-button" data-sidebar-mini aria-label="{% translate 'Recolher navegação' %}">
           <i aria-hidden="true" class="feather-align-left"></i>
         </button>
-        <button type="button" class="product-icon-button" id="menu-expend-button" style="display: none;" data-sidebar-expand
+        <button type="button" class="btn btn-light border" id="menu-expend-button" style="display: none;" data-sidebar-expand
           aria-label="{% translate 'Expandir navegação' %}">
           <i aria-hidden="true" class="feather-arrow-right"></i>
         </button>
@@ -44,7 +40,7 @@
     </div>
 
     <!-- Header Right -->
-    <div class="header-right ms-auto">
+    <div class="ms-auto">
       <div class="d-flex align-items-center gap-2">
         <div class="aurora-header-quicknav d-none d-md-flex align-items-center gap-2 me-2">
           <a href="{% url 'psychiatry:crisis_protocol' %}" style="background: #fff1f2; border: 1px solid #fecdd3; color: #e11d48;" title="{% translate 'Orientações em crise' %}">
@@ -59,17 +55,16 @@
         </div>
         {% include "components/language_selector.html" with selector_id="header" %}
         <!-- Notifications Bell -->
-        <div class="dropdown nxl-h-item">
-          <button type="button" class="nxl-head-link me-0" data-bs-toggle="dropdown" role="button"
+        <div class="dropdown">
+          <button type="button" class="btn btn-light border" data-bs-toggle="dropdown" role="button"
             data-bs-auto-close="outside" aria-label="{% translate 'Notificações' %}">
             <i aria-hidden="true" class="feather-bell"></i>
             {% if pending_consent_revocation_count %}
-            <span class="badge bg-danger nxl-h-badge">{{ pending_consent_revocation_count }}</span>
+            <span class="badge bg-danger ms-1">{{ pending_consent_revocation_count }}</span>
 
             {% endif %}
           </button>
-          <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-notifications-menu p-3"
-            style="min-width: 280px;">
+          <div class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <h6 class="fw-bold text-dark mb-0">{% translate "Notificações" %}</h6>
               <span class="fs-11 text-muted">{% translate "Central de avisos" %}</span>
@@ -89,8 +84,8 @@
 
         <!-- Clinic Switcher (if multiple clinics available) -->
         {% if available_clinics|length > 1 %}
-        <div class="dropdown nxl-h-item">
-          <button type="button" class="nxl-head-link me-0" data-bs-toggle="dropdown"
+        <div class="dropdown">
+          <button type="button" class="btn btn-light border" data-bs-toggle="dropdown"
             data-bs-auto-close="outside" aria-label="{% translate 'Trocar clínica' %}" title="{% translate 'Trocar clínica' %}">
             <i aria-hidden="true" class="feather-repeat"></i>
           </button>
@@ -113,15 +108,14 @@
         {% endif %}
 
         <!-- User Profile Dropdown -->
-        <div class="dropdown nxl-h-item">
+        <div class="dropdown">
           <button type="button" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside"
-            aria-expanded="false" class="d-flex align-items-center product-icon-button" aria-label="{% translate 'Menu da conta' %}">
+            aria-expanded="false" class="d-flex align-items-center border-0 bg-transparent" aria-label="{% translate 'Menu da conta' %}">
             <div class="avatar-text avatar-md bg-primary text-white rounded-circle fw-bold">
               {{ user.first_name|first|default:user.email|first|upper }}
             </div>
           </button>
-          <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown p-2 shadow-sm"
-            style="min-width: 260px;">
+          <div class="dropdown-menu dropdown-menu-end p-2 shadow-sm" style="min-width: 260px;">
             <div class="dropdown-header px-3 py-2 mb-2 bg-light-subtle rounded">
               <h6 class="text-dark mb-0 fw-bold fs-13">{{ user.get_full_name|default:user.email }}</h6>
               <span class="fs-11 text-muted text-truncate d-block">{{ user.email }}</span>

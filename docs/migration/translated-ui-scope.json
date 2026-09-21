@@ -124,7 +124,6 @@
     "templates/scheduling/waitlist_form.html",
     "templates/scheduling/waitlist_list.html",
     "templates/therapist_dashboard/home.html",
-    "templates/visual_reference/reference.html",
     "templates/workspace/home.html",
     "templates/workspace/shortcut.html",
     "scheduling/unit_services.py",

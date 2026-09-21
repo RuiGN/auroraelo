@@ -34,7 +34,10 @@ def test_sidebar_revocation_notification_uses_localized_plural(
             "layouts/partials/navigation.html",
             {"pending_consent_revocation_count": count},
         )
-    assert f"<span>{singular if count == 1 else plural}</span>" in content
+    assert (
+        f'<span class="aurora-nav-text">{singular if count == 1 else plural}</span>'
+        in content
+    )
 
 
 def test_sidebar_without_revocations_has_no_notification() -> None:

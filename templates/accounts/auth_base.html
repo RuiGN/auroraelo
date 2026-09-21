@@ -2,7 +2,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <!doctype html>
-<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}" class="aurora-utilities">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,30 +11,26 @@
   <meta name="application-name" content="Aurora Elo">
   <title>{% block title %}{% if page_title %}{{ page_title }}{% else %}{{ title }}{% endif %}{% endblock %} · Aurora Elo</title>
   <link rel="icon" href="{% static 'duralux/images/favicon.svg' %}" type="image/svg+xml">
-  <script src="{% static 'duralux/js/product-shell.js' %}"></script>
-  <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
-  <link rel="stylesheet" href="{% static 'duralux/css/theme.min.css' %}">
-  <link rel="stylesheet" href="{% static 'duralux/css/product-integration.css' %}">
-  <link rel="stylesheet" href="{% static 'duralux/css/auth.css' %}">
   <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
   {% block page_styles %}{% endblock %}
 </head>
-<body class="product-auth-body aurora-auth">
-  <a class="skip-link" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
+<body class="aurora-auth font-sans">
+  <a class="skip-link visually-hidden-focusable" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
+  <div class="aurora-auth-backdrop" aria-hidden="true">
+    <img src="{% static 'design_system/assets/images/clinic-hero.jpg' %}" alt="">
+    <div class="absolute inset-0 bg-gradient-to-tr from-aurora-950 via-aurora-900/90 to-slate-950/95"></div>
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-elo-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-aurora-600/15 rounded-full blur-3xl"></div>
+  </div>
   <header class="aurora-auth-header">
-    <a href="{% url 'home' %}" class="aurora-brand" aria-label="Aurora Elo">
-      <img src="{% static 'images/aurora-elo-horizontal.png' %}" alt="Aurora Elo" width="180" height="48">
-    </a>
-    <div class="product-auth-toolbar">{% include "components/language_selector.html" with selector_id="auth" %}</div>
+    <span class="aurora-brand">
+      <img src="{% static 'design_system/assets/images/logo.png' %}" alt="Aurora Elo">
+      <span class="aurora-brand-text">Aurora <span>Elo</span></span>
+    </span>
+    {% include "components/language_selector.html" with selector_id="auth" %}
   </header>
   <main id="main-content" class="aurora-auth-main" tabindex="-1">
-    <div class="aurora-auth-intro">
-      <p class="aurora-eyebrow">Aurora Elo</p>
-      <h1>{% translate "Apoio à sua recuperação" %}</h1>
-      <p>{% translate "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito." %}</p>
-      <p>{% translate "Acesse sua conta para continuar." %}</p>
-    </div>
     <div class="aurora-auth-card">
       {% block auth_content %}{% endblock %}
     </div>
@@ -42,10 +38,9 @@
   <footer class="aurora-auth-footer">
     <p>{% translate "Este portal não é um serviço de emergência e não oferece monitoramento contínuo." %}</p>
     <p>{% translate "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência." %}</p>
-    <span>Aurora Elo © {% now "Y" %}</span>
+    <p class="mb-0">Aurora Elo © {% now "Y" %}</p>
   </footer>
-  <script defer src="{% static 'duralux/js/bootstrap.bundle.min.js' %}"></script>
-  <script defer src="{% static 'duralux/js/language-selector.js' %}"></script>
+  <script defer src="{% static 'design_system/js/shell.js' %}"></script>
   {% block page_scripts %}{% endblock %}
 </body>
 </html>

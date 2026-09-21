@@ -4676,9 +4676,6 @@ msgstr "Review your account devices and sessions."
 #~ msgid "Idioma da interface"
 #~ msgstr "Interface language"
 
-#~ msgid "Aplicar idioma"
-#~ msgstr "Apply language"
-
 #. Aurora Elo UI technical draft; human clinical/terminology review pending.
 #: templates/accounts/auth_base.html:36
 msgid "Acesse sua conta para continuar."
@@ -4915,3 +4912,35 @@ msgstr "Medical record"
 #. Technical draft: unavailable interface; human terminology review pending.
 msgid "Voltar para recuperação"
 msgstr "Back to recovery"
+
+#. Design system shell; technical draft.
+msgid "Perfil de acesso"
+msgstr "Access profile"
+
+#. Design system shell; technical draft.
+msgid "Médico / Psi"
+msgstr "Doctor / Psych"
+
+#. Design system shell; technical draft.
+msgid "Recepção"
+msgstr "Reception"
+
+#. Design system shell; technical draft.
+msgid "seu e-mail profissional"
+msgstr "your professional email"
+
+#. Design system shell; technical draft.
+msgid "seu CPF ou e-mail"
+msgstr "your CPF or email"
+
+#. Design system shell; technical draft.
+msgid "sua matrícula ou e-mail"
+msgstr "your employee ID or email"
+
+#. Design system shell; technical draft.
+msgid "Mostrar ou ocultar senha"
+msgstr "Show or hide password"
+
+#. Design system shell; technical draft.
+msgid "Aplicar idioma"
+msgstr "Apply language"

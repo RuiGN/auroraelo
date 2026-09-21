@@ -50,17 +50,26 @@ def test_theme_bootstrap_runs_before_styles_and_theme_is_pinned(
 
     content = client.get(reverse("workspace_vertical")).content.decode("utf-8")
 
-    bootstrap = content.index("duralux/js/product-shell.js")
-    stylesheet = content.index("duralux/css/bootstrap.min.css")
-    assert bootstrap < stylesheet
-    assert '<script src="/static/duralux/js/product-shell.js"></script>' in content
+    # O shell Aurora Elo carrega o design system compilado e o shell.js;
+    # o pinning de tema legado (product-shell.js) não é mais referenciado.
+    assert (
+        '<link rel="stylesheet" href="/static/design_system/css/aurora.css">'
+        in content
+    )
+    assert '<script defer src="/static/design_system/js/shell.js"></script>' in content
+    assert "duralux/js/product-shell.js" not in content
+    assert "duralux/js/language-selector.js" not in content
     assert "data-theme-toggle" not in content
     assert "Alternar tema claro e escuro" not in content
 
 
 def test_theme_script_pins_light_identity_without_switch() -> None:
     script = (
-        Path(settings.BASE_DIR) / "static" / "duralux" / "js" / "product-shell.js"
+        Path(settings.BASE_DIR)
+        / "static"
+        / "design_system"
+        / "js"
+        / "shell.js"
     ).read_text(encoding="utf-8")
 
     assert 'root.dataset.bsTheme = "light"' in script
@@ -145,14 +154,16 @@ def test_chart_adapter_uses_semantic_theme_and_accessible_equivalent() -> None:
     assert "diagnóstico" not in script.casefold()
 
 
-def test_visual_reference_chart_has_summary_table_and_local_vendor_asset(
+def test_visual_reference_route_serves_the_static_showcase(
     client: Client,
 ) -> None:
     user = _login(client)
     user.is_staff = True
     user.save(update_fields=["is_staff"])
 
-    content = client.get(reverse("design_system_reference")).content.decode("utf-8")
+    # A referência visual publicada é o showcase estático do design system;
+    # a antiga página staff-only com gráficos operacionais foi substituída.
+    response = client.get(reverse("design_system_reference"))
     vendor = (
         Path(settings.BASE_DIR)
         / "static"
@@ -163,13 +174,9 @@ def test_visual_reference_chart_has_summary_table_and_local_vendor_asset(
     )
 
     assert vendor.is_file()
-    assert "Gráfico de registros operacionais" in content
-    assert "data-chart-summary" in content
-    assert "data-chart-table" in content
-    assert "Registros por semana" in content
-    assert "Semana 1" in content
-    assert "Apenas registros agregados autorizados" in content
-    assert "duralux/js/visual-reference-charts.js" in content
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/static/design_system/index.html"
+    assert "Gráfico de registros operacionais" not in response.content.decode()
 
 
 def test_workspace_theme_tokens_keep_text_and_surfaces_accessible() -> None:
@@ -199,7 +206,11 @@ def test_workspace_theme_tokens_keep_text_and_surfaces_accessible() -> None:
 
 def test_theme_storage_has_a_safe_system_fallback() -> None:
     script = (
-        Path(settings.BASE_DIR) / "static" / "duralux" / "js" / "product-shell.js"
+        Path(settings.BASE_DIR)
+        / "static"
+        / "design_system"
+        / "js"
+        / "shell.js"
     ).read_text(encoding="utf-8")
 
     assert "safeStorageGet" in script

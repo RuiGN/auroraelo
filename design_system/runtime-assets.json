@@ -1,7 +1,7 @@
 {
-  "static/design_system/css/aurora.css": "8b724f9721ecb28569b87eca5d2e03a84bed02ce91d285884c6776ff8eba6da1",
-  "static/design_system/css/tokens.css": "d4cabbb9663fcfb293928c2795d225a01db842dd8c02bbadba6920f289ab49f7",
-  "static/design_system/css/custom.css": "5abb010ec095973d95d93c06d601a82f6d931b09e4619f1ca4c4ee2a4cb5812f",
-  "static/design_system/js/shell.js": "b0156b3dd29c7b8531092186dab3b46378d3a2222e9c5037a5ad1c3e6b9c38cf",
+  "static/design_system/css/aurora.css": "12adb7f01cd693ad53ad5921666dcd3dded41e464a2f65ec1c16ea5e85f6381a",
+  "static/design_system/css/tokens.css": "afc5ad4fb8d93413a56c67be3c43dc28051c2235cf4476d8b51f063e84e875f4",
+  "static/design_system/css/custom.css": "44e274f8c3e6da8e8a280f46e9f678f154b501877698232559dde907eaac1de0",
+  "static/design_system/js/shell.js": "400a5a35cbe5d19cf0cd831339655f44a185c5fe54fbe32ed7070ab5f657c4ab",
   "static/design_system/images/ai-avatar.svg": "5dd3909e9f5b4a7da00fb94e92a45f16f7d17e74cb0bbbf8c7c673c034930cbd"
 }

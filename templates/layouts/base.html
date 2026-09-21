@@ -11,13 +11,12 @@
   <meta name="application-name" content="Aurora Elo">
   <title>{% block title %}{{ page_title }}{% endblock %} · Aurora Elo</title>
   <link rel="icon" href="{% static 'duralux/images/favicon.svg' %}" type="image/svg+xml">
-  <!-- Local compiled design system; no runtime compiler. -->
-  <script src="{% static 'duralux/js/product-shell.js' %}"></script>
   <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/css/theme.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/css/product-integration.css' %}">
   <link rel="stylesheet" href="{% static 'css/aurora-theme-override.css' %}">
+  <!-- Local compiled design system; no runtime compiler. -->
   <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
   {% block page_styles %}{% endblock %}
   {% block head_scripts %}{% endblock %}
@@ -29,7 +28,7 @@
   <a class="skip-link" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
   {% block workspace %}{% endblock %}
   <script defer src="{% static 'duralux/js/bootstrap.bundle.min.js' %}"></script>
-  <script defer src="{% static 'duralux/js/language-selector.js' %}"></script>
+  <script defer src="{% static 'design_system/js/shell.js' %}"></script>
   {% block page_scripts %}{% endblock %}
 </body>
 

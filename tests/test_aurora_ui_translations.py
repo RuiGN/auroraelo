@@ -177,7 +177,8 @@ def test_rendered_surfaces_have_translated_limits_and_selector(
     assert f'action="{reverse("account_set_language")}"' in html
     assert 'name="csrfmiddlewaretoken"' in html
     for code in LANGUAGES:
-        assert f'name="language" value="{code}"' in html
+        assert f'<option value="{code}"' in html
+    assert f'<option value="{language}" selected>' in html
 
 
 class ParsedForm(TypedDict):

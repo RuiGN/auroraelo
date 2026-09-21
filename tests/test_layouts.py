@@ -76,11 +76,11 @@ def test_navigation_partial_uses_duralux_classes_without_legacy_shell_classes() 
         / "navigation.html"
     ).read_text(encoding="utf-8")
 
-    assert 'class="nxl-navbar"' in navigation
-    assert 'class="nxl-item"' in navigation
-    assert 'class="nxl-link' in navigation
-    assert 'class="nxl-micon"' in navigation
-    assert 'class="nxl-mtext"' in navigation
+    assert 'class="aurora-sidebar-nav"' in navigation
+    assert 'class="aurora-nav-section"' in navigation
+    assert 'class="aurora-nav-label"' in navigation
+    assert 'class="aurora-nav-text"' in navigation
+    assert "nxl-" not in navigation
     assert "navigation-list" not in navigation
     assert "navigation-section" not in navigation
     assert "navigation-link" not in navigation
@@ -131,18 +131,17 @@ def test_workspace_layouts_share_semantics_and_authorized_context(
 
     assert response.status_code == 200
     assert 'lang="pt-br"' in content.lower()
-    assert f'class="{layout_class} product-shell' in content
+    assert 'class="aurora-workspace' in content
     assert "Ir para o conteúdo principal" in content
-    assert '<header class="nxl-header"' in content
+    assert '<header class="aurora-workspace-header"' in content
     assert '<nav aria-label="Navegação principal"' in content
-    assert '<div id="main-content"' in content
+    assert '<main id="main-content"' in content
     assert '<nav aria-label="Caminho de navegação"' in content
     assert 'aria-current="page"' in content
     active_fragment = (
-        'href="/workspace/" class="nxl-link is-active" aria-current="page"'
+        'href="/workspace/" class="is-active" aria-current="page"'
         if route_name == "workspace_vertical"
-        else 'href="/workspace/detached/" class="nxl-link is-active" '
-        'aria-current="page"'
+        else 'href="/workspace/detached/" class="is-active" aria-current="page"'
     )
     assert active_fragment in content
     assert layout_label in content
@@ -169,10 +168,13 @@ def test_workspace_shell_uses_only_the_duralux_runtime(
         "/static/duralux/css/product-integration.css",
         "/static/duralux/images/favicon.svg",
         "/static/duralux/js/bootstrap.bundle.min.js",
-        "/static/duralux/js/product-shell.js",
+        "/static/design_system/css/aurora.css",
+        "/static/design_system/js/shell.js",
     ):
         assert asset in content
     assert "/static/duralux/js/form-behaviors.js" not in content
+    assert "/static/duralux/js/product-shell.js" not in content
+    assert "/static/duralux/js/language-selector.js" not in content
     for transitional_asset in (
         "/static/css/framework.css",
         "/static/css/tokens.css",
@@ -186,9 +188,8 @@ def test_workspace_shell_uses_only_the_duralux_runtime(
         assert transitional_asset not in content
     for legacy_attribute in ("x-data=", "x-show=", "x-ref="):
         assert legacy_attribute not in content
-    assert 'class="nxl-navigation"' in content
-    assert 'class="nxl-header"' in content
-    assert 'class="nxl-container"' in content
+    assert 'class="aurora-sidebar"' in content
+    assert 'class="aurora-workspace-header"' in content
 
 
 def test_mobile_drawer_has_focus_escape_overlay_and_scroll_lock_contract(
@@ -400,8 +401,11 @@ def test_sprint_three_account_and_error_templates_use_duralux_foundation() -> No
     ):
         template = (templates_root / relative_path).read_text(encoding="utf-8")
         assert '{% extends "accounts/auth_base.html" %}' in template
-        assert 'class="product-auth-card' in template
+        # O chrome de login é o design system Aurora Elo; wrappers legados
+        # (product-auth-card/minimal) não podem voltar.
+        assert 'class="product-auth-card' not in template
         assert 'class="auth-card' not in template
+        assert "minimal-card" not in template
         assert "primary-action" not in template
 
     sessions = (templates_root / "accounts" / "sessions.html").read_text(

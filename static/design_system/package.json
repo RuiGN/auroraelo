@@ -5,9 +5,10 @@
   "author": "Aurora Elo Health Systems",
   "license": "MIT",
   "scripts": {
-    "dev": "npx serve . -l 3000",
-    "start": "npx serve . -l 3000"
+    "test": "node --test tests/*.test.cjs",
+    "build": "tailwindcss -c tailwind.config.js -i src/aurora.css -o ../static/design_system/css/aurora.css --minify"
   },
+  "devDependencies": {"tailwindcss": "3.4.17"},
   "keywords": [
     "design-system",
     "tailwindcss",
