@@ -28,8 +28,8 @@
 .aurora-role-tab.is-active { background: #fff; color: #0f172a; box-shadow: 0 1px 3px rgba(15, 23, 42, .12); }
 .aurora-auth-label { display: block; margin: 0 0 .25rem; font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #334155; }
 .aurora-auth-field { position: relative; }
-.aurora-auth-field .field-control-icon, .aurora-lang-select .field-control-icon { position: absolute; left: .875rem; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; }
-.aurora-auth-field .field-control-icon .feather, .aurora-lang-select .field-control-icon .feather { width: 1rem; height: 1rem; }
+.aurora-auth-field .field-control-icon { position: absolute; left: .875rem; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; }
+.aurora-auth-field .field-control-icon .feather { width: 1rem; height: 1rem; }
 .aurora-auth-identity { font-size: .8125rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: .5rem; }
 .aurora-auth-field.has-toggle .form-control { padding-right: 2.75rem; }
 .aurora-password-toggle { position: absolute; right: .4rem; top: 50%; transform: translateY(-50%); border: 0; background: transparent; color: #94a3b8; padding: .4rem; cursor: pointer; }
@@ -51,9 +51,15 @@
 .aurora-auth-footer p { margin: 0 0 .375rem; }
 .aurora-auth-footer a { color: #fff; font-weight: 700; margin: 0 .25rem; }
 .aurora-lang-select { position: relative; display: inline-flex; }
-.aurora-lang-select select { appearance: none; border: 1px solid #cbd5e1; background: #f8fafc; color: #1f2937; border-radius: .75rem; padding: .5rem 2rem .5rem 2.25rem; font-size: .75rem; font-weight: 600; cursor: pointer; }
+.aurora-lang-select .field-control-icon { display: none; }
+.aurora-lang-select select { appearance: none; border: 1px solid #cbd5e1; background: #f8fafc; color: #1f2937; border-radius: .75rem; padding: .5rem 1.85rem .5rem .75rem; font-size: .75rem; font-weight: 600; cursor: pointer; }
+.aurora-lang-select select:focus { outline: none; border-color: #0284c7; box-shadow: 0 0 0 2px rgba(2, 132, 199, .2); }
+.aurora-lang-select select option { background-color: #fff; color: #0f172a; }
 .aurora-lang-select::after { content: ""; position: absolute; right: .7rem; top: 50%; width: .45rem; height: .45rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
 .aurora-auth .aurora-lang-select select { background-color: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .25); color: #fff; }
+.aurora-auth .aurora-lang-select select:focus,
+.aurora-auth .aurora-lang-select select:active { background-color: #0b1f35; border-color: #22d3ee; color: #fff; outline: none; box-shadow: 0 0 0 2px rgba(34, 211, 238, .35); }
+.aurora-auth .aurora-lang-select select option { background-color: #0b1f35; color: #fff; }
 .aurora-auth .aurora-lang-select { color: #67e8f9; }
 
 /* ---- Workspace shell: vertical layout matching design_system/index.html ---- */
