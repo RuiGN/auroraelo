@@ -61,6 +61,11 @@ def test_shell_uses_compiled_local_css(template: str) -> None:
     assert "@tailwind" not in css
     assert "@theme" not in css
     assert "fonts.googleapis.com" not in css
+    # O login não carrega Bootstrap; sem border-box no escopo auth os inputs
+    # (content-box) estouram a largura do card. Guarda de regressão geométrica.
+    assert ".aurora-auth *" in css
+    assert "box-sizing:border-box" in css
+    assert "max-width:100%" in css
 
 
 @pytest.mark.django_db

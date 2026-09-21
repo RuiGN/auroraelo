@@ -5,6 +5,10 @@
 
 /* ---- Login: atmospheric dark panel matching design_system/login.html ---- */
 .aurora-auth { min-height: 100vh; display: flex; flex-direction: column; background: #051424; color: #e2e8f0; }
+/* O login não carrega Bootstrap: sem reboot, .form-control é content-box e o
+   padding infla a largura além do card. Escopo local resolve na raiz. */
+.aurora-auth *, .aurora-auth *::before, .aurora-auth *::after { box-sizing: border-box; }
+.aurora-auth .form-control, .aurora-auth .form-select { max-width: 100%; }
 .aurora-auth-backdrop { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
 .aurora-auth-backdrop img { width: 100%; height: 100%; object-fit: cover; opacity: .2; filter: blur(3px); transform: scale(1.05); }
 .aurora-auth-header { position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 2.5rem); }
