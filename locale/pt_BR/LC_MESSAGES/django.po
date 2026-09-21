@@ -4949,3 +4949,55 @@ msgstr "Mostrar ou ocultar senha"
 #. Design system shell; technical draft.
 msgid "Aplicar idioma"
 msgstr "Aplicar idioma"
+
+msgid "Ambiente Clínico"
+msgstr "Ambiente Clínico"
+
+msgid "Ambiente Integrado"
+msgstr "Ambiente Integrado"
+
+msgid "Ambiente para teleconsultas psiquiátricas e orientações clínicas."
+msgstr "Ambiente para teleconsultas psiquiátricas e orientações clínicas."
+
+msgid "Apoio Imediato"
+msgstr "Apoio Imediato"
+
+msgid "Apoio continuado para álcool, outras substâncias e transtornos de jogos."
+msgstr "Apoio continuado para álcool, outras substâncias e transtornos de jogos."
+
+msgid "Avaliação psiquiátrica inicial e histórico de acompanhamento do paciente."
+msgstr "Avaliação psiquiátrica inicial e histórico de acompanhamento do paciente."
+
+msgid "CVV: 188 (Brasil)"
+msgstr "CVV: 188 (Brasil)"
+
+msgid "Cadastrado"
+msgstr "Cadastrado"
+
+msgid "Canais de emergência e apoio emocional 192 (SAMU) e 188 (CVV)."
+msgstr "Canais de emergência e apoio emocional 192 (SAMU) e 188 (CVV)."
+
+msgid "Consulta somente leitura"
+msgstr "Consulta somente leitura"
+
+msgid "Consulta somente leitura dos cadastros e prontuários autorizados da clínica."
+msgstr "Consulta somente leitura dos cadastros e prontuários autorizados da clínica."
+
+msgid "Informações operacionais e consulta de leitos psiquiátricos."
+msgstr "Informações operacionais e consulta de leitos psiquiátricos."
+
+msgid "Perfis autorizados"
+msgstr "Perfis autorizados"
+
+msgid "Recuperação"
+msgstr "Recuperação"
+
+msgid "Recursos clínicos"
+msgstr "Recursos clínicos"
+
+msgid "SAMU: 192 (Brasil)"
+msgstr "SAMU: 192 (Brasil)"
+
+msgid "Voltar ao painel clínico"
+msgstr "Voltar ao painel clínico"
+

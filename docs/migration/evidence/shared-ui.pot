@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 18:27-0300\n"
+"POT-Creation-Date: 2026-09-21 14:41-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,9 +35,10 @@ msgstr ""
 
 #: accounts/forms.py:18 content/forms.py:80 content/forms.py:192
 #: people/presentation.py:16 scheduling/forms.py:129
+#: templates/accounts/auth_form.html:18
 #: templates/analytics/therapist_dashboard.html:39
 #: templates/goals/exercise_assign.html:20
-#: templates/layouts/partials/header.html:129
+#: templates/layouts/partials/header.html:123
 #: templates/people/patient_detail.html:4
 #: templates/scheduling/waitlist_list.html:15
 msgid "Paciente"
@@ -287,8 +288,8 @@ msgid "Estes indicadores descrevem autorrelatos e fatos registrados. Eles não c
 msgstr ""
 
 #: analytics/views.py:94 templates/analytics/patient_dashboard.html:10
-#: templates/layouts/partials/navigation.html:174
-#: templates/workspace/home.html:21
+#: templates/layouts/partials/navigation.html:93
+#: templates/workspace/home.html:31
 msgid "Minha evolução"
 msgstr ""
 
@@ -318,14 +319,14 @@ msgid "Muito bem"
 msgstr ""
 
 #: analytics/views.py:125 templates/analytics/therapist_dashboard.html:10
-#: templates/layouts/partials/navigation.html:183
-#: templates/workspace/home.html:29
+#: templates/layouts/partials/navigation.html:99
+#: templates/workspace/home.html:39
 msgid "Painel profissional"
 msgstr ""
 
 #: analytics/views.py:149 templates/analytics/clinic_panel.html:10
-#: templates/layouts/partials/navigation.html:86
-#: templates/workspace/home.html:33
+#: templates/layouts/partials/navigation.html:47
+#: templates/workspace/home.html:43
 msgid "Painel operacional"
 msgstr ""
 
@@ -362,13 +363,14 @@ msgid "Domingo"
 msgstr ""
 
 #: clinics/forms.py:21 psychiatry/templates/psychiatry/base_aurora.html:25
-#: psychiatry/templates/psychiatry/dashboard.html:11
+#: psychiatry/templates/psychiatry/dashboard.html:25
+#: psychiatry/templates/psychiatry/dashboard.html:29
 #: psychiatry/templates/psychiatry/patients.html:3
-#: psychiatry/templates/psychiatry/patients.html:6
-#: templates/layouts/partials/navigation.html:70
+#: psychiatry/templates/psychiatry/patients.html:9
+#: templates/layouts/partials/navigation.html:37
 #: templates/people/patient_list.html:4 templates/people/patient_list.html:6
 #: templates/people/patient_list.html:7 templates/people/patient_list.html:20
-#: templates/therapist_dashboard/home.html:132 templates/workspace/home.html:37
+#: templates/therapist_dashboard/home.html:132 templates/workspace/home.html:47
 msgid "Pacientes"
 msgstr ""
 
@@ -377,7 +379,7 @@ msgstr ""
 #: templates/scheduling/appointment_request.html:9
 #: templates/scheduling/appointment_reschedule.html:9
 #: templates/scheduling/waitlist_form.html:8
-#: templates/scheduling/waitlist_list.html:8 templates/workspace/home.html:42
+#: templates/scheduling/waitlist_list.html:8 templates/workspace/home.html:52
 msgid "Agenda"
 msgstr ""
 
@@ -404,8 +406,8 @@ msgstr ""
 
 #: clinics/forms.py:28 templates/content/notifications.html:4
 #: templates/content/notifications.html:10
-#: templates/layouts/partials/header.html:64
-#: templates/layouts/partials/header.html:74
+#: templates/layouts/partials/header.html:60
+#: templates/layouts/partials/header.html:69
 msgid "Notificações"
 msgstr ""
 
@@ -679,7 +681,7 @@ msgstr ""
 msgid "Configurada"
 msgstr ""
 
-#: config/views.py:43 templates/visual_reference/reference.html:102
+#: config/views.py:43
 msgid "Disponível"
 msgstr ""
 
@@ -779,7 +781,7 @@ msgstr ""
 msgid "sem dados sensíveis"
 msgstr ""
 
-#: config/views.py:226 templates/visual_reference/reference.html:187
+#: config/views.py:226
 msgid "Carregando conteúdo"
 msgstr ""
 
@@ -832,9 +834,8 @@ msgid "Atividades operacionais recentes"
 msgstr ""
 
 #: config/views.py:313 psychiatry/templates/psychiatry/base_aurora.html:18
-#: templates/layouts/detached.html:34 templates/layouts/detached.html:39
-#: templates/layouts/partials/navigation.html:27
-#: templates/layouts/vertical.html:34 templates/layouts/vertical.html:39
+#: templates/layouts/detached.html:26 templates/layouts/detached.html:32
+#: templates/layouts/vertical.html:26 templates/layouts/vertical.html:32
 #: templates/workspace/home.html:3 templates/workspace/home.html:4
 #: templates/workspace/home.html:5
 msgid "Área de trabalho"
@@ -1040,7 +1041,7 @@ msgstr ""
 
 #: content/forms.py:192 scheduling/forms.py:29
 #: templates/analytics/clinic_panel.html:34
-#: templates/layouts/partials/header.html:129
+#: templates/layouts/partials/header.html:123
 msgid "Profissional"
 msgstr ""
 
@@ -1744,8 +1745,6 @@ msgstr ""
 
 #: journal/forms.py:167 templates/journal/list.html:87
 #: templates/scheduling/waitlist_list.html:15
-#: templates/visual_reference/reference.html:261
-#: templates/visual_reference/reference.html:270
 msgid "Período"
 msgstr ""
 
@@ -2076,74 +2075,92 @@ msgid "A data de transferência excede o término do vínculo."
 msgstr ""
 
 #: psychiatry/templates/psychiatry/addiction_dashboard.html:3
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:6
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:12
 #: psychiatry/templates/psychiatry/base_aurora.html:29
-#: psychiatry/templates/psychiatry/dashboard.html:13
+#: psychiatry/templates/psychiatry/dashboard.html:59
 msgid "Recuperação: álcool, substâncias e jogos"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:7
-#: psychiatry/templates/psychiatry/anamnesis.html:7
-#: psychiatry/templates/psychiatry/beds.html:7
-#: psychiatry/templates/psychiatry/crisis_protocol.html:7
-#: psychiatry/templates/psychiatry/mobile_b2c.html:7
-#: psychiatry/templates/psychiatry/mobile_connected.html:10
-#: psychiatry/templates/psychiatry/telepsychiatry_room.html:7
-#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:7
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:17
+#: psychiatry/templates/psychiatry/anamnesis.html:17
+#: psychiatry/templates/psychiatry/beds.html:17
+#: psychiatry/templates/psychiatry/crisis_protocol.html:17
+#: psychiatry/templates/psychiatry/mobile_b2c.html:17
+#: psychiatry/templates/psychiatry/mobile_connected.html:23
+#: psychiatry/templates/psychiatry/telepsychiatry_room.html:17
+#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:17
 msgid "Indisponível nesta interface"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:8
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:18
 msgid "O registro de fissura e os indicadores de recuperação estão indisponíveis nesta interface. Não há monitoramento nem intervenção automática."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:9
-#: psychiatry/templates/psychiatry/anamnesis.html:9
-#: psychiatry/templates/psychiatry/beds.html:9
-#: psychiatry/templates/psychiatry/crisis_protocol.html:9
-#: psychiatry/templates/psychiatry/mobile_b2c.html:9
-#: psychiatry/templates/psychiatry/mobile_connected.html:12
-#: psychiatry/templates/psychiatry/telepsychiatry_room.html:9
-#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:9
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:19
+#: psychiatry/templates/psychiatry/anamnesis.html:19
+#: psychiatry/templates/psychiatry/beds.html:19
+#: psychiatry/templates/psychiatry/crisis_protocol.html:19
+#: psychiatry/templates/psychiatry/mobile_b2c.html:19
+#: psychiatry/templates/psychiatry/mobile_connected.html:25
+#: psychiatry/templates/psychiatry/telepsychiatry_room.html:19
+#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:19
 msgid "Esta página não grava dados nem envia notificações."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:10
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:23
 msgid "Consultar disponibilidade da anamnese dos 12 passos"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:13
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:29
 msgid "Pacientes disponíveis para consulta"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:14
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:30
+msgid "Perfis autorizados"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:32
 msgid "Consulta somente leitura dos perfis de recuperação autorizados. A lista exibe até 15 registros; não representa o total da clínica."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:17
-#: psychiatry/templates/psychiatry/patients.html:10
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:44
+#: psychiatry/templates/psychiatry/patients.html:25
 msgid "Prontuário"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/addiction_dashboard.html:19
-#: psychiatry/templates/psychiatry/patients.html:12
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:47
+#: templates/analytics/patient_dashboard.html:9
+msgid "Acompanhamento"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/addiction_dashboard.html:54
+#: psychiatry/templates/psychiatry/patients.html:35
 msgid "Nenhum paciente disponível para este acesso."
 msgstr ""
 
 #: psychiatry/templates/psychiatry/anamnesis.html:3
-#: psychiatry/templates/psychiatry/anamnesis.html:6
+#: psychiatry/templates/psychiatry/anamnesis.html:12
 #: psychiatry/templates/psychiatry/base_aurora.html:26
-#: psychiatry/templates/psychiatry/dashboard.html:12
+#: psychiatry/templates/psychiatry/dashboard.html:40
+#: psychiatry/templates/psychiatry/dashboard.html:44
 msgid "Anamnese"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/anamnesis.html:8
+#: psychiatry/templates/psychiatry/anamnesis.html:18
 msgid "O formulário de anamnese está indisponível até a homologação da integração. Não é possível inserir, salvar ou anexar dados nesta página."
 msgstr ""
 
+#: psychiatry/templates/psychiatry/anamnesis.html:24
+#: psychiatry/templates/psychiatry/beds.html:24
+#: psychiatry/templates/psychiatry/mobile_b2c.html:24
+#: psychiatry/templates/psychiatry/mobile_connected.html:30
+#: psychiatry/templates/psychiatry/telepsychiatry_room.html:24
+msgid "Voltar ao painel clínico"
+msgstr ""
+
 #: psychiatry/templates/psychiatry/base_aurora.html:3
-#: psychiatry/templates/psychiatry/dashboard.html:7
-#: templates/workspace/home.html:13
+#: psychiatry/templates/psychiatry/dashboard.html:10
+#: templates/workspace/home.html:18
 msgid "Portal de psiquiatria"
 msgstr ""
 
@@ -2152,12 +2169,12 @@ msgid "Menu"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:13
-#: templates/layouts/partials/header.html:136
+#: templates/layouts/partials/header.html:130
 msgid "Modo de navegação"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:14
-#: templates/layouts/partials/header.html:139
+#: templates/layouts/partials/header.html:133
 msgid "Vertical"
 msgstr ""
 
@@ -2166,9 +2183,9 @@ msgid "Horizontal"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:23
-#: templates/layouts/detached.html:7
+#: templates/layouts/detached.html:6
 #: templates/layouts/partials/navigation.html:2
-#: templates/layouts/vertical.html:7
+#: templates/layouts/vertical.html:6
 msgid "Navegação principal"
 msgstr ""
 
@@ -2178,43 +2195,49 @@ msgid "Painel clínico"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:27
+#: psychiatry/templates/psychiatry/dashboard.html:70
+#: psychiatry/templates/psychiatry/dashboard.html:74
 #: psychiatry/templates/psychiatry/telepsychiatry_room.html:3
-#: psychiatry/templates/psychiatry/telepsychiatry_room.html:6
-#: templates/layouts/partials/header.html:53
-#: templates/layouts/partials/header.html:54
-#: templates/layouts/partials/navigation.html:208
+#: psychiatry/templates/psychiatry/telepsychiatry_room.html:12
+#: templates/layouts/partials/header.html:49
+#: templates/layouts/partials/header.html:50
+#: templates/layouts/partials/navigation.html:117
 msgid "Telepsiquiatria"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:28
 #: psychiatry/templates/psychiatry/beds.html:3
-#: psychiatry/templates/psychiatry/beds.html:6
-#: templates/layouts/partials/navigation.html:214
+#: psychiatry/templates/psychiatry/beds.html:12
+#: psychiatry/templates/psychiatry/dashboard.html:85
+#: psychiatry/templates/psychiatry/dashboard.html:89
+#: templates/layouts/partials/navigation.html:121
 msgid "Leitos e internação"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:30
 #: psychiatry/templates/psychiatry/crisis_protocol.html:3
-#: psychiatry/templates/psychiatry/crisis_protocol.html:6
-#: templates/layouts/partials/header.html:50
-#: templates/layouts/partials/header.html:51
-#: templates/layouts/partials/navigation.html:15
-#: templates/layouts/partials/navigation.html:220
-#: templates/workspace/home.html:52
+#: psychiatry/templates/psychiatry/crisis_protocol.html:12
+#: psychiatry/templates/psychiatry/dashboard.html:100
+#: psychiatry/templates/psychiatry/dashboard.html:104
+#: templates/layouts/partials/header.html:46
+#: templates/layouts/partials/header.html:47
+#: templates/layouts/partials/navigation.html:12
+#: templates/layouts/partials/navigation.html:125
+#: templates/workspace/home.html:66
 msgid "Orientações em crise"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:31
 #: psychiatry/templates/psychiatry/mobile_connected.html:3
-#: psychiatry/templates/psychiatry/mobile_connected.html:6
-#: templates/layouts/partials/navigation.html:230
+#: psychiatry/templates/psychiatry/mobile_connected.html:12
+#: templates/layouts/partials/navigation.html:133
 msgid "Prévia do aplicativo conectado"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:32
 #: psychiatry/templates/psychiatry/mobile_b2c.html:3
-#: psychiatry/templates/psychiatry/mobile_b2c.html:6
-#: templates/layouts/partials/navigation.html:236
+#: psychiatry/templates/psychiatry/mobile_b2c.html:12
+#: templates/layouts/partials/navigation.html:137
 msgid "Prévia do aplicativo Aurora Elo"
 msgstr ""
 
@@ -2231,40 +2254,80 @@ msgid "A IA generativa está desativada até a integração com API própria e r
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:49
-#: psychiatry/templates/psychiatry/crisis_protocol.html:10
-#: templates/accounts/auth_base.html:43 templates/workspace/home.html:53
+#: psychiatry/templates/psychiatry/crisis_protocol.html:23
+#: templates/accounts/auth_base.html:39 templates/workspace/home.html:68
 msgid "Este portal não é um serviço de emergência e não oferece monitoramento contínuo."
 msgstr ""
 
 #: psychiatry/templates/psychiatry/base_aurora.html:50
-#: psychiatry/templates/psychiatry/crisis_protocol.html:11
-#: templates/accounts/auth_base.html:44 templates/workspace/home.html:54
+#: psychiatry/templates/psychiatry/crisis_protocol.html:24
+#: templates/accounts/auth_base.html:40 templates/workspace/home.html:69
 msgid "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/beds.html:8
+#: psychiatry/templates/psychiatry/beds.html:18
 msgid "A consulta de ocupação, a admissão e as comunicações de internação estão indisponíveis nesta interface. Nenhuma vaga está confirmada."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/crisis_protocol.html:8
+#: psychiatry/templates/psychiatry/crisis_protocol.html:11
+msgid "Apoio Imediato"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/crisis_protocol.html:18
 msgid "O acionamento de SOS pelo portal está indisponível. Não há plantão, monitoramento ou envio de ajuda por esta página."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/crisis_protocol.html:12
+#: psychiatry/templates/psychiatry/crisis_protocol.html:28
 msgid "Ligar para o SAMU: 192 (Brasil)"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/crisis_protocol.html:13
+#: psychiatry/templates/psychiatry/crisis_protocol.html:29
 msgid "Ligar para o CVV: 188 (Brasil)"
 msgstr ""
 
 #: psychiatry/templates/psychiatry/dashboard.html:8
-#: templates/workspace/home.html:12
+msgid "Ambiente Clínico"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:11
+#: templates/workspace/home.html:15
 msgid "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/dashboard.html:9
+#: psychiatry/templates/psychiatry/dashboard.html:12
 msgid "Os indicadores clínicos deste painel ainda não estão disponíveis. Nenhum dado de demonstração é apresentado como atendimento real."
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:16
+msgid "Recursos clínicos"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:27
+msgid "Consulta somente leitura dos cadastros e prontuários autorizados da clínica."
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:42
+msgid "Avaliação psiquiátrica inicial e histórico de acompanhamento do paciente."
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:55
+msgid "Recuperação"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:57
+msgid "Apoio continuado para álcool, outras substâncias e transtornos de jogos."
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:72
+msgid "Ambiente para teleconsultas psiquiátricas e orientações clínicas."
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:87
+msgid "Informações operacionais e consulta de leitos psiquiátricos."
+msgstr ""
+
+#: psychiatry/templates/psychiatry/dashboard.html:102
+msgid "Canais de emergência e apoio emocional 192 (SAMU) e 188 (CVV)."
 msgstr ""
 
 #: psychiatry/templates/psychiatry/login.html:6
@@ -2275,44 +2338,52 @@ msgstr ""
 msgid "Use sua conta Aurora Elo para acessar o portal."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/mobile_b2c.html:8
+#: psychiatry/templates/psychiatry/mobile_b2c.html:18
 msgid "O registro de humor, o diário e a contratação de assinatura estão indisponíveis nesta prévia. Nenhum histórico ou benefício de assinatura é exibido."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/mobile_connected.html:8
+#: psychiatry/templates/psychiatry/mobile_connected.html:18
 msgid "Perfil vinculado à sua conta nesta clínica"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/mobile_connected.html:11
+#: psychiatry/templates/psychiatry/mobile_connected.html:24
 msgid "A agenda, as prescrições, o registro de tomadas e o SOS estão indisponíveis nesta prévia. Esta página não confirma tratamento ou atendimento."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/patients.html:7
+#: psychiatry/templates/psychiatry/patients.html:11
+msgid "Consulta somente leitura"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/patients.html:13
 msgid "Consulta somente leitura dos pacientes disponíveis para este acesso. A lista exibe até 50 registros autorizados; não representa o total da clínica."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/patients.html:15
+#: psychiatry/templates/psychiatry/patients.html:28
+msgid "Cadastrado"
+msgstr ""
+
+#: psychiatry/templates/psychiatry/patients.html:42
 msgid "Cadastro, edição e exportação estão indisponíveis nesta interface."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/patients.html:16
+#: psychiatry/templates/psychiatry/patients.html:44
 msgid "Consultar disponibilidade da anamnese"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/telepsychiatry_room.html:8
+#: psychiatry/templates/psychiatry/telepsychiatry_room.html:18
 msgid "A sala de vídeo, o registro da consulta e a emissão ou assinatura de documentos estão indisponíveis nesta interface."
 msgstr ""
 
 #: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:3
-#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:6
+#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:12
 msgid "Anamnese dos 12 passos"
 msgstr ""
 
-#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:8
+#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:18
 msgid "O formulário de etapas está indisponível até a homologação da integração. Não há avanço de etapas, salvamento automático ou consolidação nesta página."
 msgstr ""
 
-#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:10
+#: psychiatry/templates/psychiatry/twelve_steps_anamnesis.html:24
 msgid "Voltar para recuperação"
 msgstr ""
 
@@ -2484,9 +2555,9 @@ msgstr ""
 msgid "Salvar preferência"
 msgstr ""
 
-#: scheduling/views.py:396 templates/layouts/partials/navigation.html:159
+#: scheduling/views.py:396 templates/layouts/partials/navigation.html:83
 #: templates/scheduling/conversation_list.html:9
-#: templates/workspace/home.html:44
+#: templates/workspace/home.html:54
 msgid "Mensagens"
 msgstr ""
 
@@ -2518,21 +2589,44 @@ msgstr ""
 msgid "Adicionar"
 msgstr ""
 
-#: templates/accounts/auth_base.html:24 templates/layouts/base.html:29
-#: templates/visual_reference/reference.html:18
+#: templates/accounts/auth_base.html:19 templates/layouts/base.html:28
 msgid "Ir para o conteúdo principal"
 msgstr ""
 
-#: templates/accounts/auth_base.html:34
-msgid "Apoio à sua recuperação"
+#: templates/accounts/auth_form.html:10
+msgid "Acesse sua conta para continuar."
 msgstr ""
 
-#: templates/accounts/auth_base.html:35
+#: templates/accounts/auth_form.html:13
 msgid "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito."
 msgstr ""
 
-#: templates/accounts/auth_base.html:36
-msgid "Acesse sua conta para continuar."
+#: templates/accounts/auth_form.html:16
+msgid "Perfil de acesso"
+msgstr ""
+
+#: templates/accounts/auth_form.html:17
+msgid "seu e-mail profissional"
+msgstr ""
+
+#: templates/accounts/auth_form.html:17
+msgid "Médico / Psi"
+msgstr ""
+
+#: templates/accounts/auth_form.html:18
+msgid "seu CPF ou e-mail"
+msgstr ""
+
+#: templates/accounts/auth_form.html:19
+msgid "sua matrícula ou e-mail"
+msgstr ""
+
+#: templates/accounts/auth_form.html:19
+msgid "Recepção"
+msgstr ""
+
+#: templates/accounts/auth_form.html:51
+msgid "Mostrar ou ocultar senha"
 msgstr ""
 
 #: templates/accounts/sessions.html:4 templates/accounts/sessions.html:12
@@ -2678,10 +2772,6 @@ msgstr ""
 msgid "Consultas por profissional"
 msgstr ""
 
-#: templates/analytics/patient_dashboard.html:9
-msgid "Acompanhamento"
-msgstr ""
-
 #: templates/analytics/patient_dashboard.html:11
 #: templates/analytics/report_list.html:32
 #: templates/analytics/therapist_dashboard.html:11
@@ -2810,8 +2900,8 @@ msgid "Manter clínica atual"
 msgstr ""
 
 #: templates/clinics/setup.html:4 templates/clinics/setup.html:11
-#: templates/layouts/partials/navigation.html:62
-#: templates/workspace/home.html:39
+#: templates/layouts/partials/navigation.html:33
+#: templates/workspace/home.html:49
 msgid "Configurar clínica"
 msgstr ""
 
@@ -2935,23 +3025,12 @@ msgstr ""
 msgid "Não foi possível salvar. Corrija os problemas abaixo."
 msgstr ""
 
-#: templates/components/language_selector.html:19
-msgid "Selecione o idioma"
-msgstr ""
-
-#: templates/components/language_selector.html:20
-#, python-format
-msgid "%(count)s idioma disponível!"
-msgid_plural "%(count)s idiomas disponíveis!"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/components/language_selector.html:22
-msgid "Idiomas disponíveis"
-msgstr ""
-
-#: templates/components/language_selector.html:32
+#: templates/components/language_selector.html:3
 msgid "Há alterações não salvas. Alterar o idioma e descartar essas alterações?"
+msgstr ""
+
+#: templates/components/language_selector.html:13
+msgid "Aplicar idioma"
 msgstr ""
 
 #: templates/components/pagination.html:2 templates/content/library.html:33
@@ -2964,7 +3043,6 @@ msgstr ""
 
 #: templates/components/pagination.html:8
 #: templates/journal/partials/calendar.html:11
-#: templates/visual_reference/reference.html:153
 msgid "Anterior"
 msgstr ""
 
@@ -2974,7 +3052,6 @@ msgid "Ir para a página %(number)s"
 msgstr ""
 
 #: templates/components/pagination.html:12
-#: templates/visual_reference/reference.html:156
 msgid "Próxima"
 msgstr ""
 
@@ -2993,7 +3070,6 @@ msgstr ""
 #: templates/scheduling/unit_list.html:15
 #: templates/scheduling/waitlist_list.html:15
 #: templates/therapist_dashboard/home.html:155
-#: templates/visual_reference/reference.html:28
 msgid "Ações"
 msgstr ""
 
@@ -4055,19 +4131,19 @@ msgstr ""
 msgid "Nenhuma denúncia aberta."
 msgstr ""
 
-#: templates/errors/400.html:6 templates/errors/403.html:6
-#: templates/errors/404.html:6 templates/errors/500.html:6
+#: templates/errors/400.html:7 templates/errors/403.html:7
+#: templates/errors/404.html:7 templates/errors/500.html:7
 #, python-format
 msgid "Erro %(code)s"
 msgstr ""
 
-#: templates/errors/400.html:9 templates/errors/403.html:9
-#: templates/errors/404.html:9 templates/errors/500.html:9
+#: templates/errors/400.html:10 templates/errors/403.html:10
+#: templates/errors/404.html:10 templates/errors/500.html:10
 msgid "Referência:"
 msgstr ""
 
-#: templates/errors/400.html:10 templates/errors/403.html:10
-#: templates/errors/404.html:10 templates/errors/500.html:10
+#: templates/errors/400.html:11 templates/errors/403.html:11
+#: templates/errors/404.html:11 templates/errors/500.html:11
 msgid "Voltar ao início"
 msgstr ""
 
@@ -4246,8 +4322,6 @@ msgstr ""
 #: templates/goals/exercise_assign.html:46
 #: templates/goals/exercise_form.html:66 templates/goals/form.html:103
 #: templates/journal/form.html:179 templates/people/patient_form.html:21
-#: templates/visual_reference/reference.html:57
-#: templates/visual_reference/reference.html:314
 msgid "Cancelar"
 msgstr ""
 
@@ -5024,25 +5098,25 @@ msgstr ""
 msgid "Total de registros"
 msgstr ""
 
-#: templates/layouts/detached.html:10 templates/layouts/vertical.html:10
+#: templates/layouts/detached.html:8 templates/layouts/vertical.html:8
 msgid "Início da plataforma"
 msgstr ""
 
-#: templates/layouts/detached.html:16 templates/layouts/detached.html:54
-#: templates/layouts/vertical.html:16 templates/layouts/vertical.html:54
+#: templates/layouts/detached.html:11 templates/layouts/detached.html:45
+#: templates/layouts/vertical.html:11 templates/layouts/vertical.html:45
 msgid "Fechar menu"
 msgstr ""
 
-#: templates/layouts/detached.html:21
-#: templates/layouts/partials/navigation.html:40
+#: templates/layouts/detached.html:15
+#: templates/layouts/partials/navigation.html:23
 msgid "Navegação destacada"
 msgstr ""
 
-#: templates/layouts/detached.html:30 templates/layouts/vertical.html:30
+#: templates/layouts/detached.html:23 templates/layouts/vertical.html:23
 msgid "Caminho de navegação"
 msgstr ""
 
-#: templates/layouts/detached.html:38 templates/layouts/vertical.html:38
+#: templates/layouts/detached.html:24 templates/layouts/vertical.html:24
 msgid "Início"
 msgstr ""
 
@@ -5050,80 +5124,81 @@ msgstr ""
 msgid "Abrir menu"
 msgstr ""
 
-#: templates/layouts/partials/header.html:25
+#: templates/layouts/partials/header.html:21
 msgid "Recolher navegação"
 msgstr ""
 
-#: templates/layouts/partials/header.html:29
+#: templates/layouts/partials/header.html:25
 msgid "Expandir navegação"
 msgstr ""
 
-#: templates/layouts/partials/header.html:40
+#: templates/layouts/partials/header.html:36
 msgid "Clínica ativa"
 msgstr ""
 
-#: templates/layouts/partials/header.html:56
+#: templates/layouts/partials/header.html:52
 msgid "Sistema de design Aurora Elo"
 msgstr ""
 
-#: templates/layouts/partials/header.html:57
-#: templates/layouts/partials/navigation.html:242
+#: templates/layouts/partials/header.html:53
+#: templates/layouts/partials/navigation.html:141
+#: templates/workspace/home.html:21
 msgid "Sistema de design"
 msgstr ""
 
-#: templates/layouts/partials/header.html:75
+#: templates/layouts/partials/header.html:70
 msgid "Central de avisos"
 msgstr ""
 
-#: templates/layouts/partials/header.html:81
-#: templates/layouts/partials/navigation.html:8
+#: templates/layouts/partials/header.html:76
+#: templates/layouts/partials/navigation.html:6
 #, python-format
 msgid "%(count)s revogação operacional pendente"
 msgid_plural "%(count)s revogações operacionais pendentes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/layouts/partials/header.html:84
+#: templates/layouts/partials/header.html:79
 msgid "Nenhuma notificação pendente."
 msgstr ""
 
-#: templates/layouts/partials/header.html:94
+#: templates/layouts/partials/header.html:89
 msgid "Trocar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:98
+#: templates/layouts/partials/header.html:93
 msgid "Alternar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:101
+#: templates/layouts/partials/header.html:96
 msgid "Selecionar clínica"
 msgstr ""
 
-#: templates/layouts/partials/header.html:109
+#: templates/layouts/partials/header.html:104
 msgid "Revisar troca"
 msgstr ""
 
-#: templates/layouts/partials/header.html:118
+#: templates/layouts/partials/header.html:113
 msgid "Menu da conta"
 msgstr ""
 
-#: templates/layouts/partials/header.html:129
+#: templates/layouts/partials/header.html:123
 msgid "Administrador"
 msgstr ""
 
-#: templates/layouts/partials/header.html:129
+#: templates/layouts/partials/header.html:123
 msgid "Usuário"
 msgstr ""
 
-#: templates/layouts/partials/header.html:140
+#: templates/layouts/partials/header.html:134
 msgid "Destacado"
 msgstr ""
 
-#: templates/layouts/partials/header.html:143
+#: templates/layouts/partials/header.html:137
 msgid "OK"
 msgstr ""
 
-#: templates/layouts/partials/header.html:154
+#: templates/layouts/partials/header.html:148
 msgid "Sair da conta"
 msgstr ""
 
@@ -5131,84 +5206,72 @@ msgstr ""
 msgid "Mensagens do sistema"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:21
+#: templates/layouts/partials/navigation.html:16
 msgid "Geral"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:34
-#: templates/layouts/vertical.html:21
+#: templates/layouts/partials/navigation.html:19
+#: templates/layouts/vertical.html:15
 msgid "Navegação vertical"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:48
+#: templates/layouts/partials/navigation.html:29
 msgid "Gestão da clínica"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:54
-msgid "Administração"
-msgstr ""
-
-#: templates/layouts/partials/navigation.html:77
+#: templates/layouts/partials/navigation.html:41
 #: templates/people/professional_list.html:4
 #: templates/people/professional_list.html:11
 msgid "Profissionais"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:96
+#: templates/layouts/partials/navigation.html:55
 msgid "Cuidado e prática"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:102
-msgid "Rotina terapêutica"
-msgstr ""
-
-#: templates/layouts/partials/navigation.html:110
-#: templates/workspace/home.html:23
+#: templates/layouts/partials/navigation.html:58
+#: templates/workspace/home.html:33
 msgid "Diário emocional"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:117
-#: templates/workspace/home.html:25
+#: templates/layouts/partials/navigation.html:62
+#: templates/workspace/home.html:35
 msgid "Minhas metas"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:124
+#: templates/layouts/partials/navigation.html:66
 msgid "Exercícios"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:131
+#: templates/layouts/partials/navigation.html:70
 msgid "Modo de baixa energia"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:139
+#: templates/layouts/partials/navigation.html:76
 msgid "Comunicação e agenda"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:145
-msgid "Atendimento"
-msgstr ""
-
-#: templates/layouts/partials/navigation.html:152
+#: templates/layouts/partials/navigation.html:79
 msgid "Agenda de consultas"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:167
+#: templates/layouts/partials/navigation.html:89
 msgid "Painéis de evolução"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:191
+#: templates/layouts/partials/navigation.html:106
 msgid "Psiquiatria e recuperação"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:196
+#: templates/layouts/partials/navigation.html:109
 msgid "Álcool e outras substâncias"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:202
+#: templates/layouts/partials/navigation.html:113
 msgid "Recuperação e jogos"
 msgstr ""
 
-#: templates/layouts/partials/navigation.html:225
+#: templates/layouts/partials/navigation.html:130
 msgid "Aplicativos e sistema de design"
 msgstr ""
 
@@ -5901,417 +5964,76 @@ msgstr ""
 msgid "Cadastre um paciente ou aguarde novos vínculos."
 msgstr ""
 
-#: templates/visual_reference/reference.html:9
-msgid "Referência do sistema visual — Catálogo Duralux"
+#: templates/workspace/home.html:10
+msgid "Ambiente Integrado"
 msgstr ""
 
-#: templates/visual_reference/reference.html:24
-msgid "Referência interna de interface"
-msgstr ""
-
-#: templates/visual_reference/reference.html:26
-msgid "Seções do catálogo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:29
-#: templates/visual_reference/reference.html:137
-msgid "Formulários"
-msgstr ""
-
-#: templates/visual_reference/reference.html:30
-msgid "Conteúdo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:31
-msgid "Sobreposições"
-msgstr ""
-
-#: templates/visual_reference/reference.html:39
-msgid "Fundação Duralux"
-msgstr ""
-
-#: templates/visual_reference/reference.html:40
-msgid "Referência do sistema visual"
-msgstr ""
-
-#: templates/visual_reference/reference.html:42
-msgid "Exemplos baseados em Bootstrap e nas integrações do produto, com estrutura semântica, rótulos visíveis e estados que não dependem apenas de cor."
-msgstr ""
-
-#: templates/visual_reference/reference.html:49
-msgid "Botões e ações"
-msgstr ""
-
-#: templates/visual_reference/reference.html:50
-msgid "Use o texto da ação para comunicar seu resultado."
-msgstr ""
-
-#: templates/visual_reference/reference.html:54
-msgid "Ação principal"
-msgstr ""
-
-#: templates/visual_reference/reference.html:55
-msgid "Ação secundária"
-msgstr ""
-
-#: templates/visual_reference/reference.html:56
-msgid "Ação alternativa"
-msgstr ""
-
-#: templates/visual_reference/reference.html:58
-msgid "Excluir"
-msgstr ""
-
-#: templates/visual_reference/reference.html:59
-msgid "Ação indisponível"
-msgstr ""
-
-#: templates/visual_reference/reference.html:66
-msgid "Formulário acessível"
-msgstr ""
-
-#: templates/visual_reference/reference.html:68
-msgid "Cada campo possui um rótulo associado; a validação do servidor é a fonte de verdade."
-msgstr ""
-
-#: templates/visual_reference/reference.html:74
-msgid "Exemplo validado pelo servidor. Nenhum dado foi armazenado."
-msgstr ""
-
-#: templates/visual_reference/reference.html:77
-msgid "Salvar exemplo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:84
-msgid "Cards, alertas e badges"
-msgstr ""
-
-#: templates/visual_reference/reference.html:85
-msgid "Componentes de conteúdo combinam hierarquia, texto e contexto."
-msgstr ""
-
-#: templates/visual_reference/reference.html:92
-msgid "Informativo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:93
-msgid "Card básico"
-msgstr ""
-
-#: templates/visual_reference/reference.html:94
-msgid "Agrupa informações relacionadas e uma ação contextual."
-msgstr ""
-
-#: templates/visual_reference/reference.html:95
-msgid "Ver inventário"
-msgstr ""
-
-#: templates/visual_reference/reference.html:103
-msgid "Card com rodapé"
-msgstr ""
-
-#: templates/visual_reference/reference.html:104
-msgid "O rodapé pode separar metadados do conteúdo principal."
-msgstr ""
-
-#: templates/visual_reference/reference.html:106
-msgid "Atualizado pelo próprio sistema"
-msgstr ""
-
-#: templates/visual_reference/reference.html:111
-msgid "Exemplos de alertas"
-msgstr ""
-
-#: templates/visual_reference/reference.html:112
-msgid "<strong>Sucesso:</strong> operação concluída."
-msgstr ""
-
-#: templates/visual_reference/reference.html:113
-msgid "<strong>Atenção:</strong> revise os campos antes de continuar."
-msgstr ""
-
-#: templates/visual_reference/reference.html:114
-msgid "<strong>Erro:</strong> não foi possível concluir a operação."
-msgstr ""
-
-#: templates/visual_reference/reference.html:115
-msgid "<strong>Informação:</strong> há orientações adicionais disponíveis."
-msgstr ""
-
-#: templates/visual_reference/reference.html:119
-msgid "Tabela responsiva"
-msgstr ""
-
-#: templates/visual_reference/reference.html:122
-msgid "Disponibilidade dos componentes apresentados neste catálogo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:125
-msgid "Componente"
-msgstr ""
-
-#: templates/visual_reference/reference.html:126
-msgid "Fundação"
-msgstr ""
-
-#: templates/visual_reference/reference.html:127
-msgid "Estado"
-msgstr ""
-
-#: templates/visual_reference/reference.html:132
-msgid "Botões"
-msgstr ""
-
-#: templates/visual_reference/reference.html:134
-#: templates/visual_reference/reference.html:139
-#: templates/visual_reference/reference.html:144
-msgid "Suportado"
-msgstr ""
-
-#: templates/visual_reference/reference.html:142
-#: templates/visual_reference/reference.html:163
-msgid "Estados de conteúdo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:143
-msgid "Integração do produto"
-msgstr ""
-
-#: templates/visual_reference/reference.html:151
-msgid "Paginação do catálogo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:164
-msgid "O nome do estado e a orientação permanecem disponíveis em texto."
-msgstr ""
-
-#: templates/visual_reference/reference.html:169
-msgid "Nenhum item encontrado"
-msgstr ""
-
-#: templates/visual_reference/reference.html:170
-msgid "Altere os filtros ou crie o primeiro item."
-msgstr ""
-
-#: templates/visual_reference/reference.html:171
-msgid "Criar item"
-msgstr ""
-
-#: templates/visual_reference/reference.html:176
-msgid "Falha ao carregar"
-msgstr ""
-
-#: templates/visual_reference/reference.html:177
-msgid "Verifique sua conexão e tente novamente."
-msgstr ""
-
-#: templates/visual_reference/reference.html:178
-msgid "Tentar novamente"
-msgstr ""
-
-#: templates/visual_reference/reference.html:185
-msgid "Carregando"
-msgstr ""
-
-#: templates/visual_reference/reference.html:188
-msgid "Aguarde enquanto as informações são preparadas."
-msgstr ""
-
-#: templates/visual_reference/reference.html:197
-msgid "Cards de resumo"
-msgstr ""
-
-#: templates/visual_reference/reference.html:199
-msgid "Indicadores factuais combinam texto, valor e contexto sem conclusão clínica."
-msgstr ""
-
-#: templates/visual_reference/reference.html:213
-msgid "Tabela responsiva e paginação"
-msgstr ""
-
-#: templates/visual_reference/reference.html:215
-msgid "A mesma informação permanece disponível em tabela no desktop e em cards no celular."
-msgstr ""
-
-#: templates/visual_reference/reference.html:224
-msgid "Estados gerados pelo produto"
-msgstr ""
-
-#: templates/visual_reference/reference.html:225
-msgid "Cada estado combina texto, contexto e semântica; não depende apenas da cor."
-msgstr ""
-
-#: templates/visual_reference/reference.html:236
-msgid "Formatação e privacidade"
-msgstr ""
-
-#: templates/visual_reference/reference.html:237
-msgid "A densidade nunca reduz os alvos de interação nem oculta o contexto."
-msgstr ""
-
-#: templates/visual_reference/reference.html:240
-msgid "<strong>Fuso horário efetivo:</strong> datas exibem o contexto temporal aplicável."
-msgstr ""
-
-#: templates/visual_reference/reference.html:241
-msgid "<strong>Identificadores pessoais:</strong> valores chegam mascarados pelo backend."
-msgstr ""
-
-#: templates/visual_reference/reference.html:242
-msgid "<strong>Truncamento:</strong> o valor integral permanece disponível no detalhe autorizado."
-msgstr ""
-
-#: templates/visual_reference/reference.html:243
-msgid "<strong>Ausência de dados:</strong> zero, dado ausente e indisponibilidade são estados diferentes."
-msgstr ""
-
-#: templates/visual_reference/reference.html:249
-msgid "Gráfico de registros operacionais"
-msgstr ""
-
-#: templates/visual_reference/reference.html:251
-msgid "Registros por semana: 4 na Semana 1, 7 na Semana 2 e 5 na Semana 3. Apenas registros agregados autorizados; não representa diagnóstico ou causalidade."
-msgstr ""
-
-#: templates/visual_reference/reference.html:258
-msgid "Registros operacionais por semana"
-msgstr ""
-
-#: templates/visual_reference/reference.html:259
-#: templates/visual_reference/reference.html:270
-msgid "Registros"
-msgstr ""
-
-#: templates/visual_reference/reference.html:260
-msgid "Quantidade de registros"
-msgstr ""
-
-#: templates/visual_reference/reference.html:262
-#: templates/visual_reference/reference.html:272
-msgid "Semana 1"
-msgstr ""
-
-#: templates/visual_reference/reference.html:263
-#: templates/visual_reference/reference.html:273
-msgid "Semana 2"
-msgstr ""
-
-#: templates/visual_reference/reference.html:264
-#: templates/visual_reference/reference.html:274
-msgid "Semana 3"
-msgstr ""
-
-#: templates/visual_reference/reference.html:269
-msgid "Registros por semana"
-msgstr ""
-
-#: templates/visual_reference/reference.html:282
-msgid "Modal e painel lateral"
-msgstr ""
-
-#: templates/visual_reference/reference.html:283
-msgid "Os controles usam o comportamento acessível fornecido pelo Bootstrap."
-msgstr ""
-
-#: templates/visual_reference/reference.html:288
-msgid "Abrir modal"
-msgstr ""
-
-#: templates/visual_reference/reference.html:291
-msgid "Abrir painel lateral"
-msgstr ""
-
-#: templates/visual_reference/reference.html:301
-msgid "Catálogo interno dos componentes disponíveis na fundação visual do produto."
-msgstr ""
-
-#: templates/visual_reference/reference.html:309
-msgid "Confirmar ação"
-msgstr ""
-
-#: templates/visual_reference/reference.html:310
-#: templates/visual_reference/reference.html:324
-msgid "Fechar"
-msgstr ""
-
-#: templates/visual_reference/reference.html:312
-msgid "Revise as informações antes de confirmar."
-msgstr ""
-
-#: templates/visual_reference/reference.html:315
-msgid "Confirmar"
-msgstr ""
-
-#: templates/visual_reference/reference.html:323
-msgid "Detalhes do componente"
-msgstr ""
-
-#: templates/visual_reference/reference.html:327
-msgid "O painel lateral mantém o contexto da página enquanto apresenta informações complementares."
-msgstr ""
-
-#: templates/visual_reference/reference.html:328
-msgid "Concluir"
-msgstr ""
-
-#: templates/workspace/home.html:9
+#: templates/workspace/home.html:12
 msgid "seja bem-vindo"
 msgstr ""
 
-#: templates/workspace/home.html:10
+#: templates/workspace/home.html:13
 #, python-format
 msgid "Olá, %(name)s."
 msgstr ""
 
-#: templates/workspace/home.html:11
+#: templates/workspace/home.html:14
 #, python-format
 msgid "Acesse seus recursos em %(clinic_name)s."
 msgstr ""
 
-#: templates/workspace/home.html:18
+#: templates/workspace/home.html:28
 msgid "Por onde começar"
 msgstr ""
 
-#: templates/workspace/home.html:21
+#: templates/workspace/home.html:31
 msgid "Acompanhe os registros do seu cuidado."
 msgstr ""
 
-#: templates/workspace/home.html:23
+#: templates/workspace/home.html:33
 msgid "Reserve um momento para registrar como você está."
 msgstr ""
 
-#: templates/workspace/home.html:25
+#: templates/workspace/home.html:35
 msgid "Retome seus objetivos e próximos passos."
 msgstr ""
 
-#: templates/workspace/home.html:29
+#: templates/workspace/home.html:39
 msgid "Acompanhe os pacientes vinculados a você."
 msgstr ""
 
-#: templates/workspace/home.html:33
+#: templates/workspace/home.html:43
 msgid "Consulte os indicadores da clínica ativa."
 msgstr ""
 
-#: templates/workspace/home.html:37
+#: templates/workspace/home.html:47
 msgid "Consulte e organize os cadastros da clínica."
 msgstr ""
 
-#: templates/workspace/home.html:39
+#: templates/workspace/home.html:49
 msgid "Revise os dados e a identidade da sua clínica."
 msgstr ""
 
-#: templates/workspace/home.html:42
+#: templates/workspace/home.html:52
 msgid "Veja as consultas disponíveis para o seu perfil."
 msgstr ""
 
-#: templates/workspace/home.html:44
+#: templates/workspace/home.html:54
 msgid "Acesse suas conversas na plataforma."
 msgstr ""
 
-#: templates/workspace/home.html:46
+#: templates/workspace/home.html:56
 msgid "Segurança da conta"
 msgstr ""
 
-#: templates/workspace/home.html:46
+#: templates/workspace/home.html:56
 msgid "Confira os dispositivos e as sessões da sua conta."
+msgstr ""
+
+#: templates/workspace/home.html:72
+msgid "SAMU: 192 (Brasil)"
+msgstr ""
+
+#: templates/workspace/home.html:75
+msgid "CVV: 188 (Brasil)"
 msgstr ""

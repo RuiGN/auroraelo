@@ -4944,3 +4944,55 @@ msgstr "Show or hide password"
 #. Design system shell; technical draft.
 msgid "Aplicar idioma"
 msgstr "Apply language"
+
+msgid "Ambiente Clínico"
+msgstr "Clinical Environment"
+
+msgid "Ambiente Integrado"
+msgstr "Integrated Environment"
+
+msgid "Ambiente para teleconsultas psiquiátricas e orientações clínicas."
+msgstr "Environment for psychiatric teleconsultations and clinical guidance."
+
+msgid "Apoio Imediato"
+msgstr "Immediate Support"
+
+msgid "Apoio continuado para álcool, outras substâncias e transtornos de jogos."
+msgstr "Ongoing support for alcohol, other substances, and gambling disorders."
+
+msgid "Avaliação psiquiátrica inicial e histórico de acompanhamento do paciente."
+msgstr "Initial psychiatric evaluation and patient follow-up history."
+
+msgid "CVV: 188 (Brasil)"
+msgstr "CVV: 188 (Brazil)"
+
+msgid "Cadastrado"
+msgstr "Registered"
+
+msgid "Canais de emergência e apoio emocional 192 (SAMU) e 188 (CVV)."
+msgstr "Emergency channels and emotional support 192 (SAMU) and 188 (CVV)."
+
+msgid "Consulta somente leitura"
+msgstr "Read-only query"
+
+msgid "Consulta somente leitura dos cadastros e prontuários autorizados da clínica."
+msgstr "Read-only query of clinic authorized registrations and medical records."
+
+msgid "Informações operacionais e consulta de leitos psiquiátricos."
+msgstr "Operational information and psychiatric bed consultation."
+
+msgid "Perfis autorizados"
+msgstr "Authorized profiles"
+
+msgid "Recuperação"
+msgstr "Recovery"
+
+msgid "Recursos clínicos"
+msgstr "Clinical resources"
+
+msgid "SAMU: 192 (Brasil)"
+msgstr "SAMU: 192 (Brazil)"
+
+msgid "Voltar ao painel clínico"
+msgstr "Back to clinical dashboard"
+
