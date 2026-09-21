@@ -3,11 +3,11 @@
 <form method="post" action="{% url 'account_set_language' %}" class="aurora-lang-select m-0" data-language-form data-language-source="{{ selector_id }}" data-language-confirm="{% translate 'Há alterações não salvas. Alterar o idioma e descartar essas alterações?' %}">
   {% csrf_token %}
   <input type="hidden" name="next" value="{{ ui_language_next }}">
-  <span class="field-control-icon" aria-hidden="true"><i class="feather-globe"></i></span>
+  <span class="field-control-icon" aria-hidden="true">{% if "pt" in current_ui_language|lower %}🇧🇷{% elif "en" in current_ui_language|lower %}🇺🇸{% elif "es" in current_ui_language|lower %}🇪🇸{% else %}<i class="feather-globe"></i>{% endif %}</span>
   <label class="visually-hidden" for="{{ selector_id }}-language-select">{% translate 'Idioma' %}</label>
   <select id="{{ selector_id }}-language-select" name="language" lang="{{ current_ui_language }}">
     {% for language in ui_languages %}
-    <option value="{{ language.code }}"{% if language.code == current_ui_language %} selected{% endif %}>{{ language.name_local }}</option>
+    <option value="{{ language.code }}"{% if language.code == current_ui_language %} selected{% endif %}>{% if "pt" in language.code|lower %}🇧🇷 {% elif "en" in language.code|lower %}🇺🇸 {% elif "es" in language.code|lower %}🇪🇸 {% endif %}{{ language.name_local }}</option>
     {% endfor %}
   </select>
   <noscript><button type="submit" class="btn btn-sm btn-outline-primary ms-1">{% translate "Aplicar idioma" %}</button></noscript>
