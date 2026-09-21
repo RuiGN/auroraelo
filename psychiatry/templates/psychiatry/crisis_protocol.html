@@ -2,14 +2,31 @@
 {% load i18n %}
 {% block title %}{% translate "Orientações em crise" %}{% endblock %}
 {% block content %}
-<section class="aurora-section-card" aria-labelledby="psychiatry-page-title">
-  <h1 id="psychiatry-page-title">{% translate "Orientações em crise" %}</h1>
-  <h2>{% translate "Indisponível nesta interface" %}</h2>
-  <p>{% translate "O acionamento de SOS pelo portal está indisponível. Não há plantão, monitoramento ou envio de ajuda por esta página." %}</p>
-  <p>{% translate "Esta página não grava dados nem envia notificações." %}</p>
-  <p>{% translate "Este portal não é um serviço de emergência e não oferece monitoramento contínuo." %}</p>
-  <p>{% translate "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência." %}</p>
-  <p><a class="btn btn-outline-primary" href="tel:192">{% translate "Ligar para o SAMU: 192 (Brasil)" %}</a></p>
-  <p><a class="btn btn-outline-primary" href="tel:188">{% translate "Ligar para o CVV: 188 (Brasil)" %}</a></p>
+<section class="aurora-section-card border-danger-subtle" aria-labelledby="psychiatry-page-title">
+  <div class="d-flex align-items-center gap-3 mb-3">
+    <div class="avatar-text avatar-lg bg-soft-danger text-danger rounded-2xl flex-shrink-0">
+      <i class="feather-alert-triangle" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p class="aurora-eyebrow text-danger mb-0">{% translate "Apoio Imediato" %}</p>
+      <h1 id="psychiatry-page-title" class="h3 mb-0 text-danger">{% translate "Orientações em crise" %}</h1>
+    </div>
+  </div>
+
+  <div class="p-3 rounded-xl bg-light-subtle border mb-4">
+    <h2 class="h5 text-dark mb-2">{% translate "Indisponível nesta interface" %}</h2>
+    <p class="fs-13 text-muted mb-2">{% translate "O acionamento de SOS pelo portal está indisponível. Não há plantão, monitoramento ou envio de ajuda por esta página." %}</p>
+    <p class="fs-12 text-muted mb-0">{% translate "Esta página não grava dados nem envia notificações." %}</p>
+  </div>
+
+  <div class="alert alert-warning border-0 shadow-sm mb-4">
+    <p class="mb-2 fw-semibold">{% translate "Este portal não é um serviço de emergência e não oferece monitoramento contínuo." %}</p>
+    <p class="mb-0 fs-13">{% translate "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência." %}</p>
+  </div>
+
+  <div class="d-flex flex-wrap gap-3">
+    <a class="btn btn-danger px-4 py-2 rounded-xl fw-bold" href="tel:192">{% translate "Ligar para o SAMU: 192 (Brasil)" %}</a>
+    <a class="btn btn-outline-secondary px-4 py-2 rounded-xl fw-bold" href="tel:188">{% translate "Ligar para o CVV: 188 (Brasil)" %}</a>
+  </div>
 </section>
 {% endblock %}

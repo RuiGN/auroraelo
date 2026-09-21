@@ -2,22 +2,59 @@
 {% load i18n %}
 {% block title %}{% translate "Recuperação: álcool, substâncias e jogos" %}{% endblock %}
 {% block content %}
-<section class="aurora-section-card" aria-labelledby="psychiatry-page-title">
-  <h1 id="psychiatry-page-title">{% translate "Recuperação: álcool, substâncias e jogos" %}</h1>
-  <h2>{% translate "Indisponível nesta interface" %}</h2>
-  <p>{% translate "O registro de fissura e os indicadores de recuperação estão indisponíveis nesta interface. Não há monitoramento nem intervenção automática." %}</p>
-  <p>{% translate "Esta página não grava dados nem envia notificações." %}</p>
-  <a href="{% url 'psychiatry:twelve_steps_anamnesis' %}">{% translate "Consultar disponibilidade da anamnese dos 12 passos" %}</a>
+<section class="aurora-section-card mb-4" aria-labelledby="psychiatry-page-title">
+  <div class="d-flex align-items-center gap-3 mb-3">
+    <div class="avatar-text avatar-lg bg-soft-success text-success rounded-2xl flex-shrink-0">
+      <i class="feather-shield" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p class="aurora-eyebrow mb-0">Aurora Elo</p>
+      <h1 id="psychiatry-page-title" class="h3 mb-0">{% translate "Recuperação: álcool, substâncias e jogos" %}</h1>
+    </div>
+  </div>
+
+  <div class="p-3 rounded-xl bg-light-subtle border mb-3">
+    <h2 class="h5 text-dark mb-2">{% translate "Indisponível nesta interface" %}</h2>
+    <p class="fs-13 text-muted mb-2">{% translate "O registro de fissura e os indicadores de recuperação estão indisponíveis nesta interface. Não há monitoramento nem intervenção automática." %}</p>
+    <p class="fs-12 text-muted mb-0">{% translate "Esta página não grava dados nem envia notificações." %}</p>
+  </div>
+
+  <a class="btn btn-outline-primary btn-sm" href="{% url 'psychiatry:twelve_steps_anamnesis' %}">
+    <i class="feather-compass me-1" aria-hidden="true"></i>{% translate "Consultar disponibilidade da anamnese dos 12 passos" %}
+  </a>
 </section>
+
 <section class="aurora-section-card" aria-labelledby="recovery-patients-title">
-  <h2 id="recovery-patients-title">{% translate "Pacientes disponíveis para consulta" %}</h2>
-  <p>{% translate "Consulta somente leitura dos perfis de recuperação autorizados. A lista exibe até 15 registros; não representa o total da clínica." %}</p>
-  <ul>
-    {% for profile in profiles %}
-    <li>{{ profile.patient.full_name }} — {% translate "Prontuário" %}: {{ profile.patient.record_number }}</li>
-    {% empty %}
-    <li>{% translate "Nenhum paciente disponível para este acesso." %}</li>
-    {% endfor %}
-  </ul>
+  <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+    <h2 id="recovery-patients-title" class="h5 mb-0">{% translate "Pacientes disponíveis para consulta" %}</h2>
+    <span class="badge bg-soft-primary text-primary px-3 py-1 rounded-pill fs-11">{% translate "Perfis autorizados" %}</span>
+  </div>
+  <p class="text-muted fs-13 mb-3">{% translate "Consulta somente leitura dos perfis de recuperação autorizados. A lista exibe até 15 registros; não representa o total da clínica." %}</p>
+
+  <div class="card border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+    <ul class="list-group list-group-flush mb-0">
+      {% for profile in profiles %}
+      <li class="list-group-item d-flex align-items-center justify-content-between py-3 px-4">
+        <div class="d-flex align-items-center gap-3">
+          <div class="avatar-text avatar-sm bg-soft-success text-success rounded-xl fw-bold flex-shrink-0">
+            <i class="feather-user" aria-hidden="true"></i>
+          </div>
+          <div>
+            <span class="fw-bold text-dark d-block">{{ profile.patient.full_name }}</span>
+            <span class="fs-12 text-muted">{% translate "Prontuário" %}: <span class="badge bg-light text-dark font-mono">{{ profile.patient.record_number }}</span></span>
+          </div>
+        </div>
+        <span class="badge bg-soft-success text-success rounded-pill">{% translate "Acompanhamento" %}</span>
+      </li>
+      {% empty %}
+      <li class="list-group-item text-center py-5 text-muted">
+        <div class="avatar-text avatar-lg rounded-xl bg-light text-muted mx-auto mb-2">
+          <i class="feather-users" aria-hidden="true"></i>
+        </div>
+        <p class="mb-0">{% translate "Nenhum paciente disponível para este acesso." %}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 {% endblock %}

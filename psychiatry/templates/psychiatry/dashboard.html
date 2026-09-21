@@ -2,15 +2,108 @@
 {% load i18n %}
 {% block title %}{% translate "Painel clínico" %}{% endblock %}
 {% block content %}
-<section class="aurora-section-card" aria-labelledby="portal-title">
-  <p class="aurora-eyebrow">Aurora Elo</p>
-  <h1 id="portal-title">{% translate "Portal de psiquiatria" %}</h1>
-  <p>{% translate "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos." %}</p>
-  <p>{% translate "Os indicadores clínicos deste painel ainda não estão disponíveis. Nenhum dado de demonstração é apresentado como atendimento real." %}</p>
-  <div class="d-flex flex-wrap gap-2 mt-4">
-    <a class="btn btn-primary" href="{% url 'psychiatry:patients' %}">{% translate "Pacientes" %}</a>
-    <a class="btn btn-outline-primary" href="{% url 'psychiatry:anamnesis' %}">{% translate "Anamnese" %}</a>
-    <a class="btn btn-outline-primary" href="{% url 'psychiatry:addiction_dashboard' %}">{% translate "Recuperação: álcool, substâncias e jogos" %}</a>
+<section class="aurora-section-card mb-4" aria-labelledby="portal-title">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <p class="aurora-eyebrow mb-0">Aurora Elo</p>
+    <span class="badge bg-soft-primary text-primary px-3 py-1 rounded-pill fs-11">{% translate "Ambiente Clínico" %}</span>
+  </div>
+  <h1 id="portal-title" class="h3 mb-2">{% translate "Portal de psiquiatria" %}</h1>
+  <p class="text-body-secondary mb-2">{% translate "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos." %}</p>
+  <p class="fs-13 text-muted mb-0">{% translate "Os indicadores clínicos deste painel ainda não estão disponíveis. Nenhum dado de demonstração é apresentado como atendimento real." %}</p>
+</section>
+
+<section aria-labelledby="portal-services-title">
+  <h2 id="portal-services-title" class="visually-hidden">{% translate "Recursos clínicos" %}</h2>
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="aurora-section-card h-100 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="avatar-text avatar-sm bg-soft-primary text-primary rounded-xl">
+              <i class="feather-users" aria-hidden="true"></i>
+            </div>
+            <h3 class="h5 mb-0">{% translate "Pacientes" %}</h3>
+          </div>
+          <p class="fs-13 text-muted mb-3">{% translate "Consulta somente leitura dos cadastros e prontuários autorizados da clínica." %}</p>
+        </div>
+        <a class="btn btn-primary btn-sm w-100" href="{% url 'psychiatry:patients' %}">{% translate "Pacientes" %}</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="aurora-section-card h-100 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="avatar-text avatar-sm bg-soft-info text-info rounded-xl">
+              <i class="feather-file-text" aria-hidden="true"></i>
+            </div>
+            <h3 class="h5 mb-0">{% translate "Anamnese" %}</h3>
+          </div>
+          <p class="fs-13 text-muted mb-3">{% translate "Avaliação psiquiátrica inicial e histórico de acompanhamento do paciente." %}</p>
+        </div>
+        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'psychiatry:anamnesis' %}">{% translate "Anamnese" %}</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="aurora-section-card h-100 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="avatar-text avatar-sm bg-soft-success text-success rounded-xl">
+              <i class="feather-shield" aria-hidden="true"></i>
+            </div>
+            <h3 class="h5 mb-0">{% translate "Recuperação" %}</h3>
+          </div>
+          <p class="fs-13 text-muted mb-3">{% translate "Apoio continuado para álcool, outras substâncias e transtornos de jogos." %}</p>
+        </div>
+        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'psychiatry:addiction_dashboard' %}">{% translate "Recuperação: álcool, substâncias e jogos" %}</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="aurora-section-card h-100 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="avatar-text avatar-sm bg-soft-primary text-primary rounded-xl">
+              <i class="feather-video" aria-hidden="true"></i>
+            </div>
+            <h3 class="h5 mb-0">{% translate "Telepsiquiatria" %}</h3>
+          </div>
+          <p class="fs-13 text-muted mb-3">{% translate "Ambiente para teleconsultas psiquiátricas e orientações clínicas." %}</p>
+        </div>
+        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'psychiatry:telepsychiatry' %}">{% translate "Telepsiquiatria" %}</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="aurora-section-card h-100 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="avatar-text avatar-sm bg-soft-warning text-warning rounded-xl">
+              <i class="feather-grid" aria-hidden="true"></i>
+            </div>
+            <h3 class="h5 mb-0">{% translate "Leitos e internação" %}</h3>
+          </div>
+          <p class="fs-13 text-muted mb-3">{% translate "Informações operacionais e consulta de leitos psiquiátricos." %}</p>
+        </div>
+        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'psychiatry:inpatient_beds' %}">{% translate "Leitos e internação" %}</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="aurora-section-card h-100 d-flex flex-column justify-content-between border-danger-subtle">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="avatar-text avatar-sm bg-soft-danger text-danger rounded-xl">
+              <i class="feather-alert-triangle" aria-hidden="true"></i>
+            </div>
+            <h3 class="h5 mb-0 text-danger">{% translate "Orientações em crise" %}</h3>
+          </div>
+          <p class="fs-13 text-muted mb-3">{% translate "Canais de emergência e apoio emocional 192 (SAMU) e 188 (CVV)." %}</p>
+        </div>
+        <a class="btn btn-outline-danger btn-sm w-100" href="{% url 'psychiatry:crisis_protocol' %}">{% translate "Orientações em crise" %}</a>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

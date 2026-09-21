@@ -21,16 +21,16 @@
   <div class="aurora-portal-grid">
     <aside id="psychiatry-navigation" class="aurora-portal-sidebar">
       <nav class="aurora-portal-nav" aria-label="{% translate 'Navegação principal' %}">
-        <a href="{% url 'psychiatry:dashboard' %}"{% if active_nav == 'dashboard' %} aria-current="page"{% endif %}>{% translate "Painel clínico" %}</a>
-        <a href="{% url 'psychiatry:patients' %}"{% if active_nav == 'patients' %} aria-current="page"{% endif %}>{% translate "Pacientes" %}</a>
-        <a href="{% url 'psychiatry:anamnesis' %}"{% if active_nav == 'anamnesis' %} aria-current="page"{% endif %}>{% translate "Anamnese" %}</a>
-        <a href="{% url 'psychiatry:telepsychiatry' %}"{% if active_nav == 'telepsychiatry' %} aria-current="page"{% endif %}>{% translate "Telepsiquiatria" %}</a>
-        <a href="{% url 'psychiatry:inpatient_beds' %}"{% if active_nav == 'beds' %} aria-current="page"{% endif %}>{% translate "Leitos e internação" %}</a>
-        <a href="{% url 'psychiatry:addiction_dashboard' %}"{% if active_nav == 'addiction' %} aria-current="page"{% endif %}>{% translate "Recuperação: álcool, substâncias e jogos" %}</a>
-        <a href="{% url 'psychiatry:crisis_protocol' %}"{% if active_nav == 'crisis' %} aria-current="page"{% endif %}>{% translate "Orientações em crise" %}</a>
-        <a href="{% url 'psychiatry:mobile_connected' %}">{% translate "Prévia do aplicativo conectado" %}</a>
-        <a href="{% url 'psychiatry:mobile_b2c' %}">{% translate "Prévia do aplicativo Aurora Elo" %}</a>
-        <a href="{% url 'account_login' %}">{% translate "Entrar" %}</a>
+        <a href="{% url 'psychiatry:dashboard' %}"{% if active_nav == 'dashboard' %} aria-current="page"{% endif %}><i class="feather-home me-2" aria-hidden="true"></i>{% translate "Painel clínico" %}</a>
+        <a href="{% url 'psychiatry:patients' %}"{% if active_nav == 'patients' %} aria-current="page"{% endif %}><i class="feather-users me-2" aria-hidden="true"></i>{% translate "Pacientes" %}</a>
+        <a href="{% url 'psychiatry:anamnesis' %}"{% if active_nav == 'anamnesis' %} aria-current="page"{% endif %}><i class="feather-file-text me-2" aria-hidden="true"></i>{% translate "Anamnese" %}</a>
+        <a href="{% url 'psychiatry:telepsychiatry' %}"{% if active_nav == 'telepsychiatry' %} aria-current="page"{% endif %}><i class="feather-video me-2" aria-hidden="true"></i>{% translate "Telepsiquiatria" %}</a>
+        <a href="{% url 'psychiatry:inpatient_beds' %}"{% if active_nav == 'beds' %} aria-current="page"{% endif %}><i class="feather-grid me-2" aria-hidden="true"></i>{% translate "Leitos e internação" %}</a>
+        <a href="{% url 'psychiatry:addiction_dashboard' %}"{% if active_nav == 'addiction' %} aria-current="page"{% endif %}><i class="feather-shield me-2" aria-hidden="true"></i>{% translate "Recuperação: álcool, substâncias e jogos" %}</a>
+        <a href="{% url 'psychiatry:crisis_protocol' %}"{% if active_nav == 'crisis' %} aria-current="page"{% endif %} class="aurora-nav-crisis"><i class="feather-alert-triangle me-2" aria-hidden="true"></i>{% translate "Orientações em crise" %}</a>
+        <a href="{% url 'psychiatry:mobile_connected' %}"><i class="feather-smartphone me-2" aria-hidden="true"></i>{% translate "Prévia do aplicativo conectado" %}</a>
+        <a href="{% url 'psychiatry:mobile_b2c' %}"><i class="feather-shopping-bag me-2" aria-hidden="true"></i>{% translate "Prévia do aplicativo Aurora Elo" %}</a>
+        <a href="{% url 'account_login' %}"><i class="feather-log-in me-2" aria-hidden="true"></i>{% translate "Entrar" %}</a>
       </nav>
     </aside>
     <main id="main-content" class="aurora-portal-content" tabindex="-1">

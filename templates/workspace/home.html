@@ -5,12 +5,22 @@
 {% block breadcrumb_active %}{% translate "Área de trabalho" %}{% endblock %}
 {% block content %}
 <section class="aurora-section-card mb-4" aria-labelledby="workspace-title">
-  <p class="aurora-eyebrow">Aurora Elo · {{ active_clinic.name }}</p>
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <p class="aurora-eyebrow mb-0">Aurora Elo · {{ active_clinic.name }}</p>
+    <span class="badge bg-soft-primary text-primary px-3 py-1 rounded-pill fs-11">{% translate "Ambiente Integrado" %}</span>
+  </div>
   {% translate "seja bem-vindo" as welcome_fallback %}
-  <h1 id="workspace-title">{% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}</h1>
-  <p>{% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}</p>
-  <p>{% translate "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos." %}</p>
-  <a class="btn btn-primary" href="{% url 'psychiatry:dashboard' %}">{% translate "Portal de psiquiatria" %}</a>
+  <h1 id="workspace-title" class="h3 mb-2">{% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}</h1>
+  <p class="text-body-secondary mb-2">{% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}</p>
+  <p class="fs-13 text-muted mb-3">{% translate "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos." %}</p>
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-primary" href="{% url 'psychiatry:dashboard' %}">
+      <i class="feather-activity me-1" aria-hidden="true"></i>{% translate "Portal de psiquiatria" %}
+    </a>
+    <a class="btn btn-outline-primary" href="{% url 'design_system_reference' %}">
+      <i class="feather-layers me-1" aria-hidden="true"></i>{% translate "Sistema de design" %}
+    </a>
+  </div>
 </section>
 
 <!-- Standard Workspace Shortcuts (Contractually tested) -->
@@ -48,9 +58,22 @@
   </div>
 </section>
 
-<section class="aurora-section-card mt-4" aria-labelledby="aurora-support-title">
-  <h2 id="aurora-support-title">{% translate "Orientações em crise" %}</h2>
-  <p>{% translate "Este portal não é um serviço de emergência e não oferece monitoramento contínuo." %}</p>
-  <p>{% translate "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência." %}</p>
+<section class="aurora-section-card mt-4 border-danger-subtle" aria-labelledby="aurora-support-title">
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <div class="avatar-text avatar-sm bg-soft-danger text-danger rounded-xl flex-shrink-0">
+      <i class="feather-alert-triangle" aria-hidden="true"></i>
+    </div>
+    <h2 id="aurora-support-title" class="h5 text-danger mb-0">{% translate "Orientações em crise" %}</h2>
+  </div>
+  <p class="fs-13 text-muted mb-2">{% translate "Este portal não é um serviço de emergência e não oferece monitoramento contínuo." %}</p>
+  <p class="fs-13 text-muted mb-3">{% translate "No Brasil, em emergência, ligue 192 (SAMU). Para apoio emocional, 188 (CVV). Em outros países, procure o serviço local de emergência." %}</p>
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-danger btn-sm px-3" href="tel:192">
+      <i class="feather-phone-call me-1" aria-hidden="true"></i>{% translate "SAMU: 192 (Brasil)" %}
+    </a>
+    <a class="btn btn-outline-secondary btn-sm px-3" href="tel:188">
+      <i class="feather-heart me-1" aria-hidden="true"></i>{% translate "CVV: 188 (Brasil)" %}
+    </a>
+  </div>
 </section>
 {% endblock %}

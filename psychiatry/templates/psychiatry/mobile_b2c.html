@@ -3,9 +3,26 @@
 {% block title %}{% translate "Prévia do aplicativo Aurora Elo" %}{% endblock %}
 {% block content %}
 <section class="aurora-section-card" aria-labelledby="psychiatry-page-title">
-  <h1 id="psychiatry-page-title">{% translate "Prévia do aplicativo Aurora Elo" %}</h1>
-  <h2>{% translate "Indisponível nesta interface" %}</h2>
-  <p>{% translate "O registro de humor, o diário e a contratação de assinatura estão indisponíveis nesta prévia. Nenhum histórico ou benefício de assinatura é exibido." %}</p>
-  <p>{% translate "Esta página não grava dados nem envia notificações." %}</p>
+  <div class="d-flex align-items-center gap-3 mb-3">
+    <div class="avatar-text avatar-lg bg-soft-info text-info rounded-2xl flex-shrink-0">
+      <i class="feather-shopping-bag" aria-hidden="true"></i>
+    </div>
+    <div>
+      <p class="aurora-eyebrow mb-0">Aurora Elo</p>
+      <h1 id="psychiatry-page-title" class="h3 mb-0">{% translate "Prévia do aplicativo Aurora Elo" %}</h1>
+    </div>
+  </div>
+
+  <div class="p-3 rounded-xl bg-light-subtle border mb-4">
+    <h2 class="h5 text-dark mb-2">{% translate "Indisponível nesta interface" %}</h2>
+    <p class="fs-13 text-muted mb-2">{% translate "O registro de humor, o diário e a contratação de assinatura estão indisponíveis nesta prévia. Nenhum histórico ou benefício de assinatura é exibido." %}</p>
+    <p class="fs-12 text-muted mb-0">{% translate "Esta página não grava dados nem envia notificações." %}</p>
+  </div>
+
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'psychiatry:dashboard' %}">
+      <i class="feather-arrow-left me-1" aria-hidden="true"></i>{% translate "Voltar ao painel clínico" %}
+    </a>
+  </div>
 </section>
 {% endblock %}

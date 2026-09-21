@@ -71,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (miniButton) miniButton.addEventListener("click", () => setMini(true));
     if (expandButton) expandButton.addEventListener("click", () => setMini(false));
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && sidebar && sidebar.classList.contains("is-open")) {
+      if (event && event.key === "Escape" && sidebar && sidebar.classList.contains("is-open")) {
         setDrawer(false);
       }
     });
   }
 
   // --- Login: seletor de perfil ajusta o placeholder do identificador ---
-  const roleTabs = document.querySelectorAll("[data-role-tab]");
+  const roleTabs = typeof document.querySelectorAll === "function" ? document.querySelectorAll("[data-role-tab]") : [];
   if (roleTabs.length) {
     const identifier = document.querySelector("input[name='email'], input[type='text'][autocomplete='email'], input[type='text']");
     roleTabs.forEach((tab) => {
@@ -90,35 +90,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Login: mostrar/ocultar senha ---
-  document.querySelectorAll("[data-password-toggle]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const control = button.parentElement.querySelector("input[type='password'], input[type='text']");
-      if (!control) return;
-      const revealing = control.type === "password";
-      control.type = revealing ? "text" : "password";
-      button.setAttribute("aria-label", revealing ? "Ocultar senha" : "Mostrar senha");
+  if (typeof document.querySelectorAll === "function") {
+    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const control = button.parentElement.querySelector("input[type='password'], input[type='text']");
+        if (!control) return;
+        const revealing = control.type === "password";
+        control.type = revealing ? "text" : "password";
+        button.setAttribute("aria-label", revealing ? "Ocultar senha" : "Mostrar senha");
+      });
     });
-  });
 
-  // --- Idioma: submissão pelo servidor, com confirmação em formulários sujos ---
-  document.querySelectorAll("[data-language-form]").forEach((form) => {
-    const select = form.querySelector("select[name='language']");
-    if (!select) return;
-    select.addEventListener("change", () => {
-      const confirmMessage = form.dataset.languageConfirm;
-      if (confirmMessage && formIsDirty(form.closest("body") || document)) {
-        if (!window.confirm(confirmMessage)) {
-          select.value = select.querySelector("option[selected]") ? select.querySelector("option[selected]").value : select.value;
-          return;
+    // --- Idioma: submissão pelo servidor, com confirmação em formulários sujos ---
+    document.querySelectorAll("[data-language-form]").forEach((form) => {
+      const select = form.querySelector("select[name='language']");
+      if (!select) return;
+      select.addEventListener("change", () => {
+        const confirmMessage = form.dataset.languageConfirm;
+        if (confirmMessage && formIsDirty(form.closest("body") || document)) {
+          if (!window.confirm(confirmMessage)) {
+            select.value = select.querySelector("option[selected]") ? select.querySelector("option[selected]").value : select.value;
+            return;
+          }
         }
-      }
-      form.submit();
+        form.submit();
+      });
     });
-  });
+  }
 
   // --- Foco no resumo de erros quando presente ---
   const errorSummary = document.querySelector("[data-focus-error-summary]");
-  if (errorSummary) errorSummary.focus();
+  if (errorSummary && typeof errorSummary.focus === "function") errorSummary.focus();
 
   // --- Portal de psiquiatria: navegação e layout ---
   const portal = document.querySelector("[data-aurora-portal]");
