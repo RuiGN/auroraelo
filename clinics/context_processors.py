@@ -17,7 +17,7 @@ from .typing import ClinicRequest
 def clinic_navigation(request: HttpRequest) -> dict[str, Any]:
     """Expose only the current actor's authorized active clinic choices."""
     clinic_request = cast(ClinicRequest, request)
-    if not isinstance(request.user, AbstractBaseUser) or clinic_request.clinic is None:
+    if not hasattr(request, "user") or not isinstance(request.user, AbstractBaseUser) or clinic_request.clinic is None:
         return {
             "active_clinic": None,
             "active_clinic_branding": None,
