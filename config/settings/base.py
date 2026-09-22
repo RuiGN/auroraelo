@@ -57,6 +57,7 @@ RECOVERY_CONSENT_RESOLVER = None
 
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -318,3 +319,105 @@ MASTER_USER_EMAIL: str = os.environ.get(
     "MASTER_USER_EMAIL", "master@auroraelo.internal"
 )
 MASTER_USER_PASSWORD: str = os.environ.get("MASTER_USER_PASSWORD", "master")
+
+# ── Django Jazzmin (Admin UI) ─────────────────────────────────────────────────
+JAZZMIN_SETTINGS: dict = {
+    # Window / tab title
+    "site_title": "Aurora Elo Admin",
+    # Brand on login and sidebar header
+    "site_header": "Aurora Elo",
+    "site_brand": "Aurora Elo",
+    # Logo (relative to static/) — uses the same emblem as /master/login/
+    "site_logo": "design_system/assets/images/aurora-elo-emblem.png",
+    "login_logo": "design_system/assets/images/aurora-elo-emblem.png",
+    "login_logo_dark": "design_system/assets/images/aurora-elo-emblem.png",
+    "site_logo_classes": "img-circle",
+    "site_icon": "images/favicon.svg",
+    # Welcome text on login
+    "welcome_sign": "Acesse o painel administrativo",
+    # Copyright
+    "copyright": "Aurora Elo — Plataforma de Saúde Mental",
+    # Search bar in header
+    "search_model": ["accounts.User", "clinics.Clinic"],
+    # ── Top menu links ──
+    "topmenu_links": [
+        {"name": "Início", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Master Panel", "url": "/master/", "new_window": False},
+        {"name": "Plataforma", "url": "/", "new_window": True},
+    ],
+    # ── Sidebar ──
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "order_with_respect_to": [
+        "accounts",
+        "clinics",
+        "people",
+        "scheduling",
+        "finance",
+        "consents",
+        "audit",
+    ],
+    # Icons (Font Awesome)
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "accounts.User": "fas fa-user-shield",
+        "accounts.AccountSession": "fas fa-key",
+        "clinics.Clinic": "fas fa-hospital",
+        "clinics.ClinicMembership": "fas fa-id-badge",
+        "people.PatientProfile": "fas fa-user-injured",
+        "scheduling.Appointment": "fas fa-calendar-check",
+        "finance.Invoice": "fas fa-file-invoice-dollar",
+        "consents.ConsentRecord": "fas fa-file-signature",
+        "audit.AuditEntry": "fas fa-clipboard-list",
+        "journal.JournalEntry": "fas fa-book-medical",
+        "goals.Goal": "fas fa-bullseye",
+        "analytics.Metric": "fas fa-chart-line",
+        "content.Article": "fas fa-newspaper",
+        "master_panel.TenantSubscription": "fas fa-building",
+        "master_panel.TenantUsageSnapshot": "fas fa-chart-bar",
+    },
+    "default_icon_parents": "fas fa-folder",
+    "default_icon_children": "fas fa-circle",
+    # ── UI behavior ──
+    "related_modal_active": True,
+    "use_google_fonts_cdn": False,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "language_chooser": False,
+}
+
+JAZZMIN_UI_TWEAKS: dict = {
+    "navbar_small_text": False,
+    "footer_small_text": True,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
