@@ -29,11 +29,12 @@ def test_root_url_resolves_to_home() -> None:
 
 
 def test_root_endpoint_uses_brazilian_portuguese(client: Client) -> None:
-    """The only user-visible foundation response is in PT-BR."""
+    """The root endpoint serves the landing page in Brazilian Portuguese."""
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.content.decode() == "Plataforma terapêutica disponível."
+    assert "Plataforma terapêutica disponível." in response.content.decode("utf-8")
+    assert "Aurora Elo" in response.content.decode("utf-8")
 
 
 @pytest.mark.django_db

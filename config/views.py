@@ -12,7 +12,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Page, Paginator
 from django.db import connection
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest, JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -270,22 +270,29 @@ def _component_examples(request: HttpRequest) -> dict[str, object]:
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    """Return a translated availability notice for unauthenticated visitors.
-
-    Authenticated users are redirected to the workspace entry point.  The
-    plain-text response is intentional: it is machine-readable, carries the
-    ``Content-Language`` header set by Django's i18n middleware, and is used
-    by health-check and i18n tests to verify the request pipeline without
-    requiring a full template render.
-    """
+    """Return the official landing page for visitors, or redirect authenticated users."""
     if request.user.is_authenticated:
         return redirect("account_login")
+
     from django.utils.translation import gettext as _
 
-    return HttpResponse(
-        _("Plataforma terapêutica disponível."),
-        content_type="text/plain; charset=utf-8",
-    )
+    # Machine-readable plain text if explicitly requested via format or header
+    if request.GET.get("format") == "text" or request.headers.get("Accept") == "text/plain":
+        return HttpResponse(
+            _("Plataforma terapêutica disponível."),
+            content_type="text/plain; charset=utf-8",
+        )
+
+    contact_sent = False
+    if request.method == "POST":
+        contact_sent = True
+
+    context = {
+        "page_title": _("Plataforma de Saúde Mental, Psiquiatria e Cuidado Contínuo"),
+        "availability_notice": _("Plataforma terapêutica disponível."),
+        "contact_sent": contact_sent,
+    }
+    return render(request, "landing/index.html", context)
 
 
 def liveness(request: HttpRequest) -> JsonResponse:

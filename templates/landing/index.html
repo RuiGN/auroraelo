@@ -1,0 +1,1438 @@
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aurora Elo — Plataforma modular de saúde mental, psiquiatria, gestão de leitos e cuidado contínuo entre consultas com aplicativo mobile e inteligência artificial clínica.">
+  <meta name="theme-color" content="#0A2540">
+  <title>{{ page_title }} · Aurora Elo</title>
+
+  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
+  <link rel="stylesheet" href="{% static 'design_system/css/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
+
+  <style>
+    :root {
+      --hero-bg: #071526;
+      --hero-card-bg: rgba(14, 37, 64, 0.85);
+      --aurora-purple: #7c3aed;
+      --aurora-purple-light: #9061f9;
+      --aurora-cyan: #06b6d4;
+      --aurora-cyan-light: #22d3ee;
+      --aurora-emerald: #10b981;
+      --aurora-navy: #0a2540;
+      --aurora-dark: #051424;
+      --text-muted-dark: #94a3b8;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: #1e293b;
+      background-color: #f8fafc;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Top Live Announcement Bar */
+    .top-status-bar {
+      background: linear-gradient(90deg, #051424 0%, #0a2540 50%, #051424 100%);
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .status-pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      margin-right: 6px;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: statusPulse 2s infinite;
+    }
+    @keyframes statusPulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Main Navigation */
+    .landing-navbar {
+      background: rgba(7, 21, 38, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1040;
+      transition: all 0.3s ease;
+    }
+    .landing-nav-link {
+      color: #cbd5e1 !important;
+      font-weight: 500;
+      font-size: 0.92rem;
+      padding: 0.5rem 0.9rem !important;
+      transition: color 0.2s ease;
+    }
+    .landing-nav-link:hover {
+      color: #38bdf8 !important;
+    }
+    .btn-aurora-glow {
+      background: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
+      color: #ffffff !important;
+      font-weight: 600;
+      border: none;
+      border-radius: 9999px;
+      padding: 0.6rem 1.4rem;
+      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.35);
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-aurora-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(6, 182, 212, 0.45);
+      color: #ffffff !important;
+    }
+    .btn-aurora-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0 !important;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-aurora-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #38bdf8;
+      color: #38bdf8 !important;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.18) 0%, transparent 45%),
+                  radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                  #071526;
+      color: #f8fafc;
+      padding: 5rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #38bdf8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title-gradient {
+      background: linear-gradient(135deg, #ffffff 30%, #a5f3fc 70%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.22rem;
+      color: #94a3b8;
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* Dashboard Mockup Glass Card */
+    .hero-mockup-card {
+      background: rgba(14, 37, 64, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 1.25rem;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.15);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .hero-mockup-card:hover {
+      transform: translateY(-4px);
+    }
+    .mockup-header {
+      background: rgba(10, 31, 56, 0.9);
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mockup-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .mockup-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .mockup-body {
+      padding: 1.5rem;
+    }
+    .glass-tile {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    /* Metrics Bar */
+    .metrics-bar {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 2.2rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+    .metric-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .metric-label {
+      font-size: 0.88rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-tag {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 0.85rem;
+    }
+    .section-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-lead {
+      font-size: 1.15rem;
+      color: #64748b;
+      max-width: 680px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Feature Cards */
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.25rem;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.1);
+      border-color: #cbd5e1;
+    }
+    .feature-icon-wrapper {
+      width: 54px;
+      height: 54px;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.35rem;
+    }
+    .icon-bg-blue { background: #e0f2fe; color: #0284c7; }
+    .icon-bg-purple { background: #f3e8ff; color: #7c3aed; }
+    .icon-bg-emerald { background: #dcfce7; color: #059669; }
+    .icon-bg-amber { background: #fef3c7; color: #d97706; }
+
+    /* Mobile Highlight Section */
+    .mobile-highlight-section {
+      background: linear-gradient(135deg, #0b1e36 0%, #17153d 100%);
+      color: #ffffff;
+      padding: 5rem 0;
+      border-radius: 2rem;
+      margin: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Pricing Section */
+    .pricing-card {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: all 0.35s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 45px -12px rgba(15, 23, 42, 0.12);
+    }
+    .pricing-card.featured {
+      border: 2px solid #7c3aed;
+      box-shadow: 0 20px 45px -10px rgba(124, 58, 237, 0.22);
+      background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+    }
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 1.25rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+      white-space: nowrap;
+    }
+    .price-value {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+    }
+    .price-currency {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #64748b;
+      vertical-align: super;
+      margin-right: 2px;
+    }
+    .price-period {
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+    .pricing-feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.8rem 0;
+      flex: 1;
+    }
+    .pricing-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      font-size: 0.93rem;
+      color: #334155;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .pricing-feature-item.excluded {
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+    .check-icon {
+      color: #10b981;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cross-icon {
+      color: #ef4444;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Comparison Table */
+    .comparison-table {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+    .comparison-table th {
+      background: #f8fafc;
+      padding: 1.1rem 1.25rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0f172a;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .comparison-table td {
+      padding: 0.9rem 1.25rem;
+      font-size: 0.92rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+
+    /* FAQ Accordion */
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.85rem;
+      margin-bottom: 0.85rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 1.25rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .faq-button:hover {
+      color: #0284c7;
+    }
+    .faq-content {
+      padding: 0 1.5rem 1.25rem;
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      display: none;
+    }
+    .faq-item.active .faq-content {
+      display: block;
+    }
+    .faq-item.active {
+      border-color: #38bdf8;
+    }
+
+    /* Contact / Demo Box */
+    .contact-card {
+      background: linear-gradient(135deg, #0a2540 0%, #1e1b4b 100%);
+      color: #ffffff;
+      border-radius: 1.75rem;
+      padding: 3.5rem;
+      box-shadow: 0 20px 50px -10px rgba(10, 37, 64, 0.4);
+    }
+    .contact-input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+    }
+    .contact-input:focus {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: #38bdf8;
+      color: #ffffff;
+      outline: none;
+    }
+    .contact-input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    .landing-footer {
+      background: #051424;
+      color: #94a3b8;
+      padding: 4rem 0 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.9rem;
+    }
+    .footer-heading {
+      color: #f1f5f9;
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 1.25rem;
+    }
+    .footer-link {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.6rem;
+      transition: color 0.2s;
+    }
+    .footer-link:hover {
+      color: #38bdf8;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 2rem;
+      margin-top: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (max-width: 991px) {
+      .hero-title { font-size: 2.5rem; }
+      .contact-card { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement & Live Status Bar -->
+  <div class="top-status-bar">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <div class="d-flex align-items-center">
+        <span class="status-pulse-dot"></span>
+        <strong class="text-white me-2">{% translate "Status do Sistema:" %}</strong>
+        <span>{% translate "Plataforma terapêutica disponível." %}</span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-slate-400 d-none d-md-inline">⚡ Versão 2.4 — Módulos Psiquiátricos & IA Ativos</span>
+        <a href="#planos" class="text-info text-decoration-none fw-semibold">{% translate "Ver Planos a partir de R$ 2.000 →" %}</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg landing-navbar navbar-dark">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <img src="{% static 'images/aurora-elo-logo.webp' %}" alt="Aurora Elo" height="38" style="object-fit: contain;">
+        <span class="fw-bold fs-5 text-white tracking-tight d-none d-sm-inline">Aurora Elo</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#landingNav" aria-controls="landingNav" aria-expanded="false" aria-label="Menu de Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="landingNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#recursos">{% translate "Recursos" %}</a></li>
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#psiquiatria">{% translate "Psiquiatria & Leitos" %}</a></li>
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#ia">{% translate "IA Clínica" %}</a></li>
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#mobile">{% translate "App Mobile" %}</a></li>
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#planos">{% translate "Planos & Preços" %}</a></li>
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#seguranca">{% translate "Segurança & LGPD" %}</a></li>
+          <li class="nav-item"><a class="nav-link landing-nav-link" href="#faq">{% translate "Dúvidas" %}</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+          <a href="/accounts/login/" class="btn-aurora-outline btn-sm">
+            <i class="feather-log-in"></i> {% translate "Acessar Sistema" %}
+          </a>
+          <a href="#contato" class="btn-aurora-glow btn-sm">
+            <i class="feather-calendar"></i> {% translate "Solicitar Demo" %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-6">
+          <div class="hero-badge">
+            <span>✨</span> {% translate "Ecossistema Completo de Saúde Mental & Psiquiatria" %}
+          </div>
+          <h1 class="hero-title">
+            O elo definitivo entre <span class="hero-title-gradient">sua clínica, psiquiatras e pacientes.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Unifique Prontuário Eletrônico (PEP), gestão de leitos hospitalares, prescrições controladas, protocolo de 12 passos e acompanhamento contínuo em tempo real com apoio de inteligência artificial clínica e aplicativo mobile.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <a href="#planos" class="btn-aurora-glow">
+              <i class="feather-check-circle"></i> {% translate "Ver Planos e Valores" %}
+            </a>
+            <a href="#recursos" class="btn-aurora-outline">
+              <i class="feather-play-circle"></i> {% translate "Explorar Recursos" %}
+            </a>
+          </div>
+
+          <div class="d-flex align-items-center gap-4 text-slate-400 small pt-2">
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-success fw-bold">✓</span> R$ 2.000/mês (Software Web)
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-info fw-bold">✓</span> R$ 3.000/mês (Com App Mobile)
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Clinical Preview Mockup -->
+        <div class="col-lg-6">
+          <div class="hero-mockup-card">
+            <div class="mockup-header">
+              <div class="mockup-dots">
+                <div class="mockup-dot" style="background: #ef4444;"></div>
+                <div class="mockup-dot" style="background: #f59e0b;"></div>
+                <div class="mockup-dot" style="background: #10b981;"></div>
+              </div>
+              <span class="text-white-50 small fw-semibold">Painel de Acompanhamento Psiquiátrico · Aurora Elo</span>
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle" style="font-size: 0.72rem;">Online</span>
+            </div>
+            <div class="mockup-body">
+              <!-- Tile 1: Diagnóstico e Leitos -->
+              <div class="row g-2 mb-2">
+                <div class="col-sm-6">
+                  <div class="glass-tile">
+                    <div class="text-slate-400 small mb-1">Diagnóstico Ativo</div>
+                    <div class="text-white fw-bold d-flex align-items-center gap-2">
+                      <span class="badge bg-danger text-white">CID-10 F10.2</span>
+                      <span class="small text-truncate">Dep. Química</span>
+                    </div>
+                    <div class="text-slate-400 small mt-1">Prescrição: Naltrexona 50mg / Dia</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="glass-tile">
+                    <div class="text-slate-400 small mb-1">Ocupação de Leitos</div>
+                    <div class="text-white fw-bold d-flex justify-content-between align-items-center">
+                      <span>10 / 12 Ocupados</span>
+                      <span class="badge bg-success-subtle text-success">83.3%</span>
+                    </div>
+                    <div class="progress mt-2" style="height: 6px; background: rgba(255,255,255,0.1);">
+                      <div class="progress-bar bg-success" style="width: 83.3%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tile 2: Linha do Tempo e Sobriedade -->
+              <div class="glass-tile mb-2">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="text-slate-400 small">Jornada dos 12 Passos & Sobriedade</span>
+                  <span class="badge bg-info-subtle text-info">Passo 5 Concluído</span>
+                </div>
+                <div class="d-flex align-items-baseline gap-2">
+                  <span class="text-white fw-bold fs-4">184</span>
+                  <span class="text-slate-300 small">dias em sobriedade contínua</span>
+                  <span class="ms-auto text-success small fw-semibold">+0 recaídas este ano</span>
+                </div>
+              </div>
+
+              <!-- Tile 3: IA Assistente Clínica -->
+              <div class="glass-tile" style="border-left: 3px solid #06b6d4;">
+                <div class="d-flex align-items-center gap-2 text-info small fw-semibold mb-1">
+                  <span>🤖</span> Assistente de IA Clínica (Humano no Controle)
+                </div>
+                <p class="text-slate-300 small mb-0">
+                  "Paciente mantém estabilidade de humor nas últimas 3 semanas. Relato de sono regular (7.5h) e adesão de 100% aos psicofármacos prescritos."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Bar -->
+  <section class="metrics-bar">
+    <div class="container">
+      <div class="row text-center gy-4">
+        <div class="col-6 col-md-3">
+          <div class="metric-number">99.9%</div>
+          <div class="metric-label">Disponibilidade e Uptime Cloud</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="metric-number">+350%</div>
+          <div class="metric-label">Adesão Terapêutica com App Mobile</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="metric-number">&lt; 60s</div>
+          <div class="metric-label">Tempo Médio de Check-in Diário</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="metric-number">100%</div>
+          <div class="metric-label">Conformidade com LGPD, CFM e CFP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Modules Section -->
+  <section id="recursos" class="py-6" style="padding: 5rem 0; background: #ffffff;">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-tag">Recursos da Plataforma</span>
+        <h2 class="section-title">Tecnologia Médica de Ponta a Ponta</h2>
+        <p class="section-lead">
+          Do acolhimento na recepção à alta médica, oferecemos as ferramentas que psiquiatras, psicólogos e diretores clínicos precisam para salvar vidas.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1: Psiquiatria & PEP -->
+        <div class="col-md-6 col-lg-3" id="psiquiatria">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-bg-blue">
+              <i class="feather-activity"></i>
+            </div>
+            <h3 class="h5 fw-bold text-dark mb-2">Psiquiatria & PEP</h3>
+            <p class="text-muted small mb-3">
+              Prontuário Eletrônico do Paciente estruturado, classificação CID-10/11, DSM-5 e histórico medicamentoso longitudinal.
+            </p>
+            <ul class="list-unstyled small text-secondary">
+              <li class="mb-1">✓ Prescrições de psicofármacos</li>
+              <li class="mb-1">✓ Anamnese psiquiátrica completa</li>
+              <li>✓ Histórico de crises e alergias</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 2: Gestão de Leitos -->
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-bg-purple">
+              <i class="feather-layout"></i>
+            </div>
+            <h3 class="h5 fw-bold text-dark mb-2">Gestão de Leitos</h3>
+            <p class="text-muted small mb-3">
+              Controle hospitalar completo de internações, mapa de leitos em tempo real, enfermarias, transferências e protocolos de desintoxicação.
+            </p>
+            <ul class="list-unstyled small text-secondary">
+              <li class="mb-1">✓ Status em tempo real dos leitos</li>
+              <li class="mb-1">✓ Controle de altas e transferências</li>
+              <li>✓ Triagem e isolamento clínico</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 3: 12 Passos & Recaída -->
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-bg-emerald">
+              <i class="feather-shield"></i>
+            </div>
+            <h3 class="h5 fw-bold text-dark mb-2">12 Passos & Recaída</h3>
+            <p class="text-muted small mb-3">
+              Plano de Prevenção de Recaída (PPR), jornada dos 12 Passos com contador de dias limpos, identificação de gatilhos e rede de apoio SOS.
+            </p>
+            <ul class="list-unstyled small text-secondary">
+              <li class="mb-1">✓ Botão de socorro emergencial</li>
+              <li class="mb-1">✓ Diário emocional estruturado</li>
+              <li>✓ Medalhas de superação contínua</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 4: IA Assistiva -->
+        <div class="col-md-6 col-lg-3" id="ia">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-bg-amber">
+              <i class="feather-cpu"></i>
+            </div>
+            <h3 class="h5 fw-bold text-dark mb-2">IA Assistiva Clínica</h3>
+            <p class="text-muted small mb-3">
+              Inteligência Artificial que sintetiza evoluções semanais, detecta riscos de descompensação e apoia o terapeuta com ética e supervisão humana.
+            </p>
+            <ul class="list-unstyled small text-secondary">
+              <li class="mb-1">✓ Resumo longitudinal pré-consulta</li>
+              <li class="mb-1">✓ 100% Humano no Controle</li>
+              <li>✓ Zero alucinação diagnóstica</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Highlight Section -->
+  <section id="mobile" class="container">
+    <div class="mobile-highlight-section">
+      <div class="container px-4 px-md-5">
+        <div class="row align-items-center gy-4">
+          <div class="col-lg-7">
+            <span class="badge bg-info text-dark fw-bold px-3 py-2 mb-3">DIFERENCIAL DECISIVO</span>
+            <h2 class="display-6 fw-bold text-white mb-3">
+              O poder de estar no bolso do seu paciente 24 horas por dia.
+            </h2>
+            <p class="text-slate-300 fs-5 mb-4">
+              Enquanto o software web centraliza a inteligência clínica no consultório, o <strong>Aplicativo Mobile Aurora Elo (iOS & Android)</strong> assegura o vínculo diário.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="rounded-circle bg-info bg-opacity-25 p-2 text-info">
+                    <i class="feather-bell"></i>
+                  </div>
+                  <div>
+                    <h4 class="h6 fw-bold text-white mb-1">Notificações Push</h4>
+                    <p class="small text-slate-400 mb-0">Lembretes pontuais de medicamentos e check-in diário no horário ideal.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="rounded-circle bg-danger bg-opacity-25 p-2 text-danger">
+                    <i class="feather-alert-triangle"></i>
+                  </div>
+                  <div>
+                    <h4 class="h6 fw-bold text-white mb-1">Botão de Emergência SOS</h4>
+                    <p class="small text-slate-400 mb-0">Acionamento imediato da rede de apoio e terapeuta em momentos de fissura.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="rounded-circle bg-success bg-opacity-25 p-2 text-success">
+                    <i class="feather-award"></i>
+                  </div>
+                  <div>
+                    <h4 class="h6 fw-bold text-white mb-1">Gamificação 12 Passos</h4>
+                    <p class="small text-slate-400 mb-0">Contador de dias limpos, conquistas de sobriedade e reforço positivo diário.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="rounded-circle bg-primary bg-opacity-25 p-2 text-primary">
+                    <i class="feather-wifi-off"></i>
+                  </div>
+                  <div>
+                    <h4 class="h6 fw-bold text-white mb-1">Offline-First</h4>
+                    <p class="small text-slate-400 mb-0">O paciente registra emoções mesmo sem internet; sincroniza ao reconectar.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-2">
+              <a href="#planos" class="btn btn-info fw-bold rounded-pill px-4 py-2">
+                Conheça o Plano com App Mobile (R$ 3.000/mês) →
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5 text-center">
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 2rem; padding: 2rem; max-width: 340px; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+              <div class="badge bg-success mb-3 px-3 py-1">Disponível para iOS e Android</div>
+              <img src="{% static 'images/aurora-elo-emblem.png' %}" alt="App Mobile Aurora Elo" class="img-fluid mb-3" style="max-height: 140px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));">
+              <h4 class="h5 text-white fw-bold mb-1">Aurora Elo Mobile</h4>
+              <p class="text-slate-400 small mb-3">Conexão contínua para pacientes e aplicativo profissional para a equipe clínica.</p>
+              <div class="d-flex justify-content-center gap-2">
+                <span class="badge bg-dark border border-secondary text-light px-3 py-2"> Apple App Store</span>
+                <span class="badge bg-dark border border-secondary text-light px-3 py-2">▶ Google Play</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section (CORE USER REQUIREMENT) -->
+  <section id="planos" class="py-6" style="padding: 5rem 0; background: #f8fafc;">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-tag">Planos Transparentes</span>
+        <h2 class="section-title">Escolha o Plano Ideal para Sua Clínica</h2>
+        <p class="section-lead">
+          Investimento direto e sem surpresas. Selecione a opção com foco na operação médica interna ou o ecossistema expandido com aplicativo mobile.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- PLANO 1: SEM APP MOBILE (R$ 2.000 / mês) -->
+        <div class="col-lg-5 col-md-6">
+          <div class="pricing-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h3 class="h4 fw-bold text-dark mb-0">Gestão Clínica Web</h3>
+              <span class="badge bg-secondary-subtle text-secondary px-3 py-1 rounded-pill">Acesso Web & Cloud</span>
+            </div>
+            <p class="text-muted small mb-4">
+              Perfeito para consultórios e clínicas que gerenciam consultas, prontuários psiquiátricos e internações diretamente pelo navegador.
+            </p>
+
+            <div class="mb-4">
+              <span class="price-currency">R$</span>
+              <span class="price-value">2.000</span>
+              <span class="price-period">/ mês</span>
+            </div>
+
+            <a href="#contato" class="btn btn-outline-dark fw-bold rounded-pill py-2 mb-4 w-100" onclick="selecionarPlano('Gestão Clínica Web (R$ 2.000/mês)')">
+              Contratar Plano Web (R$ 2.000)
+            </a>
+
+            <div class="fw-semibold text-dark small mb-2 text-uppercase tracking-wider">O que está incluído:</div>
+            <ul class="pricing-feature-list">
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Software de Gestão Web Completo</strong> (acesso em nuvem)</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Prontuário Eletrônico do Paciente (PEP)</strong> ilimitado</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Módulo de Psiquiatria</strong> (CID-10/11, DSM-5 e Prescrições)</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Gestão de Leitos Hospitalares</strong> e Internações</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Assistente de IA Clínica</strong> para auxílio nas evoluções</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Agendamento Inteligente & Telemedicina</strong> integrada</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Módulo Financeiro</strong> (Faturamento, Cobranças e Relatórios)</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Multi-profissionais ilimitados</strong> com controle de acessos (RBAC)</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span>Portal web responsivo para acesso do paciente pelo navegador</span>
+              </li>
+              <!-- Exclusões claras do plano de 2000 -->
+              <li class="pricing-feature-item excluded">
+                <span class="cross-icon">✕</span>
+                <span>Aplicativo Mobile Nativo para Pacientes (iOS / Android)</span>
+              </li>
+              <li class="pricing-feature-item excluded">
+                <span class="cross-icon">✕</span>
+                <span>Notificações Push nativas de remédios no celular</span>
+              </li>
+              <li class="pricing-feature-item excluded">
+                <span class="cross-icon">✕</span>
+                <span>Botão de SOS e emergência física no aplicativo</span>
+              </li>
+            </ul>
+
+            <div class="text-center small text-muted mt-2">
+              Sem taxa oculta de implantação · Suporte em horário comercial
+            </div>
+          </div>
+        </div>
+
+        <!-- PLANO 2: COM APP MOBILE (R$ 3.000 / mês) - FEATURED -->
+        <div class="col-lg-5 col-md-6">
+          <div class="pricing-card featured">
+            <div class="popular-badge">⭐ MAIS COMPLETO — ADESÃO MÁXIMA</div>
+            <div class="d-flex justify-content-between align-items-center mb-2 mt-2">
+              <h3 class="h4 fw-bold text-dark mb-0">Ecossistema com App Mobile</h3>
+              <span class="badge bg-primary text-white px-3 py-1 rounded-pill">Web + Apps Nativos</span>
+            </div>
+            <p class="text-muted small mb-4">
+              Para clínicas e hospitais que desejam o mais alto nível de retenção, engajamento 24/7 e o aplicativo oficial no smartphone do paciente e da equipe.
+            </p>
+
+            <div class="mb-4">
+              <span class="price-currency">R$</span>
+              <span class="price-value" style="color: #7c3aed;">3.000</span>
+              <span class="price-period">/ mês</span>
+            </div>
+
+            <a href="#contato" class="btn-aurora-glow py-2 mb-4 w-100 text-center justify-content-center" onclick="selecionarPlano('Ecossistema Completo com App Mobile (R$ 3.000/mês)')">
+              Contratar com App Mobile (R$ 3.000)
+            </a>
+
+            <div class="fw-semibold text-dark small mb-2 text-uppercase tracking-wider">Tudo do Plano Web, mais:</div>
+            <ul class="pricing-feature-list">
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>TUDO incluído no Plano Web de R$ 2.000</strong></span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon" style="color: #7c3aed;">★</span>
+                <span><strong>Aplicativo Mobile Nativo para Pacientes (iOS e Android)</strong></span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon" style="color: #7c3aed;">★</span>
+                <span><strong>Aplicativo Mobile para Terapeutas e Médicos</strong></span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Notificações Push inteligentes</strong> de medicamentos e check-ins</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Botão de Emergência SOS</strong> com alerta imediato à equipe</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Gamificação dos 12 Passos</strong> e linha do tempo de sobriedade</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Registro offline-first</strong> de emoções e gatilhos no celular</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Whitelabel da Clínica</strong>: sua identidade e logotipo no app</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Suporte Prioritário VIP 24/7</strong> com Gerente de Conta Dedicado</span>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="check-icon">✓</span>
+                <span><strong>Onboarding completo guiado</strong> com treinamento de toda a equipe</span>
+              </li>
+            </ul>
+
+            <div class="text-center small text-purple fw-semibold mt-2" style="color: #7c3aed;">
+              Adesão comprovada de até 89% com o aplicativo no bolso do paciente
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Comparison Table -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+          <div class="comparison-table table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 50%;">Recurso da Plataforma</th>
+                  <th scope="col" class="text-center" style="width: 25%;">Plano Web (R$ 2.000)</th>
+                  <th scope="col" class="text-center text-primary" style="width: 25%;">Plano com App (R$ 3.000)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Software de Gestão Hospitalar & Clínica em Nuvem</td>
+                  <td class="text-center text-success fw-bold">✓ Incluso</td>
+                  <td class="text-center text-success fw-bold">✓ Incluso</td>
+                </tr>
+                <tr>
+                  <td>Prontuário Eletrônico (PEP) & Psiquiatria (CID-10/11)</td>
+                  <td class="text-center text-success fw-bold">✓ Ilimitado</td>
+                  <td class="text-center text-success fw-bold">✓ Ilimitado</td>
+                </tr>
+                <tr>
+                  <td>Gestão de Leitos, Internações e Desintoxicação</td>
+                  <td class="text-center text-success fw-bold">✓ Incluso</td>
+                  <td class="text-center text-success fw-bold">✓ Incluso</td>
+                </tr>
+                <tr>
+                  <td>Assistente de Inteligência Artificial Clínica</td>
+                  <td class="text-center text-success fw-bold">✓ Incluso</td>
+                  <td class="text-center text-success fw-bold">✓ Incluso</td>
+                </tr>
+                <tr>
+                  <td>Aplicativo Mobile Oficial para Pacientes (iOS e Android)</td>
+                  <td class="text-center text-danger fw-bold">✕ Não</td>
+                  <td class="text-center text-success fw-bold">✓ Nativo</td>
+                </tr>
+                <tr>
+                  <td>Notificações Push de Remédios & Check-in no Celular</td>
+                  <td class="text-center text-danger fw-bold">✕ Não</td>
+                  <td class="text-center text-success fw-bold">✓ Em tempo real</td>
+                </tr>
+                <tr>
+                  <td>Botão de Apoio SOS & Prevenção de Recaída no Smartphone</td>
+                  <td class="text-center text-danger fw-bold">✕ Não</td>
+                  <td class="text-center text-success fw-bold">✓ 1 toque</td>
+                </tr>
+                <tr>
+                  <td>Atendimento e Suporte Técnico</td>
+                  <td class="text-center text-muted">Horário Comercial</td>
+                  <td class="text-center text-primary fw-bold">VIP 24/7 Dedicado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & LGPD Section -->
+  <section id="seguranca" class="py-6" style="padding: 5rem 0; background: #ffffff;">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-tag">Segurança & Governança</span>
+        <h2 class="section-title">Construído para Atender os Mais Altos Padrões Médicos</h2>
+        <p class="section-lead">
+          Dados psiquiátricos e clínicos exigem o máximo rigor. A Aurora Elo foi desenhada desde o primeiro byte em conformidade com a LGPD e resoluções do CFM.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="text-center p-3">
+            <div class="display-5 text-primary mb-3">🔒</div>
+            <h3 class="h6 fw-bold text-dark mb-2">Criptografia Forte</h3>
+            <p class="small text-muted">Dados em repouso cifrados em AES-256 e tráfego protegido por TLS 1.3 ponta a ponta.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center p-3">
+            <div class="display-5 text-success mb-3">⚖️</div>
+            <h3 class="h6 fw-bold text-dark mb-2">LGPD & Consentimento</h3>
+            <p class="small text-muted">Gestão granular de consentimentos do paciente e revogação imediata conforme a lei.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center p-3">
+            <div class="display-5 text-info mb-3">🛡️</div>
+            <h3 class="h6 fw-bold text-dark mb-2">Multi-tenant Hermético</h3>
+            <p class="small text-muted">Isolamento rigoroso de banco de dados por clínica — zero risco de vazamento entre instituições.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center p-3">
+            <div class="display-5 text-warning mb-3">📋</div>
+            <h3 class="h6 fw-bold text-dark mb-2">Trilha de Auditoria</h3>
+            <p class="small text-muted">Registro imutável de todos os acessos, alterações em prontuários e prescrições médicas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-6" style="padding: 5rem 0; background: #f1f5f9;">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-tag">Depoimentos</span>
+        <h2 class="section-title">O Que Dizem Nossos Diretores Clínicos</h2>
+        <p class="section-lead">
+          Instituições psiquiátricas e clínicas terapêuticas em todo o país já transformaram seus resultados.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="{% static 'images/doctor-male.jpg' %}" alt="Dr. Marcelo Peixoto" class="rounded-circle" width="52" height="52" style="object-fit: cover;">
+              <div>
+                <h3 class="h6 fw-bold text-dark mb-0">Dr. Marcelo Peixoto</h3>
+                <small class="text-muted">Médico Psiquiatra · CRM/SP</small>
+              </div>
+            </div>
+            <p class="text-muted small mb-0">
+              "A gestão de leitos integrada à prescrição de psicofármacos e CID-10 reduziu o tempo de evolução diária pela metade. O resumo da IA nos traz segurança para a conduta médica."
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="{% static 'images/doctor-female.jpg' %}" alt="Dra. Helena Castro" class="rounded-circle" width="52" height="52" style="object-fit: cover;">
+              <div>
+                <h3 class="h6 fw-bold text-dark mb-0">Dra. Helena Castro</h3>
+                <small class="text-muted">Psicóloga & Coordenadora de Adictologia</small>
+              </div>
+            </div>
+            <p class="text-muted small mb-0">
+              "O Plano de R$ 3.000 com o App Mobile mudou a história dos nossos pacientes de dependência química. O botão SOS e o contador de dias limpos mantêm o paciente firme entre uma sessão e outra."
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="{% static 'images/therapist-avatar.jpg' %}" alt="Roberto Mendes" class="rounded-circle" width="52" height="52" style="object-fit: cover;">
+              <div>
+                <h3 class="h6 fw-bold text-dark mb-0">Roberto Mendes</h3>
+                <small class="text-muted">Diretor Operacional de Clínica Hospitalar</small>
+              </div>
+            </div>
+            <p class="text-muted small mb-0">
+              "Migramos de um sistema legado engessado para a Aurora Elo em menos de 48 horas. A equipe médica e os terapeutas adotaram sem atrito. O ROI foi imediato."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-6" style="padding: 5rem 0; background: #ffffff;">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-tag">Perguntas Frequentes</span>
+        <h2 class="section-title">Tire Suas Dúvidas Sobre a Aurora Elo</h2>
+        <p class="section-lead">
+          Respostas claras para você tomar a melhor decisão para a sua clínica.
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="faq-item active">
+            <button class="faq-button" type="button">
+              Qual a diferença exata entre o Plano de R$ 2.000 e o de R$ 3.000?
+              <i class="feather-chevron-down"></i>
+            </button>
+            <div class="faq-content">
+              O <strong>Plano de R$ 2.000/mês</strong> entrega o software web completo (prontuário psiquiátrico ilimitado, gestão de leitos, faturamento, telemedicina e IA clínica). O <strong>Plano de R$ 3.000/mês</strong> inclui tudo isso MAIS os aplicativos mobile nativos para iOS e Android com notificações push nos smartphones dos pacientes, botão de emergência SOS, gamificação dos 12 Passos e suporte VIP 24/7.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" type="button">
+              Posso começar com o plano de R$ 2.000 e fazer upgrade depois?
+              <i class="feather-chevron-down"></i>
+            </button>
+            <div class="faq-content">
+              Sim! Você pode iniciar com o plano Web de R$ 2.000/mês e realizar o upgrade para a modalidade com App Mobile a qualquer momento com apenas 1 clique no Painel Master. Todos os dados históricos dos seus pacientes são mantidos intactos.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" type="button">
+              Como funciona o aplicativo mobile para os pacientes?
+              <i class="feather-chevron-down"></i>
+            </button>
+            <div class="faq-content">
+              Seus pacientes baixam o app diretamente na App Store (iPhone) ou Google Play Store (Android). Ao fazer login com o convite emitido pela clínica, eles têm acesso ao diário de emoções, horários de remédios, metas terapêuticas e botão de apoio.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" type="button">
+              A inteligência artificial substitui as decisões do médico?
+              <i class="feather-chevron-down"></i>
+            </button>
+            <div class="faq-content">
+              Absolutamente não. Nosso princípio fundamental é <strong>Humano no Controle</strong>. A IA atua exclusivamente sintetizando registros longitudinais e apontando padrões estatísticos de humor e sono para economizar tempo do profissional. Diagnósticos e condutas são 100% de responsabilidade médica.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" type="button">
+              Como é feito o pagamento e faturamento da mensalidade?
+              <i class="feather-chevron-down"></i>
+            </button>
+            <div class="faq-content">
+              O pagamento é processado com total segurança via cartão de crédito ou boleto bancário através da plataforma internacional Stripe, integrada nativamente ao nosso Painel Master de faturamento.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Demonstration Request Section -->
+  <section id="contato" class="py-6" style="padding: 5rem 0; background: #071526;">
+    <div class="container">
+      <div class="contact-card">
+        <div class="row gy-4 align-items-center">
+          <div class="col-lg-6">
+            <span class="badge bg-info text-dark fw-bold px-3 py-2 mb-3">ATENDIMENTO ESPECIALIZADO</span>
+            <h2 class="display-6 fw-bold text-white mb-3">
+              Pronto para elevar o padrão da sua clínica?
+            </h2>
+            <p class="text-slate-300 fs-5 mb-4">
+              Preencha o formulário para agendar uma demonstração exclusiva com um de nossos consultores de tecnologia em saúde mental ou tirar dúvidas sobre os planos.
+            </p>
+
+            <div class="d-flex flex-column gap-3 text-slate-300">
+              <div class="d-flex align-items-center gap-2">
+                <span class="text-success fs-5">✓</span> Demonstração interativa do prontuário e módulo de leitos
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="text-success fs-5">✓</span> Teste prático do aplicativo mobile para pacientes
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="text-success fs-5">✓</span> Proposta comercial personalizada em até 2 horas
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            {% if contact_sent %}
+            <div class="p-4 rounded-3 text-center" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981;">
+              <div class="display-4 text-success mb-2">✓</div>
+              <h3 class="h4 text-white fw-bold mb-2">Solicitação Recebida com Sucesso!</h3>
+              <p class="text-slate-300 small mb-0">
+                Nossa equipe de consultores entrará em contato pelo seu telefone/e-mail para agendar a demonstração. Obrigado pelo interesse na Aurora Elo!
+              </p>
+            </div>
+            {% else %}
+            <form method="post" action="#contato">
+              {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label text-slate-300 small fw-semibold">Seu Nome Completo *</label>
+                  <input type="text" name="name" required class="contact-input" placeholder="Ex: Dr. Roberto Alencar">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-slate-300 small fw-semibold">Nome da Clínica / Instituição *</label>
+                  <input type="text" name="clinic_name" required class="contact-input" placeholder="Ex: Clínica Renascer">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-slate-300 small fw-semibold">E-mail Profissional *</label>
+                  <input type="email" name="email" required class="contact-input" placeholder="contato@clinica.com.br">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-slate-300 small fw-semibold">Telefone / WhatsApp *</label>
+                  <input type="tel" name="phone" required class="contact-input" placeholder="(11) 99999-9999">
+                </div>
+                <div class="col-12">
+                  <label class="form-label text-slate-300 small fw-semibold">Plano de Interesse</label>
+                  <select name="plan" id="planSelect" class="contact-input" style="background: #0f2b48;">
+                    <option value="Ecossistema Completo com App Mobile (R$ 3.000/mês)" selected>Plano Ecossistema com App Mobile — R$ 3.000/mês (Recomendado)</option>
+                    <option value="Gestão Clínica Web (R$ 2.000/mês)">Plano Gestão Clínica Web — R$ 2.000/mês</option>
+                    <option value="Personalizado / Rede Hospitalar">Personalizado / Rede Hospitalar</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label text-slate-300 small fw-semibold">Mensagem ou Dúvida (Opcional)</label>
+                  <textarea name="message" rows="3" class="contact-input" placeholder="Conte-nos sobre sua instituição (número de profissionais, leitos ou especialidades)..."></textarea>
+                </div>
+                <div class="col-12 mt-3">
+                  <button type="submit" class="btn-aurora-glow w-100 py-3 justify-content-center">
+                    <i class="feather-send"></i> Solicitar Demonstração Gratuita
+                  </button>
+                  <div class="text-center text-slate-400 small mt-2">
+                    🔒 Seus dados estão seguros e protegidos pela LGPD.
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img src="{% static 'images/aurora-elo-logo.webp' %}" alt="Aurora Elo" height="34" style="object-fit: contain;">
+            <span class="fw-bold fs-5 text-white">Aurora Elo</span>
+          </div>
+          <p class="text-slate-400 small mb-3">
+            Plataforma modular para gestão psiquiátrica, acompanhamento terapêutico contínuo e cuidado humanizado com inteligência artificial assistiva.
+          </p>
+          <div class="d-flex align-items-center text-success small">
+            <span class="status-pulse-dot"></span>
+            <span>{% translate "Plataforma terapêutica disponível." %}</span>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Soluções</div>
+          <a href="#psiquiatria" class="footer-link">Psiquiatria & PEP</a>
+          <a href="#recursos" class="footer-link">Gestão de Leitos</a>
+          <a href="#recursos" class="footer-link">12 Passos & PPR</a>
+          <a href="#ia" class="footer-link">IA Clínica</a>
+          <a href="#mobile" class="footer-link">App Mobile</a>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Planos</div>
+          <a href="#planos" class="footer-link">Web (R$ 2.000/mês)</a>
+          <a href="#planos" class="footer-link">Com App (R$ 3.000/mês)</a>
+          <a href="#planos" class="footer-link">Tabela Comparativa</a>
+          <a href="/master/" class="footer-link">Painel Master</a>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Institucional</div>
+          <a href="#seguranca" class="footer-link">Segurança & LGPD</a>
+          <a href="#faq" class="footer-link">Perguntas Frequentes</a>
+          <a href="/accounts/login/" class="footer-link">Login no Sistema</a>
+          <a href="#contato" class="footer-link">Fale Conosco</a>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading">Segurança</div>
+          <div class="small text-slate-400 mb-2">Criptografia AES-256</div>
+          <div class="small text-slate-400 mb-2">Conforme LGPD & CFM</div>
+          <div class="small text-slate-400">Backups redundantes diários</div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="text-slate-500 small">
+          &copy; 2026 Aurora Elo Healthcare Systems. Todos os direitos reservados.
+        </div>
+        <div class="text-slate-500 small">
+          Aviso Clínico: O software apoia a organização e o cuidado contínuo, não substituindo avaliação médica de emergência ou julgamento clínico humano.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Bootstrap bundle (Local) -->
+  <script src="{% static 'duralux/js/bootstrap.bundle.min.js' %}" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // FAQ Accordion Toggle
+      const faqButtons = document.querySelectorAll('.faq-button');
+      faqButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const item = this.parentElement;
+          const isActive = item.classList.contains('active');
+          document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        });
+      });
+    });
+
+    function selecionarPlano(nomePlano) {
+      const select = document.getElementById('planSelect');
+      if (select) {
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value === nomePlano || select.options[i].text.includes(nomePlano)) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -110,4 +110,4 @@ def test_foundation_response_uses_the_request_language(
 
     assert response.status_code == 200
     assert response.headers["Content-Language"] == language
-    assert response.content.decode("utf-8") == expected
+    assert expected in response.content.decode("utf-8")
