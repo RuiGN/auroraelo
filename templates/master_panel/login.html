@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
   <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
     .bg-grid-pattern {
       background-size: 40px 40px;
       background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -42,7 +43,7 @@
   <!-- Main Content -->
   <main id="main-content" class="relative z-10 flex-grow flex flex-col items-center justify-center p-4" tabindex="-1">
     
-    <div class="w-full max-w-md bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-700/50 p-8 mb-6">
+    <div class="w-full max-w-md bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-700/50 p-8 mb-6 overflow-hidden">
       
       <!-- Icon & Titles -->
       <div class="text-center mb-8">
@@ -92,9 +93,9 @@
           <label for="id_password" class="block text-sm font-medium text-slate-300 mb-1">
             {% translate "Senha" %}
           </label>
-          <div class="relative">
+          <div class="relative w-full">
             <input type="password" name="password" id="id_password"
-                   class="w-full px-4 py-2.5 rounded-lg bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-aurora-500 focus:border-transparent transition-colors pr-10"
+                   class="block w-full min-w-0 pl-4 pr-12 py-2.5 rounded-lg bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-aurora-500 focus:border-transparent transition-colors"
                    placeholder="{% translate 'Digite sua senha' %}"
                    autocomplete="current-password" required>
             <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-200 focus:outline-none" data-password-toggle aria-label="{% translate 'Mostrar ou ocultar senha' %}">
