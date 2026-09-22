@@ -5001,3 +5001,12 @@ msgstr "SAMU: 192 (Brasil)"
 msgid "Voltar ao painel clínico"
 msgstr "Voltar ao painel clínico"
 
+
+msgid "Master Panel"
+msgstr "Master Panel"
+
+msgid "Acesso restrito à administração da plataforma."
+msgstr "Acesso restrito à administração da plataforma."
+
+msgid "Acessar painel"
+msgstr "Acessar painel"

@@ -4996,3 +4996,12 @@ msgstr "SAMU: 192 (Brazil)"
 msgid "Voltar ao painel clínico"
 msgstr "Back to clinical dashboard"
 
+
+msgid "Master Panel"
+msgstr "Master Panel"
+
+msgid "Acesso restrito à administração da plataforma."
+msgstr "Restricted access to platform administration."
+
+msgid "Acessar painel"
+msgstr "Access panel"
