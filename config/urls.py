@@ -24,6 +24,7 @@ handler500 = "config.views.server_error"
 
 urlpatterns = [
     path("", home, name="home"),
+    path("master/", include("master_panel.urls", namespace="master_panel")),
     path("accounts/", include("accounts.urls")),
     path("clinics/", include("clinics.urls")),
     path("people/", include("people.urls")),

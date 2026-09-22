@@ -1,0 +1,38 @@
+{% extends "master_panel/base.html" %}
+{% block content %}
+
+<div style="max-width:520px;">
+  <a href="{% url 'master_panel:tenant_list' %}" style="color:#7c3aed;text-decoration:none;font-size:.875rem;">← Voltar à lista</a>
+
+  <div class="chart-card" style="margin-top:1rem;">
+    <h2 style="margin:0 0 1.25rem;font-size:1.1rem;">Nova Clínica</h2>
+    <form method="post">
+      {% csrf_token %}
+
+      <div style="margin-bottom:1rem;">
+        <label style="display:block;font-size:.875rem;font-weight:600;margin-bottom:.35rem;">Nome da Clínica *</label>
+        <input name="name" required placeholder="Ex.: Clínica Bem Estar" style="width:100%;border:1px solid #e2e8f0;border-radius:.375rem;padding:.5rem .75rem;font-size:.875rem;box-sizing:border-box;">
+      </div>
+
+      <div style="margin-bottom:1rem;">
+        <label style="display:block;font-size:.875rem;font-weight:600;margin-bottom:.35rem;">E-mail do Administrador *</label>
+        <input name="admin_email" type="email" required placeholder="admin@clinica.com.br" style="width:100%;border:1px solid #e2e8f0;border-radius:.375rem;padding:.5rem .75rem;font-size:.875rem;box-sizing:border-box;">
+        <small style="color:#64748b;font-size:.75rem;">Usado para criar o Customer no Stripe e enviar o convite.</small>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block;font-size:.875rem;font-weight:600;margin-bottom:.35rem;">Plano inicial</label>
+        <select name="plan" style="width:100%;border:1px solid #e2e8f0;border-radius:.375rem;padding:.5rem .75rem;font-size:.875rem;box-sizing:border-box;">
+          {% for val, label in plan_choices %}
+          <option value="{{ val }}" {% if val == 'free' %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" style="width:100%;background:#7c3aed;color:#fff;border:none;padding:.65rem 1rem;border-radius:.5rem;cursor:pointer;font-size:.9rem;font-weight:700;">
+        ➕ Criar Clínica
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

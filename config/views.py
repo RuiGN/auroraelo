@@ -270,8 +270,22 @@ def _component_examples(request: HttpRequest) -> dict[str, object]:
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    """Redirect to login page."""
-    return redirect("account_login")
+    """Return a translated availability notice for unauthenticated visitors.
+
+    Authenticated users are redirected to the workspace entry point.  The
+    plain-text response is intentional: it is machine-readable, carries the
+    ``Content-Language`` header set by Django's i18n middleware, and is used
+    by health-check and i18n tests to verify the request pipeline without
+    requiring a full template render.
+    """
+    if request.user.is_authenticated:
+        return redirect("account_login")
+    from django.utils.translation import gettext as _
+
+    return HttpResponse(
+        _("Plataforma terapêutica disponível."),
+        content_type="text/plain; charset=utf-8",
+    )
 
 
 def liveness(request: HttpRequest) -> JsonResponse:

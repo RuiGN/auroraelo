@@ -1,0 +1,60 @@
+{% extends "master_panel/base.html" %}
+{% block content %}
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+  <div>
+    <a href="{% url 'master_panel:tenant_create' %}" style="background:#7c3aed;color:#fff;padding:.5rem 1rem;border-radius:.5rem;text-decoration:none;font-weight:600;font-size:.875rem;">➕ Nova Clínica</a>
+  </div>
+  <form method="get" style="display:flex;gap:.5rem;">
+    <input name="q" value="{{ q }}" placeholder="Buscar clínica…" style="border:1px solid #e2e8f0;border-radius:.375rem;padding:.4rem .75rem;font-size:.875rem;">
+    <select name="status" style="border:1px solid #e2e8f0;border-radius:.375rem;padding:.4rem .75rem;font-size:.875rem;">
+      <option value="">Todos os status</option>
+      {% for val, label in status_choices %}
+      <option value="{{ val }}" {% if val == status_filter %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" style="background:#7c3aed;color:#fff;border:none;border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;font-size:.875rem;">Filtrar</button>
+  </form>
+</div>
+
+<div class="chart-card" style="padding:0;overflow:hidden;">
+  <table style="width:100%;border-collapse:collapse;font-size:.875rem;">
+    <thead style="background:#f8fafc;">
+      <tr>
+        <th style="text-align:left;padding:.75rem 1rem;color:#64748b;font-weight:600;border-bottom:2px solid #e2e8f0;">Clínica</th>
+        <th style="text-align:left;padding:.75rem 1rem;color:#64748b;font-weight:600;border-bottom:2px solid #e2e8f0;">Slug</th>
+        <th style="text-align:left;padding:.75rem 1rem;color:#64748b;font-weight:600;border-bottom:2px solid #e2e8f0;">Plano</th>
+        <th style="text-align:left;padding:.75rem 1rem;color:#64748b;font-weight:600;border-bottom:2px solid #e2e8f0;">Status</th>
+        <th style="text-align:left;padding:.75rem 1rem;color:#64748b;font-weight:600;border-bottom:2px solid #e2e8f0;">Criada em</th>
+        <th style="padding:.75rem 1rem;border-bottom:2px solid #e2e8f0;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sub in subscriptions %}
+      <tr style="border-bottom:1px solid #f1f5f9;{% if sub.is_blocked %}background:#fff5f5;{% elif sub.is_past_due %}background:#fffbeb;{% endif %}">
+        <td style="padding:.625rem 1rem;font-weight:500;">
+          {{ sub.clinic.name }}
+          {% if not sub.clinic.is_active %}<span style="font-size:.7rem;color:#94a3b8;"> (inativa)</span>{% endif %}
+        </td>
+        <td style="padding:.625rem 1rem;color:#64748b;font-family:monospace;font-size:.8rem;">{{ sub.clinic.slug }}</td>
+        <td style="padding:.625rem 1rem;">{{ sub.get_plan_display }}</td>
+        <td style="padding:.625rem 1rem;">
+          <span class="status-badge badge-{{ sub.status }}">{{ sub.get_status_display }}</span>
+        </td>
+        <td style="padding:.625rem 1rem;color:#64748b;">{{ sub.created_at|date:"d/m/Y" }}</td>
+        <td style="padding:.625rem 1rem;text-align:right;">
+          <a href="{% url 'master_panel:tenant_detail' clinic_id=sub.clinic.pk %}" style="color:#7c3aed;font-weight:600;font-size:.8rem;text-decoration:none;">Ver →</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" style="padding:2rem 1rem;text-align:center;color:#94a3b8;">
+          Nenhuma clínica encontrada.
+          <a href="{% url 'master_panel:tenant_create' %}" style="color:#7c3aed;">Criar a primeira →</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

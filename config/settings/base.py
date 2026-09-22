@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     "clinical_operations.apps.ClinicalOperationsConfig",
     "ai_assistant.apps.AiAssistantConfig",
     "psychiatry.apps.PsychiatryConfig",
+    "master_panel.apps.MasterPanelConfig",
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "accounts.middleware.UserLanguageMiddleware",
     "clinics.middleware.ClinicTenantMiddleware",
+    "master_panel.middleware.PaymentRequiredMiddleware",
     "accounts.middleware.AccountSecurityMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -109,10 +111,9 @@ MIDDLEWARE = [
 
 CONTENT_SECURITY_POLICY = (
     "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; "
-    "form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://static.cloudflareinsights.com; "
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
-    "img-src 'self' data: https://images.unsplash.com; "
-    "font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://cloudflareinsights.com"
+    "form-action 'self'; object-src 'none'; script-src 'self'; "
+    "style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
+    "font-src 'self'; connect-src 'self'"
 )
 REFERRER_POLICY = "strict-origin-when-cross-origin"
 PERMISSIONS_POLICY = "camera=(), microphone=(), geolocation=()"
@@ -199,11 +200,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "pt-br"
-LANGUAGES = (
-    ("pt-br", "Português (Brasil)"),
-    ("en", "English"),
-    ("es", "Español"),
-)
+# Only the reviewed and launched language is active in base/production.
+# Development and test environments expand this list via their own settings.
+LANGUAGES = (("pt-br", "Português (Brasil)"),)
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = os.environ.get("DJANGO_TIME_ZONE", "America/Sao_Paulo")
 USE_I18N = True
@@ -298,3 +297,22 @@ CSRF_TRUSTED_ORIGINS = [
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
+
+# ── Stripe Billing ────────────────────────────────────────────────────────────
+STRIPE_SECRET_KEY: str = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_PUBLISHABLE_KEY: str = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
+STRIPE_WEBHOOK_SECRET: str = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+
+# Map plan slugs to Stripe Price IDs (configure per-environment).
+STRIPE_PRICE_IDS: dict[str, str] = {
+    "starter": os.environ.get("STRIPE_PRICE_STARTER", ""),
+    "professional": os.environ.get("STRIPE_PRICE_PROFESSIONAL", ""),
+    "enterprise": os.environ.get("STRIPE_PRICE_ENTERPRISE", ""),
+}
+
+# ── Master Panel ──────────────────────────────────────────────────────────────
+# Default password for the auto-created master superuser (override in prod).
+MASTER_USER_EMAIL: str = os.environ.get(
+    "MASTER_USER_EMAIL", "master@auroraelo.internal"
+)
+MASTER_USER_PASSWORD: str = os.environ.get("MASTER_USER_PASSWORD", "master")

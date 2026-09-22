@@ -8,7 +8,7 @@ rows are created through infrastructure_objects, bypassing services.
 from __future__ import annotations
 
 import pytest
-from django.db import IntegrityError, ProgrammingError, transaction
+from django.db import IntegrityError, ProgrammingError, connection, transaction
 
 import content.models as content_models
 from accounts.models import User
@@ -21,6 +21,70 @@ pytestmark = pytest.mark.django_db
 # RAISE(ABORT) surfaces as IntegrityError; PostgreSQL's plpgsql RAISE EXCEPTION
 # surfaces as ProgrammingError. Both prove the write was rejected.
 _TENANT_VIOLATION = (IntegrityError, ProgrammingError)
+
+_SQLITE_TRIGGERS = (
+    """
+    CREATE TRIGGER IF NOT EXISTS content_contentversion_same_tenant_ins
+    BEFORE INSERT ON content_contentversion
+    FOR EACH ROW
+    BEGIN
+      SELECT RAISE(ABORT, 'cross-tenant reference into content tree')
+      WHERE NEW.clinic_id IS NOT
+        (SELECT clinic_id FROM content_content WHERE id = NEW.content_id);
+    END
+    """,
+    """
+    CREATE TRIGGER IF NOT EXISTS content_contentversion_same_tenant_upd
+    BEFORE UPDATE OF content_id, clinic_id ON content_contentversion
+    FOR EACH ROW
+    BEGIN
+      SELECT RAISE(ABORT, 'cross-tenant reference into content tree')
+      WHERE NEW.clinic_id IS NOT
+        (SELECT clinic_id FROM content_content WHERE id = NEW.content_id);
+    END
+    """,
+    """
+    CREATE TRIGGER IF NOT EXISTS content_contentmedia_same_tenant_ins
+    BEFORE INSERT ON content_contentmedia
+    FOR EACH ROW
+    BEGIN
+      SELECT RAISE(ABORT, 'cross-tenant reference into content tree')
+      WHERE NEW.clinic_id IS NOT
+        (SELECT clinic_id FROM content_content WHERE id = NEW.content_id);
+    END
+    """,
+    """
+    CREATE TRIGGER IF NOT EXISTS content_content_tenant_immutable
+    BEFORE UPDATE ON content_content
+    FOR EACH ROW
+    WHEN OLD.clinic_id != NEW.clinic_id
+    BEGIN
+      SELECT RAISE(ABORT, 'content tenant is immutable');
+    END
+    """,
+)
+
+
+@pytest.fixture(autouse=True)
+def _install_content_triggers(db: object) -> None:  # noqa: ARG001
+    """Install tenant-invariant triggers when running without migrations.
+
+    When the full migration suite runs (``--migrations``), migration 0009
+    already creates these triggers.  When running with ``--no-migrations``
+    (fast-path for development), the triggers are absent and the DB-level
+    assertions would silently pass.  This fixture ensures the triggers exist
+    regardless of how the test database was set up, making the suite hermetic.
+
+    PostgreSQL triggers are handled by the migration runner; this fixture
+    only acts on SQLite, which is the default test backend.
+    """
+    if connection.vendor != "sqlite":
+        return
+    with connection.cursor() as cursor:
+        for statement in _SQLITE_TRIGGERS:
+            cursor.execute(statement)
+
+
 
 
 def _two_clinic_setup() -> tuple[Clinic, Clinic, User]:

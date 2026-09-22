@@ -1,0 +1,77 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="pt-br" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ page_title }} — Aurora Elo Master{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
+  <script src="{% static 'master_panel/js/chart.umd.min.js' %}" defer></script>
+  <style>
+    :root { --master-accent: #7c3aed; }
+    .master-sidebar {
+      width: 240px; min-height: 100vh; background: #1e1b4b;
+      color: #e0e7ff; display: flex; flex-direction: column;
+    }
+    .master-sidebar a { color: #c7d2fe; text-decoration: none; padding: .5rem 1.25rem; display: block; border-radius: .375rem; }
+    .master-sidebar a:hover, .master-sidebar a.active { background: rgba(255,255,255,.12); color: #fff; }
+    .master-logo { padding: 1.25rem; font-weight: 700; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,.15); }
+    .master-nav { padding: .75rem .5rem; flex: 1; }
+    .master-nav-section { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #818cf8; padding: .75rem 1.25rem .25rem; }
+    .master-main { flex: 1; display: flex; flex-direction: column; background: #f8fafc; }
+    .master-topbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: .75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .master-content { padding: 1.5rem; flex: 1; }
+    .kpi-card { background: #fff; border-radius: .75rem; border: 1px solid #e2e8f0; padding: 1.25rem 1.5rem; }
+    .kpi-value { font-size: 2rem; font-weight: 700; line-height: 1; }
+    .kpi-label { font-size: .8rem; color: #64748b; margin-top: .25rem; }
+    .chart-card { background: #fff; border-radius: .75rem; border: 1px solid #e2e8f0; padding: 1.25rem; }
+    .badge-active { background: #dcfce7; color: #166534; }
+    .badge-trialing { background: #dbeafe; color: #1e40af; }
+    .badge-past_due { background: #fef3c7; color: #92400e; }
+    .badge-blocked { background: #fee2e2; color: #991b1b; }
+    .badge-canceled { background: #f1f5f9; color: #475569; }
+    .status-badge { font-size: .75rem; font-weight: 600; padding: .2rem .65rem; border-radius: 9999px; }
+  </style>
+</head>
+<body style="display:flex; min-height:100vh; margin:0; font-family:system-ui,sans-serif;">
+
+<!-- Sidebar -->
+<aside class="master-sidebar">
+  <div class="master-logo">🌐 Aurora Elo<br><small style="font-weight:400;font-size:.8rem;color:#a5b4fc;">Painel Master</small></div>
+  <nav class="master-nav">
+    <div class="master-nav-section">Visão Geral</div>
+    <a href="{% url 'master_panel:dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>📊 Dashboard</a>
+
+    <div class="master-nav-section">Tenants</div>
+    <a href="{% url 'master_panel:tenant_list' %}" {% if 'tenant' in request.resolver_match.url_name %}class="active"{% endif %}>🏥 Clínicas</a>
+    <a href="{% url 'master_panel:tenant_create' %}">➕ Nova Clínica</a>
+
+    <div class="master-nav-section" style="margin-top:auto;">Sistema</div>
+    <a href="/admin/">⚙️ Django Admin</a>
+    <a href="/accounts/logout/">🚪 Sair</a>
+  </nav>
+</aside>
+
+<!-- Main -->
+<div class="master-main">
+  <div class="master-topbar">
+    <h1 style="margin:0;font-size:1.1rem;font-weight:600;">{{ page_title }}</h1>
+    <span style="font-size:.85rem;color:#64748b;">{{ request.user.get_full_name|default:request.user.email }}</span>
+  </div>
+
+  {% if messages %}
+  <div style="padding:.75rem 1.5rem 0;">
+    {% for message in messages %}
+    <div class="aurora-alert aurora-alert-{{ message.tags }}" style="margin-bottom:.5rem;">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="master-content">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+{% block page_scripts %}{% endblock %}
+</body>
+</html>

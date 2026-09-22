@@ -1,0 +1,112 @@
+{% extends "master_panel/base.html" %}
+{% block content %}
+
+<div style="display:flex;gap:1rem;margin-bottom:1.25rem;">
+  <a href="{% url 'master_panel:tenant_list' %}" style="color:#7c3aed;text-decoration:none;font-size:.875rem;">← Voltar à lista</a>
+</div>
+
+<!-- Header strip -->
+<div class="chart-card" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+  <div>
+    <h2 style="margin:0;font-size:1.15rem;">{{ clinic.name }}</h2>
+    <code style="font-size:.8rem;color:#64748b;">{{ clinic.slug }}</code>
+  </div>
+  <div style="display:flex;gap:.5rem;align-items:center;">
+    <span class="status-badge badge-{{ sub.status }}" style="font-size:.85rem;padding:.3rem .85rem;">{{ sub.get_status_display }}</span>
+    {% if sub.is_blocked %}
+    <form method="post" action="{% url 'master_panel:tenant_unblock' clinic_id=clinic.pk %}" style="display:inline;">
+      {% csrf_token %}
+      <button style="background:#16a34a;color:#fff;border:none;padding:.4rem .85rem;border-radius:.375rem;cursor:pointer;font-size:.8rem;font-weight:600;">✔ Desbloquear</button>
+    </form>
+    {% else %}
+    <button onclick="document.getElementById('block-modal').style.display='flex'" style="background:#dc2626;color:#fff;border:none;padding:.4rem .85rem;border-radius:.375rem;cursor:pointer;font-size:.8rem;font-weight:600;">🚫 Bloquear</button>
+    {% endif %}
+    {% if sub.stripe_customer_id %}
+    <a href="{% url 'master_panel:tenant_billing_portal' clinic_id=clinic.pk %}" style="background:#6366f1;color:#fff;padding:.4rem .85rem;border-radius:.375rem;text-decoration:none;font-size:.8rem;font-weight:600;">💳 Portal Stripe</a>
+    <a href="{% url 'master_panel:tenant_checkout' clinic_id=clinic.pk %}" style="background:#0ea5e9;color:#fff;padding:.4rem .85rem;border-radius:.375rem;text-decoration:none;font-size:.8rem;font-weight:600;">🛒 Checkout</a>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Info cards -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1rem;">
+  <div class="kpi-card">
+    <div class="kpi-label">Plano atual</div>
+    <div style="font-size:1.1rem;font-weight:700;margin-top:.25rem;">{{ sub.get_plan_display }}</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Stripe Customer</div>
+    <div style="font-size:.8rem;font-family:monospace;margin-top:.25rem;color:#7c3aed;">
+      {{ sub.stripe_customer_id|default:"—" }}
+    </div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Stripe Subscription</div>
+    <div style="font-size:.8rem;font-family:monospace;margin-top:.25rem;color:#7c3aed;">
+      {{ sub.stripe_subscription_id|default:"—" }}
+    </div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Período atual termina</div>
+    <div style="font-size:1rem;font-weight:600;margin-top:.25rem;">
+      {{ sub.current_period_end|date:"d/m/Y"|default:"—" }}
+    </div>
+  </div>
+  {% if sub.blocked_at %}
+  <div class="kpi-card" style="border-left:4px solid #dc2626;">
+    <div class="kpi-label">Bloqueada em</div>
+    <div style="font-size:1rem;font-weight:600;margin-top:.25rem;color:#dc2626;">{{ sub.blocked_at|date:"d/m/Y H:i" }}</div>
+    <div style="font-size:.75rem;color:#64748b;margin-top:.25rem;">{{ sub.block_reason }}</div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Usage snapshots -->
+<div class="chart-card">
+  <h3 style="margin:0 0 1rem;font-size:.95rem;font-weight:600;">Histórico de Uso (últimos 30 snapshots)</h3>
+  {% if snapshots %}
+  <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
+    <thead>
+      <tr style="border-bottom:2px solid #e2e8f0;">
+        <th style="text-align:left;padding:.4rem .75rem;color:#64748b;">Data</th>
+        <th style="text-align:right;padding:.4rem .75rem;color:#64748b;">Usuários ativos</th>
+        <th style="text-align:right;padding:.4rem .75rem;color:#64748b;">Sessões</th>
+        <th style="text-align:right;padding:.4rem .75rem;color:#64748b;">Storage (MB)</th>
+        <th style="text-align:right;padding:.4rem .75rem;color:#64748b;">Chamadas API</th>
+        <th style="text-align:right;padding:.4rem .75rem;color:#64748b;">Agendamentos</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for snap in snapshots %}
+      <tr style="border-bottom:1px solid #f1f5f9;">
+        <td style="padding:.35rem .75rem;color:#64748b;">{{ snap.snapshot_at|date:"d/m/Y H:i" }}</td>
+        <td style="padding:.35rem .75rem;text-align:right;font-weight:500;">{{ snap.active_users }}</td>
+        <td style="padding:.35rem .75rem;text-align:right;">{{ snap.total_sessions }}</td>
+        <td style="padding:.35rem .75rem;text-align:right;">{{ snap.storage_mb }}</td>
+        <td style="padding:.35rem .75rem;text-align:right;">{{ snap.api_calls }}</td>
+        <td style="padding:.35rem .75rem;text-align:right;">{{ snap.appointments }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:#94a3b8;text-align:center;padding:1rem 0;">Nenhum snapshot de uso coletado ainda.</p>
+  {% endif %}
+</div>
+
+<!-- Block modal -->
+<div id="block-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:.75rem;padding:2rem;min-width:400px;max-width:90vw;">
+    <h3 style="margin:0 0 1rem;">Bloquear clínica «{{ clinic.name }}»</h3>
+    <form method="post" action="{% url 'master_panel:tenant_block' clinic_id=clinic.pk %}">
+      {% csrf_token %}
+      <label style="display:block;margin-bottom:.5rem;font-size:.875rem;font-weight:600;">Motivo do bloqueio</label>
+      <input name="reason" value="Inadimplência" style="width:100%;border:1px solid #e2e8f0;border-radius:.375rem;padding:.5rem .75rem;font-size:.875rem;box-sizing:border-box;margin-bottom:1rem;">
+      <div style="display:flex;gap:.5rem;justify-content:flex-end;">
+        <button type="button" onclick="document.getElementById('block-modal').style.display='none'" style="background:#f1f5f9;border:none;padding:.5rem 1rem;border-radius:.375rem;cursor:pointer;">Cancelar</button>
+        <button type="submit" style="background:#dc2626;color:#fff;border:none;padding:.5rem 1rem;border-radius:.375rem;cursor:pointer;font-weight:600;">🚫 Confirmar Bloqueio</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

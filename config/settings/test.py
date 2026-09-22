@@ -78,3 +78,10 @@ ACCOUNT_SESSION_ALLOW_UNKNOWN = True
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 CLINICAL_OPERATIONS_ENABLED = False
+# Expand the language list in tests so that i18n and translation tests can
+# exercise EN and ES without requiring a production launch of those languages.
+LANGUAGES = (
+    ("pt-br", "Português (Brasil)"),
+    ("en", "English"),
+    ("es", "Español"),
+)

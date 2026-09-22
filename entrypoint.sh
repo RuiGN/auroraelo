@@ -29,6 +29,25 @@ if [ "$1" = "gunicorn" ]; then
     echo "Running clinical seed command..."
     python manage.py seed_psychiatry || true
   fi
+
+  echo "Ensuring master superuser exists..."
+  python manage.py shell -c "
+from django.conf import settings
+from django.contrib.auth import get_user_model
+User = get_user_model()
+email = getattr(settings, 'MASTER_USER_EMAIL', 'master@auroraelo.internal')
+password = getattr(settings, 'MASTER_USER_PASSWORD', 'master')
+if not User.infrastructure_objects.filter(email=email).exists():
+    User.infrastructure_objects.create_superuser(
+        email=email,
+        password=password,
+        first_name='Master',
+        last_name='Admin',
+    )
+    print(f'Master user created: {email}')
+else:
+    print(f'Master user already exists: {email}')
+" || true
 fi
 
 echo "Starting Aurora Elo application with command: $@"

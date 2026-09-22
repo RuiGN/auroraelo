@@ -140,10 +140,22 @@ def test_rendered_surfaces_have_translated_limits_and_selector(
     request.user = AnonymousUser()
     request.LANGUAGE_CODE = language
     index = LANGUAGES.index(language)
+    # Build the same ui_languages structure that accounts.context_processors
+    # language_preferences() would inject — render_to_string does not call
+    # context processors automatically.
+    _country = {"pt-br": "br", "en": "us", "es": "es"}
+    _names = {"pt-br": "Português (Brasil)", "en": "English", "es": "Español"}
+    ui_languages = [
+        {"code": code, "name_local": _names[code], "country_code": _country[code]}
+        for code in LANGUAGES
+    ]
     context = {
         "user": User(email="synthetic@example.test", first_name="Pessoa Sintética"),
         "active_clinic": {"name": "Clínica Sintética"},
         "layout_template": "layouts/vertical.html",
+        "ui_languages": ui_languages,
+        "current_ui_language": language,
+        "ui_language_next": "/synthetic/",
     }
     with override(language):
         html = render_to_string(template, context, request=request)
@@ -178,7 +190,9 @@ def test_rendered_surfaces_have_translated_limits_and_selector(
     assert 'name="csrfmiddlewaretoken"' in html
     for code in LANGUAGES:
         assert f'<option value="{code}"' in html
-    assert f'<option value="{language}" selected>' in html
+    # The template may append class="..." after `selected` (e.g. for auth
+    # selector_id), so match the attribute prefix only — not the closing >.
+    assert f'<option value="{language}" selected' in html
 
 
 class ParsedForm(TypedDict):

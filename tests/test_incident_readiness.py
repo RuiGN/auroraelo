@@ -176,6 +176,21 @@ def test_restore_drill_fails_closed_for_injected_control_failures(
     assert expected_cause in report["simulation"]["failures"]
 
 
+def _docker_available() -> bool:
+    """Return True when the Docker daemon is reachable from this process."""
+    try:
+        result = subprocess.run(
+            ["docker", "info"],
+            capture_output=True,
+            check=False,
+            timeout=5,
+        )
+        return result.returncode == 0
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return False
+
+
+@pytest.mark.skipif(not _docker_available(), reason="Docker daemon not available")
 def test_postgres_drill_measures_objectives_and_binds_persistent_artifacts(
     tmp_path: Path,
 ) -> None:
