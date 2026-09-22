@@ -37,8 +37,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 email = getattr(settings, 'MASTER_USER_EMAIL', 'master@auroraelo.internal')
 password = getattr(settings, 'MASTER_USER_PASSWORD', 'master')
-if not User.infrastructure_objects.filter(email=email).exists():
-    User.infrastructure_objects.create_superuser(
+qs = User.objects.filter(email=email)
+if not qs.exists():
+    User.objects.create_superuser(
         email=email,
         password=password,
         first_name='Master',
