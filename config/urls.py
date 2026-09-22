@@ -26,8 +26,11 @@ handler403 = "config.views.permission_denied"
 handler404 = "config.views.page_not_found"
 handler500 = "config.views.server_error"
 
+from accounts.views import master_login
+
 urlpatterns = [
     path("", home, name="home"),
+    path("master/login/", master_login, name="master_login"),
     path("master/", include("master_panel.urls", namespace="master_panel")),
     path("accounts/", include("accounts.urls")),
     path("clinics/", include("clinics.urls")),

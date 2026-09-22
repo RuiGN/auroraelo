@@ -16,7 +16,7 @@ from master_panel.services import (
 )
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 def tenant_billing_portal(request: HttpRequest, clinic_id) -> HttpResponse:
     """Redirect to the Stripe Customer Portal for self-service billing."""
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)
@@ -37,7 +37,7 @@ def tenant_billing_portal(request: HttpRequest, clinic_id) -> HttpResponse:
         return redirect("master_panel:tenant_detail", clinic_id=clinic_id)
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 def tenant_checkout(request: HttpRequest, clinic_id) -> HttpResponse:
     """Start a Stripe Checkout session for a new subscription."""
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)

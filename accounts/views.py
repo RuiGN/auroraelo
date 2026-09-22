@@ -103,7 +103,7 @@ def _safe_local_next(request: HttpRequest, value: object) -> str | None:
 
 @require_http_methods(["GET", "POST"])
 def account_login(request: HttpRequest) -> HttpResponse:
-    """Authenticate with a canonical e-mail and select one authorized clinic."""
+    """Authenticate clinic users (therapists, patients, staff)."""
     form = LoginForm(request.POST or None)
     status = 200
     if request.method == "POST" and form.is_valid():
@@ -132,17 +132,63 @@ def account_login(request: HttpRequest) -> HttpResponse:
             ) and not request.session.get(CLINIC_SESSION_KEY):
                 return redirect("master_panel:dashboard")
             return redirect("workspace_vertical")
-    response = _form_response(
+    response = TemplateResponse(
         request,
-        form=form,
-        title=_("Entrar na plataforma"),
-        description=_(
-            "Use seu e-mail e sua senha para acessar uma clínica autorizada."
-        ),
-        submit_label=_("Entrar"),
+        "accounts/clinic_login.html",
+        {
+            "page_title": _("Entrar na plataforma"),
+            "title": _("Entrar na plataforma"),
+            "description": _(
+                "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+            ),
+            "form": form,
+            "submit_label": _("Entrar"),
+            "secondary_url": reverse("password_recovery"),
+            "secondary_label": _("Esqueci minha senha"),
+        },
         status=status,
-        secondary_url=reverse("password_recovery"),
-        secondary_label=_("Esqueci minha senha"),
+    )
+    if status == 429:
+        response.headers["Retry-After"] = str(
+            max(1, int(settings.LOGIN_RATE_LIMIT_WINDOW_SECONDS))
+        )
+    return response
+
+
+@require_http_methods(["GET", "POST"])
+def master_login(request: HttpRequest) -> HttpResponse:
+    """Authenticate platform administrators for the Master Panel."""
+    form = LoginForm(request.POST or None)
+    status = 200
+    if request.method == "POST" and form.is_valid():
+        try:
+            login_user(
+                request=request,
+                email=form.cleaned_data["email"],
+                password=form.cleaned_data["password"],
+            )
+        except LoginRateLimitedError:
+            form.add_error(None, _(GENERIC_LOGIN_ERROR))
+            status = 429
+        except LoginRejectedError:
+            form.add_error(None, _(GENERIC_LOGIN_ERROR))
+        else:
+            if not (request.user.is_staff or request.user.is_superuser):
+                return redirect("workspace_vertical")
+            return redirect("master_panel:dashboard")
+    response = TemplateResponse(
+        request,
+        "master_panel/login.html",
+        {
+            "page_title": _("Master Panel"),
+            "title": _("Master Panel"),
+            "description": _(
+                "Acesso restrito à administração da plataforma."
+            ),
+            "form": form,
+            "submit_label": _("Acessar painel"),
+        },
+        status=status,
     )
     if status == 429:
         response.headers["Retry-After"] = str(

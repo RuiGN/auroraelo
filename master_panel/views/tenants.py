@@ -15,7 +15,7 @@ from master_panel.models import TenantSubscription, TenantUsageSnapshot
 from master_panel.services import create_stripe_customer
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 def tenant_list(request: HttpRequest) -> HttpResponse:
     subscriptions = (
         TenantSubscription.objects.select_related("clinic")
@@ -41,7 +41,7 @@ def tenant_list(request: HttpRequest) -> HttpResponse:
     )
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 def tenant_create(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
@@ -93,7 +93,7 @@ def tenant_create(request: HttpRequest) -> HttpResponse:
     )
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 def tenant_detail(request: HttpRequest, clinic_id) -> HttpResponse:
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)
     sub, _ = TenantSubscription.objects.get_or_create(
@@ -115,7 +115,7 @@ def tenant_detail(request: HttpRequest, clinic_id) -> HttpResponse:
     )
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 @require_POST
 def tenant_block(request: HttpRequest, clinic_id) -> HttpResponse:
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)
@@ -126,7 +126,7 @@ def tenant_block(request: HttpRequest, clinic_id) -> HttpResponse:
     return redirect("master_panel:tenant_detail", clinic_id=clinic_id)
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 @require_POST
 def tenant_unblock(request: HttpRequest, clinic_id) -> HttpResponse:
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)

@@ -16,7 +16,7 @@ from clinics.models import Clinic
 from master_panel.models import TenantSubscription, TenantUsageSnapshot
 
 
-@staff_member_required(login_url="/accounts/login/")
+@staff_member_required(login_url="/master/login/")
 def dashboard(request: HttpRequest) -> HttpResponse:
     """Main master panel dashboard with KPIs and Chart.js charts."""
     # ── KPIs ──────────────────────────────────────────────────────────────────
