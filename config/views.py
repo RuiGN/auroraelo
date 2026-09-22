@@ -272,7 +272,14 @@ def _component_examples(request: HttpRequest) -> dict[str, object]:
 def home(request: HttpRequest) -> HttpResponse:
     """Return the official landing page for visitors, or redirect authenticated users."""
     if request.user.is_authenticated:
-        return redirect("account_login")
+        from clinics.services import CLINIC_SESSION_KEY
+
+        has_clinic = bool(request.session.get(CLINIC_SESSION_KEY))
+        if has_clinic:
+            return redirect("workspace_vertical")
+        if request.user.is_staff or request.user.is_superuser:
+            return redirect("master_panel:dashboard")
+        return redirect("workspace_vertical")
 
     from django.utils.translation import gettext as _
 

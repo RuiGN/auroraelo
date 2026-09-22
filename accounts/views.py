@@ -126,6 +126,11 @@ def account_login(request: HttpRequest) -> HttpResponse:
                 ):
                     return redirect("workspace_vertical")
                 return redirect(next_url)
+            # Global staff without a clinic goes to the master panel.
+            if (
+                request.user.is_staff or request.user.is_superuser
+            ) and not request.session.get(CLINIC_SESSION_KEY):
+                return redirect("master_panel:dashboard")
             return redirect("workspace_vertical")
     response = _form_response(
         request,
