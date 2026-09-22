@@ -20,7 +20,7 @@ def test_production_trusts_only_explicit_csrf_origins(
         "AUDIT_INTEGRITY_KEY": "test-only-audit-integrity-key-32-characters",
         "MFA_ENCRYPTION_KEY": "test-only-mfa-key-32-characters-long",
         "DJANGO_ALLOWED_HOSTS": "auroraelo.example.test",
-        "CACHE_URL": "redis://127.0.0.1:6379/15",
+        "CACHE_REDIS_URL": "redis://127.0.0.1:6379/15",
         "DB_NAME": "auroraelo_test",
         "DB_USER": "test",
         "DB_PASSWORD": "test",

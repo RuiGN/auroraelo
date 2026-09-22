@@ -14,7 +14,7 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: "5432"
-      CACHE_URL: redis://redis:6379/1
+      CACHE_REDIS_URL: redis://redis:6379/1
       REDIS_STATE_URL: redis://redis:6379/3
       CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672//
       CELERY_RESULT_BACKEND: redis://redis:6379/2
@@ -51,7 +51,7 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: "5432"
-      CACHE_URL: redis://redis:6379/1
+      CACHE_REDIS_URL: redis://redis:6379/1
       REDIS_STATE_URL: redis://redis:6379/3
       CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672//
       CELERY_RESULT_BACKEND: redis://redis:6379/2

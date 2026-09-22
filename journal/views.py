@@ -390,7 +390,9 @@ def checkin_list(request: HttpRequest) -> HttpResponse:
 
     return TemplateResponse(
         request,
-        "journal/checkin_list.html",
+        "journal/partials/checkin_table.html"
+        if request.headers.get("HX-Request")
+        else "journal/checkin_list.html",
         {
             "layout_template": "layouts/vertical.html",
             "page_title": _("Histórico de Check-ins"),

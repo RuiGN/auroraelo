@@ -7,6 +7,7 @@ from django.http import HttpRequest, HttpResponse, JsonResponse
 
 from core.policies import is_tenant_independent_path
 from core.services import update_observability_context
+from core.telemetry import enrich_span_with_tenant
 
 from .services import (
     InvalidClinicSelectionError,
@@ -17,7 +18,7 @@ from .services import (
 from .typing import ClinicRequest
 
 # Django admin is global infrastructure and overrides tenant-safe model managers.
-TENANT_EXEMPT_PATH_PREFIXES = ("/accounts/", "/admin/", "/health/")
+TENANT_EXEMPT_PATH_PREFIXES = ("/accounts/", "/admin/", "/health/", "/master/")
 
 
 def is_tenant_exempt_path(path: str) -> bool:
@@ -47,6 +48,10 @@ class ClinicTenantMiddleware:
         try:
             clinic_request.clinic = resolve_request_clinic(request, request.user)
             update_observability_context(tenant_id=str(clinic_request.clinic.pk))
+            enrich_span_with_tenant(
+                clinic_id=str(clinic_request.clinic.pk),
+                clinic_name=clinic_request.clinic.name,
+            )
         except MissingClinicSelectionError:
             return JsonResponse(
                 {"detail": "Selecione uma clínica para continuar."}, status=400

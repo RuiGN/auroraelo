@@ -9,4 +9,14 @@ requests==2.34.2
 segno==1.6.6
 sqlparse==0.6.0
 whitenoise==6.12.0
+django-ninja==1.7.1
 stripe>=12.0.0
+# OpenTelemetry (opt-in distributed tracing — set OTEL_EXPORTER_OTLP_ENDPOINT to activate)
+opentelemetry-api==1.30.0
+opentelemetry-sdk==1.30.0
+opentelemetry-instrumentation-django==0.51b0
+opentelemetry-instrumentation-celery==0.51b0
+opentelemetry-instrumentation-psycopg==0.51b0
+opentelemetry-instrumentation-redis==0.51b0
+opentelemetry-instrumentation-requests==0.51b0
+opentelemetry-exporter-otlp-proto-grpc==1.30.0

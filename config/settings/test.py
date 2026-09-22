@@ -75,6 +75,24 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 # Test clients commonly use force_login(), which bypasses the real login service that
 # registers managed sessions. Security tests override this to False explicitly.
 ACCOUNT_SESSION_ALLOW_UNKNOWN = True
+# Use LocMemCache for hermetic unit tests (no Redis required).
+# Integration tests with compose.test.yml can set CACHE_REDIS_URL to exercise Redis.
+_test_cache_url = os.environ.get("CACHE_REDIS_URL")
+if _test_cache_url:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": _test_cache_url,
+            "KEY_PREFIX": "auroraelo-test",
+        }
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "auroraelo-test",
+        }
+    }
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 CLINICAL_OPERATIONS_ENABLED = False

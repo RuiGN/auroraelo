@@ -93,6 +93,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "core.middleware.RequestCorrelationMiddleware",
+    "core.metrics.MetricsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "core.security.SecurityHeadersMiddleware",
@@ -220,8 +221,9 @@ PRIVATE_UPLOAD_MALWARE_SCAN_COMMAND = tuple(
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": os.environ.get("CACHE_LOCATION", "mindcare"),
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.environ.get("CACHE_REDIS_URL", "redis://redis:6379/1"),
+        "KEY_PREFIX": "auroraelo",
     }
 }
 

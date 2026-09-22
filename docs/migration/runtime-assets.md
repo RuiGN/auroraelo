@@ -82,6 +82,7 @@ ativo forem alterados.
 | `js/bootstrap.bundle.min.js` | `073254afbfc06331b8b548b7fc0532b4ffe2cfdd588368dcc338e7abd50810e1` |
 | `js/dashboard-charts.js` | `155d4235c74c1660c02c9ec274b3b87ab43dd4f701918b72f8f4f220540ec047` |
 | `js/form-behaviors.js` | `7576ead48d793e4ff00eab29332ede7cfdc0c26d352b0c7269f8c55b4aaf87ab` |
+| `js/htmx.min.js` | `e209dda5c8235479f3166defc7750e1dbcd5a5c1808b7792fc2e6733768fb447` |
 | `js/language-selector.js` | `f3f8e0f7056594794561e2ea22e57f2f044e3812932726ded8a8f0704666446d` |
 | `js/lesson-player.js` | `ea7ec89f8b738db3d7cb467466c2a5803cdad380f7656855bd2d514ddc6169a7` |
 | `js/product-shell.js` | `2780dbd87feb28348abe41547a3d6cd78ff8aebc7e918cd20aae853d75f949e8` |

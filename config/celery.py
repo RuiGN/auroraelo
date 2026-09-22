@@ -7,6 +7,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
 
 app = Celery("auroraelo")
 app.config_from_object("django.conf:settings", namespace="CELERY")
+
+from core.telemetry import configure_telemetry  # noqa: E402
+
+configure_telemetry()
+
 app.autodiscover_tasks()
 
 

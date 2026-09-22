@@ -60,11 +60,12 @@ from .base import (  # noqa: F401
 SECRET_KEY = required_environment("DJANGO_SECRET_KEY")
 AUDIT_INTEGRITY_KEY = required_environment("AUDIT_INTEGRITY_KEY")
 MFA_ENCRYPTION_KEY = required_environment("MFA_ENCRYPTION_KEY")
-CACHE_URL = required_environment("CACHE_URL")
+CACHE_REDIS_URL = required_environment("CACHE_REDIS_URL")
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": CACHE_URL,
+        "LOCATION": CACHE_REDIS_URL,
+        "KEY_PREFIX": "auroraelo",
         "OPTIONS": {
             "socket_connect_timeout": 5,
             "socket_timeout": 5,
@@ -86,6 +87,19 @@ if db_sslmode in {"verify-ca", "verify-full"}:
     )
 elif "DB_SSLROOTCERT" in os.environ and os.environ["DB_SSLROOTCERT"]:
     DATABASES["default"]["OPTIONS"]["sslrootcert"] = os.environ["DB_SSLROOTCERT"]
+
+# Read replica (opt-in: set REPLICA_DATABASE_URL to activate)
+_replica_url = os.environ.get("REPLICA_DATABASE_URL", "")
+if _replica_url:
+    from .base import parse_database_url  # type: ignore[attr-defined]
+
+    DATABASES["replica"] = postgres_database_from_environment(
+        env_var="REPLICA_DATABASE_URL"
+    )
+    DATABASES["replica"]["OPTIONS"] = DATABASES["default"]["OPTIONS"].copy()
+    DATABASES["replica"]["TEST"] = {"MIRROR": "default"}
+
+DATABASE_ROUTERS = ["core.db_router.ReadReplicaRouter"]
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()

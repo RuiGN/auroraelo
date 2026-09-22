@@ -1,0 +1,17 @@
+{
+  "name": "auroraelo-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "End-to-end tests for AuroraElo clinical management platform",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "test:report": "npx playwright show-report",
+    "install:browsers": "npx playwright install --with-deps chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

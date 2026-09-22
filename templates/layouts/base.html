@@ -23,11 +23,13 @@
 </head>
 
 <body class="product-workspace-body"
+  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
   data-clinic-primary="{% if active_clinic_branding %}{{ active_clinic_branding.primary_color }}{% endif %}"
   data-clinic-secondary="{% if active_clinic_branding %}{{ active_clinic_branding.secondary_color }}{% endif %}">
   <a class="skip-link" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
   {% block workspace %}{% endblock %}
   <script defer src="{% static 'duralux/js/bootstrap.bundle.min.js' %}"></script>
+  <script defer src="{% static 'duralux/js/htmx.min.js' %}"></script>
   <script defer src="{% static 'design_system/js/shell.js' %}"></script>
   {% block page_scripts %}{% endblock %}
 </body>

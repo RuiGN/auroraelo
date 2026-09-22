@@ -1,0 +1,99 @@
+{% load i18n %}
+{# HTMX partial: checkin table rows + pagination — swapped into #checkin-content #}
+<div id="checkin-content">
+  {% if checkins.object_list %}
+  <div class="product-table-card product-table-scroll table-responsive" role="region" aria-label="{% translate 'Histórico de Check-ins' %}" tabindex="0">
+    <table class="table product-table">
+      <caption class="visually-hidden">{% translate "Respostas enviadas por dia" %}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{% translate "Data" %}</th>
+          <th scope="col">{% translate "Estado geral" %}</th>
+          <th scope="col">{% translate "Ansiedade" %}</th>
+          <th scope="col">{% translate "Energia" %}</th>
+          <th scope="col">{% translate "Sono" %}</th>
+          <th scope="col">{% translate "Status" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for checkin in checkins %}
+        <tr>
+          <th scope="row">{{ checkin.date|date:"SHORT_DATE_FORMAT" }}</th>
+          <td>{{ checkin.answers.general_state|default:"—" }}/5</td>
+          <td>{{ checkin.answers.anxiety|default:"—" }}/5</td>
+          <td>{{ checkin.answers.energy|default:"—" }}/5</td>
+          <td>{{ checkin.answers.sleep_quality|default:"—" }}/5</td>
+          <td>
+            {% if checkin.is_draft %}
+            <span class="badge text-bg-warning">{% translate "Rascunho" %}</span>
+            {% else %}
+            <span class="badge text-bg-success">{% translate "Enviado" %}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mobile-row-list d-md-none d-grid gap-2 mt-3">
+    {% for checkin in checkins %}
+    <article class="mobile-row-card p-3 border rounded">
+      <h3 class="h6 mb-2">{{ checkin.date|date:"SHORT_DATE_FORMAT" }}</h3>
+      <dl class="row mb-0 small">
+        <dt class="col-6">{% translate "Estado geral" %}</dt>
+        <dd class="col-6">{{ checkin.answers.general_state|default:"—" }}/5</dd>
+        <dt class="col-6">{% translate "Ansiedade" %}</dt>
+        <dd class="col-6">{{ checkin.answers.anxiety|default:"—" }}/5</dd>
+        <dt class="col-6">{% translate "Energia" %}</dt>
+        <dd class="col-6">{{ checkin.answers.energy|default:"—" }}/5</dd>
+        <dt class="col-6">{% translate "Sono" %}</dt>
+        <dd class="col-6">{{ checkin.answers.sleep_quality|default:"—" }}/5</dd>
+        <dt class="col-6">{% translate "Status" %}</dt>
+        <dd class="col-6">{% if checkin.is_draft %}{% translate "Rascunho" %}{% else %}{% translate "Enviado" %}{% endif %}</dd>
+      </dl>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if checkins.paginator.num_pages > 1 %}
+  <nav class="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3"
+    aria-label="{% translate 'Paginação do histórico de check-ins' %}">
+    <p class="product-muted mb-0">
+      {% blocktranslate with current=checkins.number total=checkins.paginator.num_pages %}Página {{ current }} de {{ total }}{% endblocktranslate %}
+    </p>
+    <ul class="list-unstyled d-flex align-items-center gap-2 mb-0 pagination-common-style">
+      {% if checkins.has_previous %}
+      <li><a href="?page={{ checkins.previous_page_number }}"
+             hx-get="?page={{ checkins.previous_page_number }}"
+             hx-target="#checkin-content"
+             hx-swap="outerHTML"
+             hx-push-url="true"
+             aria-label="{% translate 'Página anterior' %}"><i
+            class="feather-arrow-left"></i></a></li>
+      {% endif %}
+      <li><span class="active" aria-current="page">{{ checkins.number }}</span></li>
+      {% if checkins.has_next %}
+      <li><a href="?page={{ checkins.next_page_number }}"
+             hx-get="?page={{ checkins.next_page_number }}"
+             hx-target="#checkin-content"
+             hx-swap="outerHTML"
+             hx-push-url="true"
+             aria-label="{% translate 'Próxima página' %}"><i
+            class="feather-arrow-right"></i></a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+  {% else %}
+  <div class="product-empty-state" role="status">
+    <h2 class="h5">{% translate "Nenhum check-in registrado ainda" %}</h2>
+    <p>
+      {% translate "O check-in diário é rápido e ajuda você a acompanhar seu dia a dia. Comece agora." %}
+    </p>
+    <a href="{% url 'checkin_today' %}" class="btn btn-primary mt-2">
+      {% translate "Fazer meu primeiro check-in" %}
+    </a>
+  </div>
+  {% endif %}
+</div>

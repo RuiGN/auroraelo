@@ -197,13 +197,29 @@ def goal_step_toggle(request: HttpRequest, step_id: UUID) -> HttpResponse:
     """Mark or unmark one small step."""
     clinic_id, actor = _clinic_and_actor(request)
     is_done = request.POST.get("is_done") == "true"
-    complete_step(
+    step = complete_step(
         clinic_id=clinic_id,
         actor=actor,
         step_id=step_id,
         is_done=is_done,
         request_id=_request_uuid(),
     )
+    # HTMX: return updated steps partial instead of full redirect
+    if request.headers.get("HX-Request"):
+        goal = step.goal
+        steps = list(goal.steps.order_by("order"))
+        done, total, percent = goal_progress(goal=goal)
+        return TemplateResponse(
+            request,
+            "goals/partials/steps_progress.html",
+            {
+                "goal": goal,
+                "steps": steps,
+                "done_count": done,
+                "total_steps": total,
+                "percent": percent,
+            },
+        )
     next_url = request.POST.get("next") or reverse("goal_list")
     return HttpResponseRedirect(next_url)
 

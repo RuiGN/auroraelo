@@ -77,6 +77,7 @@ def test_only_allowlisted_application_assets_are_in_static_storage() -> None:
         "duralux/css/product-integration.css",
         "duralux/images/favicon.svg",
         "duralux/js/bootstrap.bundle.min.js",
+        "duralux/js/htmx.min.js",
         "duralux/js/product-shell.js",
     }
     promoted = {
@@ -88,7 +89,7 @@ def test_only_allowlisted_application_assets_are_in_static_storage() -> None:
     assert expected <= promoted
     # Toda a árvore estática vive em um dos quatro diretórios de aplicação;
     # nada solto na raiz de static/.
-    allowed_roots = {"css", "design_system", "duralux", "images"}
+    allowed_roots = {"css", "design_system", "duralux", "images", "master_panel"}
     assert all(path.split("/")[0] in allowed_roots for path in promoted)
     assert not any(path.endswith(("user.png",)) for path in promoted)
     assert not any("logo-full" in path or "bg-main" in path for path in promoted)

@@ -128,7 +128,7 @@ def test_production_enforces_secure_session_and_csrf_configuration() -> None:
             "DB_HOST": "127.0.0.1",
             "DB_PORT": "5432",
             "DB_SSLROOTCERT": "/run/secrets/postgresql-ca.pem",
-            "CACHE_URL": "redis://cache.internal:6379/1",
+            "CACHE_REDIS_URL": "redis://cache.internal:6379/1",
             "DJANGO_SECURE_HSTS_SECONDS": "0",
         }
     )
@@ -177,7 +177,7 @@ def test_production_requires_a_shared_cache_for_authentication_limits() -> None:
             "DB_SSLROOTCERT": "/run/secrets/postgresql-ca.pem",
         }
     )
-    environment.pop("CACHE_URL", None)
+    environment.pop("CACHE_REDIS_URL", None)
 
     missing = subprocess.run(
         [sys.executable, "-c", "import config.settings.production"],
@@ -187,9 +187,9 @@ def test_production_requires_a_shared_cache_for_authentication_limits() -> None:
         env=environment,
     )
     assert missing.returncode != 0
-    assert "CACHE_URL" in missing.stderr
+    assert "CACHE_REDIS_URL" in missing.stderr
 
-    environment["CACHE_URL"] = "redis://cache.internal:6379/1"
+    environment["CACHE_REDIS_URL"] = "redis://cache.internal:6379/1"
     configured = subprocess.run(
         [
             sys.executable,

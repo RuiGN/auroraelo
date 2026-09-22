@@ -17,6 +17,10 @@ from .views import (
     workspace_vertical,
 )
 
+from core.metrics import metrics_view
+
+from api import api
+
 handler400 = "config.views.bad_request"
 handler403 = "config.views.permission_denied"
 handler404 = "config.views.page_not_found"
@@ -39,6 +43,7 @@ urlpatterns = [
     path("dashboard/", include("therapist_dashboard.urls")),
     path("psiquiatria/", include("psychiatry.urls")),
     path("api/v1/clinical-operations/", include("clinical_operations.urls")),
+    path("api/v1/", api.urls),
     path("", include("ai_assistant.urls")),
     path("design-system/", design_system_reference, name="design_system_reference"),
     path("workspace/", workspace_vertical, name="workspace_vertical"),
@@ -54,6 +59,7 @@ urlpatterns = [
     ),
     path("health/live/", liveness, name="health-live"),
     path("health/ready/", readiness, name="health-ready"),
+    path("health/metrics/", metrics_view, name="health-metrics"),
     path(
         "admin/login/",
         admin_login_redirect,

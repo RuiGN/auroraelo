@@ -164,7 +164,9 @@ def appointment_calendar(request: HttpRequest) -> HttpResponse:
 
     return TemplateResponse(
         request,
-        "scheduling/appointment_calendar.html",
+        "scheduling/partials/calendar_grid.html"
+        if request.headers.get("HX-Request")
+        else "scheduling/appointment_calendar.html",
         {
             "layout_template": "layouts/vertical.html",
             "page_title": _("Agenda semanal"),

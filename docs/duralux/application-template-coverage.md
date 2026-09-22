@@ -102,7 +102,7 @@ Baseline da Sprint 0. A rota é exibida sem parâmetros repetitivos quando o pr�
 ## Fechamento da cobertura
 
 - Baseline contabilizada: **95 templates**; 93 permanecem migrados e `goals/placeholder.html` e as telas de MFA (`accounts/mfa_recovery_codes.html`) foram removidos com guarda de ausência de referência.
-- Templates atuais no disco: **99** = 93 templates retidos da baseline + 6 auxiliares e páginas adicionados após a baseline. Contagem conferida por `templates/**/*.html`.
+- Templates atuais no disco: **103** = 93 templates retidos da baseline + 6 auxiliares e páginas adicionados após a baseline + 4 partials HTMX (checkin_table, steps_progress, calendar_grid, scheduling partials). Contagem conferida por `templates/**/*.html`.
 - Distribuição de sprint: Sprint 2 = 11; Sprint 3 = 8; Sprint 4 = 15; Sprint 5 = 15; Sprint 6 = 24; Sprint 7 = 21; Sprint 8 = 1.
 - Layouts/partials/components herdam a autorização do consumidor; a matriz não atribui permissão nova a nenhum template.
 

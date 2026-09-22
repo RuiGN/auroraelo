@@ -9,6 +9,10 @@ from pathlib import Path
 PUBLIC_BOUNDARIES = frozenset({"events", "policies", "selectors", "services"})
 TARGET_PUBLIC_SYMBOLS = {
     "core.persistence": frozenset({"UUIDTimestampedModel"}),
+    "core.telemetry": frozenset({"enrich_span_with_tenant", "enrich_span_with_actor"}),
+    "core.event_store": frozenset(
+        {"append_event", "reconstruct_state", "aggregate_history", "register_event_applier"}
+    ),
 }
 EDGE_PUBLIC_SYMBOLS: dict[tuple[str, str], dict[str, frozenset[str]]] = {}
 

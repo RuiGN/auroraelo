@@ -264,6 +264,8 @@ def test_only_documented_infrastructure_paths_are_exempt() -> None:
     """The path exemption is narrow rather than a broad authentication bypass."""
     assert is_tenant_exempt_path("/admin/") is True
     assert is_tenant_exempt_path("/admin/login/") is True
+    assert is_tenant_exempt_path("/master/") is True
+    assert is_tenant_exempt_path("/master/tenants/") is True
     assert is_tenant_exempt_path("/tenant/") is False
     assert is_tenant_exempt_path("/administrator/") is False
 

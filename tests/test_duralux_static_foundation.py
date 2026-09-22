@@ -27,6 +27,7 @@ DURALUX_RUNTIME_FILES = {
     "duralux/js/bootstrap.bundle.min.js",
     "duralux/js/dashboard-charts.js",
     "duralux/js/form-behaviors.js",
+    "duralux/js/htmx.min.js",
     "duralux/js/lesson-player.js",
     "duralux/js/language-selector.js",
     "duralux/js/product-shell.js",
