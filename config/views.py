@@ -288,7 +288,7 @@ def home(request: HttpRequest) -> HttpResponse:
         contact_sent = True
 
     context = {
-        "page_title": _("Plataforma de Saúde Mental, Psiquiatria e Cuidado Contínuo"),
+        "page_title": "Aurora Elo — Plataforma de Saúde Mental, Psiquiatria e Cuidado Contínuo",
         "availability_notice": _("Plataforma terapêutica disponível."),
         "contact_sent": contact_sent,
     }
