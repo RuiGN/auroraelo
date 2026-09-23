@@ -228,9 +228,16 @@ def test_production_uses_manifest_storage_after_legacy_css_cleanup() -> None:
         encoding="utf-8"
     )
 
-    assert '"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"' in (
-        production_settings
+    assert (
+        '"BACKEND": "config.storage.TolerantCompressedManifestStaticFilesStorage"'
+        in production_settings
     )
+    # The tolerant storage must still hash and compress through the manifest.
+    storage_module = (
+        Path(settings.BASE_DIR) / "config" / "storage.py"
+    ).read_text(encoding="utf-8")
+    assert "CompressedManifestStaticFilesStorage" in storage_module
+    assert "manifest_strict = False" in storage_module
     assert "nine missing local URLs" in progress
     assert "manifest storage probe passed" in progress
 

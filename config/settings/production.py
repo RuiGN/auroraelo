@@ -56,12 +56,15 @@ from .base import (  # noqa: F401
     WSGI_APPLICATION,
     environment_flag,
     postgres_database_from_environment,
+    postgres_database_from_url,
     required_environment,
 )
 
 SECRET_KEY = required_environment("DJANGO_SECRET_KEY")
 AUDIT_INTEGRITY_KEY = required_environment("AUDIT_INTEGRITY_KEY")
 MFA_ENCRYPTION_KEY = required_environment("MFA_ENCRYPTION_KEY")
+MASTER_USER_EMAIL = required_environment("MASTER_USER_EMAIL")
+MASTER_USER_PASSWORD = required_environment("MASTER_USER_PASSWORD")
 CACHE_REDIS_URL = required_environment("CACHE_REDIS_URL")
 CACHES = {
     "default": {
@@ -92,14 +95,11 @@ elif "DB_SSLROOTCERT" in os.environ and os.environ["DB_SSLROOTCERT"]:
 
 # Read replica (opt-in: set REPLICA_DATABASE_URL to activate)
 _replica_url = os.environ.get("REPLICA_DATABASE_URL", "")
-if _replica_url:
-    from .base import parse_database_url  # type: ignore[attr-defined]
-
-    DATABASES["replica"] = postgres_database_from_environment(
-        env_var="REPLICA_DATABASE_URL"
+if _replica_url.strip():
+    DATABASES["replica"] = postgres_database_from_url(
+        _replica_url,
+        tls_options=DATABASES["default"].get("OPTIONS", {}),
     )
-    DATABASES["replica"]["OPTIONS"] = DATABASES["default"]["OPTIONS"].copy()
-    DATABASES["replica"]["TEST"] = {"MIRROR": "default"}
 
 DATABASE_ROUTERS = ["core.db_router.ReadReplicaRouter"]
 
@@ -114,7 +114,7 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "config.storage.TolerantCompressedManifestStaticFilesStorage",
     },
 }
 
