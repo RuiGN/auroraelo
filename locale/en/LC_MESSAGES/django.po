@@ -5208,3 +5208,97 @@ msgstr "Suspend this user's membership?"
 
 msgid "Revogar este convite pendente?"
 msgstr "Revoke this pending invitation?"
+
+# Administração global: rascunho técnico de UI, sem conteúdo clínico.
+msgid "Acessar como profissional da clínica"
+msgstr "Sign in as a clinic professional"
+
+msgid "Acesso restrito à administração da plataforma"
+msgstr "Access restricted to platform administration"
+
+msgid "Acompanhe o estado das clínicas na plataforma."
+msgstr "Track the status of clinics on the platform."
+
+msgid "Administração de usuários e equipe"
+msgstr "User and team administration"
+
+msgid "Ativos ou em avaliação"
+msgstr "Active or on trial"
+
+msgid "Atualização recente"
+msgstr "Recent update"
+
+msgid "Bloqueados"
+msgstr "Blocked"
+
+msgid "Com acesso operacional"
+msgstr "With operational access"
+
+msgid "Criado em"
+msgstr "Created on"
+
+msgid "Criar tenant"
+msgstr "Create tenant"
+
+msgid "Dashboard de tenants"
+msgstr "Tenant dashboard"
+
+msgid "Em atraso"
+msgstr "Past due"
+
+msgid "Indicadores de tenants"
+msgstr "Tenant indicators"
+
+msgid "Menu do painel Master"
+msgstr "Master panel menu"
+
+msgid "Nenhum tenant cadastrado ainda."
+msgstr "No tenants registered yet."
+
+msgid "Outra área"
+msgstr "Another area"
+
+msgid "Painel Administrativo"
+msgstr "Administration panel"
+
+msgid "Plano"
+msgstr "Plan"
+
+msgid "Registrados na plataforma"
+msgstr "Registered on the platform"
+
+msgid "Requerem acompanhamento"
+msgstr "Require follow-up"
+
+msgid "Sem acesso operacional"
+msgstr "Without operational access"
+
+msgid "Tabela de tenants recentes"
+msgstr "Recent tenants table"
+
+msgid "Tenant"
+msgstr "Tenant"
+
+msgid "Tenants recentes"
+msgstr "Recent tenants"
+
+msgid "Total de tenants"
+msgstr "Total tenants"
+
+msgid "Ver tenant"
+msgstr "View tenant"
+
+msgid "Ver todos"
+msgstr "View all"
+
+msgid "Visão geral"
+msgstr "Overview"
+
+msgid "admin@email.com"
+msgstr "admin@email.com"
+
+msgid "Área de infraestrutura"
+msgstr "Infrastructure area"
+
+msgid "Área restrita. Acesso permitido apenas a administradores autorizados."
+msgstr "Restricted area. Access is limited to authorized administrators."

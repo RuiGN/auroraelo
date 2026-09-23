@@ -1,0 +1,17 @@
+{% extends "master_panel/base.html" %}
+{% load i18n %}
+{% block title %}{{ page_title }} — Aurora Elo{% endblock %}
+{% block panel_label %}{% translate "Usuários e equipe" %}{% endblock %}
+{% block panel_navigation %}
+  <nav class="master-navigation" aria-label="{% translate 'Usuários e equipe' %}">
+    <div class="master-nav-group">
+      <p class="master-nav-label">{% translate "Usuários e equipe" %}</p>
+      <a class="master-nav-link" href="{% url 'administration:user_list' %}" {% if request.resolver_match.url_name == 'user_list' %}aria-current="page"{% endif %}>{% translate "Usuários e equipe" %}</a>
+      <a class="master-nav-link" href="{% url 'administration:user_invite' %}" {% if request.resolver_match.url_name == 'user_invite' %}aria-current="page"{% endif %}>{% translate "Convidar usuário" %}</a>
+    </div>
+    <div class="master-nav-group master-nav-group-secondary">
+      <p class="master-nav-label">{% translate "Outra área" %}</p>
+      <a class="master-nav-link master-nav-link-secondary" href="{% url 'master_panel:dashboard' %}">{% translate "Painel Master" %}</a>
+    </div>
+  </nav>
+{% endblock %}

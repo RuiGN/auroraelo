@@ -1,9 +1,9 @@
-{% extends "master_panel/base.html" %}
+{% extends "master_panel/administration_base.html" %}
 {% load i18n %}
 {% block content %}
 <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap;">
   <p style="margin:0;color:#475569;">{% translate "Identidades únicas, vínculos por clínica e convites pendentes." %}</p>
-  <a href="{% url 'master_panel:user_invite' %}" style="background:#7c3aed;color:#fff;padding:.5rem 1rem;border-radius:.5rem;text-decoration:none;font-weight:600;">➕ {% translate "Convidar usuário" %}</a>
+  <a href="{% url 'administration:user_invite' %}" class="master-button">{% translate "Convidar usuário" %}</a>
 </div>
 
 <form method="get" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
@@ -48,7 +48,7 @@
         <td style="padding:.65rem 1rem;">{{ row.membership.unit_name|default:'—' }}</td>
         <td style="padding:.65rem 1rem;">{{ row.membership.valid_from|date:'d/m/Y' }}{% if row.membership.valid_until %} — {{ row.membership.valid_until|date:'d/m/Y' }}{% endif %}</td>
         <td style="padding:.65rem 1rem;"><span class="status-badge {% if row.membership.is_active %}badge-active{% else %}badge-blocked{% endif %}">{% if row.membership.is_active %}{% translate "Ativo" %}{% else %}{% translate "Suspenso" %}{% endif %}</span></td>
-        <td style="padding:.65rem 1rem;text-align:right;"><a href="{% url 'master_panel:user_edit' membership_id=row.membership.pk %}" style="color:#7c3aed;font-weight:600;">{% translate "Editar" %}</a></td>
+        <td style="padding:.65rem 1rem;text-align:right;"><a href="{% url 'administration:user_edit' membership_id=row.membership.pk %}">{% translate "Editar" %}</a></td>
       </tr>
       {% empty %}<tr><td colspan="7" style="padding:2rem;text-align:center;color:#94a3b8;">{% translate "Nenhum vínculo encontrado." %}</td></tr>{% endfor %}
     </tbody>
@@ -59,7 +59,7 @@
   <h2 style="font-size:1rem;margin:0 0 1rem;">{% translate "Convites pendentes" %}</h2>
   <div style="overflow:auto;"><table style="width:100%;border-collapse:collapse;font-size:.875rem;min-width:620px;">
     <thead><tr><th style="text-align:left;padding:.5rem 0;">{% translate "Destinatário" %}</th><th style="text-align:left;padding:.5rem 0;">{% translate "Clínica" %}</th><th style="text-align:left;padding:.5rem 0;">{% translate "Papel" %}</th><th style="text-align:left;padding:.5rem 0;">{% translate "Expira" %}</th><th></th></tr></thead>
-    <tbody>{% for row in invitation_rows %}<tr style="border-top:1px solid #f1f5f9;"><td style="padding:.5rem 0;">{{ row.invitation.recipient_email }}</td><td style="padding:.5rem 0;">{{ row.invitation.clinic.name }}</td><td style="padding:.5rem 0;">{{ row.role_label }}</td><td style="padding:.5rem 0;">{{ row.invitation.expires_at|date:'d/m/Y H:i' }}</td><td style="text-align:right;"><form method="post" action="{% url 'master_panel:master_invitation_revoke' invitation_id=row.invitation.pk %}">{% csrf_token %}<button type="submit" style="border:0;background:none;color:#b91c1c;cursor:pointer;" data-destructive-action data-confirmation="{% translate 'Revogar este convite pendente?' %}">{% translate "Revogar" %}</button></form></td></tr>{% empty %}<tr><td colspan="5" style="padding:1rem 0;color:#94a3b8;">{% translate "Nenhum convite pendente." %}</td></tr>{% endfor %}</tbody>
+    <tbody>{% for row in invitation_rows %}<tr style="border-top:1px solid #f1f5f9;"><td style="padding:.5rem 0;">{{ row.invitation.recipient_email }}</td><td style="padding:.5rem 0;">{{ row.invitation.clinic.name }}</td><td style="padding:.5rem 0;">{{ row.role_label }}</td><td style="padding:.5rem 0;">{{ row.invitation.expires_at|date:'d/m/Y H:i' }}</td><td style="text-align:right;"><form method="post" action="{% url 'administration:invitation_revoke' invitation_id=row.invitation.pk %}">{% csrf_token %}<button type="submit" style="border:0;background:none;color:#b91c1c;cursor:pointer;" data-destructive-action data-confirmation="{% translate 'Revogar este convite pendente?' %}">{% translate "Revogar" %}</button></form></td></tr>{% empty %}<tr><td colspan="5" style="padding:1rem 0;color:#94a3b8;">{% translate "Nenhum convite pendente." %}</td></tr>{% endfor %}</tbody>
   </table></div>
 </div>
 {% endblock %}

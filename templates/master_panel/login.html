@@ -14,38 +14,18 @@
   <link rel="icon" href="{% static 'duralux/images/favicon.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
   <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    .bg-grid-pattern {
-      background-size: 40px 40px;
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    }
-    .field-control {
-      position: relative;
-    }
-    .field-control .field-control-icon {
-      position: absolute;
-      top: 50%;
-      left: 0.875rem;
-      z-index: 1;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      pointer-events: none;
-    }
-    .field-control input {
-      padding-left: 2.75rem;
-    }
-  </style>
+
 </head>
-<body class="min-h-screen bg-slate-900 text-slate-200 font-sans flex flex-col antialiased relative overflow-hidden">
+<body class="master-auth min-h-screen bg-slate-900 text-slate-200 font-sans flex flex-col antialiased relative">
   
   <a class="skip-link visually-hidden-focusable" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
   
   <!-- Background Pattern -->
+  <div class="master-auth-backdrop" aria-hidden="true">
   <div class="absolute inset-0 bg-grid-pattern z-0 pointer-events-none" aria-hidden="true"></div>
   <div class="absolute top-0 right-1/4 w-96 h-96 bg-aurora-600/10 rounded-full blur-3xl z-0 pointer-events-none" aria-hidden="true"></div>
   <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-elo-500/10 rounded-full blur-3xl z-0 pointer-events-none" aria-hidden="true"></div>
+  </div>
 
   <!-- Header -->
   <header class="relative z-10 p-6 flex justify-between items-center w-full">

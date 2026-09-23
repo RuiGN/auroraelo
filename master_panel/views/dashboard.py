@@ -8,8 +8,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
-from master_panel.tenant_services import latest_usage_snapshots, tenant_panel_rows
+from master_panel.tenant_services import tenant_panel_rows
 
 
 @staff_member_required(login_url="/master/login/")
@@ -37,18 +38,8 @@ def dashboard(request: HttpRequest) -> HttpResponse:
     ]
     monthly_data = [monthly_counts[month] for month in month_keys]
 
-    latest_snapshots = latest_usage_snapshots()
-    top_clinics = sorted(
-        latest_snapshots,
-        key=lambda snapshot: snapshot.active_users,
-        reverse=True,
-    )[:10]
-    top_names = [snapshot.clinic.name for snapshot in top_clinics]
-    top_users = [snapshot.active_users for snapshot in top_clinics]
-    top_storage = [float(snapshot.storage_mb) for snapshot in top_clinics]
-
     context = {
-        "page_title": "Painel Master",
+        "page_title": _("Painel Master"),
         "total_tenants": total_tenants,
         "active_tenants": active_tenants,
         "blocked_tenants": blocked_tenants,
@@ -57,9 +48,6 @@ def dashboard(request: HttpRequest) -> HttpResponse:
         "chart_plan_data": json.dumps(plan_data),
         "chart_monthly_labels": json.dumps(monthly_labels),
         "chart_monthly_data": json.dumps(monthly_data),
-        "chart_top_names": json.dumps(top_names),
-        "chart_top_users": json.dumps(top_users),
-        "chart_top_storage": json.dumps(top_storage),
         "recent_subs": rows[:10],
     }
     return render(request, "master_panel/dashboard.html", context)

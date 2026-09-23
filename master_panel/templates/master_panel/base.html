@@ -1,79 +1,103 @@
 {% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!doctype html>
-{% get_current_language as LANGUAGE_CODE %}<html lang="{{ LANGUAGE_CODE }}" dir="ltr">
+<html class="aurora-utilities" lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ page_title }} — Aurora Elo Master{% endblock %}</title>
+  <meta name="color-scheme" content="light">
+  <meta name="application-name" content="Aurora Elo">
+  <title>{% block title %}{% translate "Painel Master" %} — Aurora Elo{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
-  <script src="{% static 'master_panel/js/chart.umd.min.js' %}" defer></script>
-  <style>
-    :root { --master-accent: #7c3aed; }
-    .master-sidebar {
-      width: 240px; min-height: 100vh; background: #1e1b4b;
-      color: #e0e7ff; display: flex; flex-direction: column;
-    }
-    .master-sidebar a { color: #c7d2fe; text-decoration: none; padding: .5rem 1.25rem; display: block; border-radius: .375rem; }
-    .master-sidebar a:hover, .master-sidebar a.active { background: rgba(255,255,255,.12); color: #fff; }
-    .master-logo { padding: 1.25rem; font-weight: 700; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,.15); }
-    .master-nav { padding: .75rem .5rem; flex: 1; }
-    .master-nav-section { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #818cf8; padding: .75rem 1.25rem .25rem; }
-    .master-main { flex: 1; display: flex; flex-direction: column; background: #f8fafc; }
-    .master-topbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: .75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
-    .master-content { padding: 1.5rem; flex: 1; }
-    .kpi-card { background: #fff; border-radius: .75rem; border: 1px solid #e2e8f0; padding: 1.25rem 1.5rem; }
-    .kpi-value { font-size: 2rem; font-weight: 700; line-height: 1; }
-    .kpi-label { font-size: .8rem; color: #64748b; margin-top: .25rem; }
-    .chart-card { background: #fff; border-radius: .75rem; border: 1px solid #e2e8f0; padding: 1.25rem; }
-    .badge-active { background: #dcfce7; color: #166534; }
-    .badge-trialing { background: #dbeafe; color: #1e40af; }
-    .badge-past_due { background: #fef3c7; color: #92400e; }
-    .badge-blocked { background: #fee2e2; color: #991b1b; }
-    .badge-canceled { background: #f1f5f9; color: #475569; }
-    .badge-unconfigured { background: #f1f5f9; color: #64748b; }
-    .status-badge { font-size: .75rem; font-weight: 600; padding: .2rem .65rem; border-radius: 9999px; }
-  </style>
 </head>
-<body style="display:flex; min-height:100vh; margin:0; font-family:system-ui,sans-serif;">
+<body class="master-panel-body">
+  <a class="master-skip-link" href="#main-content">{% translate "Ir para o conteúdo principal" %}</a>
+  <div class="master-shell">
+    <aside id="master-sidebar" class="master-sidebar" data-master-sidebar aria-label="{% translate 'Navegação principal' %}">
+      <div class="master-sidebar-header">
+        <a class="master-brand" href="{% url 'master_panel:dashboard' %}">
+          <img class="master-brand-mark" src="{% static 'design_system/assets/images/aurora-elo-emblem.png' %}" alt="" width="32" height="32">
+          <span>
+            <span class="master-brand-name">Aurora <strong>Elo</strong></span>
+            <span class="master-brand-label">{% block panel_label %}{% translate "Painel Master" %}{% endblock %}</span>
+          </span>
+        </a>
+        <button type="button" class="master-sidebar-close" data-master-menu-close aria-label="{% translate 'Fechar menu' %}">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
 
-<!-- Sidebar -->
-<aside class="master-sidebar">
-  <div class="master-logo">🌐 Aurora Elo<br><small style="font-weight:400;font-size:.8rem;color:#a5b4fc;">{% translate "Painel Master" %}</small></div>
-  <nav class="master-nav">
-    <div class="master-nav-section">{% translate "Visão Geral" %}</div>
-    <a href="{% url 'master_panel:dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>📊 {% translate "Dashboard" %}</a>
+      {% block panel_navigation %}
+      <nav class="master-navigation" aria-label="{% translate 'Menu do painel Master' %}">
+        <div class="master-nav-group">
+          <p class="master-nav-label">{% translate "Visão geral" %}</p>
+          <a class="master-nav-link{% if request.resolver_match.url_name == 'dashboard' %} is-active{% endif %}"
+             href="{% url 'master_panel:dashboard' %}"{% if request.resolver_match.url_name == 'dashboard' %} aria-current="page"{% endif %}>
+            <span class="master-nav-icon" aria-hidden="true">⌂</span>
+            <span>{% translate "Dashboard" %}</span>
+          </a>
+        </div>
+        <div class="master-nav-group">
+          <p class="master-nav-label">{% translate "Tenants" %}</p>
+          <a class="master-nav-link{% if request.resolver_match.url_name == 'tenant_list' %} is-active{% endif %}"
+             href="{% url 'master_panel:tenant_list' %}"{% if request.resolver_match.url_name == 'tenant_list' %} aria-current="page"{% endif %}>
+            <span class="master-nav-icon" aria-hidden="true">▦</span>
+            <span>{% translate "Tenants" %}</span>
+          </a>
+          <a class="master-nav-link{% if request.resolver_match.url_name == 'tenant_create' %} is-active{% endif %}"
+             href="{% url 'master_panel:tenant_create' %}"{% if request.resolver_match.url_name == 'tenant_create' %} aria-current="page"{% endif %}>
+            <span class="master-nav-icon" aria-hidden="true">＋</span>
+            <span>{% translate "Criar tenant" %}</span>
+          </a>
+        </div>
+        <div class="master-nav-group master-nav-group-secondary">
+          <p class="master-nav-label">{% translate "Outra área" %}</p>
+          <a class="master-nav-link master-nav-link-secondary" href="{% url 'administration:user_list' %}">
+            <span class="master-nav-icon" aria-hidden="true">↗</span>
+            <span>{% translate "Administração de usuários e equipe" %}</span>
+          </a>
+        </div>
+      </nav>
+      {% endblock %}
+    </aside>
 
-    <div class="master-nav-section">{% translate "Tenants" %}</div>
-    <a href="{% url 'master_panel:tenant_list' %}" {% if 'tenant' in request.resolver_match.url_name %}class="active"{% endif %}>🏥 {% translate "Clínicas" %}</a>
-    <a href="{% url 'master_panel:tenant_create' %}">➕ {% translate "Nova Clínica" %}</a>
+    <div class="master-workspace">
+      <header class="master-topbar">
+        <button type="button" class="master-menu-toggle" data-master-menu-toggle aria-expanded="false"
+                aria-controls="master-sidebar" aria-label="{% translate 'Abrir menu' %}">
+          <span aria-hidden="true">☰</span>
+          <span>{% translate "Menu" %}</span>
+        </button>
+        <div class="master-topbar-title">
+          <span class="master-eyebrow">{% translate "Área de infraestrutura" %}</span>
+          <span class="master-page-title">{{ page_title }}</span>
+        </div>
+        <div class="master-topbar-actions">
+          {% include "components/language_selector.html" with selector_id="master" %}
+          <span class="master-user" title="{{ request.user.email }}">{{ request.user.get_full_name|default:request.user.email }}</span>
+          <form method="post" action="{% url 'account_logout' %}" class="master-logout-form">
+            {% csrf_token %}
+            <button type="submit" class="master-logout">{% translate "Sair" %}</button>
+          </form>
+        </div>
+      </header>
 
-    <a href="{% url 'master_panel:user_list' %}" {% if 'user' in request.resolver_match.url_name %}class="active"{% endif %}>👥 {% translate "Usuários e equipe" %}</a>
-    <div class="master-nav-section" style="margin-top:auto;">{% translate "Sistema" %}</div>
-    <a href="/admin/">⚙️ {% translate "Django Admin" %}</a>
-    <form method="post" action="{% url 'account_logout' %}" style="margin:0;">{% csrf_token %}<button type="submit" style="width:100%;text-align:left;background:none;border:0;color:#c7d2fe;padding:.5rem 1.25rem;cursor:pointer;font:inherit;">🚪 {% translate "Sair" %}</button></form>
-  </nav>
-</aside>
+      {% if messages %}
+      <div class="master-messages" aria-live="polite">
+        {% for message in messages %}
+        <div class="master-alert master-alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
 
-<!-- Main -->
-<div class="master-main">
-  <div class="master-topbar">
-    <h1 style="margin:0;font-size:1.1rem;font-weight:600;">{{ page_title }}</h1>
-    <span style="font-size:.85rem;color:#64748b;">{{ request.user.get_full_name|default:request.user.email }}</span>
+      <main id="main-content" class="master-content" tabindex="-1">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
   </div>
 
-  {% if messages %}
-  <div style="padding:.75rem 1.5rem 0;">
-    {% for message in messages %}
-    <div class="aurora-alert aurora-alert-{{ message.tags }}" style="margin-bottom:.5rem;">{{ message }}</div>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  <div class="master-content">
-    {% block content %}{% endblock %}
-  </div>
-</div>
-
-{% block page_scripts %}{% endblock %}
+  <script defer src="{% static 'master_panel/js/panel.js' %}"></script>
+  {% block page_scripts %}{% endblock %}
 </body>
 </html>

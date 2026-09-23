@@ -166,6 +166,10 @@
     "master_panel/user_services.py",
     "master_panel/views/users.py",
     "master_panel/templates/master_panel/base.html",
+    "templates/master_panel/login.html",
+    "master_panel/templates/master_panel/dashboard.html",
+    "master_panel/templates/master_panel/administration_base.html",
+    "master_panel/views/dashboard.py",
     "master_panel/templates/master_panel/users.html",
     "master_panel/templates/master_panel/user_invite.html",
     "master_panel/templates/master_panel/user_edit.html"

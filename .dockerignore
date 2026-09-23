@@ -1,6 +1,10 @@
 # Runtime configuration is injected by Compose, never baked into an image.
 **/.env
 **/.env.*
+# Editor recovery files can contain runtime credentials, even with extra dots.
+**/*.swp
+**/*.swo
+**/*.swx
 **/.git
 **/.venv
 **/__pycache__

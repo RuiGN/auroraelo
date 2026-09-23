@@ -5213,3 +5213,97 @@ msgstr "Suspender o vínculo deste usuário?"
 
 msgid "Revogar este convite pendente?"
 msgstr "Revogar este convite pendente?"
+
+# Administração global: rascunho técnico de UI, sem conteúdo clínico.
+msgid "Acessar como profissional da clínica"
+msgstr "Acessar como profissional da clínica"
+
+msgid "Acesso restrito à administração da plataforma"
+msgstr "Acesso restrito à administração da plataforma"
+
+msgid "Acompanhe o estado das clínicas na plataforma."
+msgstr "Acompanhe o estado das clínicas na plataforma."
+
+msgid "Administração de usuários e equipe"
+msgstr "Administração de usuários e equipe"
+
+msgid "Ativos ou em avaliação"
+msgstr "Ativos ou em avaliação"
+
+msgid "Atualização recente"
+msgstr "Atualização recente"
+
+msgid "Bloqueados"
+msgstr "Bloqueados"
+
+msgid "Com acesso operacional"
+msgstr "Com acesso operacional"
+
+msgid "Criado em"
+msgstr "Criado em"
+
+msgid "Criar tenant"
+msgstr "Criar tenant"
+
+msgid "Dashboard de tenants"
+msgstr "Dashboard de tenants"
+
+msgid "Em atraso"
+msgstr "Em atraso"
+
+msgid "Indicadores de tenants"
+msgstr "Indicadores de tenants"
+
+msgid "Menu do painel Master"
+msgstr "Menu do painel Master"
+
+msgid "Nenhum tenant cadastrado ainda."
+msgstr "Nenhum tenant cadastrado ainda."
+
+msgid "Outra área"
+msgstr "Outra área"
+
+msgid "Painel Administrativo"
+msgstr "Painel Administrativo"
+
+msgid "Plano"
+msgstr "Plano"
+
+msgid "Registrados na plataforma"
+msgstr "Registrados na plataforma"
+
+msgid "Requerem acompanhamento"
+msgstr "Requerem acompanhamento"
+
+msgid "Sem acesso operacional"
+msgstr "Sem acesso operacional"
+
+msgid "Tabela de tenants recentes"
+msgstr "Tabela de tenants recentes"
+
+msgid "Tenant"
+msgstr "Tenant"
+
+msgid "Tenants recentes"
+msgstr "Tenants recentes"
+
+msgid "Total de tenants"
+msgstr "Total de tenants"
+
+msgid "Ver tenant"
+msgstr "Ver tenant"
+
+msgid "Ver todos"
+msgstr "Ver todos"
+
+msgid "Visão geral"
+msgstr "Visão geral"
+
+msgid "admin@email.com"
+msgstr "admin@email.com"
+
+msgid "Área de infraestrutura"
+msgstr "Área de infraestrutura"
+
+msgid "Área restrita. Acesso permitido apenas a administradores autorizados."
+msgstr "Área restrita. Acesso permitido apenas a administradores autorizados."

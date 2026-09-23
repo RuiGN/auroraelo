@@ -52,7 +52,7 @@ def test_master_user_list_is_available_to_global_staff(client: Client) -> None:
     member = UserFactory.create(email="membro@example.test")
     ClinicMembershipFactory.create(clinic=clinic, user=member)
 
-    response = client.get(reverse("master_panel:user_list"))
+    response = client.get(reverse("administration:user_list"))
 
     assert response.status_code == 200
     assert member.email in response.content.decode()
@@ -68,7 +68,7 @@ def test_master_links_existing_identity_and_creates_psychiatrist_profile(
     user = UserFactory.create(email="psiquiatra@example.test")
 
     response = client.post(
-        reverse("master_panel:user_invite"),
+        reverse("administration:user_invite"),
         {
             "recipient_email": user.email,
             "clinic": str(clinic.pk),
@@ -98,7 +98,7 @@ def test_master_invitation_persists_scope_and_sends_no_password(client: Client) 
     clinic = ClinicFactory.create(name="Clínica de convites")
 
     response = client.post(
-        reverse("master_panel:user_invite"),
+        reverse("administration:user_invite"),
         {
             "recipient_email": "novo.profissional@example.test",
             "clinic": str(clinic.pk),
@@ -164,7 +164,7 @@ def test_patient_and_non_staff_cannot_open_master_user_management(
     user = UserFactory.create(is_staff=False, is_superuser=False)
     client.force_login(user)
 
-    response = client.get(reverse("master_panel:user_list"))
+    response = client.get(reverse("administration:user_list"))
 
     assert response.status_code == 302
     assert "/master/login/" in response.headers["Location"]

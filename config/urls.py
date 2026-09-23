@@ -31,6 +31,10 @@ urlpatterns = [
     path("", home, name="home"),
     path("master/login/", master_login, name="master_login"),
     path("master/", include("master_panel.urls", namespace="master_panel")),
+    path(
+        "administracao/",
+        include("master_panel.administration_urls", namespace="administration"),
+    ),
     path("accounts/", include("accounts.urls")),
     path("clinics/", include("clinics.urls")),
     path("people/", include("people.urls")),

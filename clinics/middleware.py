@@ -18,7 +18,13 @@ from .services import (
 from .typing import ClinicRequest
 
 # Django admin is global infrastructure and overrides tenant-safe model managers.
-TENANT_EXEMPT_PATH_PREFIXES = ("/accounts/", "/admin/", "/health/", "/master/")
+TENANT_EXEMPT_PATH_PREFIXES = (
+    "/accounts/",
+    "/admin/",
+    "/health/",
+    "/master/",
+    "/administracao/",
+)
 
 
 def is_tenant_exempt_path(path: str) -> bool:

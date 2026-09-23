@@ -5238,3 +5238,97 @@ msgstr "¿Suspender el vínculo de este usuario?"
 
 msgid "Revogar este convite pendente?"
 msgstr "¿Revocar esta invitación pendiente?"
+
+# Administração global: rascunho técnico de UI, sem conteúdo clínico.
+msgid "Acessar como profissional da clínica"
+msgstr "Acceder como profesional de la clínica"
+
+msgid "Acesso restrito à administração da plataforma"
+msgstr "Acceso restringido a la administración de la plataforma"
+
+msgid "Acompanhe o estado das clínicas na plataforma."
+msgstr "Consulte el estado de las clínicas en la plataforma."
+
+msgid "Administração de usuários e equipe"
+msgstr "Administración de usuarios y equipo"
+
+msgid "Ativos ou em avaliação"
+msgstr "Activos o en prueba"
+
+msgid "Atualização recente"
+msgstr "Actualización reciente"
+
+msgid "Bloqueados"
+msgstr "Bloqueados"
+
+msgid "Com acesso operacional"
+msgstr "Con acceso operativo"
+
+msgid "Criado em"
+msgstr "Creado el"
+
+msgid "Criar tenant"
+msgstr "Crear tenant"
+
+msgid "Dashboard de tenants"
+msgstr "Panel de tenants"
+
+msgid "Em atraso"
+msgstr "Con pagos vencidos"
+
+msgid "Indicadores de tenants"
+msgstr "Indicadores de tenants"
+
+msgid "Menu do painel Master"
+msgstr "Menú del panel Master"
+
+msgid "Nenhum tenant cadastrado ainda."
+msgstr "Aún no hay tenants registrados."
+
+msgid "Outra área"
+msgstr "Otra área"
+
+msgid "Painel Administrativo"
+msgstr "Panel administrativo"
+
+msgid "Plano"
+msgstr "Plan"
+
+msgid "Registrados na plataforma"
+msgstr "Registrados en la plataforma"
+
+msgid "Requerem acompanhamento"
+msgstr "Requieren seguimiento"
+
+msgid "Sem acesso operacional"
+msgstr "Sin acceso operativo"
+
+msgid "Tabela de tenants recentes"
+msgstr "Tabla de tenants recientes"
+
+msgid "Tenant"
+msgstr "Tenant"
+
+msgid "Tenants recentes"
+msgstr "Tenants recientes"
+
+msgid "Total de tenants"
+msgstr "Total de tenants"
+
+msgid "Ver tenant"
+msgstr "Ver tenant"
+
+msgid "Ver todos"
+msgstr "Ver todos"
+
+msgid "Visão geral"
+msgstr "Vista general"
+
+msgid "admin@email.com"
+msgstr "admin@email.com"
+
+msgid "Área de infraestrutura"
+msgstr "Área de infraestructura"
+
+msgid "Área restrita. Acesso permitido apenas a administradores autorizados."
+msgstr "Área restringida. Acceso permitido solo a administradores autorizados."

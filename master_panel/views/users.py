@@ -149,7 +149,7 @@ def user_invite(request: HttpRequest) -> HttpResponse:
                 form.add_error(None, str(error))
             else:
                 messages.success(request, _("Vínculo da identidade atualizado."))
-                return redirect("master_panel:user_list")
+                return redirect("administration:user_list")
         else:
             try:
                 issued = issue_invitation(
@@ -194,7 +194,7 @@ def user_invite(request: HttpRequest) -> HttpResponse:
                 messages.success(
                     request, _("Convite enviado sem criar senha administrativa.")
                 )
-                return redirect("master_panel:user_list")
+                return redirect("administration:user_list")
     return render(
         request,
         "master_panel/user_invite.html",
@@ -243,7 +243,7 @@ def user_edit(request: HttpRequest, membership_id: UUID) -> HttpResponse:
             form.add_error(None, str(error))
         else:
             messages.success(request, _("Vínculo atualizado."))
-            return redirect("master_panel:user_list")
+            return redirect("administration:user_list")
     return render(
         request,
         "master_panel/user_edit.html",
@@ -262,4 +262,4 @@ def invitation_revoke(request: HttpRequest, invitation_id: UUID) -> HttpResponse
     actor = _operator(request)
     revoke_invitation_as_operator(actor=actor, invitation_id=invitation_id)
     messages.success(request, _("Convite revogado."))
-    return redirect("master_panel:user_list")
+    return redirect("administration:user_list")

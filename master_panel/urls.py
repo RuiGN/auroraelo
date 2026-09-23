@@ -1,6 +1,7 @@
 """Master panel URL configuration."""
 
 from django.urls import path
+from django.views.generic import RedirectView
 
 from master_panel.views.billing import (
     tenant_billing_portal,
@@ -13,14 +14,6 @@ from master_panel.views.tenants import (
     tenant_detail,
     tenant_list,
     tenant_unblock,
-)
-from master_panel.views.users import (
-    invitation_revoke as master_invitation_revoke,
-)
-from master_panel.views.users import (
-    user_edit,
-    user_invite,
-    user_list,
 )
 from master_panel.views.webhooks import stripe_webhook
 
@@ -43,16 +36,37 @@ urlpatterns = [
         tenant_checkout,
         name="tenant_checkout",
     ),
-    path("users/", user_list, name="user_list"),
-    path("users/invite/", user_invite, name="user_invite"),
+    # Compatibilidade de favoritos: ações de escrita só na nova administração.
+    path(
+        "users/",
+        RedirectView.as_view(
+            pattern_name="administration:user_list",
+            http_method_names=["get", "head", "options"],
+        ),
+        name="user_list",
+    ),
+    path(
+        "users/invite/",
+        RedirectView.as_view(
+            pattern_name="administration:user_invite",
+            http_method_names=["get", "head", "options"],
+        ),
+        name="user_invite",
+    ),
     path(
         "users/memberships/<uuid:membership_id>/edit/",
-        user_edit,
+        RedirectView.as_view(
+            pattern_name="administration:user_edit",
+            http_method_names=["get", "head", "options"],
+        ),
         name="user_edit",
     ),
     path(
         "users/invitations/<uuid:invitation_id>/revoke/",
-        master_invitation_revoke,
+        RedirectView.as_view(
+            pattern_name="administration:invitation_revoke",
+            http_method_names=["get", "head", "options"],
+        ),
         name="master_invitation_revoke",
     ),
     path("stripe/webhook/", stripe_webhook, name="stripe_webhook"),

@@ -1,0 +1,17 @@
+/* Login administrativo: reservas explícitas para ícones, sem reset global. */
+.aurora-utilities .master-auth { margin: 0; min-width: 0; }
+.master-auth *, .master-auth *::before, .master-auth *::after { box-sizing: border-box; }
+.master-auth-backdrop { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+.master-auth .bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+}
+.master-auth .field-control { position: relative; }
+.master-auth .field-control-icon {
+  position: absolute; top: 50%; left: .875rem; z-index: 1;
+  transform: translateY(-50%); color: #94a3b8; pointer-events: none;
+}
+/* Mais específico que .aurora-utilities .px-4, inclusive após recompilação. */
+.aurora-utilities .master-auth .field-control input {
+  padding-left: 2.75rem; min-width: 0; max-width: 100%; font-size: 1rem;
+}

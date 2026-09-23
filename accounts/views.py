@@ -190,6 +190,9 @@ def master_login(request: HttpRequest) -> HttpResponse:
                 "master login granted",
                 extra={"event": "master.login.granted", "outcome": "success"},
             )
+            next_url = _safe_local_next(request, request.GET.get("next"))
+            if next_url is not None:
+                return redirect(next_url)
             return redirect("master_panel:dashboard")
     response = TemplateResponse(
         request,
