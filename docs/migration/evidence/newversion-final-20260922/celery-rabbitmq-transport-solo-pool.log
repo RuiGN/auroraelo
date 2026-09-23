@@ -1,0 +1,135 @@
+=== broker container status ===
+Error response from daemon: container 2d159c54a87e274d9681a7f2a582396a1d3db85b5d2cbfea7c91e97d138427a9 is not running
+rabbitmq_ping_exit=1
+4b7725692377a9ceef77f77268c3a9621802fa15b7e1dc5c224a8e923a7ba1a5
+redis_container=0
+PONG
+redis_ping_exit=0
+--- dispatch (transport, não eager) ---
+Traceback (most recent call last):
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/utils/functional.py", line 32, in __call__
+    return self.__value__
+           ^^^^^^^^^^^^^^
+AttributeError: 'ChannelPromise' object has no attribute '__value__'. Did you mean: '__call__'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 474, in _reraise_as_library_errors
+    yield
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 461, in _ensure_connection
+    return retry_over_time(
+        self._connection_factory, self.recoverable_connection_errors,
+    ...<2 lines>...
+        callback, timeout=timeout
+    )
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/utils/functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 941, in _connection_factory
+    self._connection = self._establish_connection()
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 863, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/transport/pyamqp.py", line 203, in establish_connection
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/amqp/connection.py", line 324, in connect
+    self.transport.connect()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/amqp/transport.py", line 132, in connect
+    self._connect(self.host, self.port, self.connect_timeout)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/amqp/transport.py", line 187, in _connect
+    self.sock.connect(sa)
+    ~~~~~~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<string>", line 6, in <module>
+    result = debug_task.apply_async()
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/celery/app/task.py", line 627, in apply_async
+    return app.send_task(
+           ~~~~~~~~~~~~~^
+        self.name, args, kwargs, task_id=task_id, producer=producer,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        **options
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/celery/app/base.py", line 969, in send_task
+    amqp.send_task_message(P, name, message, **options)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/celery/app/amqp.py", line 559, in send_task_message
+    ret = producer.publish(
+        body,
+    ...<8 lines>...
+        **properties
+    )
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/messaging.py", line 190, in publish
+    return _publish(
+        body, priority, content_type, content_encoding,
+        headers, properties, routing_key, mandatory, immediate,
+        exchange_name, declare, timeout, confirm_timeout, retry, retry_policy
+    )
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 558, in _ensured
+    return fun(*args, **kwargs)
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/messaging.py", line 200, in _publish
+    channel = self.channel
+              ^^^^^^^^^^^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/messaging.py", line 224, in _get_channel
+    channel = self._channel = channel()
+                              ~~~~~~~^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/utils/functional.py", line 34, in __call__
+    value = self.__value__ = self.__contract__()
+                             ~~~~~~~~~~~~~~~~~^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/messaging.py", line 240, in <lambda>
+    channel = ChannelPromise(lambda: connection.default_channel)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 960, in default_channel
+    self._ensure_connection(**conn_opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 460, in _ensure_connection
+    with ctx():
+         ~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/kombu/connection.py", line 478, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: [Errno 61] Connection refused
+task_always_eager=False
+dispatch_exit=1
+--- queues after dispatch, before worker ---
+Error response from daemon: container 2d159c54a87e274d9681a7f2a582396a1d3db85b5d2cbfea7c91e97d138427a9 is not running
+--- worker view ---
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+- ** ---------- .> results:     redis://127.0.0.1:56379/2
+[2026-09-23 02:29:58,064: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:00,072: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:04,092: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:10,120: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:18,170: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:28,218: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:40,278: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:30:54,354: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+[2026-09-23 02:31:10,450: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+task_received=0
+task_succeeded=0
+worker_errors=0
+--- worker log head (diagnóstico) ---
+ 
+ -------------- verify@MacBook-Pro-de-Rui.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.7.1-x86_64-i386-64bit-Mach-O 2026-09-23 02:29:58
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         auroraelo:0x10cb70ec0
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+--- queues while worker runs ---
+Error response from daemon: container 2d159c54a87e274d9681a7f2a582396a1d3db85b5d2cbfea7c91e97d138427a9 is not running
+auroraelo-rmq-verify
+auroraelo-redis-verify
+leftover_containers=0

@@ -1,0 +1,56 @@
+== mobile/connected ==
+-- format:check
+
+> aurora-elo-connected@1.0.0 format:check
+> prettier --check App.tsx index.js '*.config.js' tsconfig.json app.json 'src/**/*.{ts,tsx}' 'tests/*.{ts,tsx,js}' '../shared/*.ts'
+
+Checking formatting...
+All matched files use Prettier code style!
+format_rc=0
+-- typecheck
+
+> aurora-elo-connected@1.0.0 typecheck
+> tsc --noEmit
+
+typecheck_rc=0
+-- test
+
+> aurora-elo-connected@1.0.0 test
+> jest --runInBand
+
+PASS tests/HomeScreen.test.tsx
+PASS tests/http.test.ts
+PASS tests/clinical-api.test.ts
+PASS tests/safety.test.ts
+
+Test Suites: 4 passed, 4 total
+Tests:       25 passed, 25 total
+Snapshots:   0 total
+Time:        2.696 s, estimated 9 s
+Ran all test suites.
+test_rc=0
+-- export
+
+> aurora-elo-connected@1.0.0 export
+> EXPO_NO_DOTENV=1 expo export --platform all
+
+Starting Metro Bundler
+Web Bundled 16158ms index.js (192 modules)
+Android Bundled 16945ms index.js (565 modules)
+iOS Bundled 18341ms index.js (566 modules)
+
+› web bundles (1):
+_expo/static/js/web/index-f1f9ce77de9a3dc7fc0743314a17ec5f.js (321 kB)
+
+› android bundles (1):
+_expo/static/js/android/index-07fd7e350a5d6c5cbf12481b84f82a97.hbc (1.58 MB)
+
+› ios bundles (1):
+_expo/static/js/ios/index-8bb74063e49ea5943ec32cc591ca6204.hbc (1.57 MB)
+
+› Files (2):
+index.html (1.19 kB)
+metadata.json (244 B)
+
+Exported: dist
+export_rc=0

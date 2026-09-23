@@ -1,0 +1,11 @@
+........................................................                 [100%]
+=============================== warnings summary ===============================
+tests/test_user_administration.py: 7 warnings
+tests/test_master_panel_tenants.py: 4 warnings
+tests/test_security_controls.py: 1 warning
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/core/handlers/base.py:63: UserWarning: No directory at: /Users/rgnsystems/projects/auroraelo/staticfiles/
+    mw_instance = middleware(adapted_handler)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+56 passed, 12 warnings in 93.67s (0:01:33)
+pg_focus_exit=0

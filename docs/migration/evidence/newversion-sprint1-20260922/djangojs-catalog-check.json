@@ -1,0 +1,24 @@
+{
+  "domain": "djangojs",
+  "languages": {
+    "pt_BR": {
+      "keys_including_plural_forms": 5,
+      "stale_compiled_catalog": false,
+      "empty_entries": [],
+      "placeholder_errors": []
+    },
+    "en": {
+      "keys_including_plural_forms": 5,
+      "stale_compiled_catalog": false,
+      "empty_entries": [],
+      "placeholder_errors": []
+    },
+    "es": {
+      "keys_including_plural_forms": 5,
+      "stale_compiled_catalog": false,
+      "empty_entries": [],
+      "placeholder_errors": []
+    }
+  },
+  "passed": true
+}

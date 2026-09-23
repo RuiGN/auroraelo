@@ -1,0 +1,21 @@
+Would reformat: api/scheduling_api.py
+Would reformat: clinics/context_processors.py
+Would reformat: clinics/management/commands/create_aurora_clinic.py
+Would reformat: config/views.py
+Would reformat: core/event_store.py
+Would reformat: core/feature_flags.py
+Would reformat: core/metrics.py
+Would reformat: master_panel/models.py
+Would reformat: master_panel/views/billing.py
+Would reformat: psychiatry/management/commands/create_aurora_users.py
+Would reformat: psychiatry/management/commands/seed_psychiatry.py
+Would reformat: psychiatry/tests.py
+Would reformat: psychiatry/urls.py
+Would reformat: tests/architecture_helpers.py
+Would reformat: tests/test_content_tenant_invariant.py
+Would reformat: tests/test_design_system.py
+Would reformat: tests/test_form_components.py
+Would reformat: tests/test_incident_readiness.py
+Would reformat: tests/test_theme_charts.py
+19 files would be reformatted, 579 files already formatted
+ruff_format_exit=1

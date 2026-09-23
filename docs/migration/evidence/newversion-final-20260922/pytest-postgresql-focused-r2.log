@@ -1,0 +1,24 @@
+ Network auroraelo-test_default Creating 
+ Network auroraelo-test_default Creating 
+ Network auroraelo-test_default Created 
+ Network auroraelo-test_default Created 
+ Container auroraelo-test-postgres-1 Creating 
+ Container auroraelo-test-postgres-1 Created 
+ Container auroraelo-test-postgres-1 Starting 
+ Container auroraelo-test-postgres-1 Started 
+ Container auroraelo-test-postgres-1 Waiting 
+ Container auroraelo-test-postgres-1 Healthy 
+compose_up_exit=0
+........................................................................ [ 82%]
+...............                                                          [100%]
+=============================== warnings summary ===============================
+tests/test_user_administration.py: 7 warnings
+tests/test_master_panel_tenants.py: 4 warnings
+tests/test_professional_management.py: 1 warning
+tests/test_security_controls.py: 1 warning
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/core/handlers/base.py:63: UserWarning: No directory at: /Users/rgnsystems/projects/auroraelo/staticfiles/
+    mw_instance = middleware(adapted_handler)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+87 passed, 13 warnings in 98.58s (0:01:38)
+pg_focus_r2_exit=0

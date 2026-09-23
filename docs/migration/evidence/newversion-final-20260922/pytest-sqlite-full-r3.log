@@ -1,0 +1,167 @@
+........................................................................ [  2%]
+........................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+........................................................................ [ 13%]
+........................................................................ [ 15%]
+........................................................................ [ 18%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 26%]
+........................................................................ [ 29%]
+........................................................................ [ 31%]
+........................................................................ [ 34%]
+........................................................................ [ 37%]
+........................................................................ [ 39%]
+........................................................................ [ 42%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 50%]
+........................................................................ [ 53%]
+........................................................................ [ 55%]
+........................................................................ [ 58%]
+........................................................................ [ 60%]
+.......................sssssssss........................................ [ 63%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+........................................................................ [ 71%]
+..............ssss.s.sssssss............................................ [ 74%]
+........................................................................ [ 76%]
+........................................................................ [ 79%]
+........................................................................ [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 87%]
+........................................................................ [ 90%]
+........................................................................ [ 92%]
+........ssssssss........................................................ [ 95%]
+........................................................................ [ 98%]
+...................................................                      [100%]
+=============================== warnings summary ===============================
+tests/test_account_session_mfa.py: 9 warnings
+tests/test_accounts_authentication.py: 15 warnings
+tests/test_analytics.py: 2 warnings
+tests/test_api.py: 12 warnings
+tests/test_aurora_design_system.py: 1 warning
+tests/test_aurora_ui_translations.py: 3 warnings
+tests/test_auth_duralux_acceptance.py: 5 warnings
+tests/test_checkin.py: 3 warnings
+tests/test_clinic_admin.py: 4 warnings
+tests/test_clinic_onboarding_ui_translations.py: 6 warnings
+tests/test_clinic_setup.py: 14 warnings
+tests/test_clinical_operations.py: 18 warnings
+tests/test_clinical_operations_json_limits.py: 43 warnings
+tests/test_clinical_operations_revocation.py: 8 warnings
+tests/test_consent_access_lifecycle.py: 10 warnings
+tests/test_consents_ui_translations.py: 12 warnings
+tests/test_content_components.py: 2 warnings
+tests/test_content_curation_governance.py: 1 warning
+tests/test_content_http.py: 18 warnings
+tests/test_content_learning_authoring_http.py: 14 warnings
+tests/test_content_learning_authoring_http_round5.py: 6 warnings
+tests/test_content_learning_participant_http_round5.py: 2 warnings
+tests/test_design_system.py: 3 warnings
+tests/test_exercises.py: 1 warning
+tests/test_finance.py: 2 warnings
+tests/test_goals.py: 2 warnings
+tests/test_i18n_recipient_and_notifications.py: 1 warning
+tests/test_identity_migration_boundaries.py: 1 warning
+tests/test_journal.py: 6 warnings
+tests/test_language_preferences.py: 11 warnings
+tests/test_language_selector_ui.py: 2 warnings
+tests/test_layouts.py: 14 warnings
+tests/test_learning_experience_round3.py: 1 warning
+tests/test_learning_player_http.py: 4 warnings
+tests/test_low_energy.py: 1 warning
+tests/test_master_panel_tenants.py: 4 warnings
+tests/test_metrics_and_telemetry.py: 2 warnings
+tests/test_observability.py: 13 warnings
+tests/test_onboarding.py: 2 warnings
+tests/test_patient_management.py: 6 warnings
+tests/test_people_ui_translations.py: 11 warnings
+tests/test_professional_management.py: 1 warning
+tests/test_psychiatry_http_hardening.py: 184 warnings
+tests/test_psychiatry_integration.py: 60 warnings
+tests/test_psychiatry_rendered_safety.py: 15 warnings
+tests/test_recovery_integration.py: 15 warnings
+tests/test_scheduling.py: 3 warnings
+tests/test_shell_ui_translations.py: 6 warnings
+tests/test_tenant_middleware.py: 13 warnings
+tests/test_theme_charts.py: 5 warnings
+tests/test_therapist_dashboard.py: 1 warning
+tests/test_triage.py: 1 warning
+tests/test_units.py: 3 warnings
+tests/test_user_administration.py: 7 warnings
+tests/test_versioned_consents.py: 7 warnings
+tests/test_waitlist.py: 2 warnings
+tests/test_whitelabel_brand_schema.py: 1 warning
+tests/test_whitelabel_round4.py: 1 warning
+tests/test_workspace_foundation.py: 7 warnings
+tests/test_account_ui_translations.py: 2 warnings
+tests/test_clinical_operations_integration.py: 11 warnings
+tests/test_javascript_catalog_i18n.py: 5 warnings
+tests/test_security_controls.py: 1 warning
+tests/test_smoke.py: 1 warning
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/core/handlers/base.py:63: UserWarning: No directory at: /Users/rgnsystems/projects/auroraelo/staticfiles/
+    mw_instance = middleware(adapted_handler)
+
+tests/test_psychiatry_http_hardening.py: 30 warnings
+  tests/test_psychiatry_http_hardening.py:333: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+    @pytest.mark.parametrize("transport", ["client", "factory"])
+
+tests/test_psychiatry_http_hardening.py::test_outer_middleware_stops_before_private_decorator[csrf]
+tests/test_psychiatry_http_hardening.py::test_outer_middleware_stops_before_private_decorator[revoked_session]
+tests/test_psychiatry_http_hardening.py::test_outer_middleware_stops_before_private_decorator[missing_tenant]
+  tests/test_psychiatry_http_hardening.py:421: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+    @pytest.mark.parametrize("state", ["csrf", "revoked_session", "missing_tenant"])
+
+tests/test_static_storage_manifest.py::test_strict_manifest_rejects_the_jazzmin_directory_reference
+  /Users/rgnsystems/projects/auroraelo/tests/test_static_storage_manifest.py:54: RuntimeWarning: Static reference 'vendor/bootswatch' is not part of the collected manifest; serving it unhashed.
+    assert tolerant.url(JAZZMIN_DIRECTORY_REFERENCE) == (
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'vendor/bootswatch/darkly/bootstrap.min.css' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'vendor/fontawesome-free/css/all.min.css' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'vendor/adminlte/css/adminlte.min.css' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'vendor/bootswatch' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'jazzmin/css/main.css' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'images/favicon.svg' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'design_system/assets/images/aurora-elo-emblem.png' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'admin/js/vendor/jquery/jquery.js' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'vendor/bootstrap/js/bootstrap.bundle.min.js' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'vendor/adminlte/js/adminlte.min.js' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+tests/test_static_storage_manifest.py::test_admin_index_renders_with_a_manifest_missing_the_jazzmin_entry
+  /Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/django/templatetags/static.py:129: RuntimeWarning: Static reference 'jazzmin/js/main.js' is not part of the collected manifest; serving it unhashed.
+    return staticfiles_storage.url(path)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2686 passed, 29 skipped, 692 warnings in 214.95s (0:03:34)
+pytest_sqlite_r3_exit=0

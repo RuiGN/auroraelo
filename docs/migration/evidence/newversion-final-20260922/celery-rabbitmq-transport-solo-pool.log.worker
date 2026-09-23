@@ -1,0 +1,51 @@
+ 
+ -------------- verify@MacBook-Pro-de-Rui.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.7.1-x86_64-i386-64bit-Mach-O 2026-09-23 02:29:58
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         auroraelo:0x10cb70ec0
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+- ** ---------- .> results:     redis://127.0.0.1:56379/2
+- *** --- * --- .> concurrency: 8 (solo)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . config.celery.debug_task
+  . psychiatry.tasks.consolidate_twelve_steps_task
+  . psychiatry.tasks.generate_ai_relapse_prevention_plan_task
+  . psychiatry.tasks.notify_urgent_craving_alert_task
+
+[2026-09-23 02:29:58,064: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 2.00 seconds... (1/100)
+
+[2026-09-23 02:30:00,072: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 4.00 seconds... (2/100)
+
+[2026-09-23 02:30:04,092: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 6.00 seconds... (3/100)
+
+[2026-09-23 02:30:10,120: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 8.00 seconds... (4/100)
+
+[2026-09-23 02:30:18,170: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 10.00 seconds... (5/100)
+
+[2026-09-23 02:30:28,218: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 12.00 seconds... (6/100)
+
+[2026-09-23 02:30:40,278: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 14.00 seconds... (7/100)
+
+[2026-09-23 02:30:54,354: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 16.00 seconds... (8/100)
+
+[2026-09-23 02:31:10,450: ERROR/MainProcess] consumer: Cannot connect to amqp://auroraelo_sintetico:**@127.0.0.1:55672//: [Errno 61] Connection refused.
+Trying again in 18.00 seconds... (9/100)
+
+
+worker: Warm shutdown (MainProcess)

@@ -1,0 +1,55 @@
+== mobile/b2c ==
+-- format:check
+
+> aurora-elo-b2c@1.0.0 format:check
+> prettier --check App.tsx index.js '*.config.js' tsconfig.json app.json 'src/**/*.{ts,tsx}' 'tests/*.{ts,tsx,js}' '../shared/*.ts'
+
+Checking formatting...
+All matched files use Prettier code style!
+format_rc=0
+-- typecheck
+
+> aurora-elo-b2c@1.0.0 typecheck
+> tsc --noEmit
+
+typecheck_rc=0
+-- test
+
+> aurora-elo-b2c@1.0.0 test
+> jest --runInBand
+
+PASS tests/HomeScreen.test.tsx
+PASS tests/http.test.ts
+PASS tests/safety.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       22 passed, 22 total
+Snapshots:   0 total
+Time:        2.881 s, estimated 10 s
+Ran all test suites.
+test_rc=0
+-- export
+
+> aurora-elo-b2c@1.0.0 export
+> EXPO_NO_DOTENV=1 expo export --platform all
+
+Starting Metro Bundler
+Web Bundled 17012ms index.js (192 modules)
+iOS Bundled 17826ms index.js (566 modules)
+Android Bundled 19212ms index.js (565 modules)
+
+› web bundles (1):
+_expo/static/js/web/index-6feb722fa81e5b849d3dd7cd516b203f.js (320 kB)
+
+› ios bundles (1):
+_expo/static/js/ios/index-20e00c9331408fcd72d9e2b5a386c744.hbc (1.57 MB)
+
+› android bundles (1):
+_expo/static/js/android/index-3f400720ec7f1597a123da7b7d2ff2a8.hbc (1.58 MB)
+
+› Files (2):
+index.html (1.19 kB)
+metadata.json (244 B)
+
+Exported: dist
+export_rc=0

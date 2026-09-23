@@ -1,0 +1,31 @@
+ 
+ -------------- verify@MacBook-Pro-de-Rui.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.7.1-x86_64-i386-64bit-Mach-O 2026-09-23 02:13:47
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         auroraelo:0x104414ec0
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+- ** ---------- .> results:     redis://127.0.0.1:56379/2
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . config.celery.debug_task
+  . psychiatry.tasks.consolidate_twelve_steps_task
+  . psychiatry.tasks.generate_ai_relapse_prevention_plan_task
+  . psychiatry.tasks.notify_urgent_craving_alert_task
+
+[2026-09-23 02:13:47,474: INFO/MainProcess] Connected to amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+[2026-09-23 02:13:47,485: INFO/MainProcess] mingle: searching for neighbors
+[2026-09-23 02:13:47,797: INFO/SpawnPoolWorker-1] child process 10289 calling self.run()
+[2026-09-23 02:13:48,525: INFO/MainProcess] mingle: all alone
+[2026-09-23 02:13:48,576: INFO/MainProcess] verify@MacBook-Pro-de-Rui.local ready.
+
+worker: Warm shutdown (MainProcess)
+/Users/rgnsystems/projects/auroraelo/.venv/lib/python3.14/site-packages/billiard/semaphore_tracker.py:130: UserWarning: semaphore_tracker: There appear to be 1 leaked semaphores to clean up at shutdown
+  warnings.warn('semaphore_tracker: There appear to be %d '

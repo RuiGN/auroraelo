@@ -1,0 +1,32 @@
+=== container status (broker já iniciado em tentativa anterior) ===
+rabbitmq:3.13-alpine Up 25 seconds
+Ping succeeded
+rabbitmq_ping_exit=0
+df9198a726b174ff5bba0f31c9aa5b46b26f1e52742e7e4d1572587dc7ab61a5
+redis_container=0
+PONG
+redis_ping_exit=0
+worker_ready=1
+Request: <Context: {'id': '0722400e-8597-4ac2-8a58-afa2b7d89c5e', 'task': 'config.celery.debug_task', 'parent_id': None, 'root_id': '0722400e-8597-4ac2-8a58-afa2b7d89c5e', 'retries': 0, 'is_eager': True, 'logfile': None, 'loglevel': 0, 'hostname': 'MacBook-Pro-de-Rui.local', 'callbacks': None, 'errbacks': None, 'headers': None, 'ignore_result': True, 'delivery_info': {'is_eager': True, 'exchange': None, 'routing_key': None, 'priority': None}, 'args': (), 'called_directly': False, 'kwargs': {}}>
+dispatched_task_id=0722400e-8597-4ac2-8a58-afa2b7d89c5e
+dispatch_exit=0
+--- worker startup and task execution ---
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+- ** ---------- .> results:     redis://127.0.0.1:56379/2
+[2026-09-23 02:13:47,474: INFO/MainProcess] Connected to amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+[2026-09-23 02:13:48,576: INFO/MainProcess] verify@MacBook-Pro-de-Rui.local ready.
+task_received=0
+task_succeeded=0
+worker_errors=0
+--- broker queues after execution ---
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name	messages	consumers
+celery	0	1
+verify@MacBook-Pro-de-Rui.local.celery.pidbox	0	1
+celeryev.59239f29-105f-4ae0-b591-90feb77226a8	0	1
+queues_exit=0
+auroraelo-rmq-verify
+auroraelo-redis-verify
+cleanup_exit=0
+leftover_containers=0

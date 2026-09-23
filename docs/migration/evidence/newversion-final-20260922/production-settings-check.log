@@ -1,0 +1,26 @@
+=== import production settings (no replica) ===
+databases: ['default']
+debug: False
+import_exit=0
+=== import production settings (with replica) ===
+databases: ['default', 'replica']
+replica: replica db replica user
+replica_import_exit=0
+=== import production settings (missing master env) ===
+  File "/Users/rgnsystems/projects/auroraelo/config/settings/base.py", line 31, in required_environment
+    raise ImproperlyConfigured(f"Mandatory environment variable {name} is not set.")
+django.core.exceptions.ImproperlyConfigured: Mandatory environment variable MASTER_USER_PASSWORD is not set.
+missing_env_pipeline_exit=1
+=== import production settings (malformed replica) ===
+        "REPLICA_DATABASE_URL must be a complete PostgreSQL URL."
+    )
+django.core.exceptions.ImproperlyConfigured: REPLICA_DATABASE_URL must be a complete PostgreSQL URL.
+malformed_replica_pipeline_exit=1
+=== manage.py check --deploy ===
+System check identified some issues:
+
+WARNINGS:
+?: (security.W009) Your SECRET_KEY has less than 50 characters, less than 5 unique characters, or it's prefixed with 'django-insecure-' indicating that it was generated automatically by Django. Please generate a long and random value, otherwise many of Django's security-critical features will be vulnerable to attack.
+
+System check identified 1 issue (0 silenced).
+deploy_check_exit=0

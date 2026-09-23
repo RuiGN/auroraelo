@@ -1,0 +1,45 @@
+=== broker container status ===
+rabbitmq:3.13-alpine Up 22 seconds
+Ping succeeded
+rabbitmq_ping_exit=0
+62ddcf04a2f876fd845cd4513537fddbe80b7040961852cfcf8bca07263571e8
+redis_container=0
+PONG
+redis_ping_exit=0
+--- dispatch (transport, não eager) ---
+task_always_eager=False
+dispatched_task_id=f219c771-0fcb-4dc5-a9a9-daf266f9e099
+dispatch_exit=0
+--- queues after dispatch, before worker ---
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name	messages	consumers
+celery	1	0
+--- worker view ---
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+- ** ---------- .> results:     redis://127.0.0.1:56379/2
+[2026-09-23 02:25:51,351: INFO/MainProcess] Connected to amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+[2026-09-23 02:25:52,450: INFO/MainProcess] verify@MacBook-Pro-de-Rui.local ready.
+[2026-09-23 02:25:52,952: ERROR/MainProcess] Task handler raised error: ValueError('not enough values to unpack (expected 3, got 0)')
+task_received=0
+task_succeeded=0
+worker_errors=0
+--- worker log head (diagnóstico) ---
+ 
+ -------------- verify@MacBook-Pro-de-Rui.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.7.1-x86_64-i386-64bit-Mach-O 2026-09-23 02:25:51
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         auroraelo:0x10a24cec0
+- ** ---------- .> transport:   amqp://auroraelo_sintetico:**@127.0.0.1:55672//
+--- queues while worker runs ---
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name	messages	consumers
+celery	0	1
+verify@MacBook-Pro-de-Rui.local.celery.pidbox	0	1
+celeryev.240ea2c2-4e66-4608-a995-e70288cab540	0	1
+auroraelo-rmq-verify
+auroraelo-redis-verify
+leftover_containers=0

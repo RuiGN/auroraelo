@@ -1,0 +1,2061 @@
+E402 Module level import not at top of file
+  --> api/__init__.py:93:1
+   |
+91 | # ── Domain routers ───────────────────────────────────────────────────────────
+92 |
+93 | from api.journal_api import router as journal_router
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+94 | from api.goals_api import router as goals_router
+95 | from api.scheduling_api import router as scheduling_router
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> api/__init__.py:93:1
+   |
+91 |   # ── Domain routers ───────────────────────────────────────────────────────────
+92 |
+93 | / from api.journal_api import router as journal_router
+94 | | from api.goals_api import router as goals_router
+95 | | from api.scheduling_api import router as scheduling_router
+   | |__________________________________________________________^
+96 |
+97 |   api.add_router("/journal/", journal_router)
+   |
+help: Organize imports
+
+E402 Module level import not at top of file
+  --> api/__init__.py:94:1
+   |
+93 | from api.journal_api import router as journal_router
+94 | from api.goals_api import router as goals_router
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+95 | from api.scheduling_api import router as scheduling_router
+   |
+
+E402 Module level import not at top of file
+  --> api/__init__.py:95:1
+   |
+93 | from api.journal_api import router as journal_router
+94 | from api.goals_api import router as goals_router
+95 | from api.scheduling_api import router as scheduling_router
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+96 |
+97 | api.add_router("/journal/", journal_router)
+   |
+
+F401 [*] `clinics.typing.ClinicRequest` imported but unused
+  --> api/journal_api.py:12:28
+   |
+10 | from ninja import Router, Schema
+11 |
+12 | from clinics.typing import ClinicRequest
+   |                            ^^^^^^^^^^^^^
+13 |
+14 | router = Router(tags=["Journal"])
+   |
+help: Remove unused import: `clinics.typing.ClinicRequest`
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> api/journal_api.py:112:5
+    |
+110 |   def create_entry(request: HttpRequest, payload: JournalEntryIn):
+111 |       """Create a new journal diary entry."""
+112 | /     from people.selectors import patient_profile_for_user
+113 | |     from journal.services import create_journal_entry
+    | |_____________________________________________________^
+114 |
+115 |       clinic_id = _clinic_id(request)
+    |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> api/journal_api.py:149:5
+    |
+147 |   def submit_checkin(request: HttpRequest, payload: CheckInIn):
+148 |       """Submit a daily check-in (idempotent per period)."""
+149 | /     from people.selectors import patient_profile_for_user
+150 | |     from journal.services import submit_daily_checkin
+    | |_____________________________________________________^
+151 |
+152 |       clinic_id = _clinic_id(request)
+    |
+help: Organize imports
+
+E501 Line too long (119 > 88)
+  --> clinics/context_processors.py:20:89
+   |
+18 |     """Expose only the current actor's authorized active clinic choices."""
+19 |     clinic_request = cast(ClinicRequest, request)
+20 |     if not hasattr(request, "user") or not isinstance(request.user, AbstractBaseUser) or clinic_request.clinic is None:
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+21 |         return {
+22 |             "active_clinic": None,
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> clinics/management/commands/create_aurora_clinic.py:3:1
+  |
+1 |   """Provision primary Aurora Elo Clinic and link user memberships."""
+2 |
+3 | / from datetime import date
+4 | | from django.core.management.base import BaseCommand
+5 | | from django.contrib.auth import get_user_model
+6 | | from clinics.models import Clinic, ClinicConfiguration, ClinicMembership
+  | |________________________________________________________________________^
+7 |
+8 |   User = get_user_model()
+  |
+help: Organize imports
+
+E501 Line too long (92 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:15:89
+   |
+14 |     def handle(self, *args, **options):
+15 |         self.stdout.write(self.style.MIGRATE_HEADING("Provisionando Clínica Aurora Elo..."))
+   |                                                                                         ^^^^
+16 |
+17 |         clinic = Clinic.infrastructure_objects.filter(slug="aurora-elo").first()
+   |
+
+E501 Line too long (101 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:25:89
+   |
+23 |                 is_demo=False,
+24 |             )
+25 |             self.stdout.write(self.style.SUCCESS(f"✓ Clínica criada: {clinic.name} ({clinic.slug})"))
+   |                                                                                         ^^^^^^^^^^^^^
+26 |         else:
+27 |             clinic.is_active = True
+   |
+
+E501 Line too long (89 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:31:89
+   |
+29 |             self.stdout.write(f"✓ Clínica existente confirmada ativa: {clinic.name}")
+30 |
+31 |         config = ClinicConfiguration.infrastructure_objects.filter(clinic=clinic).first()
+   |                                                                                         ^
+32 |         if not config:
+33 |             config = ClinicConfiguration.infrastructure_objects.create(
+   |
+
+E501 Line too long (100 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:46:89
+   |
+44 |                 country_code="BR",
+45 |             )
+46 |             self.stdout.write(self.style.SUCCESS("✓ Configuração institucional da clínica criada."))
+   |                                                                                         ^^^^^^^^^^^^
+47 |         else:
+48 |             self.stdout.write("✓ Configuração institucional já vinculada.")
+   |
+
+E501 Line too long (165 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:52:89
+   |
+50 | …
+51 | …
+52 | …ministrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+53 | …: "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+54 | …: "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+   |
+
+E501 Line too long (164 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:53:89
+   |
+51 | …
+52 | …ministrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+53 | …: "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+54 | …: "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+55 | …"Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |
+
+E501 Line too long (167 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:54:89
+   |
+52 | …inistrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+53 | … "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+54 | … "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+55 | …Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+56 | … "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |
+
+E501 Line too long (174 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:55:89
+   |
+53 | …rcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+54 | …mila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+55 | …pção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+56 | …uipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+57 | …: "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |
+
+E501 Line too long (177 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:56:89
+   |
+54 | …ila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+55 | …ção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+56 | …ipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+57 | … "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+58 | …o", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |
+
+E501 Line too long (165 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:57:89
+   |
+55 | …"Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+56 | …: "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+57 | …irst": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+58 | …"Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |
+
+E501 Line too long (158 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:58:89
+   |
+56 | …st": "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+57 | … "first": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+58 | …": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+59 | …
+60 | …
+   |
+
+E501 Line too long (165 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:61:89
+   |
+60 | …
+61 | …ministrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+62 | …: "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+63 | …: "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+   |
+
+E501 Line too long (164 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:62:89
+   |
+60 | …
+61 | …ministrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+62 | …: "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+63 | …: "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+64 | …"Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |
+
+E501 Line too long (167 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:63:89
+   |
+61 | …inistrador", "last": "Geral", "role": ClinicMembership.Role.CLINIC_ADMIN, "staff": True, "super": True},
+62 | … "Marcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+63 | … "Camila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+64 | …Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+65 | … "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |
+
+E501 Line too long (174 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:64:89
+   |
+62 | …rcelo", "last": "Arantes", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+63 | …mila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+64 | …pção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+65 | …uipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+66 | …go", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |
+
+E501 Line too long (177 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:65:89
+   |
+63 | …ila", "last": "Albuquerque", "role": ClinicMembership.Role.THERAPIST, "staff": True, "super": False},
+64 | …ção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+65 | …ipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+   |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+66 | …o", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+67 | …
+   |
+
+E501 Line too long (158 > 88)
+  --> clinics/management/commands/create_aurora_clinic.py:66:89
+   |
+64 | …": "Recepção", "last": "Clínica", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+65 | …st": "Equipe", "last": "Enfermagem", "role": ClinicMembership.Role.ADMINISTRATIVE_STAFF, "staff": True, "super": False},
+66 | …": "Thiago", "last": "Silva", "role": ClinicMembership.Role.PATIENT, "staff": False, "super": False},
+   |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+67 | …
+   |
+
+E501 Line too long (106 > 88)
+   --> clinics/management/commands/create_aurora_clinic.py:112:89
+    |
+110 |                     valid_until=None,
+111 |                 )
+112 |                 self.stdout.write(self.style.SUCCESS(f"✓ Vínculo criado: {user.email} -> {spec['role']}"))
+    |                                                                                         ^^^^^^^^^^^^^^^^^^
+113 |             else:
+114 |                 membership.is_active = True
+    |
+
+E501 Line too long (97 > 88)
+   --> clinics/management/commands/create_aurora_clinic.py:118:89
+    |
+116 |                 membership.valid_from = date(2024, 1, 1)
+117 |                 membership.valid_until = None
+118 |                 membership.save(update_fields=["is_active", "role", "valid_from", "valid_until"])
+    |                                                                                         ^^^^^^^^^
+119 |                 self.stdout.write(f"✓ Vínculo atualizado: {user.email} -> {spec['role']}")
+    |
+
+E501 Line too long (90 > 88)
+   --> clinics/management/commands/create_aurora_clinic.py:119:89
+    |
+117 |                 membership.valid_until = None
+118 |                 membership.save(update_fields=["is_active", "role", "valid_from", "valid_until"])
+119 |                 self.stdout.write(f"✓ Vínculo atualizado: {user.email} -> {spec['role']}")
+    |                                                                                         ^^
+120 |
+121 |         self.stdout.write(self.style.SUCCESS("✓ Clínica Aurora Elo e todos os usuários/vínculos configurados com sucesso!"))
+    |
+
+E501 Line too long (124 > 88)
+   --> clinics/management/commands/create_aurora_clinic.py:121:89
+    |
+119 |                 self.stdout.write(f"✓ Vínculo atualizado: {user.email} -> {spec['role']}")
+120 |
+121 |         self.stdout.write(self.style.SUCCESS("✓ Clínica Aurora Elo e todos os usuários/vínculos configurados com sucesso!"))
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> config/celery.py:3:1
+  |
+1 |   """Celery initialization for Aurora Elo Health Systems."""
+2 |
+3 | / import os
+4 | | from celery import Celery
+  | |_________________________^
+5 |
+6 |   os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
+  |
+help: Organize imports
+
+F401 [*] `.base.parse_database_url` imported but unused
+  --> config/settings/production.py:96:23
+   |
+94 | _replica_url = os.environ.get("REPLICA_DATABASE_URL", "")
+95 | if _replica_url:
+96 |     from .base import parse_database_url  # type: ignore[attr-defined]
+   |                       ^^^^^^^^^^^^^^^^^^
+97 |
+98 |     DATABASES["replica"] = postgres_database_from_environment(
+   |
+help: Remove unused import: `.base.parse_database_url`
+
+F811 Redefinition of unused `LANGUAGES` from line 23
+   --> config/settings/test.py:103:1
+    |
+101 | # Expand the language list in tests so that i18n and translation tests can
+102 | # exercise EN and ES without requiring a production launch of those languages.
+103 | LANGUAGES = (
+    | ^^^^^^^^^ `LANGUAGES` redefined here
+104 |     ("pt-br", "Português (Brasil)"),
+105 |     ("en", "English"),
+    |
+   ::: config/settings/test.py:23:5
+    |
+ 21 |     JAZZMIN_UI_TWEAKS,
+ 22 |     LANGUAGE_CODE,
+ 23 |     LANGUAGES,
+    |     --------- previous definition of `LANGUAGES` here
+ 24 |     LOCALE_PATHS,
+ 25 |     LOGGING,
+    |
+help: Remove definition: `LANGUAGES`
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> config/urls.py:3:1
+   |
+ 1 |   """Project URL configuration."""
+ 2 |
+ 3 | / from django.contrib import admin
+ 4 | | from django.urls import include, path
+ 5 | | from django.views.i18n import JavaScriptCatalog
+ 6 | |
+ 7 | | from .views import (
+ 8 | |     admin_login_redirect,
+ 9 | |     confirm_clinic_switch,
+10 | |     design_system_reference,
+11 | |     home,
+12 | |     liveness,
+13 | |     readiness,
+14 | |     review_clinic_switch,
+15 | |     save_workspace_layout,
+16 | |     workspace_detached,
+17 | |     workspace_vertical,
+18 | | )
+19 | |
+20 | | from core.metrics import metrics_view
+21 | |
+22 | | from api import api
+   | |___________________^
+23 |
+24 |   handler400 = "config.views.bad_request"
+   |
+help: Organize imports
+
+E402 Module level import not at top of file
+  --> config/urls.py:29:1
+   |
+27 | handler500 = "config.views.server_error"
+28 |
+29 | from accounts.views import master_login
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+30 |
+31 | urlpatterns = [
+   |
+
+E501 Line too long (89 > 88)
+   --> config/views.py:273:89
+    |
+272 | def home(request: HttpRequest) -> HttpResponse:
+273 |     """Return the official landing page for visitors, or redirect authenticated users."""
+    |                                                                                         ^
+274 |     if request.user.is_authenticated:
+275 |         from clinics.services import CLINIC_SESSION_KEY
+    |
+
+E501 Line too long (92 > 88)
+   --> config/views.py:287:89
+    |
+286 |     # Machine-readable plain text if explicitly requested via format or header
+287 |     if request.GET.get("format") == "text" or request.headers.get("Accept") == "text/plain":
+    |                                                                                         ^^^^
+288 |         return HttpResponse(
+289 |             _("Plataforma terapêutica disponível."),
+    |
+
+E501 Line too long (96 > 88)
+   --> config/views.py:298:89
+    |
+297 |     context = {
+298 |         "page_title": "Aurora Elo — Plataforma de Saúde Mental, Psiquiatria e Cuidado Contínuo",
+    |                                                                                         ^^^^^^^^
+299 |         "availability_notice": _("Plataforma terapêutica disponível."),
+300 |         "contact_sent": contact_sent,
+    |
+
+UP035 [*] Import from `collections.abc` instead: `Callable`
+  --> core/event_store.py:14:1
+   |
+13 | from datetime import datetime
+14 | from typing import Any, Callable
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+15 | from uuid import UUID
+   |
+help: Import from `collections.abc`
+
+E402 Module level import not at top of file
+  --> core/feature_flags.py:85:1
+   |
+83 | # ── Selectors ─────────────────────────────────────────────────────────────────
+84 |
+85 | import hashlib
+   | ^^^^^^^^^^^^^^
+86 | from uuid import UUID
+   |
+
+E402 Module level import not at top of file
+  --> core/feature_flags.py:86:1
+   |
+85 | import hashlib
+86 | from uuid import UUID
+   | ^^^^^^^^^^^^^^^^^^^^^
+   |
+
+F401 [*] `json` imported but unused
+  --> core/metrics.py:14:8
+   |
+13 | import bisect
+14 | import json
+   |        ^^^^
+15 | import logging
+16 | import threading
+   |
+help: Remove unused import: `json`
+
+E501 Line too long (90 > 88)
+  --> core/telemetry.py:98:89
+   |
+96 |         pass
+97 |     except Exception:
+98 |         logger.debug("Failed to instrument %s.%s", module_path, class_name, exc_info=True)
+   |                                                                                         ^^
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> master_panel/middleware.py:3:1
+  |
+1 |   """Payment enforcement middleware for tenant billing."""
+2 |
+3 | / from __future__ import annotations
+4 | |
+5 | | from django.conf import settings
+6 | | from django.http import HttpRequest, HttpResponse
+7 | | from django.shortcuts import render
+  | |___________________________________^
+  |
+help: Organize imports
+
+F401 [*] `master_panel.models.TenantSubscription` imported but unused
+  --> master_panel/services.py:76:37
+   |
+74 | def handle_stripe_event(event: Any) -> None:
+75 |     """Dispatch a verified Stripe event to the appropriate handler."""
+76 |     from master_panel.models import TenantSubscription
+   |                                     ^^^^^^^^^^^^^^^^^^
+77 |
+78 |     event_type: str = event["type"]
+   |
+help: Remove unused import: `master_panel.models.TenantSubscription`
+
+UP037 [*] Remove quotes from type annotation
+   --> master_panel/services.py:196:29
+    |
+196 | def _ts_to_dt(timestamp) -> "timezone.datetime | None":
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+197 |     if timestamp is None:
+198 |         return None
+    |
+help: Remove quotes
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> master_panel/services.py:199:5
+    |
+197 |     if timestamp is None:
+198 |         return None
+199 |     from datetime import datetime, UTC
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+200 |
+201 |     return datetime.fromtimestamp(timestamp, tz=UTC)
+    |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> master_panel/urls.py:3:1
+   |
+ 1 |   """Master panel URL configuration."""
+ 2 |
+ 3 | / from django.urls import path
+ 4 | |
+ 5 | | from master_panel.views.dashboard import dashboard
+ 6 | | from master_panel.views.tenants import (
+ 7 | |     tenant_list,
+ 8 | |     tenant_create,
+ 9 | |     tenant_detail,
+10 | |     tenant_block,
+11 | |     tenant_unblock,
+12 | | )
+13 | | from master_panel.views.billing import (
+14 | |     tenant_billing_portal,
+15 | |     tenant_checkout,
+16 | | )
+17 | | from master_panel.views.webhooks import stripe_webhook
+   | |______________________________________________________^
+18 |
+19 |   app_name = "master_panel"
+   |
+help: Organize imports
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> master_panel/views/dashboard.py:3:1
+   |
+ 1 |   """Master panel — dashboard view with KPIs and charts."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | import json
+ 6 | | from datetime import datetime, timedelta, UTC
+ 7 | |
+ 8 | | from django.contrib.admin.views.decorators import staff_member_required
+ 9 | | from django.db.models import Count, Q
+10 | | from django.db.models.functions import TruncMonth
+11 | | from django.shortcuts import render
+12 | | from django.utils import timezone
+13 | | from django.http import HttpRequest, HttpResponse
+14 | |
+15 | | from clinics.models import Clinic
+16 | | from master_panel.models import TenantSubscription, TenantUsageSnapshot
+   | |_______________________________________________________________________^
+   |
+help: Organize imports
+
+F401 [*] `datetime.datetime` imported but unused
+ --> master_panel/views/dashboard.py:6:22
+  |
+5 | import json
+6 | from datetime import datetime, timedelta, UTC
+  |                      ^^^^^^^^
+7 |
+8 | from django.contrib.admin.views.decorators import staff_member_required
+  |
+help: Remove unused import
+
+F401 [*] `datetime.UTC` imported but unused
+ --> master_panel/views/dashboard.py:6:43
+  |
+5 | import json
+6 | from datetime import datetime, timedelta, UTC
+  |                                           ^^^
+7 |
+8 | from django.contrib.admin.views.decorators import staff_member_required
+  |
+help: Remove unused import
+
+F401 [*] `django.db.models.Q` imported but unused
+  --> master_panel/views/dashboard.py:9:37
+   |
+ 8 | from django.contrib.admin.views.decorators import staff_member_required
+ 9 | from django.db.models import Count, Q
+   |                                     ^
+10 | from django.db.models.functions import TruncMonth
+11 | from django.shortcuts import render
+   |
+help: Remove unused import: `django.db.models.Q`
+
+F401 [*] `clinics.models.Clinic` imported but unused
+  --> master_panel/views/dashboard.py:15:28
+   |
+13 | from django.http import HttpRequest, HttpResponse
+14 |
+15 | from clinics.models import Clinic
+   |                            ^^^^^^
+16 | from master_panel.models import TenantSubscription, TenantUsageSnapshot
+   |
+help: Remove unused import: `clinics.models.Clinic`
+
+E501 Line too long (98 > 88)
+  --> master_panel/views/tenants.py:52:89
+   |
+51 |         if not name or not email:
+52 |             messages.error(request, "Nome da clínica e e-mail do administrador são obrigatórios.")
+   |                                                                                         ^^^^^^^^^^
+53 |             return render(request, "master_panel/tenant_create.html", {
+54 |                 "page_title": "Nova Clínica",
+   |
+
+SIM105 Use `contextlib.suppress(Exception)` instead of `try`-`except`-`pass`
+  --> master_panel/views/tenants.py:71:13
+   |
+69 |               # Create Stripe customer (silently skip if no API key configured).
+70 |               stripe_customer_id = ""
+71 | /             try:
+72 | |                 stripe_customer_id = create_stripe_customer(name, email)
+73 | |             except Exception:
+74 | |                 pass
+   | |____________________^
+75 |
+76 |               sub = TenantSubscription.objects.create(
+   |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(Exception): ...`
+
+F841 Local variable `sub` is assigned to but never used
+  --> master_panel/views/tenants.py:76:13
+   |
+74 |                 pass
+75 |
+76 |             sub = TenantSubscription.objects.create(
+   |             ^^^
+77 |                 clinic=clinic,
+78 |                 plan=plan,
+   |
+help: Remove assignment to unused variable `sub`
+
+E501 Line too long (95 > 88)
+   --> master_panel/views/tenants.py:103:89
+    |
+101 |         defaults={"status": TenantSubscription.Status.TRIALING},
+102 |     )
+103 |     snapshots = TenantUsageSnapshot.objects.filter(clinic=clinic).order_by("-snapshot_at")[:30]
+    |                                                                                         ^^^^^^^
+104 |
+105 |     return render(
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> psychiatry/management/commands/create_aurora_users.py:6:1
+  |
+4 |   """
+5 |
+6 | / from django.core.management.base import BaseCommand
+7 | | from django.contrib.auth import get_user_model
+  | |______________________________________________^
+8 |
+9 |   User = get_user_model()
+  |
+help: Organize imports
+
+E501 Line too long (104 > 88)
+  --> psychiatry/management/commands/create_aurora_users.py:16:89
+   |
+15 |     def handle(self, *args, **options):
+16 |         self.stdout.write(self.style.MIGRATE_HEADING("Criando contas de acesso para todas as áreas..."))
+   |                                                                                         ^^^^^^^^^^^^^^^^
+17 |
+18 |         users_to_create = [
+   |
+
+E501 Line too long (89 > 88)
+  --> psychiatry/management/commands/create_aurora_users.py:35:89
+   |
+33 |                 "is_staff": True,
+34 |                 "is_superuser": False,
+35 |                 "role_desc": "Diretoria Médica & Psiquiatra Especialista em Adictologia",
+   |                                                                                         ^
+36 |             },
+37 |             {
+   |
+
+E501 Line too long (89 > 88)
+  --> psychiatry/management/commands/create_aurora_users.py:71:89
+   |
+69 |                 "is_staff": False,
+70 |                 "is_superuser": False,
+71 |                 "role_desc": "Paciente Acolhido (Recuperação Jogos de Azar / 12 Passos)",
+   |                                                                                         ^
+72 |             },
+73 |         ]
+   |
+
+E501 Line too long (102 > 88)
+  --> psychiatry/management/commands/create_aurora_users.py:90:89
+   |
+88 |                 user.set_password(u["password"])
+89 |                 user.save()
+90 |                 self.stdout.write(self.style.SUCCESS(f"✓ Usuário criado: {email} ({u['role_desc']})"))
+   |                                                                                         ^^^^^^^^^^^^^^
+91 |             else:
+92 |                 user.set_password(u["password"])
+   |
+
+E501 Line too long (102 > 88)
+  --> psychiatry/management/commands/create_aurora_users.py:97:89
+   |
+95 |                 user.is_active = True
+96 |                 user.save()
+97 |                 self.stdout.write(self.style.WARNING(f"• Usuário atualizado com nova senha: {email}"))
+   |                                                                                         ^^^^^^^^^^^^^^
+98 |
+99 |         self.stdout.write(self.style.SUCCESS("✓ Todas as contas de acesso criadas com sucesso!"))
+   |
+
+E501 Line too long (97 > 88)
+  --> psychiatry/management/commands/create_aurora_users.py:99:89
+   |
+97 |                 self.stdout.write(self.style.WARNING(f"• Usuário atualizado com nova senha: {email}"))
+98 |
+99 |         self.stdout.write(self.style.SUCCESS("✓ Todas as contas de acesso criadas com sucesso!"))
+   |                                                                                         ^^^^^^^^^
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> psychiatry/management/commands/seed_psychiatry.py:7:1
+   |
+ 5 |   """
+ 6 |
+ 7 | / from datetime import timedelta
+ 8 | | from django.core.management.base import BaseCommand
+ 9 | | from django.utils import timezone
+10 | | from psychiatry.models import (
+11 | |     DiagnosticCategory,
+12 | |     PsychiatricPatientProfile,
+13 | |     PsychiatricEvaluation,
+14 | |     PsychopharmacologyPrescription,
+15 | |     PrescriptionItem,
+16 | |     MedicationAdherenceLog,
+17 | |     InpatientBed,
+18 | |     TelepsychiatryRoom,
+19 | |     PsychiatricCrisisAlert,
+20 | |     B2CMindLog,
+21 | |     B2CCBTDiary,
+22 | |     B2CSubscription,
+23 | |     AddictionProfile,
+24 | |     TwelveStepsAnamnesis,
+25 | |     CravingTrackingLog,
+26 | | )
+   | |_^
+   |
+help: Organize imports
+
+E501 Line too long (112 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:33:89
+   |
+32 |     def handle(self, *args, **options):
+33 |         self.stdout.write(self.style.MIGRATE_HEADING("Iniciando seed do ecossistema Aurora Elo Psiquiatria..."))
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+34 |
+35 |         # 1. Classificações Diagnósticas (CID-11 & DSM-5)
+   |
+
+E501 Line too long (107 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:42:89
+   |
+40 |                 "name": "Transtorno Depressivo Maior, Episódio Único",
+41 |                 "category": "Transtornos do Humor",
+42 |                 "specifiers": "Moderado a grave, sem características psicóticas. Resposta parcial a ISRS.",
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^
+43 |             },
+44 |             {
+   |
+
+E501 Line too long (93 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:49:89
+   |
+47 |                 "name": "Transtorno Depressivo Recorrente",
+48 |                 "category": "Transtornos do Humor",
+49 |                 "specifiers": "Episódio atual grave com ideação suicida prévia em remissão.",
+   |                                                                                         ^^^^^
+50 |             },
+51 |             {
+   |
+
+E501 Line too long (107 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:56:89
+   |
+54 |                 "name": "Transtorno Bipolar Tipo I",
+55 |                 "category": "Transtornos Bipolares",
+56 |                 "specifiers": "Episódio maníaco com sintomas mistos; estabilizado com carbonato de lítio.",
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^
+57 |             },
+58 |             {
+   |
+
+E501 Line too long (101 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:63:89
+   |
+61 |                 "name": "Transtorno Bipolar Tipo II",
+62 |                 "category": "Transtornos Bipolares",
+63 |                 "specifiers": "Episódios hipomaníacos alternados com episódios depressivos maiores.",
+   |                                                                                         ^^^^^^^^^^^^^
+64 |             },
+65 |             {
+   |
+
+E501 Line too long (97 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:70:89
+   |
+68 |                 "name": "Transtorno de Ansiedade Generalizada (TAG)",
+69 |                 "category": "Transtornos de Ansiedade",
+70 |                 "specifiers": "Tensão muscular, hiperarousal autonômico, insônia intermediária.",
+   |                                                                                         ^^^^^^^^^
+71 |             },
+72 |             {
+   |
+
+E501 Line too long (104 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:77:89
+   |
+75 |                 "name": "Transtorno de Pânico",
+76 |                 "category": "Transtornos de Ansiedade",
+77 |                 "specifiers": "Com agorafobia e esquiva fóbica de transportes públicos e aglomerações.",
+   |                                                                                         ^^^^^^^^^^^^^^^^
+78 |             },
+79 |             {
+   |
+
+E501 Line too long (108 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:84:89
+   |
+82 |                 "name": "Transtorno Obsessivo-Compulsivo (TOC)",
+83 |                 "category": "Transtornos Obsessivo-Compulsivos",
+84 |                 "specifiers": "Obsessões de contaminação e checagem ritualística com sofrimento acentuado.",
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^
+85 |             },
+86 |             {
+   |
+
+E501 Line too long (110 > 88)
+  --> psychiatry/management/commands/seed_psychiatry.py:91:89
+   |
+89 |                 "name": "Transtorno de Estresse Pós-Traumático (TEPT)",
+90 |                 "category": "Transtornos Relacionados ao Estresse",
+91 |                 "specifiers": "Flashbacks intrusivos, hipervigilância, histórico de evento ameaçador à vida.",
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+92 |             },
+93 |             {
+   |
+
+E501 Line too long (115 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:98:89
+    |
+ 96 |                 "name": "Esquizofrenia Paranóide",
+ 97 |                 "category": "Esquizofrenia e Outros Transtornos Psicóticos",
+ 98 |                 "specifiers": "Sintomas positivos predominantes (delírios persecutórios e alucinações auditivas).",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 99 |             },
+100 |             {
+    |
+
+E501 Line too long (100 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:105:89
+    |
+103 |                 "name": "Transtorno de Déficit de Atenção e Hiperatividade (TDAH)",
+104 |                 "category": "Transtornos do Neurodesenvolvimento",
+105 |                 "specifiers": "Apresentação combinada (desatenção e hiperatividade-impulsividade).",
+    |                                                                                         ^^^^^^^^^^^^
+106 |             },
+107 |             {
+    |
+
+E501 Line too long (94 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:112:89
+    |
+110 |                 "name": "Anorexia Nervosa",
+111 |                 "category": "Transtornos Alimentares",
+112 |                 "specifiers": "Tipo restritivo, distorção de imagem corporal, IMC limítrofe.",
+    |                                                                                         ^^^^^^
+113 |             },
+114 |             {
+    |
+
+E501 Line too long (144 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:126:89
+    |
+124 | …patia (Gambling Disorder)",
+125 | …Comportamentos Aditivos",
+126 | …de apostas online (Bets e cassinos virtuais), perseguição de perdas e endividamento crítico.",
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+127 | …
+128 | …
+    |
+
+E501 Line too long (106 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:133:89
+    |
+131 |                 "name": "Transtorno por Uso de Cocaína e Estimulantes",
+132 |                 "category": "Transtornos por Uso de Substâncias",
+133 |                 "specifiers": "Dependência com fissura (craving) intensa associada ao consumo de álcool.",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^
+134 |             },
+135 |         ]
+    |
+
+E501 Line too long (111 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:149:89
+    |
+147 |             )
+148 |             diagnoses[d["cid11"]] = obj
+149 |         self.stdout.write(self.style.SUCCESS(f"✓ {len(diagnoses)} classificações diagnósticas sincronizadas."))
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^
+150 |
+151 |         # 2. Leitos de Internação Psiquiátrica
+    |
+
+E501 Line too long (122 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:153:89
+    |
+151 |         # 2. Leitos de Internação Psiquiátrica
+152 |         wards_and_beds = [
+153 |             ("L-101", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+154 |             ("L-102", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+155 |             ("L-103", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |
+
+E501 Line too long (122 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:154:89
+    |
+152 |         wards_and_beds = [
+153 |             ("L-101", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+154 |             ("L-102", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+155 |             ("L-103", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.AVAILABLE, ""),
+156 |             ("L-104", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+    |
+
+E501 Line too long (89 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:155:89
+    |
+153 |             ("L-101", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+154 |             ("L-102", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+155 |             ("L-103", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |                                                                                         ^
+156 |             ("L-104", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+157 |             ("L-201", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+    |
+
+E501 Line too long (124 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:156:89
+    |
+154 |             ("L-102", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+155 |             ("L-103", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.AVAILABLE, ""),
+156 |             ("L-104", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+157 |             ("L-201", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+158 |             ("L-202", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |
+
+E501 Line too long (127 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:157:89
+    |
+155 |             ("L-103", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.AVAILABLE, ""),
+156 |             ("L-104", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+157 |             ("L-201", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+158 |             ("L-202", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+159 |             ("L-203", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |
+
+E501 Line too long (94 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:158:89
+    |
+156 |             ("L-104", "Ala Aurora Norte (Agudos)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+157 |             ("L-201", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+158 |             ("L-202", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |                                                                                         ^^^^^^
+159 |             ("L-203", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+160 |             ("L-204", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.MAINTENANCE, ""),
+    |
+
+E501 Line too long (94 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:159:89
+    |
+157 |             ("L-201", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.VOLUNTARY),
+158 |             ("L-202", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+159 |             ("L-203", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |                                                                                         ^^^^^^
+160 |             ("L-204", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.MAINTENANCE, ""),
+161 |             ("L-301", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+    |
+
+E501 Line too long (96 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:160:89
+    |
+158 |             ("L-202", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+159 |             ("L-203", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+160 |             ("L-204", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.MAINTENANCE, ""),
+    |                                                                                         ^^^^^^^^
+161 |             ("L-301", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+162 |             ("L-302", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.RESERVED, ""),
+    |
+
+E501 Line too long (131 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:161:89
+    |
+159 |             ("L-203", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.AVAILABLE, ""),
+160 |             ("L-204", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.MAINTENANCE, ""),
+161 |             ("L-301", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+162 |             ("L-302", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.RESERVED, ""),
+163 |             ("L-303", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.COMPULSORY),
+    |
+
+E501 Line too long (95 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:162:89
+    |
+160 |             ("L-204", "Ala Aurora Sul (Estabilização)", InpatientBed.BedStatus.MAINTENANCE, ""),
+161 |             ("L-301", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+162 |             ("L-302", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.RESERVED, ""),
+    |                                                                                         ^^^^^^^
+163 |             ("L-303", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.COMPULSORY),
+164 |             ("L-304", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |
+
+E501 Line too long (130 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:163:89
+    |
+161 |             ("L-301", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.INVOLUNTARY),
+162 |             ("L-302", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.RESERVED, ""),
+163 |             ("L-303", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.COMPULSORY),
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+164 |             ("L-304", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.AVAILABLE, ""),
+165 |         ]
+    |
+
+E501 Line too long (96 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:164:89
+    |
+162 |             ("L-302", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.RESERVED, ""),
+163 |             ("L-303", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.OCCUPIED, InpatientBed.AdmissionType.COMPULSORY),
+164 |             ("L-304", "Unidade Intensiva de Crise (UIC)", InpatientBed.BedStatus.AVAILABLE, ""),
+    |                                                                                         ^^^^^^^^
+165 |         ]
+    |
+
+E501 Line too long (128 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:175:89
+    |
+173 | …         "status": status,
+174 | …         "admission_type": adm_type,
+175 | …         "admission_date": timezone.now() - timedelta(days=4) if status == InpatientBed.BedStatus.OCCUPIED else None,
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+176 | …         "nursing_notes": "Sinais vitais estáveis. Avaliação de risco de fuga e autoagressão negativa nas últimas 24h." if status ==…
+177 | …     }
+    |
+
+E501 Line too long (225 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:176:89
+    |
+174 | …
+175 | …== InpatientBed.BedStatus.OCCUPIED else None,
+176 | … fuga e autoagressão negativa nas últimas 24h." if status == InpatientBed.BedStatus.OCCUPIED else "Leito higienizado e pronto para admissão.",
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+177 | …
+178 | …
+    |
+
+E501 Line too long (96 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:180:89
+    |
+178 |             )
+179 |             beds[bed_code] = b_obj
+180 |         self.stdout.write(self.style.SUCCESS(f"✓ {len(beds)} leitos hospitalares cadastrados."))
+    |                                                                                         ^^^^^^^^
+181 |
+182 |         # 3. Pacientes Psiquiátricos Exemplares
+    |
+
+E501 Line too long (89 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:249:89
+    |
+247 |                 "guardian": "Clara de Souza (Irmã)",
+248 |                 "guardian_phone": "(11) 98844-5512",
+249 |                 "allergies": "Reação extrapiramidal prévia a haloperidol em altas doses",
+    |                                                                                         ^
+250 |                 "comorbidities": "Tabagismo",
+251 |             },
+    |
+
+E501 Line too long (112 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:329:89
+    |
+327 |             created_patients.append(pat_obj)
+328 |
+329 |         self.stdout.write(self.style.SUCCESS(f"✓ {len(created_patients)} pacientes psiquiátricos cadastrados."))
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+330 |
+331 |         # Associar pacientes internados aos leitos
+    |
+
+E501 Line too long (109 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:348:89
+    |
+346 | …     "doctor_crm": "CRM/SP 148.920",
+347 | …     "modality": PsychiatricEvaluation.Modality.TELEHEALTH,
+348 | …     "chief_complaint": "Episódio de desânimo acentuado, anedonia e insônia terminal há 3 meses.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^
+349 | …     "hda": "Paciente relata início insidioso de humor deprimido após término de relacionamento e sobrecarga laboral. Refere choro f…
+350 | …     "past_psychiatric_history": "Episódio depressivo prévio aos 22 anos tratado com Sertralina 50mg com remissão completa.",
+    |
+
+E501 Line too long (256 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:349:89
+    |
+347 | …
+348 | …nia terminal há 3 meses.",
+349 | …rmino de relacionamento e sobrecarga laboral. Refere choro fácil, fadiga crônica e perda de interesse por hobbies. Nega ideação suicida estruturada ou sintomas psicóticos.",
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+350 | … tratado com Sertralina 50mg com remissão completa.",
+351 | …lar; tia materna com transtorno de ansiedade.",
+    |
+
+E501 Line too long (136 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:350:89
+    |
+348 | …     "chief_complaint": "Episódio de desânimo acentuado, anedonia e insônia terminal há 3 meses.",
+349 | …     "hda": "Paciente relata início insidioso de humor deprimido após término de relacionamento e sobrecarga laboral. Refere choro f…
+350 | …     "past_psychiatric_history": "Episódio depressivo prévio aos 22 anos tratado com Sertralina 50mg com remissão completa.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+351 | …     "family_psychiatric_history": "Mãe com histórico de depressão unipolar; tia materna com transtorno de ansiedade.",
+352 | …     "substance_use_history": "Uso social esporádico de álcool (1 dose quinzenal). Nega tabagismo ou substâncias ilícitas.",
+    |
+
+E501 Line too long (130 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:351:89
+    |
+349 | …     "hda": "Paciente relata início insidioso de humor deprimido após término de relacionamento e sobrecarga laboral. Refere choro f…
+350 | …     "past_psychiatric_history": "Episódio depressivo prévio aos 22 anos tratado com Sertralina 50mg com remissão completa.",
+351 | …     "family_psychiatric_history": "Mãe com histórico de depressão unipolar; tia materna com transtorno de ansiedade.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+352 | …     "substance_use_history": "Uso social esporádico de álcool (1 dose quinzenal). Nega tabagismo ou substâncias ilícitas.",
+353 | …     "mse_appearance_attitude": "Vestes adequadas, asseada, postura curvada, contato visual mantido porém hesitante, plenamente cola…
+    |
+
+E501 Line too long (135 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:352:89
+    |
+350 | …     "past_psychiatric_history": "Episódio depressivo prévio aos 22 anos tratado com Sertralina 50mg com remissão completa.",
+351 | …     "family_psychiatric_history": "Mãe com histórico de depressão unipolar; tia materna com transtorno de ansiedade.",
+352 | …     "substance_use_history": "Uso social esporádico de álcool (1 dose quinzenal). Nega tabagismo ou substâncias ilícitas.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+353 | …     "mse_appearance_attitude": "Vestes adequadas, asseada, postura curvada, contato visual mantido porém hesitante, plenamente cola…
+354 | …     "mse_psychomotor": "Discreta lentificação psicomotora, sem tiques ou acatisia.",
+    |
+
+E501 Line too long (154 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:353:89
+    |
+351 | …histórico de depressão unipolar; tia materna com transtorno de ansiedade.",
+352 | …porádico de álcool (1 dose quinzenal). Nega tabagismo ou substâncias ilícitas.",
+353 | …uadas, asseada, postura curvada, contato visual mantido porém hesitante, plenamente colaborativa.",
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+354 | …ão psicomotora, sem tiques ou acatisia.",
+355 | …to-referido como 'vazio e exaustão'. Afeto restrito, congruente com o tema depressivo.",
+    |
+
+E501 Line too long (96 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:354:89
+    |
+352 | …     "substance_use_history": "Uso social esporádico de álcool (1 dose quinzenal). Nega tabagismo ou substâncias ilícitas.",
+353 | …     "mse_appearance_attitude": "Vestes adequadas, asseada, postura curvada, contato visual mantido porém hesitante, plenamente cola…
+354 | …     "mse_psychomotor": "Discreta lentificação psicomotora, sem tiques ou acatisia.",
+    |                                                                               ^^^^^^^^
+355 | …     "mse_mood_affect": "Humor hipotímico auto-referido como 'vazio e exaustão'. Afeto restrito, congruente com o tema depressivo.",
+356 | …     "mse_speech": "Voz baixa, latência de resposta discretamente aumentada, ritmo e articulação preservados.",
+    |
+
+E501 Line too long (143 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:355:89
+    |
+353 | … adequadas, asseada, postura curvada, contato visual mantido porém hesitante, plenamente colaborativa.",
+354 | …ficação psicomotora, sem tiques ou acatisia.",
+355 | …co auto-referido como 'vazio e exaustão'. Afeto restrito, congruente com o tema depressivo.",
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+356 | … de resposta discretamente aumentada, ritmo e articulação preservados.",
+357 | …linear, sem fuga de ideias ou afrouxamento associativo.",
+    |
+
+E501 Line too long (122 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:356:89
+    |
+354 | …     "mse_psychomotor": "Discreta lentificação psicomotora, sem tiques ou acatisia.",
+355 | …     "mse_mood_affect": "Humor hipotímico auto-referido como 'vazio e exaustão'. Afeto restrito, congruente com o tema depressivo.",
+356 | …     "mse_speech": "Voz baixa, latência de resposta discretamente aumentada, ritmo e articulação preservados.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+357 | …     "mse_thought_process": "Coerente, linear, sem fuga de ideias ou afrouxamento associativo.",
+358 | …     "mse_thought_content": "Pensamentos de autocrítica exacerbada e preocupação com o futuro. Ausência de delírios ou ideação de ru…
+    |
+
+E501 Line too long (107 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:357:89
+    |
+355 | …     "mse_mood_affect": "Humor hipotímico auto-referido como 'vazio e exaustão'. Afeto restrito, congruente com o tema depressivo.",
+356 | …     "mse_speech": "Voz baixa, latência de resposta discretamente aumentada, ritmo e articulação preservados.",
+357 | …     "mse_thought_process": "Coerente, linear, sem fuga de ideias ou afrouxamento associativo.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^
+358 | …     "mse_thought_content": "Pensamentos de autocrítica exacerbada e preocupação com o futuro. Ausência de delírios ou ideação de ru…
+359 | …     "mse_perception": "Sem alterações sensoperceptivas (ausência de alucinações ou ilusões).",
+    |
+
+E501 Line too long (149 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:358:89
+    |
+356 | … resposta discretamente aumentada, ritmo e articulação preservados.",
+357 | …ear, sem fuga de ideias ou afrouxamento associativo.",
+358 | …e autocrítica exacerbada e preocupação com o futuro. Ausência de delírios ou ideação de ruína.",
+    |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+359 | …soperceptivas (ausência de alucinações ou ilusões).",
+360 | …o tempo e espaço. Atenção concentrada preservada ao exame sumário.",
+    |
+
+E501 Line too long (106 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:359:89
+    |
+357 | …     "mse_thought_process": "Coerente, linear, sem fuga de ideias ou afrouxamento associativo.",
+358 | …     "mse_thought_content": "Pensamentos de autocrítica exacerbada e preocupação com o futuro. Ausência de delírios ou ideação de ru…
+359 | …     "mse_perception": "Sem alterações sensoperceptivas (ausência de alucinações ou ilusões).",
+    |                                                                               ^^^^^^^^^^^^^^^^^^
+360 | …     "mse_cognition": "Lúcida, orientada no tempo e espaço. Atenção concentrada preservada ao exame sumário.",
+361 | …     "mse_insight": "Insight grau 6 (plena consciência do adoecimento psíquico e motivação para o tratamento).",
+    |
+
+E501 Line too long (121 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:360:89
+    |
+358 | …     "mse_thought_content": "Pensamentos de autocrítica exacerbada e preocupação com o futuro. Ausência de delírios ou ideação de ru…
+359 | …     "mse_perception": "Sem alterações sensoperceptivas (ausência de alucinações ou ilusões).",
+360 | …     "mse_cognition": "Lúcida, orientada no tempo e espaço. Atenção concentrada preservada ao exame sumário.",
+    |                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+361 | …     "mse_insight": "Insight grau 6 (plena consciência do adoecimento psíquico e motivação para o tratamento).",
+362 | …     "suicidal_ideation_present": False,
+    |
+
+E501 Line too long (123 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:361:89
+    |
+359 |                 "mse_perception": "Sem alterações sensoperceptivas (ausência de alucinações ou ilusões).",
+360 |                 "mse_cognition": "Lúcida, orientada no tempo e espaço. Atenção concentrada preservada ao exame sumário.",
+361 |                 "mse_insight": "Insight grau 6 (plena consciência do adoecimento psíquico e motivação para o tratamento).",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+362 |                 "suicidal_ideation_present": False,
+363 |                 "suicide_risk_stratification": PsychiatricPatientProfile.RiskLevel.LOW,
+    |
+
+E501 Line too long (146 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:364:89
+    |
+362 | …
+363 | …hiatricPatientProfile.RiskLevel.LOW,
+364 | …o familiar sólida (pais e irmã), estabilidade profissional, vínculo terapêutico estabelecido.",
+    |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+365 | …ais de emergência da clínica Aurora Elo (botão SOS 24h no aplicativo móvel) e CVV 188.",
+366 | …
+    |
+
+E501 Line too long (139 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:365:89
+    |
+363 | …sychiatricPatientProfile.RiskLevel.LOW,
+364 | …poio familiar sólida (pais e irmã), estabilidade profissional, vínculo terapêutico estabelecido.",
+365 | …canais de emergência da clínica Aurora Elo (botão SOS 24h no aplicativo móvel) e CVV 188.",
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+366 | …
+367 | …orno Depressivo Maior, Episódio Único, Moderado (CID-11 6A70 / DSM-5 296.22).",
+    |
+
+E501 Line too long (127 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:367:89
+    |
+365 | …         "safety_plan": "Orientada sobre canais de emergência da clínica Aurora Elo (botão SOS 24h no aplicativo móvel) e CVV 188.",
+366 | …         "anxiety_analog_scale": 4,
+367 | …         "diagnostic_impression": "Transtorno Depressivo Maior, Episódio Único, Moderado (CID-11 6A70 / DSM-5 296.22).",
+    |                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+368 | …         "therapeutic_plan": "1. Iniciar Escitalopram 10mg/dia pela manhã; 2. Titular para 15mg após 14 dias conforme tolerabilidade…
+369 | …     }
+    |
+
+E501 Line too long (245 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:368:89
+    |
+366 | …
+367 | …co, Moderado (CID-11 6A70 / DSM-5 296.22).",
+368 | …. Titular para 15mg após 14 dias conforme tolerabilidade; 3. Encaminhamento para Psicoterapia TCC semanal; 4. Monitoramento diário via App Aurora Elo Conectado.",
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+369 | …
+370 | …
+    |
+
+E501 Line too long (94 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:379:89
+    |
+377 |                 "doctor_name": "Dr. Marcelo Arantes",
+378 |                 "doctor_crm": "CRM/SP 148.920",
+379 |                 "recipe_type": PsychopharmacologyPrescription.RecipeType.CONTROLE_ESPECIAL_C1,
+    |                                                                                         ^^^^^^
+380 |                 "issued_date": timezone.now().date(),
+381 |                 "expires_date": (timezone.now() + timedelta(days=30)).date(),
+    |
+
+E501 Line too long (116 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:382:89
+    |
+380 |                 "issued_date": timezone.now().date(),
+381 |                 "expires_date": (timezone.now() + timedelta(days=30)).date(),
+382 |                 "digital_signature_hash": "SHA256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+383 |             }
+384 |         )
+    |
+
+E501 Line too long (132 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:393:89
+    |
+391 | …
+392 | …ido pela manhã após o desjejum",
+393 | …mper abruptamente. Efeitos terapêuticos esperados entre 2 e 4 semanas de uso contínuo.",
+    |                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+394 | …
+395 | …
+    |
+
+E501 Line too long (109 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:404:89
+    |
+402 |                 "dosage": "3 mg",
+403 |                 "posology": "Tomar 1 cápsula 45 minutos antes de deitar",
+404 |                 "instructions": "Associar com higiene do sono (desligar telas luminosas e ambiente escuro).",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^
+405 |             }
+406 |         )
+    |
+
+E501 Line too long (158 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:427:89
+    |
+425 | …
+426 | …
+427 | …Ala Aurora Norte. Quadro de agitação psicomotora estabilizado com contenção verbal e farmacológica.",
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+428 | …
+429 | …
+    |
+
+E501 Line too long (126 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:438:89
+    |
+436 |                 "scheduled_for": timezone.now() + timedelta(hours=2),
+437 |                 "status": TelepsychiatryRoom.SessionStatus.SCHEDULED,
+438 |                 "session_notes": "Consulta de retorno programada para ajuste de dosagem e avaliação da adesão medicamentosa.",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+439 |             }
+440 |         )
+    |
+
+E501 Line too long (104 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:463:89
+    |
+461 |                 "sleep_hours": 8.0,
+462 |                 "emotions_tags": ["Serenidade", "Foco", "Gratidão"],
+463 |                 "gratitude_note": "A respiração guiada 4-4-4-4 antes de dormir ajudou muito a relaxar.",
+    |                                                                                         ^^^^^^^^^^^^^^^^
+464 |             }
+465 |         )
+    |
+
+E501 Line too long (89 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:469:89
+    |
+467 |         B2CCBTDiary.objects.get_or_create(
+468 |             user_identifier=demo_user,
+469 |             trigger_situation="Apresentação do projeto na reunião executiva da empresa.",
+    |                                                                                         ^
+470 |             defaults={
+471 |                 "automatic_thought": "Vou esquecer os slides e todos vão achar que sou incapaz.",
+    |
+
+E501 Line too long (97 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:471:89
+    |
+469 | …     trigger_situation="Apresentação do projeto na reunião executiva da empresa.",
+470 | …     defaults={
+471 | …         "automatic_thought": "Vou esquecer os slides e todos vão achar que sou incapaz.",
+    |                                                                                   ^^^^^^^^^
+472 | …         "cognitive_distortion": "Catastrofização e Leitura Mental",
+473 | …         "rational_response": "Eu me preparei durante toda a semana, conheço os dados técnicos em detalhes e esquecer um detalhe é p…
+    |
+
+E501 Line too long (161 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:473:89
+    |
+471 | …s e todos vão achar que sou incapaz.",
+472 | …Leitura Mental",
+473 | …e toda a semana, conheço os dados técnicos em detalhes e esquecer um detalhe é perfeitamente humano.",
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+474 | …
+475 | …
+    |
+
+E501 Line too long (99 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:489:89
+    |
+487 |                 "category": AddictionProfile.AddictionCategory.GAMBLING,
+488 |                 "severity": AddictionProfile.SeverityLevel.SEVERE,
+489 |                 "gambling_modalities": ["Bets Esportivas", "Cassino Virtual (Tigrinho)", "Roleta"],
+    |                                                                                         ^^^^^^^^^^^
+490 |                 "estimated_financial_debt": 145000.00,
+491 |                 "chasing_losses": True,
+    |
+
+E501 Line too long (212 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:528:89
+    |
+526 | …
+527 | …
+528 | …obre as apostas online. Cheguei a pedir empréstimos bancários e comprometi o patrimônio familiar sem que minha esposa soubesse.",
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+529 | …co na Aurora Elo e o grupo dos Jogadores Anônimos podem me restaurar a sanidade e a paz mental.",
+530 | …à minha esposa e instalei software de bloqueio (Gamban) em todos os dispositivos móveis.",
+    |
+
+E501 Line too long (180 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:529:89
+    |
+527 | …
+528 | …te o controle sobre as apostas online. Cheguei a pedir empréstimos bancários e comprometi o patrimônio familiar sem que minha esposa…
+529 | …ento psiquiátrico na Aurora Elo e o grupo dos Jogadores Anônimos podem me restaurar a sanidade e a paz mental.",
+    |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+530 | …ntas bancárias à minha esposa e instalei software de bloqueio (Gamban) em todos os dispositivos móveis.",
+531 | … R$ 145.000,00 dividida em 3 instituições e 2 cartões de crédito. Reconheço que menti repetidamente para encobrir as perdas.",
+    |
+
+E501 Line too long (173 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:530:89
+    |
+528 | …mente o controle sobre as apostas online. Cheguei a pedir empréstimos bancários e comprometi o patrimônio familiar sem que minha esp…
+529 | …hamento psiquiátrico na Aurora Elo e o grupo dos Jogadores Anônimos podem me restaurar a sanidade e a paz mental.",
+530 | … contas bancárias à minha esposa e instalei software de bloqueio (Gamban) em todos os dispositivos móveis.",
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+531 | … de R$ 145.000,00 dividida em 3 instituições e 2 cartões de crédito. Reconheço que menti repetidamente para encobrir as perdas.",
+532 | … valores e segredos diante do Dr. Marcelo Arantes e da minha esposa Camila sem reservas.",
+    |
+
+E501 Line too long (194 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:531:89
+    |
+529 | …iquiátrico na Aurora Elo e o grupo dos Jogadores Anônimos podem me restaurar a sanidade e a paz mental.",
+530 | …ncárias à minha esposa e instalei software de bloqueio (Gamban) em todos os dispositivos móveis.",
+531 | ….000,00 dividida em 3 instituições e 2 cartões de crédito. Reconheço que menti repetidamente para encobrir as perdas.",
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+532 | … segredos diante do Dr. Marcelo Arantes e da minha esposa Camila sem reservas.",
+533 | …siedade subjacente e abandonar a ilusão do dinheiro fácil e das recompensas rápidas.",
+    |
+
+E501 Line too long (155 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:532:89
+    |
+530 | …tódia das contas bancárias à minha esposa e instalei software de bloqueio (Gamban) em todos os dispositivos móveis.",
+531 | …ida exata de R$ 145.000,00 dividida em 3 instituições e 2 cartões de crédito. Reconheço que menti repetidamente para encobrir as per…
+532 | … todos os valores e segredos diante do Dr. Marcelo Arantes e da minha esposa Camila sem reservas.",
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+533 | …posto a tratar a ansiedade subjacente e abandonar a ilusão do dinheiro fácil e das recompensas rápidas.",
+534 | …uperação da impulsividade e aceito a medicação de estabilização dopaminérgica prescrita.",
+    |
+
+E501 Line too long (161 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:533:89
+    |
+531 | … exata de R$ 145.000,00 dividida em 3 instituições e 2 cartões de crédito. Reconheço que menti repetidamente para encobrir as perdas…
+532 | …dos os valores e segredos diante do Dr. Marcelo Arantes e da minha esposa Camila sem reservas.",
+533 | …to a tratar a ansiedade subjacente e abandonar a ilusão do dinheiro fácil e das recompensas rápidas.",
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+534 | …ração da impulsividade e aceito a medicação de estabilização dopaminérgica prescrita.",
+535 | …ila (esposa), meus pais, e 2 amigos próximos dos quais tomei dinheiro emprestado sob falsos pretextos.",
+    |
+
+E501 Line too long (146 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:534:89
+    |
+532 | …essei todos os valores e segredos diante do Dr. Marcelo Arantes e da minha esposa Camila sem reservas.",
+533 | …e disposto a tratar a ansiedade subjacente e abandonar a ilusão do dinheiro fácil e das recompensas rápidas.",
+534 | …e a superação da impulsividade e aceito a medicação de estabilização dopaminérgica prescrita.",
+    |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+535 | …oas: Camila (esposa), meus pais, e 2 amigos próximos dos quais tomei dinheiro emprestado sob falsos pretextos.",
+536 | …nanceiro aprovado com a família para quitação em 36 parcelas com acompanhamento de consultoria financeira neutra.",
+    |
+
+E501 Line too long (163 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:535:89
+    |
+533 | …o a tratar a ansiedade subjacente e abandonar a ilusão do dinheiro fácil e das recompensas rápidas.",
+534 | …ação da impulsividade e aceito a medicação de estabilização dopaminérgica prescrita.",
+535 | …la (esposa), meus pais, e 2 amigos próximos dos quais tomei dinheiro emprestado sob falsos pretextos.",
+    |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+536 | …aprovado com a família para quitação em 36 parcelas com acompanhamento de consultoria financeira neutra.",
+537 | …diária todas as noites. Se surge o impulso de apostar, relato imediatamente ao padrinho Eduardo.",
+    |
+
+E501 Line too long (166 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:536:89
+    |
+534 | …ção da impulsividade e aceito a medicação de estabilização dopaminérgica prescrita.",
+535 | …a (esposa), meus pais, e 2 amigos próximos dos quais tomei dinheiro emprestado sob falsos pretextos.",
+536 | …provado com a família para quitação em 36 parcelas com acompanhamento de consultoria financeira neutra.",
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+537 | …iária todas as noites. Se surge o impulso de apostar, relato imediatamente ao padrinho Eduardo.",
+538 | …tos de respiração 4-4-4-4 pela manhã para manter a mente no momento presente e sem ansiedade.",
+    |
+
+E501 Line too long (158 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:537:89
+    |
+535 | …amila (esposa), meus pais, e 2 amigos próximos dos quais tomei dinheiro emprestado sob falsos pretextos.",
+536 | …ro aprovado com a família para quitação em 36 parcelas com acompanhamento de consultoria financeira neutra.",
+537 | …ão diária todas as noites. Se surge o impulso de apostar, relato imediatamente ao padrinho Eduardo.",
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+538 | …minutos de respiração 4-4-4-4 pela manhã para manter a mente no momento presente e sem ansiedade.",
+539 | … orador nas reuniões do J.A. para acolher recém-chegados que perderam economias em Bets.",
+    |
+
+E501 Line too long (156 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:538:89
+    |
+536 | …iro aprovado com a família para quitação em 36 parcelas com acompanhamento de consultoria financeira neutra.",
+537 | …xão diária todas as noites. Se surge o impulso de apostar, relato imediatamente ao padrinho Eduardo.",
+538 | … minutos de respiração 4-4-4-4 pela manhã para manter a mente no momento presente e sem ansiedade.",
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+539 | …o orador nas reuniões do J.A. para acolher recém-chegados que perderam economias em Bets.",
+540 | … na TV e Internet", "Sexta-feira pós-expediente", "Frustração financeira", "Celular desprotegido"],
+    |
+
+E501 Line too long (147 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:539:89
+    |
+537 | …eflexão diária todas as noites. Se surge o impulso de apostar, relato imediatamente ao padrinho Eduardo.",
+538 | …o 10 minutos de respiração 4-4-4-4 pela manhã para manter a mente no momento presente e sem ansiedade.",
+539 | … como orador nas reuniões do J.A. para acolher recém-chegados que perderam economias em Bets.",
+    |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+540 | …Bets na TV e Internet", "Sexta-feira pós-expediente", "Frustração financeira", "Celular desprotegido"],
+541 | …
+    |
+
+E501 Line too long (155 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:540:89
+    |
+538 | … minutos de respiração 4-4-4-4 pela manhã para manter a mente no momento presente e sem ansiedade.",
+539 | …o orador nas reuniões do J.A. para acolher recém-chegados que perderam economias em Bets.",
+540 | … na TV e Internet", "Sexta-feira pós-expediente", "Frustração financeira", "Celular desprotegido"],
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+541 | …
+542 | …ZADO DE PREVENÇÃO DE RECAÍDA (AURORA ELO & MARLATT):\n1. Manter Gamban ativo em todos os dispositivos.\n2. Limite Pix diário travado…
+    |
+
+E501 Line too long (356 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:542:89
+    |
+540 | …feira pós-expediente", "Frustração financeira", "Celular desprotegido"],
+541 | …
+542 | …A (AURORA ELO & MARLATT):\n1. Manter Gamban ativo em todos os dispositivos.\n2. Limite Pix diário travado em R$ 100.\n3. Presença semanal no grupo de Jogadores Anônimos.\n4. Se surgir fissura súbita: aplicar a regra dos 15 minutos e acionar o botão SOS no App Aurora Elo.",
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+543 | …po. Excelente insight terapêutico e cumprimento rigoroso das reparações do Passo 9.",
+544 | …
+    |
+
+E501 Line too long (168 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:543:89
+    |
+541 | …
+542 | …E PREVENÇÃO DE RECAÍDA (AURORA ELO & MARLATT):\n1. Manter Gamban ativo em todos os dispositivos.\n2. Limite Pix diário travado em R$…
+543 | …vorável no 2º mês limpo. Excelente insight terapêutico e cumprimento rigoroso das reparações do Passo 9.",
+    |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+544 | …
+545 | …
+    |
+
+E501 Line too long (94 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:553:89
+    |
+551 |             defaults={
+552 |                 "craving_intensity": 7,
+553 |                 "trigger_detail": "Notificação push durante partida da semifinal de futebol.",
+    |                                                                                         ^^^^^^
+554 |                 "halt_factors": ["Angry", "Tired"],
+555 |                 "coping_technique": "Desligou o aparelho, realizou 5 min de respiração guiada 4-4-4-4 e ligou para o padrinho.",
+    |
+
+E501 Line too long (128 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:555:89
+    |
+553 |                 "trigger_detail": "Notificação push durante partida da semifinal de futebol.",
+554 |                 "halt_factors": ["Angry", "Tired"],
+555 |                 "coping_technique": "Desligou o aparelho, realizou 5 min de respiração guiada 4-4-4-4 e ligou para o padrinho.",
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+556 |                 "urge_surfed_successfully": True,
+557 |             }
+    |
+
+E501 Line too long (111 > 88)
+   --> psychiatry/management/commands/seed_psychiatry.py:560:89
+    |
+558 |         )
+559 |
+560 |         self.stdout.write(self.style.SUCCESS("✓ Seed psiquiátrico e adictologia concluído com sucesso total!"))
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> psychiatry/tests.py:3:1
+   |
+ 1 |   """Automated tests for Aurora Elo Psychiatric Platform & Mobile APIs."""
+ 2 |
+ 3 | / import json
+ 4 | | from django.test import TestCase, Client
+ 5 | | from django.urls import reverse
+ 6 | | from django.core.management import call_command
+ 7 | | from django.utils import timezone
+ 8 | | from datetime import timedelta
+ 9 | | from psychiatry.models import (
+10 | |     DiagnosticCategory,
+11 | |     PsychiatricPatientProfile,
+12 | |     PsychiatricEvaluation,
+13 | |     PsychopharmacologyPrescription,
+14 | |     PrescriptionItem,
+15 | |     MedicationAdherenceLog,
+16 | |     InpatientBed,
+17 | |     TelepsychiatryRoom,
+18 | |     PsychiatricCrisisAlert,
+19 | |     B2CMindLog,
+20 | |     B2CCBTDiary,
+21 | |     B2CSubscription,
+22 | | )
+   | |_^
+   |
+help: Organize imports
+
+F401 [*] `django.urls.reverse` imported but unused
+ --> psychiatry/tests.py:5:25
+  |
+3 | import json
+4 | from django.test import TestCase, Client
+5 | from django.urls import reverse
+  |                         ^^^^^^^
+6 | from django.core.management import call_command
+7 | from django.utils import timezone
+  |
+help: Remove unused import: `django.urls.reverse`
+
+F401 [*] `django.utils.timezone` imported but unused
+ --> psychiatry/tests.py:7:26
+  |
+5 | from django.urls import reverse
+6 | from django.core.management import call_command
+7 | from django.utils import timezone
+  |                          ^^^^^^^^
+8 | from datetime import timedelta
+9 | from psychiatry.models import (
+  |
+help: Remove unused import: `django.utils.timezone`
+
+F401 [*] `datetime.timedelta` imported but unused
+  --> psychiatry/tests.py:8:22
+   |
+ 6 | from django.core.management import call_command
+ 7 | from django.utils import timezone
+ 8 | from datetime import timedelta
+   |                      ^^^^^^^^^
+ 9 | from psychiatry.models import (
+10 |     DiagnosticCategory,
+   |
+help: Remove unused import: `datetime.timedelta`
+
+F401 [*] `psychiatry.models.TelepsychiatryRoom` imported but unused
+  --> psychiatry/tests.py:17:5
+   |
+15 |     MedicationAdherenceLog,
+16 |     InpatientBed,
+17 |     TelepsychiatryRoom,
+   |     ^^^^^^^^^^^^^^^^^^
+18 |     PsychiatricCrisisAlert,
+19 |     B2CMindLog,
+   |
+help: Remove unused import
+
+F401 [*] `psychiatry.models.PsychiatricCrisisAlert` imported but unused
+  --> psychiatry/tests.py:18:5
+   |
+16 |     InpatientBed,
+17 |     TelepsychiatryRoom,
+18 |     PsychiatricCrisisAlert,
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+19 |     B2CMindLog,
+20 |     B2CCBTDiary,
+   |
+help: Remove unused import
+
+E501 Line too long (93 > 88)
+  --> psychiatry/tests.py:26:89
+   |
+25 | class PsychiatricSeedTest(TestCase):
+26 |     """Verifies that the seed management command populates all required clinical catalogs."""
+   |                                                                                         ^^^^^
+27 |
+28 |     def test_seed_psychiatry_command(self):
+   |
+
+N806 Variable `User` in function should be lowercase
+  --> psychiatry/tests.py:42:9
+   |
+40 |     def test_create_aurora_users_command(self):
+41 |         from django.contrib.auth import get_user_model
+42 |         User = get_user_model()
+   |         ^^^^
+43 |         call_command("create_aurora_users")
+44 |         self.assertTrue(User.objects.filter(email="admin@auroraelo.com.br").exists())
+   |
+
+E501 Line too long (95 > 88)
+   --> psychiatry/tests.py:146:89
+    |
+144 |             "anxiety_scale": 7,
+145 |             "diagnostic_code": "6B00",
+146 |             "therapeutic_plan": "Prescrição de ansiolítico e encaminhamento para psicoterapia",
+    |                                                                                         ^^^^^^^
+147 |             "suicidal_risk": "LOW",
+148 |         }
+    |
+
+E501 Line too long (96 > 88)
+   --> psychiatry/tests.py:159:89
+    |
+158 |     def test_mobile_connected_summary(self):
+159 |         patient = PsychiatricPatientProfile.objects.filter(record_number="PR-2026-0842").first()
+    |                                                                                         ^^^^^^^^
+160 |         response = self.client.get(f"/psiquiatria/api/v1/mobile/connected/summary/?cpf={patient.cpf}")
+161 |         self.assertEqual(response.status_code, 200)
+    |
+
+E501 Line too long (102 > 88)
+   --> psychiatry/tests.py:160:89
+    |
+158 |     def test_mobile_connected_summary(self):
+159 |         patient = PsychiatricPatientProfile.objects.filter(record_number="PR-2026-0842").first()
+160 |         response = self.client.get(f"/psiquiatria/api/v1/mobile/connected/summary/?cpf={patient.cpf}")
+    |                                                                                         ^^^^^^^^^^^^^^
+161 |         self.assertEqual(response.status_code, 200)
+162 |         data = response.json()
+    |
+
+E501 Line too long (96 > 88)
+   --> psychiatry/tests.py:202:89
+    |
+200 |     def test_mobile_b2c_mood(self):
+201 |         # GET
+202 |         response = self.client.get("/psiquiatria/api/v1/mobile/b2c/mood/?user_id=test_b2c_user")
+    |                                                                                         ^^^^^^^^
+203 |         self.assertEqual(response.status_code, 200)
+    |
+
+E501 Line too long (89 > 88)
+   --> psychiatry/tests.py:229:89
+    |
+227 |             "automatic_thought": "Vão apontar apenas meus erros.",
+228 |             "distortion": "Filtro Negativo",
+229 |             "rational_response": "Recebi elogios no último trimestre e estou preparado.",
+    |                                                                                         ^
+230 |             "emotion_before": 75,
+231 |             "emotion_after": 20,
+    |
+
+E501 Line too long (104 > 88)
+   --> psychiatry/tests.py:250:89
+    |
+248 |     def test_mobile_b2c_subscription(self):
+249 |         # GET
+250 |         response = self.client.get("/psiquiatria/api/v1/mobile/b2c/subscription/?user_id=test_b2c_user")
+    |                                                                                         ^^^^^^^^^^^^^^^^
+251 |         self.assertEqual(response.status_code, 200)
+    |
+
+E501 Line too long (102 > 88)
+   --> psychiatry/tests.py:285:89
+    |
+283 |                 "session_id": "test-session-redis-001",
+284 |                 "step_number": 1,
+285 |                 "step_data": {"answer": "Admito a perda de controle sobre apostas esportivas online."}
+    |                                                                                         ^^^^^^^^^^^^^^
+286 |             }),
+287 |             content_type="application/json"
+    |
+
+E501 Line too long (119 > 88)
+   --> psychiatry/tests.py:293:89
+    |
+292 |         # 2. Get draft from Redis
+293 |         get_res = self.client.get("/psiquiatria/api/v1/adictologia/12-passos/draft/?session_id=test-session-redis-001")
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+294 |         self.assertEqual(get_res.status_code, 200)
+295 |         draft = get_res.json()["draft"]
+    |
+
+E501 Line too long (115 > 88)
+   --> psychiatry/tests.py:324:89
+    |
+322 |         from psychiatry.redis_service import TwelveStepsRedisService
+323 |         session_id = "test-session-consolidate-999"
+324 |         TwelveStepsRedisService.save_step_draft(session_id, 1, {"answer": "Impotência perante as apostas online."})
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+325 |
+326 |         # Consolidate via API (triggers Celery task in eager mode)
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> psychiatry/urls.py:1:1
+  |
+1 | / from django.urls import path
+2 | | from . import views, api
+  | |________________________^
+3 |
+4 |   app_name = "psychiatry"
+  |
+help: Organize imports
+
+E501 Line too long (101 > 88)
+  --> psychiatry/urls.py:22:89
+   |
+20 |     # Addiction, Gambling & 12 Steps Module
+21 |     path("adictologia/", views.addiction_dashboard_view, name="addiction_dashboard"),
+22 |     path("adictologia/12-passos/", views.twelve_steps_anamnesis_view, name="twelve_steps_anamnesis"),
+   |                                                                                         ^^^^^^^^^^^^^
+23 |
+24 |     # REST APIs for Web Portal & Mobile Apps (Canonical & Aliased)
+   |
+
+E501 Line too long (93 > 88)
+  --> psychiatry/urls.py:25:89
+   |
+24 |     # REST APIs for Web Portal & Mobile Apps (Canonical & Aliased)
+25 |     path("api/v1/clinic/dashboard/", api.clinic_dashboard_kpis, name="api_clinic_dashboard"),
+   |                                                                                         ^^^^^
+26 |     path("api/v1/clinic/patients/", api.list_patients, name="api_list_patients"),
+27 |     path("api/v1/clinic/anamnese/", api.save_anamnesis, name="api_save_anamnesis"),
+   |
+
+E501 Line too long (104 > 88)
+  --> psychiatry/urls.py:33:89
+   |
+32 |     # Addictology, Gambling & 12 Steps APIs
+33 |     path("api/v1/adictologia/12-passos/step/", api.api_save_12steps_step, name="api_save_12steps_step"),
+   |                                                                                         ^^^^^^^^^^^^^^^^
+34 |     path("api/v1/adictologia/12-passos/draft/", api.api_get_12steps_draft, name="api_get_12steps_draft"),
+35 |     path("api/v1/adictologia/12-passos/consolidate/", api.api_consolidate_12steps, name="api_consolidate_12steps"),
+   |
+
+E501 Line too long (105 > 88)
+  --> psychiatry/urls.py:34:89
+   |
+32 |     # Addictology, Gambling & 12 Steps APIs
+33 |     path("api/v1/adictologia/12-passos/step/", api.api_save_12steps_step, name="api_save_12steps_step"),
+34 |     path("api/v1/adictologia/12-passos/draft/", api.api_get_12steps_draft, name="api_get_12steps_draft"),
+   |                                                                                         ^^^^^^^^^^^^^^^^^
+35 |     path("api/v1/adictologia/12-passos/consolidate/", api.api_consolidate_12steps, name="api_consolidate_12steps"),
+36 |     path("api/v1/adictologia/craving/", api.api_record_craving, name="api_record_craving"),
+   |
+
+E501 Line too long (115 > 88)
+  --> psychiatry/urls.py:35:89
+   |
+33 |     path("api/v1/adictologia/12-passos/step/", api.api_save_12steps_step, name="api_save_12steps_step"),
+34 |     path("api/v1/adictologia/12-passos/draft/", api.api_get_12steps_draft, name="api_get_12steps_draft"),
+35 |     path("api/v1/adictologia/12-passos/consolidate/", api.api_consolidate_12steps, name="api_consolidate_12steps"),
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+36 |     path("api/v1/adictologia/craving/", api.api_record_craving, name="api_record_craving"),
+37 |     path("api/v1/adictologia/dashboard/", api.api_addiction_dashboard_kpis, name="api_addiction_kpis"),
+   |
+
+E501 Line too long (91 > 88)
+  --> psychiatry/urls.py:36:89
+   |
+34 |     path("api/v1/adictologia/12-passos/draft/", api.api_get_12steps_draft, name="api_get_12steps_draft"),
+35 |     path("api/v1/adictologia/12-passos/consolidate/", api.api_consolidate_12steps, name="api_consolidate_12steps"),
+36 |     path("api/v1/adictologia/craving/", api.api_record_craving, name="api_record_craving"),
+   |                                                                                         ^^^
+37 |     path("api/v1/adictologia/dashboard/", api.api_addiction_dashboard_kpis, name="api_addiction_kpis"),
+   |
+
+E501 Line too long (103 > 88)
+  --> psychiatry/urls.py:37:89
+   |
+35 |     path("api/v1/adictologia/12-passos/consolidate/", api.api_consolidate_12steps, name="api_consolidate_12steps"),
+36 |     path("api/v1/adictologia/craving/", api.api_record_craving, name="api_record_craving"),
+37 |     path("api/v1/adictologia/dashboard/", api.api_addiction_dashboard_kpis, name="api_addiction_kpis"),
+   |                                                                                         ^^^^^^^^^^^^^^^
+38 |
+39 |     # Connected Mobile App APIs
+   |
+
+E501 Line too long (92 > 88)
+  --> psychiatry/urls.py:40:89
+   |
+39 |     # Connected Mobile App APIs
+40 |     path("api/v1/patient/summary/", api.patient_mobile_summary, name="api_patient_summary"),
+   |                                                                                         ^^^^
+41 |     path("api/v1/patient/medications/log/", api.log_medication_adherence, name="api_medication_log"),
+42 |     path("api/v1/patient/sos/", api.trigger_patient_sos, name="api_patient_sos"),
+   |
+
+E501 Line too long (101 > 88)
+  --> psychiatry/urls.py:41:89
+   |
+39 |     # Connected Mobile App APIs
+40 |     path("api/v1/patient/summary/", api.patient_mobile_summary, name="api_patient_summary"),
+41 |     path("api/v1/patient/medications/log/", api.log_medication_adherence, name="api_medication_log"),
+   |                                                                                         ^^^^^^^^^^^^^
+42 |     path("api/v1/patient/sos/", api.trigger_patient_sos, name="api_patient_sos"),
+43 |     path("api/v1/mobile/connected/summary/", api.patient_mobile_summary),
+   |
+
+E501 Line too long (90 > 88)
+  --> psychiatry/urls.py:50:89
+   |
+48 |     path("api/v1/mind/mood/", api.b2c_mood, name="api_b2c_mood"),
+49 |     path("api/v1/mind/cbt-diary/", api.b2c_cbt_diary, name="api_b2c_cbt_diary"),
+50 |     path("api/v1/mind/breathing/", api.b2c_breathing_exercises, name="api_b2c_breathing"),
+   |                                                                                         ^^
+51 |     path("api/v1/mind/subscription/", api.b2c_subscription_status, name="api_b2c_subscription"),
+52 |     path("api/v1/mobile/b2c/mood/", api.b2c_mood),
+   |
+
+E501 Line too long (96 > 88)
+  --> psychiatry/urls.py:51:89
+   |
+49 |     path("api/v1/mind/cbt-diary/", api.b2c_cbt_diary, name="api_b2c_cbt_diary"),
+50 |     path("api/v1/mind/breathing/", api.b2c_breathing_exercises, name="api_b2c_breathing"),
+51 |     path("api/v1/mind/subscription/", api.b2c_subscription_status, name="api_b2c_subscription"),
+   |                                                                                         ^^^^^^^^
+52 |     path("api/v1/mobile/b2c/mood/", api.b2c_mood),
+53 |     path("api/v1/mobile/b2c/cbt-diary/", api.b2c_cbt_diary),
+   |
+
+E501 Line too long (92 > 88)
+  --> tests/architecture_helpers.py:14:89
+   |
+12 |     "core.telemetry": frozenset({"enrich_span_with_tenant", "enrich_span_with_actor"}),
+13 |     "core.event_store": frozenset(
+14 |         {"append_event", "reconstruct_state", "aggregate_history", "register_event_applier"}
+   |                                                                                         ^^^^
+15 |     ),
+16 | }
+   |
+
+F401 [*] `django.test.override_settings` imported but unused
+ --> tests/test_api.py:6:33
+  |
+5 | import pytest
+6 | from django.test import Client, override_settings
+  |                                 ^^^^^^^^^^^^^^^^^
+  |
+help: Remove unused import: `django.test.override_settings`
+
+F841 Local variable `tags` is assigned to but never used
+  --> tests/test_api.py:43:9
+   |
+41 |     def test_spec_has_journal_tag(self, client: Client) -> None:
+42 |         spec = client.get("/api/v1/openapi.json").json()
+43 |         tags = {tag["name"] for tag in spec.get("tags", [])}
+   |         ^^^^
+44 |         # If no tags key, check that journal paths exist
+45 |         journal_paths = [p for p in spec["paths"] if "journal" in p]
+   |
+help: Remove assignment to unused variable `tags`
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests/test_event_store.py:3:1
+   |
+ 1 |   """Tests for the event store and DB router modules."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | from datetime import datetime, timedelta
+ 6 | | from uuid import uuid4
+ 7 | |
+ 8 | | import pytest
+ 9 | | from django.utils import timezone
+10 | |
+11 | | from core.db_router import ReadReplicaRouter
+12 | | from core.event_store import (
+13 | |     StoredEvent,
+14 | |     append_event,
+15 | |     reconstruct_state,
+16 | |     aggregate_history,
+17 | |     register_event_applier,
+18 | | )
+   | |_^
+   |
+help: Organize imports
+
+F401 [*] `datetime.datetime` imported but unused
+ --> tests/test_event_store.py:5:22
+  |
+3 | from __future__ import annotations
+4 |
+5 | from datetime import datetime, timedelta
+  |                      ^^^^^^^^
+6 | from uuid import uuid4
+  |
+help: Remove unused import: `datetime.datetime`
+
+Found 178 errors.
+[*] 32 fixable with the `--fix` option (3 hidden fixes can be enabled with the `--unsafe-fixes` option).
