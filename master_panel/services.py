@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import logging
+from datetime import UTC, datetime
 from typing import Any
 
 from django.conf import settings
 from django.db import transaction
-from django.utils import timezone
+
+from .tenant_services import audit_subscription_transition
 
 logger = logging.getLogger(__name__)
 
@@ -73,8 +75,6 @@ def construct_webhook_event(payload: bytes, sig_header: str) -> Any:
 
 def handle_stripe_event(event: Any) -> None:
     """Dispatch a verified Stripe event to the appropriate handler."""
-    from master_panel.models import TenantSubscription
-
     event_type: str = event["type"]
     data: dict[str, Any] = event["data"]["object"]
 
@@ -94,6 +94,14 @@ def handle_stripe_event(event: Any) -> None:
         handler(data)
     else:
         logger.debug("Unhandled Stripe event type: %s", event_type)
+
+
+def _audit_system_transition(subscription: Any, trigger: str) -> None:
+    """Audit a payment-provider driven status change (no human actor)."""
+    audit_subscription_transition(
+        subscription=subscription,
+        justification=f"Provedor de pagamento: {trigger}.",
+    )
 
 
 def _subscription_by_stripe_id(sub_id: str):
@@ -123,6 +131,7 @@ def _on_subscription_created(data: dict[str, Any]) -> None:
     sub.status = _map_stripe_status(data["status"])
     sub.current_period_end = _ts_to_dt(data.get("current_period_end"))
     sub.save()
+    _audit_system_transition(sub, "subscription.created")
 
 
 @transaction.atomic
@@ -136,6 +145,7 @@ def _on_subscription_updated(data: dict[str, Any]) -> None:
         sub.status = new_status
     sub.current_period_end = _ts_to_dt(data.get("current_period_end"))
     sub.save()
+    _audit_system_transition(sub, "subscription.updated")
 
 
 @transaction.atomic
@@ -144,6 +154,7 @@ def _on_subscription_deleted(data: dict[str, Any]) -> None:
     if not sub:
         return
     sub.block(reason="Assinatura cancelada no Stripe.")
+    _audit_system_transition(sub, "subscription.deleted")
 
 
 @transaction.atomic
@@ -155,6 +166,7 @@ def _on_payment_succeeded(data: dict[str, Any]) -> None:
     if sub.status == "past_due":
         sub.status = "active"
         sub.save(update_fields=["status", "updated_at"])
+        _audit_system_transition(sub, "invoice.payment_succeeded")
 
 
 @transaction.atomic
@@ -166,6 +178,7 @@ def _on_payment_failed(data: dict[str, Any]) -> None:
     if sub.status not in ("blocked", "canceled"):
         sub.status = "past_due"
         sub.save(update_fields=["status", "updated_at"])
+        _audit_system_transition(sub, "invoice.payment_failed")
 
 
 @transaction.atomic
@@ -177,6 +190,7 @@ def _on_checkout_completed(data: dict[str, Any]) -> None:
     sub.stripe_subscription_id = data.get("subscription", "")
     sub.status = "active"
     sub.save(update_fields=["stripe_subscription_id", "status", "updated_at"])
+    _audit_system_transition(sub, "checkout.session.completed")
 
 
 def _map_stripe_status(stripe_status: str) -> str:
@@ -193,10 +207,9 @@ def _map_stripe_status(stripe_status: str) -> str:
     return mapping.get(stripe_status, "past_due")
 
 
-def _ts_to_dt(timestamp) -> "timezone.datetime | None":
+def _ts_to_dt(timestamp) -> datetime | None:
     if timestamp is None:
         return None
-    from datetime import datetime, UTC
 
     return datetime.fromtimestamp(timestamp, tz=UTC)
 

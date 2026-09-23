@@ -15,6 +15,12 @@ ROLE_LABELS = {
     "administrative_staff": _("Equipe administrativa"),
     "patient": _("Paciente"),
 }
+CATEGORY_LABELS = {
+    "psychologist": _("Psicologia"),
+    "psychiatrist": _("Psiquiatria"),
+    "therapist": _("Terapia"),
+    "other": _("Outra categoria"),
+}
 STATUS_LABELS = {
     "active": _("Ativo"),
     "scheduled": _("Agendado"),

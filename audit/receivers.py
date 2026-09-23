@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from accounts.events import account_audit_required
 from clinics.events import (
     clinic_configuration_updated,
+    membership_authorization_changed,
     professional_membership_updated,
     whitelabel_audit_required,
 )
@@ -126,6 +127,33 @@ def audit_professional_membership_update(
     **kwargs: object,
 ) -> None:
     """Append a minimized permission event for a professional membership update."""
+    del sender, kwargs
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action=AuditAction.PERMISSION_CHANGE,
+        resource_type="clinic_membership",
+        resource_id=resource_id,
+        outcome=AuditOutcome.SUCCESS,
+        request_id=request_id,
+        network_origin=None,
+    )
+
+
+@receiver(
+    membership_authorization_changed,
+    dispatch_uid="audit.membership_authorization_changed.v1",
+)
+def audit_membership_authorization_change(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_id: str,
+    request_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Append one minimized event for a clinic membership status change."""
     del sender, kwargs
     record_audit_event(
         clinic_id=clinic_id,

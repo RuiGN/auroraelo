@@ -1,24 +1,21 @@
 """Automated tests for Aurora Elo Psychiatric Platform & Mobile APIs."""
 
 import json
-from django.test import TestCase, Client
-from django.urls import reverse
+
 from django.core.management import call_command
-from django.utils import timezone
-from datetime import timedelta
+from django.test import Client, TestCase
+
 from psychiatry.models import (
-    DiagnosticCategory,
-    PsychiatricPatientProfile,
-    PsychiatricEvaluation,
-    PsychopharmacologyPrescription,
-    PrescriptionItem,
-    MedicationAdherenceLog,
-    InpatientBed,
-    TelepsychiatryRoom,
-    PsychiatricCrisisAlert,
-    B2CMindLog,
     B2CCBTDiary,
+    B2CMindLog,
     B2CSubscription,
+    DiagnosticCategory,
+    InpatientBed,
+    MedicationAdherenceLog,
+    PrescriptionItem,
+    PsychiatricEvaluation,
+    PsychiatricPatientProfile,
+    PsychopharmacologyPrescription,
 )
 
 

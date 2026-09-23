@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from contextlib import suppress
+
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db import transaction
@@ -13,20 +15,24 @@ from django.views.decorators.http import require_POST
 from clinics.models import Clinic
 from master_panel.models import TenantSubscription, TenantUsageSnapshot
 from master_panel.services import create_stripe_customer
+from master_panel.tenant_services import (
+    TenantPanelRow,
+    ensure_tenant_subscription,
+    set_tenant_blocked,
+    tenant_panel_rows,
+)
 
 
 @staff_member_required(login_url="/master/login/")
 def tenant_list(request: HttpRequest) -> HttpResponse:
-    subscriptions = (
-        TenantSubscription.objects.select_related("clinic")
-        .order_by("-created_at")
-    )
+    """List every infrastructure clinic, even before billing is configured."""
     q = request.GET.get("q", "").strip()
-    if q:
-        subscriptions = subscriptions.filter(clinic__name__icontains=q)
     status_filter = request.GET.get("status", "")
-    if status_filter:
-        subscriptions = subscriptions.filter(status=status_filter)
+    subscriptions = tenant_panel_rows(q=q, status=status_filter)
+    status_choices = (
+        (TenantPanelRow.UNCONFIGURED_STATUS, "Sem assinatura configurada"),
+        *TenantSubscription.Status.choices,
+    )
 
     return render(
         request,
@@ -36,7 +42,7 @@ def tenant_list(request: HttpRequest) -> HttpResponse:
             "subscriptions": subscriptions,
             "q": q,
             "status_filter": status_filter,
-            "status_choices": TenantSubscription.Status.choices,
+            "status_choices": status_choices,
         },
     )
 
@@ -49,11 +55,17 @@ def tenant_create(request: HttpRequest) -> HttpResponse:
         plan = request.POST.get("plan", "free")
 
         if not name or not email:
-            messages.error(request, "Nome da clínica e e-mail do administrador são obrigatórios.")
-            return render(request, "master_panel/tenant_create.html", {
-                "page_title": "Nova Clínica",
-                "plan_choices": TenantSubscription.Plan.choices,
-            })
+            messages.error(
+                request, "Nome da clínica e e-mail do administrador são obrigatórios."
+            )
+            return render(
+                request,
+                "master_panel/tenant_create.html",
+                {
+                    "page_title": "Nova Clínica",
+                    "plan_choices": TenantSubscription.Plan.choices,
+                },
+            )
 
         slug_base = slugify(name)
         slug = slug_base
@@ -68,12 +80,10 @@ def tenant_create(request: HttpRequest) -> HttpResponse:
 
             # Create Stripe customer (silently skip if no API key configured).
             stripe_customer_id = ""
-            try:
+            with suppress(Exception):
                 stripe_customer_id = create_stripe_customer(name, email)
-            except Exception:
-                pass
 
-            sub = TenantSubscription.objects.create(
+            TenantSubscription.objects.create(
                 clinic=clinic,
                 plan=plan,
                 status=TenantSubscription.Status.TRIALING,
@@ -96,11 +106,10 @@ def tenant_create(request: HttpRequest) -> HttpResponse:
 @staff_member_required(login_url="/master/login/")
 def tenant_detail(request: HttpRequest, clinic_id) -> HttpResponse:
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)
-    sub, _ = TenantSubscription.objects.get_or_create(
-        clinic=clinic,
-        defaults={"status": TenantSubscription.Status.TRIALING},
-    )
-    snapshots = TenantUsageSnapshot.objects.filter(clinic=clinic).order_by("-snapshot_at")[:30]
+    sub = ensure_tenant_subscription(clinic_id=clinic.pk)
+    snapshots = TenantUsageSnapshot.objects.filter(clinic=clinic).order_by(
+        "-snapshot_at"
+    )[:30]
 
     return render(
         request,
@@ -119,9 +128,13 @@ def tenant_detail(request: HttpRequest, clinic_id) -> HttpResponse:
 @require_POST
 def tenant_block(request: HttpRequest, clinic_id) -> HttpResponse:
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)
-    sub = get_object_or_404(TenantSubscription, clinic=clinic)
     reason = request.POST.get("reason", "Bloqueio administrativo.").strip()
-    sub.block(reason=reason)
+    set_tenant_blocked(
+        actor=request.user,
+        clinic_id=clinic.pk,
+        blocked=True,
+        reason=reason,
+    )
     messages.warning(request, f"Clínica «{clinic.name}» bloqueada.")
     return redirect("master_panel:tenant_detail", clinic_id=clinic_id)
 
@@ -130,7 +143,10 @@ def tenant_block(request: HttpRequest, clinic_id) -> HttpResponse:
 @require_POST
 def tenant_unblock(request: HttpRequest, clinic_id) -> HttpResponse:
     clinic = get_object_or_404(Clinic.infrastructure_objects, pk=clinic_id)
-    sub = get_object_or_404(TenantSubscription, clinic=clinic)
-    sub.unblock()
+    set_tenant_blocked(
+        actor=request.user,
+        clinic_id=clinic.pk,
+        blocked=False,
+    )
     messages.success(request, f"Clínica «{clinic.name}» desbloqueada.")
     return redirect("master_panel:tenant_detail", clinic_id=clinic_id)

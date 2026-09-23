@@ -5,24 +5,26 @@ inpatient beds, clinical evaluations, controlled prescriptions, and B2C data.
 """
 
 from datetime import timedelta
+
 from django.core.management.base import BaseCommand
 from django.utils import timezone
+
 from psychiatry.models import (
-    DiagnosticCategory,
-    PsychiatricPatientProfile,
-    PsychiatricEvaluation,
-    PsychopharmacologyPrescription,
-    PrescriptionItem,
-    MedicationAdherenceLog,
-    InpatientBed,
-    TelepsychiatryRoom,
-    PsychiatricCrisisAlert,
-    B2CMindLog,
-    B2CCBTDiary,
-    B2CSubscription,
     AddictionProfile,
-    TwelveStepsAnamnesis,
+    B2CCBTDiary,
+    B2CMindLog,
+    B2CSubscription,
     CravingTrackingLog,
+    DiagnosticCategory,
+    InpatientBed,
+    MedicationAdherenceLog,
+    PrescriptionItem,
+    PsychiatricCrisisAlert,
+    PsychiatricEvaluation,
+    PsychiatricPatientProfile,
+    PsychopharmacologyPrescription,
+    TelepsychiatryRoom,
+    TwelveStepsAnamnesis,
 )
 
 

@@ -16,7 +16,7 @@ services:
       DB_PORT: "5432"
       CACHE_REDIS_URL: redis://redis:6379/1
       REDIS_STATE_URL: redis://redis:6379/3
-      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672//
+      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER_URLENCODED:?RABBITMQ_DEFAULT_USER_URLENCODED must be set}:${RABBITMQ_DEFAULT_PASS_URLENCODED:?RABBITMQ_DEFAULT_PASS_URLENCODED must be set}@rabbitmq:5672//
       CELERY_RESULT_BACKEND: redis://redis:6379/2
     volumes:
       - media_volume:/app/media
@@ -53,7 +53,7 @@ services:
       DB_PORT: "5432"
       CACHE_REDIS_URL: redis://redis:6379/1
       REDIS_STATE_URL: redis://redis:6379/3
-      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER:-guest}:${RABBITMQ_DEFAULT_PASS:-guest}@rabbitmq:5672//
+      CELERY_BROKER_URL: amqp://${RABBITMQ_DEFAULT_USER_URLENCODED:?RABBITMQ_DEFAULT_USER_URLENCODED must be set}:${RABBITMQ_DEFAULT_PASS_URLENCODED:?RABBITMQ_DEFAULT_PASS_URLENCODED must be set}@rabbitmq:5672//
       CELERY_RESULT_BACKEND: redis://redis:6379/2
     volumes:
       - media_volume:/app/media
@@ -122,8 +122,8 @@ services:
     container_name: auroraelo-rabbitmq
     restart: unless-stopped
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:?RABBITMQ_DEFAULT_USER must be set}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:?RABBITMQ_DEFAULT_PASS must be set}
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:

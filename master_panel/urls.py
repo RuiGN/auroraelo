@@ -2,17 +2,25 @@
 
 from django.urls import path
 
-from master_panel.views.dashboard import dashboard
-from master_panel.views.tenants import (
-    tenant_list,
-    tenant_create,
-    tenant_detail,
-    tenant_block,
-    tenant_unblock,
-)
 from master_panel.views.billing import (
     tenant_billing_portal,
     tenant_checkout,
+)
+from master_panel.views.dashboard import dashboard
+from master_panel.views.tenants import (
+    tenant_block,
+    tenant_create,
+    tenant_detail,
+    tenant_list,
+    tenant_unblock,
+)
+from master_panel.views.users import (
+    invitation_revoke as master_invitation_revoke,
+)
+from master_panel.views.users import (
+    user_edit,
+    user_invite,
+    user_list,
 )
 from master_panel.views.webhooks import stripe_webhook
 
@@ -34,6 +42,18 @@ urlpatterns = [
         "tenants/<uuid:clinic_id>/billing/checkout/",
         tenant_checkout,
         name="tenant_checkout",
+    ),
+    path("users/", user_list, name="user_list"),
+    path("users/invite/", user_invite, name="user_invite"),
+    path(
+        "users/memberships/<uuid:membership_id>/edit/",
+        user_edit,
+        name="user_edit",
+    ),
+    path(
+        "users/invitations/<uuid:invitation_id>/revoke/",
+        master_invitation_revoke,
+        name="master_invitation_revoke",
     ),
     path("stripe/webhook/", stripe_webhook, name="stripe_webhook"),
 ]

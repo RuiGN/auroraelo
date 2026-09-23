@@ -201,6 +201,10 @@ class ClinicInvitation(UUIDTimestampedModel):
             ("patient", "Paciente"),
         ),
     )
+    initial_category = models.CharField(max_length=32, blank=True, default="")
+    unit_name = models.CharField(max_length=120, blank=True, default="")
+    valid_from = models.DateField(blank=True, null=True)
+    valid_until = models.DateField(blank=True, null=True)
     token_digest = models.CharField(max_length=64, unique=True, editable=False)
     expires_at = models.DateTimeField()
     used_at = models.DateTimeField(blank=True, null=True)

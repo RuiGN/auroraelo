@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Health & Smoke", () => {
   test("liveness probe returns 200", async ({ request }) => {
-    const response = await request.get("/health/alive/");
+    const response = await request.get("/health/live/");
     expect(response.status()).toBe(200);
     const body = await response.json();
     expect(body.status).toBe("ok");

@@ -46,6 +46,10 @@
       <i aria-hidden="true" class="feather-bar-chart-2"></i>
       <span class="aurora-nav-text">{% translate "Painel operacional" %}</span>
     </a>
+    <a href="{% url 'team_list' %}"{% if request.resolver_match.url_name == 'team_list' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-user-plus"></i>
+      <span class="aurora-nav-text">{% translate "Usuários e equipe" %}</span>
+    </a>
     {% endif %}
   </div>
   {% endif %}

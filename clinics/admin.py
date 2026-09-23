@@ -18,7 +18,7 @@ class ClinicAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = ("name", "slug", "is_active", "updated_at")
     list_filter = ("is_active",)
     search_fields = ("name", "slug")
-    readonly_fields = ("id", "created_at", "updated_at")
+    readonly_fields = ("id", "created_at", "updated_at", "is_active")
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Clinic]:
         """Use the global manager only inside exempt admin infrastructure."""
@@ -29,7 +29,7 @@ class ClinicAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         request: HttpRequest,
         obj: Clinic | None = None,
     ) -> tuple[str, ...]:
-        """Keep an existing clinic slug stable in administration."""
+        """Keep clinic slug and activation under audited service control."""
         fields = tuple(super().get_readonly_fields(request, obj))
         return fields + (("slug",) if obj is not None else ())
 
@@ -41,7 +41,32 @@ class ClinicMembershipAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = ("user", "clinic", "role", "is_active", "valid_until")
     list_filter = ("is_active", "role")
     search_fields = ("user__username", "clinic__name", "clinic__slug")
-    readonly_fields = ("id", "created_at", "updated_at")
+    readonly_fields = (
+        "id",
+        "created_at",
+        "updated_at",
+        "role",
+        "is_active",
+        "valid_from",
+        "valid_until",
+        "authorized_by",
+    )
+
+    def has_add_permission(self, request: HttpRequest) -> bool:
+        """Forbid Admin-created memberships; use the audited service instead."""
+        return False
+
+    def has_change_permission(
+        self, request: HttpRequest, obj: models.Model | None = None
+    ) -> bool:
+        """Forbid Admin-edited memberships; use the audited service instead."""
+        return False
+
+    def has_delete_permission(
+        self, request: HttpRequest, obj: models.Model | None = None
+    ) -> bool:
+        """Forbid Admin-deleted memberships; use the audited service instead."""
+        return False
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[ClinicMembership]:
         """Use unrestricted access only in exempt admin infrastructure."""

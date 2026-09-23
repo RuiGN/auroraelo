@@ -13,7 +13,6 @@
   <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'duralux/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'duralux/vendors/css/feather.min.css' %}">
-  <link rel="stylesheet" href="{% static 'design_system/css/tokens.css' %}">
   <link rel="stylesheet" href="{% static 'design_system/css/aurora.css' %}">
 
   <style>
@@ -450,6 +449,25 @@
       border-radius: 1.75rem;
       padding: 3.5rem;
       box-shadow: 0 20px 50px -10px rgba(10, 37, 64, 0.4);
+    }
+    .field-control {
+      position: relative;
+    }
+    .field-control .field-control-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.875rem;
+      z-index: 1;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+    .field-control:has(textarea) .field-control-icon {
+      top: 0.875rem;
+      transform: none;
+    }
+    .field-control .contact-input {
+      padding-left: 2.75rem;
     }
     .contact-input {
       background: rgba(255, 255, 255, 0.08);
@@ -1299,31 +1317,49 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label text-slate-300 small fw-semibold">Seu Nome Completo *</label>
-                  <input type="text" name="name" required class="contact-input" placeholder="Ex: Dr. Roberto Alencar">
+                  <div class="field-control">
+                    <span class="field-control-icon" aria-hidden="true"><i class="feather-user"></i></span>
+                    <input type="text" name="name" required class="contact-input" placeholder="Ex: Dr. Roberto Alencar">
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label text-slate-300 small fw-semibold">Nome da Clínica / Instituição *</label>
-                  <input type="text" name="clinic_name" required class="contact-input" placeholder="Ex: Clínica Renascer">
+                  <div class="field-control">
+                    <span class="field-control-icon" aria-hidden="true"><i class="feather-home"></i></span>
+                    <input type="text" name="clinic_name" required class="contact-input" placeholder="Ex: Clínica Renascer">
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label text-slate-300 small fw-semibold">E-mail Profissional *</label>
-                  <input type="email" name="email" required class="contact-input" placeholder="contato@clinica.com.br">
+                  <div class="field-control">
+                    <span class="field-control-icon" aria-hidden="true"><i class="feather-mail"></i></span>
+                    <input type="email" name="email" required class="contact-input" placeholder="contato@clinica.com.br">
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label text-slate-300 small fw-semibold">Telefone / WhatsApp *</label>
-                  <input type="tel" name="phone" required class="contact-input" placeholder="(11) 99999-9999">
+                  <div class="field-control">
+                    <span class="field-control-icon" aria-hidden="true"><i class="feather-phone"></i></span>
+                    <input type="tel" name="phone" required class="contact-input" placeholder="(11) 99999-9999">
+                  </div>
                 </div>
                 <div class="col-12">
                   <label class="form-label text-slate-300 small fw-semibold">Plano de Interesse</label>
-                  <select name="plan" id="planSelect" class="contact-input" style="background: #0f2b48;">
-                    <option value="Ecossistema Completo com App Mobile (R$ 3.000/mês)" selected>Plano Ecossistema com App Mobile — R$ 3.000/mês (Recomendado)</option>
-                    <option value="Gestão Clínica Web (R$ 2.000/mês)">Plano Gestão Clínica Web — R$ 2.000/mês</option>
-                    <option value="Personalizado / Rede Hospitalar">Personalizado / Rede Hospitalar</option>
-                  </select>
+                  <div class="field-control">
+                    <span class="field-control-icon" aria-hidden="true"><i class="feather-layers"></i></span>
+                    <select name="plan" id="planSelect" class="contact-input" style="background: #0f2b48;">
+                      <option value="Ecossistema Completo com App Mobile (R$ 3.000/mês)" selected>Plano Ecossistema com App Mobile — R$ 3.000/mês (Recomendado)</option>
+                      <option value="Gestão Clínica Web (R$ 2.000/mês)">Plano Gestão Clínica Web — R$ 2.000/mês</option>
+                      <option value="Personalizado / Rede Hospitalar">Personalizado / Rede Hospitalar</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="col-12">
                   <label class="form-label text-slate-300 small fw-semibold">Mensagem ou Dúvida (Opcional)</label>
-                  <textarea name="message" rows="3" class="contact-input" placeholder="Conte-nos sobre sua instituição (número de profissionais, leitos ou especialidades)..."></textarea>
+                  <div class="field-control">
+                    <span class="field-control-icon" aria-hidden="true"><i class="feather-message-square"></i></span>
+                    <textarea name="message" rows="3" class="contact-input" placeholder="Conte-nos sobre sua instituição (número de profissionais, leitos ou especialidades)..."></textarea>
+                  </div>
                 </div>
                 <div class="col-12 mt-3">
                   <button type="submit" class="btn-aurora-glow w-100 py-3 justify-content-center">

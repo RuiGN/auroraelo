@@ -84,6 +84,8 @@ def test_runtime_languages_separate_local_acceptance_from_production(
         "DJANGO_SECRET_KEY": "test-settings-secret",
         "AUDIT_INTEGRITY_KEY": "test-settings-audit-key",
         "MFA_ENCRYPTION_KEY": "test-settings-mfa-key",
+        "MASTER_USER_EMAIL": "master.synthetic@example.test",
+        "MASTER_USER_PASSWORD": "synthetic-master-password-only",
         "CACHE_REDIS_URL": "redis://127.0.0.1:6379/15",
         "DJANGO_ALLOWED_HOSTS": "example.test",
         "DB_NAME": "settings-contract",

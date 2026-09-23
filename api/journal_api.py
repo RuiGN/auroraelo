@@ -9,8 +9,6 @@ from django.core.exceptions import PermissionDenied, ValidationError
 from django.http import HttpRequest
 from ninja import Router, Schema
 
-from clinics.typing import ClinicRequest
-
 router = Router(tags=["Journal"])
 
 
@@ -109,8 +107,8 @@ def list_entries(
 @router.post("/entries/", response={201: JournalEntryOut, 422: ErrorOut})
 def create_entry(request: HttpRequest, payload: JournalEntryIn):
     """Create a new journal diary entry."""
-    from people.selectors import patient_profile_for_user
     from journal.services import create_journal_entry
+    from people.selectors import patient_profile_for_user
 
     clinic_id = _clinic_id(request)
     profile = patient_profile_for_user(clinic_id=clinic_id, user_id=request.user.pk)
@@ -146,8 +144,8 @@ def list_checkins(request: HttpRequest):
 @router.post("/checkins/", response={201: CheckInOut, 422: ErrorOut})
 def submit_checkin(request: HttpRequest, payload: CheckInIn):
     """Submit a daily check-in (idempotent per period)."""
-    from people.selectors import patient_profile_for_user
     from journal.services import submit_daily_checkin
+    from people.selectors import patient_profile_for_user
 
     clinic_id = _clinic_id(request)
     profile = patient_profile_for_user(clinic_id=clinic_id, user_id=request.user.pk)

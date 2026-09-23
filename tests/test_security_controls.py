@@ -121,6 +121,8 @@ def test_production_enforces_secure_session_and_csrf_configuration() -> None:
                 "test-audit-integrity-key-with-32-characters-minimum"
             ),
             "MFA_ENCRYPTION_KEY": "test-mfa-encryption-key-with-32-characters",
+            "MASTER_USER_EMAIL": "master.synthetic@example.test",
+            "MASTER_USER_PASSWORD": "synthetic-master-password-only",
             "DJANGO_ALLOWED_HOSTS": "example.test",
             "DB_NAME": "test",
             "DB_USER": "test",
@@ -168,6 +170,8 @@ def test_production_requires_a_shared_cache_for_authentication_limits() -> None:
                 "test-audit-integrity-key-with-32-characters-minimum"
             ),
             "MFA_ENCRYPTION_KEY": "test-mfa-encryption-key-with-32-characters",
+            "MASTER_USER_EMAIL": "master.synthetic@example.test",
+            "MASTER_USER_PASSWORD": "synthetic-master-password-only",
             "DJANGO_ALLOWED_HOSTS": "example.test",
             "DB_NAME": "test",
             "DB_USER": "test",

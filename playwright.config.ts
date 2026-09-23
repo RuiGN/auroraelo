@@ -28,13 +28,12 @@ export default defineConfig({
     },
   ],
 
-  /* Run the Django dev server before tests if not in CI. */
-  webServer: process.env.CI
-    ? undefined
-    : {
-        command: "python manage.py runserver --noreload",
-        url: "http://localhost:8000/health/alive/",
-        reuseExistingServer: !process.env.CI,
-        timeout: 30_000,
-      },
+  /* CI and local runs both start an isolated Django test server. */
+  webServer: {
+    command:
+      "DJANGO_SETTINGS_MODULE=config.settings.test .venv/bin/python manage.py runserver 127.0.0.1:8000 --noreload",
+    url: "http://127.0.0.1:8000/health/live/",
+    reuseExistingServer: !process.env.CI,
+    timeout: 30_000,
+  },
 });

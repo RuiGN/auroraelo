@@ -3,7 +3,7 @@
 import re
 from datetime import date, datetime
 from typing import Final
-from uuid import UUID
+from uuid import UUID, uuid4
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -23,7 +23,11 @@ from core.services import (
     Service as Service,
 )
 
-from .events import clinic_configuration_updated, professional_membership_updated
+from .events import (
+    clinic_configuration_updated,
+    membership_authorization_changed,
+    professional_membership_updated,
+)
 from .models import Clinic, ClinicConfiguration, ClinicMembership
 from .policies import ClinicAuthorizationPolicy
 
@@ -160,12 +164,31 @@ def switch_active_clinic(
     return membership.clinic
 
 
+def ensure_membership_activatable(
+    *, valid_from: date, valid_until: date | None
+) -> None:
+    """Reject activation of a link whose validity already expired.
+
+    A future ``valid_from`` is a supported state (see
+    ``ClinicMembership.professional_status``: an active link starting later is
+    ``scheduled``), so only an expired window requires explicit renewal.
+    """
+    del valid_from
+    today = timezone.localdate()
+    if valid_until is not None and valid_until < today:
+        raise ValidationError(
+            gettext("A validade do vínculo deve ser renovada antes da reativação.")
+        )
+
+
+@transaction.atomic
 def update_membership_role(
     *,
     actor: AbstractBaseUser,
     clinic: Clinic,
     membership_id: UUID,
     role: str,
+    request_id: UUID | None = None,
 ) -> ClinicMembership:
     """Update one role only when action and target share the explicit clinic."""
     if not ClinicAuthorizationPolicy().is_allowed(actor, clinic, "membership.update"):
@@ -175,8 +198,60 @@ def update_membership_role(
     membership = scoped.filter(pk=membership_id).first()
     if membership is None:
         raise PermissionDenied
+    if role not in ClinicMembership.Role.values:
+        raise ValidationError(gettext("Papel de clínica inválido."))
     membership.role = role
-    membership.save(update_fields=("role", "updated_at"))
+    membership.authorized_by_id = actor.pk
+    membership.save(update_fields=("role", "authorized_by", "updated_at"))
+    membership_authorization_changed.send(
+        sender=ClinicMembership,
+        clinic_id=clinic.pk,
+        actor_id=actor.pk,
+        resource_id=str(membership.pk),
+        request_id=request_id or uuid4(),
+    )
+    return membership
+
+
+@transaction.atomic
+def set_membership_active(
+    *,
+    clinic_id: UUID,
+    actor: AbstractBaseUser,
+    membership_id: UUID,
+    is_active: bool,
+    request_id: UUID,
+) -> ClinicMembership:
+    """Suspend or reactivate any clinic membership without deleting history."""
+    authorized_active_clinic(
+        clinic_id=clinic_id,
+        actor=actor,
+        action="membership.update",
+    )
+    lock_clinic_for_update(clinic_id=clinic_id)
+    membership = (
+        ClinicMembership.objects.for_clinic(clinic_id)
+        .select_for_update()
+        .filter(pk=membership_id)
+        .first()
+    )
+    if membership is None or membership.user_id == actor.pk:
+        raise PermissionDenied
+    if is_active:
+        ensure_membership_activatable(
+            valid_from=membership.valid_from,
+            valid_until=membership.valid_until,
+        )
+    membership.is_active = is_active
+    membership.authorized_by_id = actor.pk
+    membership.save(update_fields=("is_active", "authorized_by", "updated_at"))
+    membership_authorization_changed.send(
+        sender=ClinicMembership,
+        clinic_id=clinic_id,
+        actor_id=actor.pk,
+        resource_id=str(membership.pk),
+        request_id=request_id,
+    )
     return membership
 
 
@@ -270,9 +345,13 @@ def _set_professional_membership_active(
     )
     if membership is None:
         raise PermissionDenied
-    membership.is_active = is_active
     if is_active:
+        ensure_membership_activatable(
+            valid_from=membership.valid_from,
+            valid_until=membership.valid_until,
+        )
         membership.authorized_by_id = actor.pk
+    membership.is_active = is_active
     membership.save(update_fields=("is_active", "authorized_by", "updated_at"))
     professional_membership_updated.send(
         sender=ClinicMembership,
@@ -671,17 +750,48 @@ def is_membership_role_supported(role: str) -> bool:
 
 
 def create_clinic_membership(
-    *, clinic_id: UUID, user_id: UUID, role: str
+    *,
+    clinic_id: UUID,
+    user_id: UUID,
+    role: str,
+    unit_name: str = "",
+    valid_from: date | None = None,
+    valid_until: date | None = None,
+    authorized_by_id: UUID | None = None,
+    is_active: bool = True,
 ) -> ClinicMembership:
     """Create one tenant membership through the clinic-owned write boundary."""
     if not is_membership_role_supported(role):
         raise ValueError("role is invalid")
-    return ClinicMembership.infrastructure_objects.create(
+    effective_valid_from = valid_from or timezone.localdate()
+    if valid_until is not None and valid_until < effective_valid_from:
+        raise ValidationError(gettext("A data final não pode ser anterior à inicial."))
+    if is_active:
+        ensure_membership_activatable(
+            valid_from=effective_valid_from,
+            valid_until=valid_until,
+        )
+    membership = ClinicMembership.infrastructure_objects.create(
         clinic_id=clinic_id,
         user_id=user_id,
         role=role,
-        valid_from=timezone.localdate(),
+        unit_name=unit_name.strip(),
+        authorized_by_id=authorized_by_id,
+        valid_from=effective_valid_from,
+        valid_until=valid_until,
+        is_active=is_active,
     )
+    if authorized_by_id is not None:
+        # Creating a link grants a role: keep the same authorization trail used by
+        # every other role change, naming the issuer as the actor.
+        membership_authorization_changed.send(
+            sender=ClinicMembership,
+            clinic_id=clinic_id,
+            actor_id=authorized_by_id,
+            resource_id=str(membership.pk),
+            request_id=uuid4(),
+        )
+    return membership
 
 
 def suspend_expired_memberships(*, clinic_id: UUID, on_date: date) -> tuple[UUID, ...]:
@@ -700,12 +810,20 @@ def suspend_expired_memberships(*, clinic_id: UUID, on_date: date) -> tuple[UUID
 
 
 def activate_invited_membership(
-    *, clinic_id: UUID, user_id: UUID, role: str
+    *,
+    clinic_id: UUID,
+    user_id: UUID,
+    role: str,
+    unit_name: str = "",
+    valid_from: date | None = None,
+    valid_until: date | None = None,
+    authorized_by_id: UUID | None = None,
 ) -> ClinicMembership:
     """Create or reactivate a membership authorized by a fresh invitation."""
     if not is_membership_role_supported(role):
         raise ValueError("role is invalid")
     today = timezone.localdate()
+    effective_valid_from = valid_from or today
     membership = (
         ClinicMembership.infrastructure_objects.select_for_update()
         .filter(clinic_id=clinic_id, user_id=user_id)
@@ -716,6 +834,10 @@ def activate_invited_membership(
             clinic_id=clinic_id,
             user_id=user_id,
             role=role,
+            unit_name=unit_name,
+            valid_from=effective_valid_from,
+            valid_until=valid_until,
+            authorized_by_id=authorized_by_id,
         )
     if (
         membership.is_active
@@ -723,20 +845,44 @@ def activate_invited_membership(
         and (membership.valid_until is None or membership.valid_until >= today)
     ):
         return membership
+    ensure_membership_activatable(
+        valid_from=effective_valid_from,
+        valid_until=valid_until,
+    )
     membership.role = role
+    membership.unit_name = unit_name.strip()
+    membership.authorized_by_id = authorized_by_id
     membership.is_active = True
-    membership.valid_from = today
-    membership.valid_until = None
+    membership.valid_from = effective_valid_from
+    membership.valid_until = valid_until
     membership.save(
         update_fields=(
             "role",
+            "unit_name",
+            "authorized_by",
             "is_active",
             "valid_from",
             "valid_until",
             "updated_at",
         )
     )
+    if authorized_by_id is not None:
+        membership_authorization_changed.send(
+            sender=ClinicMembership,
+            clinic_id=clinic_id,
+            actor_id=authorized_by_id,
+            resource_id=str(membership.pk),
+            request_id=uuid4(),
+        )
     return membership
+
+
+def active_clinic_for_infrastructure(*, clinic_id: UUID) -> Clinic:
+    """Resolve one active clinic through the public infrastructure boundary."""
+    clinic = Clinic.infrastructure_objects.filter(pk=clinic_id, is_active=True).first()
+    if clinic is None:
+        raise PermissionDenied
+    return clinic
 
 
 def clinic_exists(*, clinic_id: UUID) -> bool:
@@ -751,6 +897,7 @@ def lock_clinic_for_update(*, clinic_id: UUID) -> None:
 
 __all__ = [
     "CLINIC_HEADER",
+    "Clinic",
     "CLINIC_SESSION_KEY",
     "ClinicConfiguration",
     "ClinicMembership",
@@ -759,6 +906,7 @@ __all__ = [
     "Service",
     "UnauthorizedClinicError",
     "activate_invited_membership",
+    "active_clinic_for_infrastructure",
     "authorized_active_clinic",
     "clinic_exists",
     "create_clinic_membership",
@@ -766,6 +914,7 @@ __all__ = [
     "lock_clinic_for_update",
     "resolve_request_clinic",
     "selected_clinic_id",
+    "set_membership_active",
     "suspend_expired_memberships",
     "switch_active_clinic",
     "update_clinic_branding",

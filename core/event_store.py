@@ -10,8 +10,9 @@ and ``delete()`` both raise ``PermissionError``.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import datetime
-from typing import Any, Callable
+from typing import Any
 from uuid import UUID
 
 from django.db import models

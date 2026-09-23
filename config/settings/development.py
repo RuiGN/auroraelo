@@ -58,6 +58,8 @@ from .base import (  # noqa: F401
 
 SECRET_KEY = required_environment("DJANGO_SECRET_KEY")
 AUDIT_INTEGRITY_KEY = required_environment("AUDIT_INTEGRITY_KEY")
+MASTER_USER_EMAIL = required_environment("MASTER_USER_EMAIL")
+MASTER_USER_PASSWORD = required_environment("MASTER_USER_PASSWORD")
 DEBUG = True
 # Local acceptance exposes draft catalogs; production keeps its reviewed allowlist.
 LANGUAGES = (

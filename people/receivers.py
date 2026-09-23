@@ -5,8 +5,48 @@ from uuid import UUID
 from django.dispatch import receiver
 
 from accounts.events import invitation_accepted
+from accounts.selectors import accepted_professional_invitation, active_user_display
 
-from .models import CareRelationship, PatientInvitationLink, PatientProfile
+from .models import (
+    CareRelationship,
+    PatientInvitationLink,
+    PatientProfile,
+    ProfessionalProfile,
+)
+
+
+@receiver(
+    invitation_accepted,
+    dispatch_uid="people.create_professional_profile_after_invitation.v1",
+)
+def create_professional_profile_after_invitation(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    invitation_id: UUID,
+    actor_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Create the professional projection inside the people domain."""
+    del sender, kwargs
+    accepted = accepted_professional_invitation(
+        clinic_id=clinic_id, invitation_id=invitation_id
+    )
+    if accepted is None or accepted[1] != actor_id:
+        return
+    identity = active_user_display(user_id=actor_id)
+    if identity is None:
+        return
+    full_name, email = identity
+    ProfessionalProfile.infrastructure_objects.get_or_create(
+        clinic_id=clinic_id,
+        user_id=actor_id,
+        defaults={
+            "full_name": full_name,
+            "professional_email": email,
+            "category": accepted[0],
+        },
+    )
 
 
 @receiver(

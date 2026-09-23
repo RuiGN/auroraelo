@@ -11,7 +11,6 @@ For production clusters, export via OpenTelemetry metrics exporter instead.
 from __future__ import annotations
 
 import bisect
-import json
 import logging
 import threading
 import time

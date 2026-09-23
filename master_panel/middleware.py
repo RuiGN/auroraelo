@@ -6,7 +6,6 @@ from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-
 _BYPASS_PREFIXES = (
     "/master/",
     "/health/",

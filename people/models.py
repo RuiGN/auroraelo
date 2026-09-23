@@ -54,6 +54,7 @@ class ProfessionalProfile(UUIDTimestampedModel):
 
     class Category(models.TextChoices):
         PSYCHOLOGIST = "psychologist", "Psicologia"
+        PSYCHIATRIST = "psychiatrist", "Psiquiatria"
         THERAPIST = "therapist", "Terapia"
         OTHER = "other", "Outra categoria"
 

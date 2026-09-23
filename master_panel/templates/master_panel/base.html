@@ -1,6 +1,6 @@
 {% load i18n static %}
 <!doctype html>
-<html lang="pt-br" dir="ltr">
+{% get_current_language as LANGUAGE_CODE %}<html lang="{{ LANGUAGE_CODE }}" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +30,7 @@
     .badge-past_due { background: #fef3c7; color: #92400e; }
     .badge-blocked { background: #fee2e2; color: #991b1b; }
     .badge-canceled { background: #f1f5f9; color: #475569; }
+    .badge-unconfigured { background: #f1f5f9; color: #64748b; }
     .status-badge { font-size: .75rem; font-weight: 600; padding: .2rem .65rem; border-radius: 9999px; }
   </style>
 </head>
@@ -37,18 +38,19 @@
 
 <!-- Sidebar -->
 <aside class="master-sidebar">
-  <div class="master-logo">🌐 Aurora Elo<br><small style="font-weight:400;font-size:.8rem;color:#a5b4fc;">Painel Master</small></div>
+  <div class="master-logo">🌐 Aurora Elo<br><small style="font-weight:400;font-size:.8rem;color:#a5b4fc;">{% translate "Painel Master" %}</small></div>
   <nav class="master-nav">
-    <div class="master-nav-section">Visão Geral</div>
-    <a href="{% url 'master_panel:dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>📊 Dashboard</a>
+    <div class="master-nav-section">{% translate "Visão Geral" %}</div>
+    <a href="{% url 'master_panel:dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>📊 {% translate "Dashboard" %}</a>
 
-    <div class="master-nav-section">Tenants</div>
-    <a href="{% url 'master_panel:tenant_list' %}" {% if 'tenant' in request.resolver_match.url_name %}class="active"{% endif %}>🏥 Clínicas</a>
-    <a href="{% url 'master_panel:tenant_create' %}">➕ Nova Clínica</a>
+    <div class="master-nav-section">{% translate "Tenants" %}</div>
+    <a href="{% url 'master_panel:tenant_list' %}" {% if 'tenant' in request.resolver_match.url_name %}class="active"{% endif %}>🏥 {% translate "Clínicas" %}</a>
+    <a href="{% url 'master_panel:tenant_create' %}">➕ {% translate "Nova Clínica" %}</a>
 
-    <div class="master-nav-section" style="margin-top:auto;">Sistema</div>
-    <a href="/admin/">⚙️ Django Admin</a>
-    <a href="/accounts/logout/">🚪 Sair</a>
+    <a href="{% url 'master_panel:user_list' %}" {% if 'user' in request.resolver_match.url_name %}class="active"{% endif %}>👥 {% translate "Usuários e equipe" %}</a>
+    <div class="master-nav-section" style="margin-top:auto;">{% translate "Sistema" %}</div>
+    <a href="/admin/">⚙️ {% translate "Django Admin" %}</a>
+    <form method="post" action="{% url 'account_logout' %}" style="margin:0;">{% csrf_token %}<button type="submit" style="width:100%;text-align:left;background:none;border:0;color:#c7d2fe;padding:.5rem 1.25rem;cursor:pointer;font:inherit;">🚪 {% translate "Sair" %}</button></form>
   </nav>
 </aside>
 

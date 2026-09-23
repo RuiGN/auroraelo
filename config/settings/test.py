@@ -20,7 +20,6 @@ from .base import (  # noqa: F401
     JAZZMIN_SETTINGS,
     JAZZMIN_UI_TWEAKS,
     LANGUAGE_CODE,
-    LANGUAGES,
     LOCALE_PATHS,
     LOGGING,
     LOGIN_RATE_LIMIT_ATTEMPTS,
@@ -60,8 +59,10 @@ from .base import (  # noqa: F401
 
 SECRET_KEY = "test-only-not-a-secret"
 AUDIT_INTEGRITY_KEY = "test-audit-integrity-key-with-32-characters-minimum"
+MASTER_USER_EMAIL = "master.test@example.test"
+MASTER_USER_PASSWORD = "test-master-password-only"
 DEBUG = False
-ALLOWED_HOSTS = ["testserver"]
+ALLOWED_HOSTS = ["testserver", "127.0.0.1", "localhost"]
 DATABASES: dict[str, Any]
 if os.environ.get("TEST_DATABASE") == "postgresql":
     DATABASES = {"default": postgres_database_from_environment()}

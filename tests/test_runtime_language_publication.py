@@ -22,6 +22,8 @@ def test_local_runtime_offers_and_applies_launch_languages(
         "DJANGO_SETTINGS_MODULE": "config.settings.development",
         "DJANGO_SECRET_KEY": "test-only-runtime-secret",
         "AUDIT_INTEGRITY_KEY": "test-only-runtime-audit",
+        "MASTER_USER_EMAIL": "master.synthetic@example.test",
+        "MASTER_USER_PASSWORD": "synthetic-master-password-only",
         "DJANGO_ALLOWED_HOSTS": "testserver",
         "DB_NAME": "unused",
         "DB_USER": "unused",

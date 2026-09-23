@@ -4,6 +4,9 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
 
+from api import api
+from core.metrics import metrics_view
+
 from .views import (
     admin_login_redirect,
     confirm_clinic_switch,
@@ -16,10 +19,6 @@ from .views import (
     workspace_detached,
     workspace_vertical,
 )
-
-from core.metrics import metrics_view
-
-from api import api
 
 handler400 = "config.views.bad_request"
 handler403 = "config.views.permission_denied"

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from uuid import uuid4
 
 import pytest
@@ -11,12 +11,11 @@ from django.utils import timezone
 from core.db_router import ReadReplicaRouter
 from core.event_store import (
     StoredEvent,
+    aggregate_history,
     append_event,
     reconstruct_state,
-    aggregate_history,
     register_event_applier,
 )
-
 
 # ── StoredEvent immutability ─────────────────────────────────────────────────
 

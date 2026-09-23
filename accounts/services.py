@@ -6,7 +6,7 @@ import hashlib
 import logging
 import secrets
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from typing import Protocol
 from uuid import UUID, uuid4
 
@@ -34,10 +34,12 @@ from clinics.selectors import active_clinic_ids_for_actor, active_clinics_for_ac
 from clinics.services import (
     CLINIC_SESSION_KEY,
     activate_invited_membership,
+    active_clinic_for_infrastructure,
     authorized_active_clinic,
     create_clinic_membership,
     is_membership_role_supported,
 )
+from core.policies import current_actor_is_active
 from core.services import Service as Service
 
 from .events import account_audit_required, invitation_accepted
@@ -151,7 +153,7 @@ def _request_id(request: HttpRequest) -> UUID:
     candidate = getattr(request, "request_id", None)
     try:
         return UUID(str(candidate))
-    except (TypeError, ValueError, AttributeError):
+    except TypeError, ValueError, AttributeError:
         return uuid4()
 
 
@@ -386,7 +388,9 @@ def reset_password(*, uid: str, token: str, new_password: str) -> bool:
 def _active_clinic_for_action(
     *, clinic_id: UUID, actor: User, action: str
 ) -> ClinicIdentity:
-    """Resolve one active tenant and enforce its current membership policy."""
+    """Resolve one active tenant for a member or global platform operator."""
+    if current_actor_is_active(actor) and (actor.is_staff or actor.is_superuser):
+        return active_clinic_for_infrastructure(clinic_id=clinic_id)
     return authorized_active_clinic(
         clinic_id=clinic_id,
         actor=actor,
@@ -417,8 +421,12 @@ def issue_invitation(
     recipient_email: str,
     initial_role: str,
     expires_at: datetime,
+    initial_category: str = "",
+    unit_name: str = "",
+    valid_from: date | None = None,
+    valid_until: date | None = None,
 ) -> IssuedInvitation:
-    """Issue one auditable invitation for an active clinic administrator."""
+    """Issue one auditable invitation for a clinic member or global operator."""
     clinic = _active_clinic_for_action(
         clinic_id=clinic_id,
         actor=issuer,
@@ -428,6 +436,14 @@ def issue_invitation(
         raise ValueError(INVALID_INVITATION_MESSAGE)
     if not is_membership_role_supported(initial_role):
         raise ValueError("initial_role is invalid")
+    allowed_categories = {"", "psychologist", "psychiatrist", "therapist", "other"}
+    if initial_category not in allowed_categories:
+        raise ValueError("initial_category is invalid")
+    if initial_category and initial_role != "therapist":
+        raise ValueError("initial_category requires the therapist role")
+    effective_valid_from = valid_from or timezone.localdate()
+    if valid_until is not None and valid_until < effective_valid_from:
+        raise ValueError("valid_until must not precede valid_from")
     recipient = UserManager.canonical_email(recipient_email)
     if not recipient:
         raise ValueError("recipient_email is required")
@@ -438,6 +454,10 @@ def issue_invitation(
         issuer=issuer,
         recipient_email=recipient,
         initial_role=initial_role,
+        initial_category=initial_category,
+        unit_name=unit_name.strip(),
+        valid_from=effective_valid_from,
+        valid_until=valid_until,
         token_digest=_token_digest(raw_token),
         expires_at=expires_at,
     )
@@ -488,6 +508,10 @@ def accept_invitation(
                 clinic_id=invitation.clinic_id,
                 user_id=user.id,
                 role=invitation.initial_role,
+                unit_name=invitation.unit_name,
+                valid_from=invitation.valid_from,
+                valid_until=invitation.valid_until,
+                authorized_by_id=invitation.issuer_id,
             )
     else:
         if actor is not None:
@@ -513,6 +537,10 @@ def accept_invitation(
             clinic_id=invitation.clinic_id,
             user_id=user.id,
             role=invitation.initial_role,
+            unit_name=invitation.unit_name,
+            valid_from=invitation.valid_from,
+            valid_until=invitation.valid_until,
+            authorized_by_id=invitation.issuer_id,
         )
     invitation.used_at = now
     invitation.save(update_fields=("used_at", "updated_at"))
@@ -571,6 +599,37 @@ def revoke_invitation(
         action="update",
     )
     return invitation
+
+
+@transaction.atomic
+def resend_invitation(
+    *,
+    clinic_id: UUID,
+    invitation_id: UUID,
+    actor: User,
+    expires_at: datetime,
+) -> IssuedInvitation:
+    """Replace a pending invitation with a fresh one without erasing history."""
+    original = (
+        ClinicInvitation.objects.for_clinic(clinic_id)
+        .select_for_update()
+        .filter(pk=invitation_id, used_at__isnull=True, revoked_at__isnull=True)
+        .first()
+    )
+    if original is None:
+        raise PermissionDenied
+    revoke_invitation(clinic_id=clinic_id, invitation_id=invitation_id, actor=actor)
+    return issue_invitation(
+        clinic_id=clinic_id,
+        issuer=actor,
+        recipient_email=original.recipient_email,
+        initial_role=original.initial_role,
+        initial_category=original.initial_category,
+        unit_name=original.unit_name,
+        valid_from=original.valid_from,
+        valid_until=original.valid_until,
+        expires_at=expires_at,
+    )
 
 
 def _client_label(request: HttpRequest) -> str:
@@ -811,6 +870,7 @@ __all__ = [
     "reauthenticate_sensitive_action",
     "rotate_current_session_tracking",
     "revoke_account_session",
+    "resend_invitation",
     "revoke_invitation",
     "revoke_other_sessions",
     "validate_current_session",

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import pytest
-from django.test import Client, override_settings
+from django.test import Client
 
 
 @pytest.mark.django_db

@@ -90,8 +90,8 @@ def api_ping(request: HttpRequest) -> dict[str, str]:
 
 # ── Domain routers ───────────────────────────────────────────────────────────
 
-from api.journal_api import router as journal_router
 from api.goals_api import router as goals_router
+from api.journal_api import router as journal_router
 from api.scheduling_api import router as scheduling_router
 
 api.add_router("/journal/", journal_router)

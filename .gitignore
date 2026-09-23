@@ -22,7 +22,10 @@ db.sqlite3
 !.env.example
 .migration-runtime/
 .coverage.*
+.coverage (1)
 .DS_Store
+playwright-report/
+test-results/
 **/node_modules/
 **/.expo/
 **/dist/

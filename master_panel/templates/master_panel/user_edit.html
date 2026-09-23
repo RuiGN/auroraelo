@@ -1,0 +1,15 @@
+{% extends "master_panel/base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="chart-card" style="max-width:720px;">
+  <p><a href="{% url 'master_panel:user_list' %}" style="color:#7c3aed;">← {% translate "Voltar aos usuários" %}</a></p>
+  <h2 style="margin-bottom:.25rem;">{% translate "Editar vínculo" %}</h2>
+  <p style="color:#64748b;margin-top:0;">{{ membership.user.email }} · {{ membership.clinic.name }}</p>
+  <form method="post" novalidate data-form-guard>
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="aurora-alert aurora-alert-error">{{ form.non_field_errors }}</div>{% endif %}
+    {% for field in form %}<div style="margin-bottom:1rem;"><label for="{{ field.id_for_label }}" style="display:block;font-weight:600;margin-bottom:.25rem;">{{ field.label }}</label>{{ field }}{% for error in field.errors %}<div style="color:#b91c1c;font-size:.85rem;">{{ error }}</div>{% endfor %}</div>{% endfor %}
+    <div style="display:flex;gap:.75rem;align-items:center;"><button type="submit" style="background:#7c3aed;color:#fff;border:0;border-radius:.5rem;padding:.6rem 1rem;font-weight:600;cursor:pointer;">{% translate "Salvar vínculo" %}</button><a href="{% url 'master_panel:user_list' %}" style="color:#475569;">{% translate "Cancelar" %}</a></div>
+  </form>
+</div>
+{% endblock %}

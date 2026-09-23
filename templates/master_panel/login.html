@@ -21,6 +21,21 @@
       background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                         linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     }
+    .field-control {
+      position: relative;
+    }
+    .field-control .field-control-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.875rem;
+      z-index: 1;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+    .field-control input {
+      padding-left: 2.75rem;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-slate-900 text-slate-200 font-sans flex flex-col antialiased relative overflow-hidden">
@@ -79,11 +94,14 @@
           <label for="id_email" class="block text-sm font-medium text-slate-300 mb-1">
             {% translate "E-mail" %}
           </label>
-          <input type="email" name="email" id="id_email"
-                 value="{{ form.email.value|default_if_none:'' }}"
-                 class="w-full px-4 py-2.5 rounded-lg bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-aurora-500 focus:border-transparent transition-colors"
-                 placeholder="{% translate 'admin@email.com' %}"
-                 autocomplete="email" inputmode="email" required>
+          <div class="field-control">
+            <span class="field-control-icon" aria-hidden="true"><i class="feather-mail"></i></span>
+            <input type="email" name="email" id="id_email"
+                   value="{{ form.email.value|default_if_none:'' }}"
+                   class="w-full px-4 py-2.5 rounded-lg bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-aurora-500 focus:border-transparent transition-colors"
+                   placeholder="{% translate 'admin@email.com' %}"
+                   autocomplete="email" inputmode="email" required>
+          </div>
           {% for error in form.email.errors %}
           <p class="mt-1 text-sm text-red-400">{{ error }}</p>
           {% endfor %}
@@ -93,7 +111,8 @@
           <label for="id_password" class="block text-sm font-medium text-slate-300 mb-1">
             {% translate "Senha" %}
           </label>
-          <div>
+          <div class="field-control">
+            <span class="field-control-icon" aria-hidden="true"><i class="feather-key"></i></span>
             <input type="password" name="password" id="id_password"
                    class="block w-full min-w-0 px-4 py-2.5 rounded-lg bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-aurora-500 focus:border-transparent transition-colors"
                    placeholder="{% translate 'Digite sua senha' %}"

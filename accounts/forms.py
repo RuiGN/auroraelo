@@ -19,7 +19,19 @@ _MEMBERSHIP_ROLE_UI_LABELS = {
 }
 
 
-def _translated_membership_role_choices() -> tuple[tuple[str, object], ...]:
+def translated_membership_role_label(role: str) -> str:
+    """Return the translated label of a membership role.
+
+    Unknown values fall back to a translated generic label so the model display
+    name (untranslated) is never rendered in the UI.
+    """
+    for value, label in translated_membership_role_choices():
+        if value == role:
+            return str(label)
+    return str(_("Papel não reconhecido"))
+
+
+def translated_membership_role_choices() -> tuple[tuple[str, object], ...]:
     """Keep stable role codes while translating labels in the account UI."""
     return tuple(
         (value, _MEMBERSHIP_ROLE_UI_LABELS.get(value, label))
@@ -126,7 +138,7 @@ class InvitationIssueForm(forms.Form):
     recipient_email = forms.EmailField(label=_("E-mail da pessoa convidada"))
     initial_role = forms.ChoiceField(
         label=_("Papel inicial"),
-        choices=_translated_membership_role_choices(),
+        choices=translated_membership_role_choices(),
     )
     expires_in_hours = forms.IntegerField(
         label=_("Validade em horas"),

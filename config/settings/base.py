@@ -2,8 +2,10 @@
 
 import os
 import shlex
+from collections.abc import Mapping
 from pathlib import Path
 from typing import NotRequired, TypedDict
+from urllib.parse import unquote, urlparse
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -40,6 +42,44 @@ def postgres_database_from_environment() -> DatabaseConfig:
         "HOST": required_environment("DB_HOST"),
         "PORT": required_environment("DB_PORT"),
     }
+
+
+def postgres_database_from_url(
+    url: str,
+    *,
+    tls_options: Mapping[str, str] | None = None,
+) -> DatabaseConfig:
+    """Build a PostgreSQL config from a URL without exposing connection values."""
+    parsed = urlparse(url)
+    try:
+        port = parsed.port or 5432
+    except ValueError as error:
+        raise ImproperlyConfigured(
+            "REPLICA_DATABASE_URL has an invalid PostgreSQL port."
+        ) from error
+
+    if (
+        parsed.scheme not in {"postgres", "postgresql"}
+        or not parsed.hostname
+        or parsed.username is None
+        or parsed.password is None
+        or not parsed.path.strip("/")
+    ):
+        raise ImproperlyConfigured(
+            "REPLICA_DATABASE_URL must be a complete PostgreSQL URL."
+        )
+
+    config: DatabaseConfig = {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": unquote(parsed.path.lstrip("/")),
+        "USER": unquote(parsed.username),
+        "PASSWORD": unquote(parsed.password),
+        "HOST": parsed.hostname,
+        "PORT": str(port),
+    }
+    if tls_options:
+        config["OPTIONS"] = dict(tls_options)
+    return config
 
 
 def environment_flag(name: str, default: bool = False) -> bool:
@@ -272,7 +312,9 @@ LOGGING = {
 }
 
 # Celery & Message Broker Configuration (RabbitMQ + Redis)
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "amqp://guest:guest@rabbitmq:5672//")
+CELERY_BROKER_URL = os.environ.get(
+    "CELERY_BROKER_URL", "amqp://guest:***@rabbitmq:5672//"
+)
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", "redis://redis:6379/2")
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
@@ -312,13 +354,6 @@ STRIPE_PRICE_IDS: dict[str, str] = {
     "professional": os.environ.get("STRIPE_PRICE_PROFESSIONAL", ""),
     "enterprise": os.environ.get("STRIPE_PRICE_ENTERPRISE", ""),
 }
-
-# ── Master Panel ──────────────────────────────────────────────────────────────
-# Default password for the auto-created master superuser (override in prod).
-MASTER_USER_EMAIL: str = os.environ.get(
-    "MASTER_USER_EMAIL", "master@auroraelo.internal"
-)
-MASTER_USER_PASSWORD: str = os.environ.get("MASTER_USER_PASSWORD", "master")
 
 # ── Django Jazzmin (Admin UI) ─────────────────────────────────────────────────
 JAZZMIN_SETTINGS: dict = {

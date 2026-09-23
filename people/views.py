@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import date
 from uuid import UUID, uuid4
 
+from django.contrib import messages
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -101,12 +102,15 @@ def professional_suspend(request: HttpRequest, membership_id: UUID) -> HttpRespo
 @require_POST
 def professional_reactivate(request: HttpRequest, membership_id: UUID) -> HttpResponse:
     actor, clinic_id = _actor_and_clinic(request)
-    reactivate_professional_membership(
-        clinic_id=clinic_id,
-        actor=actor,
-        membership_id=membership_id,
-        request_id=_request_uuid(),
-    )
+    try:
+        reactivate_professional_membership(
+            clinic_id=clinic_id,
+            actor=actor,
+            membership_id=membership_id,
+            request_id=_request_uuid(),
+        )
+    except ValidationError as error:
+        messages.error(request, error.messages[0])
     return HttpResponseRedirect(reverse("professional_list"))
 
 

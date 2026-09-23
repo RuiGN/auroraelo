@@ -9,6 +9,7 @@ from core.events import DomainEvent
 
 clinic_configuration_updated = Signal()
 professional_membership_updated = Signal()
+membership_authorization_changed = Signal()
 whitelabel_audit_required = Signal()
 
 
@@ -23,6 +24,7 @@ __all__ = [
     "ClinicCreated",
     "DomainEvent",
     "clinic_configuration_updated",
+    "membership_authorization_changed",
     "professional_membership_updated",
     "whitelabel_audit_required",
 ]

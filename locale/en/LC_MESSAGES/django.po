@@ -25,6 +25,9 @@ msgstr "Administrative staff"
 msgid "Paciente"
 msgstr "Patient"
 
+msgid "Papel não reconhecido"
+msgstr "Unrecognized role"
+
 msgid "E-mail"
 msgstr "Email"
 
@@ -4997,6 +5000,25 @@ msgid "Voltar ao painel clínico"
 msgstr "Back to clinical dashboard"
 
 
+msgid "A data final não pode ser anterior à inicial."
+msgstr "The end date cannot be earlier than the start date."
+
+msgid "Outra categoria"
+msgstr "Other category"
+
+msgid "Psicologia"
+msgstr "Psychology"
+
+msgid "Psiquiatria"
+msgstr "Psychiatry"
+
+msgid "Terapia"
+msgstr "Therapy"
+
+msgid "Usuários e equipe"
+msgstr "Users and team"
+
+
 msgid "Master Panel"
 msgstr "Master Panel"
 
@@ -5005,3 +5027,184 @@ msgstr "Restricted access to platform administration."
 
 msgid "Acessar painel"
 msgstr "Access panel"
+
+msgid "A validade do vínculo deve ser renovada antes da reativação."
+msgstr "The membership validity must be renewed before reactivation."
+
+msgid "Vínculo ativo"
+msgstr "Active membership"
+
+msgid "Voltar aos usuários"
+msgstr "Back to users"
+
+msgid "Clínicas"
+msgstr "Clinics"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Django Admin"
+msgstr "Django Admin"
+
+msgid "E-mail, nome ou clínica"
+msgstr "E-mail, name or clinic"
+
+msgid "Editar vínculo"
+msgstr "Edit membership"
+
+msgid "Fim da validade"
+msgstr "End of validity"
+
+msgid "Expira"
+msgstr "Expires"
+
+msgid "Vínculo da identidade atualizado."
+msgstr "Identity membership updated."
+
+msgid "Papel de clínica inválido."
+msgstr "Invalid clinic role."
+
+msgid "Convite indisponível para reenvio."
+msgstr "Invitation not available for resending."
+
+msgid "Convite indisponível para revogação."
+msgstr "Invitation not available for revocation."
+
+msgid "Convite reenviado."
+msgstr "Invitation resent."
+
+msgid "Convite revogado."
+msgstr "Invitation revoked."
+
+msgid "Convite enviado sem criar senha administrativa."
+msgstr "Invitation sent without creating an administrative password."
+
+msgid "Convite para acessar uma clínica"
+msgstr "Invitation to access a clinic"
+
+msgid "Validade do convite em horas"
+msgstr "Invitation validity in hours"
+
+msgid "Convidar usuário"
+msgstr "Invite user"
+
+msgid "Gerencie somente os vínculos da clínica ativa."
+msgstr "Manage only the memberships of the active clinic."
+
+msgid "Painel Master"
+msgstr "Master Panel"
+
+msgid "Vínculo reativado."
+msgstr "Membership reactivated."
+
+msgid "Vínculo suspenso."
+msgstr "Membership suspended."
+
+msgid "Vínculo atualizado."
+msgstr "Membership updated."
+
+msgid "Nova Clínica"
+msgstr "New clinic"
+
+msgid "Nenhum vínculo encontrado."
+msgstr "No membership found."
+
+msgid "Nenhum convite pendente."
+msgstr "No pending invitations."
+
+msgid "Não se aplica"
+msgstr "Not applicable"
+
+msgid "Visão Geral"
+msgstr "Overview"
+
+msgid "Convites pendentes"
+msgstr "Pending invitations"
+
+msgid "Pessoa"
+msgstr "Person"
+
+msgid "Categoria profissional"
+msgstr "Professional category"
+
+msgid "Destinatário"
+msgstr "Recipient"
+
+msgid "Reenviar"
+msgstr "Resend"
+
+msgid "Revogar"
+msgstr "Revoke"
+
+msgid "Salvar vínculo"
+msgstr "Save membership"
+
+msgid "Busca"
+msgstr "Search"
+
+msgid "Enviar convite ou vincular"
+msgstr "Send invitation or link"
+
+msgid "Sair"
+msgstr "Sign out"
+
+msgid "Identidades únicas, vínculos por clínica e convites pendentes."
+msgstr "Single identities, per-clinic memberships and pending invitations."
+
+msgid "Início da validade"
+msgstr "Start of validity"
+
+msgid "Sistema"
+msgstr "System"
+
+msgid "Filtros da equipe"
+msgstr "Team filters"
+
+msgid "Vínculos da equipe"
+msgstr "Team memberships"
+
+msgid "Tenants"
+msgstr "Tenants"
+
+msgid "A categoria exige o papel Terapeuta."
+msgstr "The category requires the therapist role."
+
+msgid "A validade final não pode ser anterior à inicial."
+msgstr "The end of validity cannot precede the start."
+
+msgid "A validade final é inválida."
+msgstr "The end of validity is invalid."
+
+msgid "Não foi possível enviar o convite. Tente novamente."
+msgstr "The invitation could not be sent. Please try again."
+
+msgid "A categoria profissional exige o papel Terapeuta."
+msgstr "The professional category requires the therapist role."
+
+msgid "O sistema envia um convite de uso único. Nenhuma senha é criada ou exibida pelo painel."
+msgstr "The system sends a single-use invitation. No password is created or displayed by the panel."
+
+msgid "Validade"
+msgstr "Validity"
+
+msgid ""
+"Você recebeu um convite para acessar uma clínica.\n"
+"\n"
+"Acesse: %(accept_url)s\n"
+"\n"
+"O convite é individual e pode ser usado uma única vez."
+msgstr ""
+"You received an invitation to access a clinic.\n"
+"\n"
+"Open: %(accept_url)s\n"
+"\n"
+"The invitation is personal and can be used only once."
+
+msgid "Seu próprio vínculo não pode ser suspenso"
+msgstr "Your own membership cannot be suspended"
+
+msgid "Suspender o vínculo deste usuário?"
+msgstr "Suspend this user's membership?"
+
+msgid "Revogar este convite pendente?"
+msgstr "Revoke this pending invitation?"

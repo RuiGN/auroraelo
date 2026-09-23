@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from datetime import timedelta
 from uuid import UUID
 
@@ -49,6 +50,8 @@ from .services import (
     revoke_invitation,
     revoke_other_sessions,
 )
+
+logger = logging.getLogger("application.accounts")
 
 
 def _form_response(
@@ -132,20 +135,16 @@ def account_login(request: HttpRequest) -> HttpResponse:
             ) and not request.session.get(CLINIC_SESSION_KEY):
                 return redirect("master_panel:dashboard")
             return redirect("workspace_vertical")
-    response = TemplateResponse(
+    response = _form_response(
         request,
-        "accounts/clinic_login.html",
-        {
-            "page_title": _("Entrar na plataforma"),
-            "title": _("Entrar na plataforma"),
-            "description": _(
-                "Use seu e-mail e sua senha para acessar uma clínica autorizada."
-            ),
-            "form": form,
-            "submit_label": _("Entrar"),
-            "secondary_url": reverse("password_recovery"),
-            "secondary_label": _("Esqueci minha senha"),
-        },
+        form=form,
+        title=_("Entrar na plataforma"),
+        description=_(
+            "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+        ),
+        submit_label=_("Entrar"),
+        secondary_url=reverse("password_recovery"),
+        secondary_label=_("Esqueci minha senha"),
         status=status,
     )
     if status == 429:
@@ -168,13 +167,29 @@ def master_login(request: HttpRequest) -> HttpResponse:
                 password=form.cleaned_data["password"],
             )
         except LoginRateLimitedError:
+            logger.warning(
+                "master login rate limited",
+                extra={"event": "master.login.rate_limited", "outcome": "denied"},
+            )
             form.add_error(None, _(GENERIC_LOGIN_ERROR))
             status = 429
         except LoginRejectedError:
+            logger.info(
+                "master login rejected",
+                extra={"event": "master.login.rejected", "outcome": "denied"},
+            )
             form.add_error(None, _(GENERIC_LOGIN_ERROR))
         else:
             if not (request.user.is_staff or request.user.is_superuser):
+                logger.info(
+                    "master login refused for non-platform identity",
+                    extra={"event": "master.login.non_staff", "outcome": "denied"},
+                )
                 return redirect("workspace_vertical")
+            logger.info(
+                "master login granted",
+                extra={"event": "master.login.granted", "outcome": "success"},
+            )
             return redirect("master_panel:dashboard")
     response = TemplateResponse(
         request,
@@ -182,9 +197,7 @@ def master_login(request: HttpRequest) -> HttpResponse:
         {
             "page_title": _("Master Panel"),
             "title": _("Master Panel"),
-            "description": _(
-                "Acesso restrito à administração da plataforma."
-            ),
+            "description": _("Acesso restrito à administração da plataforma."),
             "form": form,
             "submit_label": _("Acessar painel"),
         },

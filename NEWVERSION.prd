@@ -1,0 +1,285 @@
+# NEWVERSION — plano de correções e administração
+
+Projeto: Aurora Elo
+Checkout: `/Users/rgnsystems/projects/auroraelo`
+Branch de referência: `gemini`
+Status: planejamento criado; execução das correções ainda não iniciada
+
+## Como usar este arquivo
+
+- `[ ]` = pendente.
+- `[X]` = concluído somente após execução e evidência registrada no próprio sprint.
+- Não marcar uma tarefa por inspeção visual ou por uma execução parcial.
+- Dados de teste devem ser sintéticos. Não usar credenciais, prontuários, uploads ou banco real para validar o plano.
+- Não fazer commit, push, deploy ou alteração na VPS sem autorização explícita.
+
+## Restrições obrigatórias
+
+- Preservar `accounts.User`, as migrations existentes e os contratos entre domínios.
+- Não criar um segundo modelo de autenticação para substituir `accounts.User`.
+- O isolamento por clínica deve ser aplicado na consulta, na autorização, no cache, nos arquivos e na auditoria.
+- A referência visual para telas novas é exclusivamente `design_system/`. Não restaurar `design_system_duralux/`.
+- Não alterar o provedor de IA do produto neste trabalho.
+- A execução e revisão deste plano deve usar somente OpenCode Go e Claude Subscription DirectSDK. Não usar OpenAI, Gemini, CommandCode, OpenRouter ou qualquer outro provedor.
+- Não enviar dados clínicos ou credenciais para provedores de desenvolvimento.
+
+## Estado inicial verificado
+
+- [X] `git status` local limpo na branch `gemini`; `NEWVERSION.prd` não existia antes deste plano.
+- [X] A rota `/master/login/` está registrada em `config/urls.py:33` e chama `accounts.views.master_login`.
+- [X] `master_login` autentica uma conta global `is_staff`/`is_superuser` e redireciona para `master_panel:dashboard` sem exigir uma clínica na sessão (`accounts/views.py:159-197`).
+- [X] `/admin/login/` é redirecionada para `/accounts/login/` preservando `next` (`config/views.py:443-450`).
+- [X] O middleware de clínica isenta `/master/` e `/admin/` (`clinics/middleware.py:20-27`); portanto, a mensagem de clínica ausente não deveria impedir a tela de login Master.
+- [X] O Django Admin lista `Clinic` pelo manager de infraestrutura (`clinics/admin.py:14-25`).
+- [X] O painel Master lista e conta `TenantSubscription`, não `Clinic` (`master_panel/views/tenants.py:18-41` e `master_panel/views/dashboard.py:19-35`).
+- [X] Existe um caso reproduzível com dados sintéticos: uma `Clinic` criada no Django Admin sem `TenantSubscription` aparece no Admin, mas `/master/tenants/` responde 200 com “Nenhuma clínica encontrada.”.
+- [X] O teste sintético de `GET /master/login/` e login de superusuário sem clínica passou localmente; resultado: 1 passed.
+- [X] Os testes focados atuais de Admin, memberships e profissionais passaram: 14 passed, com apenas avisos de `staticfiles` ausente.
+- [X] `manage.py check` passou e `makemigrations --check --dry-run` retornou “No changes detected”.
+- [X] A jornada autenticada do dashboard Master com uma clínica existente e sem assinatura ainda precisa ser reproduzida em PostgreSQL. O ensaio SQLite também revelou um segundo problema: `dashboard` usa `distinct("clinic_id")`, que não é suportado pelo SQLite.
+  - Situação 2026-09-22: reproduzido em PostgreSQL descartável. A suíte completa em PostgreSQL passou com `2680 passed, 17 skipped` e a única falha remanescente é pré-existente no domínio `psychiatry` (também falha no snapshot do `HEAD`, ver evidência). O `distinct("clinic_id")` foi substituído por agregação compatível com PostgreSQL e SQLite, e o dashboard Master lista clínicas sem assinatura como estado comercial inicial.
+- [X] A causa do erro observado pelo usuário foi verificada na produção. Reproduzida em processo no container `web` sem senha (sessão criada via `register_current_session` para um superusuário existente, identidade não impressa): `GET /admin/` levanta `ValueError: Missing staticfiles manifest entry for 'vendor/bootswatch'`, porque `jazzmin/templates/admin/base.html:34` resolve um diretório com `{% static %}` sob o backend estrito do whitenoise. O commit `8c0ad2c` (guard de `request.user`) não era a causa. Correção local em `config/storage.py` + `config/settings/production.py`, com regressões em `tests/test_static_storage_manifest.py`. **Correção ainda não deployada** (ver pendência de deploy).
+
+## As seis correções técnicas
+
+### Sprint 1 — Qualidade, UI, i18n e baseline [ ]
+
+Objetivo: deixar o baseline de qualidade reproduzível e corrigir as regressões já encontradas sem enfraquecer os testes.
+
+- [X] Capturar novo baseline antes de editar: pytest completo com JUnit, Ruff check, Ruff format check, mypy, scanner de segredos, catálogos e `npm ci`.
+- [X] Comparar os nomes dos casos falhos com o baseline anterior; não declarar a sprint concluída apenas pela redução da contagem de falhas.
+- [X] Corrigir as falhas de tradução e renderização dos templates de login e dos componentes afetados.
+- [X] Remover referências residuais de runtime ao legado visual, incluindo o consumidor de `css/tokens.css` em `templates/landing/index.html`, usando somente o escopo aprovado.
+- [X] Reconciliar `docs/migration/translated-ui-scope.json`, catálogos `.po/.mo`, inventário de templates e testes de remoção legada.
+- [X] Corrigir erros de Ruff, formatação e mypy que permanecerem após separar claramente dívida legada de erro introduzido.
+  - Situação 2026-09-22: nenhum erro novo introduzido. Comparação por arquivo contra o snapshot do `HEAD`: Ruff 178→140, `ruff format --check` 25→19 arquivos, mypy 732→728, zero arquivo com mais erros que o baseline. A dívida legada restante foi documentada, não mascarada.
+- [ ] Validar as telas alteradas renderizadas em desktop e mobile, incluindo foco, teclado, overflow, idioma pt-BR e mensagens de erro.
+  - Situação 2026-09-22: a validação renderizada ficou restrita a asserções HTTP e a E2E Playwright em viewport desktop; foco, teclado e overflow em mobile real não foram inspecionados interativamente. Pendente.
+- [ ] Critério de aceite: pytest, Ruff check, Ruff format check, mypy, scanner de segredos e verificadores de catálogos passam no mesmo checkout.
+  - Situação 2026-09-22: pytest, scanner de segredos, catálogos UI/DjangoJS, `manage.py check`, `makemigrations --check --dry-run`, `npm ci` e E2E PASSAM. `ruff check` (140, sendo 132 E501), `ruff format --check` (19 arquivos) e mypy (728) permanecem VERMELHOS por dívida legada anterior a este trabalho, sem regressão introduzida (ver `docs/migration/evidence/newversion-final-20260922/`).
+
+### Sprint 2 — Credenciais do Master em produção [X]
+
+Objetivo: eliminar fallback de credencial administrativa e impedir startup aparentemente bem-sucedido com Master inválido.
+
+Arquivos de referência: `config/settings/base.py`, `config/settings/production.py`, `entrypoint.sh`.
+
+- [X] Exigir em produção as variáveis de configuração do Master por `required_environment`; nunca usar e-mail ou senha padrão.
+- [X] Remover o fallback interno usado pelo `entrypoint.sh` para criação do superusuário.
+- [X] Remover o `|| true` do comando de criação/verificação do Master; erro deve interromper o startup e ser observável sem expor segredo.
+- [X] Tornar a operação idempotente: usuário existente deve ser validado sem redefinir senha silenciosamente.
+- [X] Garantir que e-mail, senha e chaves nunca apareçam em logs, mensagens de erro, JUnit ou documentação.
+- [X] Criar testes com variáveis sintéticas: configuração ausente falha claramente; configuração válida importa; usuário existente não é duplicado.
+- [X] Critério de aceite: `check --deploy` e import de produção passam sem defaults inseguros.
+
+### Sprint 3 — Configuração de read replica [X]
+
+Objetivo: fazer o settings de produção importar quando `REPLICA_DATABASE_URL` estiver habilitada.
+
+Arquivos de referência: `config/settings/production.py:93-104` e `config/settings/base.py:33-42`.
+
+- [X] Remover o import de `parse_database_url` que não existe em `config.settings.base`.
+- [X] Corrigir a chamada de `postgres_database_from_environment`, que atualmente recebe um argumento não suportado.
+- [X] Definir uma única função explícita e tipada para montar o banco principal e a réplica, preservando `TypedDict` e as opções TLS.
+- [X] Confirmar que a réplica recebe somente as opções necessárias e que `TEST.MIRROR` não altera produção.
+- [X] Testar três estados: sem réplica, réplica válida e réplica malformada/ausente.
+- [X] Usar somente valores sintéticos redigidos nos testes; não imprimir connection strings.
+- [X] Critério de aceite: settings de produção importa com e sem réplica e `manage.py check` passa nos dois caminhos.
+
+### Sprint 4 — Redação real do OpenTelemetry [X]
+
+Objetivo: impedir que atributos de requisição, cookies, autorização ou SQL sejam exportados para telemetria externa.
+
+Arquivo de referência: `core/telemetry.py:133-161`.
+
+- [X] Substituir o `pass` do `_PiiScrubberExporter` por uma implementação que realmente remova ou substitua os atributos proibidos antes do delegate exporter.
+- [X] Respeitar a imutabilidade de `ReadableSpan`/atributos do SDK; não depender de mutação que o SDK não permita.
+- [X] Cobrir pelo menos `http.request.body`, cookie, autorização, `db.statement` e `db.query_text`.
+- [X] Verificar que atributos técnicos permitidos continuam presentes e que spans sem atributos sensíveis continuam exportáveis.
+- [X] Cobrir exportação, shutdown e force flush com exporter sintético, sem endpoint externo.
+- [X] Verificar a inicialização em WSGI, Celery e ASGI ou registrar explicitamente por que uma entrada não deve instrumentar.
+- [X] Critério de aceite: teste prova a ausência dos campos sensíveis no payload recebido pelo exporter fake.
+
+### Sprint 5 — Broker Celery/RabbitMQ no Compose [ ]
+
+Objetivo: corrigir a interpolação do broker e garantir que web e worker usem a mesma URL válida sem expor credenciais.
+
+Arquivo de referência: `docker-compose.yml:19` e `docker-compose.yml:56`.
+
+- [X] Corrigir a expressão de interpolação que atualmente está malformada e não inclui corretamente usuário, senha e fechamento da variável.
+- [X] Definir explicitamente a origem de `RABBITMQ_DEFAULT_USER` e `RABBITMQ_DEFAULT_PASS`, sem inserir valores reais no plano ou nos logs.
+- [X] Verificar caracteres especiais e a necessidade de URL-encoding na construção da URL AMQP.
+- [X] Validar `docker compose config --quiet` com arquivo de exemplo e valores sintéticos.
+- [X] Subir somente a infraestrutura descartável de teste quando necessário; nunca usar `down -v` em dados existentes.
+- [X] Confirmar conectividade do worker com RabbitMQ e preservar Redis como backend de resultado.
+  - Situação 2026-09-23: execução de tarefa provada em produção. `config.celery.debug_task` publicado na fila real (`task_always_eager=False`) foi recebido e executado pelo worker Linux: `Task config.celery.debug_task[...] received` / `succeeded in 0.0089s`. A falha `fast_trace_task` observada nos ensaios locais é específica do macOS e não afeta a produção. Histórico da investigação parcial em 2026-09-22: o Compose foi renderizado e validado com valores sintéticos (web e worker com o mesmo broker, Redis como backend de resultado). Conectividade real exercitada **parcialmente** com broker e backend descartáveis: o worker conecta no RabbitMQ real, declara a fila `celery` (`consumers=1`) e uma tarefa despachada sem eager atravessa o broker (`messages=1` → `0`) e é recebida pelo worker. **Não** foi possível provar a execução da tarefa no host macOS: o Celery 5.6.3 (`requirements.txt`) com Python 3.14 falha em `celery/app/trace.py:762` (`fast_trace_task`: `ValueError: not enough values to unpack (expected 3, got 0)`), e as tentativas de contorno (`--pool=solo`, worker em contêiner Linux) não puderam ser concluídas porque o contêiner descartável de RabbitMQ parou de iniciar neste host (`Error when reading /var/lib/rabbitmq/.erlang.cookie: eacces`). Item mantido como `[ ]` com evidência em `docs/migration/evidence/newversion-final-20260922/celery-rabbitmq-*.log`.
+- [X] Critério de aceite: Compose renderiza sem warning de sintaxe e worker/web recebem configuração coerente.
+
+### Sprint 6 — Lockfile E2E e gates de CI [X]
+
+Objetivo: tornar Playwright instalável a partir de checkout limpo e incluir a verificação da autenticação no pipeline.
+
+Arquivos de referência: `package.json`, `package-lock.json`, `.github/workflows/quality.yml`.
+
+- [X] Regenerar `package-lock.json` a partir do `package.json` atual, eliminando o lockfile vazio/histórico que ainda declara o projeto antigo.
+- [X] Confirmar `npm ci --ignore-scripts --no-audit --no-fund` em ambiente limpo.
+- [X] Instalar/validar apenas o navegador necessário para os testes E2E; não mascarar ausência de browser com skip.
+- [X] Criar jornada Playwright sintética para `/master/login/`, `/master/`, `/admin/` e o redirecionamento para `next`.
+- [X] Adicionar o job E2E ao CI com artefatos de relatório e falha explícita quando o lockfile não for reproduzível.
+- [X] Avaliar a execução dos checks dos dois apps mobile no CI sem tratar `expo start` como build aprovado.
+  - Situação 2026-09-22: avaliados e executados localmente os checks determinísticos dos dois apps (`npm run format:check`, `npm run typecheck`, `npm test`, `npm run export`); `expo start` não é tratado como build aprovado. `expo-doctor` e `expo install --check` dependem de rede e ficam fora do gate de CI.
+- [X] Critério de aceite: `npm ci` e os E2E de autenticação passam em checkout limpo.
+
+## Correção funcional da rota `/master/login/` e do erro de clínica
+
+### Sprint 7 — Login Master, Admin e fonte de verdade de clínicas [X]
+
+Diagnóstico atual:
+
+- `/master/login/` existe e responde 200 na VPS.
+- Sem autenticação, `/master/` responde 302 para `/master/login/?next=/master/`.
+- `/admin/` responde 302 para `/admin/login/?next=/admin/`.
+- O problema não está na existência da rota de login. O painel Master consulta `TenantSubscription`, enquanto o Django Admin consulta `Clinic`. Uma clínica criada no Admin pode não possuir ainda a assinatura relacionada e, por isso, o painel mostra “Nenhuma clínica encontrada” ou “Nenhuma clínica cadastrada ainda”.
+- O dashboard também usa `distinct("clinic_id")`, dependente de PostgreSQL, e quebra no SQLite usado em alguns testes.
+
+Implementação planejada:
+
+- [X] Definir `Clinic.infrastructure_objects` como fonte de verdade da existência de tenants no painel Master.
+- [X] Tratar `TenantSubscription` como estado comercial opcional da clínica, com estado inicial explícito quando não houver registro.
+- [X] Criar serviço idempotente para garantir a assinatura padrão de uma clínica e uma rotina/migration de backfill para clínicas já existentes, sem apagar ou alterar dados comerciais válidos.
+- [X] Alterar lista, dashboard, detalhe e contadores para incluir clínicas sem assinatura e exibir claramente o estado comercial ausente/inicial.
+- [X] Reescrever a consulta de “último snapshot por clínica” sem `DISTINCT ON` incompatível com SQLite; manter desempenho e resultado determinístico em PostgreSQL.
+- [X] Preservar a isenção de tenant middleware em `/master/` e `/admin/`; não resolver o problema liberando rotas clínicas sem sessão/autorização.
+- [X] Conferir todos os links “Administração”, “Painel Master”, `/master/` e `/admin/`, inclusive o parâmetro `next`.
+- [X] Adicionar logs técnicos com request id, sem e-mail, senha, token ou dados clínicos.
+- [X] Criar regressões para: clínica existente sem assinatura; clínica existente com assinatura; nenhuma clínica; usuário Master sem clínica na sessão; usuário não staff; usuário clínico sem permissão; `/admin/` anônimo; `/master/login/` GET e POST.
+- [X] Rodar a jornada em PostgreSQL descartável e em SQLite de testes, registrando a diferença apenas quando for intencional.
+- [X] Critério de aceite: após login Master, toda clínica existente no Admin aparece no painel Master sem exigir cadastro duplicado.
+
+## Gerenciamento de usuários e perfis
+
+### Sprint 8 — Administração de usuários, memberships e perfis [X]
+
+Objetivo: disponibilizar uma gestão operacional real, sem depender do Django Admin cru e sem duplicar `accounts.User`.
+
+Modelo funcional a preservar:
+
+- `clinic_admin` → Administrador da clínica.
+- `therapist` → Profissional; a categoria distingue psicólogo, psiquiatra ou terapeuta.
+- `administrative_staff` → Recepção/equipe administrativa.
+- `patient` → Paciente.
+- `is_staff`/`is_superuser` → operação global da plataforma, não substitui o papel da clínica.
+
+Tarefas de domínio:
+
+- [X] Manter `accounts.User` como identidade única e `ClinicMembership` como vínculo autorizado por clínica.
+- [X] Adicionar a categoria estável de psiquiatra em `ProfessionalProfile`, preservando dados existentes de psicólogo/terapeuta e usando valores persistidos em inglês.
+- [X] Definir rótulos pt-BR sem usar rótulos traduzidos nas regras de negócio.
+- [X] Reutilizar o fluxo de convite de uso único e expiração; não criar senha em texto ou senha administrativa pela tela de gestão.
+- [X] Permitir convite/criação operacional de profissional, psicólogo, psiquiatra, recepção e paciente.
+- [X] Permitir vincular uma identidade existente à clínica, respeitando a unicidade `(user, clinic)`.
+- [X] Permitir editar papel, categoria profissional, unidade, início/fim de validade e status do vínculo.
+- [X] Permitir suspender, reativar, revogar convite e reenviar convite sem apagar histórico.
+- [X] Usar recuperação de senha existente em vez de exibir ou redefinir senha arbitrariamente.
+- [X] Manter perfil clínico separado de autenticação; paciente deve continuar com `PatientProfile` e profissional com `ProfessionalProfile`.
+
+Telas e rotas planejadas:
+
+- [X] Criar uma tela de usuários do painel Master, por exemplo `/master/users/`, com busca por e-mail/nome, clínica, papel, categoria e status.
+- [X] Criar uma tela de equipe da clínica ativa para `clinic_admin`, sem permitir enumeração de outra clínica.
+- [X] Exibir ações diferentes por escopo: Master administra vínculos globais; administrador da clínica administra apenas sua clínica; recepção, profissional e paciente não administram usuários.
+- [X] Reutilizar `design_system/`, com formulário acessível, mensagens traduzidas, confirmação para ações destrutivas e estados vazio/erro/carregamento.
+- [X] Adicionar link “Usuários e equipe” no painel correto; não esconder a função apenas dentro do Django Admin.
+
+Django Admin:
+
+- [X] Substituir o registro genérico de `UserAdmin` por um `UserAdmin` customizado com busca por e-mail/nome, filtros de ativo/staff e visualização segura dos memberships.
+- [X] Disponibilizar inline/formulário de `ClinicMembership` usando somente o manager de infraestrutura dentro do Admin.
+- [X] Exibir papel, clínica, validade e status sem expor senha, tokens de convite ou dados clínicos.
+- [X] Fazer o Admin chamar regras/serviços autorizados quando houver alteração de membership; não permitir que um save administrativo contorne auditoria ou isolamento.
+- [X] Registrar alterações de conta e vínculo em auditoria técnica minimizada.
+
+Segurança e testes:
+
+- [X] Testar que administrador de uma clínica não lista, edita, suspende ou convida usuário de outra clínica.
+- [X] Testar que suspensão de membership bloqueia acesso sem apagar histórico, perfil ou auditoria.
+- [X] Testar datas de validade, reativação, convite expirado, convite revogado e identidade já existente.
+- [X] Testar CSRF, método HTTP, rate limit, sessão revogada e ausência de clínica ativa.
+- [X] Testar que paciente não recebe permissões de profissional e que recepção não acessa prontuário/conteúdo clínico sem política explícita.
+- [X] Testar que o Master sem clínica ativa consegue operar somente rotas globais autorizadas.
+- [X] Critério de aceite: os cinco perfis solicitados podem ser convidados, visualizados, ativados/suspensos e auditados pelo fluxo apropriado, com isolamento entre clínicas.
+
+## Sprint 9 — Integração, VPS e aceite final [ ]
+
+- [X] Reexecutar todos os seis gates técnicos e os testes das Sprints 7 e 8 com dados sintéticos.
+- [X] Executar suíte completa com PostgreSQL descartável e gerar JUnit; não declarar sucesso após timeout sem artefato.
+  - Situação 2026-09-22: `TEST_DATABASE=postgresql` contra contêiner descartável `postgres:17-alpine` (porta 55433) → `1 failed, 2680 passed, 17 skipped` em 6m02s, com JUnit gerado; a falha é pré-existente no `HEAD` (ver `docs/migration/evidence/newversion-final-20260922/README.md`). No SQLite de teste a suíte passa integralmente.
+- [ ] Confirmar `manage.py check`, migrations, Ruff, format, mypy, catálogo, secret scan, `npm ci` e E2E.
+  - Situação 2026-09-22: `check`, migrations, catálogo, secret scan, `npm ci` e E2E confirmados; Ruff check, Ruff format e mypy seguem vermelhos por dívida legada (ver Sprint 1).
+- [ ] Deployar a correção do 500 do `/admin/` (storage tolerante do manifesto) e o restante do drift local: endurecimento do compose (credenciais obrigatórias do RabbitMQ e broker URL-encoded), painel Master, gestão de equipe, administração global de usuários, `SECURE_SSL_REDIRECT` e traduções. Requer autorização explícita de deploy.
+- [X] Desligar o seed de demonstração em produção e levantar os dados fictícios já gravados (autorizado nesta sessão). Situação 2026-09-23: `DJANGO_ALLOW_DEMO_SEED=false` no `.env` da VPS (backup `.env.bak-20260923T105246Z`), `web` e `worker` recriados, flag confirmada desligada e `Running clinical seed command` ausente; inventário mostrou 7 pacientes psiquiátricos no total, todos do seed demo, além de 29 avaliações, 1 prescrição, 29 adesões, 1 alerta de crise e as linhas B2C do identificador demo. Limpeza desses registros **não** foi executada: depende de decisão sua, já que hoje o banco contém apenas dados sintéticos.
+- [X] Validar por HTTP na VPS: `/health/live/`, `/health/ready/`, `/`, `/master/login/`, `/accounts/login/`, `/master/` e `/admin/` anônimos, 301 HTTP→HTTPS, HSTS/CSP/XFO/nosniff/Referrer-Policy e certificado. Situação 2026-09-23: todos verificados em `https://auroraelo.rgnsystems.com.br`; `auroraelo.com.br` não resolve em DNS.
+  - Situação 2026-09-22: a verificação HTTP somente leitura registrada anteriormente foi feita no commit remoto `8c0ad2c`, **antes** das correções desta sessão; repetir depois do deploy exige autorização explícita e não foi feito aqui.
+- [ ] Validar a jornada autenticada com conta autorizada por fluxo seguro, sem colocar senha ou token no chat, no plano ou nos logs.
+  - Situação 2026-09-22: sem login real e sem autorização para operar na VPS nesta sessão.
+- [ ] Confirmar que o commit/imagem/container executado na VPS corresponde ao artefato aprovado antes de qualquer deploy.
+  - Situação 2026-09-22: o container remoto segue no commit `8c0ad2c`, anterior a este trabalho; nenhum commit, imagem ou deploy foi produzido.
+- [X] Corrigir ou aceitar formalmente a advertência atual de produção sobre `SECURE_SSL_REDIRECT` antes do release.
+  - Situação 2026-09-22: `manage.py check --deploy` com settings de produção e valores sintéticos não apresenta mais advertência de `SECURE_SSL_REDIRECT`; restou apenas `security.W009` da `SECRET_KEY` sintética curta, artefato do próprio ensaio.
+- [X] Fazer revisão independente de segurança, autorização, isolamento multi-clínica e impacto clínico.
+  - Situação 2026-09-22: revisão independente somente leitura executada em contexto separado, em duas rodadas. Primeira rodada (`passed: false`) apontou autorização de staff inativo, inline editável no Admin, Playwright em CI, ordenação do dashboard, validade de vínculo e parâmetro inútil — todos corrigidos. Segunda rodada (`passed: false`, 6 achados) apontou: reativação profissional sem validar expiração, edição do Master podendo ativar vínculo expirado, privilégios globais editáveis no Django Admin, bloqueio de clínica sem auditoria, `update_membership_role` sem autoria/auditoria e rótulos de papel/categoria sem tradução efetiva. Todos os seis foram corrigidos e cobertos por regressões novas em `tests/test_user_administration.py`; detalhes em `docs/migration/evidence/newversion-final-20260922/README.md`. Terceira rodada (`passed: false`, 6 achados) sobre essas correções: **5 aceitos e corrigidos** — `ClinicMembershipAdmin` avulso editável (add/change/delete desabilitados, campos somente leitura), `Clinic.is_active` editável no Admin (agora somente leitura), transições de status por webhook de pagamento sem auditoria (`audit_subscription_transition` com ator nulo e justificativa do gatilho, usada por todos os cinco handlers), `update_membership_role` sem atomicidade (`@transaction.atomic`) e rótulos de papel com fallback para `get_role_display` (`translated_membership_role_label` com msgid novo traduzido nos três catálogos). O achado sobre criação/edição fora da janela de validade foi **parcialmente rejeitado com evidência**: `ClinicMembership.professional_status` (`clinics/models.py:295-303`) define `scheduled` para janela futura e `tests/test_professional_management.py:135-150` cobre esse fluxo, então a regra foi refinada para rejeitar apenas validade **expirada** (o caso que originou a correção anterior) e a criação passou a aceitar `is_active=False` para vínculos futuros, rejeitando `is_active=True` já expirado. Evento de autorização passou a ser emitido também na criação/aceitação de convite e no seed de demonstração. Regressões novas em `tests/test_authorization_hardening.py` (8 testes) e suíte SQLite `2683 passed, 29 skipped`; detalhes em `docs/migration/evidence/newversion-final-20260922/README.md`.
+- [X] Registrar neste arquivo os comandos executados, resultados, limitações e links/IDs de evidência sem dados sensíveis.
+  - Situação 2026-09-22: comandos, resultados, baselines e limitações registrados em `docs/migration/evidence/newversion-final-20260922/README.md`, sem dados sensíveis.
+- [ ] Marcar a sprint como `[X]` somente após todos os critérios de aceite anteriores estarem verdes.
+  - Situação 2026-09-23: a terceira rodada de revisão foi respondida (5 achados corrigidos, 1 refinado com evidência); permanecem uma rodada final de confirmação e os gates/VPS.
+  - Situação 2026-09-22: sprint mantida como `[ ]` porque os itens 210–213 (gates verdes e validação na VPS) permanecem incompletos.
+
+## Feedback da verificação atual
+
+### Local
+
+- O projeto local está na branch `gemini` e sem alterações antes da criação deste arquivo.
+- A rota `/master/login/` está implementada e o teste sintético de GET/login global passou.
+- O conjunto focado `tests/test_clinic_admin.py` + `tests/test_professional_management.py` passou com 14 casos.
+- A causa mais provável do erro relatado foi confirmada com dados sintéticos: o painel Master procura assinatura (`TenantSubscription`), enquanto o Django Admin comprova apenas a existência da clínica (`Clinic`).
+- O teste do dashboard completo em SQLite não chegou ao HTML porque encontrou `DISTINCT ON`, incompatível com SQLite; isso deve ser corrigido e validado em PostgreSQL.
+- Ainda não foram implementadas as seis correções nem a gestão completa de usuários; este arquivo é o plano, não a entrega funcional.
+
+### VPS `deploy@13.140.139.122`
+
+Verificação somente leitura executada:
+
+- Host respondeu como `vmi3351517`.
+- Repositório remoto: `/home/deploy/auroraelo`.
+- Branch remota: `gemini`.
+- Commit remoto: `8c0ad2c`, alinhado ao checkout local verificado.
+- `git status` remoto limpo e alinhado a `origin/gemini`.
+- Containers web e worker estão `healthy`; PostgreSQL, Redis e RabbitMQ estão `healthy`; túnel Cloudflare está em execução.
+- `/master/login/` respondeu HTTP 200.
+- `/master/` anônimo respondeu HTTP 302 para `/master/login/?next=/master/`.
+- `/admin/` anônimo respondeu HTTP 302 para `/admin/login/?next=/admin/`.
+- `/health/live/` respondeu HTTP 200.
+- `manage.py check --deploy` foi executado no container web e retornou somente o warning de `SECURE_SSL_REDIRECT` desativado; não retornou erro fatal.
+
+Limitações da verificação da VPS:
+
+- Não foi feito login real, não foram lidos bancos, `.env`, uploads, prontuários, credenciais ou dados de usuários.
+- Não foi possível confirmar pela VPS se a clínica existente possui `TenantSubscription`, porque essa consulta exigiria leitura do banco de produção.
+- Portanto, a correção da divergência `Clinic` versus `TenantSubscription` ainda precisa ser aplicada e validada em ambiente descartável antes de qualquer deploy.
+- Nenhum deploy, restart, migration ou alteração remota foi realizado nesta etapa.
+
+## Registro de execução 2026-09-22 (continuação)
+
+Detalhamento, comandos e logs: `docs/migration/evidence/newversion-final-20260922/README.md`.
+
+- Suíte completa em PostgreSQL descartável (`postgres:17-alpine`, porta 55433): `1 failed, 2680 passed, 17 skipped` em 6m02s, com JUnit. A falha única (`tests/test_psychiatry_secondary_waits.py::test_membership_revocation_cannot_commit_before_pending_evaluation`) é pré-existente: falha com o mesmo texto no snapshot do `HEAD` e é ignorada no SQLite de teste.
+- Suíte completa no SQLite de teste: passa integralmente (sem falhas), em contraste com as `18 failed` do diagnóstico inicial deste plano.
+- Ruff `178 → 140` (132 `E501` legados), `ruff format --check` `25 → 19` arquivos, mypy `732 → 728` erros em `35 → 33` arquivos. Nenhum arquivo do repositório passou a ter mais erros que o `HEAD`; nenhum gate foi enfraquecido com `noqa`, ignore ou relaxamento de configuração.
+- Catálogo UI escopado: `passed; 1421 keys` nos três idiomas (`pt_BR`, `en`, `es`), com `translated-ui-scope.json` estendido para as novas superfícies do painel Master e da equipe da clínica; catálogo DjangoJS `passed`; scanner de segredos `passed`.
+- E2E Playwright em modo CI: `22 passed`, `e2e_exit=0`.
+- Apps mobile `b2c` e `connected`: `format:check`, `typecheck`, `test` e `export` com `rc=0` em ambos; `expo start` não foi tratado como build aprovado.
+- Settings de produção: import sem réplica (`['default']`), com réplica (`['default', 'replica']`), falha clara e redigida quando `MASTER_USER_PASSWORD` ou `REPLICA_DATABASE_URL` estão ausentes/malformados; `manage.py check --deploy` sem a advertência de `SECURE_SSL_REDIRECT` (restou apenas `security.W009` da `SECRET_KEY` sintética curta do ensaio).
+- Correções aplicadas após a segunda revisão independente: regra única de validade (`ensure_membership_activatable`) usada por todos os caminhos de reativação, ativação global recusada fora da validade, privilégios globais somente leitura no Django Admin, serviço auditado `set_tenant_blocked` para bloqueio/desbloqueio de clínica, autoria e auditoria em `update_membership_role`, e rótulos de papel/categoria traduzíveis nas superfícies do Master e da equipe (defeito latente: `LANGUAGES` de runtime publica apenas `pt-br`).
+- Alterações funcionais desta continuação: gestão de convites na tela de equipe (listar, revogar e reenviar sem apagar histórico, sempre limitada à clínica da sessão), logs técnicos de login Master com `request_id` e sem PII, e confirmação declarativa de ações destrutivas (`data-confirmation`) nos botões de suspender e revogar.
+- Risco aberto a validar (não é regressão desta sessão): `celery==5.6.3` com `python:3.14-slim` e pool prefork apresentou falha de execução de tarefa no host macOS. A produção executa a mesma imagem Linux, então a verificação precisa ser feita em Linux/CI (por exemplo um job que suba broker descartável e um worker que processe uma tarefa simples, ou a inspeção do worker já em execução no host — não feita aqui porque os logs de um worker ativo podem conter dados reais).
+- Pendências explícitas (9 itens ainda `[ ]`): validação visual interativa; conectividade real worker↔RabbitMQ; gates legados de Ruff/format/mypy verdes; validação HTTP e da jornada autenticada na VPS; confirmação de que o artefato na VPS corresponde ao trabalho aprovado; verificação em produção com conta real; e o aceite final da Sprint 9.

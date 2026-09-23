@@ -25,6 +25,9 @@ msgstr "Personal administrativo"
 msgid "Paciente"
 msgstr "Paciente"
 
+msgid "Papel não reconhecido"
+msgstr "Rol no reconocido"
+
 msgid "E-mail"
 msgstr "Correo electrónico"
 
@@ -5027,6 +5030,25 @@ msgid "Voltar ao painel clínico"
 msgstr "Volver al panel clínico"
 
 
+msgid "A data final não pode ser anterior à inicial."
+msgstr "La fecha final no puede ser anterior a la inicial."
+
+msgid "Outra categoria"
+msgstr "Otra categoría"
+
+msgid "Psicologia"
+msgstr "Psicología"
+
+msgid "Psiquiatria"
+msgstr "Psiquiatría"
+
+msgid "Terapia"
+msgstr "Terapia"
+
+msgid "Usuários e equipe"
+msgstr "Usuarios y equipo"
+
+
 msgid "Master Panel"
 msgstr "Master Panel"
 
@@ -5035,3 +5057,184 @@ msgstr "Acceso restringido a la administración de la plataforma."
 
 msgid "Acessar painel"
 msgstr "Acceder al panel"
+
+msgid "A validade do vínculo deve ser renovada antes da reativação."
+msgstr "La vigencia del vínculo debe renovarse antes de la reactivación."
+
+msgid "Busca"
+msgstr "Búsqueda"
+
+msgid "Categoria profissional"
+msgstr "Categoría profesional"
+
+msgid "Clínicas"
+msgstr "Clínicas"
+
+msgid "E-mail, nome ou clínica"
+msgstr "Correo, nombre o clínica"
+
+msgid "Destinatário"
+msgstr "Destinatario"
+
+msgid "Django Admin"
+msgstr "Django Admin"
+
+msgid "Editar vínculo"
+msgstr "Editar vínculo"
+
+msgid "A validade final é inválida."
+msgstr "El fin de vigencia no es válido."
+
+msgid "A validade final não pode ser anterior à inicial."
+msgstr "El fin de vigencia no puede ser anterior al inicio."
+
+msgid "O sistema envia um convite de uso único. Nenhuma senha é criada ou exibida pelo painel."
+msgstr "El sistema envía una invitación de un solo uso. El panel no crea ni muestra ninguna contraseña."
+
+msgid "Enviar convite ou vincular"
+msgstr "Enviar invitación o vincular"
+
+msgid "Expira"
+msgstr "Expira"
+
+msgid "Filtros da equipe"
+msgstr "Filtros del equipo"
+
+msgid "Fim da validade"
+msgstr "Fin de vigencia"
+
+msgid "Gerencie somente os vínculos da clínica ativa."
+msgstr "Gestione solo los vínculos de la clínica activa."
+
+msgid "Salvar vínculo"
+msgstr "Guardar vínculo"
+
+msgid "Identidades únicas, vínculos por clínica e convites pendentes."
+msgstr "Identidades únicas, vínculos por clínica e invitaciones pendientes."
+
+msgid "Início da validade"
+msgstr "Inicio de vigencia"
+
+msgid "Convites pendentes"
+msgstr "Invitaciones pendientes"
+
+msgid "Convite enviado sem criar senha administrativa."
+msgstr "Invitación enviada sin crear una contraseña administrativa."
+
+msgid "Convite indisponível para reenvio."
+msgstr "Invitación no disponible para reenvío."
+
+msgid "Convite indisponível para revogação."
+msgstr "Invitación no disponible para revocación."
+
+msgid "Convite para acessar uma clínica"
+msgstr "Invitación para acceder a una clínica"
+
+msgid "Convite reenviado."
+msgstr "Invitación reenviada."
+
+msgid "Convite revogado."
+msgstr "Invitación revocada."
+
+msgid "Convidar usuário"
+msgstr "Invitar usuario"
+
+msgid "A categoria profissional exige o papel Terapeuta."
+msgstr "La categoría profesional requiere el rol de terapeuta."
+
+msgid "A categoria exige o papel Terapeuta."
+msgstr "La categoría requiere el rol de terapeuta."
+
+msgid "Nenhum convite pendente."
+msgstr "Ninguna invitación pendiente."
+
+msgid "Não se aplica"
+msgstr "No aplica"
+
+msgid "Não foi possível enviar o convite. Tente novamente."
+msgstr "No fue posible enviar la invitación. Inténtelo de nuevo."
+
+msgid "Nenhum vínculo encontrado."
+msgstr "No se encontró ningún vínculo."
+
+msgid "Nova Clínica"
+msgstr "Nueva clínica"
+
+msgid "Dashboard"
+msgstr "Panel"
+
+msgid "Painel Master"
+msgstr "Panel Master"
+
+msgid "Pessoa"
+msgstr "Persona"
+
+msgid ""
+"Você recebeu um convite para acessar uma clínica.\n"
+"\n"
+"Acesse: %(accept_url)s\n"
+"\n"
+"O convite é individual e pode ser usado uma única vez."
+msgstr ""
+"Recibiste una invitación para acceder a una clínica.\n"
+"\n"
+"Accede: %(accept_url)s\n"
+"\n"
+"La invitación es individual y solo puede usarse una vez."
+
+msgid "Reenviar"
+msgstr "Reenviar"
+
+msgid "Revogar"
+msgstr "Revocar"
+
+msgid "Papel de clínica inválido."
+msgstr "Rol de clínica no válido."
+
+msgid "Sair"
+msgstr "Salir"
+
+msgid "Sistema"
+msgstr "Sistema"
+
+msgid "Tenants"
+msgstr "Tenants"
+
+msgid "Seu próprio vínculo não pode ser suspenso"
+msgstr "Tu propio vínculo no puede suspenderse"
+
+msgid "Validade"
+msgstr "Vigencia"
+
+msgid "Validade do convite em horas"
+msgstr "Vigencia de la invitación en horas"
+
+msgid "Visão Geral"
+msgstr "Visión general"
+
+msgid "Voltar aos usuários"
+msgstr "Volver a usuarios"
+
+msgid "Vínculo ativo"
+msgstr "Vínculo activo"
+
+msgid "Vínculo atualizado."
+msgstr "Vínculo actualizado."
+
+msgid "Vínculo da identidade atualizado."
+msgstr "Vínculo de la identidad actualizado."
+
+msgid "Vínculo reativado."
+msgstr "Vínculo reactivado."
+
+msgid "Vínculo suspenso."
+msgstr "Vínculo suspendido."
+
+msgid "Vínculos da equipe"
+msgstr "Vínculos del equipo"
+
+msgid "Suspender o vínculo deste usuário?"
+msgstr "¿Suspender el vínculo de este usuario?"
+
+msgid "Revogar este convite pendente?"
+msgstr "¿Revocar esta invitación pendiente?"

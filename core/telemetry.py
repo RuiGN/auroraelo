@@ -13,10 +13,13 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import TYPE_CHECKING
+from collections.abc import Mapping, Sequence
+from types import MappingProxyType
+from typing import TYPE_CHECKING, Any, cast
 
 if TYPE_CHECKING:
-    from opentelemetry.sdk.trace.export import SpanExporter
+    from opentelemetry.sdk.trace import ReadableSpan
+    from opentelemetry.sdk.trace.export import SpanExporter, SpanExportResult
 
 logger = logging.getLogger("application.telemetry")
 
@@ -95,7 +98,9 @@ def _try_instrument(module_path: str, class_name: str) -> None:
     except ImportError:
         pass
     except Exception:
-        logger.debug("Failed to instrument %s.%s", module_path, class_name, exc_info=True)
+        logger.debug(
+            "Failed to instrument %s.%s", module_path, class_name, exc_info=True
+        )
 
 
 # ── Span enrichment helpers ──────────────────────────────────────────────────
@@ -130,6 +135,27 @@ def enrich_span_with_actor(*, actor_ref: str) -> None:
 # ── PII Scrubber ─────────────────────────────────────────────────────────────
 
 
+class _SanitizedReadableSpan:
+    """ReadableSpan proxy that exposes a sanitized immutable attribute mapping."""
+
+    def __init__(
+        self,
+        delegate: ReadableSpan,
+        attributes: Mapping[str, Any],
+    ) -> None:
+        self._delegate = delegate
+        self._attributes = MappingProxyType(dict(attributes))
+
+    @property
+    def attributes(self) -> Mapping[str, Any]:
+        """Return sanitized attributes without mutating the source span."""
+        return self._attributes
+
+    def __getattr__(self, name: str) -> Any:
+        """Delegate every non-attribute span property to the source span."""
+        return getattr(self._delegate, name)
+
+
 class _PiiScrubberExporter:
     """Wrap a span exporter to strip sensitive attributes before export.
 
@@ -150,18 +176,33 @@ class _PiiScrubberExporter:
     def __init__(self, delegate: SpanExporter) -> None:
         self._delegate = delegate
 
-    def export(self, spans):  # type: ignore[no-untyped-def]
+    def export(self, spans: Sequence[ReadableSpan]) -> SpanExportResult:
+        """Export spans after removing prohibited attributes immutably."""
+        sanitized_spans: list[ReadableSpan] = []
         for span in spans:
-            if hasattr(span, "attributes") and span.attributes:
-                for key in self._REDACT_KEYS:
-                    if key in span.attributes:
-                        # ReadableSpan attributes are typically immutable;
-                        # reconstruct without sensitive keys if needed.
-                        pass
-        return self._delegate.export(spans)
+            attributes = getattr(span, "attributes", None)
+            if not attributes:
+                sanitized_spans.append(span)
+                continue
+
+            sanitized_attributes = {
+                key: value
+                for key, value in attributes.items()
+                if key not in self._REDACT_KEYS
+            }
+            if len(sanitized_attributes) == len(attributes):
+                sanitized_spans.append(span)
+            else:
+                sanitized_spans.append(
+                    cast(
+                        "ReadableSpan",
+                        _SanitizedReadableSpan(span, sanitized_attributes),
+                    )
+                )
+        return self._delegate.export(sanitized_spans)
 
     def shutdown(self) -> None:
         self._delegate.shutdown()
 
     def force_flush(self, timeout_millis: int = 30000) -> bool:
-        return self._delegate.force_flush(timeout_millis)
+        return bool(self._delegate.force_flush(timeout_millis))
