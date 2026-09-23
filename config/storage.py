@@ -11,10 +11,14 @@ references through their unhashed URL.
 
 from __future__ import annotations
 
+import threading
 import warnings
 from urllib.parse import urljoin
 
 from whitenoise.storage import CompressedManifestStaticFilesStorage
+
+_warned_names: set[str] = set()
+_warned_lock = threading.Lock()
 
 
 class TolerantCompressedManifestStaticFilesStorage(
@@ -29,10 +33,23 @@ class TolerantCompressedManifestStaticFilesStorage(
         try:
             return super().url(name, force=force)
         except ValueError:
-            warnings.warn(
-                f"Static reference '{name}' is not part of the collected "
-                "manifest; serving it unhashed.",
-                RuntimeWarning,
-                stacklevel=2,
-            )
+            _warn_once(name)
             return urljoin(self.base_url, name)
+
+
+def _warn_once(name: str) -> None:
+    """Warn only the first time a reference is found missing.
+
+    The admin shell resolves dozens of legacy vendored names on every request;
+    warning each time floods the production log without adding information.
+    """
+    with _warned_lock:
+        if name in _warned_names:
+            return
+        _warned_names.add(name)
+    warnings.warn(
+        f"Static reference '{name}' is not part of the collected manifest; "
+        "serving it unhashed.",
+        RuntimeWarning,
+        stacklevel=3,
+    )

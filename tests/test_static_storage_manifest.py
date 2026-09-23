@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import warnings
 
 import pytest
 from django.test import Client, override_settings
@@ -54,6 +55,25 @@ def test_strict_manifest_rejects_the_jazzmin_directory_reference(tmp_path) -> No
     assert tolerant.url(JAZZMIN_DIRECTORY_REFERENCE) == (
         f"/static/{JAZZMIN_DIRECTORY_REFERENCE}"
     )
+
+
+@pytest.mark.django_db
+def test_missing_reference_warns_only_once(tmp_path) -> None:
+    """Repeated lookups must not flood the production log with the same warning."""
+    static_root = _manifest_root(tmp_path)
+    tolerant = TolerantCompressedManifestStaticFilesStorage(
+        location=str(static_root), base_url="/static/"
+    )
+    unknown = "vendor/legacy-once/asset.css"
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        first = tolerant.url(unknown)
+        second = tolerant.url(unknown)
+
+    assert first == second == f"/static/{unknown}"
+    matching = [w for w in caught if unknown in str(w.message)]
+    assert len(matching) == 1
 
 
 def test_production_uses_the_tolerant_manifest_storage() -> None:
