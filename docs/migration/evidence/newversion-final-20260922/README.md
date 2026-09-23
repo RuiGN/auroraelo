@@ -253,13 +253,15 @@ autorização explícita pedida nesta sessão.
 
 **Causa raiz do 500 em `/admin/` (reproduzida e corrigida)**
 
-Reprodução autenticada em processo, sem senha: sessão real criada com
-`register_current_session` para um superusuário de produção (identidade não impressa) e
-`GET /admin/` pelo stack completo de middleware:
-
-```
-ValueError: Missing staticfiles manifest entry for 'vendor/bootswatch'
-```
+Registro corrigido em 2026-09-23 (ver seção 9): o harness em processo usado neste
+diagnóstico estava inválido — o client do Django envia `Host: testserver`, que não está em
+`ALLOWED_HOSTS` de produção, e a requisição morria em `DisallowedHost` antes de renderizar
+(`consents/context_processors.py` mascarava com `AttributeError`). A evidência direta do
+`ValueError: Missing staticfiles manifest entry for 'vendor/bootswatch'` é a regressão
+`tests/test_static_storage_manifest.py::test_strict_manifest_rejects_the_jazzmin_directory_reference`,
+que usa o storage estrito contra um manifesto coletado real; a causa raiz permanece a
+referência a diretório em `jazzmin/templates/admin/base.html`, mas a reprodução em produção
+não está documentada de forma conclusiva.
 
 `jazzmin/templates/admin/base.html:34` usa `{% static 'vendor/bootswatch' %}` — um
 **diretório**, não um arquivo do manifesto — e o backend estrito
@@ -316,3 +318,60 @@ a credencial default `guest` (o compose deployado ainda tem `${RABBITMQ_DEFAULT_
 `SECURE_SSL_REDIRECT=False` no app, PostgreSQL com `sslmode=disable`, ausência de backup
 agendado do Aurora Elo, disco em 80% com 31,8GB de build cache recuperável e deploy
 manual sem automação.
+
+## 9. Deploy da VPS executado (2026-09-23)
+
+Autorizado pelo usuário ("atualize o repositorio e a vps").
+
+**Publicação do repositório**
+
+- Branch `gemini` publicada em `origin` (`github.com/RuiGN/auroraelo`): `8c0ad2c` → `a4a47b0`
+  (correção do storage do Admin, evidências, restante do trabalho) → `e35eee2` (aviso único
+  por referência ausente).
+- `.gitignore` passou a ignorar `playwright-report/`, `test-results/` e `.coverage (1)`;
+  `scripts/check_secrets.py` rodou antes do commit (`Secret scan passed.`) e nenhum `.env`
+  foi versionado.
+
+**VPS**
+
+- `~/auroraelo`, branch `gemini`, fast-forward até `e35eee2`; imagem reconstruída
+  (`auroraelo:latest` = `0dc55b6c7267`, anterior `94558a7886c1`); `rabbitmq`, `web` e
+  `worker` recriados e saudáveis. Âncoras de rollback: tag `auroraelo:rollback-20260923T111813Z`,
+  `.env.bak-20260923T111813Z` e `git checkout 8c0ad2c`.
+- Migrações aplicadas pelo entrypoint: `core.0001`, `core.0002`, `accounts.0009_clinicinvitationscope`,
+  `people.0005_professionalprofile_psychiatrist`; `migrate --check` = 0.
+- Broker: usuário dedicado `auroraelo` (senha aleatória de 43 caracteres gerada na VPS,
+  nunca exibida) com permissões no vhost `/`; `.env` atualizado com `RABBITMQ_DEFAULT_USER`,
+  `RABBITMQ_DEFAULT_PASS` e as variantes URL-encoded exigidas pelo Compose endurecido. O
+  usuário default `guest` foi **removido** após confirmar o tráfego no usuário novo.
+- Verificação: `config.celery.debug_task` recebida e concluída **antes** e **depois** da
+  remoção de `guest`; fila `celery` vazia; `inspect ping` = `pong`, 1 node.
+- Admin: `/admin/` autenticado → **200** (sessão criada em processo para superusuário
+  existente, sem senha; linhas de sessão temporárias removidas depois); anônimo → 302 para
+  `/admin/login/`; **0 respostas 500 e 0 tracebacks** no log do `web` desde o deploy.
+- Público: `/health/live/`, `/health/ready/`, `/`, `/master/login/`, `/accounts/login/`
+  → 200; `/master/` e `/admin/` anônimos → 302; HTTP→HTTPS 301; HSTS, CSP, X-Frame-Options,
+  nosniff, Referrer-Policy, Permissions-Policy e `x-request-id` presentes.
+- Seed demo: `DJANGO_ALLOW_DEMO_SEED=false` e `Running clinical seed command` ausente.
+
+**Correção de registro do diagnóstico do 500**
+
+O harness em processo usado no diagnóstico anterior envia `Host: testserver`, rejeitado por
+`ALLOWED_HOSTS` em produção; a requisição falhava em `DisallowedHost` e o template de erro
+estourava depois em `consents/context_processors.py` (`request.user`), mascarando a causa.
+Com o host real no client o comportamento é coerente: anônimo 302 e autenticado 200 no
+commit novo. A prova direta do `ValueError` do manifesto é a regressão local citada na
+seção 8.
+
+**Pendência nova identificada no deploy**
+
+O shell do Admin renderiza, mas referencia ativos legados que não existem no pacote do
+Jazzmin nem em `static/`: `vendor/bootstrap/js/bootstrap.js`, `vendor/select2/*`,
+`vendor/fontawesome-free/*`, `vendor/adminlte/*`, `admin/js/jquery.js`,
+`admin/js/vendor/select2/select2.js`, `jazzmin/css/main.backup` e variantes não minificadas
+(`duralux/css/bootstrap.css`, `duralux/js/bootstrap.bundle.js`, `master_panel/js/chart.umd.js`,
+`design_system/tailwind.js`) — 69 nomes distintos. Antes da correção a página inteira falhava;
+agora os que existem são servidos e os ausentes retornam 404, com aviso emitido uma única vez
+por nome e por processo do gunicorn (3 workers). Resolver exige decidir a origem desses
+bundles (vendorizar no repositório ou permitir CDN com ajuste de CSP); fora do escopo desta
+atualização.
