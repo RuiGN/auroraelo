@@ -17,7 +17,6 @@ from accounts.services import (
     activate_patient_account,
     activate_patient_by_otp,
     invitation_clinic_id,
-    issue_patient_otp,
     password_reset_identity,
     request_password_recovery,
     reset_password,
@@ -273,8 +272,16 @@ def activate(request: HttpRequest, payload: ActivateIn):
 class ActivateOtpIn(Schema):
     """Dados para ativação via código de 6 dígitos (sem senha)."""
 
-    code: str = Field(max_length=128, description="Token do convite (vem no link do email)")
-    pin: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$", description="PIN de 6 dígitos")
+    code: str = Field(
+        max_length=128,
+        description="Token do convite (vem no link do email)",
+    )
+    pin: str = Field(
+        min_length=6,
+        max_length=6,
+        pattern=r"^\d{6}$",
+        description="PIN de 6 dígitos",
+    )
     first_name: str = Field(default="", max_length=150)
     last_name: str = Field(default="", max_length=150)
     device_label: str = Field(default="", max_length=500)
@@ -295,7 +302,8 @@ def activate_otp(request: HttpRequest, payload: ActivateOtpIn):
     """Ativa conta do paciente com nome + PIN de 6 dígitos e abre a sessão.
 
     Fluxo:
-      - A clínica chama ``POST /patients/{id}/send-otp/`` → paciente recebe PIN por email.
+      - A clínica chama ``POST /patients/{id}/send-otp/``
+        → paciente recebe PIN por email.
       - Paciente abre o app, informa nome e digita o PIN.
       - Endpoint valida, cria conta se necessária, e retorna os tokens Bearer.
     """
@@ -312,7 +320,10 @@ def activate_otp(request: HttpRequest, payload: ActivateOtpIn):
     except LoginRateLimitedError:
         return Status(
             429,
-            {"detail": "Muitas tentativas. Aguarde alguns minutos.", "code": "rate_limited"},
+            {
+                "detail": "Muitas tentativas. Aguarde alguns minutos.",
+                "code": "rate_limited",
+            },
         )
     except (LoginRejectedError, ValueError, PermissionDenied):
         return Status(
@@ -331,7 +342,10 @@ def activate_otp(request: HttpRequest, payload: ActivateOtpIn):
     except LoginRateLimitedError:
         return Status(
             429,
-            {"detail": "Muitas tentativas. Aguarde alguns minutos.", "code": "rate_limited"},
+            {
+                "detail": "Muitas tentativas. Aguarde alguns minutos.",
+                "code": "rate_limited",
+            },
         )
     return Status(200, _tokens(issued))
 

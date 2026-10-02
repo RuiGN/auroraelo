@@ -15,8 +15,12 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
-from accounts.services import issue_patient_otp, send_patient_activation_email
 from accounts.models import ClinicInvitation
+from accounts.services import (
+    issue_patient_otp,
+    revoke_invitation,
+    send_patient_activation_email,
+)
 from clinics.services import (
     authorized_active_clinic,
     reactivate_professional_membership,
@@ -272,10 +276,6 @@ def patient_send_otp(
 
     # Como não temos o raw_token original (só o digest), reemitimos o convite
     # para obter um novo raw_token disponível para gerar o OTP.
-    from accounts.services import revoke_invitation
-    from .services import invitation_expiration_after, issue_patient_invitation  # noqa: PLC0415
-
-    # Revoga o antigo e emite um novo (raw_token disponível no IssuedInvitation)
     revoke_invitation(
         clinic_id=clinic_id,
         invitation_id=invitation.pk,

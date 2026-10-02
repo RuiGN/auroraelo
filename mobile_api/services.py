@@ -301,21 +301,18 @@ def start_session(
 def start_session_for_user(
     *,
     request: HttpRequest,
-    user: "User",
-    clinic_id: "UUID | None",
+    user: Any,
+    clinic_id: UUID | None,
     device_label: str,
     platform: str,
     app_version: str,
-    request_id: "UUID",
+    request_id: UUID,
 ) -> IssuedTokens:
     """Abre uma sessão mobile para um ``User`` já autenticado (ex: via OTP).
 
     Idêntico a ``start_session`` mas não exige verificação de senha —
     o chamador é responsável por garantir que o usuário está autenticado.
     """
-    from clinics.selectors import active_clinics_with_role
-    from .selectors import patient_profile_for_user
-
     candidates = active_clinics_with_role(user, PATIENT_ROLE)
     if clinic_id is None:
         if len(candidates) != 1:

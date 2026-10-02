@@ -830,7 +830,8 @@ def _send_otp_email(
     with translation.override(language or "pt-br"):
         subject = _("Seu código de acesso — Aurora Elo Pós-alta")
         body = _(
-            "Sua clínica gerou um código de acesso para o aplicativo Aurora Elo Pós-alta.\n\n"
+            "Sua clínica gerou um código de acesso para o aplicativo "
+            "Aurora Elo Pós-alta.\n\n"
             "Código de 6 dígitos: %(pin)s\n\n"
             "Abra o aplicativo, informe seu nome e depois este código.\n"
             "O código expira em 15 minutos e só pode ser usado uma vez.\n\n"
