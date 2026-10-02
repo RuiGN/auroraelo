@@ -15,7 +15,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
-from accounts.services import send_patient_activation_email
+from accounts.services import issue_patient_otp, send_patient_activation_email
+from accounts.models import ClinicInvitation
 from clinics.services import (
     authorized_active_clinic,
     reactivate_professional_membership,
@@ -223,4 +224,90 @@ def patient_detail(request: HttpRequest, patient_profile_id: UUID) -> HttpRespon
             "patient": profile,
             "gender_label": GENDER_LABELS.get(profile.gender, _("Não informado")),
         },
+    )
+
+
+@login_required
+@require_POST
+def patient_send_otp(
+    request: HttpRequest, patient_profile_id: UUID
+) -> HttpResponse:
+    """Dispara um PIN de 6 dígitos por email ao paciente para o app Pós-Alta.
+
+    Requer que o paciente já tenha um convite pendente emitido via
+    ``patient_invite``. O código OTP expira em 15 minutos e só pode ser
+    usado uma vez. Pode ser reenviado quantas vezes necessário.
+    """
+    actor, clinic_id = _actor_and_clinic(request, action="invitation.issue")
+    profile = patient_profile_in_clinic(
+        clinic_id=clinic_id, patient_profile_id=patient_profile_id
+    )
+    if profile is None:
+        raise PermissionDenied
+
+    # Busca o convite pendente mais recente do paciente (por e-mail)
+    invitation = (
+        ClinicInvitation.infrastructure_objects.filter(
+            clinic_id=clinic_id,
+            recipient_email=profile.email,
+            initial_role="patient",
+            used_at__isnull=True,
+            revoked_at__isnull=True,
+        )
+        .order_by("-created_at")
+        .first()
+    )
+
+    if invitation is None:
+        messages.error(
+            request,
+            _(
+                "Nenhum convite pendente para este paciente. "
+                "Emita primeiro um convite pelo botão 'Convidar para o app'."
+            ),
+        )
+        return HttpResponseRedirect(
+            reverse("patient_detail", kwargs={"patient_profile_id": patient_profile_id})
+        )
+
+    # Como não temos o raw_token original (só o digest), reemitimos o convite
+    # para obter um novo raw_token disponível para gerar o OTP.
+    from accounts.services import revoke_invitation
+    from .services import invitation_expiration_after, issue_patient_invitation  # noqa: PLC0415
+
+    # Revoga o antigo e emite um novo (raw_token disponível no IssuedInvitation)
+    revoke_invitation(
+        clinic_id=clinic_id,
+        invitation_id=invitation.pk,
+        actor=actor,
+    )
+    issued = issue_patient_invitation(
+        clinic_id=clinic_id,
+        actor=actor,
+        patient_profile_id=patient_profile_id,
+        expires_at=invitation_expiration_after(days=7),
+        request_id=_request_uuid(),
+    )
+
+    try:
+        issue_patient_otp(
+            raw_token=issued.raw_token,
+            language=getattr(profile, "language_code", "pt-br") or "pt-br",
+            recipient_email=profile.email,
+        )
+        messages.success(
+            request,
+            _(
+                "Código de 6 dígitos enviado para %(email)s. "
+                "O código expira em 15 minutos."
+            ) % {"email": profile.email},
+        )
+    except ValueError:
+        messages.error(
+            request,
+            _("Não foi possível enviar o código. Tente novamente."),
+        )
+
+    return HttpResponseRedirect(
+        reverse("patient_detail", kwargs={"patient_profile_id": patient_profile_id})
     )

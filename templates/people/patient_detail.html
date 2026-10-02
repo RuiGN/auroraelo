@@ -4,6 +4,19 @@
 {% block title %}{% translate "Paciente" %}{% endblock %}
 
 {% block content %}
+
+{% if messages %}
+<div class="container-fluid px-0 mb-3">
+  {% for message in messages %}
+  <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+
 <div class="product-page" aria-labelledby="patient-detail-title">
 <section class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3" aria-labelledby="patient-detail-title">
   <div><p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Cadastro mínimo" %}</p><h1 id="patient-detail-title">{{ patient.full_name }}{% if patient.social_name %} <small>({{ patient.social_name }})</small>{% endif %}</h1><p class="lead mb-0">{% translate "Dados cadastrais autorizados da clínica ativa." %}</p></div>
@@ -54,5 +67,27 @@
   </dl>
 </section>
 {% endif %}
+
+<section class="d-grid gap-3" aria-labelledby="detail-app-title">
+  <h2 id="detail-app-title">{% translate "App Pós-Alta" %}</h2>
+  <p class="text-muted small">
+    {% translate "Envie um código de 6 dígitos para o paciente acessar o aplicativo Aurora Elo Pós-Alta. O código expira em 15 minutos." %}
+  </p>
+  <div class="d-flex gap-2 flex-wrap">
+    <form method="post" action="{% url 'patient_send_otp' patient.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-primary" id="btn-send-otp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" class="me-1" aria-hidden="true">
+          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="m22 7-10 7L2 7"/>
+        </svg>
+        {% translate "Enviar código por e-mail" %}
+      </button>
+    </form>
+    <a class="btn btn-outline-secondary" href="{% url 'patient_invite' patient.pk %}">
+      {% translate "Convidar para o app (link)" %}
+    </a>
+  </div>
+</section>
+
  </div>
 {% endblock %}

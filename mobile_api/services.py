@@ -298,6 +298,72 @@ def start_session(
     return IssuedTokens(session=session, access_token=access, refresh_token=refresh)
 
 
+def start_session_for_user(
+    *,
+    request: HttpRequest,
+    user: "User",
+    clinic_id: "UUID | None",
+    device_label: str,
+    platform: str,
+    app_version: str,
+    request_id: "UUID",
+) -> IssuedTokens:
+    """Abre uma sessão mobile para um ``User`` já autenticado (ex: via OTP).
+
+    Idêntico a ``start_session`` mas não exige verificação de senha —
+    o chamador é responsável por garantir que o usuário está autenticado.
+    """
+    from clinics.selectors import active_clinics_with_role
+    from .selectors import patient_profile_for_user
+
+    candidates = active_clinics_with_role(user, PATIENT_ROLE)
+    if clinic_id is None:
+        if len(candidates) != 1:
+            raise ClinicChoiceRequiredError([(c.pk, c.name) for c in candidates])
+        clinic = candidates[0]
+    else:
+        match = next((c for c in candidates if c.pk == clinic_id), None)
+        if match is None:
+            raise LoginRejectedError("clinic not available")
+        clinic = match
+
+    profile = patient_profile_for_user(clinic_id=clinic.pk, user_id=user.pk)
+    if profile is None:
+        raise LoginRejectedError("patient profile not available")
+
+    now = timezone.now()
+    with transaction.atomic():
+        session = MobileSession(
+            clinic=clinic,
+            user=user,
+            patient_profile=profile,
+            device_label=_clean_label(
+                device_label, limit=MAX_DEVICE_LABEL_LENGTH, default="Dispositivo"
+            ),
+            platform=_clean_platform(platform),
+            app_version=_clean_label(
+                app_version, limit=MAX_APP_VERSION_LENGTH, default=""
+            ),
+            network_hint=_network_hint(_origin(request)),
+            absolute_expires_at=now + session_absolute_ttl(),
+            last_used_at=now,
+        )
+        access, refresh = _issue(session, now=now)
+        session.save(force_insert=True)
+        _evict_oldest(session, now=now)
+        _audit(
+            session=session,
+            action="login",
+            request_id=request_id,
+            network_origin=_origin(request),
+        )
+    logger.info(
+        "mobile session started via otp",
+        extra={"event": "mobile.session.started", "outcome": "otp"},
+    )
+    return IssuedTokens(session=session, access_token=access, refresh_token=refresh)
+
+
 def _evict_oldest(current: MobileSession, *, now: datetime) -> None:
     """Mantém no máximo N aparelhos ativos por pessoa e clínica."""
     active = list(

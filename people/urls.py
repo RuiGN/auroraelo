@@ -7,6 +7,7 @@ from .views import (
     patient_detail,
     patient_invite,
     patient_list,
+    patient_send_otp,
     professional_list,
     professional_reactivate,
     professional_suspend,
@@ -19,6 +20,11 @@ urlpatterns = [
         "patients/<uuid:patient_profile_id>/invite/",
         patient_invite,
         name="patient_invite",
+    ),
+    path(
+        "patients/<uuid:patient_profile_id>/send-otp/",
+        patient_send_otp,
+        name="patient_send_otp",
     ),
     path(
         "patients/<uuid:patient_profile_id>/",

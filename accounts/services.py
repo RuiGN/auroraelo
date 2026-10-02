@@ -762,6 +762,173 @@ def send_patient_activation_email(
     return True
 
 
+# ─── OTP de 6 dígitos para ativação sem senha ─────────────────────────────
+# Gerado via CSPRNG; armazenado no Redis com TTL de 15 min; zero migrations.
+
+_OTP_TTL_SECONDS: int = 15 * 60  # 15 minutos
+_OTP_MAX_ATTEMPTS: int = 5
+
+
+def _otp_cache_key(*, token_digest: str) -> str:
+    """Derive a stable, namespaced Redis key from the invitation digest."""
+    return f"accounts:patient_otp:{token_digest}"
+
+
+def _otp_attempts_key(*, token_digest: str) -> str:
+    return f"accounts:patient_otp_attempts:{token_digest}"
+
+
+def issue_patient_otp(*, raw_token: str, language: str, recipient_email: str) -> str:
+    """Generate a 6-digit PIN, cache it in Redis, and email it to the patient.
+
+    Returns the plain PIN (used only in admin display; never persisted in DB).
+    Raises ``ValueError`` if the invitation is already used or expired.
+    """
+    token_digest = _token_digest(raw_token)
+
+    valid = (
+        ClinicInvitation.infrastructure_objects.filter(
+            token_digest=token_digest,
+            used_at__isnull=True,
+            revoked_at__isnull=True,
+            expires_at__gt=timezone.now(),
+            clinic__is_active=True,
+        )
+        .values_list("id", flat=True)
+        .exists()
+    )
+    if not valid:
+        raise ValueError(INVALID_INVITATION_MESSAGE)
+
+    pin = f"{secrets.randbelow(1_000_000):06d}"
+    pin_hash = hashlib.sha256(pin.encode()).hexdigest()
+
+    cache_key = _otp_cache_key(token_digest=token_digest)
+    cache.set(cache_key, pin_hash, timeout=_OTP_TTL_SECONDS)
+    cache.delete(_otp_attempts_key(token_digest=token_digest))
+
+    _send_otp_email(
+        recipient_email=recipient_email,
+        pin=pin,
+        language=language,
+    )
+
+    logger.info(
+        "patient otp issued",
+        extra={
+            "event": "accounts.patient_otp.issued",
+            "token_digest_prefix": token_digest[:8],
+        },
+    )
+    return pin
+
+
+def _send_otp_email(
+    *, recipient_email: str, pin: str, language: str
+) -> None:
+    """Send the 6-digit PIN email to the patient."""
+    with translation.override(language or "pt-br"):
+        subject = _("Seu código de acesso — Aurora Elo Pós-alta")
+        body = _(
+            "Sua clínica gerou um código de acesso para o aplicativo Aurora Elo Pós-alta.\n\n"
+            "Código de 6 dígitos: %(pin)s\n\n"
+            "Abra o aplicativo, informe seu nome e depois este código.\n"
+            "O código expira em 15 minutos e só pode ser usado uma vez.\n\n"
+            "Se você não esperava este código, entre em contato com sua clínica."
+        ) % {"pin": pin}
+        message = EmailMultiAlternatives(
+            subject=str(subject),
+            body=str(body),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[recipient_email],
+        )
+    try:
+        message.send()
+    except Exception:
+        logger.exception(
+            "patient otp delivery failed",
+            extra={"event": "accounts.patient_otp.delivery_error"},
+        )
+
+
+def activate_patient_by_otp(
+    *,
+    request: HttpRequest,
+    raw_token: str,
+    pin: str,
+    first_name: str,
+    last_name: str,
+) -> User:
+    """Consume a 6-digit OTP to activate a patient account without a password.
+
+    Steps:
+      1. Rate-limit attempts (5 tries per 15-min window).
+      2. Validate PIN against cached hash (constant-time compare).
+      3. Validate invitation role = ``patient``.
+      4. Create or link the user via ``accept_invitation``.
+      5. New accounts get an unusable password — app auth via Bearer only.
+      6. Consume the OTP from cache (one-time use).
+    """
+    token_digest = _token_digest(raw_token)
+
+    attempts_key = _otp_attempts_key(token_digest=token_digest)
+    attempts: int = cache.get(attempts_key, 0)
+    if attempts >= _OTP_MAX_ATTEMPTS:
+        raise LoginRateLimitedError("Muitas tentativas. Aguarde 15 minutos.")
+
+    cache_key = _otp_cache_key(token_digest=token_digest)
+    stored_hash: str | None = cache.get(cache_key)
+    if not stored_hash:
+        raise LoginRejectedError(GENERIC_LOGIN_ERROR)
+
+    candidate_hash = hashlib.sha256(pin.strip().encode()).hexdigest()
+    if not secrets.compare_digest(candidate_hash, stored_hash):
+        cache.set(attempts_key, attempts + 1, timeout=_OTP_TTL_SECONDS)
+        raise LoginRejectedError(GENERIC_LOGIN_ERROR)
+
+    if invitation_initial_role(raw_token=raw_token) != "patient":
+        raise ValueError(INVALID_INVITATION_MESSAGE)
+
+    recipient = (
+        ClinicInvitation.infrastructure_objects.filter(token_digest=token_digest)
+        .values_list("recipient_email", flat=True)
+        .first()
+    )
+    existing = (
+        User.objects.filter(email=recipient, is_active=True).first()
+        if recipient
+        else None
+    )
+
+    if existing is not None:
+        user = accept_invitation(
+            raw_token=raw_token,
+            password="",
+            first_name="",
+            last_name="",
+            actor=existing,
+        )
+    else:
+        dummy_password = secrets.token_urlsafe(32)
+        user = accept_invitation(
+            raw_token=raw_token,
+            password=dummy_password,
+            first_name=first_name.strip(),
+            last_name=last_name.strip(),
+        )
+        user.set_unusable_password()
+        user.save(update_fields=["password"])
+
+    cache.delete(cache_key)
+    cache.delete(attempts_key)
+
+    logger.info(
+        "patient otp consumed",
+        extra={"event": "accounts.patient_otp.consumed", "user_id": str(user.pk)},
+    )
+    return user
+
+
 @transaction.atomic
 def revoke_invitation(
     *, clinic_id: UUID, invitation_id: UUID, actor: User
@@ -1069,4 +1236,6 @@ __all__ = [
     "revoke_other_sessions",
     "validate_current_session",
     "verify_credentials",
+    "issue_patient_otp",
+    "activate_patient_by_otp",
 ]

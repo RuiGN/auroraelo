@@ -15,7 +15,9 @@ from accounts.services import (
     GENERIC_RECOVERY_RESPONSE,
     RecoveryRateLimitedError,
     activate_patient_account,
+    activate_patient_by_otp,
     invitation_clinic_id,
+    issue_patient_otp,
     password_reset_identity,
     request_password_recovery,
     reset_password,
@@ -33,6 +35,7 @@ from mobile_api.services import (
     revoke_session,
     revoke_session_by_id,
     start_session,
+    start_session_for_user,
 )
 
 from .mobile_common import (
@@ -263,6 +266,72 @@ def activate(request: HttpRequest, payload: ActivateIn):
     except LoginRejectedError, ClinicChoiceRequiredError:
         return Status(
             401, {"detail": GENERIC_LOGIN_ERROR, "code": "invalid_credentials"}
+        )
+    return Status(200, _tokens(issued))
+
+
+class ActivateOtpIn(Schema):
+    """Dados para ativação via código de 6 dígitos (sem senha)."""
+
+    code: str = Field(max_length=128, description="Token do convite (vem no link do email)")
+    pin: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$", description="PIN de 6 dígitos")
+    first_name: str = Field(default="", max_length=150)
+    last_name: str = Field(default="", max_length=150)
+    device_label: str = Field(default="", max_length=500)
+    platform: str = Field(default="other", max_length=16)
+    app_version: str = Field(default="", max_length=100)
+
+
+@router.post(
+    "/activate-otp/",
+    auth=None,
+    response={
+        200: TokensOut,
+        401: MobileErrorOut,
+        429: MobileErrorOut,
+    },
+)
+def activate_otp(request: HttpRequest, payload: ActivateOtpIn):
+    """Ativa conta do paciente com nome + PIN de 6 dígitos e abre a sessão.
+
+    Fluxo:
+      - A clínica chama ``POST /patients/{id}/send-otp/`` → paciente recebe PIN por email.
+      - Paciente abre o app, informa nome e digita o PIN.
+      - Endpoint valida, cria conta se necessária, e retorna os tokens Bearer.
+    """
+    code = payload.code.strip()
+    try:
+        clinic_id = invitation_clinic_id(raw_token=code)
+        user = activate_patient_by_otp(
+            request=request,
+            raw_token=code,
+            pin=payload.pin,
+            first_name=payload.first_name,
+            last_name=payload.last_name,
+        )
+    except LoginRateLimitedError:
+        return Status(
+            429,
+            {"detail": "Muitas tentativas. Aguarde alguns minutos.", "code": "rate_limited"},
+        )
+    except (LoginRejectedError, ValueError, PermissionDenied):
+        return Status(
+            401, {"detail": GENERIC_LOGIN_ERROR, "code": "invalid_credentials"}
+        )
+    try:
+        issued = start_session_for_user(
+            request=request,
+            user=user,
+            clinic_id=clinic_id,
+            device_label=payload.device_label,
+            platform=payload.platform,
+            app_version=payload.app_version,
+            request_id=request_id(request),
+        )
+    except LoginRateLimitedError:
+        return Status(
+            429,
+            {"detail": "Muitas tentativas. Aguarde alguns minutos.", "code": "rate_limited"},
         )
     return Status(200, _tokens(issued))
 
