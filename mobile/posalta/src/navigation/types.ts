@@ -10,7 +10,17 @@ export type TabParamList = {
 };
 
 export type RootStackParamList = {
+  // Entrada (modo live sem sessão ativa). Nenhuma leva parâmetros: senhas e códigos
+  // de convite nunca viram parâmetro de rota (na web virariam endereço e histórico).
+  SignIn: undefined;
+  Activate: undefined;
+  Recover: undefined;
+  Reset: undefined;
+  ConfigMissing: undefined;
+  Restoring: undefined;
+  // App com dados (preview ou sessão ativa)
   Tabs: NavigatorScreenParams<TabParamList> | undefined;
+  /** Disponível também sem sessão: os números de emergência não dependem de login. */
   UrgentHelp: undefined;
   Profile: undefined;
   Settings: undefined;

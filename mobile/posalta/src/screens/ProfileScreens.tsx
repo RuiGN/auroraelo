@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useOptionalSession } from "../api/session";
 import { Button } from "../components/Button";
 import { Card, Divider, ListRow } from "../components/Card";
 import {
@@ -7,15 +8,17 @@ import {
   Badge,
   currentModeKey,
   FeedbackAlert,
-  useActionFeedback,
+  FeedbackState,
+  useRunAction,
 } from "../components/Feedback";
 import { ChipGroup } from "../components/Form";
 import { Icon } from "../components/Icon";
 import {
   BrandMark,
+  NoDataState,
   Screen,
   Section,
-  UnavailableState,
+  StaleNotice,
   Wordmark,
 } from "../components/Layout";
 import { Text } from "../components/Text";
@@ -27,6 +30,7 @@ import {
   TeamRole,
 } from "../domain/types";
 import { catalogs, Locale, localeLabels, useI18n } from "../i18n";
+import { authFailureKey } from "../i18n/errorCodes";
 import { useNav } from "../navigation/useNav";
 import { ThemePreference, useTheme } from "../theme/ThemeProvider";
 
@@ -65,10 +69,12 @@ export function ProfileScreen() {
               {snapshot.patient.displayName}
             </Text>
             <Text variant="bodySm" tone="muted">
-              {snapshot.patient.clinicName} •{" "}
-              {t("profile.discharge", {
-                date: formatDate(snapshot.patient.dischargeDate),
-              })}
+              {snapshot.patient.clinicName}
+              {snapshot.patient.dischargeDate
+                ? ` • ${t("profile.discharge", {
+                    date: formatDate(snapshot.patient.dischargeDate),
+                  })}`
+                : ""}
             </Text>
           </>
         ) : null}
@@ -76,6 +82,7 @@ export function ProfileScreen() {
 
       {snapshot ? (
         <>
+          <StaleNotice />
           <Section title={t("profile.team")}>
             <Card>
               {snapshot.patient.careTeam.map((member, index) => (
@@ -98,7 +105,7 @@ export function ProfileScreen() {
           </Section>
         </>
       ) : (
-        <UnavailableState />
+        <NoDataState />
       )}
 
       <Card>
@@ -117,7 +124,137 @@ export function ProfileScreen() {
           onPress={() => nav.navigate("Privacy")}
         />
       </Card>
+
+      <SessionSection />
     </Screen>
+  );
+}
+
+/**
+ * Sair deste aparelho e sair dos outros aparelhos. Só existe no modo live com sessão
+ * ativa; as duas ações pedem confirmação. Sair limpa o aparelho mesmo sem rede.
+ */
+function SessionSection() {
+  const { t } = useI18n();
+  const store = useStore();
+  const session = useOptionalSession();
+  const [confirm, setConfirm] = useState<"logout" | "others" | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [feedback, setFeedback] = useState<FeedbackState | null>(null);
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+
+  if (store.mode !== "live" || !session || session.status !== "active") {
+    return null;
+  }
+
+  const logout = async () => {
+    setBusy(true);
+    await session.logout(); // a tela é trocada pela entrada quando a sessão acaba
+    if (mounted.current) {
+      setBusy(false);
+      setConfirm(null);
+    }
+  };
+
+  const logoutOthers = async () => {
+    setBusy(true);
+    const result = await session.logoutOthers();
+    if (!mounted.current) return;
+    setBusy(false);
+    setConfirm(null);
+    if (result.ok) {
+      setFeedback({
+        tone: "success",
+        text:
+          result.revoked > 0
+            ? t("profile.logoutOthers.done", { count: result.revoked })
+            : t("profile.logoutOthers.none"),
+      });
+    } else {
+      setFeedback({ tone: "warning", text: t(authFailureKey(result.reason)) });
+    }
+  };
+
+  return (
+    <Section title={t("profile.session")}>
+      <Card>
+        <ListRow
+          testID="profile-logout"
+          icon="arrow-right"
+          title={t("profile.logout")}
+          subtitle={t("profile.logout.subtitle")}
+          onPress={() => {
+            setFeedback(null);
+            setConfirm("logout");
+          }}
+        />
+        <Divider />
+        <ListRow
+          testID="profile-logout-others"
+          icon="phone"
+          title={t("profile.logoutOthers")}
+          subtitle={t("profile.logoutOthers.subtitle")}
+          onPress={() => {
+            setFeedback(null);
+            setConfirm("others");
+          }}
+        />
+      </Card>
+      <FeedbackAlert feedback={feedback} />
+      {confirm ? (
+        <Alert
+          tone="info"
+          title={t(
+            confirm === "logout"
+              ? "profile.logout.confirm"
+              : "profile.logoutOthers.confirm",
+          )}
+        >
+          <Text variant="bodySm">
+            {t(
+              confirm === "logout"
+                ? "profile.logout.body"
+                : "profile.logoutOthers.body",
+            )}
+          </Text>
+          <View style={styles.rowGap}>
+            <Button
+              label={t("common.cancel")}
+              variant="secondary"
+              size="sm"
+              disabled={busy}
+              style={styles.flex}
+              testID="profile-session-cancel"
+              onPress={() => setConfirm(null)}
+            />
+            <Button
+              label={
+                busy && confirm === "logout"
+                  ? t("profile.logout.working")
+                  : t("common.confirm")
+              }
+              size="sm"
+              loading={busy}
+              style={styles.flex}
+              testID={
+                confirm === "logout"
+                  ? "profile-logout-confirm"
+                  : "profile-logout-others-confirm"
+              }
+              onPress={() =>
+                void (confirm === "logout" ? logout() : logoutOthers())
+              }
+            />
+          </View>
+        </Alert>
+      ) : null}
+    </Section>
   );
 }
 
@@ -209,17 +346,14 @@ const REQUEST_TYPES: PrivacyRequestType[] = [
 export function PrivacyScreen() {
   const { t, formatDate } = useI18n();
   const store = useStore();
-  const { feedback, report, setFeedback } = useActionFeedback();
+  const { feedback, run, report, setFeedback } = useRunAction();
   const snapshot = store.snapshot;
 
   const toggleConsent = (purpose: ConsentPurposeKey, granted: boolean) =>
-    report(
-      store.run(mutations.setConsent({ purpose, granted })),
-      "common.done",
-    );
+    run(mutations.setConsent({ purpose, granted }), "common.done");
 
-  const requestRight = (type: PrivacyRequestType) => {
-    const outcome = store.run(mutations.createPrivacyRequest(type));
+  const requestRight = async (type: PrivacyRequestType) => {
+    const outcome = await store.run(mutations.createPrivacyRequest(type));
     if (!outcome.ok && outcome.reason === "invalid") {
       setFeedback({ tone: "warning", text: t("privacy.request.duplicate") });
       return;
@@ -234,7 +368,7 @@ export function PrivacyScreen() {
       </Text>
       <FeedbackAlert feedback={feedback} />
       {!snapshot ? (
-        <UnavailableState />
+        <NoDataState />
       ) : (
         <>
           <Section title={t("privacy.consents")}>

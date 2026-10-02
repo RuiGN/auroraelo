@@ -4,6 +4,7 @@
     "slug": "aurora-elo-posalta",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "auroraelo-posalta",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "platforms": ["ios", "android", "web"],
@@ -38,7 +39,7 @@
       "themeColor": "#0a2342",
       "backgroundColor": "#f3f7fb"
     },
-    "plugins": ["expo-asset", "expo-font"],
+    "plugins": ["expo-asset", "expo-font", "expo-secure-store"],
     "newArchEnabled": true
   }
 }

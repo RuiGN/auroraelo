@@ -39,6 +39,7 @@ export function buildPreviewSnapshot(now: Date): Snapshot {
       displayName: "Alex Exemplo",
       clinicName: "Clínica Aurora (demonstração)",
       dischargeDate,
+      timezone: "America/Sao_Paulo",
       careTeam: Object.values(team),
     },
     checkIns: [

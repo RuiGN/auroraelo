@@ -6,7 +6,7 @@ import {
   Alert,
   Badge,
   FeedbackAlert,
-  useActionFeedback,
+  useRunAction,
 } from "../components/Feedback";
 import { CheckRow } from "../components/Form";
 import { Icon, IconName } from "../components/Icon";
@@ -72,7 +72,7 @@ const SCOPES: SupportScope[] = [
 
 export function NetworkScreen() {
   const { t } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const [confirming, setConfirming] = useState<string | null>(null);
   return (
     <Screen testID="screen-network">
@@ -109,13 +109,11 @@ export function NetworkScreen() {
                           label={t(`network.scope.${scope}`)}
                           checked={person.scopes.includes(scope)}
                           onToggle={() =>
-                            report(
-                              store.run(
-                                mutations.toggleSupportScope({
-                                  id: person.id,
-                                  scope,
-                                }),
-                              ),
+                            run(
+                              mutations.toggleSupportScope({
+                                id: person.id,
+                                scope,
+                              }),
                               "common.done",
                             )
                           }
@@ -143,8 +141,8 @@ export function NetworkScreen() {
                               style={styles.action}
                               testID={`revoke-confirm-${person.id}`}
                               onPress={() => {
-                                report(
-                                  store.run(mutations.revokeSupport(person.id)),
+                                run(
+                                  mutations.revokeSupport(person.id),
                                   "common.done",
                                 );
                                 setConfirming(null);
@@ -248,7 +246,7 @@ export function ContentDetailScreen({
 }: RootScreenProps<"ContentDetail">) {
   const { t } = useI18n();
   const { colors } = useTheme();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   return (
     <Screen testID="screen-content-detail">
       <WithData>
@@ -302,13 +300,11 @@ export function ContentDetailScreen({
                   style={styles.action}
                   testID="content-favorite"
                   onPress={() =>
-                    report(
-                      store.run(
-                        mutations.toggleContent({
-                          id: item.id,
-                          flag: "favorite",
-                        }),
-                      ),
+                    run(
+                      mutations.toggleContent({
+                        id: item.id,
+                        flag: "favorite",
+                      }),
                       "common.done",
                     )
                   }
@@ -320,10 +316,8 @@ export function ContentDetailScreen({
                   style={styles.action}
                   testID="content-read"
                   onPress={() =>
-                    report(
-                      store.run(
-                        mutations.toggleContent({ id: item.id, flag: "read" }),
-                      ),
+                    run(
+                      mutations.toggleContent({ id: item.id, flag: "read" }),
                       "common.done",
                     )
                   }

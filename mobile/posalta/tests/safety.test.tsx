@@ -3,7 +3,8 @@ import { join, resolve } from "node:path";
 import { fireEvent, screen } from "@testing-library/react-native";
 import { Linking } from "react-native";
 import { buildPreviewSnapshot } from "../src/data/previewData";
-import { flush, NOW, renderApp } from "./helpers";
+import { createFakeServer, Handler, meBody, networkFailure } from "./fakeApi";
+import { flush, NOW, renderApp, settle } from "./helpers";
 
 const root = resolve(__dirname, "..");
 const appJson = JSON.parse(readFileSync(join(root, "app.json"), "utf8")).expo;
@@ -19,37 +20,62 @@ function sourceFiles(dir: string): string[] {
   });
 }
 
-describe("modo clínica (live) sem API autenticada", () => {
-  it("não mostra nenhum dado de paciente, nem de demonstração", async () => {
+/** Tudo o que só existe nos dados de demonstração: nunca pode aparecer no live. */
+function previewSecrets() {
+  const snapshot = buildPreviewSnapshot(NOW);
+  return [
+    snapshot.patient.displayName,
+    snapshot.medications[0].name,
+    snapshot.patient.careTeam[0].name,
+    "Sertralina",
+    "Recuperação",
+  ];
+}
+
+const liveServer = (overrides: Record<string, Handler> = {}) =>
+  createFakeServer((call) => {
+    const custom = overrides[call.path];
+    if (custom) return custom(call);
+    return call.path === "/mobile/me/"
+      ? { status: 200, body: meBody() }
+      : { status: 404, body: { detail: "x", code: "not_found" } };
+  });
+
+describe("modo clínica (live) sem sessão", () => {
+  it("sem servidor configurado não mostra nenhum dado, nem de demonstração", async () => {
     renderApp({ mode: "live" });
-    expect(await screen.findByTestId("unavailable-state")).toBeTruthy();
+    await settle();
+    expect(screen.getByTestId("screen-config-missing")).toBeTruthy();
     expect(screen.queryByTestId("demo-banner")).toBeNull();
     expect(screen.queryByTestId("header-demo")).toBeNull();
-    const snapshot = buildPreviewSnapshot(NOW);
     const text = JSON.stringify(screen.toJSON());
-    for (const secret of [
-      snapshot.patient.displayName,
-      snapshot.medications[0].name,
-      snapshot.patient.careTeam[0].name,
-      "Sertralina",
-      "Recuperação",
-    ]) {
-      expect(text).not.toContain(secret);
-    }
+    for (const secret of previewSecrets()) expect(text).not.toContain(secret);
     expect(text).not.toMatch(/recuperação\b.*dias/);
   });
 
-  it("explica que nada é exibido, salvo ou enviado", async () => {
+  it("com servidor mas sem entrar, só existe a pilha de entrada", async () => {
+    const server = liveServer();
+    renderApp({ mode: "live", transport: server.transport });
+    await settle();
+    expect(screen.getByTestId("screen-signin")).toBeTruthy();
+    expect(screen.queryByTestId("screen-home")).toBeNull();
+    expect(screen.queryByLabelText("Cuidado")).toBeNull(); // sem abas
+    expect(server.calls).toHaveLength(0); // nada é pedido antes de entrar
+    const text = JSON.stringify(screen.toJSON());
+    for (const secret of previewSecrets()) expect(text).not.toContain(secret);
+  });
+
+  it("explica, sem servidor, que nada é exibido, salvo ou enviado", async () => {
     renderApp({ mode: "live" });
-    expect(
-      await screen.findByText("Ainda não conectado à clínica"),
-    ).toBeTruthy();
-    expect(screen.getByText(/nada é exibido, salvo ou enviado/)).toBeTruthy();
+    await settle();
+    expect(screen.getByText("Aplicativo sem configuração")).toBeTruthy();
+    expect(screen.getByText(/Nada é exibido, salvo ou enviado/)).toBeTruthy();
   });
 
   it("a Ajuda continua funcionando sem conexão e sem pessoas fictícias", async () => {
     const openURL = jest.spyOn(Linking, "openURL").mockResolvedValue(true);
     renderApp({ mode: "live" });
+    await settle();
     fireEvent.press(await screen.findByTestId("header-help"));
     flush();
     expect(await screen.findByTestId("screen-urgent-help")).toBeTruthy();
@@ -64,28 +90,100 @@ describe("modo clínica (live) sem API autenticada", () => {
     expect(openURL).toHaveBeenCalledWith("tel:192");
     openURL.mockRestore();
   });
+});
 
-  it("o perfil e as telas de dados mostram o estado indisponível", async () => {
-    renderApp({ mode: "live" });
-    fireEvent.press(await screen.findByTestId("header-profile"));
-    flush();
-    expect(await screen.findByTestId("screen-profile")).toBeTruthy();
-    expect(screen.getByTestId("unavailable-state")).toBeTruthy();
-    fireEvent.press(screen.getByTestId("profile-privacy"));
-    flush();
-    expect(await screen.findByTestId("screen-privacy")).toBeTruthy();
-    expect(screen.queryByTestId("consent-terms_of_use")).toBeNull();
-    expect(screen.queryByTestId("privacy-open-access")).toBeNull();
+describe("modo clínica (live) com sessão", () => {
+  it("mostra carregando e depois só o que veio da API (nada de demonstração)", async () => {
+    const server = liveServer();
+    renderApp({ mode: "live", transport: server.transport, signedIn: true });
+    await settle();
+    expect(await screen.findByText("Bom dia, Alex")).toBeTruthy();
+    expect(screen.queryByTestId("demo-banner")).toBeNull();
+    expect(screen.queryByTestId("unavailable-state")).toBeNull();
+    expect(screen.queryByText("Ainda não conectado à clínica")).toBeNull();
+    const text = JSON.stringify(screen.toJSON());
+    for (const secret of previewSecrets()) expect(text).not.toContain(secret);
   });
 
-  it("idioma e aparência funcionam também sem conexão", async () => {
-    renderApp({ mode: "live" });
+  it("o carregamento tem estado próprio (não o aviso de 'não conectado')", async () => {
+    const server = liveServer({
+      "/mobile/me/": () => new Promise(() => undefined) as never, // nunca responde
+    });
+    renderApp({ mode: "live", transport: server.transport, signedIn: true });
+    await settle();
+    expect(screen.getByTestId("loading-state")).toBeTruthy();
+    expect(screen.queryByTestId("unavailable-state")).toBeNull();
+  });
+
+  it("falha ao carregar mostra o erro acolhedor e 'tentar de novo' recupera", async () => {
+    let offline = true;
+    const server = liveServer({
+      "/mobile/me/": () =>
+        offline ? networkFailure() : { status: 200, body: meBody() },
+    });
+    renderApp({ mode: "live", transport: server.transport, signedIn: true });
+    await settle();
+    expect(screen.getByTestId("load-error-state")).toBeTruthy();
+    expect(screen.getByText(/Sem conexão com o servidor agora/)).toBeTruthy();
+    expect(screen.queryByTestId("unavailable-state")).toBeNull();
+    offline = false;
+    fireEvent.press(screen.getByTestId("retry-load"));
+    await settle();
+    expect(await screen.findByText("Bom dia, Alex")).toBeTruthy();
+    expect(screen.queryByTestId("load-error-state")).toBeNull();
+  });
+
+  it("o perfil mostra o paciente e a equipe reais; idioma e aparência funcionam", async () => {
+    const server = liveServer();
+    renderApp({ mode: "live", transport: server.transport, signedIn: true });
+    await settle();
     fireEvent.press(await screen.findByTestId("header-profile"));
-    flush();
-    fireEvent.press(await screen.findByTestId("profile-settings"));
-    flush();
+    await settle();
+    expect(await screen.findByTestId("screen-profile")).toBeTruthy();
+    expect(screen.getByText("Alex Paciente")).toBeTruthy();
+    expect(screen.getByText("Dra. Helena")).toBeTruthy();
+    fireEvent.press(screen.getByTestId("profile-settings"));
+    await settle();
     expect(await screen.findByTestId("settings-language")).toBeTruthy();
     expect(screen.getByTestId("settings-theme")).toBeTruthy();
+  });
+
+  it("com só o paciente carregado, todas as abas abrem sem quebrar nem inventar dados", async () => {
+    const server = liveServer();
+    renderApp({ mode: "live", transport: server.transport, signedIn: true });
+    await settle();
+    await screen.findByText("Bom dia, Alex");
+    const tabs: [string, string][] = [
+      ["Cuidado", "screen-care"],
+      ["Diário", "screen-diary"],
+      ["Agenda", "screen-agenda"],
+      ["Apoio", "screen-support"],
+      ["Hoje", "screen-home"],
+    ];
+    for (const [label, id] of tabs) {
+      fireEvent.press(screen.getByLabelText(label));
+      await settle();
+      expect(await screen.findByTestId(id)).toBeTruthy();
+      expect(screen.queryByTestId("unavailable-state")).toBeNull();
+      expect(screen.queryByTestId("demo-banner")).toBeNull();
+    }
+    // Sem loader de domínio ainda, só o paciente veio da API (uma leitura).
+    expect(server.callsTo("/mobile/me/")).toHaveLength(1);
+    expect(server.calls).toHaveLength(1);
+  });
+
+  it("gravar algo sem ação registrada diz que não está disponível (nunca 'salvo')", async () => {
+    const server = liveServer();
+    renderApp({ mode: "live", transport: server.transport, signedIn: true });
+    await settle();
+    fireEvent.press(await screen.findByTestId("low-energy-on"));
+    await settle();
+    const feedback = await screen.findByTestId("action-feedback");
+    expect(feedback).toHaveTextContent(/ainda não está disponível/);
+    expect(feedback).toHaveTextContent(/Nada foi salvo ou enviado/);
+    expect(screen.queryByText(/Registrado na demonstração/)).toBeNull();
+    // Só a leitura foi ao servidor: nenhuma gravação.
+    expect(server.calls.every((call) => call.method === "GET")).toBe(true);
   });
 });
 
@@ -110,18 +208,40 @@ describe("honestidade da interface", () => {
     }
   });
 
-  it("o código não envia dados: sem fetch, XMLHttpRequest, WebSocket nem armazenamento clínico", () => {
-    const offenders: string[] = [];
+  it("o código só fala com a rede pelo cliente HTTP e só guarda sessão no cofre seguro", () => {
+    const outside: string[] = [];
+    const where = (file: string) => file.replace(`${root}/`, "");
     for (const file of sourceFiles(join(root, "src"))) {
       const content = readFileSync(file, "utf8");
+      const name = where(file);
+      // Nunca em lugar nenhum: outros transportes e armazenamentos de dados.
+      expect({
+        name,
+        found:
+          /XMLHttpRequest|WebSocket|SQLite|localStorage|sessionStorage/.test(
+            content,
+          ),
+      }).toEqual({ name, found: false });
+      // `fetch(` e o cabeçalho Authorization só no cliente HTTP.
       if (
-        /\bfetch\s*\(|XMLHttpRequest|WebSocket|SecureStore|SQLite|localStorage/.test(
+        /\bfetch\s*\(|globalThis\.fetch|\bBearer\b|\.Authorization\b|["']Authorization["']/.test(
           content,
         )
-      )
-        offenders.push(file);
+      ) {
+        if (name !== "src/api/client.ts") outside.push(`${name}: rede`);
+      }
+      // O cofre seguro só no módulo de armazenamento de tokens.
+      if (/SecureStore/.test(content) && name !== "src/api/tokenStore.ts") {
+        outside.push(`${name}: cofre`);
+      }
+      // Nenhum console.* no código do app (tokens, corpos e códigos nunca em log).
+      if (
+        /\bconsole\./.test(content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, ""))
+      ) {
+        outside.push(`${name}: console`);
+      }
     }
-    expect(offenders).toEqual([]);
+    expect(outside).toEqual([]);
   });
 
   it("só idioma e aparência são gravados no aparelho (AsyncStorage)", () => {
@@ -207,6 +327,13 @@ describe("configuração nativa", () => {
         "android.permission.POST_NOTIFICATIONS",
       ]),
     );
+  });
+
+  it("registra o esquema dos links do app e o cofre seguro", () => {
+    expect(appJson.scheme).toBe("auroraelo-posalta");
+    expect(appJson.plugins).toContain("expo-secure-store");
+    const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+    expect(pkg.dependencies["expo-secure-store"]).toBeDefined();
   });
 
   it("identifica o app e usa a marca Aurora Elo", () => {

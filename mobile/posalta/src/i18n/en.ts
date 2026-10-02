@@ -36,7 +36,7 @@ export const en: Messages = {
   "mode.unavailable.help":
     "The Help button and the language and appearance settings work normally.",
   "mode.action.unavailable":
-    "This could not be completed. The app is not connected to the clinic yet and nothing was saved or sent.",
+    "This action is not available in the app yet. Nothing was saved or sent.",
   "mode.action.invalid": "Check the fields and try again. Nothing was saved.",
   "mode.preview.saved":
     "Recorded in the demo. It was not saved or sent to anyone.",
@@ -436,7 +436,7 @@ export const en: Messages = {
   "settings.reminders.off":
     "Notification reminders are not active in this app yet. It does not ask for notification permission.",
   "settings.storage":
-    "Only the language and appearance are saved on this device. No health data is stored here.",
+    "This device keeps the language, the appearance and, if you signed in, your session in the device's secure vault. No health data is stored here.",
   "settings.storageError":
     "Could not save the preference on this device. It only applies to this session.",
   "settings.about": "About this app",
@@ -479,4 +479,145 @@ export const en: Messages = {
   "privacy.requests.none": "No requests made.",
   "privacy.mandatoryNote":
     "Required authorizations cannot be revoked here. To stop using the service, make a revocation request.",
+  // ── Writes and loading (live mode) ──────────────────────────────────────
+  "mode.action.offline":
+    "No connection to the clinic right now. Nothing was saved. Try again when the internet is back.",
+  "mode.action.rejected":
+    "This could not be saved. Check the information and try again. Nothing was changed.",
+  "mode.action.session":
+    "Your session has ended. Sign in again to continue. Nothing was saved.",
+  "mode.action.blocked":
+    "Access to your care is temporarily suspended by the clinic. Please contact the clinic. Urgent help is still available.",
+  "mode.action.server":
+    "The server could not finish this right now. Try again in a moment. Check whether the entry appears before repeating it.",
+  "data.loading": "Loading your data…",
+  "data.error.title": "Could not load",
+  "data.error.stale":
+    "Could not refresh right now. You are seeing what was already loaded.",
+  "data.retry": "Try again",
+
+  // ── Messages by server error code ───────────────────────────────────────
+  "error.code.network":
+    "No connection to the server right now. Check your internet and try again.",
+  "error.code.invalid_credentials":
+    "The email or password does not match. Check them and try again.",
+  "error.code.rate_limited":
+    "Too many attempts in a short time. Wait a few minutes and try again.",
+  "error.code.clinic_choice_required": "Choose the clinic to continue.",
+  "error.code.invalid_token":
+    "Your session has ended. Sign in again to continue.",
+  "error.code.not_found":
+    "We could not find this item. Refresh the screen and try again.",
+  "error.code.invalid_dose_time":
+    "This time does not match a scheduled dose of this medication.",
+  "error.code.timezone_required":
+    "Your record is missing a time zone. Please ask the clinic to fix it.",
+  "error.code.plan_closed":
+    "This plan is already closed and does not accept a new response.",
+  "error.code.invalid_date":
+    "This date cannot be used here. Choose a date within the allowed period.",
+  "error.code.not_scheduled": "This habit is not planned for this day.",
+  "error.code.already_completed":
+    "This was already completed and cannot be sent again.",
+  "error.code.invalid_response":
+    "The response is not in an accepted format. Check it and try again.",
+  "error.code.unsupported":
+    "This type of activity cannot be done in the app yet.",
+  "error.code.no_actions_configured":
+    "The team has not set the low energy mode actions yet.",
+  "error.code.invalid_intensity": "The intensity must be between 1 and 10.",
+  "error.code.invalid_scope": "This permission is not available.",
+  "error.code.reauthentication_failed":
+    "The password did not match. Nothing was changed.",
+  "error.code.consent_rejected":
+    "Your decision could not be recorded. Nothing was changed.",
+  "error.code.revocation_rejected":
+    "This authorization cannot be revoked here.",
+  "error.code.already_open": "A request of this type is already in progress.",
+  "error.code.rejected": "The clinic did not accept this request.",
+  "error.code.slot_unavailable":
+    "This time slot is no longer free. Choose another one.",
+  "error.code.weak_password":
+    "This password was not accepted. See what is missing and try again.",
+  "error.code.invalid_code":
+    "This code is not valid or has expired. Ask the clinic for a new invitation or, for a password reset, request a new code.",
+  "error.code.clinic_blocked":
+    "Access to your care is temporarily suspended by the clinic. Please contact the clinic.",
+  "error.code.unknown":
+    "This could not be completed. Please try again in a moment.",
+
+  // ── Server configuration ────────────────────────────────────────────────
+  "config.missing.title": "App not configured",
+  "config.missing.body":
+    "This version of the app does not know which server to talk to, so it cannot sign in or show your data. Nothing is shown, saved or sent. Let whoever gave you this app know.",
+  "config.missing.help":
+    "Urgent help works normally, even without a connection.",
+  "config.missing.dev":
+    "For developers: set EXPO_PUBLIC_API_BASE_URL to the server's https address and restart the app.",
+
+  // ── Sign-in: sign in, activate account and reset password ───────────────
+  "auth.restoring": "Opening your account…",
+  "auth.signin.title": "Sign in",
+  "auth.signin.intro":
+    "Sign in with your account email and password to see your care.",
+  "auth.email": "Email",
+  "auth.password": "Password",
+  "auth.password.show": "Show password",
+  "auth.password.hide": "Hide password",
+  "auth.signin.submit": "Sign in",
+  "auth.forgot": "I forgot my password",
+  "auth.haveCode": "I received an invitation code",
+  "auth.clinic.title": "Which clinic do you want to sign in to?",
+  "auth.clinic.hint":
+    "Your account is linked to more than one clinic. Choose one to continue.",
+  "auth.clinic.label": "Clinic",
+  "auth.help.note":
+    "Urgent help works without signing in and without internet.",
+  "auth.notice.expired": "Your session has ended. Sign in again to continue.",
+  "auth.notice.reset": "Password changed. Sign in with your new password.",
+  "auth.activate.title": "Activate account",
+  "auth.activate.intro":
+    "Use the invitation code the clinic sent you. If you opened the link in the email, the code is already filled in.",
+  "auth.activate.code": "Invitation code",
+  "auth.activate.firstName": "First name",
+  "auth.activate.lastName": "Last name",
+  "auth.activate.password": "Password",
+  "auth.activate.existing":
+    "If you already have an Aurora Elo account, enter your current password and leave the names blank. If the account is new, choose a password only you know.",
+  "auth.activate.submit": "Activate and sign in",
+  "auth.recover.title": "Reset password",
+  "auth.recover.intro":
+    "Enter your account email. If it is registered, we will send a code and a link to create a new password.",
+  "auth.recover.submit": "Send instructions",
+  "auth.recover.sent":
+    "Done. If this email is registered, you will receive the instructions shortly. Check your spam folder too.",
+  "auth.recover.haveCode": "I already have the code",
+  "auth.reset.title": "Create a new password",
+  "auth.reset.intro":
+    "Paste the code that arrived by email and choose a new password. If you opened the link in the email, the code is already filled in.",
+  "auth.reset.code": "Code received by email",
+  "auth.reset.newPassword": "New password",
+  "auth.reset.submit": "Save new password",
+  "auth.reset.note":
+    "When you change your password, you are signed out of all other devices.",
+  "auth.backToSignin": "Back to sign in",
+  "auth.codeFilled":
+    "We filled in the code from the link. You can edit it if needed.",
+
+  // ── Profile: sign out of this device ────────────────────────────────────
+  "profile.session": "Account on this device",
+  "profile.logout": "Sign out",
+  "profile.logout.subtitle": "Ends the session on this device",
+  "profile.logout.confirm": "Sign out of this device?",
+  "profile.logout.body":
+    "You will need to sign in again to see your care. Urgent help stays available without signing in.",
+  "profile.logout.working": "Signing out…",
+  "profile.logoutOthers": "Sign out of other devices",
+  "profile.logoutOthers.subtitle": "Ends the session on all other devices",
+  "profile.logoutOthers.confirm": "Sign out of other devices?",
+  "profile.logoutOthers.body":
+    "Anyone using your account on another device will need to sign in again. This device stays signed in.",
+  "profile.logoutOthers.done_one": "{count} other device was signed out.",
+  "profile.logoutOthers.done_other": "{count} other devices were signed out.",
+  "profile.logoutOthers.none": "There were no other devices signed in.",
 };

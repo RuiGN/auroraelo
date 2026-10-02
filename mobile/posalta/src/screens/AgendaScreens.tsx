@@ -6,7 +6,7 @@ import {
   Alert,
   Badge,
   FeedbackAlert,
-  useActionFeedback,
+  useRunAction,
 } from "../components/Feedback";
 import { ChipGroup, Field } from "../components/Form";
 import { EmptyState, Screen, Section, WithData } from "../components/Layout";
@@ -103,7 +103,7 @@ export function AppointmentDetailScreen({
   route,
 }: RootScreenProps<"AppointmentDetail">) {
   const { t, formatDateTime, formatTime } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [reason, setReason] = useState("");
   return (
@@ -153,8 +153,8 @@ export function AppointmentDetailScreen({
                     icon="refresh"
                     testID="appointment-reschedule"
                     onPress={() =>
-                      report(
-                        store.run(mutations.requestReschedule({ id: item.id })),
+                      run(
+                        mutations.requestReschedule({ id: item.id }),
                         "common.done",
                       )
                     }
@@ -191,13 +191,11 @@ export function AppointmentDetailScreen({
                           style={styles.action}
                           testID="appointment-cancel-confirm"
                           onPress={() => {
-                            report(
-                              store.run(
-                                mutations.cancelAppointment({
-                                  id: item.id,
-                                  reason,
-                                }),
-                              ),
+                            run(
+                              mutations.cancelAppointment({
+                                id: item.id,
+                                reason,
+                              }),
                               "common.done",
                             );
                             setConfirmCancel(false);
@@ -218,7 +216,7 @@ export function AppointmentDetailScreen({
 
 export function RequestAppointmentScreen() {
   const { t, formatDateTime } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run, pending } = useRunAction();
   const [serviceId, setServiceId] = useState<string | null>(null);
   const [slot, setSlot] = useState<string | null>(null);
   return (
@@ -275,16 +273,16 @@ export function RequestAppointmentScreen() {
               <Button
                 label={t("agenda.request.submit")}
                 disabled={!serviceId || !slot}
+                loading={pending}
                 testID="request-submit"
                 onPress={() => {
                   if (!serviceId || !slot) return;
-                  const ok = report(
-                    store.run(
-                      mutations.requestAppointment({ serviceId, slot }),
-                    ),
+                  void run(
+                    mutations.requestAppointment({ serviceId, slot }),
                     "agenda.request.sent",
-                  );
-                  if (ok) setSlot(null);
+                  ).then((ok) => {
+                    if (ok) setSlot(null);
+                  });
                 }}
               />
             </>

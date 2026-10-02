@@ -468,3 +468,51 @@ describe("imutabilidade", () => {
     expect(JSON.stringify(base)).toBe(frozen);
   });
 });
+
+describe("metadados das mutações (ponte para o modo live)", () => {
+  const factories = mutations as unknown as Record<
+    string,
+    (input?: unknown) => ((
+      snapshot: Snapshot,
+      now: Date,
+    ) => Snapshot | null) & {
+      meta?: { key: string; input: unknown };
+    }
+  >;
+
+  it("toda mutação carrega { key, input }: o nome e o primeiro argumento da fábrica", () => {
+    const names = Object.keys(factories);
+    expect(names.length).toBeGreaterThan(20);
+    for (const name of names) {
+      const input = { marcador: name };
+      const mutation = factories[name](input);
+      expect(typeof mutation).toBe("function");
+      expect(mutation.meta).toEqual({ key: name, input });
+      // O nome também é a chave do registro de ações remotas.
+      expect(mutation.meta?.input).toBe(input);
+    }
+  });
+
+  it("fábricas sem argumento têm entrada undefined", () => {
+    expect(mutations.restartCounter().meta).toEqual({
+      key: "restartCounter",
+      input: undefined,
+    });
+  });
+
+  it("os metadados não podem ser trocados e a mutação continua pura", () => {
+    const mutation = mutations.setLowEnergy(true);
+    expect(Object.isFrozen(mutation.meta)).toBe(true);
+    try {
+      (mutation.meta as { key: string }).key = "outra";
+    } catch {
+      // Em modo estrito a troca lança; fora dele é ignorada em silêncio.
+    }
+    expect(mutation.meta.key).toBe("setLowEnergy");
+    const first = mutation(base, NOW);
+    const second = mutation(base, NOW);
+    expect(first).toEqual(second);
+    expect(first?.lowEnergy.active).toBe(true);
+    expect(base.lowEnergy.active).toBe(false);
+  });
+});

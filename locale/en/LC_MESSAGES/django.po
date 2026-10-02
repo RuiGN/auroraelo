@@ -5302,3 +5302,846 @@ msgstr "Infrastructure area"
 
 msgid "Área restrita. Acesso permitido apenas a administradores autorizados."
 msgstr "Restricted area. Access is limited to authorized administrators."
+
+msgid "Ligação"
+msgstr "Call"
+
+msgid "Visita presencial"
+msgstr "In-person visit"
+
+msgid "Régua padrão pós-alta"
+msgstr "Default post-discharge schedule"
+
+msgid "Equipe administrativa (concierge)"
+msgstr "Administrative staff (concierge)"
+
+msgid "Em acompanhamento"
+msgstr "Under follow-up"
+
+msgid "Acompanhamento concluído"
+msgstr "Follow-up completed"
+
+msgid "Realizado"
+msgstr "Done"
+
+msgid "Não realizado"
+msgstr "Not done"
+
+msgid "Conseguiu falar"
+msgstr "Reached"
+
+msgid "Não atendeu"
+msgstr "No answer"
+
+msgid "Recusou o contato"
+msgstr "Declined contact"
+
+msgid "Visita realizada"
+msgstr "Visit done"
+
+msgid "Visita não foi possível"
+msgstr "Visit was not possible"
+
+msgid "Visita"
+msgstr "Visit"
+
+msgid "Da clínica para a família"
+msgstr "From the clinic to the family"
+
+msgid "Da família para a clínica"
+msgstr "From the family to the clinic"
+
+msgid "Que me liguem"
+msgstr "Ask them to call me"
+
+msgid "Que me visitem"
+msgstr "Ask them to visit me"
+
+msgid "Que tragam algo"
+msgstr "Ask them to bring something"
+
+msgid "Que recebam um recado"
+msgstr "Ask them to get a message"
+
+msgid "Aberto"
+msgstr "Open"
+
+msgid "Encaminhado à família"
+msgstr "Passed on to the family"
+
+msgid "Atendido"
+msgstr "Fulfilled"
+
+msgid "Não atendido"
+msgstr "Not fulfilled"
+
+msgid "Data da alta"
+msgstr "Discharge date"
+
+msgid "Não registre conteúdo clínico. Máximo de 500 caracteres."
+msgstr "Do not record clinical content. Maximum 500 characters."
+
+msgid "Selecione um paciente"
+msgstr "Select a patient"
+
+msgid "Familiar contatado (opcional)"
+msgstr "Family member contacted (optional)"
+
+msgid "Escolha apenas se o contato foi com um familiar autorizado."
+msgstr "Choose only if the contact was with an authorized family member."
+
+msgid "Observações"
+msgstr "Notes"
+
+msgid "Não registre conteúdo clínico. Máximo de 1000 caracteres."
+msgstr "Do not record clinical content. Maximum 1000 characters."
+
+msgid "Nenhum (contato com o paciente)"
+msgstr "None (contact with the patient)"
+
+msgid "Nova data"
+msgstr "New date"
+
+msgid "Motivo de não ter sido realizado"
+msgstr "Reason it was not done"
+
+msgid "Parentesco"
+msgstr "Relationship"
+
+msgid "Contato principal"
+msgstr "Primary contact"
+
+msgid "O paciente autorizou o contato com este familiar"
+msgstr "The patient authorized contact with this family member"
+
+msgid "Como a autorização foi obtida"
+msgstr "How the authorization was obtained"
+
+msgid "Ex.: termo assinado em 01/10. Obrigatório se autorizado."
+msgstr "E.g. form signed on 10/01. Required if authorized."
+
+msgid "Decisão do paciente"
+msgstr "Patient's decision"
+
+msgid "Autoriza o contato com este familiar"
+msgstr "Authorizes contact with this family member"
+
+msgid "Revoga a autorização de contato"
+msgstr "Revokes the contact authorization"
+
+msgid "Como a decisão foi obtida"
+msgstr "How the decision was obtained"
+
+msgid "Ex.: termo assinado, pedido verbal registrado em consulta."
+msgstr "E.g. signed form, verbal request recorded at a visit."
+
+msgid "Familiar"
+msgstr "Family member"
+
+msgid "Sentido"
+msgstr "Direction"
+
+msgid "Data e hora do contato"
+msgstr "Date and time of contact"
+
+msgid "Deixe em branco para usar agora."
+msgstr "Leave blank to use the current time."
+
+msgid "O que foi tratado"
+msgstr "What was discussed"
+
+msgid "Não registre conteúdo clínico nem informações de saúde."
+msgstr "Do not record clinical content or health information."
+
+msgid "Texto corrigido"
+msgstr "Corrected text"
+
+msgid "Motivo da correção"
+msgstr "Reason for the correction"
+
+msgid "O que o paciente pediu"
+msgstr "What the patient asked for"
+
+msgid "Detalhes do pedido"
+msgstr "Request details"
+
+msgid "Canal usado"
+msgstr "Channel used"
+
+msgid "O que foi dito à família"
+msgstr "What was said to the family"
+
+msgid "Desfecho"
+msgstr "Outcome"
+
+msgid "Observação"
+msgstr "Note"
+
+msgid "Nome da régua"
+msgstr "Schedule name"
+
+#, python-format
+msgid "Tipo da etapa %(number)d"
+msgstr "Step %(number)d type"
+
+msgid "— sem etapa —"
+msgstr "— no step —"
+
+#, python-format
+msgid "Dias após a alta (etapa %(number)d)"
+msgstr "Days after discharge (step %(number)d)"
+
+#, python-format
+msgid "Responsável (etapa %(number)d)"
+msgstr "Responsible (step %(number)d)"
+
+#, python-format
+msgid "Preencha o tipo e os dias da etapa %(number)d."
+msgstr "Fill in the type and days for step %(number)d."
+
+msgid "A régua precisa ter ao menos uma etapa."
+msgstr "The schedule needs at least one step."
+
+msgid "Este contato da família está inativo."
+msgstr "This family contact is inactive."
+
+msgid "O paciente ainda não autorizou o contato com este familiar. Registre a autorização antes de continuar."
+msgstr "The patient has not yet authorized contact with this family member. Record the authorization before continuing."
+
+msgid "Tipo de contato inválido na régua."
+msgstr "Invalid contact type in the schedule."
+
+msgid "Informe os dias após a alta como número."
+msgstr "Enter the days after discharge as a number."
+
+msgid "Os dias após a alta devem estar entre 1 e 365."
+msgstr "Days after discharge must be between 1 and 365."
+
+msgid "Responsável inválido na régua."
+msgstr "Invalid responsible role in the schedule."
+
+msgid "A régua não pode repetir o mesmo tipo de contato no mesmo dia."
+msgstr "The schedule cannot repeat the same contact type on the same day."
+
+msgid "A régua pode ter no máximo 8 etapas."
+msgstr "The schedule can have at most 8 steps."
+
+msgid "Informe o nome da régua (3 a 120 caracteres)."
+msgstr "Enter the schedule name (3 to 120 characters)."
+
+msgid "A data da alta não pode ser futura."
+msgstr "The discharge date cannot be in the future."
+
+msgid "A data da alta não pode ser anterior a 365 dias."
+msgstr "The discharge date cannot be more than 365 days ago."
+
+msgid "As observações da alta aceitam até 500 caracteres."
+msgstr "Discharge notes accept up to 500 characters."
+
+msgid "Este paciente já tem uma alta em acompanhamento."
+msgstr "This patient already has a discharge under follow-up."
+
+msgid "Somente uma alta em acompanhamento pode ser cancelada."
+msgstr "Only a discharge under follow-up can be canceled."
+
+msgid "Informe o motivo do cancelamento (3 a 255 caracteres)."
+msgstr "Enter the reason for canceling (3 to 255 characters)."
+
+msgid "Este contato já foi concluído ou cancelado."
+msgstr "This contact has already been completed or canceled."
+
+msgid "A alta deste contato não está mais em acompanhamento."
+msgstr "The discharge for this contact is no longer under follow-up."
+
+msgid "Resultado inválido para este tipo de contato."
+msgstr "Invalid result for this type of contact."
+
+msgid "As observações aceitam até 1000 caracteres."
+msgstr "Notes accept up to 1000 characters."
+
+msgid "Informe o motivo do reagendamento (3 a 255 caracteres)."
+msgstr "Enter the reason for rescheduling (3 to 255 characters)."
+
+msgid "A nova data não pode estar no passado."
+msgstr "The new date cannot be in the past."
+
+msgid "A nova data excede 365 dias após a alta."
+msgstr "The new date is more than 365 days after discharge."
+
+msgid "Este contato já foi reagendado o máximo de vezes."
+msgstr "This contact has already been rescheduled the maximum number of times."
+
+msgid "Só é possível encerrar como não realizado após a data prevista."
+msgstr "It can only be closed as not done after the planned date."
+
+msgid "Informe o motivo (3 a 1000 caracteres)."
+msgstr "Enter the reason (3 to 1000 characters)."
+
+msgid "Informe o nome do familiar (2 a 255 caracteres)."
+msgstr "Enter the family member's name (2 to 255 characters)."
+
+msgid "Informe o parentesco (2 a 100 caracteres)."
+msgstr "Enter the relationship (2 to 100 characters)."
+
+msgid "Informe ao menos um telefone ou e-mail."
+msgstr "Enter at least a phone number or an email."
+
+msgid "Telefone inválido: informe ao menos 8 dígitos."
+msgstr "Invalid phone number: enter at least 8 digits."
+
+msgid "E-mail inválido."
+msgstr "Invalid email."
+
+msgid "Limite de 10 contatos da família ativos por paciente."
+msgstr "Limit of 10 active family contacts per patient."
+
+msgid "Registre como a autorização do paciente foi obtida (ex.: termo assinado)."
+msgstr "Record how the patient's authorization was obtained (e.g. signed form)."
+
+msgid "Registre como a decisão do paciente foi obtida (3 a 255 caracteres)."
+msgstr "Record how the patient's decision was obtained (3 to 255 characters)."
+
+msgid "Autorização do paciente revogada."
+msgstr "Patient authorization revoked."
+
+msgid "Contato da família inativado."
+msgstr "Family contact deactivated."
+
+msgid "A data e hora do contato não podem estar no futuro."
+msgstr "The date and time of the contact cannot be in the future."
+
+msgid "O contato não pode ser anterior a 90 dias."
+msgstr "The contact cannot be more than 90 days ago."
+
+msgid "Canal de contato inválido."
+msgstr "Invalid contact channel."
+
+msgid "Sentido do contato inválido."
+msgstr "Invalid contact direction."
+
+msgid "Descreva o contato (3 a 2000 caracteres). Não registre conteúdo clínico."
+msgstr "Describe the contact (3 to 2000 characters). Do not record clinical content."
+
+msgid "Este registro já foi corrigido. Corrija a versão mais recente."
+msgstr "This entry has already been corrected. Correct the most recent version."
+
+msgid "Informe o motivo da correção (3 a 255 caracteres)."
+msgstr "Enter the reason for the correction (3 to 255 characters)."
+
+msgid "Tipo de pedido inválido."
+msgstr "Invalid request type."
+
+msgid "Descreva o pedido (3 a 1000 caracteres)."
+msgstr "Describe the request (3 to 1000 characters)."
+
+msgid "Este pedido já foi encerrado."
+msgstr "This request has already been closed."
+
+msgid "O encaminhamento deste pedido já foi registrado."
+msgstr "Forwarding of this request has already been recorded."
+
+msgid "Registre primeiro o encaminhamento à família antes de concluir o pedido."
+msgstr "Record the forwarding to the family first before completing the request."
+
+msgid "Informe o desfecho (3 a 500 caracteres)."
+msgstr "Enter the outcome (3 to 500 characters)."
+
+msgid "Informe o motivo (3 a 500 caracteres)."
+msgstr "Enter the reason (3 to 500 characters)."
+
+msgid "Acompanhamento pós-alta"
+msgstr "Post-discharge follow-up"
+
+msgid "Fila de contatos"
+msgstr "Contact queue"
+
+msgid "Altas"
+msgstr "Discharges"
+
+msgid "Alta registrada. A agenda de contatos foi criada."
+msgstr "Discharge recorded. The contact schedule was created."
+
+msgid "Registrar alta"
+msgstr "Record discharge"
+
+msgid "A agenda de ligações e visita é gerada automaticamente pela régua vigente da clínica."
+msgstr "The call and visit schedule is generated automatically from the clinic's current schedule."
+
+#, python-format
+msgid "Alta de %(name)s"
+msgstr "Discharge of %(name)s"
+
+msgid "Alta cancelada."
+msgstr "Discharge canceled."
+
+msgid "Cancelar alta"
+msgstr "Cancel discharge"
+
+msgid "Use apenas para alta registrada por engano. Os contatos ainda agendados serão cancelados."
+msgstr "Use only for a discharge recorded by mistake. Contacts still scheduled will be canceled."
+
+msgid "Contato registrado."
+msgstr "Contact recorded."
+
+#, python-format
+msgid "Registrar %(kind)s do %(day)dº dia"
+msgstr "Record %(kind)s for day %(day)d"
+
+msgid "Registrar resultado"
+msgstr "Record result"
+
+#, python-format
+msgid "Paciente: %(name)s"
+msgstr "Patient: %(name)s"
+
+msgid "Contato reagendado."
+msgstr "Contact rescheduled."
+
+msgid "Reagendar contato"
+msgstr "Reschedule contact"
+
+msgid "Reagendar"
+msgstr "Reschedule"
+
+#, python-format
+msgid "Data prevista atual: %(date)s"
+msgstr "Current planned date: %(date)s"
+
+msgid "Contato encerrado como não realizado."
+msgstr "Contact closed as not done."
+
+msgid "Encerrar como não realizado"
+msgstr "Close as not done"
+
+msgid "Encerrar contato"
+msgstr "Close contact"
+
+msgid "Familiar cadastrado."
+msgstr "Family member added."
+
+msgid "Novo contato da família"
+msgstr "New family contact"
+
+msgid "Salvar familiar"
+msgstr "Save family member"
+
+msgid "A clínica só entra em contato com a família quando o paciente autoriza. Telefone e e-mail ficam cifrados no banco."
+msgstr "The clinic only contacts the family when the patient authorizes it. Phone and email are encrypted in the database."
+
+msgid "Dados do familiar atualizados."
+msgstr "Family member details updated."
+
+msgid "Editar contato da família"
+msgstr "Edit family contact"
+
+msgid "Salvar"
+msgstr "Save"
+
+msgid "Autorização do paciente registrada."
+msgstr "Patient authorization recorded."
+
+msgid "Autorização de contato com a família"
+msgstr "Authorization for contact with the family"
+
+msgid "Registrar decisão"
+msgstr "Record decision"
+
+#, python-format
+msgid "Familiar: %(name)s"
+msgstr "Family member: %(name)s"
+
+msgid "Registro do concierge"
+msgstr "Concierge log"
+
+msgid "Registrar contato com a família"
+msgstr "Record contact with the family"
+
+msgid "Registrar contato"
+msgstr "Record contact"
+
+msgid "O registro não pode ser editado nem apagado. Se errar, use «Corrigir»: o texto original permanece no histórico."
+msgstr "The entry cannot be edited or deleted. If you make a mistake, use «Correct»: the original text stays in the history."
+
+msgid "Correção registrada."
+msgstr "Correction recorded."
+
+msgid "Corrigir registro"
+msgstr "Correct entry"
+
+msgid "Salvar correção"
+msgstr "Save correction"
+
+msgid "O texto original continua visível no histórico."
+msgstr "The original text remains visible in the history."
+
+msgid "Pedidos dos pacientes"
+msgstr "Patient requests"
+
+msgid "Pedido registrado. A família ainda não foi contatada."
+msgstr "Request recorded. The family has not been contacted yet."
+
+msgid "Registrar pedido do paciente"
+msgstr "Record patient request"
+
+msgid "Registrar pedido"
+msgstr "Record request"
+
+msgid "O pedido só é dado como encaminhado depois que você registrar o contato com a família."
+msgstr "The request is only considered forwarded after you record the contact with the family."
+
+msgid "Encaminhamento à família registrado."
+msgstr "Forwarding to the family recorded."
+
+msgid "Registrar encaminhamento à família"
+msgstr "Record forwarding to the family"
+
+msgid "Registrar encaminhamento"
+msgstr "Record forwarding"
+
+#, python-format
+msgid "Pedido: %(text)s"
+msgstr "Request: %(text)s"
+
+msgid "Pedido concluído."
+msgstr "Request completed."
+
+msgid "Concluir pedido"
+msgstr "Complete request"
+
+msgid "Pedido cancelado."
+msgstr "Request canceled."
+
+msgid "Cancelar pedido"
+msgstr "Cancel request"
+
+msgid "Régua de comunicação"
+msgstr "Communication schedule"
+
+msgid "Nova versão da régua salva. Vale para as próximas altas."
+msgstr "New schedule version saved. It applies to future discharges."
+
+msgid "Editar régua de comunicação"
+msgstr "Edit communication schedule"
+
+msgid "Pós-alta"
+msgstr "Post-discharge"
+
+msgid "Ligações e visitas ainda agendadas, da data mais antiga para a mais recente."
+msgstr "Calls and visits still scheduled, from the oldest date to the most recent."
+
+msgid "Atrasados"
+msgstr "Overdue"
+
+msgid "Hoje"
+msgstr "Today"
+
+msgid "Próximos 7 dias"
+msgstr "Next 7 days"
+
+msgid "Contatos agendados"
+msgstr "Scheduled contacts"
+
+msgid "Alta em"
+msgstr "Discharged on"
+
+msgid "Previsto para"
+msgstr "Planned for"
+
+#, python-format
+msgid "%(day)sº dia"
+msgstr "Day %(day)s"
+
+#, python-format
+msgid "reagendado %(count)s vez"
+msgid_plural "reagendado %(count)s vezes"
+msgstr[0] "rescheduled %(count)s time"
+msgstr[1] "rescheduled %(count)s times"
+
+msgid "Registrar"
+msgstr "Record"
+
+msgid "Nenhum contato encontrado com estes filtros."
+msgstr "No contacts found with these filters."
+
+msgid "Ligações e visita combinadas com cada paciente nas primeiras semanas depois da alta."
+msgstr "Calls and a visit arranged with each patient in the first weeks after discharge."
+
+msgid "Para hoje"
+msgstr "For today"
+
+msgid "Altas em acompanhamento"
+msgstr "Discharges under follow-up"
+
+msgid "Pedidos abertos"
+msgstr "Open requests"
+
+#, python-format
+msgid "%(count)s paciente em acompanhamento ainda não tem familiar autorizado a receber contato."
+msgid_plural "%(count)s pacientes em acompanhamento ainda não têm familiar autorizado a receber contato."
+msgstr[0] "%(count)s patient under follow-up does not yet have a family member authorized to receive contact."
+msgstr[1] "%(count)s patients under follow-up do not yet have a family member authorized to receive contact."
+
+msgid "Contatos atrasados, de hoje e da semana"
+msgstr "Overdue contacts, today's and this week's"
+
+msgid "Contatos pós-alta em ordem de data"
+msgstr "Post-discharge contacts in date order"
+
+msgid "Ver a fila completa"
+msgstr "See the full queue"
+
+msgid "Nenhum contato atrasado nem previsto para os próximos 7 dias."
+msgstr "No overdue contacts or contacts planned for the next 7 days."
+
+#, python-format
+msgid "Alta em %(date)s."
+msgstr "Discharged on %(date)s."
+
+msgid "Ver paciente"
+msgstr "View patient"
+
+#, python-format
+msgid "Alta cancelada: %(reason)s"
+msgstr "Discharge canceled: %(reason)s"
+
+msgid "Agenda de contatos desta alta"
+msgstr "Contact schedule for this discharge"
+
+#, python-format
+msgid "%(day)sº dia após a alta"
+msgstr "Day %(day)s after discharge"
+
+#, python-format
+msgid "original: %(date)s"
+msgstr "original: %(date)s"
+
+#, python-format
+msgid "Agenda gerada pela régua «%(name)s» (versão %(version)s). Mudanças futuras na régua não alteram esta agenda."
+msgstr "Schedule generated from «%(name)s» (version %(version)s). Future changes to the schedule do not alter this one."
+
+msgid "Cada alta gera a agenda de ligações e visita definida pela régua da clínica."
+msgstr "Each discharge generates the call and visit schedule defined by the clinic's schedule."
+
+msgid "Altas registradas"
+msgstr "Recorded discharges"
+
+msgid "Contatos"
+msgstr "Contacts"
+
+msgid "Nenhuma alta registrada ainda."
+msgstr "No discharge recorded yet."
+
+msgid "Histórico de contatos com as famílias. Os registros não podem ser editados nem apagados."
+msgstr "History of contacts with families. Entries cannot be edited or deleted."
+
+msgid "Contatos com famílias"
+msgstr "Contacts with families"
+
+msgid "Quando"
+msgstr "When"
+
+msgid "Resumo"
+msgstr "Summary"
+
+msgid "correção de um registro anterior"
+msgstr "correction of an earlier entry"
+
+msgid "Nenhum contato registrado ainda."
+msgstr "No contact recorded yet."
+
+msgid "Atrasado"
+msgstr "Overdue"
+
+msgid "Etapas da régua"
+msgstr "Schedule steps"
+
+msgid "Etapa"
+msgstr "Step"
+
+msgid "Tipo de contato"
+msgstr "Contact type"
+
+msgid "Dias após a alta"
+msgstr "Days after discharge"
+
+msgid "Responsável sugerido"
+msgstr "Suggested responsible"
+
+msgid "Contato com a família e acompanhamento pós-alta. Este painel não mostra informações clínicas."
+msgstr "Family contact and post-discharge follow-up. This panel does not show clinical information."
+
+msgid "Altas e contatos pós-alta"
+msgstr "Discharges and post-discharge contacts"
+
+#, python-format
+msgid "Alta em %(date)s"
+msgstr "Discharged on %(date)s"
+
+msgid "Nenhuma alta registrada para este paciente."
+msgstr "No discharge recorded for this patient."
+
+msgid "Família"
+msgstr "Family"
+
+msgid "Adicionar familiar"
+msgstr "Add family member"
+
+msgid "Contatos da família"
+msgstr "Family contacts"
+
+msgid "Autorização do paciente"
+msgstr "Patient authorization"
+
+msgid "Principal"
+msgstr "Primary"
+
+msgid "Inativo"
+msgstr "Inactive"
+
+msgid "Autorizado"
+msgstr "Authorized"
+
+msgid "Sem autorização"
+msgstr "Not authorized"
+
+msgid "Autorização"
+msgstr "Authorization"
+
+msgid "Inativar"
+msgstr "Deactivate"
+
+msgid "Nenhum familiar cadastrado."
+msgstr "No family member added."
+
+msgid "Pedidos do paciente à família"
+msgstr "Patient requests to the family"
+
+msgid "Nenhum pedido registrado."
+msgstr "No request recorded."
+
+msgid "Linha do tempo"
+msgstr "Timeline"
+
+msgid "Corrigir"
+msgstr "Correct"
+
+msgid "Ainda não há contatos registrados."
+msgstr "There are no recorded contacts yet."
+
+msgid "Pedidos feitos pelos pacientes aos familiares. Um pedido só vira «encaminhado» depois que o contato com a família é registrado."
+msgstr "Requests patients made to family members. A request only becomes «forwarded» after the contact with the family is recorded."
+
+msgid "Atendidos"
+msgstr "Fulfilled"
+
+msgid "Não atendidos"
+msgstr "Not fulfilled"
+
+msgid "Cancelados"
+msgstr "Canceled"
+
+msgid "Pedidos à família"
+msgstr "Requests to the family"
+
+msgid "Pedido"
+msgstr "Request"
+
+msgid "A família ainda não foi contatada."
+msgstr "The family has not been contacted yet."
+
+msgid "Nenhum pedido encontrado."
+msgstr "No request found."
+
+msgid "Salvar cria uma nova versão. Vale para as próximas altas; as altas já registradas mantêm a agenda original."
+msgstr "Saving creates a new version. It applies to future discharges; discharges already recorded keep their original schedule."
+
+msgid "Preencha até 8 etapas. Deixe a etapa em branco para não usar."
+msgstr "Fill in up to 8 steps. Leave a step blank to not use it."
+
+msgid "Salvar nova versão"
+msgstr "Save new version"
+
+msgid "Define as ligações e visitas após a alta. O padrão sugerido é ligação aos 7 e 15 dias e visita aos 15 dias."
+msgstr "Defines the calls and visits after discharge. The suggested default is a call at 7 and 15 days and a visit at 15 days."
+
+msgid "Editar régua"
+msgstr "Edit schedule"
+
+msgid "Nenhuma régua definida"
+msgstr "No schedule defined"
+
+msgid "Etapas da régua vigente"
+msgstr "Steps of the current schedule"
+
+msgid "A régua padrão é criada automaticamente na primeira alta registrada."
+msgstr "The default schedule is created automatically with the first recorded discharge."
+
+msgid "Versões anteriores"
+msgstr "Previous versions"
+
+msgid "Aurora Elo"
+msgstr "Aurora Elo"
+
+msgid "Aurora Elo — início"
+msgstr "Aurora Elo — home"
+
+msgid "Menu principal"
+msgstr "Main menu"
+
+msgid "Alternar tema claro/escuro"
+msgstr "Toggle light/dark theme"
+
+msgid "Pós-alta e concierge"
+msgstr "Post-discharge and concierge"
+
+msgid "As solicitações feitas pelos pacientes no aplicativo aparecem aqui."
+msgstr "Requests made by patients in the app appear here."
+
+msgid "Acesso da equipe da clínica. Pacientes usam o aplicativo Aurora Elo Pós-alta."
+msgstr "Clinic team access. Patients use only the Aurora Elo Post-discharge app."
+
+msgid "Aplicativo do paciente"
+msgstr "Patient app"
+
+msgid "Convite do paciente"
+msgstr "Patient invitation"
+
+msgid "Código de ativação"
+msgstr "Activation code"
+
+msgid "Entrar (equipe da clínica)"
+msgstr "Sign in (clinic team)"
+
+msgid "Este acesso é pelo aplicativo"
+msgstr "This access is through the app"
+
+msgid "Este código aparece somente agora: a clínica não consegue consultá-lo depois. Se for perdido, envie um novo convite."
+msgstr "This code is shown only now: the clinic cannot look it up later. If it is lost, send a new invitation."
+
+msgid "Não foi possível enviar o e-mail. Entregue o código ao paciente por outro meio seguro."
+msgstr "The email could not be sent. Give the code to the patient through another secure channel."
+
+msgid "O código e o link do aplicativo foram enviados ao e-mail do paciente."
+msgstr "The code and the app link were sent to the patient's email."
+
+msgid "O paciente usa apenas o aplicativo Aurora Elo Pós-alta. Ele ativa a conta com o código abaixo."
+msgstr "The patient uses only the Aurora Elo Post-discharge app. They activate their account with the code below."
+
+msgid "Pacientes usam apenas o aplicativo Aurora Elo Pós-alta. Abra o aplicativo no celular e informe o código recebido por e-mail."
+msgstr "Patients use only the Aurora Elo Post-discharge app. Open the app on your phone and enter the code you received by email."
+
+#, python-format
+msgid "Recebemos uma solicitação para redefinir sua senha no aplicativo Aurora Elo Pós-alta.\n\nAbra o link no celular em que o aplicativo está instalado: %(app_link)s\n\nSe o link não abrir, copie o código abaixo no aplicativo: %(code)s\n\nSe você não fez esta solicitação, ignore esta mensagem."
+msgstr "We received a request to reset your password in the Aurora Elo Post-discharge app.\n\nOpen the link on the phone where the app is installed: %(app_link)s\n\nIf the link does not open, copy the code below into the app: %(code)s\n\nIf you did not make this request, ignore this message."
+
+msgid "Seu acesso ao aplicativo Aurora Elo Pós-alta"
+msgstr "Your access to the Aurora Elo Post-discharge app"
+
+#, python-format
+msgid "Sua clínica convidou você para o aplicativo Aurora Elo Pós-alta.\n\nAbra o link no celular em que o aplicativo está instalado: %(app_link)s\n\nSe o link não abrir, copie o código abaixo no aplicativo: %(code)s\n\nO convite vale por 7 dias e só pode ser usado uma vez."
+msgstr "Your clinic invited you to the Aurora Elo Post-discharge app.\n\nOpen the link on the phone where the app is installed: %(app_link)s\n\nIf the link does not open, copy the code below into the app: %(code)s\n\nThe invitation is valid for 7 days and can be used only once."
+
+#, python-format
+msgid "Vale até %(date)s e só pode ser usado uma vez."
+msgstr "Valid until %(date)s and can be used only once."
+

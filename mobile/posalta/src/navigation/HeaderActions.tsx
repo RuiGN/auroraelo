@@ -121,6 +121,18 @@ const styles = StyleSheet.create({
   },
 });
 
+/** Primeira tela de cada situação: abas, entrada, sem configuração, abrindo a conta. */
+type HomeRoute = "Tabs" | "SignIn" | "ConfigMissing" | "Restoring";
+
+function isHomeRoute(name: string): name is HomeRoute {
+  return (
+    name === "Tabs" ||
+    name === "SignIn" ||
+    name === "ConfigMissing" ||
+    name === "Restoring"
+  );
+}
+
 /**
  * Fechar a ajuda urgente. No iOS o modal também fecha ao arrastar, mas um botão
  * visível é necessário (acessibilidade e quem abriu a tela por link na web).
@@ -136,11 +148,18 @@ export function CloseButton() {
       accessibilityRole="button"
       accessibilityLabel={t("common.close")}
       hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
-      onPress={() =>
-        navigation.canGoBack()
-          ? navigation.goBack()
-          : navigation.navigate("Tabs")
-      }
+      onPress={() => {
+        if (navigation.canGoBack()) {
+          navigation.goBack();
+          return;
+        }
+        // Aberta por link ou sem tela abaixo: volta para a primeira tela do app, que
+        // é a de entrada quando não há sessão (a Ajuda urgente não depende de login).
+        const home = navigation
+          .getState()
+          .routeNames.find((name): name is HomeRoute => isHomeRoute(name));
+        navigation.navigate(home ?? "Tabs");
+      }}
       style={[styles.close, { borderColor: colors.navLine }]}
     >
       <Icon name="close" size={20} color={colors.navInk} />

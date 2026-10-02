@@ -36,7 +36,7 @@ export const es: Messages = {
   "mode.unavailable.help":
     "El botón Ayuda y los ajustes de idioma y apariencia funcionan con normalidad.",
   "mode.action.unavailable":
-    "No se pudo completar. La aplicación aún no está conectada a la clínica y no se guardó ni se envió nada.",
+    "Esta acción aún no está disponible en la aplicación. No se guardó ni se envió nada.",
   "mode.action.invalid":
     "Revisa los campos e inténtalo de nuevo. No se guardó nada.",
   "mode.preview.saved":
@@ -439,7 +439,7 @@ export const es: Messages = {
   "settings.reminders.off":
     "Los recordatorios por notificación aún no están activos en esta aplicación. No pide permiso de notificaciones.",
   "settings.storage":
-    "En este dispositivo solo se guardan el idioma y la apariencia. Aquí no se almacena ningún dato de salud.",
+    "En este dispositivo se guardan el idioma, la apariencia y, si iniciaste sesión, tu sesión en el almacén seguro del dispositivo. Aquí no se almacena ningún dato de salud.",
   "settings.storageError":
     "No se pudo guardar la preferencia en este dispositivo. Vale solo para esta sesión.",
   "settings.about": "Acerca de esta aplicación",
@@ -483,4 +483,148 @@ export const es: Messages = {
   "privacy.requests.none": "Ningún pedido hecho.",
   "privacy.mandatoryNote":
     "Las autorizaciones necesarias no pueden revocarse aquí. Para dejar de usar el servicio, haz un pedido de revocación.",
+  // ── Gravaciones y carga (modo live) ─────────────────────────────────────
+  "mode.action.offline":
+    "Sin conexión con la clínica ahora. No se guardó nada. Inténtalo de nuevo cuando vuelva internet.",
+  "mode.action.rejected":
+    "No se pudo guardar. Revisa la información e inténtalo de nuevo. No se cambió nada.",
+  "mode.action.session":
+    "Tu sesión terminó. Inicia sesión de nuevo para continuar. No se guardó nada.",
+  "mode.action.blocked":
+    "El acceso a tu cuidado está suspendido temporalmente por la clínica. Habla con la clínica. La ayuda urgente sigue disponible.",
+  "mode.action.server":
+    "El servidor no pudo completar esto ahora. Inténtalo en un momento. Comprueba si el registro aparece antes de repetirlo.",
+  "data.loading": "Cargando tus datos…",
+  "data.error.title": "No se pudo cargar",
+  "data.error.stale":
+    "No se pudo actualizar ahora. Estás viendo lo que ya se había cargado.",
+  "data.retry": "Intentar de nuevo",
+
+  // ── Mensajes por código de error del servidor ───────────────────────────
+  "error.code.network":
+    "Sin conexión con el servidor ahora. Revisa tu internet e inténtalo de nuevo.",
+  "error.code.invalid_credentials":
+    "El correo o la contraseña no coinciden. Revísalos e inténtalo de nuevo.",
+  "error.code.rate_limited":
+    "Demasiados intentos en poco tiempo. Espera unos minutos e inténtalo de nuevo.",
+  "error.code.clinic_choice_required": "Elige la clínica para continuar.",
+  "error.code.invalid_token":
+    "Tu sesión terminó. Inicia sesión de nuevo para continuar.",
+  "error.code.not_found":
+    "No encontramos este elemento. Actualiza la pantalla e inténtalo de nuevo.",
+  "error.code.invalid_dose_time":
+    "Esta hora no corresponde a una dosis prevista de este medicamento.",
+  "error.code.timezone_required":
+    "Falta la zona horaria en tu registro. Pide a la clínica que lo corrija.",
+  "error.code.plan_closed":
+    "Este plan ya está cerrado y no acepta una nueva respuesta.",
+  "error.code.invalid_date":
+    "Esta fecha no se puede usar aquí. Elige una fecha dentro del período permitido.",
+  "error.code.not_scheduled": "Este hábito no está previsto para este día.",
+  "error.code.already_completed":
+    "Esto ya se completó y no se puede enviar de nuevo.",
+  "error.code.invalid_response":
+    "La respuesta no está en un formato aceptado. Revísala e inténtalo de nuevo.",
+  "error.code.unsupported":
+    "Este tipo de actividad aún no se puede hacer en la aplicación.",
+  "error.code.no_actions_configured":
+    "El equipo aún no definió las acciones del modo de poca energía.",
+  "error.code.invalid_intensity": "La intensidad debe estar entre 1 y 10.",
+  "error.code.invalid_scope": "Este permiso no está disponible.",
+  "error.code.reauthentication_failed":
+    "La contraseña no coincidió. No se cambió nada.",
+  "error.code.consent_rejected":
+    "No se pudo registrar tu decisión. No se cambió nada.",
+  "error.code.revocation_rejected":
+    "Esta autorización no se puede revocar aquí.",
+  "error.code.already_open": "Ya hay un pedido de este tipo en curso.",
+  "error.code.rejected": "La clínica no aceptó esta solicitud.",
+  "error.code.slot_unavailable": "Este horario ya no está libre. Elige otro.",
+  "error.code.weak_password":
+    "Esta contraseña no fue aceptada. Mira qué falta e inténtalo de nuevo.",
+  "error.code.invalid_code":
+    "Este código no es válido o ya venció. Pide una nueva invitación a la clínica o, en la recuperación de contraseña, solicita un nuevo código.",
+  "error.code.clinic_blocked":
+    "El acceso a tu cuidado está suspendido temporalmente por la clínica. Habla con la clínica.",
+  "error.code.unknown":
+    "No se pudo completar. Inténtalo de nuevo en un momento.",
+
+  // ── Configuración del servidor ──────────────────────────────────────────
+  "config.missing.title": "Aplicación sin configurar",
+  "config.missing.body":
+    "Esta versión de la aplicación no sabe con qué servidor hablar, así que no puede iniciar sesión ni mostrar tus datos. No se muestra, guarda ni envía nada. Avisa a quien te dio esta aplicación.",
+  "config.missing.help":
+    "La ayuda urgente funciona con normalidad, sin conexión.",
+  "config.missing.dev":
+    "Para quien desarrolla: define EXPO_PUBLIC_API_BASE_URL con la dirección https del servidor y reinicia la aplicación.",
+
+  // ── Acceso: entrar, activar cuenta y recuperar contraseña ───────────────
+  "auth.restoring": "Abriendo tu cuenta…",
+  "auth.signin.title": "Entrar",
+  "auth.signin.intro":
+    "Entra con el correo y la contraseña de tu cuenta para ver tu cuidado.",
+  "auth.email": "Correo electrónico",
+  "auth.password": "Contraseña",
+  "auth.password.show": "Mostrar contraseña",
+  "auth.password.hide": "Ocultar contraseña",
+  "auth.signin.submit": "Entrar",
+  "auth.forgot": "Olvidé mi contraseña",
+  "auth.haveCode": "Recibí un código de invitación",
+  "auth.clinic.title": "¿En qué clínica quieres entrar?",
+  "auth.clinic.hint":
+    "Tu cuenta está vinculada a más de una clínica. Elige una para continuar.",
+  "auth.clinic.label": "Clínica",
+  "auth.help.note":
+    "La ayuda urgente funciona sin iniciar sesión y sin internet.",
+  "auth.notice.expired":
+    "Tu sesión terminó. Inicia sesión de nuevo para continuar.",
+  "auth.notice.reset": "Contraseña cambiada. Entra con la nueva contraseña.",
+  "auth.activate.title": "Activar cuenta",
+  "auth.activate.intro":
+    "Usa el código de la invitación que envió la clínica. Si abriste el enlace del correo, el código ya viene completado.",
+  "auth.activate.code": "Código de invitación",
+  "auth.activate.firstName": "Nombre",
+  "auth.activate.lastName": "Apellido",
+  "auth.activate.password": "Contraseña",
+  "auth.activate.existing":
+    "Si ya tienes una cuenta de Aurora Elo, escribe tu contraseña actual y deja el nombre y el apellido en blanco. Si la cuenta es nueva, elige una contraseña que solo tú conozcas.",
+  "auth.activate.submit": "Activar y entrar",
+  "auth.recover.title": "Recuperar contraseña",
+  "auth.recover.intro":
+    "Escribe el correo de tu cuenta. Si está registrado, enviaremos un código y un enlace para crear una nueva contraseña.",
+  "auth.recover.submit": "Enviar instrucciones",
+  "auth.recover.sent":
+    "Listo. Si este correo está registrado, recibirás las instrucciones en unos instantes. Revisa también la carpeta de spam.",
+  "auth.recover.haveCode": "Ya recibí el código",
+  "auth.reset.title": "Crear una nueva contraseña",
+  "auth.reset.intro":
+    "Pega el código que llegó por correo y elige una nueva contraseña. Si abriste el enlace del correo, el código ya viene completado.",
+  "auth.reset.code": "Código recibido por correo",
+  "auth.reset.newPassword": "Nueva contraseña",
+  "auth.reset.submit": "Guardar nueva contraseña",
+  "auth.reset.note":
+    "Al cambiar la contraseña, se cierra la sesión en todos los demás dispositivos.",
+  "auth.backToSignin": "Volver a entrar",
+  "auth.codeFilled":
+    "Completamos el código a partir del enlace. Puedes corregirlo si lo necesitas.",
+
+  // ── Perfil: salir de este dispositivo ───────────────────────────────────
+  "profile.session": "Cuenta en este dispositivo",
+  "profile.logout": "Salir",
+  "profile.logout.subtitle": "Cierra la sesión en este dispositivo",
+  "profile.logout.confirm": "¿Salir de este dispositivo?",
+  "profile.logout.body":
+    "Tendrás que entrar de nuevo para ver tu cuidado. La ayuda urgente sigue disponible sin iniciar sesión.",
+  "profile.logout.working": "Saliendo…",
+  "profile.logoutOthers": "Salir de los otros dispositivos",
+  "profile.logoutOthers.subtitle":
+    "Cierra la sesión en todos los demás dispositivos",
+  "profile.logoutOthers.confirm": "¿Salir de los otros dispositivos?",
+  "profile.logoutOthers.body":
+    "Quien esté usando tu cuenta en otro dispositivo tendrá que entrar de nuevo. Este dispositivo sigue conectado.",
+  "profile.logoutOthers.done_one":
+    "Se cerró la sesión en {count} otro dispositivo.",
+  "profile.logoutOthers.done_other":
+    "Se cerró la sesión en {count} otros dispositivos.",
+  "profile.logoutOthers.none": "No había otros dispositivos conectados.",
 };

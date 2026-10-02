@@ -37,7 +37,10 @@ export interface PatientSummary {
   /** Nome social quando existir (people.PatientProfile.social_name). */
   displayName: string;
   clinicName: string;
-  dischargeDate: ISODate;
+  /** `null` quando a clínica ainda não registrou a alta. */
+  dischargeDate: ISODate | null;
+  /** Fuso IANA do paciente: as doses programadas ("HH:MM") valem nesse fuso. */
+  timezone: string;
   careTeam: TeamMember[];
 }
 

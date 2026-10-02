@@ -7,7 +7,7 @@ import {
   Alert,
   Badge,
   FeedbackAlert,
-  useActionFeedback,
+  useRunAction,
 } from "../components/Feedback";
 import {
   ChipGroup,
@@ -49,7 +49,7 @@ export function DiaryHubScreen() {
   const { t, formatDate, formatDateTime } = useI18n();
   const nav = useNav();
   const { colors } = useTheme();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const [confirmRestart, setConfirmRestart] = useState(false);
 
   return (
@@ -155,10 +155,8 @@ export function DiaryHubScreen() {
                         style={styles.action}
                         testID="recovery-toggle"
                         onPress={() =>
-                          report(
-                            store.run(
-                              mutations.setCounterHidden(!sobriety.hideCounter),
-                            ),
+                          run(
+                            mutations.setCounterHidden(!sobriety.hideCounter),
                             "common.done",
                           )
                         }
@@ -191,10 +189,7 @@ export function DiaryHubScreen() {
                             style={styles.action}
                             testID="recovery-restart-confirm"
                             onPress={() => {
-                              report(
-                                store.run(mutations.restartCounter()),
-                                "common.done",
-                              );
+                              run(mutations.restartCounter(), "common.done");
                               setConfirmRestart(false);
                             }}
                           />
@@ -263,7 +258,7 @@ interface CheckInFormProps {
 function CheckInForm({ snapshot, store }: CheckInFormProps) {
   const { t } = useI18n();
   const nav = useNav();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run, pending } = useRunAction();
   const existing = snapshot.checkIns.find(
     (item) => item.date === toISODate(store.now),
   );
@@ -342,21 +337,19 @@ function CheckInForm({ snapshot, store }: CheckInFormProps) {
       <Button
         label={t("checkin.submit")}
         disabled={!complete}
+        loading={pending}
         testID="checkin-submit"
         onPress={() => {
           if (!complete) return;
           const finalAnswers = answers as CheckInScaleAnswers;
-          const ok = report(
-            store.run(
-              mutations.submitCheckIn({
-                answers: finalAnswers,
-                notes,
-                visibility,
-              }),
-            ),
+          void run(
+            mutations.submitCheckIn({
+              answers: finalAnswers,
+              notes,
+              visibility,
+            }),
             "checkin.saved",
-          );
-          setSubmittedAnswers(ok ? finalAnswers : null);
+          ).then((ok) => setSubmittedAnswers(ok ? finalAnswers : null));
         }}
       />
     </>
@@ -369,7 +362,7 @@ const MOODS: Scale5[] = [1, 2, 3, 4, 5];
 
 export function JournalEntryNewScreen() {
   const { t } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run, pending } = useRunAction();
   const [mood, setMood] = useState<Scale5 | null>(null);
   const [emotions, setEmotions] = useState<Emotion[]>([]);
   const [intensity, setIntensity] = useState<Scale5 | null>(null);
@@ -472,6 +465,7 @@ export function JournalEntryNewScreen() {
             <Button
               label={t("entry.submit")}
               disabled={mood === null || intensity === null}
+              loading={pending}
               testID="entry-submit"
               onPress={() => {
                 if (mood === null || intensity === null) return;
@@ -479,22 +473,20 @@ export function JournalEntryNewScreen() {
                   setShowError(true);
                   return;
                 }
-                const ok = report(
-                  store.run(
-                    mutations.addJournalEntry({
-                      mood,
-                      emotions,
-                      intensity,
-                      context,
-                      triggers,
-                      reactions,
-                      strategies,
-                      visibility,
-                    }),
-                  ),
+                void run(
+                  mutations.addJournalEntry({
+                    mood,
+                    emotions,
+                    intensity,
+                    context,
+                    triggers,
+                    reactions,
+                    strategies,
+                    visibility,
+                  }),
                   "entry.saved",
-                );
-                if (ok) {
+                ).then((ok) => {
+                  if (!ok) return;
                   setMood(null);
                   setEmotions([]);
                   setIntensity(null);
@@ -504,7 +496,7 @@ export function JournalEntryNewScreen() {
                   setStrategies("");
                   setVisibility("private");
                   setShowError(false);
-                }
+                });
               }}
             />
           </>
@@ -577,7 +569,7 @@ export function JournalEntryDetailScreen({
 export function CravingScreen() {
   const { t, formatDateTime } = useI18n();
   const nav = useNav();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run, pending } = useRunAction();
   const [intensity, setIntensity] = useState<number | null>(null);
   const [context, setContext] = useState("");
   const [strategy, setStrategy] = useState("");
@@ -663,24 +655,23 @@ export function CravingScreen() {
               <Button
                 label={t("craving.submit")}
                 disabled={intensity === null}
+                loading={pending}
                 testID="craving-submit"
                 onPress={() => {
                   if (intensity === null) return;
-                  const ok = report(
-                    store.run(
-                      mutations.addCraving({
-                        intensity,
-                        triggersContext: context,
-                        copingStrategyUsed: strategy,
-                      }),
-                    ),
+                  void run(
+                    mutations.addCraving({
+                      intensity,
+                      triggersContext: context,
+                      copingStrategyUsed: strategy,
+                    }),
                     "craving.saved",
-                  );
-                  if (ok) {
+                  ).then((ok) => {
+                    if (!ok) return;
                     setIntensity(null);
                     setContext("");
                     setStrategy("");
-                  }
+                  });
                 }}
               />
               {snapshot.cravings.length > 0 ? (

@@ -16,11 +16,66 @@ import {
 } from "../domain/types";
 
 /**
- * Transformações puras do instantâneo — usadas SOMENTE no modo demonstração, onde
+ * Transformações puras do instantâneo — aplicadas SOMENTE no modo demonstração, onde
  * o estado vive na memória do app e some ao fechá-lo. Retornam `null` quando a
  * entrada é inválida. Nada aqui é enviado a servidor nem gravado no aparelho.
+ *
+ * No modo live a mesma chamada (`store.run(mutations.logDose(input))`) não executa a
+ * função: o store lê `meta` ({ key, input }) e procura a ação remota registrada em
+ * `src/data/live/actions.ts` para essa `key`. Assim as telas têm um único caminho de
+ * escrita e cada domínio liga a sua API sem mexer nelas.
  */
-export type Mutation = (snapshot: Snapshot, now: Date) => Snapshot | null;
+export interface MutationMeta<K extends string = string, I = unknown> {
+  readonly key: K;
+  /** Primeiro argumento da fábrica (`undefined` quando ela não recebe nada). */
+  readonly input: I;
+}
+
+export interface Mutation {
+  (snapshot: Snapshot, now: Date): Snapshot | null;
+  /** Presente nas mutações criadas por `defineMutations`. */
+  readonly meta?: MutationMeta;
+}
+
+type Factory = (...args: never[]) => Mutation;
+
+type InputOf<F> = F extends (...args: infer A) => unknown
+  ? A extends [infer I, ...unknown[]]
+    ? I
+    : undefined
+  : never;
+
+/** Mutação com os metadados garantidos. */
+export type TaggedMutation<K extends string, I> = Mutation & {
+  readonly meta: MutationMeta<K, I>;
+};
+
+/**
+ * Registra as fábricas e devolve as mesmas funções com o mesmo comportamento puro,
+ * mas cada mutação criada carrega `meta = { key, input }`.
+ */
+export type DefinedMutations<T extends Record<string, Factory>> = {
+  [K in keyof T & string]: (
+    ...args: Parameters<T[K]>
+  ) => TaggedMutation<K, InputOf<T[K]>>;
+};
+
+export function defineMutations<T extends Record<string, Factory>>(
+  factories: T,
+): DefinedMutations<T> {
+  const tagged: Record<string, (...args: never[]) => Mutation> = {};
+  for (const [key, factory] of Object.entries(factories)) {
+    tagged[key] = (...args: never[]) => {
+      const pure = factory(...args);
+      const mutation: Mutation = (snapshot, now) => pure(snapshot, now);
+      return Object.defineProperty(mutation, "meta", {
+        value: Object.freeze({ key, input: args[0] }),
+        enumerable: true,
+      });
+    };
+  }
+  return tagged as unknown as DefinedMutations<T>;
+}
 
 export const MAX_TEXT = 4000;
 export const MAX_DETAIL = 2000;
@@ -35,7 +90,7 @@ function blank(value: string): boolean {
   return value.trim().length === 0;
 }
 
-export const mutations = {
+export const mutations = defineMutations({
   submitCheckIn:
     (input: {
       answers: CheckInScaleAnswers;
@@ -484,4 +539,12 @@ export const mutations = {
         ],
       };
     },
-};
+});
+
+/** Nome de cada mutação: é a chave do registro de ações remotas. */
+export type MutationKey = keyof typeof mutations;
+
+/** Tipo da entrada de uma mutação (o argumento da fábrica). */
+export type MutationInput<K extends MutationKey> = ReturnType<
+  (typeof mutations)[K]
+>["meta"]["input"];

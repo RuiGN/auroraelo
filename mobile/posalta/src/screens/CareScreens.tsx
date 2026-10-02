@@ -7,7 +7,7 @@ import {
   Alert,
   Badge,
   FeedbackAlert,
-  useActionFeedback,
+  useRunAction,
 } from "../components/Feedback";
 import {
   CheckRow,
@@ -138,7 +138,7 @@ export function CarePlanScreen() {
   const [editing, setEditing] = useState(false);
   const [decision, setDecision] = useState<CarePlanDecision | null>(null);
   const [notes, setNotes] = useState("");
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run, pending } = useRunAction();
 
   return (
     <Screen testID="screen-care-plan">
@@ -257,16 +257,16 @@ export function CarePlanScreen() {
                     <Button
                       label={t("common.send")}
                       disabled={decision === null}
+                      loading={pending}
                       testID="plan-submit"
                       onPress={() => {
                         if (decision === null) return;
-                        const ok = report(
-                          store.run(
-                            mutations.respondCarePlan({ decision, notes }),
-                          ),
+                        void run(
+                          mutations.respondCarePlan({ decision, notes }),
                           "common.done",
-                        );
-                        if (ok) setEditing(false);
+                        ).then((ok) => {
+                          if (ok) setEditing(false);
+                        });
                       }}
                     />
                   </Card>
@@ -293,7 +293,7 @@ const DOSE_ACTIONS: {
 
 export function MedicationsScreen() {
   const { t, formatTime, formatDate } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   return (
     <Screen testID="screen-medications">
       <Alert tone="info">{t("meds.safety")}</Alert>
@@ -342,13 +342,11 @@ export function MedicationsScreen() {
                         size="sm"
                         testID={`undo-${slot.key}`}
                         onPress={() =>
-                          report(
-                            store.run(
-                              mutations.undoDose({
-                                medicationId: slot.medication.id,
-                                scheduledFor: slot.scheduledFor,
-                              }),
-                            ),
+                          run(
+                            mutations.undoDose({
+                              medicationId: slot.medication.id,
+                              scheduledFor: slot.scheduledFor,
+                            }),
                             "common.done",
                           )
                         }
@@ -368,14 +366,12 @@ export function MedicationsScreen() {
                             testID={`dose-${action.status}-${slot.key}`}
                             style={styles.action}
                             onPress={() =>
-                              report(
-                                store.run(
-                                  mutations.logDose({
-                                    medicationId: slot.medication.id,
-                                    scheduledFor: slot.scheduledFor,
-                                    status: action.status,
-                                  }),
-                                ),
+                              run(
+                                mutations.logDose({
+                                  medicationId: slot.medication.id,
+                                  scheduledFor: slot.scheduledFor,
+                                  status: action.status,
+                                }),
                                 "common.done",
                               )
                             }
@@ -441,7 +437,7 @@ const HABIT_STATUSES: HabitStatus[] = [
 
 export function RoutineScreen() {
   const { t } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   return (
     <Screen testID="screen-routine">
       <Text variant="bodySm" tone="muted">
@@ -489,14 +485,12 @@ export function RoutineScreen() {
                       options={options}
                       value={current}
                       onChange={(status) =>
-                        report(
-                          store.run(
-                            mutations.setHabitStatus({
-                              habitId: habit.id,
-                              date: today,
-                              status: status === current ? null : status,
-                            }),
-                          ),
+                        run(
+                          mutations.setHabitStatus({
+                            habitId: habit.id,
+                            date: today,
+                            status: status === current ? null : status,
+                          }),
                           "common.done",
                         )
                       }
@@ -596,7 +590,7 @@ export function ExerciseDetailScreen({
   route,
 }: RootScreenProps<"ExerciseDetail">) {
   const { t, formatDate } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const [response, setResponse] = useState("");
   const [visibility, setVisibility] = useState<Visibility | null>(null);
   return (
@@ -673,14 +667,12 @@ export function ExerciseDetailScreen({
                       disabled={response.trim().length === 0}
                       testID="exercise-submit"
                       onPress={() =>
-                        report(
-                          store.run(
-                            mutations.completeExercise({
-                              id: exercise.id,
-                              response,
-                              visibility: chosenVisibility,
-                            }),
-                          ),
+                        run(
+                          mutations.completeExercise({
+                            id: exercise.id,
+                            response,
+                            visibility: chosenVisibility,
+                          }),
                           "common.done",
                         )
                       }
@@ -818,7 +810,7 @@ export function GoalsScreen() {
 
 export function GoalDetailScreen({ route }: RootScreenProps<"GoalDetail">) {
   const { t, formatDate } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   return (
     <Screen testID="screen-goal-detail">
       <WithData>
@@ -829,8 +821,8 @@ export function GoalDetailScreen({ route }: RootScreenProps<"GoalDetail">) {
           if (!goal) return <EmptyState icon="target" text={t("goals.none")} />;
           const progress = goalProgress(goal);
           const setStatus = (status: GoalStatus) =>
-            report(
-              store.run(mutations.setGoalStatus({ goalId: goal.id, status })),
+            run(
+              mutations.setGoalStatus({ goalId: goal.id, status }),
               "common.done",
             );
           return (
@@ -879,13 +871,11 @@ export function GoalDetailScreen({ route }: RootScreenProps<"GoalDetail">) {
                       label={step.description}
                       checked={step.isDone}
                       onToggle={() =>
-                        report(
-                          store.run(
-                            mutations.toggleGoalStep({
-                              goalId: goal.id,
-                              stepId: step.id,
-                            }),
-                          ),
+                        run(
+                          mutations.toggleGoalStep({
+                            goalId: goal.id,
+                            stepId: step.id,
+                          }),
                           "common.done",
                         )
                       }
