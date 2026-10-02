@@ -1,0 +1,8 @@
+{% load i18n %}
+{# Selo de estado de um contato: overdue | today | upcoming | done | missed | canceled #}
+{% if state == "overdue" %}<span class="ae-badge ae-badge--danger">{% translate "Atrasado" %}</span>
+{% elif state == "today" %}<span class="ae-badge ae-badge--warning">{% translate "Hoje" %}</span>
+{% elif state == "upcoming" %}<span class="ae-badge ae-badge--info">{% translate "Agendado" %}</span>
+{% elif state == "done" %}<span class="ae-badge ae-badge--success">{% translate "Realizado" %}</span>
+{% elif state == "missed" %}<span class="ae-badge ae-badge--danger">{% translate "Não realizado" %}</span>
+{% else %}<span class="ae-badge ae-badge--muted">{% translate "Cancelado" %}</span>{% endif %}

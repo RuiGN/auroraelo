@@ -106,14 +106,6 @@
     <section id="workspace-shortcuts" aria-labelledby="shortcut-title">
       <h2 id="shortcut-title" class="fs-16 fw-semibold mb-3">{% translate "Por onde começar" %}</h2>
       <div class="row g-4">
-        {% if is_patient %}
-          {% translate "Minha evolução" as shortcut_label %}{% translate "Acompanhe os registros do seu cuidado." as shortcut_description %}
-          {% include "workspace/shortcut.html" with route="patient_dashboard" icon="feather-trending-up" label=shortcut_label description=shortcut_description only %}
-          {% translate "Diário emocional" as shortcut_label %}{% translate "Reserve um momento para registrar como você está." as shortcut_description %}
-          {% include "workspace/shortcut.html" with route="journal_list" icon="feather-book-open" label=shortcut_label description=shortcut_description only %}
-          {% translate "Minhas metas" as shortcut_label %}{% translate "Retome seus objetivos e próximos passos." as shortcut_description %}
-          {% include "workspace/shortcut.html" with route="goal_list" icon="feather-target" label=shortcut_label description=shortcut_description only %}
-        {% endif %}
         {% if is_therapist %}
           {% translate "Painel profissional" as shortcut_label %}{% translate "Acompanhe os pacientes vinculados a você." as shortcut_description %}
           {% include "workspace/shortcut.html" with route="therapist_dashboard" icon="feather-activity" label=shortcut_label description=shortcut_description only %}
@@ -130,8 +122,6 @@
         {% endif %}
           {% translate "Agenda" as shortcut_label %}{% translate "Veja as consultas disponíveis para o seu perfil." as shortcut_description %}
           {% include "workspace/shortcut.html" with route="appointment_list" icon="feather-calendar" label=shortcut_label description=shortcut_description only %}
-          {% translate "Mensagens" as shortcut_label %}{% translate "Acesse suas conversas na plataforma." as shortcut_description %}
-          {% include "workspace/shortcut.html" with route="conversation_list" icon="feather-message-square" label=shortcut_label description=shortcut_description only %}
           {% translate "Segurança da conta" as shortcut_label %}{% translate "Confira os dispositivos e as sessões da sua conta." as shortcut_description %}
           {% include "workspace/shortcut.html" with route="account_sessions" icon="feather-shield" label=shortcut_label description=shortcut_description only %}
       </div>

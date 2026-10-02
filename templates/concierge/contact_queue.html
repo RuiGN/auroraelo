@@ -1,0 +1,54 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li>{% translate "Fila de contatos" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Fila de contatos" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Ligações e visitas ainda agendadas, da data mais antiga para a mais recente." %}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form class="ae-toolbar" method="get" role="search">
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="janela">{% translate "Período" %}</label>
+    <div class="ae-control"><span class="field-control-icon ae-control__icon" aria-hidden="true"><svg class="ae-icon"><use href="#i-clock"/></svg></span><select class="ae-select ae-select--icon" id="janela" name="janela">
+      <option value="all"{% if window == "all" %} selected{% endif %}>{% translate "Todos" %}</option>
+      <option value="overdue"{% if window == "overdue" %} selected{% endif %}>{% translate "Atrasados" %}</option>
+      <option value="today"{% if window == "today" %} selected{% endif %}>{% translate "Hoje" %}</option>
+      <option value="week"{% if window == "week" %} selected{% endif %}>{% translate "Próximos 7 dias" %}</option>
+    </select></div></div>
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="tipo">{% translate "Tipo" %}</label>
+    <div class="ae-control"><span class="field-control-icon ae-control__icon" aria-hidden="true"><svg class="ae-icon"><use href="#i-phone"/></svg></span><select class="ae-select ae-select--icon" id="tipo" name="tipo">
+      <option value="">{% translate "Todos" %}</option>
+      <option value="call"{% if kind == "call" %} selected{% endif %}>{% translate "Ligação" %}</option>
+      <option value="visit"{% if kind == "visit" %} selected{% endif %}>{% translate "Visita presencial" %}</option>
+    </select></div></div>
+  <button class="ae-btn ae-btn--secondary" type="submit">{% translate "Filtrar" %}</button>
+</form>
+{% if rows %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Contatos agendados" %}</caption>
+    <thead><tr><th scope="col">{% translate "Paciente" %}</th><th scope="col">{% translate "Contato" %}</th><th scope="col">{% translate "Alta em" %}</th><th scope="col">{% translate "Previsto para" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td><a class="ae-table__strong" href="{% url 'concierge:patient_detail' row.patient_profile_id %}">{{ row.patient_name }}</a></td>
+        <td>{{ row.contact.get_kind_display }} · {% blocktranslate with day=row.contact.day_after_discharge %}{{ day }}º dia{% endblocktranslate %}</td>
+        <td class="ae-table__nowrap">{{ row.discharge_date|date:"SHORT_DATE_FORMAT" }}</td>
+        <td class="ae-table__nowrap">{{ row.contact.due_date|date:"SHORT_DATE_FORMAT" }}{% if row.contact.reschedule_count %}<span class="ae-table__meta">{% blocktranslate count count=row.contact.reschedule_count %}reagendado {{ count }} vez{% plural %}reagendado {{ count }} vezes{% endblocktranslate %}</span>{% endif %}</td>
+        <td>{% include "concierge/partials/badge.html" with state=row.state %}</td>
+        <td class="ae-table__actions ae-actions ae-actions--end">
+          <a class="ae-btn ae-btn--sm" href="{% url 'concierge:contact_complete' row.contact.pk %}">{% translate "Registrar" %}</a>
+          <a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'concierge:contact_reschedule' row.contact.pk %}">{% translate "Reagendar" %}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="ae-card ae-empty">{% translate "Nenhum contato encontrado com estes filtros." %}</div>
+{% endif %}
+{% endblock %}

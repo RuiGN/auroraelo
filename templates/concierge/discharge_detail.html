@@ -1,0 +1,44 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li><a href="{% url 'concierge:discharge_list' %}">{% translate "Altas" %}</a></li><li>{{ discharge.patient_profile.full_name }}</li></ol>
+    <h1 class="ae-page-header__title">{{ page_title }}</h1>
+    <p class="ae-page-header__lead">{% blocktranslate with date=discharge.discharge_date|date:"SHORT_DATE_FORMAT" %}Alta em {{ date }}.{% endblocktranslate %} {{ discharge.get_status_display }}.</p>
+  </div>
+  <div class="ae-actions">
+    <a class="ae-btn ae-btn--secondary" href="{% url 'concierge:patient_detail' discharge.patient_profile_id %}">{% translate "Ver paciente" %}</a>
+    {% if discharge.status == "active" %}<a class="ae-btn ae-btn--ghost" href="{% url 'concierge:discharge_cancel' discharge.pk %}">{% translate "Cancelar alta" %}</a>{% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+{% if discharge.status == "canceled" %}
+<div class="ae-alert ae-alert--warning"><svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg><div>{% blocktranslate with reason=discharge.cancel_reason %}Alta cancelada: {{ reason }}{% endblocktranslate %}</div></div>
+{% endif %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Agenda de contatos desta alta" %}</caption>
+    <thead><tr><th scope="col">{% translate "Contato" %}</th><th scope="col">{% translate "Previsto para" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col">{% translate "Resultado" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td><span class="ae-table__strong">{{ row.contact.get_kind_display }}</span><span class="ae-table__meta">{% blocktranslate with day=row.contact.day_after_discharge %}{{ day }}º dia após a alta{% endblocktranslate %}</span></td>
+        <td class="ae-table__nowrap">{{ row.contact.due_date|date:"SHORT_DATE_FORMAT" }}{% if row.contact.reschedule_count %}<span class="ae-table__meta">{% blocktranslate with date=row.contact.original_due_date|date:"SHORT_DATE_FORMAT" %}original: {{ date }}{% endblocktranslate %}</span>{% endif %}</td>
+        <td>{% include "concierge/partials/badge.html" with state=row.state %}</td>
+        <td>{% if row.contact.outcome %}{{ row.contact.get_outcome_display }}{% else %}—{% endif %}{% if row.contact.completed_at %}<span class="ae-table__meta">{{ row.contact.completed_at|date:"SHORT_DATETIME_FORMAT" }}</span>{% endif %}</td>
+        <td class="ae-table__actions ae-actions ae-actions--end">
+          {% if row.contact.status == scheduled %}
+          <a class="ae-btn ae-btn--sm" href="{% url 'concierge:contact_complete' row.contact.pk %}">{% translate "Registrar" %}</a>
+          <a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'concierge:contact_reschedule' row.contact.pk %}">{% translate "Reagendar" %}</a>
+          {% if row.state == "overdue" %}<a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'concierge:contact_missed' row.contact.pk %}">{% translate "Não realizado" %}</a>{% endif %}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="ae-card__meta">{% blocktranslate with name=discharge.rule_snapshot.name version=discharge.rule_snapshot.version %}Agenda gerada pela régua «{{ name }}» (versão {{ version }}). Mudanças futuras na régua não alteram esta agenda.{% endblocktranslate %}</p>
+{% endblock %}

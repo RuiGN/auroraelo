@@ -1,0 +1,109 @@
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% comment %}
+  Layout do design system Aurora Elo (menu superior, tema claro/escuro, Manrope local).
+  Usado pelas áreas novas (pós-alta/concierge). As telas legadas seguem em
+  layouts/vertical.html (Duralux) até migrarem. Sem script inline e sem fontes
+  externas: a CSP do produto só aceita recursos de 'self'.
+{% endcomment %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0a2342">
+  <meta name="application-name" content="Aurora Elo">
+  <title>{% block title %}{{ page_title|default:_("Aurora Elo") }}{% endblock %} · Aurora Elo</title>
+  <script src="{% static 'aurora_elo/js/theme-init.js' %}"></script>
+  <link rel="icon" type="image/png" href="{% static 'aurora_elo/img/aurora-elo-mark-160.png' %}">
+  <link rel="stylesheet" href="{% static 'aurora_elo/css/aurora-elo-fonts.css' %}">
+  <link rel="stylesheet" href="{% static 'aurora_elo/css/aurora-elo.css' %}">
+  <link rel="stylesheet" href="{% static 'aurora_elo/css/aurora-elo-extras.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  {% include "layouts/partials/ae_icons.html" %}
+
+  <a class="ae-skip" href="#conteudo">{% translate "Ir para o conteúdo principal" %}</a>
+
+  <header class="ae-navbar" data-ae-navbar>
+    <div class="ae-navbar__inner">
+      <a class="ae-brand" href="{% url 'workspace_vertical' %}" aria-label="{% translate 'Aurora Elo — início' %}">
+        <img class="ae-brand__mark" src="{% static 'aurora_elo/img/aurora-elo-mark-160.png' %}" alt="" width="40" height="40">
+        <span class="ae-brand__name"><span class="ae-brand__aurora">Aurora</span> <span class="ae-brand__elo">Elo</span></span>
+      </a>
+
+      <nav class="ae-nav" id="ae-menu" aria-label="{% translate 'Menu principal' %}">
+        {% block navbar_menu %}{% include "layouts/partials/ae_navbar_menu.html" %}{% endblock %}
+      </nav>
+
+      <div class="ae-navbar__end">
+        {% if ui_languages %}
+        <form method="post" action="{% url 'account_set_language' %}" class="ae-language m-0" data-ae-language-form>
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ ui_language_next }}">
+          <label class="ae-sr-only" for="ae-language-select">{% translate "Idioma" %}</label>
+          <span class="field-control-icon ae-control__icon ae-control__icon--nav" aria-hidden="true"><svg class="ae-icon"><use href="#i-globe"/></svg></span>
+          <select id="ae-language-select" class="ae-select ae-select--nav ae-select--icon" name="language" lang="{{ current_ui_language }}">
+            {% for language in ui_languages %}
+            <option value="{{ language.code }}"{% if language.code == current_ui_language %} selected{% endif %}>{{ language.name_local }}</option>
+            {% endfor %}
+          </select>
+          <noscript><button type="submit" class="ae-btn ae-btn--sm ae-btn--secondary">{% translate "Aplicar idioma" %}</button></noscript>
+        </form>
+        {% endif %}
+        <button type="button" class="ae-navbar__action ae-theme-toggle" data-ae-theme-toggle aria-label="{% translate 'Alternar tema claro/escuro' %}">
+          <svg class="ae-icon ae-icon--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="ae-icon ae-icon--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+        {% block navbar_user %}
+        {% if user.is_authenticated %}
+        <span class="ae-user">
+          <span class="ae-user__avatar" aria-hidden="true">{{ user.first_name|default:user.email|slice:":1"|upper }}</span>
+          <span class="ae-user__name">{{ user.get_short_name|default:user.email }}</span>
+        </span>
+        <form method="post" action="{% url 'account_logout' %}" class="m-0">
+          {% csrf_token %}
+          <button type="submit" class="ae-navbar__action" aria-label="{% translate 'Sair' %}" title="{% translate 'Sair' %}">
+            <svg class="ae-icon" aria-hidden="true"><use href="#i-log-out"/></svg>
+          </button>
+        </form>
+        {% endif %}
+        {% endblock %}
+        <button type="button" class="ae-navbar__toggle" aria-expanded="false" aria-controls="ae-menu" aria-label="{% translate 'Abrir menu' %}" data-ae-navbar-toggle>
+          <svg class="ae-icon ae-icon--menu" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="ae-icon ae-icon--close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="ae-main" id="conteudo" tabindex="-1">
+    {% if messages %}
+    <div class="ae-messages" role="status" aria-label="{% translate 'Mensagens do sistema' %}">
+      {% for message in messages %}
+      <div class="ae-alert{% if message.level_tag == 'error' %} ae-alert--danger{% elif message.level_tag == 'warning' %} ae-alert--warning{% elif message.level_tag == 'success' %} ae-alert--success{% endif %}"{% if message.level_tag == 'error' %} role="alert"{% endif %}>
+        <svg class="ae-icon" aria-hidden="true"><use href="#{% if message.level_tag == 'success' %}i-check{% elif message.level_tag == 'warning' or message.level_tag == 'error' %}i-alert{% else %}i-info{% endif %}"/></svg>
+        <div>{{ message }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block page_header %}{% endblock %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="ae-footer">
+    <div class="ae-footer__inner">
+      <span>© {% now "Y" %} Aurora Elo</span>
+      {% block footer_extra %}{% endblock %}
+    </div>
+  </footer>
+
+  <script src="{% static 'aurora_elo/js/aurora-elo.js' %}" defer></script>
+  <script src="{% static 'aurora_elo/js/language-select.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% load i18n %}
+{# Menu principal do layout Aurora Elo. A visibilidade é conveniência: o servidor autoriza cada rota. #}
+<ul class="ae-nav__list">
+  <li class="ae-nav__item">
+    <a class="ae-nav__link{% if request.resolver_match.url_name == 'workspace_vertical' %} is-active{% endif %}" href="{% url 'workspace_vertical' %}">{% translate "Início" %}</a>
+  </li>
+  {% if can_use_aftercare %}
+  <li class="ae-nav__item">
+    <button type="button" class="ae-nav__trigger{% if request.resolver_match.namespace == 'concierge' %} is-active{% endif %}" aria-expanded="false" aria-controls="menu-posalta" data-ae-dropdown-trigger>
+      {% translate "Pós-alta" %} <svg class="ae-icon" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+    </button>
+    <ul class="ae-dropdown" id="menu-posalta">
+      <li><a class="ae-dropdown__link"{% if request.resolver_match.url_name == 'dashboard' and request.resolver_match.namespace == 'concierge' %} aria-current="page"{% endif %} href="{% url 'concierge:dashboard' %}"><span class="ae-dropdown__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-heart-pulse"/></svg></span>{% translate "Acompanhamento" %}</a></li>
+      <li><a class="ae-dropdown__link" href="{% url 'concierge:contact_queue' %}"><span class="ae-dropdown__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-phone"/></svg></span>{% translate "Fila de contatos" %}</a></li>
+      <li><a class="ae-dropdown__link" href="{% url 'concierge:discharge_list' %}"><span class="ae-dropdown__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>{% translate "Altas" %}</a></li>
+      <li><a class="ae-dropdown__link" href="{% url 'concierge:request_list' %}"><span class="ae-dropdown__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-message"/></svg></span>{% translate "Pedidos dos pacientes" %}</a></li>
+      <li><a class="ae-dropdown__link" href="{% url 'concierge:log_list' %}"><span class="ae-dropdown__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-file"/></svg></span>{% translate "Registro do concierge" %}</a></li>
+      <li><a class="ae-dropdown__link" href="{% url 'concierge:rule_list' %}"><span class="ae-dropdown__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-sliders"/></svg></span>{% translate "Régua de comunicação" %}</a></li>
+    </ul>
+  </li>
+  {% endif %}
+  <li class="ae-nav__item">
+    <a class="ae-nav__link{% if request.resolver_match.url_name == 'patient_list' %} is-active{% endif %}" href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a>
+  </li>
+  <li class="ae-nav__item">
+    <a class="ae-nav__link{% if 'appointment' in request.resolver_match.url_name %} is-active{% endif %}" href="{% url 'appointment_list' %}">{% translate "Agenda" %}</a>
+  </li>
+</ul>

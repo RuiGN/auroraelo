@@ -1,0 +1,88 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li>{{ patient.full_name }}</li></ol>
+    <h1 class="ae-page-header__title">{{ patient.full_name }}</h1>
+    <p class="ae-page-header__lead">{% translate "Contato com a família e acompanhamento pós-alta. Este painel não mostra informações clínicas." %}</p>
+  </div>
+  <div class="ae-actions">
+    <a class="ae-btn" href="{% url 'concierge:log_create' patient.pk %}">{% translate "Registrar contato" %}</a>
+    <a class="ae-btn ae-btn--secondary" href="{% url 'concierge:request_create' patient.pk %}">{% translate "Registrar pedido" %}</a>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="ae-stack">
+  <section class="ae-card" aria-labelledby="sec-discharges">
+    <h2 class="ae-card__title" id="sec-discharges">{% translate "Altas e contatos pós-alta" %}</h2>
+    {% for discharge in discharges %}
+    <p class="ae-card__meta"><a href="{% url 'concierge:discharge_detail' discharge.pk %}">{% blocktranslate with date=discharge.discharge_date|date:"SHORT_DATE_FORMAT" %}Alta em {{ date }}{% endblocktranslate %}</a> · {{ discharge.get_status_display }}</p>
+    {% empty %}<p class="ae-card__meta">{% translate "Nenhuma alta registrada para este paciente." %}</p>{% endfor %}
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-family">
+    <div class="ae-actions"><h2 class="ae-card__title" id="sec-family">{% translate "Família" %}</h2>
+      <a class="ae-btn ae-btn--sm ae-btn--secondary" href="{% url 'concierge:family_create' patient.pk %}">{% translate "Adicionar familiar" %}</a></div>
+    {% if family_contacts %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Contatos da família" %}</caption>
+        <thead><tr><th scope="col">{% translate "Nome" %}</th><th scope="col">{% translate "Contato" %}</th><th scope="col">{% translate "Autorização do paciente" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+        <tbody>
+          {% for family in family_contacts %}
+          <tr>
+            <td><span class="ae-table__strong">{{ family.full_name }}{% if family.is_primary %} <span class="ae-badge ae-badge--info">{% translate "Principal" %}</span>{% endif %}</span><span class="ae-table__meta">{{ family.relationship }}</span></td>
+            <td>{% if family.phone %}{{ family.phone }}{% endif %}{% if family.email %}<span class="ae-table__meta">{{ family.email }}</span>{% endif %}</td>
+            <td>{% if not family.is_active %}<span class="ae-badge ae-badge--muted">{% translate "Inativo" %}</span>{% elif family.consent_to_contact %}<span class="ae-badge ae-badge--success">{% translate "Autorizado" %}</span><span class="ae-table__meta">{{ family.consent_note }}</span>{% else %}<span class="ae-badge ae-badge--warning">{% translate "Sem autorização" %}</span>{% endif %}</td>
+            <td class="ae-table__actions ae-actions ae-actions--end">
+              {% if family.is_active %}
+              <a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'concierge:family_consent' family.pk %}">{% translate "Autorização" %}</a>
+              <a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'concierge:family_edit' family.pk %}">{% translate "Editar" %}</a>
+              <form method="post" action="{% url 'concierge:family_deactivate' family.pk %}" class="ae-inline-form">{% csrf_token %}<button class="ae-btn ae-btn--sm ae-btn--ghost" type="submit">{% translate "Inativar" %}</button></form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}<p class="ae-card__meta">{% translate "Nenhum familiar cadastrado." %}</p>{% endif %}
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-requests">
+    <h2 class="ae-card__title" id="sec-requests">{% translate "Pedidos do paciente à família" %}</h2>
+    {% if requests %}
+    <ul class="ae-timeline">
+      {% for item in requests %}
+      <li class="ae-timeline__item">
+        <span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-message"/></svg></span>
+        <div><p class="ae-timeline__title">{{ item.get_kind_display }} · {{ item.family_contact.full_name }} <span class="ae-badge ae-badge--{% if item.status == 'fulfilled' %}success{% elif item.status == 'open' %}warning{% elif item.status == 'forwarded' %}info{% else %}muted{% endif %}">{{ item.get_status_display }}</span></p>
+          <p class="ae-timeline__body">{{ item.description }}</p>
+          <p class="ae-timeline__meta">{{ item.requested_at|date:"SHORT_DATETIME_FORMAT" }}{% if item.resolution_note %} · {{ item.resolution_note }}{% endif %}</p></div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="ae-card__meta">{% translate "Nenhum pedido registrado." %}</p>{% endif %}
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-timeline">
+    <h2 class="ae-card__title" id="sec-timeline">{% translate "Linha do tempo" %}</h2>
+    {% if timeline %}
+    <ol class="ae-timeline">
+      {% for item in timeline %}
+      <li class="ae-timeline__item">
+        <span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#{% if item.kind == 'log' %}i-phone{% elif item.kind == 'request' %}i-message{% else %}i-calendar{% endif %}"/></svg></span>
+        <div>
+          <p class="ae-timeline__title">{{ item.title }}{% if item.kind == "log" and item.obj.family_contact %} · {{ item.obj.family_contact.full_name }}{% endif %}</p>
+          <p class="ae-timeline__body">{{ item.detail }}</p>
+          <p class="ae-timeline__meta">{{ item.when|date:"SHORT_DATETIME_FORMAT" }}{% if item.kind == "log" %} · {{ item.obj.recorded_by.get_short_name|default:item.obj.recorded_by.email }}{% if item.obj.corrects_id %} · {% translate "correção de um registro anterior" %}{% endif %}{% if not item.obj.corrections.all %} · <a href="{% url 'concierge:log_correct' item.obj.pk %}">{% translate "Corrigir" %}</a>{% endif %}{% endif %}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}<p class="ae-card__meta">{% translate "Ainda não há contatos registrados." %}</p>{% endif %}
+  </section>
+</div>
+{% endblock %}

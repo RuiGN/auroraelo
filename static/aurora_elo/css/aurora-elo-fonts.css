@@ -1,0 +1,6 @@
+/* Manrope hospedada localmente (licença SIL OFL, ver ../fonts/LICENSE-OFL.txt).
+   A CSP do produto só aceita fontes de 'self'; por isso não usamos o Google Fonts. */
+@font-face { font-family: "Manrope"; font-weight: 500; font-style: normal; font-display: swap; src: url("../fonts/Manrope-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Manrope"; font-weight: 600; font-style: normal; font-display: swap; src: url("../fonts/Manrope-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Manrope"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/Manrope-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Manrope"; font-weight: 800; font-style: normal; font-display: swap; src: url("../fonts/Manrope-ExtraBold.ttf") format("truetype"); }

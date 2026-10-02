@@ -10,22 +10,27 @@ from django.utils import timezone
 
 from .models import ClinicConfiguration
 from .policies import ClinicAuthorizationPolicy, has_active_clinic_role
-from .selectors import active_clinics_for_actor
+from .selectors import active_web_clinics_for_actor
 from .typing import ClinicRequest
 
 
 def clinic_navigation(request: HttpRequest) -> dict[str, Any]:
     """Expose only the current actor's authorized active clinic choices."""
     clinic_request = cast(ClinicRequest, request)
-    if not hasattr(request, "user") or not isinstance(request.user, AbstractBaseUser) or clinic_request.clinic is None:
+    if (
+        not hasattr(request, "user")
+        or not isinstance(request.user, AbstractBaseUser)
+        or clinic_request.clinic is None
+    ):
         return {
             "active_clinic": None,
             "active_clinic_branding": None,
             "available_clinics": [],
             "can_manage_active_clinic": False,
-            "is_patient": False,
             "is_therapist": False,
             "is_clinic_admin": False,
+            "can_use_aftercare": False,
+            "can_manage_aftercare_rules": False,
         }
     branding = (
         ClinicConfiguration.objects.for_clinic(clinic_request.clinic.pk)
@@ -38,19 +43,22 @@ def clinic_navigation(request: HttpRequest) -> dict[str, Any]:
     return {
         "active_clinic": clinic_request.clinic,
         "active_clinic_branding": branding,
-        "available_clinics": active_clinics_for_actor(request.user),
+        "available_clinics": active_web_clinics_for_actor(request.user),
         "can_manage_active_clinic": ClinicAuthorizationPolicy().is_allowed(
             request.user,
             clinic_request.clinic,
             "clinic.manage",
-        ),
-        "is_patient": has_active_clinic_role(
-            clinic_id=clinic_id, user_id=user_id, role="patient", on_date=today
         ),
         "is_therapist": has_active_clinic_role(
             clinic_id=clinic_id, user_id=user_id, role="therapist", on_date=today
         ),
         "is_clinic_admin": has_active_clinic_role(
             clinic_id=clinic_id, user_id=user_id, role="clinic_admin", on_date=today
+        ),
+        "can_use_aftercare": ClinicAuthorizationPolicy().is_allowed(
+            request.user, clinic_request.clinic, "aftercare.read"
+        ),
+        "can_manage_aftercare_rules": ClinicAuthorizationPolicy().is_allowed(
+            request.user, clinic_request.clinic, "aftercare.rules.manage"
         ),
     }

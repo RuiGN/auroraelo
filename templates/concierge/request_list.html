@@ -1,0 +1,49 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li>{% translate "Pedidos dos pacientes" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Pedidos dos pacientes" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Pedidos feitos pelos pacientes aos familiares. Um pedido só vira «encaminhado» depois que o contato com a família é registrado." %}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form class="ae-toolbar" method="get" role="search">
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="situacao">{% translate "Situação" %}</label>
+    <div class="ae-control"><span class="field-control-icon ae-control__icon" aria-hidden="true"><svg class="ae-icon"><use href="#i-checklist"/></svg></span><select class="ae-select ae-select--icon" id="situacao" name="situacao">
+      <option value="open"{% if status == "open" %} selected{% endif %}>{% translate "Em aberto" %}</option>
+      <option value="fulfilled"{% if status == "fulfilled" %} selected{% endif %}>{% translate "Atendidos" %}</option>
+      <option value="declined"{% if status == "declined" %} selected{% endif %}>{% translate "Não atendidos" %}</option>
+      <option value="canceled"{% if status == "canceled" %} selected{% endif %}>{% translate "Cancelados" %}</option>
+      <option value="all"{% if status == "all" %} selected{% endif %}>{% translate "Todos" %}</option>
+    </select></div></div>
+  <button class="ae-btn ae-btn--secondary" type="submit">{% translate "Filtrar" %}</button>
+</form>
+{% if requests %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Pedidos à família" %}</caption>
+    <thead><tr><th scope="col">{% translate "Paciente" %}</th><th scope="col">{% translate "Pedido" %}</th><th scope="col">{% translate "Familiar" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+    <tbody>
+      {% for item in requests %}
+      <tr>
+        <td><a class="ae-table__strong" href="{% url 'concierge:patient_detail' item.patient_profile_id %}">{{ item.patient_profile.full_name }}</a><span class="ae-table__meta">{{ item.requested_at|date:"SHORT_DATETIME_FORMAT" }}</span></td>
+        <td>{{ item.get_kind_display }}<span class="ae-table__meta">{{ item.description }}</span></td>
+        <td>{{ item.family_contact.full_name }}</td>
+        <td><span class="ae-badge ae-badge--{% if item.status == 'fulfilled' %}success{% elif item.status == 'open' %}warning{% elif item.status == 'forwarded' %}info{% else %}muted{% endif %}">{{ item.get_status_display }}</span>{% if item.status == "open" %}<span class="ae-table__meta">{% translate "A família ainda não foi contatada." %}</span>{% endif %}</td>
+        <td class="ae-table__actions ae-actions ae-actions--end">
+          {% if item.status == "open" %}<a class="ae-btn ae-btn--sm" href="{% url 'concierge:request_forward' item.pk %}">{% translate "Registrar encaminhamento" %}</a>{% endif %}
+          {% if item.status == "forwarded" %}<a class="ae-btn ae-btn--sm" href="{% url 'concierge:request_resolve' item.pk %}">{% translate "Concluir" %}</a>{% endif %}
+          {% if item.status == "open" or item.status == "forwarded" %}<a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'concierge:request_cancel' item.pk %}">{% translate "Cancelar" %}</a>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="ae-card ae-empty">{% translate "Nenhum pedido encontrado." %}</div>
+{% endif %}
+{% endblock %}
