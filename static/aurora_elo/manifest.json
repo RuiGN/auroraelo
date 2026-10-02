@@ -1,0 +1,52 @@
+{
+  "name": "Aurora Elo — Clínica",
+  "short_name": "Aurora Elo",
+  "description": "Plataforma de gestão clínica para equipes de saúde mental e psiquiatria.",
+  "start_url": "/workspace/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A2540",
+  "theme_color": "#0A2540",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["health", "medical", "business"],
+  "icons": [
+    {
+      "src": "/static/aurora_elo/img/aurora-elo-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/aurora_elo/img/aurora-elo-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/static/aurora_elo/img/aurora-elo-emblem.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Agenda",
+      "short_name": "Agenda",
+      "description": "Acessar agenda de consultas",
+      "url": "/scheduling/",
+      "icons": [{ "src": "/static/aurora_elo/img/aurora-elo-icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prontuários",
+      "short_name": "Prontuários",
+      "description": "Acessar prontuários de pacientes",
+      "url": "/people/",
+      "icons": [{ "src": "/static/aurora_elo/img/aurora-elo-icon.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

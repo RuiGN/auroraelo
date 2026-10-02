@@ -16,7 +16,8 @@ from .models import ConsentRevocationWorkItem
 
 def revocation_work_notifications(request: HttpRequest) -> dict[str, Any]:
     """Return a minimized pending count only for an active clinic administrator."""
-    actor = request.user
+    # Guard: AuthenticationMiddleware may not have run yet for exempt paths.
+    actor = getattr(request, "user", None)
     clinic_id = getattr(getattr(request, "clinic", None), "pk", None)
     if not isinstance(actor, AbstractBaseUser) or not isinstance(clinic_id, UUID):
         return {"pending_consent_revocation_count": 0}
