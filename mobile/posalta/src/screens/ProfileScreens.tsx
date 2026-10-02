@@ -1,0 +1,357 @@
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Button } from "../components/Button";
+import { Card, Divider, ListRow } from "../components/Card";
+import {
+  Alert,
+  Badge,
+  currentModeKey,
+  FeedbackAlert,
+  useActionFeedback,
+} from "../components/Feedback";
+import { ChipGroup } from "../components/Form";
+import { Icon } from "../components/Icon";
+import {
+  BrandMark,
+  Screen,
+  Section,
+  UnavailableState,
+  Wordmark,
+} from "../components/Layout";
+import { Text } from "../components/Text";
+import { mutations } from "../data/mutations";
+import { useStore } from "../data/store";
+import {
+  ConsentPurposeKey,
+  PrivacyRequestType,
+  TeamRole,
+} from "../domain/types";
+import { catalogs, Locale, localeLabels, useI18n } from "../i18n";
+import { useNav } from "../navigation/useNav";
+import { ThemePreference, useTheme } from "../theme/ThemeProvider";
+
+const ROLE_ICON = {
+  psychiatrist: "stethoscope",
+  psychologist: "message",
+  nurse: "heart-pulse",
+  pharmacist: "pill",
+  other: "patient",
+} as const satisfies Record<TeamRole, string>;
+
+// ── Perfil ──────────────────────────────────────────────────────────────────
+
+export function ProfileScreen() {
+  const { t, formatDate } = useI18n();
+  const nav = useNav();
+  const store = useStore();
+  const { colors } = useTheme();
+  const snapshot = store.snapshot;
+  return (
+    <Screen testID="screen-profile">
+      <Card>
+        <View style={styles.brandRow}>
+          <BrandMark size={44} />
+          <View style={styles.flex}>
+            <Wordmark tone="surface" size="md" />
+            <Text variant="bodySm" tone="muted">
+              {t("brand.tagline")}
+            </Text>
+          </View>
+        </View>
+        {snapshot ? (
+          <>
+            <Divider />
+            <Text variant="title2" header>
+              {snapshot.patient.displayName}
+            </Text>
+            <Text variant="bodySm" tone="muted">
+              {snapshot.patient.clinicName} •{" "}
+              {t("profile.discharge", {
+                date: formatDate(snapshot.patient.dischargeDate),
+              })}
+            </Text>
+          </>
+        ) : null}
+      </Card>
+
+      {snapshot ? (
+        <>
+          <Section title={t("profile.team")}>
+            <Card>
+              {snapshot.patient.careTeam.map((member, index) => (
+                <View key={member.id}>
+                  {index > 0 ? <Divider /> : null}
+                  <ListRow
+                    icon={ROLE_ICON[member.role]}
+                    title={member.name}
+                    subtitle={t(`profile.role.${member.role}`)}
+                  />
+                </View>
+              ))}
+            </Card>
+            <View style={styles.note}>
+              <Icon name="lock" size={16} color={colors.inkMuted} />
+              <Text variant="bodySm" tone="muted" style={styles.flex}>
+                {t("profile.psychotherapyNote")}
+              </Text>
+            </View>
+          </Section>
+        </>
+      ) : (
+        <UnavailableState />
+      )}
+
+      <Card>
+        <ListRow
+          testID="profile-settings"
+          icon="sliders"
+          title={t("settings.title")}
+          subtitle={`${t("settings.language")}, ${t("settings.appearance")}`}
+          onPress={() => nav.navigate("Settings")}
+        />
+        <Divider />
+        <ListRow
+          testID="profile-privacy"
+          icon="shield"
+          title={t("privacy.title")}
+          onPress={() => nav.navigate("Privacy")}
+        />
+      </Card>
+    </Screen>
+  );
+}
+
+// ── Configurações ───────────────────────────────────────────────────────────
+
+const THEMES: ThemePreference[] = ["system", "light", "dark"];
+
+export function SettingsScreen() {
+  const { t, locale, setLocale, busy, storageError } = useI18n();
+  const theme = useTheme();
+  const locales = Object.keys(catalogs) as Locale[];
+  return (
+    <Screen testID="screen-settings">
+      <Card>
+        <ChipGroup
+          testID="settings-language"
+          label={t("settings.language")}
+          value={locale}
+          onChange={(next) => void setLocale(next)}
+          options={locales.map((code) => ({
+            value: code,
+            label: localeLabels[code],
+          }))}
+        />
+        <Text variant="bodySm" tone="muted">
+          {t("settings.language.note")}
+        </Text>
+        {busy ? (
+          <Text variant="bodySm" tone="muted" accessibilityLiveRegion="polite">
+            {t("common.loading")}
+          </Text>
+        ) : null}
+      </Card>
+      <Card>
+        <ChipGroup
+          testID="settings-theme"
+          label={t("settings.appearance")}
+          value={theme.preference}
+          onChange={theme.setPreference}
+          options={THEMES.map((value) => ({
+            value,
+            label: t(`settings.theme.${value}`),
+          }))}
+        />
+      </Card>
+      {storageError || theme.storageError ? (
+        <Alert tone="warning" live>
+          {t("settings.storageError")}
+        </Alert>
+      ) : null}
+      <Card>
+        <View style={styles.rowGap}>
+          <Icon name="bell" size={20} color={theme.colors.inkMuted} />
+          <Text variant="title3" header>
+            {t("settings.reminders")}
+          </Text>
+        </View>
+        <Text variant="bodySm" tone="muted">
+          {t("settings.reminders.off")}
+        </Text>
+      </Card>
+      <Card>
+        <Text variant="title3" header>
+          {t("settings.about")}
+        </Text>
+        <Text variant="bodySm">{t("settings.about.body")}</Text>
+        <Text variant="bodySm" tone="muted">
+          {t(currentModeKey)} • {t("common.version", { version: "1.0.0" })}
+        </Text>
+        <Text variant="bodySm" tone="muted">
+          {t("settings.storage")}
+        </Text>
+      </Card>
+    </Screen>
+  );
+}
+
+// ── Privacidade e consentimentos ────────────────────────────────────────────
+
+const REQUEST_TYPES: PrivacyRequestType[] = [
+  "confirmation",
+  "access",
+  "correction",
+  "portability",
+  "revocation",
+  "erasure",
+];
+
+export function PrivacyScreen() {
+  const { t, formatDate } = useI18n();
+  const store = useStore();
+  const { feedback, report, setFeedback } = useActionFeedback();
+  const snapshot = store.snapshot;
+
+  const toggleConsent = (purpose: ConsentPurposeKey, granted: boolean) =>
+    report(
+      store.run(mutations.setConsent({ purpose, granted })),
+      "common.done",
+    );
+
+  const requestRight = (type: PrivacyRequestType) => {
+    const outcome = store.run(mutations.createPrivacyRequest(type));
+    if (!outcome.ok && outcome.reason === "invalid") {
+      setFeedback({ tone: "warning", text: t("privacy.request.duplicate") });
+      return;
+    }
+    report(outcome, "privacy.request.sent");
+  };
+
+  return (
+    <Screen testID="screen-privacy">
+      <Text variant="body" tone="muted">
+        {t("privacy.intro")}
+      </Text>
+      <FeedbackAlert feedback={feedback} />
+      {!snapshot ? (
+        <UnavailableState />
+      ) : (
+        <>
+          <Section title={t("privacy.consents")}>
+            {snapshot.consents.map((consent) => (
+              <Card key={consent.id} testID={`consent-${consent.purpose}`}>
+                <View style={styles.between}>
+                  <Text variant="title3" style={styles.flex}>
+                    {t(`privacy.consent.${consent.purpose}`)}
+                  </Text>
+                  <Badge
+                    label={t(
+                      consent.status === "granted"
+                        ? "privacy.consent.granted"
+                        : "privacy.consent.revoked",
+                    )}
+                    tone={consent.status === "granted" ? "success" : "neutral"}
+                  />
+                </View>
+                <Text variant="bodySm" tone="muted">
+                  {t("privacy.consent.version", {
+                    version: consent.documentVersion,
+                    date: formatDate(consent.decidedAt),
+                  })}
+                </Text>
+                {consent.mandatory ? (
+                  <Text variant="bodySm" tone="muted">
+                    {t("privacy.consent.mandatory")}
+                  </Text>
+                ) : (
+                  <Button
+                    label={
+                      consent.status === "granted"
+                        ? t("privacy.consent.revoke")
+                        : t("privacy.consent.grant")
+                    }
+                    variant={
+                      consent.status === "granted" ? "secondary" : "primary"
+                    }
+                    size="sm"
+                    testID={`consent-toggle-${consent.purpose}`}
+                    onPress={() =>
+                      toggleConsent(
+                        consent.purpose,
+                        consent.status !== "granted",
+                      )
+                    }
+                  />
+                )}
+              </Card>
+            ))}
+            <Text variant="bodySm" tone="muted">
+              {t("privacy.mandatoryNote")}
+            </Text>
+          </Section>
+
+          <Section title={t("privacy.rights")}>
+            <Text variant="bodySm" tone="muted">
+              {t("privacy.rights.intro")}
+            </Text>
+            <Card>
+              {REQUEST_TYPES.map((type, index) => (
+                <View key={type}>
+                  {index > 0 ? <Divider /> : null}
+                  <ListRow
+                    testID={`privacy-request-${type}`}
+                    icon="file"
+                    title={t(`privacy.request.${type}`)}
+                    trailing={
+                      <Button
+                        label={t("privacy.request.open")}
+                        size="sm"
+                        variant="secondary"
+                        testID={`privacy-open-${type}`}
+                        onPress={() => requestRight(type)}
+                      />
+                    }
+                  />
+                </View>
+              ))}
+            </Card>
+          </Section>
+
+          <Section title={t("privacy.requests")}>
+            {snapshot.privacyRequests.length === 0 ? (
+              <Text variant="bodySm" tone="muted">
+                {t("privacy.requests.none")}
+              </Text>
+            ) : (
+              <Card>
+                {snapshot.privacyRequests.map((request, index) => (
+                  <View key={request.id}>
+                    {index > 0 ? <Divider /> : null}
+                    <ListRow
+                      icon="clock"
+                      title={t(`privacy.request.${request.type}`)}
+                      subtitle={`${formatDate(request.requestedAt)} • ${t(`privacy.request.status.${request.status}`)}`}
+                    />
+                  </View>
+                ))}
+              </Card>
+            )}
+          </Section>
+        </>
+      )}
+    </Screen>
+  );
+}
+
+const styles = StyleSheet.create({
+  brandRow: { flexDirection: "row", alignItems: "center", gap: 12 },
+  flex: { flex: 1 },
+  between: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: 8,
+  },
+  note: { flexDirection: "row", gap: 8, alignItems: "flex-start" },
+  rowGap: { flexDirection: "row", alignItems: "center", gap: 8 },
+});

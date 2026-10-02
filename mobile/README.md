@@ -1,7 +1,8 @@
 # Aurora Elo — aplicativos mobile
 
-Dois projetos Expo independentes: `b2c` (recuperação e apoio pessoal) e
-`connected` (vínculo com o cuidado, ainda **sem integração clínica**).
+Três projetos Expo independentes: `b2c` (recuperação e apoio pessoal), `connected`
+(vínculo com o cuidado, ainda **sem integração clínica**) e `posalta` (app do
+paciente depois da alta; ver [`posalta/README.md`](posalta/README.md)).
 
 ## O que funciona localmente
 
@@ -32,6 +33,35 @@ npm start
 `export` gera JS web e bytecode Hermes iOS/Android em `dist/`. **Não gera APK,
 AAB ou IPA, não valida dispositivo e não publica nada.** Não há configuração EAS.
 Os scripts Expo não carregam `.env`. Não inserir segredos em `EXPO_PUBLIC_*`.
+
+## Executar neste Mac (Simulador iOS)
+
+Este Mac é Intel x86_64 e tem o runtime iOS 26.5 instalado no Xcode. Para compilar
+e abrir o protótipo no Simulador, sem assinatura e sem aparelho físico:
+
+```sh
+chmod +x mobile/scripts/run-mac-simulator.sh   # apenas uma vez
+mobile/scripts/run-mac-simulator.sh recuperacao
+mobile/scripts/run-mac-simulator.sh clinica
+```
+
+O script compila em Release para `iphonesimulator` usando `build/DerivedData-Sim`
+(separado do build de dispositivo), gera `ios/` e roda `pod install` se faltarem, e
+depois instala e abre o app no simulador indicado. O primeiro build compila os pods
+do zero e é demorado (mais de uma hora neste Intel i5); os seguintes são
+incrementais. Nada é publicado, nada é assinado e nenhum dado real é usado.
+
+Notas específicas deste Mac (Xcode 26 + Intel):
+
+- O runtime iOS 26.5 já está instalado; não rode `xcodebuild -downloadPlatform iOS`,
+  que trava neste ambiente.
+- O Xcode 26 não compila o `fmt` 11 do React Native por causa do `consteval`; o
+  workaround aplicado é forçar `#define FMT_USE_CONSTEVAL 0` em
+  `Pods/fmt/include/fmt/base.h` (diretório gerado; se perde em um novo `pod install`).
+- Alguns builds de simulador terminam com `build.db: disk I/O error` depois de gerar
+  o `.app` completo; o script detecta o produto válido e continua.
+- A instalação é feita com o simulador em modo headless; abra o Simulator.app depois,
+  ou use `ABRIR_SIMULADOR=1 mobile/scripts/run-mac-simulator.sh recuperacao`.
 
 ## API: infraestrutura preparada, integração bloqueada
 

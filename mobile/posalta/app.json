@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Aurora Elo Pós-Alta",
+    "slug": "aurora-elo-posalta",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "platforms": ["ios", "android", "web"],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f3f7fb"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "br.med.auroraelo.posalta"
+    },
+    "android": {
+      "package": "br.med.auroraelo.posalta",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [],
+      "blockedPermissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.POST_NOTIFICATIONS"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png",
+      "name": "Aurora Elo Pós-Alta",
+      "themeColor": "#0a2342",
+      "backgroundColor": "#f3f7fb"
+    },
+    "plugins": ["expo-asset", "expo-font"],
+    "newArchEnabled": true
+  }
+}
