@@ -21,6 +21,7 @@ from .typing import ClinicRequest
 TENANT_EXEMPT_PATH_PREFIXES = (
     "/accounts/",
     "/admin/",
+    "/api/v1/mobile/",  # app Pós-Alta: auth Bearer via Ninja, sem sessão de clínica
     "/health/",
     "/master/",
     "/administracao/",
