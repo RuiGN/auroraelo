@@ -9,8 +9,15 @@ do próprio paciente.
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from django.db.models import QuerySet
+
+    from goals.models import Goal, GoalStep
+    from mobile_api.services import AuthenticatedMobileSession
+    from scheduling.models import Appointment
 
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.http import HttpRequest
@@ -94,7 +101,7 @@ class CancelIn(Schema):
     reason: str = Field(default="", max_length=MAX_REASON)
 
 
-def _appointment_out(item, names: dict[UUID, str]) -> AppointmentOut:
+def _appointment_out(item: Appointment, names: dict[UUID, str]) -> AppointmentOut:
     return AppointmentOut(
         id=item.pk,
         service_name=item.service.name,
@@ -107,8 +114,8 @@ def _appointment_out(item, names: dict[UUID, str]) -> AppointmentOut:
     )
 
 
-def _own_appointments(context):
-    return appointments_visible_to(clinic_id=context.clinic_id, actor=context.user)
+def _own_appointments(context: AuthenticatedMobileSession) -> list[Appointment]:
+    return list(appointments_visible_to(clinic_id=context.clinic_id, actor=context.user))
 
 
 @router.get("/appointments/", response=list[AppointmentOut])
@@ -254,7 +261,9 @@ def create_appointment(request: HttpRequest, payload: AppointmentRequestIn):
     return Status(201, _appointment_out(own.get(appointment.pk, appointment), names))
 
 
-def _owned(context, appointment_id: UUID):
+def _owned(
+    context: AuthenticatedMobileSession, appointment_id: UUID
+) -> Appointment | None:
     return next((i for i in _own_appointments(context) if i.pk == appointment_id), None)
 
 
@@ -281,7 +290,10 @@ def cancel(request: HttpRequest, appointment_id: UUID, payload: CancelIn):
         clinic_id=context.clinic_id,
         user_ids={i.professional_id for i in _own_appointments(context)},
     )
-    return Status(200, _appointment_out(_owned(context, appointment_id), names))
+    refreshed = _owned(context, appointment_id)
+    if refreshed is None:
+        return problem(404, "Consulta não encontrada após cancelamento.", "not_found")
+    return Status(200, _appointment_out(refreshed, names))
 
 
 @router.post(
@@ -330,7 +342,10 @@ def reschedule(request: HttpRequest, appointment_id: UUID, payload: RescheduleIn
     names = professional_display_names(
         clinic_id=context.clinic_id, user_ids={current.professional_id}
     )
-    return Status(200, _appointment_out(_owned(context, appointment_id), names))
+    refreshed = _owned(context, appointment_id)
+    if refreshed is None:
+        return problem(404, "Consulta não encontrada após remarcação.", "not_found")
+    return Status(200, _appointment_out(refreshed, names))
 
 
 # ── Metas ───────────────────────────────────────────────────────────────────
@@ -361,7 +376,7 @@ class GoalStatusIn(Schema):
     status: Literal["active", "paused", "completed"]
 
 
-def _goal_out(goal, steps) -> GoalOut:
+def _goal_out(goal: Goal, steps: list[GoalStep]) -> GoalOut:
     return GoalOut(
         id=goal.pk,
         title=goal.title,

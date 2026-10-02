@@ -89,7 +89,7 @@ def test_layout_renders_without_inline_scripts_or_external_resources() -> None:
     assert "fonts.googleapis.com" not in html
     assert 'class="ae-navbar"' in html and "data-ae-navbar" in html
     assert "aurora_elo/img/aurora-elo-mark-160.png" in html
-    assert 'data-ae-theme-toggle' in html
+    assert "data-ae-theme-toggle" in html
     assert "Teste · Aurora Elo" in html
 
 

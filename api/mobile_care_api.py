@@ -516,7 +516,7 @@ def _latest_completed(assignment: ExerciseAssignment) -> ExerciseExecution | Non
     done = [
         item for item in assignment.executions.all() if item.completed_at is not None
     ]
-    return max(done, key=lambda item: item.completed_at) if done else None
+    return max(done, key=lambda item: item.completed_at or datetime.min) if done else None
 
 
 def _exercise_out(

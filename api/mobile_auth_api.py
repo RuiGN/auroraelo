@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import Any
 from uuid import UUID
 
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -380,7 +381,9 @@ def list_sessions(request: HttpRequest):
     auth=bearer,
     response={204: None, 404: MobileErrorOut},
 )
-def revoke_device(request: HttpRequest, session_id: UUID):
+def revoke_device(
+    request: HttpRequest, session_id: UUID
+) -> Any:  # Ninja: Status[T]
     """Encerra outro aparelho. Id inexistente ou alheio responde igual (404)."""
     context = mobile_context(request)
     try:
@@ -396,7 +399,7 @@ def revoke_device(request: HttpRequest, session_id: UUID):
 
 
 @router.post("/sessions/revoke-others/", auth=bearer, response={200: dict[str, int]})
-def revoke_others(request: HttpRequest):
+def revoke_others(request: HttpRequest) -> Any:  # Ninja: Status[T]
     """Encerra todos os outros aparelhos, mantendo este."""
     context = mobile_context(request)
     count = revoke_other_sessions(
