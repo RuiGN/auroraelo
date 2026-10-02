@@ -26,7 +26,7 @@ def _learner() -> tuple[Clinic, User]:
     clinic = ClinicFactory.create()
     learner = UserFactory.create()
     ClinicMembershipFactory.create(
-        clinic=clinic, user=learner, role=ClinicMembership.Role.PATIENT
+        clinic=clinic, user=learner, role=ClinicMembership.Role.ADMINISTRATIVE_STAFF
     )
     return clinic, learner
 

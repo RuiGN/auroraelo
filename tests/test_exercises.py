@@ -315,7 +315,7 @@ def test_private_visibility_blocks_therapist_comments() -> None:
 
 
 def test_exercise_http_flow(client: Client) -> None:
-    """8.7.4 & 8.7.5: Full HTTP flow for catalog, assignment, execution and comments."""
+    """8.7.4 & 8.7.5: team HTTP flow for catalog, assignment, review and comments."""
     clinic = ClinicFactory.create()
     therapist, patient_user, profile = _setup_clinic_therapist_and_patient(clinic)
 
@@ -354,25 +354,21 @@ def test_exercise_http_flow(client: Client) -> None:
         exercise_id=exercise.pk, patient_profile_id=profile.pk
     )
 
-    # 3. Patient views exercises list and executes
-    _force_client(client, clinic, patient_user)
-    list_res = client.get(reverse("patient_exercise_list"))
-    assert list_res.status_code == 200
-    assert "Respiração Guiada" in list_res.content.decode()
-
-    # Patient executes
-    execute_res = client.post(
-        reverse(
-            "patient_exercise_execute",
-            kwargs={"assignment_id": assignment.pk},
-        ),
-        data={
-            "action": "submit",
-            "response_text": "Me senti mais calmo.",
-            "visibility": ExerciseVisibility.SHAREABLE,
-        },
+    # 3. O paciente responde só pelo aplicativo (não há mais tela web de paciente)
+    started = exercise_services.start_or_resume_execution(
+        clinic_id=clinic.pk,
+        actor=patient_user,
+        assignment_id=assignment.pk,
+        request_id=uuid4(),
     )
-    assert execute_res.status_code == 302
+    exercise_services.submit_execution(
+        clinic_id=clinic.pk,
+        actor=patient_user,
+        execution_id=started.pk,
+        response_data={"text": "Me senti mais calmo."},
+        visibility=ExerciseVisibility.SHAREABLE,
+        request_id=uuid4(),
+    )
 
     execution = ExerciseExecution.objects.for_clinic(clinic.pk).get(
         assignment_id=assignment.pk

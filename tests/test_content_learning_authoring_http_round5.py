@@ -132,7 +132,7 @@ def test_enrollment_http_enrolls_active_member_in_published_course(
     admin, instructor = _clinic_team(clinic)
     patient = UserFactory.create()
     ClinicMembershipFactory.create(
-        clinic=clinic, user=patient, role=ClinicMembership.Role.PATIENT
+        clinic=clinic, user=patient, role=ClinicMembership.Role.ADMINISTRATIVE_STAFF
     )
     course = content_models.Course.infrastructure_objects.create(
         clinic=clinic,
@@ -166,7 +166,7 @@ def test_enrollment_http_replays_idempotently_and_rejects_foreign_course(
     admin, instructor = _clinic_team(clinic)
     patient = UserFactory.create()
     ClinicMembershipFactory.create(
-        clinic=clinic, user=patient, role=ClinicMembership.Role.PATIENT
+        clinic=clinic, user=patient, role=ClinicMembership.Role.ADMINISTRATIVE_STAFF
     )
     course = content_models.Course.infrastructure_objects.create(
         clinic=clinic,
@@ -222,7 +222,7 @@ def test_enrollment_http_denies_non_member_and_draft_course(client: Client) -> N
     admin, instructor = _clinic_team(clinic)
     patient = UserFactory.create()
     ClinicMembershipFactory.create(
-        clinic=clinic, user=patient, role=ClinicMembership.Role.PATIENT
+        clinic=clinic, user=patient, role=ClinicMembership.Role.ADMINISTRATIVE_STAFF
     )
     draft = content_models.Course.infrastructure_objects.create(
         clinic=clinic,

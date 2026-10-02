@@ -211,9 +211,7 @@ def reschedule_appointment(
     "/appointments/{appointment_id}/cancel/",
     response={200: AppointmentOut, 422: ErrorOut},
 )
-def cancel_appointment(
-    request: HttpRequest, appointment_id: UUID, payload: CancelIn
-):
+def cancel_appointment(request: HttpRequest, appointment_id: UUID, payload: CancelIn):
     """Cancel an appointment with optional reason."""
     from scheduling.services import cancel_appointment as svc_cancel
 

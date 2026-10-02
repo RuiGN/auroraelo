@@ -22,7 +22,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from accounts.models import User
 from accounts.services import rotate_current_session_tracking
-from clinics.selectors import active_clinics_for_actor
+from clinics.selectors import active_web_clinics_for_actor
 from clinics.services import UnauthorizedClinicError, switch_active_clinic
 from clinics.typing import ClinicRequest
 from core.forms import DesignSystemExampleForm
@@ -284,7 +284,10 @@ def home(request: HttpRequest) -> HttpResponse:
     from django.utils.translation import gettext as _
 
     # Machine-readable plain text if explicitly requested via format or header
-    if request.GET.get("format") == "text" or request.headers.get("Accept") == "text/plain":
+    if (
+        request.GET.get("format") == "text"
+        or request.headers.get("Accept") == "text/plain"
+    ):
         return HttpResponse(
             _("Plataforma terapêutica disponível."),
             content_type="text/plain; charset=utf-8",
@@ -401,7 +404,7 @@ def review_clinic_switch(request: HttpRequest) -> TemplateResponse:
     target = next(
         (
             clinic
-            for clinic in active_clinics_for_actor(actor)
+            for clinic in active_web_clinics_for_actor(actor)
             if str(clinic.pk) == raw_clinic_id
         ),
         None,

@@ -27,7 +27,7 @@ class WorkspaceLinks(HTMLParser):
 
 @pytest.mark.django_db
 @pytest.mark.parametrize("layout", ("workspace_vertical", "workspace_detached"))
-@pytest.mark.parametrize("role", ("patient", "therapist", "clinic_admin"))
+@pytest.mark.parametrize("role", ("therapist", "clinic_admin"))
 def test_workspace_offers_role_scoped_actions_without_demo_metrics(
     client: Client, role: str, layout: str
 ) -> None:
@@ -44,7 +44,6 @@ def test_workspace_offers_role_scoped_actions_without_demo_metrics(
     parser = WorkspaceLinks()
     parser.feed(html)
     assert reverse("account_sessions") in parser.links
-    assert (reverse("journal_list") in parser.links) == (role == "patient")
     assert (reverse("therapist_dashboard") in parser.links) == (role == "therapist")
     assert (reverse("clinic_setup") in parser.links) == (role == "clinic_admin")
     for demo in (
@@ -63,13 +62,13 @@ def test_workspace_offers_role_scoped_actions_without_demo_metrics(
 @pytest.mark.django_db
 def test_switching_clinic_changes_workspace_actions(client: Client) -> None:
     user = UserFactory.create()
-    patient_clinic = ClinicFactory.create()
+    therapist_clinic = ClinicFactory.create()
     admin_clinic = ClinicFactory.create()
-    ClinicMembershipFactory.create(user=user, clinic=patient_clinic, role="patient")
+    ClinicMembershipFactory.create(user=user, clinic=therapist_clinic, role="therapist")
     ClinicMembershipFactory.create(user=user, clinic=admin_clinic, role="clinic_admin")
     client.force_login(user)
     for clinic, expected in (
-        (patient_clinic, "journal_list"),
+        (therapist_clinic, "therapist_dashboard"),
         (admin_clinic, "clinic_setup"),
     ):
         session = client.session
@@ -79,5 +78,24 @@ def test_switching_clinic_changes_workspace_actions(client: Client) -> None:
         parser = WorkspaceLinks()
         parser.feed(response.content.decode())
         assert reverse(expected) in parser.links
-        other = "clinic_setup" if expected == "journal_list" else "journal_list"
+        other = (
+            "clinic_setup"
+            if expected == "therapist_dashboard"
+            else "therapist_dashboard"
+        )
         assert reverse(other) not in parser.links
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize("layout", ("workspace_vertical", "workspace_detached"))
+def test_patients_have_no_web_workspace(client: Client, layout: str) -> None:
+    """O paciente usa só o aplicativo: um vínculo de paciente não abre o web."""
+    user = UserFactory.create()
+    clinic = ClinicFactory.create()
+    ClinicMembershipFactory.create(user=user, clinic=clinic, role="patient")
+    client.force_login(user)
+    session = client.session
+    session["active_clinic_id"] = str(clinic.pk)
+    session.save()
+    response = client.get(reverse(layout))
+    assert response.status_code == 403

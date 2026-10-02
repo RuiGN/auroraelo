@@ -15,6 +15,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
+from accounts.services import send_patient_activation_email
 from clinics.services import (
     authorized_active_clinic,
     reactivate_professional_membership,
@@ -28,6 +29,7 @@ from .models import PatientProfile
 from .presentation import GENDER_LABELS
 from .selectors import (
     patient_profile_detail_for_actor,
+    patient_profile_in_clinic,
     professional_directory_visible_to,
 )
 from .services import (
@@ -160,14 +162,38 @@ def patient_create(request: HttpRequest) -> HttpResponse:
 def patient_invite(request: HttpRequest, patient_profile_id: UUID) -> HttpResponse:
     """Issue one single-use invitation linked to an existing patient profile."""
     actor, clinic_id = _actor_and_clinic(request, action="invitation.issue")
-    issue_patient_invitation(
+    issued = issue_patient_invitation(
         clinic_id=clinic_id,
         actor=actor,
         patient_profile_id=patient_profile_id,
         expires_at=invitation_expiration_after(days=7),
         request_id=_request_uuid(),
     )
-    return HttpResponseRedirect(reverse("patient_list"))
+    profile = patient_profile_in_clinic(
+        clinic_id=clinic_id, patient_profile_id=patient_profile_id
+    )
+    if profile is None:
+        raise PermissionDenied
+    # O paciente ativa a conta só no aplicativo. O código aparece aqui uma única vez
+    # (não é guardado em claro) e também segue por e-mail com o link que abre o app.
+    emailed = send_patient_activation_email(
+        recipient_email=profile.email,
+        raw_token=issued.raw_token,
+        language=profile.language_code,
+    )
+    response = TemplateResponse(
+        request,
+        "people/patient_invitation.html",
+        {
+            "layout_template": "layouts/vertical.html",
+            "patient": profile,
+            "code": issued.raw_token,
+            "expires_at": issued.invitation.expires_at,
+            "emailed": emailed,
+        },
+    )
+    response["Cache-Control"] = "private, no-store"
+    return response
 
 
 @login_required

@@ -17,14 +17,7 @@ from .views import (
     appointment_confirm,
     appointment_list,
     appointment_no_show,
-    appointment_request,
     appointment_reschedule,
-    attachment_delete,
-    attachment_download,
-    conversation_create,
-    conversation_detail,
-    conversation_list,
-    reminder_preferences,
 )
 from .waitlist_views import (
     waitlist_add,
@@ -37,7 +30,6 @@ urlpatterns = [
     # Agenda / appointments (8.8.1 & 8.8.2)
     path("", appointment_list, name="appointment_list"),
     path("semana/", appointment_calendar, name="appointment_calendar"),
-    path("consultas/nova/", appointment_request, name="appointment_request"),
     path(
         "consultas/<uuid:appointment_id>/confirmar/",
         appointment_confirm,
@@ -62,26 +54,6 @@ urlpatterns = [
         "consultas/<uuid:appointment_id>/falta/",
         appointment_no_show,
         name="appointment_no_show",
-    ),
-    # Reminders (8.8.3)
-    path("lembretes/", reminder_preferences, name="reminder_preferences"),
-    # Messaging (8.8.4 & 8.8.5)
-    path("mensagens/", conversation_list, name="conversation_list"),
-    path("mensagens/nova/", conversation_create, name="conversation_create"),
-    path(
-        "mensagens/<uuid:conversation_id>/",
-        conversation_detail,
-        name="conversation_detail",
-    ),
-    path(
-        "anexos/<uuid:attachment_id>/baixar/",
-        attachment_download,
-        name="attachment_download",
-    ),
-    path(
-        "anexos/<uuid:attachment_id>/excluir/",
-        attachment_delete,
-        name="attachment_delete",
     ),
     # Waitlist (8.10.4.2)
     path("espera/", waitlist_list, name="waitlist_list"),

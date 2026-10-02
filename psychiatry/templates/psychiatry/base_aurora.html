@@ -28,8 +28,6 @@
         <a href="{% url 'psychiatry:inpatient_beds' %}"{% if active_nav == 'beds' %} aria-current="page"{% endif %}><i class="feather-grid me-2" aria-hidden="true"></i>{% translate "Leitos e internação" %}</a>
         <a href="{% url 'psychiatry:addiction_dashboard' %}"{% if active_nav == 'addiction' %} aria-current="page"{% endif %}><i class="feather-shield me-2" aria-hidden="true"></i>{% translate "Recuperação: álcool, substâncias e jogos" %}</a>
         <a href="{% url 'psychiatry:crisis_protocol' %}"{% if active_nav == 'crisis' %} aria-current="page"{% endif %} class="aurora-nav-crisis"><i class="feather-alert-triangle me-2" aria-hidden="true"></i>{% translate "Orientações em crise" %}</a>
-        <a href="{% url 'psychiatry:mobile_connected' %}"><i class="feather-smartphone me-2" aria-hidden="true"></i>{% translate "Prévia do aplicativo conectado" %}</a>
-        <a href="{% url 'psychiatry:mobile_b2c' %}"><i class="feather-shopping-bag me-2" aria-hidden="true"></i>{% translate "Prévia do aplicativo Aurora Elo" %}</a>
         <a href="{% url 'account_login' %}"><i class="feather-log-in me-2" aria-hidden="true"></i>{% translate "Entrar" %}</a>
       </nav>
     </aside>

@@ -7,7 +7,7 @@
 <div class="product-page">
   <header class="product-page-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
     <div>
-      <a href="{% url 'patient_exercise_list' %}" class="btn btn-outline-secondary btn-sm mb-2">← {% translate "Voltar aos exercícios" %}</a>
+      <a href="{% url 'exercise_catalog' %}" class="btn btn-outline-secondary btn-sm mb-2">← {% translate "Voltar ao catálogo" %}</a>
       <h1 class="h3 mb-0">{{ execution.assignment.exercise.title }}</h1>
     </div>
   </header>
@@ -57,7 +57,6 @@
           <p class="text-body-secondary mb-4">{% translate "Nenhum comentário registrado ainda." %}</p>
         {% endif %}
 
-        {% if not is_patient %}
           <form method="post" class="d-grid gap-2">
             {% csrf_token %}
             <label for="id_content" class="form-label fw-semibold">{% translate "Adicionar comentário profissional (assíncrono)" %}</label>
@@ -66,7 +65,6 @@
               <button type="submit" class="btn btn-primary">{% translate "Enviar comentário" %}</button>
             </div>
           </form>
-        {% endif %}
       </div>
     </div>
   </div>

@@ -21,7 +21,9 @@ from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
 pytestmark = pytest.mark.django_db
 
 
-def _member(clinic: Clinic, role: str = ClinicMembership.Role.PATIENT) -> User:
+def _member(
+    clinic: Clinic, role: str = ClinicMembership.Role.ADMINISTRATIVE_STAFF
+) -> User:
     user = UserFactory.create()
     ClinicMembershipFactory.create(clinic=clinic, user=user, role=role)
     return user

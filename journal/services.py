@@ -42,6 +42,7 @@ __all__ = [
     "Service",
     "configure_checkin_questionnaire",
     "create_journal_entry",
+    "ensure_default_checkin_questionnaire",
     "get_or_create_default_checkin_questionnaire",
     "request_journal_entry_access",
     "respond_journal_entry_access_request",
@@ -498,6 +499,35 @@ def get_or_create_default_checkin_questionnaire(
 
 
 @transaction.atomic
+def ensure_default_checkin_questionnaire(*, clinic_id: UUID) -> CheckInQuestionnaire:
+    """Return the clinic's active questionnaire, creating the default when missing.
+
+    System action (no actor): a patient's first check-in must not depend on an
+    administrator having opened a configuration screen. Never replaces an existing
+    questionnaire.
+    """
+    existing = (
+        CheckInQuestionnaire.infrastructure_objects.filter(
+            clinic_id=clinic_id, is_active=True
+        )
+        .order_by("created_at")
+        .first()
+    )
+    if existing is not None:
+        return existing
+    questionnaire = CheckInQuestionnaire(
+        clinic_id=clinic_id,
+        title="Check-in Diário",
+        version="v1.0",
+        is_active=True,
+        questions=DEFAULT_CHECKIN_QUESTIONS,
+    )
+    questionnaire.full_clean(validate_unique=False, validate_constraints=False)
+    questionnaire.save(force_insert=True)
+    return questionnaire
+
+
+@transaction.atomic
 def configure_checkin_questionnaire(
     *,
     clinic_id: UUID,
@@ -622,9 +652,12 @@ def submit_daily_checkin(
     answers: dict[str, object],
     period: str = "daily",
     idempotency_key: str = "",
+    visibility: str = JournalEntry.Visibility.PRIVATE,
     request_id: UUID,
 ) -> DailyCheckIn:
     """Create or update one patient's daily check-in idempotently per period."""
+    if visibility not in JournalEntry.Visibility.values:
+        raise ValidationError("Selecione uma visibilidade válida.")
     profile_id = _resolve_owned_profile_id(
         clinic_id=clinic_id, actor=actor, patient_profile_id=patient_profile_id
     )
@@ -675,7 +708,7 @@ def submit_daily_checkin(
             date=today,
             period=period,
             answers=validated_answers,
-            visibility=JournalEntry.Visibility.PRIVATE,
+            visibility=visibility,
             is_draft=False,
             idempotency_key=idempotency_key,
             submitted_at=now,
@@ -700,8 +733,10 @@ def submit_daily_checkin(
     existing.submitted_at = now
     existing.previous_version_answers = previous
     existing.is_draft = False
+    existing.visibility = visibility
     existing.save(
         update_fields=(
+            "visibility",
             "answers",
             "questionnaire",
             "questionnaire_version",

@@ -22,6 +22,9 @@ from .models import CareRelationship, PatientProfile, ProfessionalProfile
 from .policies import PatientAuthorizationPolicy
 from .presentation import ROLE_LABELS, STATUS_LABELS
 
+# Nome mostrado ao paciente quando a pessoa da equipe ainda não tem perfil profissional.
+PROFESSIONAL_FALLBACK_NAME = "Profissional"
+
 
 @dataclass(frozen=True, slots=True)
 class ProfessionalDirectoryRow:
@@ -137,6 +140,17 @@ def patient_profiles_for_clinic(*, clinic_id: UUID) -> list[PatientProfile]:
     return list(PatientProfile.objects.for_clinic(clinic_id).order_by("full_name"))
 
 
+def patient_profile_in_clinic(
+    *, clinic_id: UUID, patient_profile_id: UUID
+) -> PatientProfile | None:
+    """Return one patient profile only when it belongs to the given clinic."""
+    return (
+        PatientProfile.objects.for_clinic(clinic_id)
+        .filter(pk=patient_profile_id)
+        .first()
+    )
+
+
 def active_patient_profile_count(*, clinic_id: UUID, on_date: date) -> int:
     """Return distinct patient profiles with an active care relationship."""
     return (
@@ -178,6 +192,7 @@ class LinkedTherapistRow:
     therapist_id: UUID
     full_name: str
     social_name: str
+    category: str = "other"
 
 
 def linked_therapists_for_patient(
@@ -208,10 +223,13 @@ def linked_therapists_for_patient(
             full_name=(
                 profiles[therapist_id].full_name
                 if therapist_id in profiles
-                else "Profissional"
+                else PROFESSIONAL_FALLBACK_NAME
             ),
             social_name=(
                 profiles[therapist_id].social_name if therapist_id in profiles else ""
+            ),
+            category=(
+                profiles[therapist_id].category if therapist_id in profiles else "other"
             ),
         )
         for therapist_id in therapist_ids
@@ -293,7 +311,26 @@ def patient_profile_detail_for_actor(
     return None
 
 
+def professional_display_names(
+    *, clinic_id: UUID, user_ids: set[UUID]
+) -> dict[UUID, str]:
+    """Return the public display name of professionals, keyed by identity.
+
+    Used by patient-facing screens to say who prescribed or assigned something.
+    Social name wins when present; identities without a profile are omitted.
+    """
+    if not user_ids:
+        return {}
+    return {
+        profile.user_id: profile.social_name or profile.full_name
+        for profile in ProfessionalProfile.objects.for_clinic(clinic_id).filter(
+            user_id__in=user_ids
+        )
+    }
+
+
 __all__ = [
+    "PROFESSIONAL_FALLBACK_NAME",
     "LinkedPatientRow",
     "LinkedTherapistRow",
     "ProfessionalDirectoryRow",
@@ -307,4 +344,5 @@ __all__ = [
     "patient_profiles_for_clinic",
     "patient_visible_to",
     "professional_directory_visible_to",
+    "professional_display_names",
 ]

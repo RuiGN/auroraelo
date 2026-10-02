@@ -43,7 +43,7 @@ def _context(client: Client) -> tuple[Clinic, User, User, ConsentDocument]:
     administrator, patient = UserFactory.create(), UserFactory.create()
     for user, role in (
         (administrator, ClinicMembership.Role.CLINIC_ADMIN),
-        (patient, ClinicMembership.Role.PATIENT),
+        (patient, ClinicMembership.Role.THERAPIST),  # o web é só da equipe
     ):
         ClinicMembershipFactory.create(clinic=clinic, user=user, role=role)
     document = publish_consent_document(
@@ -55,7 +55,7 @@ def _context(client: Client) -> tuple[Clinic, User, User, ConsentDocument]:
         content="Documento original em português.\n<script>alert('original')</script>",
         purpose="communication",
         effective_from=timezone.now() - timedelta(minutes=1),
-        audience="patient",
+        audience="professional",
         is_mandatory=False,
         refusal_consequence="Consequência original <recusa>.",
         alternative_instructions="Alternativa original da clínica.",

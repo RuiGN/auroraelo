@@ -345,8 +345,10 @@ def test_patient_invite_http_issues_single_use_invitation(client: Client) -> Non
         reverse("patient_invite", kwargs={"patient_profile_id": patient.pk})
     )
 
-    assert response.status_code == 302
-    assert response.headers["Location"] == reverse("patient_list")
+    # O código aparece uma vez para a equipe e segue por e-mail com o link do app.
+    assert response.status_code == 200
+    assert response["Cache-Control"] == "private, no-store"
+    assert 'id="invitation-code"' in response.content.decode()
     link = people_models.PatientInvitationLink.objects.filter(
         patient_profile=patient
     ).first()

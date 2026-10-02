@@ -66,13 +66,13 @@ def test_password_recovery_delivery_in_interleaved_languages_and_restores_contex
     )
 
     ClinicMembershipFactory.create(
-        clinic=clinic_a, user=user_en, role=ClinicMembership.Role.PATIENT
+        clinic=clinic_a, user=user_en, role=ClinicMembership.Role.THERAPIST
     )
     ClinicMembershipFactory.create(
-        clinic=clinic_b, user=user_es, role=ClinicMembership.Role.PATIENT
+        clinic=clinic_b, user=user_es, role=ClinicMembership.Role.THERAPIST
     )
     ClinicMembershipFactory.create(
-        clinic=clinic_a, user=user_pt, role=ClinicMembership.Role.PATIENT
+        clinic=clinic_a, user=user_pt, role=ClinicMembership.Role.THERAPIST
     )
 
     translation.activate("pt-br")

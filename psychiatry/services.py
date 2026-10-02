@@ -1,26 +1,18 @@
 """Mutações autorizadas, sem delivery de notificações ou chamadas de IA."""
 
-from decimal import Decimal
-
 from django.db import transaction
 from django.http import Http404
-from django.utils import timezone
-from django.utils.dateparse import parse_datetime
 
 from clinics.services import lock_clinic_for_update
 
 from . import validation as v
 from .models import (
-    CravingTrackingLog,
-    MedicationAdherenceLog,
-    PrescriptionItem,
-    PsychiatricCrisisAlert,
     PsychiatricEvaluation,
     PsychiatricPatientProfile,
     TwelveStepsAnamnesis,
 )
 from .policies import require_domain_access
-from .selectors import clinical_patient, own_patient, visible_patients
+from .selectors import clinical_patient, visible_patients
 
 STEP_FIELDS = (
     "step1_powerlessness",
@@ -110,85 +102,6 @@ def consolidate_steps(*, actor, clinic, session_id):
     entry.status = TwelveStepsAnamnesis.Status.IN_PROGRESS
     entry.save()
     return entry
-
-
-NO_DELIVERY = {
-    "notification_delivered": False,
-    "monitoring_active": False,
-    "protocol_active": False,
-    "urgent_intervention_dispatched": False,
-    "instructions": (
-        "Registro salvo. Ninguém foi notificado. Este "
-        "aplicativo não oferece monitoramento nem atendimento de emergência."
-    ),
-}
-
-
-@transaction.atomic
-def record_adherence(*, actor, clinic, data):
-    _lock_domain(actor=actor, clinic=clinic, mode="patient")
-    patient = own_patient(actor=actor, clinic=clinic)
-    item_id = v.integer(data, "medication_id", 1, 2147483647)
-    taken = v.boolean(data, "is_taken")
-    notes = v.text(data, "notes", maximum=255)
-    scheduled = v.text(data, "scheduled_time", maximum=40, required=True)
-    try:
-        scheduled = parse_datetime(scheduled)
-    except ValueError:
-        v.invalid()
-    if scheduled is None or timezone.is_naive(scheduled):
-        v.invalid()
-    item = PrescriptionItem.objects.filter(
-        pk=item_id,
-        prescription__patient=patient,
-        prescription__is_active=True,
-        prescription__issued_date__lte=timezone.localdate(),
-        prescription__expires_date__gte=timezone.localdate(),
-    ).first()
-    if item is None:
-        raise Http404
-    return MedicationAdherenceLog.objects.create(
-        patient=patient,
-        item=item,
-        scheduled_time=scheduled,
-        taken_at=timezone.now() if taken else None,
-        is_taken=taken,
-        patient_notes=notes,
-    )
-
-
-@transaction.atomic
-def record_sos(*, actor, clinic, data):
-    _lock_domain(actor=actor, clinic=clinic, mode="patient")
-    patient = own_patient(actor=actor, clinic=clinic)
-    if ("latitude" in data) != ("longitude" in data):
-        v.invalid()
-    coords = {}
-    for key, bound in (("latitude", 90), ("longitude", 180)):
-        if key in data:
-            coords[key] = Decimal(str(v.number(data, key, -bound, bound))).quantize(
-                Decimal("0.000001")
-            )
-    return PsychiatricCrisisAlert.objects.create(
-        patient=patient, status="OPEN", **coords
-    )
-
-
-@transaction.atomic
-def record_craving(*, actor, clinic, data):
-    _lock_domain(actor=actor, clinic=clinic, mode="patient")
-    patient = own_patient(actor=actor, clinic=clinic)
-    return CravingTrackingLog.objects.create(
-        patient=patient,
-        craving_intensity=v.integer(data, "intensity", 0, 10),
-        target_urge=v.text(data, "target_urge", maximum=80, required=True),
-        trigger_detail=v.text(data, "trigger"),
-        halt_factors=v.strings(
-            data, "halt_factors", {"HUNGRY", "ANGRY", "LONELY", "TIRED"}
-        ),
-        coping_technique=v.text(data, "coping", maximum=150),
-        urge_surfed_successfully=v.boolean(data, "urge_surfed_successfully"),
-    )
 
 
 @transaction.atomic

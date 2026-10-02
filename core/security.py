@@ -19,4 +19,7 @@ class SecurityHeadersMiddleware:
         response["Permissions-Policy"] = settings.PERMISSIONS_POLICY
         response["X-Content-Type-Options"] = "nosniff"
         response["X-Frame-Options"] = "DENY"
+        if str(getattr(request, "path", "")).startswith("/api/"):
+            # Respostas da API carregam dado de saúde e tokens: nada fica em cache.
+            response.setdefault("Cache-Control", "private, no-store")
         return response

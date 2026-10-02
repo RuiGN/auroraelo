@@ -18,7 +18,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sessions.models import Session
 from django.core.cache import cache
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.db import IntegrityError, transaction
 from django.http import HttpRequest
@@ -30,7 +30,12 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_noop
 
-from clinics.selectors import active_clinic_ids_for_actor, active_clinics_for_actor
+from clinics.selectors import (
+    active_clinic_ids_for_actor,
+    active_clinics_for_actor,
+    active_clinics_with_role,
+    active_web_clinics_for_actor,
+)
 from clinics.services import (
     CLINIC_SESSION_KEY,
     activate_invited_membership,
@@ -212,11 +217,10 @@ def _audit_session(
     )
 
 
-def login_user(
-    *, request: HttpRequest, email: str, password: str
-) -> ClinicIdentity | None:
-    """Authenticate canonically and select a tenant unless this is global staff."""
-    canonical_email = UserManager.canonical_email(email)
+def _login_budget(
+    *, request: HttpRequest, canonical_email: str
+) -> tuple[tuple[str, str], int]:
+    """Return the throttle keys and window, or refuse when the budget is spent."""
     attempts, window = _rate_limit_settings(
         attempts_name="LOGIN_RATE_LIMIT_ATTEMPTS",
         window_name="LOGIN_RATE_LIMIT_WINDOW_SECONDS",
@@ -230,6 +234,42 @@ def login_user(
     keys = (origin_key, identity_key)
     if any(_is_rate_limited(key=key, attempts=attempts) for key in keys):
         raise LoginRateLimitedError(GENERIC_LOGIN_ERROR)
+    return keys, window
+
+
+def verify_credentials(
+    *, request: HttpRequest, email: str, password: str, role: str
+) -> tuple[User, list[UUID]]:
+    """Authenticate token-based clients without opening a Django session.
+
+    Shares the failure budget with web login, so switching channel never resets it.
+    The identity must hold ``role`` in at least one active clinic; otherwise the
+    attempt counts as a failure and the caller learns nothing about why. Returns the
+    identity and the identifiers of the clinics where it holds that role.
+    """
+    canonical_email = UserManager.canonical_email(email)
+    keys, window = _login_budget(request=request, canonical_email=canonical_email)
+    authenticated = authenticate(
+        request,
+        username=canonical_email,
+        password=password,
+    )
+    user = authenticated if isinstance(authenticated, User) else None
+    clinics = active_clinics_with_role(user, role) if user is not None else []
+    if user is None or not clinics:
+        for key in keys:
+            _record_rate_limited_action(key=key, window=window)
+        raise LoginRejectedError(GENERIC_LOGIN_ERROR)
+    cache.delete_many(keys)
+    return user, [clinic.pk for clinic in clinics]
+
+
+def login_user(
+    *, request: HttpRequest, email: str, password: str
+) -> ClinicIdentity | None:
+    """Authenticate canonically and select a tenant unless this is global staff."""
+    canonical_email = UserManager.canonical_email(email)
+    keys, window = _login_budget(request=request, canonical_email=canonical_email)
 
     authenticated = authenticate(
         request,
@@ -237,7 +277,8 @@ def login_user(
         password=password,
     )
     user = authenticated if isinstance(authenticated, User) else None
-    clinics = active_clinics_for_actor(user) if user is not None else []
+    # O sistema web é só da equipe: paciente entra apenas pelo aplicativo.
+    clinics = active_web_clinics_for_actor(user) if user is not None else []
     global_staff = user is not None and (user.is_staff or user.is_superuser)
     if user is None or (not clinics and not global_staff):
         for key in keys:
@@ -284,8 +325,23 @@ def logout_user(*, request: HttpRequest) -> None:
         django_logout(request)
 
 
-def request_password_recovery(*, request: HttpRequest, email: str) -> None:
-    """Send a short-lived reset link while preserving a generic HTTP contract."""
+def _app_link(path: str, **params: str) -> str:
+    """Deep link into the patient app (custom scheme registered by the app)."""
+    from urllib.parse import urlencode
+
+    scheme = str(getattr(settings, "MOBILE_APP_SCHEME", "auroraelo-posalta"))
+    return f"{scheme}://{path}?{urlencode(params)}"
+
+
+def request_password_recovery(
+    *, request: HttpRequest, email: str, channel: str = "web"
+) -> None:
+    """Send a short-lived reset link while preserving a generic HTTP contract.
+
+    Team members get the web link. Patients use only the mobile app, so a person who
+    is only a patient gets the code and the app link instead. ``channel="mobile"``
+    (requested from the app) sends mail only to people who are patients.
+    """
     canonical_email = UserManager.canonical_email(email)
     attempts, window = _rate_limit_settings(
         attempts_name="PASSWORD_RECOVERY_RATE_LIMIT_ATTEMPTS",
@@ -306,20 +362,44 @@ def request_password_recovery(*, request: HttpRequest, email: str) -> None:
         _record_rate_limited_action(key=key, window=window)
 
     user = User.objects.filter(email=canonical_email, is_active=True).first()
-    if user is None or not active_clinics_for_actor(user):
+    if user is None:
+        return
+    is_patient = bool(active_clinics_with_role(user, "patient"))
+    on_team = bool(active_web_clinics_for_actor(user))
+    if channel == "mobile":
+        if not is_patient:
+            return
+        use_app = True
+    else:
+        use_app = is_patient and not on_team
+        if not (on_team or is_patient):
+            return
+    if not use_app and not on_team:
         return
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
-    path = reverse("password_reset", kwargs={"uid": uid, "token": token})
-    reset_url = request.build_absolute_uri(path)
     recipient_lang = getattr(user, "preferred_language", None) or "pt-br"
     with translation.override(recipient_lang):
         subject = _("Recuperação de acesso")
-        body = _(
-            "Recebemos uma solicitação para redefinir sua senha.\n\n"
-            "Acesse o link a seguir: %(reset_url)s\n\n"
-            "Se você não fez esta solicitação, ignore esta mensagem."
-        ) % {"reset_url": reset_url}
+        if use_app:
+            code = f"{uid}.{token}"
+            body = _(
+                "Recebemos uma solicitação para redefinir sua senha no aplicativo "
+                "Aurora Elo Pós-alta.\n\n"
+                "Abra o link no celular em que o aplicativo está instalado: "
+                "%(app_link)s\n\n"
+                "Se o link não abrir, copie o código abaixo no aplicativo: "
+                "%(code)s\n\n"
+                "Se você não fez esta solicitação, ignore esta mensagem."
+            ) % {"app_link": _app_link("reset", code=code), "code": code}
+        else:
+            path = reverse("password_reset", kwargs={"uid": uid, "token": token})
+            reset_url = request.build_absolute_uri(path)
+            body = _(
+                "Recebemos uma solicitação para redefinir sua senha.\n\n"
+                "Acesse o link a seguir: %(reset_url)s\n\n"
+                "Se você não fez esta solicitação, ignore esta mensagem."
+            ) % {"reset_url": reset_url}
         message = EmailMultiAlternatives(
             subject=str(subject),
             body=str(body),
@@ -340,7 +420,7 @@ def password_reset_identity(*, uid: str, token: str) -> User | None:
     try:
         user_id = force_str(urlsafe_base64_decode(uid))
         user = User.objects.filter(pk=user_id, is_active=True).first()
-    except ValueError, TypeError, OverflowError:
+    except ValueError, TypeError, OverflowError, ValidationError:
         return None
     if user is None or not default_token_generator.check_token(user, token):
         return None
@@ -355,7 +435,7 @@ def reset_password(*, uid: str, token: str, new_password: str) -> bool:
         user = (
             User.objects.select_for_update().filter(pk=user_id, is_active=True).first()
         )
-    except ValueError, TypeError, OverflowError:
+    except ValueError, TypeError, OverflowError, ValidationError:
         return False
     if user is None or not default_token_generator.check_token(user, token):
         return False
@@ -570,6 +650,116 @@ def invitation_clinic_id(*, raw_token: str) -> UUID:
     if clinic_id is None:
         raise ValueError(INVALID_INVITATION_MESSAGE)
     return clinic_id
+
+
+def invitation_initial_role(*, raw_token: str) -> str:
+    """Resolve a valid, unused invitation credential to the role it grants."""
+    row = (
+        ClinicInvitation.infrastructure_objects.filter(
+            token_digest=_token_digest(raw_token),
+            used_at__isnull=True,
+            revoked_at__isnull=True,
+            expires_at__gt=timezone.now(),
+            clinic__is_active=True,
+        )
+        .values_list("initial_role", flat=True)
+        .first()
+    )
+    if row is None:
+        raise ValueError(INVALID_INVITATION_MESSAGE)
+    return str(row)
+
+
+def authenticate_identity(*, request: HttpRequest, email: str, password: str) -> User:
+    """Verify an existing account password under the shared login failure budget."""
+    canonical_email = UserManager.canonical_email(email)
+    keys, window = _login_budget(request=request, canonical_email=canonical_email)
+    authenticated = authenticate(request, username=canonical_email, password=password)
+    user = authenticated if isinstance(authenticated, User) else None
+    if user is None:
+        for key in keys:
+            _record_rate_limited_action(key=key, window=window)
+        raise LoginRejectedError(GENERIC_LOGIN_ERROR)
+    cache.delete_many(keys)
+    return user
+
+
+def activate_patient_account(
+    *,
+    request: HttpRequest,
+    raw_token: str,
+    password: str,
+    first_name: str,
+    last_name: str,
+) -> User:
+    """Consume a patient invitation from the mobile app.
+
+    A new identity chooses its password here. A person who already has an account
+    (for example, a patient of another clinic) proves it with the current password.
+    Only invitations that grant the ``patient`` role are accepted.
+    """
+    if invitation_initial_role(raw_token=raw_token) != "patient":
+        raise ValueError(INVALID_INVITATION_MESSAGE)
+    recipient = (
+        ClinicInvitation.infrastructure_objects.filter(
+            token_digest=_token_digest(raw_token)
+        )
+        .values_list("recipient_email", flat=True)
+        .first()
+    )
+    existing = (
+        User.objects.filter(email=recipient, is_active=True).first()
+        if recipient
+        else None
+    )
+    if existing is not None:
+        actor = authenticate_identity(
+            request=request, email=existing.email, password=password
+        )
+        return accept_invitation(
+            raw_token=raw_token,
+            password="",
+            first_name="",
+            last_name="",
+            actor=actor,
+        )
+    return accept_invitation(
+        raw_token=raw_token,
+        password=password,
+        first_name=first_name,
+        last_name=last_name,
+    )
+
+
+def send_patient_activation_email(
+    *, recipient_email: str, raw_token: str, language: str
+) -> bool:
+    """Send the activation code and the app link to a newly invited patient."""
+    with translation.override(language or "pt-br"):
+        subject = _("Seu acesso ao aplicativo Aurora Elo Pós-alta")
+        body = _(
+            "Sua clínica convidou você para o aplicativo Aurora Elo Pós-alta.\n\n"
+            "Abra o link no celular em que o aplicativo está instalado: "
+            "%(app_link)s\n\n"
+            "Se o link não abrir, copie o código abaixo no aplicativo: "
+            "%(code)s\n\n"
+            "O convite vale por 7 dias e só pode ser usado uma vez."
+        ) % {"app_link": _app_link("activate", code=raw_token), "code": raw_token}
+        message = EmailMultiAlternatives(
+            subject=str(subject),
+            body=str(body),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[recipient_email],
+        )
+    try:
+        message.send()
+    except Exception:
+        logger.exception(
+            "patient activation delivery failed",
+            extra={"event": "accounts.patient_activation.delivery_error"},
+        )
+        return False
+    return True
 
 
 @transaction.atomic
@@ -859,6 +1049,10 @@ __all__ = [
     "Service",
     "User",
     "accept_invitation",
+    "activate_patient_account",
+    "authenticate_identity",
+    "invitation_initial_role",
+    "send_patient_activation_email",
     "invitation_clinic_id",
     "issue_invitation",
     "login_user",
@@ -874,4 +1068,5 @@ __all__ = [
     "revoke_invitation",
     "revoke_other_sessions",
     "validate_current_session",
+    "verify_credentials",
 ]

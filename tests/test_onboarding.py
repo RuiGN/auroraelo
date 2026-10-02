@@ -8,15 +8,12 @@ from uuid import uuid4
 
 import pytest
 from django.core.exceptions import PermissionDenied
-from django.test import Client
-from django.urls import reverse
 
 from accounts.models import User
 from accounts.services import accept_invitation
 from clinics.models import Clinic, ClinicMembership
 from onboarding import selectors as onboarding_selectors
 from onboarding import services as onboarding_services
-from onboarding.models import PatientOnboarding
 from people import services as people_services
 from people.models import PatientProfile
 from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
@@ -171,80 +168,3 @@ def test_patient_onboarding_denies_other_identity() -> None:
             current_step="goals",
             request_id=uuid4(),
         )
-
-
-def test_patient_onboarding_http_stepped_flow(client: Client) -> None:
-    clinic = ClinicFactory.create()
-    user, profile = _linked_patient(clinic)
-    client.force_login(user)
-    session = client.session
-    session["active_clinic_id"] = str(clinic.pk)
-    session.save()
-
-    response = client.post(
-        reverse("patient_onboarding"),
-        {"step": "goals", "goals": "Dormir melhor\nReduzir ansiedade"},
-    )
-    assert response.status_code == 302
-    assert "step=preferences" in response.headers["Location"]
-
-    response = client.post(
-        reverse("patient_onboarding"),
-        {
-            "step": "preferences",
-            "contact_preferences": ["email"],
-            "reminder_windows": ["morning", "evening"],
-        },
-    )
-    assert response.status_code == 302
-    assert "step=terms" in response.headers["Location"]
-
-    terms = client.get(reverse("patient_onboarding"), {"step": "terms"})
-    lowered = terms.content.decode().casefold()
-    assert "emergência" in lowered
-    assert "não substitui" in lowered
-
-    response = client.post(reverse("patient_onboarding"), {"step": "terms"})
-    assert response.status_code == 302
-    assert "step=complete" in response.headers["Location"]
-
-    onboarding = PatientOnboarding.infrastructure_objects.filter(
-        clinic_id=clinic.pk, patient_profile=profile
-    ).get()
-    assert onboarding.completed_at is not None
-    assert onboarding.goals == ["Dormir melhor", "Reduzir ansiedade"]
-    assert onboarding.contact_preferences == {
-        "email": True,
-        "phone": False,
-        "whatsapp": False,
-    }
-    assert onboarding.reminder_windows == {
-        "morning": True,
-        "afternoon": False,
-        "evening": True,
-    }
-
-
-def test_patient_onboarding_resumes_at_current_step(client: Client) -> None:
-    clinic = ClinicFactory.create()
-    user, profile = _linked_patient(clinic)
-    onboarding_services.record_patient_onboarding(
-        clinic_id=clinic.pk,
-        actor=user,
-        patient_profile_id=profile.pk,
-        goals=["Um objetivo"],
-        contact_preferences={},
-        reminder_windows={},
-        current_step="preferences",
-        request_id=uuid4(),
-    )
-    client.force_login(user)
-    session = client.session
-    session["active_clinic_id"] = str(clinic.pk)
-    session.save()
-
-    response = client.get(reverse("patient_onboarding"))
-
-    assert response.status_code == 200
-    content = response.content.decode()
-    assert "Preferências de contato" in content

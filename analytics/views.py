@@ -24,9 +24,7 @@ from .selectors import reports_visible_to
 from .services import (
     authorize_report_download,
     clinic_operational_metrics,
-    generate_individual_report,
     generate_operational_report,
-    patient_dashboard_metrics,
     therapist_dashboard_metrics,
 )
 
@@ -72,37 +70,6 @@ def _period(request: HttpRequest) -> tuple[date, date]:
     if period_end < period_start:
         period_start = period_end - timedelta(days=30)
     return period_start, period_end
-
-
-@login_required
-@require_GET
-def patient_dashboard(request: HttpRequest) -> HttpResponse:
-    """Render the patient's own evolution dashboard (8.9.2)."""
-    clinic_id, actor = _clinic_and_actor(request)
-    period_start, period_end = _period(request)
-    data = patient_dashboard_metrics(
-        clinic_id=clinic_id,
-        actor=actor,
-        period_start=period_start,
-        period_end=period_end,
-    )
-    return TemplateResponse(
-        request,
-        "analytics/patient_dashboard.html",
-        {
-            "layout_template": "layouts/vertical.html",
-            "page_title": _("Minha evolução"),
-            "data": data,
-            "mood_labels": (
-                _("Muito mal"),
-                _("Mal"),
-                _("Neutro"),
-                _("Bem"),
-                _("Muito bem"),
-            ),
-            "non_diagnostic_notice": NON_DIAGNOSTIC_NOTICE,
-        },
-    )
 
 
 @login_required
@@ -165,12 +132,6 @@ def report_list(request: HttpRequest) -> HttpResponse:
         role="clinic_admin",
         on_date=timezone.localdate(),
     )
-    is_patient = has_active_clinic_role(
-        clinic_id=clinic_id,
-        user_id=actor.pk,
-        role="patient",
-        on_date=timezone.localdate(),
-    )
     return TemplateResponse(
         request,
         "analytics/report_list.html",
@@ -179,7 +140,7 @@ def report_list(request: HttpRequest) -> HttpResponse:
             "page_title": _("Relatórios"),
             "reports": reports,
             "form": ReportPeriodForm(),
-            "can_generate": is_admin or is_patient,
+            "can_generate": is_admin,
         },
     )
 
@@ -187,7 +148,7 @@ def report_list(request: HttpRequest) -> HttpResponse:
 @login_required
 @require_POST
 def report_generate(request: HttpRequest) -> HttpResponse:
-    """Generate an individual or operational report from the actor's role."""
+    """Generate the clinic's operational report (administrators only)."""
     clinic_id, actor = _clinic_and_actor(request)
     form = ReportPeriodForm(request.POST)
     if not form.is_valid():
@@ -196,16 +157,6 @@ def report_generate(request: HttpRequest) -> HttpResponse:
     period_end = form.cleaned_data["period_end"]
     today = timezone.localdate()
     if has_active_clinic_role(
-        clinic_id=clinic_id, user_id=actor.pk, role="patient", on_date=today
-    ):
-        generate_individual_report(
-            clinic_id=clinic_id,
-            actor=actor,
-            period_start=period_start,
-            period_end=period_end,
-            request_id=_request_uuid(),
-        )
-    elif has_active_clinic_role(
         clinic_id=clinic_id, user_id=actor.pk, role="clinic_admin", on_date=today
     ):
         generate_operational_report(

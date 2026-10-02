@@ -46,6 +46,7 @@ def test_s11_02_every_table_has_responsive_wrapper_to_prevent_horizontal_overflo
         if "<table" in content:
             assert (
                 "table-responsive" in content
+                or "ae-table-wrap" in content  # design system Aurora Elo
                 or "product-table-scroll" in content
                 or "product-table-wrapper" in content
                 or "overflow-x-auto" in content

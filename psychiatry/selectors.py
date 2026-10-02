@@ -16,8 +16,6 @@ def visible_patients(*, actor, clinic, mode="clinical"):
         user__isnull=False,
         user__is_active=True,
     )
-    if mode == "patient":
-        return scoped.filter(user_id=actor.pk)
     allowed = []
     policy = PatientAuthorizationPolicy()
     for patient in (
@@ -41,13 +39,6 @@ def visible_patients(*, actor, clinic, mode="clinical"):
         ):
             allowed.append(patient.pk)
     return scoped.filter(pk__in=allowed)
-
-
-def own_patient(*, actor, clinic):
-    patients = list(visible_patients(actor=actor, clinic=clinic, mode="patient")[:2])
-    if len(patients) != 1:
-        raise Http404("Vínculo de paciente indisponível.")
-    return patients[0]
 
 
 def clinical_patient(*, actor, clinic, patient_uuid):

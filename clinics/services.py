@@ -108,7 +108,11 @@ def selected_clinic_id(request: HttpRequest) -> UUID:
 
 
 def resolve_request_clinic(request: HttpRequest, actor: AbstractBaseUser) -> Clinic:
-    """Resolve an active clinic exclusively through a current actor membership."""
+    """Resolve an active clinic exclusively through a current team membership.
+
+    Patients use only the mobile app: a patient membership never resolves a web
+    clinic.
+    """
     clinic_id = selected_clinic_id(request)
     if not current_actor_is_active(actor):
         raise UnauthorizedClinicError
@@ -123,6 +127,7 @@ def resolve_request_clinic(request: HttpRequest, actor: AbstractBaseUser) -> Cli
             clinic__is_active=True,
             user_id=actor.pk,
         )
+        .exclude(role=ClinicMembership.Role.PATIENT)
         .first()
     )
     if membership is None:
@@ -154,6 +159,7 @@ def switch_active_clinic(
             clinic__is_active=True,
             user_id=actor.pk,
         )
+        .exclude(role=ClinicMembership.Role.PATIENT)
         .first()
     )
     if membership is None:

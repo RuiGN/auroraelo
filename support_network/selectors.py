@@ -67,6 +67,18 @@ def active_supporters_for_patient(
     )
 
 
+def active_supporter_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, relationship_id: UUID
+) -> SupportNetworkRelationship | None:
+    """Return one active supporter of this patient, or ``None``."""
+    return (
+        SupportNetworkRelationship.objects.for_clinic(clinic_id)
+        .filter(id=relationship_id, patient_id=patient_profile_id, is_active=True)
+        .prefetch_related("permissions")
+        .first()
+    )
+
+
 def minor_guardrails_for_patient(
     *, clinic_id: UUID, patient_profile_id: UUID
 ) -> dict[str, Any]:

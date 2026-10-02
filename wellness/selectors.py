@@ -214,6 +214,29 @@ def sobriety_dashboard(
     }
 
 
+def active_sobriety_goal_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID
+) -> SobrietyGoal | None:
+    """Return the patient's newest active recovery goal, or ``None``."""
+    return (
+        SobrietyGoal.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id, is_active=True)
+        .order_by("-created_at")
+        .first()
+    )
+
+
+def cravings_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, limit: int = 50
+) -> list[CravingCheckIn]:
+    """Return the patient's own craving self-reports, newest first."""
+    return list(
+        CravingCheckIn.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id)
+        .order_by("-recorded_at")[: max(1, limit)]
+    )
+
+
 def relapse_plan_for_patient(
     *,
     clinic_id: UUID,
@@ -279,7 +302,9 @@ __all__ = [
     "SAFETY_DISCLAIMER_TEXT",
     "Selector",
     "activity_trends_summary",
+    "active_sobriety_goal_for_patient",
     "crisis_resources_and_grounding",
+    "cravings_for_patient",
     "relapse_plan_for_patient",
     "safe_movement_plans_for_patient",
     "sobriety_dashboard",

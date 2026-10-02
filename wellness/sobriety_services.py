@@ -88,9 +88,17 @@ def adjust_or_restart_sobriety_goal(
     new_motivations: str = "",
     hide_counter: bool | None = None,
     actor_id: UUID | None = None,
+    patient_profile_id: UUID | None = None,
 ) -> SobrietyGoal:
-    """Ajuste ou recomeço não punitivo, mantendo histórico intacto."""
-    goal = SobrietyGoal.objects.for_clinic(clinic_id).filter(pk=goal_id).first()
+    """Ajuste ou recomeço não punitivo, mantendo histórico intacto.
+
+    Quando ``patient_profile_id`` é informado, só um objetivo desse paciente é
+    aceito (autoatendimento); sem ele, vale apenas o escopo da clínica.
+    """
+    queryset = SobrietyGoal.objects.for_clinic(clinic_id).filter(pk=goal_id)
+    if patient_profile_id is not None:
+        queryset = queryset.filter(patient_profile_id=patient_profile_id)
+    goal = queryset.first()
     if not goal:
         raise ValidationError("Objetivo de sobriedade não encontrado.")
 
@@ -115,6 +123,38 @@ def adjust_or_restart_sobriety_goal(
         clinic_id=clinic_id,
         actor_id=actor_id,
         action="wellness.sobriety_goal_adjusted",
+        resource_type="sobriety_goal",
+        resource_id=str(goal.id),
+        outcome="success",
+        request_id=uuid4(),
+        network_origin=None,
+    )
+    return goal
+
+
+@transaction.atomic
+def set_sobriety_counter_hidden(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    goal_id: UUID,
+    hidden: bool,
+    actor_id: UUID | None = None,
+) -> SobrietyGoal:
+    """Show or hide the day counter without touching dates or restart history."""
+    goal = (
+        SobrietyGoal.objects.for_clinic(clinic_id)
+        .filter(pk=goal_id, patient_profile_id=patient_profile_id)
+        .first()
+    )
+    if not goal:
+        raise ValidationError("Objetivo de sobriedade não encontrado.")
+    goal.hide_counter = hidden
+    goal.save(update_fields=["hide_counter", "updated_at"])
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action="wellness.sobriety_counter_visibility",
         resource_type="sobriety_goal",
         resource_id=str(goal.id),
         outcome="success",
@@ -225,5 +265,6 @@ __all__ = [
     "record_craving_checkin",
     "record_sobriety_milestone",
     "register_support_contact",
+    "set_sobriety_counter_hidden",
     "setup_sobriety_goal",
 ]

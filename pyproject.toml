@@ -99,6 +99,8 @@ files = [
     "communities",
     "medical_records",
     "ai_assistant",
+    "concierge",
+    "mobile_api",
     "tests",
 ]
 

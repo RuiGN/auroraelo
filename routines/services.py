@@ -285,6 +285,62 @@ def generate_habit_occurrences_for_date(
 
 
 @transaction.atomic
+def ensure_habit_occurrence(
+    *, clinic_id: UUID, habit_id: UUID, scheduled_date: date
+) -> HabitOccurrence | None:
+    """Return the occurrence of one habit on one date, creating it when due.
+
+    Returns ``None`` when the habit is not scheduled that day (paused, not an
+    active weekday or not active at all), so callers can refuse the check-in.
+    """
+    habit = Habit.objects.for_clinic(clinic_id).filter(pk=habit_id).first()
+    if habit is None or habit.status != HabitStatus.ACTIVE:
+        return None
+    if habit.paused_until and scheduled_date <= habit.paused_until:
+        return None
+    if habit.active_days and scheduled_date.weekday() not in habit.active_days:
+        return None
+    occurrence, _created = HabitOccurrence.objects.for_clinic(clinic_id).get_or_create(
+        habit=habit,
+        scheduled_date=scheduled_date,
+        defaults={
+            "clinic_id": clinic_id,
+            "plan_key": f"plan_{habit.id}_{scheduled_date}_{habit.version}",
+            "version": habit.version,
+            "is_canceled": False,
+        },
+    )
+    return occurrence
+
+
+@transaction.atomic
+def clear_habit_checkin(
+    *, clinic_id: UUID, occurrence_id: UUID, actor_id: UUID, request_id: UUID
+) -> bool:
+    """Remove the patient's own check-in of one occurrence (undo), with audit."""
+    checkin = (
+        HabitCheckIn.objects.for_clinic(clinic_id)
+        .filter(occurrence_id=occurrence_id)
+        .first()
+    )
+    if checkin is None:
+        return False
+    checkin_id = checkin.pk
+    checkin.delete()
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action="delete",
+        resource_type="habit_checkin",
+        resource_id=str(checkin_id),
+        outcome="success",
+        request_id=request_id,
+        network_origin=None,
+    )
+    return True
+
+
+@transaction.atomic
 def record_habit_checkin(
     *,
     clinic_id: UUID,
@@ -427,7 +483,9 @@ __all__ = [
     "archive_habit",
     "create_habit",
     "create_routine_block",
+    "clear_habit_checkin",
     "delete_patient_routine_data",
+    "ensure_habit_occurrence",
     "export_patient_routine_data",
     "generate_habit_occurrences_for_date",
     "pause_habit",

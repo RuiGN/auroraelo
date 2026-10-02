@@ -4,11 +4,10 @@ from functools import wraps
 
 from django.core.exceptions import PermissionDenied, RequestDataTooBig, ValidationError
 from django.http import Http404, JsonResponse
-from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 
-from clinics.policies import ClinicAuthorizationPolicy, has_active_clinic_role
+from clinics.policies import ClinicAuthorizationPolicy
 from core.policies import current_actor_is_active
 
 from .validation import PayloadTooLargeError
@@ -21,20 +20,11 @@ def require_actor(actor):
 
 def require_domain_access(*, actor, clinic=None, mode="clinical"):
     require_actor(actor)
-    if mode == "b2c":
-        return
     if clinic is None:
         raise PermissionDenied("Clínica ativa necessária.")
     if mode == "clinical":
         allowed = ClinicAuthorizationPolicy().is_allowed(
             actor, clinic, "patient.clinical.read"
-        )
-    elif mode == "patient":
-        allowed = has_active_clinic_role(
-            clinic_id=clinic.pk,
-            user_id=actor.pk,
-            role="patient",
-            on_date=timezone.localdate(),
         )
     else:
         allowed = False

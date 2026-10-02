@@ -35,9 +35,13 @@ DOMAIN_MODULES = (
     "communities",
     "medical_records",
     "ai_assistant",
+    "concierge",
+    "mobile_api",
 )
 
 ALLOWED_DEPENDENCIES = {
+    "concierge": {"audit", "clinics", "core", "people"},
+    "mobile_api": {"accounts", "audit", "clinics", "core", "people"},
     "core": set(),
     "tenancy": {"core"},
     "accounts": {"clinics", "core", "tenancy"},

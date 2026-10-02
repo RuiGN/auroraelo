@@ -22,8 +22,6 @@ from .views import (
     editorial_submit,
     editorial_version_create,
     library_home,
-    notification_list,
-    recommendation_list,
 )
 
 urlpatterns = [
@@ -84,16 +82,6 @@ urlpatterns = [
         "editorial/<uuid:content_id>/metadados/",
         editorial_metadata_update,
         name="content_editorial_metadata",
-    ),
-    path(
-        "minhas-recomendacoes/",
-        recommendation_list,
-        name="content_recommendations",
-    ),
-    path(
-        "notificacoes/",
-        notification_list,
-        name="content_notifications",
     ),
     path(
         "denuncias/",

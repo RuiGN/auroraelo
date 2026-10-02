@@ -557,23 +557,11 @@ def test_operational_report_contains_no_free_text() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_patient_dashboard_http(client: Client) -> None:
-    """8.9.2: The patient dashboard renders over HTTP."""
-    clinic = ClinicFactory.create()
-    _admin, patient, _profile = _linked_patient(clinic)
-    _force_client(client, clinic, patient)
-
-    res = client.get(reverse("patient_dashboard"))
-    assert res.status_code == 200
-    assert "Minha evolução" in res.content.decode()
-    assert "Distribuição de humor" in res.content.decode()
-
-
 def test_report_list_and_download_http(client: Client) -> None:
-    """8.9.5: A patient lists and downloads their report over HTTP."""
+    """8.9.5: the clinic administrator generates, lists and downloads a report."""
     clinic = ClinicFactory.create()
-    _admin, patient, _profile = _linked_patient(clinic)
-    _force_client(client, clinic, patient)
+    admin, _patient_user, _profile = _linked_patient(clinic)
+    _force_client(client, clinic, admin)
 
     start, end = _period()
     post = client.post(

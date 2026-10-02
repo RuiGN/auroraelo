@@ -178,6 +178,60 @@ def create_data_subject_request(
     return request
 
 
+class DuplicateOpenRequestError(ValueError):
+    """The subject already has an open request of the same type."""
+
+
+_FINISHED_STATUSES = (
+    DataSubjectRequest.Status.COMPLETED,
+    DataSubjectRequest.Status.REJECTED,
+)
+
+
+@transaction.atomic
+def create_own_data_subject_request(
+    *,
+    clinic_id: UUID,
+    actor: PrivacyActor,
+    request_type: str,
+    channel: str,
+) -> DataSubjectRequest:
+    """Let a data subject file a request about their own data (LGPD art. 18).
+
+    The request starts with identity verification pending: nothing is exported,
+    corrected or erased until a clinic administrator verifies identity and decides,
+    exactly as for requests registered by the clinic.
+    """
+    if not actor.is_active or not subject_has_clinic_relationship(
+        clinic_id=clinic_id,
+        subject_id=actor.id,
+    ):
+        raise PermissionDenied("Data-subject request subject relationship is invalid.")
+    if request_type not in DataSubjectRequest.RequestType.values:
+        raise ValueError("Unsupported data-subject request type.")
+    already_open = (
+        DataSubjectRequest.infrastructure_objects.select_for_update()
+        .filter(clinic_id=clinic_id, subject_id=actor.id, request_type=request_type)
+        .exclude(status__in=_FINISHED_STATUSES)
+        .exists()
+    )
+    if already_open:
+        raise DuplicateOpenRequestError(request_type)
+    requested_at = timezone.now()
+    request = DataSubjectRequest.infrastructure_objects.create(
+        clinic_id=clinic_id,
+        subject_id=actor.id,
+        requested_by_id=actor.id,
+        request_type=request_type,
+        channel=channel,
+        requested_at=requested_at,
+        due_at=requested_at
+        + timedelta(days=int(getattr(settings, "PRIVACY_REQUEST_DUE_DAYS", 15))),
+    )
+    _audit(request=request, actor=actor, action="create")
+    return request
+
+
 @transaction.atomic
 def get_data_subject_request(
     *, clinic_id: UUID, actor: PrivacyActor, request_id: UUID

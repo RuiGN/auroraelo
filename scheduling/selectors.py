@@ -20,6 +20,7 @@ from .models import (
     Message,
     ReminderPreference,
     Service,
+    Unit,
     WaitlistEntry,
     WaitlistStatus,
 )
@@ -30,6 +31,7 @@ __all__ = [
     "Service",
     "WaitlistStatus",
     "active_services_for_clinic",
+    "active_units_for_clinic",
     "appointment_for_finance",
     "appointment_for_integrations",
     "appointments_visible_to",
@@ -44,6 +46,13 @@ def active_services_for_clinic(*, clinic_id: UUID) -> list[Service]:
     """Return active bookable services for one clinic, ordered by name."""
     return list(
         Service.objects.for_clinic(clinic_id).filter(is_active=True).order_by("name")
+    )
+
+
+def active_units_for_clinic(*, clinic_id: UUID) -> list[Unit]:
+    """Return active units of one clinic, ordered by name."""
+    return list(
+        Unit.objects.for_clinic(clinic_id).filter(is_active=True).order_by("name")
     )
 
 

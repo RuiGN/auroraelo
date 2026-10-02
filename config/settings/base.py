@@ -129,6 +129,8 @@ INSTALLED_APPS = [
     "clinical_operations.apps.ClinicalOperationsConfig",
     "ai_assistant.apps.AiAssistantConfig",
     "psychiatry.apps.PsychiatryConfig",
+    "concierge.apps.ConciergeConfig",
+    "mobile_api.apps.MobileApiConfig",
     "master_panel.apps.MasterPanelConfig",
 ]
 
@@ -283,6 +285,13 @@ MAILERS = {
     }
 }
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "webmaster@localhost")
+
+# App do paciente pós-alta (/api/v1/mobile/): sessões por token e link de ativação.
+MOBILE_APP_SCHEME = os.environ.get("MOBILE_APP_SCHEME", "auroraelo-posalta")
+MOBILE_ACCESS_TOKEN_SECONDS = int(os.environ.get("MOBILE_ACCESS_TOKEN_SECONDS", "900"))
+MOBILE_REFRESH_TOKEN_DAYS = int(os.environ.get("MOBILE_REFRESH_TOKEN_DAYS", "30"))
+MOBILE_SESSION_ABSOLUTE_DAYS = int(os.environ.get("MOBILE_SESSION_ABSOLUTE_DAYS", "90"))
+MOBILE_MAX_SESSIONS_PER_USER = int(os.environ.get("MOBILE_MAX_SESSIONS_PER_USER", "5"))
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
