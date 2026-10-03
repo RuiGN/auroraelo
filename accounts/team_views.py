@@ -228,6 +228,7 @@ def team_member_create(request: HttpRequest) -> HttpResponse:
             result = create_team_member(
                 clinic_id=clinic.pk,
                 actor=actor,
+                cpf=form.cleaned_data["cpf"],
                 email=form.cleaned_data["email"],
                 first_name=form.cleaned_data["first_name"],
                 last_name=form.cleaned_data["last_name"],

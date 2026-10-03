@@ -25,6 +25,10 @@ from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
 
 pytestmark = pytest.mark.django_db
 
+CPF = "52998224725"
+OTHER_CPF = "11144477735"
+UNKNOWN_CPF = "39053344705"
+
 GENERIC_LOGIN_ERROR = "Não foi possível entrar com os dados informados."
 GENERIC_RECOVERY_RESPONSE = (
     "Se existir uma conta ativa para este e-mail, você receberá as instruções."
@@ -32,10 +36,13 @@ GENERIC_RECOVERY_RESPONSE = (
 
 
 def create_login_identity(
-    *, email: str = "pessoa@example.test", password: str = "senha-segura-sintetica"
+    *,
+    email: str = "pessoa@example.test",
+    password: str = "senha-segura-sintetica",
+    cpf: str = CPF,
 ) -> tuple[User, Clinic]:
     """Create one credential with one currently authorized active tenant."""
-    user = User.objects.create_user(email=email, password=password)
+    user = User.objects.create_user(email=email, password=password, cpf=cpf)
     clinic = ClinicFactory.create()
     ClinicMembershipFactory.create(
         user=user,
@@ -48,13 +55,13 @@ def create_login_identity(
 def login_client(
     client: Client,
     *,
-    email: str = "pessoa@example.test",
+    cpf: str = CPF,
     password: str = "senha-segura-sintetica",
 ) -> None:
     """Authenticate through the public HTTP contract."""
     response = client.post(
         reverse("account_login"),
-        {"email": email, "password": password},
+        {"cpf": cpf, "password": password},
     )
     assert response.status_code == 302
 
@@ -85,7 +92,7 @@ def authenticate_clinic_admin(client: Client) -> tuple[User, Clinic]:
     return actor, clinic
 
 
-def test_login_uses_canonical_email_rotates_session_and_selects_active_tenant(
+def test_login_uses_cpf_rotates_session_and_selects_active_tenant(
     client: Client,
 ) -> None:
     user, clinic = create_login_identity(email="pessoa@example.test")
@@ -97,7 +104,7 @@ def test_login_uses_canonical_email_rotates_session_and_selects_active_tenant(
     response = client.post(
         reverse("account_login"),
         {
-            "email": "  PESSOA@EXAMPLE.TEST  ",
+            "cpf": "  529.982.247-25  ",
             "password": "senha-segura-sintetica",
         },
     )
@@ -126,20 +133,21 @@ def test_login_uses_same_generic_error_for_unknown_wrong_or_tenantless_identity(
     tenantless = User.objects.create_user(
         email="sem-clinica@example.test",
         password="senha-segura-sintetica",
+        cpf=OTHER_CPF,
     )
     assert tenantless.is_active is True
 
     responses = []
-    for email, password in (
-        ("unknown@example.test", "senha-segura-sintetica"),
-        ("pessoa@example.test", "senha-incorreta-sintetica"),
-        ("sem-clinica@example.test", "senha-segura-sintetica"),
+    for cpf, password in (
+        (UNKNOWN_CPF, "senha-segura-sintetica"),
+        (CPF, "senha-incorreta-sintetica"),
+        (OTHER_CPF, "senha-segura-sintetica"),
     ):
         cache.clear()
         responses.append(
             client.post(
                 reverse("account_login"),
-                {"email": email, "password": password},
+                {"cpf": cpf, "password": password},
             )
         )
 
@@ -152,7 +160,7 @@ def test_login_uses_same_generic_error_for_unknown_wrong_or_tenantless_identity(
 @override_settings(LOGIN_RATE_LIMIT_ATTEMPTS=2, LOGIN_RATE_LIMIT_WINDOW_SECONDS=90)
 def test_login_rate_limit_is_configurable_and_non_enumerating(client: Client) -> None:
     cache.clear()
-    payload = {"email": "unknown@example.test", "password": "senha-incorreta"}
+    payload = {"cpf": UNKNOWN_CPF, "password": "senha-incorreta"}
 
     first = client.post(reverse("account_login"), payload)
     second = client.post(reverse("account_login"), payload)
@@ -175,19 +183,68 @@ def test_login_rate_limit_cannot_be_bypassed_by_rotating_network_origin(
     for index in range(2):
         response = client.post(
             reverse("account_login"),
-            {"email": "PROFISSIONAL@example.test", "password": "senha-incorreta"},
+            {"cpf": "529.982.247-25", "password": "senha-incorreta"},
             REMOTE_ADDR=f"198.51.100.{index + 1}",
         )
         assert response.status_code == 200
 
     blocked = client.post(
         reverse("account_login"),
-        {"email": "profissional@example.test", "password": "segredo-seguro"},
+        {"cpf": CPF, "password": "segredo-seguro"},
         REMOTE_ADDR="198.51.100.99",
     )
 
     assert blocked.status_code == 429
     assert SESSION_KEY not in client.session
+
+
+def test_login_form_rejects_malformed_cpf_and_ignores_email_on_team_login(
+    client: Client,
+) -> None:
+    create_login_identity()
+
+    malformed = client.post(
+        reverse("account_login"), {"cpf": "123.456.789-00", "password": "x"}
+    )
+    letters = client.post(
+        reverse("account_login"), {"cpf": "5299822472ab", "password": "x"}
+    )
+    by_email = client.post(
+        reverse("account_login"),
+        {"email": "pessoa@example.test", "password": "senha-segura-sintetica"},
+    )
+
+    for response in (malformed, letters, by_email):
+        assert response.status_code == 200
+        assert SESSION_KEY not in client.session
+    assert "Informe um CPF válido." in malformed.content.decode("utf-8")
+    assert "Informe um CPF válido." in letters.content.decode("utf-8")
+
+
+def test_login_by_cpf_ignores_formatting_and_never_falls_back_to_other_accounts(
+    client: Client,
+) -> None:
+    user, _clinic = create_login_identity()
+
+    for typed in ("52998224725", "529.982.247-25", " 529 982 247 25 "):
+        cache.clear()
+        client = Client()
+        response = client.post(
+            reverse("account_login"),
+            {"cpf": typed, "password": "senha-segura-sintetica"},
+        )
+        assert response.status_code == 302, typed
+        assert client.session[SESSION_KEY] == str(user.pk)
+
+
+def test_login_service_by_cpf_exposes_only_generic_rejection() -> None:
+    from accounts.services import LoginRejectedError, login_user
+
+    request = Client().request().wsgi_request
+    with pytest.raises(LoginRejectedError, match=GENERIC_LOGIN_ERROR):
+        login_user(request=request, cpf=UNKNOWN_CPF, password="senha-incorreta")
+    with pytest.raises(LoginRejectedError, match=GENERIC_LOGIN_ERROR):
+        login_user(request=request, cpf="not-a-cpf", password="senha-incorreta")
 
 
 def test_login_service_exposes_only_generic_rejection() -> None:
@@ -298,6 +355,7 @@ def test_new_recipient_accepts_http_invitation_and_creates_membership(
         {
             "first_name": "Pessoa",
             "last_name": "Convidada",
+            "cpf": "390.533.447-05",
             "password": "senha-sintetica-longa-e-nao-reutilizavel",
             "confirm_password": "senha-sintetica-longa-e-nao-reutilizavel",
         },
@@ -308,6 +366,7 @@ def test_new_recipient_accepts_http_invitation_and_creates_membership(
     assert response.status_code == 302
     assert response.headers["Location"] == reverse("account_login")
     recipient = User.objects.get(email="nova-pessoa@example.test")
+    assert recipient.cpf == UNKNOWN_CPF
     assert (
         ClinicMembership.objects.for_clinic(clinic.pk)
         .filter(

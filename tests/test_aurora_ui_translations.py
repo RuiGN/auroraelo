@@ -235,7 +235,7 @@ def test_real_login_and_language_post_preserve_csrf_and_cookie(
     parser.feed(response.content.decode())
     login = next(form for form in parser.forms if "password" in form["inputs"])
     assert login["attributes"]["method"] == "post"
-    assert "email" in login["inputs"]
+    assert "cpf" in login["inputs"]
     assert login["inputs"]["csrfmiddlewaretoken"]
     language_form = next(
         form
@@ -244,9 +244,7 @@ def test_real_login_and_language_post_preserve_csrf_and_cookie(
     )
     assert language_form["attributes"]["method"] == "post"
     assert (
-        client.post(
-            target, {"email": "synthetic@example.test", "password": "synthetic"}
-        ).status_code
+        client.post(target, {"cpf": "52998224725", "password": "synthetic"}).status_code
         == 403
     )
     assert client.get(reverse("account_set_language")).status_code == 405

@@ -18,6 +18,8 @@ from django.utils.crypto import salted_hmac
 
 from core.persistence import UUIDTimestampedModel
 
+from .cpf import mask_cpf, normalize_cpf, validate_cpf
+
 
 def _account_cipher() -> Fernet:
     """Derive a dedicated encryption key from deployment-owned configuration."""
@@ -89,7 +91,11 @@ class UserManager(BaseUserManager["User"]):
 
 
 class User(AbstractUser):
-    """Email-authenticated identity without an implicit business role."""
+    """Identity without an implicit business role.
+
+    The clinic team signs in with ``cpf`` + password; ``email`` is the contact used to
+    recover the password. Platform operators (Master) still sign in with ``email``.
+    """
 
     class Layout(models.TextChoices):
         VERTICAL = "vertical", "Vertical"
@@ -103,6 +109,16 @@ class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     username = models.CharField(max_length=150, blank=True, default="")
     email = models.EmailField(max_length=254, unique=True)
+    # Login da equipe: onze dígitos, único em toda a plataforma. Nulo para contas
+    # sem CPF (operadores da plataforma e contas anteriores ao login por CPF).
+    cpf = models.CharField(
+        max_length=11,
+        unique=True,
+        null=True,
+        blank=True,
+        validators=[validate_cpf],
+        verbose_name="CPF",
+    )
     preferred_layout = models.CharField(
         max_length=16,
         choices=Layout.choices,
@@ -135,9 +151,15 @@ class User(AbstractUser):
             )
         ]
 
+    @property
+    def masked_cpf(self) -> str:
+        """CPF for lists and screens: ``***.456.789-**`` (empty when there is none)."""
+        return mask_cpf(self.cpf)
+
     def save(self, *args: Any, **kwargs: Any) -> None:
-        """Persist only the canonical login identifier."""
+        """Persist only the canonical login identifiers."""
         self.email = UserManager.canonical_email(self.email)
+        self.cpf = normalize_cpf(self.cpf) or None
         super().save(*args, **kwargs)
 
     def set_password(self, raw_password: str | None) -> None:

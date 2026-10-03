@@ -74,6 +74,7 @@ _ICONS_BY_NAME: dict[str, str] = {
     "legal_name": "feather-briefcase",
     "display_name": "feather-briefcase",
     "document": "feather-credit-card",
+    "cpf": "feather-user",
     "registration_identifier": "feather-hash",
     "address_line": "feather-map-pin",
     "address_line_1": "feather-map-pin",

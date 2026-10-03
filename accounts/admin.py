@@ -73,6 +73,7 @@ class AuroraUserAdmin(UserAdmin):  # type: ignore[type-arg]
     inlines = (ClinicMembershipInline,)
     list_display = (
         "email",
+        "masked_cpf",
         "first_name",
         "last_name",
         "is_active",
@@ -80,7 +81,7 @@ class AuroraUserAdmin(UserAdmin):  # type: ignore[type-arg]
         "date_joined",
     )
     list_filter = ("is_active", "is_staff", "is_superuser")
-    search_fields = ("email", "first_name", "last_name")
+    search_fields = ("email", "cpf", "first_name", "last_name")
     ordering = ("email",)
     readonly_fields = (
         "id",
@@ -95,7 +96,7 @@ class AuroraUserAdmin(UserAdmin):  # type: ignore[type-arg]
         "user_permissions",
     )
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("email", "cpf", "password")}),
         ("Identidade", {"fields": ("first_name", "last_name", "username")}),
         (
             "Permissões globais",
@@ -129,6 +130,7 @@ class AuroraUserAdmin(UserAdmin):  # type: ignore[type-arg]
                 "classes": ("wide",),
                 "fields": (
                     "email",
+                    "cpf",
                     "password1",
                     "password2",
                     "first_name",

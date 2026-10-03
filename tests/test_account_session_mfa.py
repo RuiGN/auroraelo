@@ -50,6 +50,7 @@ def test_login_registers_session_before_fail_closed_validation(client: Client) -
     user = User.objects.create_user(
         email="login-rastreado@example.test",
         password="senha-sintetica-segura",
+        cpf="52998224725",
     )
     ClinicMembershipFactory.create(
         clinic=clinic,
@@ -60,7 +61,7 @@ def test_login_registers_session_before_fail_closed_validation(client: Client) -
     response = client.post(
         reverse("account_login"),
         {
-            "email": "login-rastreado@example.test",
+            "cpf": "529.982.247-25",
             "password": "senha-sintetica-segura",
         },
     )

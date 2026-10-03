@@ -61,7 +61,7 @@ def test_patient_cannot_sign_in_to_the_web_even_with_the_right_password() -> Non
     )
     client = Client()
     response = client.post(
-        reverse("account_login"), {"email": patient.email, "password": PASSWORD}
+        reverse("account_login"), {"cpf": patient.cpf, "password": PASSWORD}
     )
     assert response.status_code == 200
     assert GENERIC_LOGIN_ERROR in response.content.decode()
@@ -79,7 +79,7 @@ def test_a_person_who_is_also_staff_gets_only_the_staff_clinic_on_the_web() -> N
     )
     client = Client()
     response = client.post(
-        reverse("account_login"), {"email": person.email, "password": PASSWORD}
+        reverse("account_login"), {"cpf": person.cpf, "password": PASSWORD}
     )
     assert response.status_code == 302
     assert client.session["active_clinic_id"] == str(staff_clinic.pk)

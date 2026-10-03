@@ -7903,3 +7903,36 @@ msgstr "Cadastre pessoas, defina a função e redefina senhas."
 msgid "Sua função: %(roles)s."
 msgstr "Sua função: %(roles)s."
 
+msgid "Informe um CPF válido."
+msgstr "Informe um CPF válido."
+
+msgid "CPF"
+msgstr "CPF"
+
+msgid "000.000.000-00"
+msgstr "000.000.000-00"
+
+msgid "CPF (seu usuário de acesso)"
+msgstr "CPF (seu usuário de acesso)"
+
+msgid "E-mail de recuperação"
+msgstr "E-mail de recuperação"
+
+msgid "Recebe o link para recuperar a senha. O acesso é pelo CPF."
+msgstr "Recebe o link para recuperar a senha. O acesso é pelo CPF."
+
+msgid "CPF e e-mail pertencem a contas diferentes."
+msgstr "CPF e e-mail pertencem a contas diferentes."
+
+msgid "Este e-mail já está cadastrado com outro CPF."
+msgstr "Este e-mail já está cadastrado com outro CPF."
+
+msgid "CPF ou e-mail já cadastrado em outra conta."
+msgstr "CPF ou e-mail já cadastrado em outra conta."
+
+msgid "Informe o CPF da pessoa."
+msgstr "Informe o CPF da pessoa."
+
+msgid "Usuário de acesso: o CPF da pessoa. O e-mail cadastrado serve para recuperar a senha."
+msgstr "Usuário de acesso: o CPF da pessoa. O e-mail cadastrado serve para recuperar a senha."
+

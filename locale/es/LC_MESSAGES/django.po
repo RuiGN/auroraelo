@@ -7928,3 +7928,36 @@ msgstr "Registre personas, defina la función y restablezca contraseñas."
 msgid "Sua função: %(roles)s."
 msgstr "Su función: %(roles)s."
 
+msgid "Informe um CPF válido."
+msgstr "Indique un CPF válido."
+
+msgid "CPF"
+msgstr "CPF"
+
+msgid "000.000.000-00"
+msgstr "000.000.000-00"
+
+msgid "CPF (seu usuário de acesso)"
+msgstr "CPF (su usuario de acceso)"
+
+msgid "E-mail de recuperação"
+msgstr "Correo electrónico de recuperación"
+
+msgid "Recebe o link para recuperar a senha. O acesso é pelo CPF."
+msgstr "Recibe el enlace para recuperar la contraseña. El acceso es con el CPF."
+
+msgid "CPF e e-mail pertencem a contas diferentes."
+msgstr "El CPF y el correo electrónico pertenecen a cuentas diferentes."
+
+msgid "Este e-mail já está cadastrado com outro CPF."
+msgstr "Este correo electrónico ya está registrado con otro CPF."
+
+msgid "CPF ou e-mail já cadastrado em outra conta."
+msgstr "CPF o correo electrónico ya registrado en otra cuenta."
+
+msgid "Informe o CPF da pessoa."
+msgstr "Indique el CPF de la persona."
+
+msgid "Usuário de acesso: o CPF da pessoa. O e-mail cadastrado serve para recuperar a senha."
+msgstr "Usuario de acceso: el CPF de la persona. El correo registrado sirve para recuperar la contraseña."
+

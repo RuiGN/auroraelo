@@ -12,6 +12,19 @@ from accounts.models import User
 from clinics.models import Clinic, ClinicMembership
 
 
+def synthetic_cpf(number: int) -> str:
+    """Return a unique, valid, obviously fake CPF for the ``number``-th user."""
+    base = f"{(100_000_000 + number * 7_919) % 1_000_000_000:09d}"
+    digits = base
+    for length in (9, 10):
+        total = sum(
+            int(digit) * weight
+            for digit, weight in zip(digits, range(length + 1, 1, -1), strict=True)
+        )
+        digits += str((total * 10) % 11 % 10)
+    return digits
+
+
 class UserFactory(DjangoModelFactory[User]):
     """Create a unique synthetic user with no usable credential."""
 
@@ -24,6 +37,7 @@ class UserFactory(DjangoModelFactory[User]):
     email = Sequence(  # type: ignore[no-untyped-call]
         lambda number: f"usuario{number}@example.test"
     )
+    cpf = Sequence(synthetic_cpf)  # type: ignore[no-untyped-call]
     first_name = Iterator(  # type: ignore[no-untyped-call]
         ("Ana", "Bruno", "Carla", "Diego")
     )

@@ -1,7 +1,8 @@
 # Aurora Elo
 
 Django application being migrated from the source snapshot `453eab7`.
-The authoritative migration checklist is [DURALUX.prd](DURALUX.prd).
+The migration history and decisions live in `docs/migration/`; the former `DURALUX.prd` checklist and the
+other planning files were removed from the tree and remain in git history.
 Imported templates are transitional: their presence does not imply visual acceptance.
 
 ## Runtime
@@ -101,7 +102,7 @@ or replace human review and runtime/browser validation.
 
 ## Historical documents
 
-`PRD.md`, `MUDANCALAYOUT.prd`, and imported `docs/` describe the source snapshot and
+`PRD.md` and imported `docs/` describe the source snapshot and
 support existing traceability tests. Their completion markers do not describe
 the current Aurora Elo release. Fresh evidence and decisions belong to
 `docs/migration/`; dated reports there also remain historical evidence, not proof

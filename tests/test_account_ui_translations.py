@@ -11,7 +11,11 @@ from django.test import Client, override_settings
 from django.urls import reverse
 from django.utils import translation
 
-from accounts.forms import InvitationAcceptanceForm, InvitationIssueForm, LoginForm
+from accounts.forms import (
+    InvitationAcceptanceForm,
+    InvitationIssueForm,
+    MasterLoginForm,
+)
 
 LAUNCH_LANGUAGES = (
     ("pt-br", "Português (Brasil)"),
@@ -84,7 +88,7 @@ def test_framework_validation_follows_account_form_language(
     email_error: str,
 ) -> None:
     with translation.override(language):
-        form = LoginForm(data={"email": "invalid", "password": "secret"})
+        form = MasterLoginForm(data={"email": "invalid", "password": "secret"})
 
         assert not form.is_valid()
         assert email_error in form.errors["email"]

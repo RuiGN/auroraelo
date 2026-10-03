@@ -48,6 +48,7 @@ from clinics.services import (
 from core.policies import current_actor_is_active
 from core.services import Service as Service
 
+from .cpf import is_valid_cpf, normalize_cpf, parse_cpf
 from .events import account_audit_required, invitation_accepted
 from .models import (
     AccountSession,
@@ -221,6 +222,7 @@ def _audit_session(
 def _login_budget(
     *, request: HttpRequest, canonical_email: str
 ) -> tuple[tuple[str, str], int]:
+    # ``canonical_email`` is the throttle identity: an e-mail or ``cpf:<digits>``.
     """Return the throttle keys and window, or refuse when the budget is spent."""
     attempts, window = _rate_limit_settings(
         attempts_name="LOGIN_RATE_LIMIT_ATTEMPTS",
@@ -265,16 +267,39 @@ def verify_credentials(
     return user, [clinic.pk for clinic in clinics]
 
 
+def _cpf_login_username(cpf: str) -> str:
+    """Resolve a typed CPF to the stored e-mail used by the password backend.
+
+    Unknown or malformed numbers resolve to an empty username, so the caller still runs
+    one password hash and the response gives no hint about whether a CPF exists.
+    """
+    digits = normalize_cpf(cpf)
+    if not is_valid_cpf(digits):
+        return ""
+    return str(
+        User.objects.filter(cpf=digits).values_list("email", flat=True).first() or ""
+    )
+
+
 def login_user(
-    *, request: HttpRequest, email: str, password: str
+    *,
+    request: HttpRequest,
+    password: str,
+    cpf: str | None = None,
+    email: str | None = None,
 ) -> ClinicIdentity | None:
-    """Authenticate canonically and select a tenant unless this is global staff."""
-    canonical_email = UserManager.canonical_email(email)
-    keys, window = _login_budget(request=request, canonical_email=canonical_email)
+    """Authenticate (team: CPF; platform operators: e-mail) and select a tenant."""
+    if cpf is not None:
+        identity = f"cpf:{normalize_cpf(cpf)}"
+        username = _cpf_login_username(cpf)
+    else:
+        identity = UserManager.canonical_email(email or "")
+        username = identity
+    keys, window = _login_budget(request=request, canonical_email=identity)
 
     authenticated = authenticate(
         request,
-        username=canonical_email,
+        username=username,
         password=password,
     )
     user = authenticated if isinstance(authenticated, User) else None
@@ -560,8 +585,12 @@ def accept_invitation(
     first_name: str,
     last_name: str,
     actor: User | None = None,
+    cpf: str | None = None,
 ) -> User:
-    """Consume one invitation for a new or explicitly authenticated identity."""
+    """Consume one invitation for a new or explicitly authenticated identity.
+
+    A new team identity needs a CPF (its login); patients use only the mobile app.
+    """
     now = timezone.now()
     invitation = (
         ClinicInvitation.infrastructure_objects.select_for_update()
@@ -600,6 +629,9 @@ def accept_invitation(
         if actor is not None:
             raise PermissionDenied
 
+        digits = parse_cpf(cpf) if cpf else None
+        if digits is None and invitation.initial_role != "patient":
+            raise ValidationError(_("Informe o CPF da pessoa."))
         candidate = User(
             email=invitation.recipient_email,
             first_name=first_name.strip(),
@@ -611,6 +643,7 @@ def accept_invitation(
                 user = User.objects.create_user(
                     email=candidate.email,
                     password=password,
+                    cpf=digits,
                     first_name=candidate.first_name,
                     last_name=candidate.last_name,
                 )
@@ -1077,6 +1110,7 @@ def create_team_member(
     *,
     clinic_id: UUID,
     actor: User,
+    cpf: str,
     email: str,
     first_name: str,
     last_name: str,
@@ -1085,6 +1119,7 @@ def create_team_member(
 ) -> TeamMemberResult:
     """Register a team member: new identities get a generated temporary password.
 
+    The CPF is the person's login and the e-mail is where password recovery is sent.
     The password is returned to the administrator once and the person must replace it
     on the first access (`must_change_password`). An identity that already exists keeps
     its own password and only receives the new clinic role.
@@ -1094,17 +1129,28 @@ def create_team_member(
     )
     if role not in TEAM_MEMBER_ROLES:
         raise ValidationError(_("Escolha uma função da equipe."))
+    digits = parse_cpf(cpf)
     canonical = UserManager.canonical_email(email)
     if not canonical:
         raise ValidationError(_("Informe o e-mail da pessoa."))
-    existing = User.objects.select_for_update().filter(email=canonical).first()
+    by_cpf = User.objects.select_for_update().filter(cpf=digits).first()
+    by_email = User.objects.select_for_update().filter(email=canonical).first()
+    if by_cpf is not None and by_email is not None and by_cpf.pk != by_email.pk:
+        raise ValidationError(_("CPF e e-mail pertencem a contas diferentes."))
+    existing = by_cpf or by_email
     if existing is not None:
+        if existing.cpf and existing.cpf != digits:
+            raise ValidationError(_("Este e-mail já está cadastrado com outro CPF."))
         if not existing.is_active:
             raise ValidationError(
                 _("Esta conta está desativada e não pode ser vinculada.")
             )
         if clinic_id in active_clinic_ids_for_actor(existing):
             raise ValidationError(_("Esta pessoa já tem vínculo ativo nesta clínica."))
+        if not existing.cpf:
+            # Conta anterior ao login por CPF: passa a entrar com o CPF informado.
+            existing.cpf = digits
+            existing.save(update_fields=("cpf",))
         create_clinic_membership(
             clinic_id=clinic_id,
             user_id=existing.pk,
@@ -1122,13 +1168,20 @@ def create_team_member(
         return TeamMemberResult(existing, None, False)
 
     password = generate_temporary_password()
-    user = User.objects.create_user(
-        email=canonical,
-        password=password,
-        first_name=first_name.strip(),
-        last_name=last_name.strip(),
-        must_change_password=True,
-    )
+    try:
+        with transaction.atomic():
+            user = User.objects.create_user(
+                email=canonical,
+                password=password,
+                cpf=digits,
+                first_name=first_name.strip(),
+                last_name=last_name.strip(),
+                must_change_password=True,
+            )
+    except IntegrityError as error:
+        raise ValidationError(
+            _("CPF ou e-mail já cadastrado em outra conta.")
+        ) from error
     create_clinic_membership(
         clinic_id=clinic_id,
         user_id=user.pk,

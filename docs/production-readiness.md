@@ -6,11 +6,14 @@ segundo pai do commit de mesclagem) e **a VPS roda esse commit** desde 2026-10-0
 
 ## Entrada no web da equipe
 
-- **Login único** (sem abas): e-mail + senha, para todas as funções. Depois de entrar, o
-  sistema monta menu e início conforme a função (gestor, terapeuta, administrativo).
-- **O gestor cadastra os usuários** em *Usuários e equipe → Cadastrar usuário*. O sistema
-  gera uma senha aleatória (16 caracteres, ex.: `Kp7m-Xw3r-Tn9v-Bc4z`) e a mostra uma única
-  vez, sem cache; o gestor repassa por canal seguro. Há "Redefinir senha" por pessoa.
+- **Login único** (sem abas): **CPF + senha**, para todas as funções da equipe. Depois de
+  entrar, o sistema monta menu e início conforme a função (gestor, terapeuta, administrativo).
+  O e-mail serve para recuperar a senha. A operação da plataforma entra em `/master/login/`
+  com e-mail e senha. O app do paciente continua entrando por e-mail.
+- **O gestor cadastra os usuários** em *Usuários e equipe → Cadastrar usuário* (nome, CPF,
+  e-mail e função). O sistema gera uma senha aleatória (16 caracteres, ex.:
+  `Kp7m-Xw3r-Tn9v-Bc4z`) e a mostra uma única vez, sem cache; o gestor repassa por canal
+  seguro. Há "Redefinir senha" por pessoa.
 - **Troca obrigatória no primeiro acesso:** enquanto `must_change_password` for verdadeiro,
   todo caminho (exceto trocar senha e sair) redireciona para a tela de troca.
 - Matriz de funções e menus: `docs/authorization-matrix.md`.
@@ -29,7 +32,7 @@ segundo pai do commit de mesclagem) e **a VPS roda esse commit** desde 2026-10-0
 | Área | Estado | Evidência |
 |---|---|---|
 | Web só da equipe (paciente barrado, telas de paciente removidas) | pronto | `tests/test_patient_web_boundary.py` |
-| Login único, cadastro com senha gerada, troca no primeiro acesso, menus por função | pronto, **em produção** | `tests/test_team_registration.py` (25 testes) |
+| Login por CPF, cadastro com senha gerada, troca no primeiro acesso, menus por função | pronto (em produção a partir do deploy do login por CPF) | `tests/test_team_registration.py`, `tests/test_accounts_authentication.py` |
 | API do paciente (59 operações, sessão por token, posse por perfil) | pronta | suíte do web: 3137 passam |
 | Ativação e recuperação de senha pelo app (código + link) | pronta | `tests/test_mobile_api_accounts.py` |
 | Telas da equipe: medicação, plano de cuidado, hábitos | prontas | `tests/test_routines_staff_*.py` |

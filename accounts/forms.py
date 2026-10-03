@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from clinics.services import membership_role_choices
 
+from .cpf import parse_cpf
 from .services import TEAM_MEMBER_ROLES
 
 _MEMBERSHIP_ROLE_UI_LABELS = {
@@ -41,8 +42,51 @@ def translated_membership_role_choices() -> tuple[tuple[str, object], ...]:
     )
 
 
-class LoginForm(forms.Form):
-    """Collect credentials without encoding account-existence distinctions."""
+def _cpf_field(
+    *, label: str | None = None, autocomplete: str = "off"
+) -> forms.CharField:
+    """Text input for a CPF typed with or without dots and dash."""
+    return forms.CharField(
+        label=label or _("CPF"),
+        max_length=14,
+        widget=forms.TextInput(
+            attrs={
+                "autocomplete": autocomplete,
+                "inputmode": "numeric",
+                "maxlength": "14",
+                "placeholder": _("000.000.000-00"),
+            }
+        ),
+    )
+
+
+class CpfFieldMixin:
+    """Validate the ``cpf`` field and return only its eleven digits."""
+
+    def clean_cpf(self) -> str:
+        """Reject malformed numbers before any account lookup happens."""
+        value = self.cleaned_data["cpf"]  # type: ignore[attr-defined]
+        return parse_cpf(value)
+
+
+class LoginForm(CpfFieldMixin, forms.Form):
+    """Team login: CPF and password, without account-existence distinctions."""
+
+    cpf = _cpf_field(autocomplete="username")
+    password = forms.CharField(
+        label=_("Senha"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "autocomplete": "current-password",
+                "placeholder": _("Digite sua senha"),
+            }
+        ),
+    )
+
+
+class MasterLoginForm(forms.Form):
+    """Platform operator login: e-mail and password (operators have no CPF)."""
 
     email = forms.EmailField(
         label=_("E-mail"),
@@ -150,11 +194,12 @@ class InvitationIssueForm(forms.Form):
     )
 
 
-class InvitationAcceptanceForm(forms.Form):
+class InvitationAcceptanceForm(CpfFieldMixin, forms.Form):
     """Collect a new invited identity without weakening password validation."""
 
     first_name = forms.CharField(label=_("Nome"), max_length=150)
     last_name = forms.CharField(label=_("Sobrenome"), max_length=150)
+    cpf = _cpf_field(label=_("CPF (seu usuário de acesso)"))
     password = forms.CharField(
         label=_("Senha"),
         strip=False,
@@ -176,14 +221,15 @@ class InvitationAcceptanceForm(forms.Form):
         return cleaned
 
 
-class TeamMemberForm(forms.Form):
+class TeamMemberForm(CpfFieldMixin, forms.Form):
     """Register a team member; the system generates the first password."""
 
     first_name = forms.CharField(label=_("Nome"), max_length=150)
     last_name = forms.CharField(label=_("Sobrenome"), max_length=150)
+    cpf = _cpf_field(label=_("CPF"))
     email = forms.EmailField(
-        label=_("E-mail"),
-        help_text=_("É o usuário de acesso da pessoa."),
+        label=_("E-mail de recuperação"),
+        help_text=_("Recebe o link para recuperar a senha. O acesso é pelo CPF."),
         widget=forms.EmailInput(
             attrs={"autocomplete": "off", "inputmode": "email"},
         ),

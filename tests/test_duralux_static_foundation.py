@@ -246,12 +246,10 @@ def test_font_namespace_is_deferred_and_vendor_is_licensed_and_scoped() -> None:
     progress = (Path(settings.BASE_DIR) / "docs" / "duralux" / "progress.md").read_text(
         encoding="utf-8"
     )
-    prd = (Path(settings.BASE_DIR) / "MUDANCALAYOUT.prd").read_text(encoding="utf-8")
     compact_progress = " ".join(progress.split())
 
     assert "namespace `fonts/` permanece adiado" in compact_progress
     assert "ApexCharts 3.52.0" in compact_progress
-    assert "- [X] Criar os namespaces Duralux necessários" in prd
     assert not (Path(settings.BASE_DIR) / "static" / "duralux" / "fonts").exists()
     vendor_root = Path(settings.BASE_DIR) / "static" / "duralux" / "vendors"
     vendor_files = {

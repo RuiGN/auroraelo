@@ -1,0 +1,202 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fmodern\fcharset0 Courier;\f2\froman\fcharset0 Times-Bold;
+\f3\froman\fcharset0 Times-Italic;\f4\fmodern\fcharset0 Courier-Oblique;\f5\fmodern\fcharset0 Courier-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid501\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww26660\viewh13040\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+Markdown\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 # PRD (Product Requirements Document) - Aurora Elo (v2.0 Atualizado)\
+\
+## 1. Escopo do Sistema\
+*   **Produto:** Plataforma Aurora Elo (SaaS Multitenant).\
+*   **Natureza:** Gest\'e3o de Comunidades Terap\'eauticas e Cl\'ednicas Psiqui\'e1tricas com ecossistema p\'f3s-alta (Mobile).\
+*   **Gest\'e3o de Perfis e Interfaces (RBAC Avan\'e7ado):** O sistema deve possuir acesso via login \'fanico. A interface de usu\'e1rio deve ser din\'e2mica e diferente de acordo com a \'e1rea e fun\'e7\'e3o na qual o profissional est\'e1 cadastrado (ex: Administrador, Psiquiatria, Enfermagem, Psicologia, Farm\'e1cia). M\'f3dulos espec\'edficos como Farm\'e1cia e Psicologia n\'e3o podem se misturar com outras \'e1reas. Algumas \'e1reas ter\'e3o pain\'e9is compartilhados conforme a necessidade cl\'ednica.\
+*   **Gest\'e3o de Contas e Cadastros:** Al\'e9m da \'e1rea de gest\'e3o do propriet\'e1rio do software, deve existir uma \'e1rea administrativa da cl\'ednica para o cadastro de setores, fun\'e7\'f5es e de todos os profissionais. O cadastro de pacientes Dev ser feito pela administra\'e7\'e3o. A defini\'e7\'e3o e aloca\'e7\'e3o de leitos \'e9 realizada exclusivamente pela administra\'e7\'e3o.\
+*   **M\'f3dulo Concierge:** Implementa\'e7\'e3o de uma fun\'e7\'e3o de concierge respons\'e1vel por manter e registrar no sistema o contato entre o paciente e a fam\'edlia, incluindo o registro de solicita\'e7\'f5es e pedidos feitos pelo paciente aos familiares.\
+*   **Controle de Visitas e Liga\'e7\'f5es:** Sistema de agenda e CRM para controle do fluxo de comunica\'e7\'e3o. Deve ser configur\'e1vel de acordo com as regras de cada cl\'ednica. O modelo padr\'e3o sugerido \'e9: 1\'aa liga\'e7\'e3o aos 7 dias, 2\'aa liga\'e7\'e3o aos 15 dias e visita presencial aos 15 dias.\
+*   **Seguran\'e7a e LGPD:** Criptografia de dados sens\'edveis em repouso e em tr\'e2nsito. Pol\'edticas r\'edgidas de anonimiza\'e7\'e3o e consentimento.\
+*   **Conformidade Regulat\'f3ria:** Rastreabilidade total (trilhas de auditoria), assinatura e registro de altera\'e7\'f5es no prontu\'e1rio (Anvisa). Isolamento absoluto das anota\'e7\'f5es psicoterap\'eauticas, invis\'edveis para outras \'e1reas e restritas ao psic\'f3logo e paciente (CFP e CRP-PE).\
+*   **Internacionaliza\'e7\'e3o (i18n):** Suporte nativo out-of-the-box para Portugu\'eas do Brasil (pt-BR), Ingl\'eas (en) e Espanhol (es).\
+*   **Backup e Redund\'e2ncia:** Rotinas automatizadas de dump, criptografia do arquivo de backup e upload externo para o Google Drive corporativo.\
+*   **Documenta\'e7\'e3o:** Gera\'e7\'e3o de Manual do Usu\'e1rio e Especifica\'e7\'f5es T\'e9cnicas/Funcionais em formato acess\'edvel (PDF/HTML) dentro do sistema.\
+*   **Intelig\'eancia Artificial:** Motor de anamnese e apoio cl\'ednico integrado via OpenAI.\
+\
+## 2. Arquitetura Sugerida\
+*   **Backend & Multitenancy:** Python 3.12, Django 5+, Django Ninja, PostgreSQL, Redis (para cache e filas).\
+*   **Controle de Acesso Modular:** Utiliza\'e7\'e3o de RBAC baseado nos grupos do Django. Cria\'e7\'e3o de rotas separadas por contexto profissional para garantir que a Farm\'e1cia e a Psicologia fiquem isoladas sistemicamente.\
+*   **Integra\'e7\'e3o OpenAI:** Biblioteca `openai` oficial. O modelo sugerido para anamnese e RAG \'e9 o `gpt-4o` (ou `gpt-4-turbo`).\
+*   **Seguran\'e7a e Criptografia:** `cryptography` e `django-cryptography` para encripta\'e7\'e3o de campos sens\'edveis.\
+*   **Backup e Armazenamento:** Celery/Celery Beat para orquestra\'e7\'e3o e `google-api-python-client` para upload ass\'edncrono para o Google Drive.\
+*   **Internacionaliza\'e7\'e3o:** Framework nativo do Django (`gettext`) com suporte a arquivos `.po`/`.mo`.\
+*   **Infraestrutura Local:** Execu\'e7\'e3o via terminal (Hermes) no macOS/Linux com arquivos `.env` para chaves de API.\
+\
+## 3. Diretrizes para o Agente de IA (Hermes)\
+*   **Desenvolvimento de Interfaces Isoladas (RBAC):** Ao estruturar o frontend ou os endpoints, crie valida\'e7\'f5es baseadas na fun\'e7\'e3o do profissional logado. Gere interfaces distintas (`dashboard_enfermagem`, `dashboard_farmacia`, `dashboard_psiquiatria`, `dashboard_psicologia`, `dashboard_administrador`), garantindo o isolamento da farm\'e1cia e de anota\'e7\'f5es psicol\'f3gicas.\
+*   **Modelagem de Concierge e Visitas:** Modele uma entidade `ConciergeLog` para auditar a ponte de contato entre paciente e fam\'edlia. Crie uma entidade de `CommunicationRule` acoplada ao *Tenant* para parametrizar a r\'e9gua de dias para as liga\'e7\'f5es (7/15 dias) e visitas (15 dias).\
+*   **Integra\'e7\'e3o de IA e Vari\'e1veis:** Leia a chave `OPENAI_API_KEY` exclusivamente do arquivo `.env`. Configure o cliente OpenAI de forma modular em `core/services/ai_service.py`.\
+*   **Blindagem de Dados e Auditoria:** Aplique decorators de permiss\'e3o customizados na modelagem cl\'ednica (psiquiatra n\'e3o pode ler di\'e1rio de psicoterapia). Criptografe colunas no ORM com `django-cryptography`. Utilize `django-simple-history` para registrar quem alterou um prontu\'e1rio, a data, a hora e o estado anterior.\
+*   **Rotina de Backup:** Escreva um script `backup_to_drive.py` que realize o `pg_dump` completo, compacte, criptografe e envie via API do Google Drive usando Service Accounts.\
+*   **Documenta\'e7\'e3o Automatizada:** Crie uma pasta `docs/` e gere automaticamente os templates Markdown refletindo a estrutura do banco.\
+\
+## 4. Comandos e Scripts de Terminal\
+```bash\
+# 1. Instala\'e7\'e3o de depend\'eancias adicionais (OpenAI, Google API, Criptografia, Auditoria)\
+pip install openai google-api-python-client google-auth-httplib2 google-auth-oauthlib django-cryptography django-simple-history[cite: 1]\
+\
+# 2. Configura\'e7\'e3o de Internacionaliza\'e7\'e3o (i18n)[cite: 1]\
+mkdir -p locale/pt_BR/LC_MESSAGES[cite: 1]\
+mkdir -p locale/en/LC_MESSAGES[cite: 1]\
+mkdir -p locale/es/LC_MESSAGES[cite: 1]\
+django-admin makemessages -l pt_BR -l en -l es[cite: 1]\
+\
+# 3. Gera\'e7\'e3o dos arquivos de compila\'e7\'e3o de tradu\'e7\'e3o[cite: 1]\
+django-admin compilemessages[cite: 1]\
+\
+# 4. Configura\'e7\'e3o do arquivo .env[cite: 1]\
+echo "OPENAI_API_KEY=sk-suachaveaqui" >> .env[cite: 1]\
+echo "GOOGLE_DRIVE_CREDENTIALS_PATH=./google_credentials.json" >> .env[cite: 1]\
+\
+# 5. Criar Apps modulares\
+python manage.py startapp compliance[cite: 1]\
+python manage.py startapp concierge\
+python manage.py startapp appointments\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f2\b\fs36 \cf0 5. Roadmap e Sprints (Checklist de Execu\'e7\'e3o)\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f3\i\b0\fs24 \cf0 Mude a tag para 
+\f4\fs26 [x]
+\f3\fs24  ao concluir cada etapa.
+\f0\i0 \
+[cite: 1]\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Sprint 1: Funda\'e7\'e3o, Multitenancy e i18n 
+\f5\fs30\fsmilli15210 <status: pendente>
+\f2\fs28 \
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 [cite: 1]\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls1\ilvl0\cf0 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Configurar ambiente, Docker (PostgreSQL/Redis) e vari\'e1veis de ambiente 
+\f1\fs26 .env
+\f0\fs24 [cite: 1].\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Implementar arquitetura multitenant (
+\f1\fs26 django-tenants
+\f0\fs24 )[cite: 1].\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Configurar o framework de internacionaliza\'e7\'e3o (i18n) e gerar arquivos 
+\f1\fs26 .po
+\f0\fs24  base (pt-BR, en, es)[cite: 1].\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Subir modelos iniciais de licen\'e7a SaaS e dom\'ednios[cite: 1].\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Sprint 2: Core Administrativo, Design System e RBAC 
+\f5\fs30\fsmilli15210 <status: pendente>
+\f2\fs28 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls2\ilvl0
+\f0\b0\fs24 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Integrar pastas est\'e1ticas do Design System local e Logomarca[cite: 1].\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver cadastros de Setores, Fun\'e7\'f5es e Profissionais (\'c1rea de administra\'e7\'e3o da cl\'ednica).\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Implementar fluxo de cadastro de pacientes (Administra\'e7\'e3o e Autoatendimento) e sistema de aloca\'e7\'e3o de leitos.\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver RBAC (Role-Based Access Control) avan\'e7ado focado em n\'edveis de sa\'fade, com gera\'e7\'e3o de interfaces isoladas[cite: 1].\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Implementar trilha de auditoria padr\'e3o Anvisa (
+\f1\fs26 django-simple-history
+\f0\fs24 ) nos modelos base[cite: 1].\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Sprint 3: Cl\'ednica, Privacidade CFP e RAG (OpenAI) 
+\f5\fs30\fsmilli15210 <status: pendente>
+\f2\fs28 \
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 [cite: 1]\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0\cf0 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Modelar Prontu\'e1rio Eletr\'f4nico do Paciente (PEP)[cite: 1].\
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Implementar isolamento e criptografia de banco (
+\f1\fs26 django-cryptography
+\f0\fs24 ) para anota\'e7\'f5es do psic\'f3logo[cite: 1].\
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver integra\'e7\'e3o com a API da OpenAI (
+\f1\fs26 gpt-4o
+\f0\fs24 ) para motor de anamnese e sugest\'f5es cl\'ednicas[cite: 1].\
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver prescri\'e7\'e3o m\'e9dica e sistema de travas para medica\'e7\'e3o SOS[cite: 1].\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Sprint 4: Facilities, Farm\'e1cia, Concierge e Financeiro 
+\f5\fs30\fsmilli15210 <status: pendente>
+\f2\fs28 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls4\ilvl0
+\f0\b0\fs24 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver o 
+\f2\b M\'f3dulo Concierge
+\f0\b0  com logs de solicita\'e7\'f5es e contato entre Paciente e Fam\'edlia.\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver r\'e9gua configur\'e1vel de visitas e liga\'e7\'f5es (parametriz\'e1vel por cl\'ednica).\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver controle de farm\'e1cia (interface isolada) e gest\'e3o de estoque[cite: 1].\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Implementar gest\'e3o de cantina, faturamento e fluxo de fechamento de conta[cite: 1].\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Sprint 5: Documenta\'e7\'e3o, Backup e Compliance 
+\f5\fs30\fsmilli15210 <status: pendente>
+\f2\fs28 \
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 [cite: 1]\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls5\ilvl0\cf0 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver 
+\f3\i management command
+\f0\i0  de backup com criptografia de arquivo[cite: 1].\
+\ls5\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Integrar API do Google Drive para upload di\'e1rio automatizado dos backups[cite: 1].\
+\ls5\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Redigir Especifica\'e7\'e3o T\'e9cnica, Especifica\'e7\'e3o Funcional (Anvisa) e Manual do Usu\'e1rio[cite: 1].\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Sprint 6: Ecossistema Mobile e P\'f3s-Alta 
+\f5\fs30\fsmilli15210 <status: pendente>
+\f2\fs28 \
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 [cite: 1]\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls6\ilvl0\cf0 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Desenvolver PWA para a equipe interna (monitores, enfermagem)[cite: 1].\
+\ls6\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Criar APIs seguras para consumo do App P\'f3s-Alta do paciente[cite: 1].\
+\ls6\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Refinar Landing Page de vendas com diferenciais de seguran\'e7a (LGPD), IA e conformidade legal[cite: 1].\
+\ls6\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+[ ] Testes finais de conectividade na rede local[cite: 1].\
+}

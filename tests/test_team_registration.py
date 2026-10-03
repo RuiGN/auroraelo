@@ -23,11 +23,18 @@ from accounts.services import (
     generate_temporary_password,
 )
 from clinics.models import ClinicMembership
-from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
+from tests.factories import (
+    ClinicFactory,
+    ClinicMembershipFactory,
+    UserFactory,
+    synthetic_cpf,
+)
 
 pytestmark = pytest.mark.django_db
 
 PASSWORD = "senha-segura-sintetica-123"  # nosec - credencial sintética de teste
+CARLA_CPF = "52998224725"
+CARLA_CPF_MASKED = "***.982.247-**"
 PASSWORD_SHAPE = re.compile(r"^[A-Za-z2-9]{4}(-[A-Za-z2-9]{4}){3}$")
 
 
@@ -63,6 +70,7 @@ def _register(client: Client, **over: str):
     data = {
         "first_name": "Carla",
         "last_name": "Dias",
+        "cpf": "529.982.247-25",
         "email": "carla.dias@example.test",
         "role": "therapist",
         **over,
@@ -85,7 +93,8 @@ def test_login_is_a_single_form_without_role_tabs() -> None:
     html = Client().get(reverse("account_login")).content.decode()
     assert "aurora-role-tab" not in html and "data-role-tab" not in html
     assert "Médico / Psi" not in html and "Recepção" not in html
-    assert 'name="email"' in html and 'name="password"' in html
+    assert 'name="cpf"' in html and 'name="password"' in html
+    assert 'name="email"' not in html
     assert html.count("<form") >= 1
     assert "Pacientes usam o aplicativo" in html
 
@@ -129,7 +138,9 @@ def test_admin_registers_a_person_and_the_password_is_shown_only_once() -> None:
 @pytest.mark.parametrize("role", TEAM_MEMBER_ROLES)
 def test_every_team_function_can_be_registered(role: str) -> None:
     clinic, _admin, client = _stage()
-    response = _register(client, role=role, email=f"{role}@example.test")
+    response = _register(
+        client, role=role, email=f"{role}@example.test", cpf=synthetic_cpf(900)
+    )
     assert response.status_code == 200
     membership = ClinicMembership.objects.for_clinic(clinic.pk).get(
         user__email=f"{role}@example.test"
@@ -164,7 +175,7 @@ def test_existing_member_is_refused_and_other_clinics_keep_their_password() -> N
     assert again.status_code == 200 and "vínculo ativo" in again.content.decode()
     other_clinic = ClinicFactory.create()
     elsewhere = _member(other_clinic, "therapist", "ja-existe@example.test")
-    response = _register(client, email="ja-existe@example.test")
+    response = _register(client, email="ja-existe@example.test", cpf=elsewhere.cpf)
     html = response.content.decode()
     assert 'data-testid="temporary-password"' not in html
     assert "continua com a própria senha" in html
@@ -188,11 +199,92 @@ def test_registration_is_audited_without_the_password() -> None:
     assert password not in repr(list(events.values()))
 
 
+def test_registered_person_signs_in_with_the_cpf_and_it_is_shown_masked() -> None:
+    clinic, _admin, client = _stage()
+    response = _register(client)
+    html = response.content.decode()
+    user = User.objects.get(email="carla.dias@example.test")
+    assert user.cpf == CARLA_CPF
+    assert CARLA_CPF_MASKED in html and "529.982.247-25" not in html
+    assert "CPF da pessoa" in html
+    listing = client.get(reverse("team_list")).content.decode()
+    assert CARLA_CPF_MASKED in listing
+    assert "529.982.247-25" not in listing and CARLA_CPF not in listing
+
+
+def test_registration_requires_a_valid_cpf() -> None:
+    _clinic, _admin, client = _stage()
+    before = User.objects.count()
+    for bad in ("", "123.456.789-00", "111.111.111-11", "5299822472", "abc"):
+        response = _register(client, cpf=bad)
+        assert response.status_code == 200, bad
+        assert 'data-testid="temporary-password"' not in response.content.decode()
+    assert User.objects.count() == before
+
+
+def test_cpf_is_unique_across_the_platform() -> None:
+    _clinic, _admin, client = _stage()
+    _register(client)
+    other_clinic = ClinicFactory.create()
+    other_admin = _member(other_clinic, "clinic_admin", "outra-admin@example.test")
+    other = _client_for(other_admin, other_clinic)
+    # o mesmo CPF com outro e-mail é a mesma pessoa: ganha o vínculo, mantém a senha
+    response = _register(other, email="outro-email@example.test")
+    assert 'data-testid="temporary-password"' not in response.content.decode()
+    assert User.objects.filter(cpf=CARLA_CPF).count() == 1
+    assert not User.objects.filter(email="outro-email@example.test").exists()
+
+
+def test_cpf_and_email_of_different_people_are_refused() -> None:
+    clinic, _admin, client = _stage()
+    _register(client)
+    stranger = _member(clinic, "therapist", "estranho@example.test")
+    before = ClinicMembership.infrastructure_objects.count()
+    response = _register(client, email=stranger.email, cpf=CARLA_CPF)
+    assert "contas diferentes" in response.content.decode()
+    assert ClinicMembership.infrastructure_objects.count() == before
+
+
+def test_account_without_cpf_receives_the_informed_one_and_keeps_its_password() -> None:
+    clinic, _admin, client = _stage()
+    legacy = User.objects.create_user(email="antigo@example.test", password=PASSWORD)
+    assert legacy.cpf is None
+    response = _register(client, email="antigo@example.test")
+    assert 'data-testid="temporary-password"' not in response.content.decode()
+    legacy.refresh_from_db()
+    assert legacy.cpf == CARLA_CPF and legacy.check_password(PASSWORD)
+    assert ClinicMembership.objects.for_clinic(clinic.pk).filter(user=legacy).exists()
+    # e uma conta que já tem outro CPF não é reaproveitada com um CPF diferente
+    other = _member(clinic, "therapist", "com-cpf@example.test")
+    refused = _register(client, email=other.email, cpf=synthetic_cpf(901))
+    assert "outro CPF" in refused.content.decode()
+
+
+def test_cpf_is_stored_as_digits_and_blank_is_not_a_value() -> None:
+    first = User.objects.create_user(
+        email="a@example.test", password=PASSWORD, cpf="529.982.247-25"
+    )
+    assert first.cpf == CARLA_CPF and first.masked_cpf == CARLA_CPF_MASKED
+    for index in range(2):
+        user = User.objects.create_user(email=f"sem-cpf-{index}@example.test", cpf="")
+        assert user.cpf is None and user.masked_cpf == ""
+
+
+def test_the_cpf_never_reaches_the_audit_trail() -> None:
+    from audit.models import AuditEvent
+
+    clinic, _admin, client = _stage()
+    _register(client)
+    events = AuditEvent.infrastructure_objects.filter(clinic_id=clinic.pk)
+    assert CARLA_CPF not in repr(list(events.values()))
+
+
 def test_service_refuses_non_administrators_and_unknown_roles() -> None:
     clinic, _admin, _client = _stage()
     therapist = _member(clinic, "therapist", "terapeuta-servico@example.test")
     kwargs = dict(
         clinic_id=clinic.pk,
+        cpf=CARLA_CPF,
         email="x@example.test",
         first_name="X",
         last_name="Y",
@@ -215,7 +307,7 @@ def _first_access(client: Client):
     person = Client()
     response = person.post(
         reverse("account_login"),
-        {"email": "carla.dias@example.test", "password": shown},
+        {"cpf": CARLA_CPF, "password": shown},
     )
     assert response.status_code == 302
     return person, shown
@@ -253,7 +345,7 @@ def test_changing_the_password_releases_the_account_and_keeps_the_session() -> N
     # a provisória deixou de valer
     fresh = Client().post(
         reverse("account_login"),
-        {"email": "carla.dias@example.test", "password": shown},
+        {"cpf": CARLA_CPF, "password": shown},
     )
     assert fresh.status_code == 200
     # e a página de troca não serve mais a quem já trocou

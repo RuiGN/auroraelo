@@ -41,8 +41,10 @@ def test_public_auth_forms_use_the_minimal_shell_and_preserve_django_inputs(
     assert 'href="/static/duralux/css/theme.min.css"' not in login_html
     assert 'class="aurora-auth-card"' in login_html
     assert 'name="csrfmiddlewaretoken"' in login_html
-    assert 'name="email"' in login_html
-    assert 'autocomplete="email"' in login_html
+    assert 'name="cpf"' in login_html
+    assert 'autocomplete="username"' in login_html
+    assert 'inputmode="numeric"' in login_html
+    assert 'name="email"' not in login_html
     assert 'name="password"' in login_html
     assert 'autocomplete="current-password"' in login_html
     assert reverse("password_recovery") in login_html
@@ -57,16 +59,16 @@ def test_invalid_login_keeps_field_errors_associated_with_the_original_input(
 ) -> None:
     response = client.post(
         reverse("account_login"),
-        {"email": "endereco-invalido", "password": ""},
+        {"cpf": "cpf-invalido", "password": ""},
     )
 
     assert response.status_code == 200
     html = response.content.decode()
     assert "data-focus-error-summary" not in html  # no non-field summary in this state
-    assert 'id="id_email"' in html
-    assert 'id="id_email_error_0"' in html
+    assert 'id="id_cpf"' in html
+    assert 'id="id_cpf_error_0"' in html
     assert 'aria-invalid="true"' in html
-    assert 'value="endereco-invalido"' in html
+    assert 'value="cpf-invalido"' in html
     assert 'id="id_password"' in html
     assert 'id="id_password_error_0"' in html
 

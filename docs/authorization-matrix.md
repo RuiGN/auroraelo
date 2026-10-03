@@ -33,12 +33,20 @@ All decisions are evaluated on the backend and default to denial.
 
 ## Login, cadastro de usuários e primeiro acesso (web da equipe)
 
-- **Login único.** `/accounts/login/` é a única entrada: e-mail (o usuário de acesso) e
-  senha, sem abas nem escolha de perfil. O sistema decide o que mostrar pela função da
-  pessoa na clínica ativa. Paciente não entra no web (usa o aplicativo).
+- **Login único.** `/accounts/login/` é a única entrada da equipe: **CPF** (o usuário de
+  acesso, com ou sem pontos e traço) e senha, sem abas nem escolha de perfil. O sistema
+  decide o que mostrar pela função da pessoa na clínica ativa. Paciente não entra no web
+  (usa o aplicativo, que continua entrando por e-mail). A operação da plataforma (Master)
+  entra em `/master/login/` com e-mail e senha.
+- **CPF e e-mail.** O CPF é único na plataforma, guardado só com os 11 dígitos, validado
+  pelos dígitos verificadores e mostrado mascarado (`***.982.247-**`) nas telas; não entra
+  em auditoria nem em log. O e-mail é o contato de **recuperação da senha**
+  (*Esqueci minha senha* continua pelo e-mail). Quem já tem conta sem CPF recebe o CPF
+  informado quando a administração o cadastra com o mesmo e-mail; um CPF ou e-mail ligado a
+  outra pessoa é recusado.
 - **Quem cadastra.** Só o administrador da clínica (`invitation.issue`) cadastra pessoas em
-  *Usuários e equipe → Cadastrar usuário*: nome, e-mail e função (administrador, terapeuta
-  ou equipe administrativa). Paciente não é cadastrado por aqui.
+  *Usuários e equipe → Cadastrar usuário*: nome, CPF, e-mail de recuperação e função
+  (administrador, terapeuta ou equipe administrativa). Paciente não é cadastrado por aqui.
 - **Senha gerada pelo sistema.** O cadastro cria a identidade com uma senha aleatória
   (`Kp7m-Xw3r-Tn9v-Bc4z`, 16 caracteres sem look-alikes, entropia do sistema operacional),
   mostrada **uma única vez** ao administrador (`Cache-Control: no-store`), nunca gravada em

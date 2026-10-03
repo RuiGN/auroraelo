@@ -1,8 +1,0 @@
-@import "./tokens.local.css";
-@import "./custom.local.css";
-@import "./shell.css";
-@import "./master-login.css";
-@import "./master.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

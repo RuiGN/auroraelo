@@ -7898,3 +7898,36 @@ msgstr "Register people, set their role and reset passwords."
 msgid "Sua função: %(roles)s."
 msgstr "Your role: %(roles)s."
 
+msgid "Informe um CPF válido."
+msgstr "Enter a valid CPF."
+
+msgid "CPF"
+msgstr "CPF"
+
+msgid "000.000.000-00"
+msgstr "000.000.000-00"
+
+msgid "CPF (seu usuário de acesso)"
+msgstr "CPF (your sign-in username)"
+
+msgid "E-mail de recuperação"
+msgstr "Recovery e-mail"
+
+msgid "Recebe o link para recuperar a senha. O acesso é pelo CPF."
+msgstr "Receives the link to recover the password. Sign-in uses the CPF."
+
+msgid "CPF e e-mail pertencem a contas diferentes."
+msgstr "The CPF and the e-mail belong to different accounts."
+
+msgid "Este e-mail já está cadastrado com outro CPF."
+msgstr "This e-mail is already registered with another CPF."
+
+msgid "CPF ou e-mail já cadastrado em outra conta."
+msgstr "CPF or e-mail already registered on another account."
+
+msgid "Informe o CPF da pessoa."
+msgstr "Enter the person's CPF."
+
+msgid "Usuário de acesso: o CPF da pessoa. O e-mail cadastrado serve para recuperar a senha."
+msgstr "Sign-in username: the person's CPF. The registered e-mail is used to recover the password."
+

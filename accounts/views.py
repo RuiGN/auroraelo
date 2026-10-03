@@ -27,6 +27,7 @@ from .forms import (
     InvitationAcceptanceForm,
     InvitationIssueForm,
     LoginForm,
+    MasterLoginForm,
     PasswordRecoveryForm,
     PasswordResetForm,
     RequiredPasswordChangeForm,
@@ -175,7 +176,7 @@ def account_login(request: HttpRequest) -> HttpResponse:
         try:
             login_user(
                 request=request,
-                email=form.cleaned_data["email"],
+                cpf=form.cleaned_data["cpf"],
                 password=form.cleaned_data["password"],
             )
         except LoginRateLimitedError:
@@ -220,7 +221,7 @@ def account_login(request: HttpRequest) -> HttpResponse:
 @require_http_methods(["GET", "POST"])
 def master_login(request: HttpRequest) -> HttpResponse:
     """Authenticate platform administrators for the Master Panel."""
-    form = LoginForm(request.POST or None)
+    form = MasterLoginForm(request.POST or None)
     status = 200
     if request.method == "POST" and form.is_valid():
         try:
@@ -405,6 +406,7 @@ def invitation_accept(request: HttpRequest, raw_token: str) -> HttpResponse:
                     password=form.cleaned_data["password"],
                     first_name=form.cleaned_data["first_name"],
                     last_name=form.cleaned_data["last_name"],
+                    cpf=form.cleaned_data["cpf"],
                 )
             except PermissionDenied, ValueError, ValidationError:
                 form.add_error(None, _("Convite inválido ou expirado."))
