@@ -8,6 +8,8 @@ import { Manrope_500Medium } from "@expo-google-fonts/manrope/500Medium";
 import { Manrope_600SemiBold } from "@expo-google-fonts/manrope/600SemiBold";
 import { Manrope_700Bold } from "@expo-google-fonts/manrope/700Bold";
 import { Manrope_800ExtraBold } from "@expo-google-fonts/manrope/800ExtraBold";
+import { DeepLinkProvider } from "./src/api/deepLinks";
+import { SessionProvider } from "./src/api/session";
 import { BrandMark } from "./src/components/Layout";
 import { StoreProvider } from "./src/data/store";
 import { I18nProvider } from "./src/i18n";
@@ -30,9 +32,14 @@ export default function App() {
         <StatusBar style="light" />
         {ready ? (
           <I18nProvider>
-            <StoreProvider>
-              <RootNavigator />
-            </StoreProvider>
+            {/* Sessão (live) → links do app → dados: cada um lê o anterior. */}
+            <SessionProvider>
+              <DeepLinkProvider>
+                <StoreProvider>
+                  <RootNavigator />
+                </StoreProvider>
+              </DeepLinkProvider>
+            </SessionProvider>
           </I18nProvider>
         ) : (
           <View style={styles.splash} accessibilityLabel="Aurora Elo">

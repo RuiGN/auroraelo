@@ -2,17 +2,14 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "../components/Button";
 import { Card, Divider, ListRow } from "../components/Card";
-import {
-  Badge,
-  FeedbackAlert,
-  useActionFeedback,
-} from "../components/Feedback";
+import { Badge, FeedbackAlert, useRunAction } from "../components/Feedback";
 import { Icon } from "../components/Icon";
 import {
+  NoDataState,
   ProgressBar,
   Screen,
   Section,
-  UnavailableState,
+  StaleNotice,
 } from "../components/Layout";
 import { Text } from "../components/Text";
 import { mutations } from "../data/mutations";
@@ -42,10 +39,13 @@ export function HomeScreen() {
   return (
     <Screen testID="screen-home">
       {store.snapshot ? (
-        <HomeContent snapshot={store.snapshot} now={store.now} />
+        <>
+          <StaleNotice />
+          <HomeContent snapshot={store.snapshot} now={store.now} />
+        </>
       ) : (
         <>
-          <UnavailableState />
+          <NoDataState />
           <Button
             label={t("help.title")}
             icon="lifebuoy"
@@ -69,7 +69,7 @@ function HomeContent({ snapshot, now }: HomeContentProps) {
   const { colors } = useTheme();
   const nav = useNav();
   const store = useStore();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const today = toISODate(now);
 
   const slots = doseSlotsForDay(snapshot, today);
@@ -83,7 +83,8 @@ function HomeContent({ snapshot, now }: HomeContentProps) {
     )[0];
   const appointment = nextAppointment(snapshot, now);
   const focusGoal = snapshot.goals.find((goal) => goal.status === "active");
-  const sinceDischarge = daysSince(snapshot.patient.dischargeDate, now);
+  const dischargeDate = snapshot.patient.dischargeDate;
+  const sinceDischarge = dischargeDate ? daysSince(dischargeDate, now) : null;
   const sobriety = snapshot.sobriety;
   const lowEnergy = snapshot.lowEnergy;
 
@@ -95,11 +96,13 @@ function HomeContent({ snapshot, now }: HomeContentProps) {
         <Text variant="title1" header>
           {t(greetingKey, { name: firstName(snapshot.patient.displayName) })}
         </Text>
-        <Text variant="body" tone="muted">
-          {sinceDischarge <= 0
-            ? t("home.dischargeToday")
-            : t("home.sinceDischarge", { count: sinceDischarge })}
-        </Text>
+        {sinceDischarge !== null ? (
+          <Text variant="body" tone="muted">
+            {sinceDischarge <= 0
+              ? t("home.dischargeToday")
+              : t("home.sinceDischarge", { count: sinceDischarge })}
+          </Text>
+        ) : null}
         {sobriety ? (
           <View style={styles.recovery}>
             <Icon name="leaf" size={18} color={colors.success} />
@@ -141,9 +144,7 @@ function HomeContent({ snapshot, now }: HomeContentProps) {
           <Button
             label={t("home.lowEnergy.deactivate")}
             variant="secondary"
-            onPress={() =>
-              report(store.run(mutations.setLowEnergy(false)), "common.done")
-            }
+            onPress={() => run(mutations.setLowEnergy(false), "common.done")}
             testID="low-energy-off"
           />
         </Card>
@@ -162,10 +163,15 @@ function HomeContent({ snapshot, now }: HomeContentProps) {
             label={t("home.lowEnergy.activate")}
             variant="secondary"
             size="sm"
-            onPress={() =>
-              report(store.run(mutations.setLowEnergy(true)), "common.done")
-            }
+            onPress={() => run(mutations.setLowEnergy(true), "common.done")}
             testID="low-energy-on"
+          />
+          <Button
+            label={t("lowenergy.edit.entry")}
+            variant="ghost"
+            size="sm"
+            onPress={() => nav.navigate("LowEnergyEdit")}
+            testID="low-energy-edit"
           />
         </Card>
       )}

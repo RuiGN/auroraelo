@@ -37,7 +37,10 @@ export interface PatientSummary {
   /** Nome social quando existir (people.PatientProfile.social_name). */
   displayName: string;
   clinicName: string;
-  dischargeDate: ISODate;
+  /** `null` quando a clínica ainda não registrou a alta. */
+  dischargeDate: ISODate | null;
+  /** Fuso IANA do paciente: as doses programadas ("HH:MM") valem nesse fuso. */
+  timezone: string;
   careTeam: TeamMember[];
 }
 
@@ -90,6 +93,16 @@ export interface JournalEntry {
   visibility: Visibility;
 }
 
+/** Pedido da equipe para ver um registro "confirmar antes"; só o paciente responde. */
+export interface JournalAccessRequest {
+  id: string;
+  entryId: string;
+  entryCreatedAt: ISODateTime;
+  therapistName: string;
+  purpose: string;
+  requestedAt: ISODateTime;
+}
+
 // ── Fissura e meta de recuperação (wellness) ────────────────────────────────
 
 export interface SobrietyGoal {
@@ -106,7 +119,7 @@ export interface SobrietyGoal {
 export interface CravingLog {
   id: string;
   recordedAt: ISODateTime;
-  /** 0 a 10. */
+  /** 1 a 10. */
   intensity: number;
   triggersContext: string;
   copingStrategyUsed: string;
@@ -325,11 +338,12 @@ export interface BookableService {
 
 // ── Rede de apoio (support_network) ─────────────────────────────────────────
 
+/** Escopos do domínio (support_network.contracts.SupportPermissionScope). */
 export type SupportScope =
-  | "view_goals"
-  | "view_routine"
-  | "view_appointments"
-  | "receive_alerts";
+  | "view_wellness_summary"
+  | "receive_urgent_alerts"
+  | "view_relapse_plan_safe"
+  | "receive_checkin_summary";
 
 export interface SupportRelationship {
   id: string;
@@ -385,12 +399,24 @@ export type ConsentPurposeKey =
   | "communication";
 
 export interface ConsentRecord {
+  /** Documento vigente (live) ou identificador fictício (demonstração). */
   id: string;
-  purpose: ConsentPurposeKey;
+  /** Finalidade do documento (ex.: clinical_follow_up). */
+  purpose: string;
+  /** Título do documento; sem ele a tela usa o rótulo traduzido da finalidade. */
+  title?: string;
   documentVersion: string;
-  status: "granted" | "revoked";
-  decidedAt: ISODateTime;
+  /** `pending`: ainda sem decisão do paciente nesta versão. */
+  status: "granted" | "revoked" | "pending";
+  decidedAt: ISODateTime | null;
   mandatory: boolean;
+  /** O servidor decide se este aceite pode ser revogado pelo app (padrão: opcional + aceito). */
+  canRevoke?: boolean;
+  /** Texto completo e consequências, quando o servidor os informa (live). */
+  content?: string;
+  refusalConsequence?: string;
+  alternativeInstructions?: string;
+  clinicContact?: string;
 }
 
 export type PrivacyRequestType =
@@ -405,7 +431,13 @@ export interface PrivacyRequest {
   id: string;
   type: PrivacyRequestType;
   requestedAt: ISODateTime;
-  status: "identity_pending" | "in_review" | "completed";
+  status:
+    | "identity_pending"
+    | "in_review"
+    | "approved"
+    | "rejected"
+    | "processing"
+    | "completed";
 }
 
 // ── Instantâneo completo mantido pelo store ─────────────────────────────────
@@ -414,6 +446,7 @@ export interface Snapshot {
   patient: PatientSummary;
   checkIns: DailyCheckIn[];
   journal: JournalEntry[];
+  accessRequests: JournalAccessRequest[];
   sobriety: SobrietyGoal | null;
   cravings: CravingLog[];
   medications: Medication[];

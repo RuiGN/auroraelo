@@ -1,8 +1,16 @@
-import React, { ReactNode, useCallback, useState } from "react";
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { StyleSheet, View } from "react-native";
 import { APP_MODE } from "../config";
+import { Mutation } from "../data/mutations";
 import { ActionOutcome, useStore } from "../data/store";
 import { TranslationKey, useI18n } from "../i18n";
+import { errorCodeKey } from "../i18n/errorCodes";
 import { useTheme } from "../theme/ThemeProvider";
 import { radius } from "../theme/tokens";
 import { Icon, IconName } from "./Icon";
@@ -100,9 +108,43 @@ export interface FeedbackState {
   note?: string;
 }
 
+/** Mensagem acolhedora para uma gravação que não deu certo (nunca "salvo"). */
+export function failureFeedback(
+  outcome: Extract<ActionOutcome, { ok: false }>,
+  t: (key: TranslationKey) => string,
+): FeedbackState {
+  switch (outcome.reason) {
+    case "unavailable":
+      // Com `code` o servidor falhou; sem `code` a ação nem existe neste app ainda.
+      return {
+        tone: "warning",
+        text: t(
+          outcome.code ? "mode.action.server" : "mode.action.unavailable",
+        ),
+      };
+    case "invalid":
+      return {
+        tone: "danger",
+        text: t(errorCodeKey(outcome.code) ?? "mode.action.invalid"),
+      };
+    case "offline":
+      return { tone: "warning", text: t("mode.action.offline") };
+    case "rejected":
+      return {
+        tone: "danger",
+        text: t(errorCodeKey(outcome.code) ?? "mode.action.rejected"),
+      };
+    case "session":
+      return { tone: "warning", text: t("mode.action.session") };
+    case "blocked":
+      return { tone: "warning", text: t("mode.action.blocked") };
+  }
+}
+
 /**
  * Resultado de uma gravação. Em modo demonstração acrescenta o aviso de que nada
- * foi salvo de verdade; sem conexão (live) mostra a recusa — nunca um sucesso falso.
+ * foi salvo de verdade; no live só diz "salvo" com `ok: true` e, nas falhas, explica
+ * por motivo (sem rede, recusado, sessão, clínica bloqueada…).
  */
 export function useActionFeedback() {
   const { t } = useI18n();
@@ -119,20 +161,65 @@ export function useActionFeedback() {
         });
         return true;
       }
-      setFeedback({
-        tone: outcome.reason === "unavailable" ? "warning" : "danger",
-        text: t(
-          outcome.reason === "unavailable"
-            ? "mode.action.unavailable"
-            : "mode.action.invalid",
-        ),
-      });
+      setFeedback(failureFeedback(outcome, t));
       return false;
     },
     [store.mode, t],
   );
   const clear = useCallback(() => setFeedback(null), []);
   return { feedback, report, clear, setFeedback };
+}
+
+/** Só mostra "trabalhando" se a gravação demorar (no preview ela resolve na hora). */
+const PENDING_DELAY_MS = 250;
+
+/**
+ * Caminho único de escrita das telas: `await run(mutations.x(input), "chave.sucesso")`.
+ * Aguarda `store.run`, mostra o resultado em `feedback` e devolve `true` só com
+ * `ok: true` (use para limpar formulários). `pending` fica `true` enquanto uma
+ * gravação lenta está em andamento (para desabilitar botões).
+ */
+export function useRunAction() {
+  const store = useStore();
+  const base = useActionFeedback();
+  const [pending, setPending] = useState(false);
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+
+  const { report } = base;
+  const storeRun = store.run;
+  const remote = store.mode === "live";
+  const run = useCallback(
+    async (
+      mutation: Mutation,
+      successKey: TranslationKey,
+    ): Promise<boolean> => {
+      let shown = false;
+      // O preview resolve na hora: sem temporizador nem estado "trabalhando".
+      const timer = remote
+        ? setTimeout(() => {
+            if (mounted.current) {
+              shown = true;
+              setPending(true);
+            }
+          }, PENDING_DELAY_MS)
+        : undefined;
+      try {
+        const outcome = await storeRun(mutation);
+        return mounted.current ? report(outcome, successKey) : outcome.ok;
+      } finally {
+        clearTimeout(timer);
+        if (shown && mounted.current) setPending(false);
+      }
+    },
+    [storeRun, report, remote],
+  );
+  return { ...base, run, pending };
 }
 
 export function FeedbackAlert({

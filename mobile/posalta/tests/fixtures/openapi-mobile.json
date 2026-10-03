@@ -1,0 +1,5715 @@
+{
+ "components": {
+  "schemas": {
+   "AccessRequestOut": {
+    "properties": {
+     "entry_created_at": {
+      "format": "date-time",
+      "title": "Entry Created At",
+      "type": "string"
+     },
+     "entry_id": {
+      "format": "uuid",
+      "title": "Entry Id",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "purpose": {
+      "title": "Purpose",
+      "type": "string"
+     },
+     "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+     },
+     "therapist_name": {
+      "title": "Therapist Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "entry_id",
+     "entry_created_at",
+     "therapist_name",
+     "purpose",
+     "requested_at"
+    ],
+    "title": "AccessRequestOut",
+    "type": "object"
+   },
+   "ActivateIn": {
+    "properties": {
+     "app_version": {
+      "default": "",
+      "maxLength": 100,
+      "title": "App Version",
+      "type": "string"
+     },
+     "code": {
+      "maxLength": 128,
+      "title": "Code",
+      "type": "string"
+     },
+     "device_label": {
+      "default": "",
+      "maxLength": 500,
+      "title": "Device Label",
+      "type": "string"
+     },
+     "first_name": {
+      "default": "",
+      "maxLength": 150,
+      "title": "First Name",
+      "type": "string"
+     },
+     "last_name": {
+      "default": "",
+      "maxLength": 150,
+      "title": "Last Name",
+      "type": "string"
+     },
+     "password": {
+      "maxLength": 1024,
+      "title": "Password",
+      "type": "string"
+     },
+     "platform": {
+      "default": "other",
+      "maxLength": 16,
+      "title": "Platform",
+      "type": "string"
+     }
+    },
+    "required": [
+     "code",
+     "password"
+    ],
+    "title": "ActivateIn",
+    "type": "object"
+   },
+   "AppointmentOut": {
+    "properties": {
+     "cancel_reason": {
+      "title": "Cancel Reason",
+      "type": "string"
+     },
+     "end_at": {
+      "format": "date-time",
+      "title": "End At",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "professional_name": {
+      "title": "Professional Name",
+      "type": "string"
+     },
+     "service_name": {
+      "title": "Service Name",
+      "type": "string"
+     },
+     "start_at": {
+      "format": "date-time",
+      "title": "Start At",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "unit_name": {
+      "title": "Unit Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "service_name",
+     "professional_name",
+     "unit_name",
+     "start_at",
+     "end_at",
+     "status",
+     "cancel_reason"
+    ],
+    "title": "AppointmentOut",
+    "type": "object"
+   },
+   "AppointmentRequestIn": {
+    "properties": {
+     "idempotency_key": {
+      "maxLength": 64,
+      "minLength": 8,
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "professional_id": {
+      "format": "uuid",
+      "title": "Professional Id",
+      "type": "string"
+     },
+     "service_id": {
+      "format": "uuid",
+      "title": "Service Id",
+      "type": "string"
+     },
+     "start_at": {
+      "format": "date-time",
+      "title": "Start At",
+      "type": "string"
+     },
+     "unit_id": {
+      "format": "uuid",
+      "title": "Unit Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "service_id",
+     "professional_id",
+     "unit_id",
+     "start_at",
+     "idempotency_key"
+    ],
+    "title": "AppointmentRequestIn",
+    "type": "object"
+   },
+   "BookingOptionOut": {
+    "properties": {
+     "duration_minutes": {
+      "title": "Duration Minutes",
+      "type": "integer"
+     },
+     "free_slots": {
+      "items": {
+       "format": "date-time",
+       "type": "string"
+      },
+      "title": "Free Slots",
+      "type": "array"
+     },
+     "professional_id": {
+      "format": "uuid",
+      "title": "Professional Id",
+      "type": "string"
+     },
+     "professional_name": {
+      "title": "Professional Name",
+      "type": "string"
+     },
+     "service_id": {
+      "format": "uuid",
+      "title": "Service Id",
+      "type": "string"
+     },
+     "service_name": {
+      "title": "Service Name",
+      "type": "string"
+     },
+     "unit_id": {
+      "format": "uuid",
+      "title": "Unit Id",
+      "type": "string"
+     },
+     "unit_name": {
+      "title": "Unit Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "service_id",
+     "service_name",
+     "duration_minutes",
+     "professional_id",
+     "professional_name",
+     "unit_id",
+     "unit_name",
+     "free_slots"
+    ],
+    "title": "BookingOptionOut",
+    "type": "object"
+   },
+   "CancelIn": {
+    "properties": {
+     "reason": {
+      "default": "",
+      "maxLength": 255,
+      "title": "Reason",
+      "type": "string"
+     }
+    },
+    "title": "CancelIn",
+    "type": "object"
+   },
+   "CarePlanActionOut": {
+    "properties": {
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "guidance": {
+      "title": "Guidance",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "is_mandatory": {
+      "title": "Is Mandatory",
+      "type": "boolean"
+     },
+     "target_frequency": {
+      "title": "Target Frequency",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "description",
+     "target_frequency",
+     "guidance",
+     "is_mandatory"
+    ],
+    "title": "CarePlanActionOut",
+    "type": "object"
+   },
+   "CarePlanEnvelope": {
+    "properties": {
+     "care_plan": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CarePlanOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "care_plan"
+    ],
+    "title": "CarePlanEnvelope",
+    "type": "object"
+   },
+   "CarePlanOut": {
+    "properties": {
+     "actions": {
+      "items": {
+       "$ref": "#/components/schemas/CarePlanActionOut"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "contraindications": {
+      "title": "Contraindications",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "objective": {
+      "title": "Objective",
+      "type": "string"
+     },
+     "prescriber_name": {
+      "title": "Prescriber Name",
+      "type": "string"
+     },
+     "response": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CarePlanResponseOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "valid_from": {
+      "format": "date",
+      "title": "Valid From",
+      "type": "string"
+     },
+     "valid_until": {
+      "anyOf": [
+       {
+        "format": "date",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Valid Until"
+     },
+     "version": {
+      "title": "Version",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "objective",
+     "contraindications",
+     "status",
+     "version",
+     "valid_from",
+     "valid_until",
+     "prescriber_name",
+     "actions",
+     "response"
+    ],
+    "title": "CarePlanOut",
+    "type": "object"
+   },
+   "CarePlanResponseIn": {
+    "properties": {
+     "decision": {
+      "enum": [
+       "accepted",
+       "refused",
+       "paused",
+       "review_requested"
+      ],
+      "title": "Decision",
+      "type": "string"
+     },
+     "notes": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Notes",
+      "type": "string"
+     }
+    },
+    "required": [
+     "decision"
+    ],
+    "title": "CarePlanResponseIn",
+    "type": "object"
+   },
+   "CarePlanResponseOut": {
+    "properties": {
+     "decision": {
+      "title": "Decision",
+      "type": "string"
+     },
+     "notes": {
+      "title": "Notes",
+      "type": "string"
+     },
+     "responded_at": {
+      "format": "date-time",
+      "title": "Responded At",
+      "type": "string"
+     }
+    },
+    "required": [
+     "decision",
+     "notes",
+     "responded_at"
+    ],
+    "title": "CarePlanResponseOut",
+    "type": "object"
+   },
+   "CheckInIn": {
+    "properties": {
+     "answers": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Answers",
+      "type": "object"
+     },
+     "notes": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Notes",
+      "type": "string"
+     },
+     "visibility": {
+      "default": "private",
+      "enum": [
+       "private",
+       "shareable",
+       "confirmation_required"
+      ],
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "answers"
+    ],
+    "title": "CheckInIn",
+    "type": "object"
+   },
+   "CheckInOut": {
+    "properties": {
+     "answers": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "title": "Answers",
+      "type": "object"
+     },
+     "date": {
+      "title": "Date",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "notes": {
+      "title": "Notes",
+      "type": "string"
+     },
+     "submitted_at": {
+      "format": "date-time",
+      "title": "Submitted At",
+      "type": "string"
+     },
+     "visibility": {
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "date",
+     "answers",
+     "notes",
+     "visibility",
+     "submitted_at"
+    ],
+    "title": "CheckInOut",
+    "type": "object"
+   },
+   "ClinicChoiceOut": {
+    "properties": {
+     "clinics": {
+      "items": {
+       "$ref": "#/components/schemas/ClinicOut"
+      },
+      "title": "Clinics",
+      "type": "array"
+     },
+     "code": {
+      "title": "Code",
+      "type": "string"
+     },
+     "detail": {
+      "title": "Detail",
+      "type": "string"
+     }
+    },
+    "required": [
+     "detail",
+     "code",
+     "clinics"
+    ],
+    "title": "ClinicChoiceOut",
+    "type": "object"
+   },
+   "ClinicOut": {
+    "properties": {
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name"
+    ],
+    "title": "ClinicOut",
+    "type": "object"
+   },
+   "ClinicRefOut": {
+    "properties": {
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name"
+    ],
+    "title": "ClinicRefOut",
+    "type": "object"
+   },
+   "ConsentDetailOut": {
+    "properties": {
+     "alternative_instructions": {
+      "title": "Alternative Instructions",
+      "type": "string"
+     },
+     "can_revoke": {
+      "title": "Can Revoke",
+      "type": "boolean"
+     },
+     "clinic_contact_instructions": {
+      "title": "Clinic Contact Instructions",
+      "type": "string"
+     },
+     "content": {
+      "title": "Content",
+      "type": "string"
+     },
+     "decided_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decided At"
+     },
+     "document_id": {
+      "format": "uuid",
+      "title": "Document Id",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "mandatory": {
+      "title": "Mandatory",
+      "type": "boolean"
+     },
+     "purpose": {
+      "title": "Purpose",
+      "type": "string"
+     },
+     "refusal_consequence": {
+      "title": "Refusal Consequence",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "version": {
+      "title": "Version",
+      "type": "string"
+     }
+    },
+    "required": [
+     "document_id",
+     "purpose",
+     "kind",
+     "title",
+     "version",
+     "mandatory",
+     "status",
+     "decided_at",
+     "can_revoke",
+     "content",
+     "refusal_consequence",
+     "alternative_instructions",
+     "clinic_contact_instructions"
+    ],
+    "title": "ConsentDetailOut",
+    "type": "object"
+   },
+   "ConsentOut": {
+    "properties": {
+     "can_revoke": {
+      "title": "Can Revoke",
+      "type": "boolean"
+     },
+     "decided_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decided At"
+     },
+     "document_id": {
+      "format": "uuid",
+      "title": "Document Id",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "mandatory": {
+      "title": "Mandatory",
+      "type": "boolean"
+     },
+     "purpose": {
+      "title": "Purpose",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "version": {
+      "title": "Version",
+      "type": "string"
+     }
+    },
+    "required": [
+     "document_id",
+     "purpose",
+     "kind",
+     "title",
+     "version",
+     "mandatory",
+     "status",
+     "decided_at",
+     "can_revoke"
+    ],
+    "title": "ConsentOut",
+    "type": "object"
+   },
+   "ContentOut": {
+    "properties": {
+     "body": {
+      "title": "Body",
+      "type": "string"
+     },
+     "category": {
+      "title": "Category",
+      "type": "string"
+     },
+     "contraindications": {
+      "title": "Contraindications",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "recommendation_objective": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Recommendation Objective"
+     },
+     "recommendation_priority": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Recommendation Priority"
+     },
+     "recommended_by_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Recommended By Name"
+     },
+     "slug": {
+      "title": "Slug",
+      "type": "string"
+     },
+     "source_reference": {
+      "title": "Source Reference",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "slug",
+     "title",
+     "kind",
+     "category",
+     "body",
+     "contraindications",
+     "source_reference",
+     "recommended_by_name",
+     "recommendation_objective",
+     "recommendation_priority"
+    ],
+    "title": "ContentOut",
+    "type": "object"
+   },
+   "CounterVisibilityIn": {
+    "properties": {
+     "hidden": {
+      "title": "Hidden",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "hidden"
+    ],
+    "title": "CounterVisibilityIn",
+    "type": "object"
+   },
+   "CravingIn": {
+    "properties": {
+     "coping_strategy_used": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Coping Strategy Used",
+      "type": "string"
+     },
+     "intensity": {
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Intensity",
+      "type": "integer"
+     },
+     "triggers_context": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Triggers Context",
+      "type": "string"
+     }
+    },
+    "required": [
+     "intensity"
+    ],
+    "title": "CravingIn",
+    "type": "object"
+   },
+   "CravingOut": {
+    "properties": {
+     "coping_strategy_used": {
+      "title": "Coping Strategy Used",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "intensity": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Intensity"
+     },
+     "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+     },
+     "triggers_context": {
+      "title": "Triggers Context",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "recorded_at",
+     "intensity",
+     "triggers_context",
+     "coping_strategy_used"
+    ],
+    "title": "CravingOut",
+    "type": "object"
+   },
+   "CustomHelplineOut": {
+    "properties": {
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "number": {
+      "title": "Number",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "number"
+    ],
+    "title": "CustomHelplineOut",
+    "type": "object"
+   },
+   "DecisionIn": {
+    "properties": {
+     "decision": {
+      "enum": [
+       "accepted",
+       "refused"
+      ],
+      "title": "Decision",
+      "type": "string"
+     },
+     "request_id": {
+      "anyOf": [
+       {
+        "format": "uuid",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Request Id"
+     }
+    },
+    "required": [
+     "decision"
+    ],
+    "title": "DecisionIn",
+    "type": "object"
+   },
+   "DiaryOut": {
+    "properties": {
+     "checkins": {
+      "items": {
+       "$ref": "#/components/schemas/CheckInOut"
+      },
+      "title": "Checkins",
+      "type": "array"
+     },
+     "entries": {
+      "items": {
+       "$ref": "#/components/schemas/EntryOut"
+      },
+      "title": "Entries",
+      "type": "array"
+     }
+    },
+    "required": [
+     "checkins",
+     "entries"
+    ],
+    "title": "DiaryOut",
+    "type": "object"
+   },
+   "DoseIn": {
+    "properties": {
+     "scheduled_for": {
+      "format": "date-time",
+      "title": "Scheduled For",
+      "type": "string"
+     },
+     "status": {
+      "enum": [
+       "taken",
+       "late",
+       "omitted",
+       "not_reported"
+      ],
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "scheduled_for",
+     "status"
+    ],
+    "title": "DoseIn",
+    "type": "object"
+   },
+   "DoseLogOut": {
+    "properties": {
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "medication_id": {
+      "format": "uuid",
+      "title": "Medication Id",
+      "type": "string"
+     },
+     "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+     },
+     "scheduled_for": {
+      "format": "date-time",
+      "title": "Scheduled For",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "medication_id",
+     "scheduled_for",
+     "status",
+     "recorded_at"
+    ],
+    "title": "DoseLogOut",
+    "type": "object"
+   },
+   "EntryIn": {
+    "properties": {
+     "context": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Context",
+      "type": "string"
+     },
+     "emotions": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 8,
+      "title": "Emotions",
+      "type": "array"
+     },
+     "intensity": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Intensity",
+      "type": "integer"
+     },
+     "mood": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Mood",
+      "type": "integer"
+     },
+     "reactions": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Reactions",
+      "type": "string"
+     },
+     "strategies": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Strategies",
+      "type": "string"
+     },
+     "triggers": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Triggers",
+      "type": "string"
+     },
+     "visibility": {
+      "default": "private",
+      "enum": [
+       "private",
+       "shareable",
+       "confirmation_required"
+      ],
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "mood",
+     "intensity",
+     "context"
+    ],
+    "title": "EntryIn",
+    "type": "object"
+   },
+   "EntryOut": {
+    "properties": {
+     "context": {
+      "title": "Context",
+      "type": "string"
+     },
+     "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+     },
+     "emotions": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Emotions",
+      "type": "array"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "intensity": {
+      "title": "Intensity",
+      "type": "integer"
+     },
+     "mood": {
+      "title": "Mood",
+      "type": "integer"
+     },
+     "reactions": {
+      "title": "Reactions",
+      "type": "string"
+     },
+     "strategies": {
+      "title": "Strategies",
+      "type": "string"
+     },
+     "triggers": {
+      "title": "Triggers",
+      "type": "string"
+     },
+     "visibility": {
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "created_at",
+     "mood",
+     "emotions",
+     "intensity",
+     "context",
+     "triggers",
+     "reactions",
+     "strategies",
+     "visibility"
+    ],
+    "title": "EntryOut",
+    "type": "object"
+   },
+   "ExerciseCompleteIn": {
+    "properties": {
+     "response": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Response",
+      "type": "string"
+     },
+     "visibility": {
+      "default": "private",
+      "enum": [
+       "private",
+       "shareable",
+       "confirmation_required"
+      ],
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "response"
+    ],
+    "title": "ExerciseCompleteIn",
+    "type": "object"
+   },
+   "ExerciseOut": {
+    "properties": {
+     "approach": {
+      "title": "Approach",
+      "type": "string"
+     },
+     "assigned_by_name": {
+      "title": "Assigned By Name",
+      "type": "string"
+     },
+     "completed_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Completed At"
+     },
+     "due_date": {
+      "anyOf": [
+       {
+        "format": "date",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Due Date"
+     },
+     "estimated_minutes": {
+      "title": "Estimated Minutes",
+      "type": "integer"
+     },
+     "frequency": {
+      "title": "Frequency",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "instructions": {
+      "title": "Instructions",
+      "type": "string"
+     },
+     "response": {
+      "title": "Response",
+      "type": "string"
+     },
+     "response_format": {
+      "title": "Response Format",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "visibility": {
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "instructions",
+     "approach",
+     "estimated_minutes",
+     "response_format",
+     "frequency",
+     "due_date",
+     "assigned_by_name",
+     "status",
+     "response",
+     "completed_at",
+     "visibility"
+    ],
+    "title": "ExerciseOut",
+    "type": "object"
+   },
+   "GoalIn": {
+    "properties": {
+     "focus": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Focus",
+      "type": "string"
+     },
+     "goal_type": {
+      "enum": [
+       "abstinence",
+       "reduction",
+       "moderation"
+      ],
+      "title": "Goal Type",
+      "type": "string"
+     },
+     "hide_counter": {
+      "default": false,
+      "title": "Hide Counter",
+      "type": "boolean"
+     },
+     "motivations": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Motivations",
+      "type": "string"
+     },
+     "reference_date": {
+      "format": "date",
+      "title": "Reference Date",
+      "type": "string"
+     }
+    },
+    "required": [
+     "goal_type",
+     "focus",
+     "reference_date"
+    ],
+    "title": "GoalIn",
+    "type": "object"
+   },
+   "GoalOut": {
+    "properties": {
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "due_date": {
+      "anyOf": [
+       {
+        "format": "date",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Due Date"
+     },
+     "horizon": {
+      "title": "Horizon",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "$ref": "#/components/schemas/GoalStepOut"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "description",
+     "horizon",
+     "due_date",
+     "status",
+     "steps"
+    ],
+    "title": "GoalOut",
+    "type": "object"
+   },
+   "GoalStatusIn": {
+    "properties": {
+     "status": {
+      "enum": [
+       "active",
+       "paused",
+       "completed"
+      ],
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "status"
+    ],
+    "title": "GoalStatusIn",
+    "type": "object"
+   },
+   "GoalStepOut": {
+    "properties": {
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "is_done": {
+      "title": "Is Done",
+      "type": "boolean"
+     },
+     "order": {
+      "title": "Order",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "id",
+     "description",
+     "order",
+     "is_done"
+    ],
+    "title": "GoalStepOut",
+    "type": "object"
+   },
+   "GroundingOut": {
+    "properties": {
+     "can_exit_anytime": {
+      "title": "Can Exit Anytime",
+      "type": "boolean"
+     },
+     "duration_seconds": {
+      "title": "Duration Seconds",
+      "type": "integer"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "instructions": {
+      "title": "Instructions",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "technique_type": {
+      "title": "Technique Type",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "technique_type",
+     "instructions",
+     "steps",
+     "duration_seconds",
+     "can_exit_anytime"
+    ],
+    "title": "GroundingOut",
+    "type": "object"
+   },
+   "HabitCheckIn": {
+    "properties": {
+     "status": {
+      "enum": [
+       "completed",
+       "partial",
+       "postponed",
+       "skipped"
+      ],
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "status"
+    ],
+    "title": "HabitCheckIn",
+    "type": "object"
+   },
+   "HabitCheckOut": {
+    "properties": {
+     "date": {
+      "format": "date",
+      "title": "Date",
+      "type": "string"
+     },
+     "habit_id": {
+      "format": "uuid",
+      "title": "Habit Id",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "habit_id",
+     "date",
+     "status"
+    ],
+    "title": "HabitCheckOut",
+    "type": "object"
+   },
+   "HabitOut": {
+    "properties": {
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "paused_until": {
+      "anyOf": [
+       {
+        "format": "date",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Paused Until"
+     },
+     "target_time": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target Time"
+     },
+     "time_window": {
+      "title": "Time Window",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "description",
+     "time_window",
+     "target_time",
+     "paused_until"
+    ],
+    "title": "HabitOut",
+    "type": "object"
+   },
+   "HelpOut": {
+    "properties": {
+     "custom_helpline": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CustomHelplineOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "disclaimer": {
+      "title": "Disclaimer",
+      "type": "string"
+     },
+     "emergency_fire": {
+      "title": "Emergency Fire",
+      "type": "string"
+     },
+     "emergency_medical": {
+      "title": "Emergency Medical",
+      "type": "string"
+     },
+     "emotional_support": {
+      "title": "Emotional Support",
+      "type": "string"
+     },
+     "grounding_exercises": {
+      "items": {
+       "$ref": "#/components/schemas/GroundingOut"
+      },
+      "title": "Grounding Exercises",
+      "type": "array"
+     },
+     "local_resources": {
+      "items": {
+       "$ref": "#/components/schemas/LocalResourceOut"
+      },
+      "title": "Local Resources",
+      "type": "array"
+     },
+     "urgent_plan": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/UrgentPlanOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "disclaimer",
+     "emergency_medical",
+     "emergency_fire",
+     "emotional_support",
+     "custom_helpline",
+     "urgent_plan",
+     "local_resources",
+     "grounding_exercises"
+    ],
+    "title": "HelpOut",
+    "type": "object"
+   },
+   "InvitationOut": {
+    "properties": {
+     "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "relationship_type": {
+      "title": "Relationship Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "relationship_type",
+     "expires_at"
+    ],
+    "title": "InvitationOut",
+    "type": "object"
+   },
+   "LocalResourceOut": {
+    "properties": {
+     "hours": {
+      "title": "Hours",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "phone": {
+      "title": "Phone",
+      "type": "string"
+     },
+     "service_type": {
+      "title": "Service Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "service_type",
+     "phone",
+     "hours"
+    ],
+    "title": "LocalResourceOut",
+    "type": "object"
+   },
+   "LoginIn": {
+    "properties": {
+     "app_version": {
+      "default": "",
+      "maxLength": 100,
+      "title": "App Version",
+      "type": "string"
+     },
+     "clinic_id": {
+      "anyOf": [
+       {
+        "format": "uuid",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Clinic Id"
+     },
+     "device_label": {
+      "default": "",
+      "maxLength": 500,
+      "title": "Device Label",
+      "type": "string"
+     },
+     "email": {
+      "maxLength": 254,
+      "title": "Email",
+      "type": "string"
+     },
+     "password": {
+      "maxLength": 1024,
+      "title": "Password",
+      "type": "string"
+     },
+     "platform": {
+      "default": "other",
+      "maxLength": 16,
+      "title": "Platform",
+      "type": "string"
+     }
+    },
+    "required": [
+     "email",
+     "password"
+    ],
+    "title": "LoginIn",
+    "type": "object"
+   },
+   "LowEnergyActionsIn": {
+    "properties": {
+     "actions": {
+      "items": {
+       "maxLength": 120,
+       "type": "string"
+      },
+      "maxItems": 3,
+      "title": "Actions",
+      "type": "array"
+     }
+    },
+    "required": [
+     "actions"
+    ],
+    "title": "LowEnergyActionsIn",
+    "type": "object"
+   },
+   "LowEnergyIn": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "active"
+    ],
+    "title": "LowEnergyIn",
+    "type": "object"
+   },
+   "LowEnergyOut": {
+    "properties": {
+     "actions": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "can_activate": {
+      "title": "Can Activate",
+      "type": "boolean"
+     },
+     "ends_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ends At"
+     },
+     "started_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Started At"
+     }
+    },
+    "required": [
+     "actions",
+     "active",
+     "started_at",
+     "ends_at",
+     "can_activate"
+    ],
+    "title": "LowEnergyOut",
+    "type": "object"
+   },
+   "MedicationOut": {
+    "properties": {
+     "dose": {
+      "title": "Dose",
+      "type": "string"
+     },
+     "end_date": {
+      "anyOf": [
+       {
+        "format": "date",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "End Date"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "instructions": {
+      "title": "Instructions",
+      "type": "string"
+     },
+     "is_continuous": {
+      "title": "Is Continuous",
+      "type": "boolean"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "prescriber_name": {
+      "title": "Prescriber Name",
+      "type": "string"
+     },
+     "presentation": {
+      "title": "Presentation",
+      "type": "string"
+     },
+     "route": {
+      "title": "Route",
+      "type": "string"
+     },
+     "schedule_times": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Schedule Times",
+      "type": "array"
+     },
+     "start_date": {
+      "format": "date",
+      "title": "Start Date",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "presentation",
+     "dose",
+     "route",
+     "schedule_times",
+     "start_date",
+     "end_date",
+     "is_continuous",
+     "prescriber_name",
+     "instructions"
+    ],
+    "title": "MedicationOut",
+    "type": "object"
+   },
+   "MedicationsOut": {
+    "properties": {
+     "dose_logs": {
+      "items": {
+       "$ref": "#/components/schemas/DoseLogOut"
+      },
+      "title": "Dose Logs",
+      "type": "array"
+     },
+     "medications": {
+      "items": {
+       "$ref": "#/components/schemas/MedicationOut"
+      },
+      "title": "Medications",
+      "type": "array"
+     }
+    },
+    "required": [
+     "medications",
+     "dose_logs"
+    ],
+    "title": "MedicationsOut",
+    "type": "object"
+   },
+   "MobileErrorOut": {
+    "description": "Erro estável: o app decide o texto pelo `code`; `detail` é só diagnóstico.",
+    "properties": {
+     "code": {
+      "default": "",
+      "title": "Code",
+      "type": "string"
+     },
+     "detail": {
+      "title": "Detail",
+      "type": "string"
+     }
+    },
+    "required": [
+     "detail"
+    ],
+    "title": "MobileErrorOut",
+    "type": "object"
+   },
+   "PasswordErrorOut": {
+    "properties": {
+     "code": {
+      "title": "Code",
+      "type": "string"
+     },
+     "detail": {
+      "title": "Detail",
+      "type": "string"
+     },
+     "errors": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+     }
+    },
+    "required": [
+     "detail",
+     "code",
+     "errors"
+    ],
+    "title": "PasswordErrorOut",
+    "type": "object"
+   },
+   "PatientOut": {
+    "properties": {
+     "display_name": {
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "display_name"
+    ],
+    "title": "PatientOut",
+    "type": "object"
+   },
+   "PatientSummaryOut": {
+    "properties": {
+     "care_team": {
+      "items": {
+       "$ref": "#/components/schemas/TeamMemberOut"
+      },
+      "title": "Care Team",
+      "type": "array"
+     },
+     "clinic": {
+      "$ref": "#/components/schemas/ClinicRefOut"
+     },
+     "discharge_date": {
+      "anyOf": [
+       {
+        "format": "date",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Discharge Date"
+     },
+     "display_name": {
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "language": {
+      "title": "Language",
+      "type": "string"
+     },
+     "timezone": {
+      "title": "Timezone",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "display_name",
+     "language",
+     "timezone",
+     "clinic",
+     "discharge_date",
+     "care_team"
+    ],
+    "title": "PatientSummaryOut",
+    "type": "object"
+   },
+   "PrivacyRequestIn": {
+    "properties": {
+     "type": {
+      "enum": [
+       "confirmation",
+       "access",
+       "correction",
+       "portability",
+       "revocation",
+       "erasure"
+      ],
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type"
+    ],
+    "title": "PrivacyRequestIn",
+    "type": "object"
+   },
+   "PrivacyRequestOut": {
+    "properties": {
+     "completed_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Completed At"
+     },
+     "due_at": {
+      "format": "date-time",
+      "title": "Due At",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "type": {
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "type",
+     "status",
+     "requested_at",
+     "due_at",
+     "completed_at"
+    ],
+    "title": "PrivacyRequestOut",
+    "type": "object"
+   },
+   "RecoveryIn": {
+    "properties": {
+     "email": {
+      "maxLength": 254,
+      "title": "Email",
+      "type": "string"
+     }
+    },
+    "required": [
+     "email"
+    ],
+    "title": "RecoveryIn",
+    "type": "object"
+   },
+   "RecoveryOut": {
+    "properties": {
+     "cravings": {
+      "items": {
+       "$ref": "#/components/schemas/CravingOut"
+      },
+      "title": "Cravings",
+      "type": "array"
+     },
+     "sobriety": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/SobrietyOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "sobriety",
+     "cravings"
+    ],
+    "title": "RecoveryOut",
+    "type": "object"
+   },
+   "RefreshIn": {
+    "properties": {
+     "refresh_token": {
+      "maxLength": 128,
+      "title": "Refresh Token",
+      "type": "string"
+     }
+    },
+    "required": [
+     "refresh_token"
+    ],
+    "title": "RefreshIn",
+    "type": "object"
+   },
+   "RelapsePlanEnvelope": {
+    "properties": {
+     "relapse_plan": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/RelapsePlanOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "relapse_plan"
+    ],
+    "title": "RelapsePlanEnvelope",
+    "type": "object"
+   },
+   "RelapsePlanIn": {
+    "properties": {
+     "sections": {
+      "items": {
+       "$ref": "#/components/schemas/RelapseSectionIn"
+      },
+      "maxItems": 7,
+      "title": "Sections",
+      "type": "array"
+     },
+     "title": {
+      "default": "",
+      "maxLength": 200,
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "title": "RelapsePlanIn",
+    "type": "object"
+   },
+   "RelapsePlanOut": {
+    "properties": {
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "last_reviewed_at": {
+      "anyOf": [
+       {
+        "format": "date-time",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Last Reviewed At"
+     },
+     "sections": {
+      "items": {
+       "$ref": "#/components/schemas/RelapseSectionOut"
+      },
+      "title": "Sections",
+      "type": "array"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "version": {
+      "title": "Version",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "version",
+     "last_reviewed_at",
+     "sections"
+    ],
+    "title": "RelapsePlanOut",
+    "type": "object"
+   },
+   "RelapseSectionIn": {
+    "properties": {
+     "content": {
+      "default": "",
+      "maxLength": 4000,
+      "title": "Content",
+      "type": "string"
+     },
+     "section_type": {
+      "maxLength": 64,
+      "title": "Section Type",
+      "type": "string"
+     },
+     "title": {
+      "default": "",
+      "maxLength": 128,
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section_type"
+    ],
+    "title": "RelapseSectionIn",
+    "type": "object"
+   },
+   "RelapseSectionOut": {
+    "properties": {
+     "content": {
+      "title": "Content",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "type": {
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "type",
+     "title",
+     "content"
+    ],
+    "title": "RelapseSectionOut",
+    "type": "object"
+   },
+   "RescheduleIn": {
+    "properties": {
+     "service_duration_minutes": {
+      "anyOf": [
+       {
+        "maximum": 480,
+        "minimum": 5,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Service Duration Minutes"
+     },
+     "start_at": {
+      "format": "date-time",
+      "title": "Start At",
+      "type": "string"
+     }
+    },
+    "required": [
+     "start_at"
+    ],
+    "title": "RescheduleIn",
+    "type": "object"
+   },
+   "ResetIn": {
+    "properties": {
+     "code": {
+      "maxLength": 256,
+      "title": "Code",
+      "type": "string"
+     },
+     "new_password": {
+      "maxLength": 1024,
+      "title": "New Password",
+      "type": "string"
+     }
+    },
+    "required": [
+     "code",
+     "new_password"
+    ],
+    "title": "ResetIn",
+    "type": "object"
+   },
+   "RespondIn": {
+    "properties": {
+     "approve": {
+      "title": "Approve",
+      "type": "boolean"
+     },
+     "expires_in_days": {
+      "anyOf": [
+       {
+        "maximum": 365,
+        "minimum": 1,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expires In Days"
+     }
+    },
+    "required": [
+     "approve"
+    ],
+    "title": "RespondIn",
+    "type": "object"
+   },
+   "RevokeIn": {
+    "properties": {
+     "reason": {
+      "maxLength": 500,
+      "minLength": 3,
+      "title": "Reason",
+      "type": "string"
+     },
+     "request_id": {
+      "anyOf": [
+       {
+        "format": "uuid",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Request Id"
+     }
+    },
+    "required": [
+     "reason"
+    ],
+    "title": "RevokeIn",
+    "type": "object"
+   },
+   "RoutineOut": {
+    "properties": {
+     "checks": {
+      "items": {
+       "$ref": "#/components/schemas/HabitCheckOut"
+      },
+      "title": "Checks",
+      "type": "array"
+     },
+     "habits": {
+      "items": {
+       "$ref": "#/components/schemas/HabitOut"
+      },
+      "title": "Habits",
+      "type": "array"
+     }
+    },
+    "required": [
+     "habits",
+     "checks"
+    ],
+    "title": "RoutineOut",
+    "type": "object"
+   },
+   "ScopesIn": {
+    "properties": {
+     "password": {
+      "maxLength": 1024,
+      "title": "Password",
+      "type": "string"
+     },
+     "scopes": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 16,
+      "title": "Scopes",
+      "type": "array"
+     }
+    },
+    "required": [
+     "scopes",
+     "password"
+    ],
+    "title": "ScopesIn",
+    "type": "object"
+   },
+   "SessionOut": {
+    "properties": {
+     "app_version": {
+      "title": "App Version",
+      "type": "string"
+     },
+     "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+     },
+     "device_label": {
+      "title": "Device Label",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "is_current": {
+      "title": "Is Current",
+      "type": "boolean"
+     },
+     "last_used_at": {
+      "format": "date-time",
+      "title": "Last Used At",
+      "type": "string"
+     },
+     "platform": {
+      "title": "Platform",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "device_label",
+     "platform",
+     "app_version",
+     "created_at",
+     "last_used_at",
+     "is_current"
+    ],
+    "title": "SessionOut",
+    "type": "object"
+   },
+   "SobrietyOut": {
+    "properties": {
+     "focus": {
+      "title": "Focus",
+      "type": "string"
+     },
+     "goal_type": {
+      "title": "Goal Type",
+      "type": "string"
+     },
+     "hide_counter": {
+      "title": "Hide Counter",
+      "type": "boolean"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "motivations": {
+      "title": "Motivations",
+      "type": "string"
+     },
+     "reference_date": {
+      "format": "date",
+      "title": "Reference Date",
+      "type": "string"
+     },
+     "restart_count": {
+      "title": "Restart Count",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "id",
+     "goal_type",
+     "focus",
+     "reference_date",
+     "restart_count",
+     "motivations",
+     "hide_counter"
+    ],
+    "title": "SobrietyOut",
+    "type": "object"
+   },
+   "StepIn": {
+    "properties": {
+     "is_done": {
+      "title": "Is Done",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "is_done"
+    ],
+    "title": "StepIn",
+    "type": "object"
+   },
+   "SupportNetworkOut": {
+    "properties": {
+     "available_scopes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Available Scopes",
+      "type": "array"
+     },
+     "pending_invitations": {
+      "items": {
+       "$ref": "#/components/schemas/InvitationOut"
+      },
+      "title": "Pending Invitations",
+      "type": "array"
+     },
+     "supporters": {
+      "items": {
+       "$ref": "#/components/schemas/SupporterOut"
+      },
+      "title": "Supporters",
+      "type": "array"
+     }
+    },
+    "required": [
+     "supporters",
+     "pending_invitations",
+     "available_scopes"
+    ],
+    "title": "SupportNetworkOut",
+    "type": "object"
+   },
+   "SupporterOut": {
+    "properties": {
+     "established_at": {
+      "format": "date-time",
+      "title": "Established At",
+      "type": "string"
+     },
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "relationship_type": {
+      "title": "Relationship Type",
+      "type": "string"
+     },
+     "scopes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Scopes",
+      "type": "array"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "relationship_type",
+     "scopes",
+     "established_at"
+    ],
+    "title": "SupporterOut",
+    "type": "object"
+   },
+   "TeamMemberOut": {
+    "properties": {
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "role": {
+      "title": "Role",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "role"
+    ],
+    "title": "TeamMemberOut",
+    "type": "object"
+   },
+   "TokensOut": {
+    "properties": {
+     "access_expires_at": {
+      "format": "date-time",
+      "title": "Access Expires At",
+      "type": "string"
+     },
+     "access_token": {
+      "title": "Access Token",
+      "type": "string"
+     },
+     "clinic": {
+      "$ref": "#/components/schemas/ClinicOut"
+     },
+     "patient": {
+      "$ref": "#/components/schemas/PatientOut"
+     },
+     "refresh_expires_at": {
+      "format": "date-time",
+      "title": "Refresh Expires At",
+      "type": "string"
+     },
+     "refresh_token": {
+      "title": "Refresh Token",
+      "type": "string"
+     },
+     "session_id": {
+      "format": "uuid",
+      "title": "Session Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "access_token",
+     "access_expires_at",
+     "refresh_token",
+     "refresh_expires_at",
+     "clinic",
+     "patient"
+    ],
+    "title": "TokensOut",
+    "type": "object"
+   },
+   "UrgentContactIn": {
+    "properties": {
+     "message_template": {
+      "default": "",
+      "maxLength": 500,
+      "title": "Message Template",
+      "type": "string"
+     },
+     "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+     },
+     "phone_number": {
+      "maxLength": 40,
+      "minLength": 1,
+      "title": "Phone Number",
+      "type": "string"
+     },
+     "relationship": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Relationship",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "relationship",
+     "phone_number"
+    ],
+    "title": "UrgentContactIn",
+    "type": "object"
+   },
+   "UrgentContactOut": {
+    "properties": {
+     "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+     },
+     "message_template": {
+      "title": "Message Template",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "phone": {
+      "title": "Phone",
+      "type": "string"
+     },
+     "relationship": {
+      "title": "Relationship",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "relationship",
+     "phone",
+     "message_template"
+    ],
+    "title": "UrgentContactOut",
+    "type": "object"
+   },
+   "UrgentPlanIn": {
+    "properties": {
+     "calming_strategies": {
+      "items": {
+       "maxLength": 200,
+       "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Calming Strategies",
+      "type": "array"
+     },
+     "personal_instructions": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Personal Instructions",
+      "type": "string"
+     }
+    },
+    "title": "UrgentPlanIn",
+    "type": "object"
+   },
+   "UrgentPlanOut": {
+    "properties": {
+     "calming_strategies": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Calming Strategies",
+      "type": "array"
+     },
+     "contacts": {
+      "items": {
+       "$ref": "#/components/schemas/UrgentContactOut"
+      },
+      "title": "Contacts",
+      "type": "array"
+     },
+     "last_reviewed_at": {
+      "format": "date-time",
+      "title": "Last Reviewed At",
+      "type": "string"
+     },
+     "personal_instructions": {
+      "title": "Personal Instructions",
+      "type": "string"
+     }
+    },
+    "required": [
+     "personal_instructions",
+     "calming_strategies",
+     "contacts",
+     "last_reviewed_at"
+    ],
+    "title": "UrgentPlanOut",
+    "type": "object"
+   },
+   "VisibilityIn": {
+    "properties": {
+     "visibility": {
+      "enum": [
+       "private",
+       "shareable",
+       "confirmation_required"
+      ],
+      "title": "Visibility",
+      "type": "string"
+     }
+    },
+    "required": [
+     "visibility"
+    ],
+    "title": "VisibilityIn",
+    "type": "object"
+   }
+  }
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/api/v1/mobile/appointments/": {
+   "get": {
+    "description": "Consultas do próprio paciente, com nomes (nada de id solto).",
+    "operationId": "api_mobile_agenda_api_list_appointments",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/AppointmentOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Appointments",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   },
+   "post": {
+    "description": "Solicita uma consulta. A clínica confirma; até lá fica como \"solicitada\".",
+    "operationId": "api_mobile_agenda_api_create_appointment",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AppointmentRequestIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AppointmentOut"
+        }
+       }
+      },
+      "description": "Created"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Create Appointment",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/appointments/{appointment_id}/cancel/": {
+   "post": {
+    "description": "Cancela uma consulta do próprio paciente (solicitada ou confirmada).",
+    "operationId": "api_mobile_agenda_api_cancel",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "appointment_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Appointment Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CancelIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AppointmentOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Cancel",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/appointments/{appointment_id}/reschedule/": {
+   "post": {
+    "description": "Pede remarcação para um horário livre. A clínica confirma o novo horário.",
+    "operationId": "api_mobile_agenda_api_reschedule",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "appointment_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Appointment Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RescheduleIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AppointmentOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Reschedule",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/activate/": {
+   "post": {
+    "description": "Ativa a conta do paciente com o código do convite e já abre a sessão.\n\nConta nova escolhe a senha aqui. Quem já tem conta (por exemplo, paciente de\noutra clínica) informa a senha atual. O código vem por e-mail com um link que\nabre o app.",
+    "operationId": "api_mobile_auth_api_activate",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ActivateIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TokensOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "401": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unauthorized"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PasswordErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Too Many Requests"
+     }
+    },
+    "summary": "Activate",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/login/": {
+   "post": {
+    "description": "Abre uma sessão para o paciente. Devolve o par de tokens uma única vez.",
+    "operationId": "api_mobile_auth_api_login",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LoginIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TokensOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "401": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unauthorized"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ClinicChoiceOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Too Many Requests"
+     }
+    },
+    "summary": "Login",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/logout/": {
+   "post": {
+    "description": "Encerra a sessão deste aparelho.",
+    "operationId": "api_mobile_auth_api_logout",
+    "parameters": [],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Logout",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/password-recovery/": {
+   "post": {
+    "description": "Pede o código de recuperação; a resposta é sempre a mesma.",
+    "operationId": "api_mobile_auth_api_password_recovery",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RecoveryIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "202": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "type": "string"
+         },
+         "title": "Response",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Accepted"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Too Many Requests"
+     }
+    },
+    "summary": "Password Recovery",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/password-reset/": {
+   "post": {
+    "description": "Troca a senha com o código recebido por e-mail. Encerra todas as sessões.",
+    "operationId": "api_mobile_auth_api_password_reset",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ResetIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "400": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Bad Request"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PasswordErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "summary": "Password Reset",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/refresh/": {
+   "post": {
+    "description": "Troca o token de renovação. O token anterior deixa de valer imediatamente.",
+    "operationId": "api_mobile_auth_api_refresh",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RefreshIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/TokensOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "401": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unauthorized"
+     }
+    },
+    "summary": "Refresh",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/sessions/": {
+   "get": {
+    "description": "Aparelhos com sessão ativa da própria pessoa (nunca de outra).",
+    "operationId": "api_mobile_auth_api_list_sessions",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/SessionOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Sessions",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/sessions/revoke-others/": {
+   "post": {
+    "description": "Encerra todos os outros aparelhos, mantendo este.",
+    "operationId": "api_mobile_auth_api_revoke_others",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "type": "integer"
+         },
+         "title": "Response",
+         "type": "object"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Revoke Others",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/auth/sessions/{session_id}/": {
+   "delete": {
+    "description": "Encerra outro aparelho. Id inexistente ou alheio responde igual (404).",
+    "operationId": "api_mobile_auth_api_revoke_device",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Revoke Device",
+    "tags": [
+     "Mobile · Sessão"
+    ]
+   }
+  },
+  "/api/v1/mobile/booking/options/": {
+   "get": {
+    "description": "Combinações serviço × profissional vinculado × unidade e os horários livres.\n\nOs horários cobrem os próximos 14 dias e já excluem o que está ocupado.",
+    "operationId": "api_mobile_agenda_api_booking_options",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/BookingOptionOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Booking Options",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/care-plan/": {
+   "get": {
+    "description": "Plano de cuidado vigente (nunca rascunho) e a última resposta do paciente.",
+    "operationId": "api_mobile_care_api_get_care_plan",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CarePlanEnvelope"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Care Plan",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/care-plan/{care_plan_id}/response/": {
+   "post": {
+    "description": "Registra a decisão do paciente. Recusar encerra o plano; pausar o pausa.",
+    "operationId": "api_mobile_care_api_respond_care_plan",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "care_plan_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Care Plan Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CarePlanResponseIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CarePlanOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Respond Care Plan",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/checkins/": {
+   "post": {
+    "description": "Envia o check-in do dia. Reenviar no mesmo dia atualiza o anterior.",
+    "operationId": "api_mobile_diary_api_submit_checkin",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CheckInIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CheckInOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Submit Checkin",
+    "tags": [
+     "Mobile · Diário"
+    ]
+   }
+  },
+  "/api/v1/mobile/consents/": {
+   "get": {
+    "description": "Documentos vigentes para o paciente e a última decisão dele em cada um.",
+    "operationId": "api_mobile_support_api_list_consents",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/ConsentOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Consents",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/consents/{document_id}/": {
+   "get": {
+    "description": "Texto completo do documento, para ler antes de decidir.",
+    "operationId": "api_mobile_support_api_get_consent",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "document_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Document Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ConsentDetailOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Consent",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/consents/{document_id}/decision/": {
+   "post": {
+    "description": "Aceita ou recusa a versão vigente (mesmo ``request_id`` = idempotente).",
+    "operationId": "api_mobile_support_api_decide_consent",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "document_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Document Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecisionIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ConsentOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Decide Consent",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/consents/{document_id}/revoke/": {
+   "post": {
+    "description": "Revoga uma autorização opcional já aceita (a partir de agora).",
+    "operationId": "api_mobile_support_api_revoke_document_consent",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "document_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Document Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RevokeIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ConsentOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Revoke Document Consent",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/content/": {
+   "get": {
+    "description": "Conteúdos indicados pela equipe e a biblioteca publicada para pacientes.\n\nSó texto simples. Favoritos e \"lido\" não existem no servidor: ficam fora.",
+    "operationId": "api_mobile_support_api_list_content",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/ContentOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Content",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/diary/": {
+   "get": {
+    "description": "Check-ins e registros do diário do próprio paciente (últimos ``days`` dias).",
+    "operationId": "api_mobile_diary_api_get_diary",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "days",
+      "required": false,
+      "schema": {
+       "default": 60,
+       "title": "Days",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DiaryOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Diary",
+    "tags": [
+     "Mobile · Diário"
+    ]
+   }
+  },
+  "/api/v1/mobile/exercises/": {
+   "get": {
+    "description": "Exercícios que a equipe passou ao paciente, com a resposta já enviada.",
+    "operationId": "api_mobile_care_api_list_exercises",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/ExerciseOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Exercises",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/exercises/{assignment_id}/complete/": {
+   "post": {
+    "description": "Envia a resposta do exercício. Só o próprio paciente, uma única vez.",
+    "operationId": "api_mobile_care_api_complete_exercise",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "assignment_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Assignment Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ExerciseCompleteIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ExerciseOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Complete Exercise",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/goals/": {
+   "get": {
+    "description": "Metas do próprio paciente com seus passos.",
+    "operationId": "api_mobile_agenda_api_list_goals",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/GoalOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Goals",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/goals/steps/{step_id}/": {
+   "put": {
+    "description": "Marca ou desmarca um passo da meta.",
+    "operationId": "api_mobile_agenda_api_set_step",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "step_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Step Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/StepIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoalOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Step",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/goals/{goal_id}/status/": {
+   "put": {
+    "description": "Pausa, retoma ou conclui uma meta.",
+    "operationId": "api_mobile_agenda_api_set_status",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "goal_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Goal Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoalStatusIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoalOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Status",
+    "tags": [
+     "Mobile · Agenda e metas"
+    ]
+   }
+  },
+  "/api/v1/mobile/habits/{habit_id}/checks/{check_date}/": {
+   "delete": {
+    "description": "Desfaz o registro do dia (a trilha de auditoria da clínica é mantida).",
+    "operationId": "api_mobile_care_api_clear_habit_check",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "habit_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Habit Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "check_date",
+      "required": true,
+      "schema": {
+       "format": "date",
+       "title": "Check Date",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Clear Habit Check",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   },
+   "put": {
+    "description": "Marca como feito, parcial, adiado ou pulado. Repetir o envio atualiza.",
+    "operationId": "api_mobile_care_api_set_habit_check",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "habit_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Habit Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "check_date",
+      "required": true,
+      "schema": {
+       "format": "date",
+       "title": "Check Date",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/HabitCheckIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HabitCheckOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Habit Check",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/help/": {
+   "get": {
+    "description": "Números de emergência, plano pessoal e exercícios de aterramento.\n\nSomente leitura e sem registro de acesso: abrir a ajuda não avisa ninguém. Os\nnúmeros abrem o discador apenas quando o paciente toca, dentro do app.",
+    "operationId": "api_mobile_recovery_api_get_help",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HelpOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Help",
+    "tags": [
+     "Mobile · Ajuda urgente"
+    ]
+   }
+  },
+  "/api/v1/mobile/journal/": {
+   "post": {
+    "description": "Registra no diário. Privado por padrão; compartilhar é escolha do paciente.",
+    "operationId": "api_mobile_diary_api_add_entry",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/EntryIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EntryOut"
+        }
+       }
+      },
+      "description": "Created"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Add Entry",
+    "tags": [
+     "Mobile · Diário"
+    ]
+   }
+  },
+  "/api/v1/mobile/journal/access-requests/": {
+   "get": {
+    "description": "Pedidos da equipe para ver registros marcados como \"confirmar antes\".",
+    "operationId": "api_mobile_diary_api_list_access_requests",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/AccessRequestOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Access Requests",
+    "tags": [
+     "Mobile · Diário"
+    ]
+   }
+  },
+  "/api/v1/mobile/journal/access-requests/{request_pk}/respond/": {
+   "post": {
+    "description": "Aprova (com validade opcional) ou recusa o pedido. A decisão é do paciente.",
+    "operationId": "api_mobile_diary_api_respond_access_request",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "request_pk",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Request Pk",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RespondIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Respond Access Request",
+    "tags": [
+     "Mobile · Diário"
+    ]
+   }
+  },
+  "/api/v1/mobile/journal/{entry_id}/visibility/": {
+   "put": {
+    "description": "Muda quem pode ver um registro. Voltar a privado revoga acessos já dados.",
+    "operationId": "api_mobile_diary_api_set_entry_visibility",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "entry_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Entry Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/VisibilityIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EntryOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Entry Visibility",
+    "tags": [
+     "Mobile · Diário"
+    ]
+   }
+  },
+  "/api/v1/mobile/low-energy/": {
+   "get": {
+    "description": "Até três ações mínimas e se o modo está ligado agora.",
+    "operationId": "api_mobile_care_api_get_low_energy",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LowEnergyOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Low Energy",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   },
+   "put": {
+    "description": "Liga ou desliga o modo de pouca energia.",
+    "operationId": "api_mobile_care_api_set_low_energy",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LowEnergyIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LowEnergyOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Low Energy",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/low-energy/actions/": {
+   "put": {
+    "description": "Define as ações mínimas (1 a 3) do modo de pouca energia.\n\nCada gravação é uma nova versão. O modo já ligado segue com as ações de quando foi\nligado; as novas valem na próxima vez. Ligar e desligar é `PUT /low-energy/`.",
+    "operationId": "api_mobile_authoring_api_set_low_energy_actions",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LowEnergyActionsIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LowEnergyOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Low Energy Actions",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   }
+  },
+  "/api/v1/mobile/me/": {
+   "get": {
+    "description": "Quem é o paciente, em que clínica, a data da alta e a equipe que o acompanha.\n\nDa alta sai **somente a data** (para contar os dias). Régua, ligações, visita e\ncontatos com a família pertencem ao aplicativo da clínica.",
+    "operationId": "api_mobile_patient_api_me",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PatientSummaryOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Me",
+    "tags": [
+     "Mobile · Paciente"
+    ]
+   }
+  },
+  "/api/v1/mobile/medications/": {
+   "get": {
+    "description": "Medicações ativas do paciente e os registros de dose dos últimos 14 dias.\n\nO app só mostra e registra; a prescrição é da equipe. Nenhuma dose é \"compensada\".",
+    "operationId": "api_mobile_care_api_list_medications",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MedicationsOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Medications",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/medications/{medication_id}/doses/": {
+   "put": {
+    "description": "Registra (ou corrige/desfaz com ``not_reported``) uma dose programada.",
+    "operationId": "api_mobile_care_api_log_dose",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "medication_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Medication Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DoseIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DoseLogOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Log Dose",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/privacy-requests/": {
+   "get": {
+    "description": "Pedidos do próprio paciente sobre os dados dele, do mais recente.",
+    "operationId": "api_mobile_support_api_list_privacy_requests",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/PrivacyRequestOut"
+         },
+         "title": "Response",
+         "type": "array"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "List Privacy Requests",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   },
+   "post": {
+    "description": "Registra um pedido. Nasce com a identidade a verificar pela clínica.",
+    "operationId": "api_mobile_support_api_create_privacy_request",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PrivacyRequestIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PrivacyRequestOut"
+        }
+       }
+      },
+      "description": "Created"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Create Privacy Request",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/recovery/": {
+   "get": {
+    "description": "Meta de recuperação, contador e os últimos registros de vontade de usar.",
+    "operationId": "api_mobile_recovery_api_get_recovery",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecoveryOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Recovery",
+    "tags": [
+     "Mobile · Recuperação"
+    ]
+   }
+  },
+  "/api/v1/mobile/recovery/counter/": {
+   "put": {
+    "description": "Mostra ou oculta o contador. Não mexe em datas nem no histórico.",
+    "operationId": "api_mobile_recovery_api_set_counter_visibility",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CounterVisibilityIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SobrietyOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Counter Visibility",
+    "tags": [
+     "Mobile · Recuperação"
+    ]
+   }
+  },
+  "/api/v1/mobile/recovery/cravings/": {
+   "post": {
+    "description": "Registra uma vontade de usar (registro privado, protegido na tela travada).",
+    "operationId": "api_mobile_recovery_api_add_craving",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CravingIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CravingOut"
+        }
+       }
+      },
+      "description": "Created"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Add Craving",
+    "tags": [
+     "Mobile · Recuperação"
+    ]
+   }
+  },
+  "/api/v1/mobile/recovery/goal/": {
+   "post": {
+    "description": "Cria a meta de recuperação do paciente. Sempre privada; o cliente não escolhe.\n\nA data de referência é o dia em que a contagem começa: hoje ou antes, no fuso do\npaciente. Só pode haver uma meta ativa; para recomeçar, `POST /recovery/restart/`.",
+    "operationId": "api_mobile_authoring_api_create_goal",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoalIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SobrietyOut"
+        }
+       }
+      },
+      "description": "Created"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Create Goal",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   }
+  },
+  "/api/v1/mobile/recovery/restart/": {
+   "post": {
+    "description": "Recomeça o contador a partir de hoje, sem apagar nada e sem culpa.",
+    "operationId": "api_mobile_recovery_api_restart_counter",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SobrietyOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Restart Counter",
+    "tags": [
+     "Mobile · Recuperação"
+    ]
+   }
+  },
+  "/api/v1/mobile/relapse-plan/": {
+   "get": {
+    "description": "Plano de prevenção de recaída do próprio paciente (edição: `PUT`).",
+    "operationId": "api_mobile_recovery_api_get_relapse_plan",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RelapsePlanEnvelope"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Relapse Plan",
+    "tags": [
+     "Mobile · Recuperação"
+    ]
+   },
+   "put": {
+    "description": "Grava o plano do próprio paciente; cada gravação gera uma nova versão.\n\n`sections` traz as seções a gravar (no máximo uma por tipo; seção com texto vazio\né ignorada, e as que não vierem ficam como estão). Para apagar uma seção use\n`DELETE /relapse-plan/sections/{tipo}/`. A resposta é o plano completo.",
+    "operationId": "api_mobile_authoring_api_save_relapse_plan",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RelapsePlanIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RelapsePlanEnvelope"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Save Relapse Plan",
+    "tags": [
+     "Mobile · Recuperação"
+    ]
+   }
+  },
+  "/api/v1/mobile/relapse-plan/sections/{section_type}/": {
+   "delete": {
+    "description": "Remove uma seção do plano do paciente; o plano ganha uma nova versão.",
+    "operationId": "api_mobile_authoring_api_delete_relapse_section",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "section_type",
+      "required": true,
+      "schema": {
+       "title": "Section Type",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RelapsePlanEnvelope"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Delete Relapse Section",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   }
+  },
+  "/api/v1/mobile/routine/": {
+   "get": {
+    "description": "Hábitos do paciente e os registros dos últimos ``days`` dias (padrão 7).",
+    "operationId": "api_mobile_care_api_get_routine",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "days",
+      "required": false,
+      "schema": {
+       "default": 7,
+       "title": "Days",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RoutineOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Routine",
+    "tags": [
+     "Mobile · Cuidado"
+    ]
+   }
+  },
+  "/api/v1/mobile/support-network/": {
+   "get": {
+    "description": "Quem acompanha o paciente e o que cada pessoa enxerga.\n\nO diário e os registros clínicos nunca fazem parte do que pode ser compartilhado.",
+    "operationId": "api_mobile_support_api_get_support_network",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupportNetworkOut"
+        }
+       }
+      },
+      "description": "OK"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Get Support Network",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/support-network/{relationship_id}/": {
+   "delete": {
+    "description": "Encerra o vínculo e retira todas as permissões dessa pessoa.",
+    "operationId": "api_mobile_support_api_end_support",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "relationship_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Relationship Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "End Support",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/support-network/{relationship_id}/scopes/": {
+   "put": {
+    "description": "Define o que uma pessoa pode ver. Exige a senha do paciente.",
+    "operationId": "api_mobile_support_api_set_scopes",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "relationship_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Relationship Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ScopesIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SupporterOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Forbidden"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Too Many Requests"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Set Scopes",
+    "tags": [
+     "Mobile · Apoio e privacidade"
+    ]
+   }
+  },
+  "/api/v1/mobile/urgent-plan/": {
+   "put": {
+    "description": "Grava o texto do plano e as estratégias de acalmar. Não mexe nos contatos.\n\nIdioma, região e prazo de revisão já gravados são preservados. Salvar o plano não\navisa nem contata ninguém. A resposta tem o formato de `urgent_plan` em\n`GET /mobile/help/` (que segue sendo a leitura, até com cobrança bloqueada).",
+    "operationId": "api_mobile_authoring_api_save_urgent_plan",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UrgentPlanIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UrgentPlanOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Save Urgent Plan",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   }
+  },
+  "/api/v1/mobile/urgent-plan/contacts/": {
+   "post": {
+    "description": "Acrescenta uma pessoa de confiança, no fim da ordem (até 5 ativas).\n\nSe o paciente ainda não tem plano, cria um vazio. Nada é enviado à pessoa.",
+    "operationId": "api_mobile_authoring_api_add_urgent_contact",
+    "parameters": [],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UrgentContactIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UrgentContactOut"
+        }
+       }
+      },
+      "description": "Created"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Conflict"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Add Urgent Contact",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   }
+  },
+  "/api/v1/mobile/urgent-plan/contacts/{contact_id}/": {
+   "delete": {
+    "description": "Tira a pessoa do plano (o registro fica inativo; some de todas as leituras).",
+    "operationId": "api_mobile_authoring_api_remove_urgent_contact",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "contact_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Contact Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Remove Urgent Contact",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   },
+   "put": {
+    "description": "Troca os dados de uma pessoa de confiança do paciente (a ordem é mantida).",
+    "operationId": "api_mobile_authoring_api_edit_urgent_contact",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "contact_id",
+      "required": true,
+      "schema": {
+       "format": "uuid",
+       "title": "Contact Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UrgentContactIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UrgentContactOut"
+        }
+       }
+      },
+      "description": "OK"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Not Found"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MobileErrorOut"
+        }
+       }
+      },
+      "description": "Unprocessable Content"
+     }
+    },
+    "security": [
+     {
+      "PatientBearerAuth": []
+     }
+    ],
+    "summary": "Edit Urgent Contact",
+    "tags": [
+     "Mobile · Conteúdo pessoal"
+    ]
+   }
+  }
+ }
+}

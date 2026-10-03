@@ -6,13 +6,13 @@ import {
   Alert,
   Badge,
   FeedbackAlert,
-  useActionFeedback,
+  useRunAction,
 } from "../components/Feedback";
 import { ChipGroup, Field } from "../components/Form";
 import { EmptyState, Screen, Section, WithData } from "../components/Layout";
 import { Text } from "../components/Text";
 import { mutations } from "../data/mutations";
-import { Appointment, AppointmentStatus } from "../domain/types";
+import { Appointment, AppointmentStatus, Snapshot } from "../domain/types";
 import { useI18n } from "../i18n";
 import { RootScreenProps } from "../navigation/types";
 import { useNav } from "../navigation/useNav";
@@ -99,13 +99,27 @@ export function AgendaScreen() {
   );
 }
 
+/** Horários livres para remarcar: mesmo serviço, profissional e unidade da consulta. */
+function slotsFor(snapshot: Snapshot, item: Appointment): string[] {
+  return snapshot.services
+    .filter(
+      (service) =>
+        service.name === item.serviceName &&
+        service.professionalName === item.professionalName &&
+        service.unitName === item.unitName,
+    )
+    .flatMap((service) => service.freeSlots);
+}
+
 export function AppointmentDetailScreen({
   route,
 }: RootScreenProps<"AppointmentDetail">) {
   const { t, formatDateTime, formatTime } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [reason, setReason] = useState("");
+  const [picking, setPicking] = useState(false);
+  const [newSlot, setNewSlot] = useState<string | null>(null);
   return (
     <Screen testID="screen-appointment-detail">
       <WithData>
@@ -147,18 +161,82 @@ export function AppointmentDetailScreen({
               <FeedbackAlert feedback={feedback} />
               {changeable ? (
                 <View style={styles.stack}>
-                  <Button
-                    label={t("agenda.reschedule")}
-                    variant="secondary"
-                    icon="refresh"
-                    testID="appointment-reschedule"
-                    onPress={() =>
-                      report(
-                        store.run(mutations.requestReschedule({ id: item.id })),
-                        "common.done",
-                      )
-                    }
-                  />
+                  {!picking ? (
+                    <Button
+                      label={t("agenda.reschedule")}
+                      variant="secondary"
+                      icon="refresh"
+                      testID="appointment-reschedule"
+                      onPress={() => {
+                        // Com horários livres do mesmo serviço/profissional/unidade o
+                        // paciente escolhe o novo horário (o servidor exige um); sem
+                        // essa lista (demonstração) vale o pedido simples.
+                        if (slotsFor(snapshot, item).length === 0) {
+                          if (store.mode === "preview") {
+                            void run(
+                              mutations.requestReschedule({ id: item.id }),
+                              "common.done",
+                            );
+                            return;
+                          }
+                        }
+                        setPicking(true);
+                      }}
+                    />
+                  ) : (
+                    <Card testID="reschedule-picker">
+                      {slotsFor(snapshot, item).length === 0 ? (
+                        <Text variant="bodySm" tone="muted">
+                          {t("agenda.reschedule.none")}
+                        </Text>
+                      ) : (
+                        <ChipGroup
+                          testID="reschedule-slot"
+                          label={t("agenda.reschedule.pick")}
+                          value={newSlot}
+                          onChange={setNewSlot}
+                          options={slotsFor(snapshot, item).map((value) => ({
+                            value,
+                            label: formatDateTime(value),
+                          }))}
+                        />
+                      )}
+                      <View style={styles.actions}>
+                        <Button
+                          label={t("common.cancel")}
+                          variant="secondary"
+                          size="sm"
+                          style={styles.action}
+                          onPress={() => {
+                            setPicking(false);
+                            setNewSlot(null);
+                          }}
+                        />
+                        <Button
+                          label={t("agenda.reschedule.submit")}
+                          size="sm"
+                          style={styles.action}
+                          disabled={!newSlot}
+                          testID="reschedule-submit"
+                          onPress={() => {
+                            if (!newSlot) return;
+                            void run(
+                              mutations.requestReschedule({
+                                id: item.id,
+                                slot: newSlot,
+                              }),
+                              "common.done",
+                            ).then((ok) => {
+                              if (ok) {
+                                setPicking(false);
+                                setNewSlot(null);
+                              }
+                            });
+                          }}
+                        />
+                      </View>
+                    </Card>
+                  )}
                   {!confirmCancel ? (
                     <Button
                       label={t("agenda.cancel")}
@@ -191,13 +269,11 @@ export function AppointmentDetailScreen({
                           style={styles.action}
                           testID="appointment-cancel-confirm"
                           onPress={() => {
-                            report(
-                              store.run(
-                                mutations.cancelAppointment({
-                                  id: item.id,
-                                  reason,
-                                }),
-                              ),
+                            run(
+                              mutations.cancelAppointment({
+                                id: item.id,
+                                reason,
+                              }),
                               "common.done",
                             );
                             setConfirmCancel(false);
@@ -218,7 +294,7 @@ export function AppointmentDetailScreen({
 
 export function RequestAppointmentScreen() {
   const { t, formatDateTime } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run, pending } = useRunAction();
   const [serviceId, setServiceId] = useState<string | null>(null);
   const [slot, setSlot] = useState<string | null>(null);
   return (
@@ -275,16 +351,16 @@ export function RequestAppointmentScreen() {
               <Button
                 label={t("agenda.request.submit")}
                 disabled={!serviceId || !slot}
+                loading={pending}
                 testID="request-submit"
                 onPress={() => {
                   if (!serviceId || !slot) return;
-                  const ok = report(
-                    store.run(
-                      mutations.requestAppointment({ serviceId, slot }),
-                    ),
+                  void run(
+                    mutations.requestAppointment({ serviceId, slot }),
                     "agenda.request.sent",
-                  );
-                  if (ok) setSlot(null);
+                  ).then((ok) => {
+                    if (ok) setSlot(null);
+                  });
                 }}
               />
             </>

@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import React, { Ref, useState } from "react";
+import {
+  Pressable,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  View,
+} from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
 import { CONTROL_HEIGHT, radius, TOUCH_TARGET } from "../theme/tokens";
 import { Icon } from "./Icon";
@@ -16,8 +22,24 @@ interface FieldProps {
   optionalLabel?: string;
   multiline?: boolean;
   maxLength?: number;
-  keyboardType?: "default" | "numeric";
+  keyboardType?: "default" | "numeric" | "email-address";
   testID?: string;
+  autoCapitalize?: TextInputProps["autoCapitalize"];
+  autoCorrect?: boolean;
+  /** Dica de preenchimento automático no Android (`username`, `password`…). */
+  autoComplete?: TextInputProps["autoComplete"];
+  /** Dica de preenchimento automático no iOS (`username`, `newPassword`, `oneTimeCode`…). */
+  textContentType?: TextInputProps["textContentType"];
+  returnKeyType?: TextInputProps["returnKeyType"];
+  onSubmitEditing?: () => void;
+  /** Referência do campo, para levar o foco ao próximo na ordem do formulário. */
+  inputRef?: Ref<TextInput>;
+  editable?: boolean;
+  /**
+   * Campo de senha: texto oculto, sem autocorreção nem sugestão, com botão de
+   * mostrar/ocultar. Os rótulos vêm de fora (este componente não conhece idiomas).
+   */
+  password?: { showLabel: string; hideLabel: string };
 }
 
 /** Campo de texto (`.ae-field`): rótulo, controle de 48 px, ajuda e erro. */
@@ -34,9 +56,48 @@ export function Field({
   maxLength,
   keyboardType = "default",
   testID,
+  autoCapitalize,
+  autoCorrect,
+  autoComplete,
+  textContentType,
+  returnKeyType,
+  onSubmitEditing,
+  inputRef,
+  editable,
+  password,
 }: FieldProps) {
   const { colors, text } = useTheme();
   const [focused, setFocused] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const borderColor = error
+    ? colors.danger
+    : focused
+      ? colors.focus
+      : colors.lineStrong;
+  const inputProps: TextInputProps = {
+    accessibilityLabel: label,
+    value,
+    onChangeText,
+    placeholder,
+    placeholderTextColor: colors.inkMuted,
+    maxLength,
+    keyboardType,
+    autoComplete,
+    textContentType,
+    returnKeyType,
+    onSubmitEditing,
+    editable,
+    onFocus: () => setFocused(true),
+    onBlur: () => setFocused(false),
+    ...(password
+      ? {
+          secureTextEntry: !visible,
+          autoCapitalize: "none",
+          autoCorrect: false,
+          spellCheck: false,
+        }
+      : { autoCapitalize, autoCorrect }),
+  };
   return (
     <View style={styles.field}>
       <Text variant="label">
@@ -53,35 +114,61 @@ export function Field({
           </Text>
         ) : null}
       </Text>
-      <TextInput
-        testID={testID}
-        accessibilityLabel={label}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor={colors.inkMuted}
-        multiline={multiline}
-        maxLength={maxLength}
-        keyboardType={keyboardType}
-        textAlignVertical={multiline ? "top" : "center"}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        style={[
-          text("body"),
-          styles.input,
-          multiline && styles.multiline,
-          {
-            color: colors.ink,
-            backgroundColor: colors.surfaceRaised,
-            borderColor: error
-              ? colors.danger
-              : focused
-                ? colors.focus
-                : colors.lineStrong,
-            borderWidth: focused ? 2 : 1,
-          },
-        ]}
-      />
+      {password ? (
+        <View
+          style={[
+            styles.passwordBox,
+            {
+              backgroundColor: colors.surfaceRaised,
+              borderColor,
+              borderWidth: focused ? 2 : 1,
+            },
+          ]}
+        >
+          <TextInput
+            {...inputProps}
+            ref={inputRef}
+            testID={testID}
+            style={[text("body"), styles.passwordInput, { color: colors.ink }]}
+          />
+          <Pressable
+            testID={testID ? `${testID}-toggle` : undefined}
+            accessibilityRole="button"
+            accessibilityLabel={
+              visible ? password.hideLabel : password.showLabel
+            }
+            accessibilityState={{ selected: visible }}
+            hitSlop={{ top: 2, bottom: 2 }}
+            onPress={() => setVisible((current) => !current)}
+            style={styles.passwordToggle}
+          >
+            <Icon
+              name={visible ? "eye-off" : "eye"}
+              size={20}
+              color={colors.inkMuted}
+            />
+          </Pressable>
+        </View>
+      ) : (
+        <TextInput
+          {...inputProps}
+          ref={inputRef}
+          testID={testID}
+          multiline={multiline}
+          textAlignVertical={multiline ? "top" : "center"}
+          style={[
+            text("body"),
+            styles.input,
+            multiline && styles.multiline,
+            {
+              color: colors.ink,
+              backgroundColor: colors.surfaceRaised,
+              borderColor,
+              borderWidth: focused ? 2 : 1,
+            },
+          ]}
+        />
+      )}
       {help && !error ? (
         <Text variant="bodySm" tone="muted">
           {help}
@@ -314,6 +401,20 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   multiline: { minHeight: 96, paddingTop: 10 },
+  passwordBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    minHeight: CONTROL_HEIGHT,
+    borderRadius: radius.md,
+    paddingLeft: 12,
+  },
+  passwordInput: { flex: 1, minHeight: CONTROL_HEIGHT - 4, paddingVertical: 8 },
+  passwordToggle: {
+    width: TOUCH_TARGET,
+    height: CONTROL_HEIGHT - 4,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   chip: {
     flexDirection: "row",

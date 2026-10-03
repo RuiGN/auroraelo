@@ -274,8 +274,11 @@ describe("plano de cuidado, rotina, exercícios e metas", () => {
 });
 
 describe("fissura e contador", () => {
-  it("valida intensidade de 0 a 10", () => {
+  it("valida intensidade de 1 a 10 (a escala do servidor)", () => {
     const entry = { triggersContext: "", copingStrategyUsed: "" };
+    expect(
+      mutations.addCraving({ ...entry, intensity: 0 })(base, NOW),
+    ).toBeNull();
     expect(
       mutations.addCraving({ ...entry, intensity: -1 })(base, NOW),
     ).toBeNull();
@@ -285,8 +288,8 @@ describe("fissura e contador", () => {
     expect(
       mutations.addCraving({ ...entry, intensity: 4.5 })(base, NOW),
     ).toBeNull();
-    const next = apply(base, mutations.addCraving({ ...entry, intensity: 0 }));
-    expect(next.cravings[0].intensity).toBe(0);
+    const next = apply(base, mutations.addCraving({ ...entry, intensity: 1 }));
+    expect(next.cravings[0].intensity).toBe(1);
   });
 
   it("oculta o contador e recomeça sem apagar o histórico de recomeços", () => {
@@ -384,9 +387,14 @@ describe("rede de apoio", () => {
   it("altera permissões e encerra o acompanhamento de uma pessoa da rede", () => {
     const toggled = apply(
       base,
-      mutations.toggleSupportScope({ id: "sn-1", scope: "view_routine" }),
+      mutations.toggleSupportScope({
+        id: "sn-1",
+        scope: "view_relapse_plan_safe",
+      }),
     );
-    expect(toggled.supportNetwork[0].scopes).toContain("view_routine");
+    expect(toggled.supportNetwork[0].scopes).toContain(
+      "view_relapse_plan_safe",
+    );
     const revoked = apply(toggled, mutations.revokeSupport("sn-1"));
     expect(revoked.supportNetwork[0]).toMatchObject({
       active: false,
@@ -415,28 +423,33 @@ describe("conteúdo, consentimentos e LGPD", () => {
   });
 
   it("não deixa revogar consentimento obrigatório; opcionais podem ser revogados e reconcedidos", () => {
+    const idOf = (purpose: string) =>
+      base.consents.find((item) => item.purpose === purpose)!.id;
     expect(
-      mutations.setConsent({ purpose: "terms_of_use", granted: false })(
+      mutations.setConsent({ id: idOf("terms_of_use"), granted: false })(
         base,
         NOW,
       ),
     ).toBeNull();
     expect(
-      mutations.setConsent({ purpose: "clinical_limits", granted: false })(
+      mutations.setConsent({ id: idOf("clinical_limits"), granted: false })(
         base,
         NOW,
       ),
+    ).toBeNull();
+    expect(
+      mutations.setConsent({ id: "nao-existe", granted: true })(base, NOW),
     ).toBeNull();
     const revoked = apply(
       base,
-      mutations.setConsent({ purpose: "communication", granted: false }),
+      mutations.setConsent({ id: idOf("communication"), granted: false }),
     );
     expect(
       revoked.consents.find((item) => item.purpose === "communication")?.status,
     ).toBe("revoked");
     const granted = apply(
       revoked,
-      mutations.setConsent({ purpose: "communication", granted: true }),
+      mutations.setConsent({ id: idOf("communication"), granted: true }),
     );
     expect(
       granted.consents.find((item) => item.purpose === "communication")?.status,
@@ -466,5 +479,53 @@ describe("imutabilidade", () => {
     apply(base, mutations.toggleGoalStep({ goalId: "g-1", stepId: "gs-2" }));
     apply(base, mutations.createPrivacyRequest("access"));
     expect(JSON.stringify(base)).toBe(frozen);
+  });
+});
+
+describe("metadados das mutações (ponte para o modo live)", () => {
+  const factories = mutations as unknown as Record<
+    string,
+    (input?: unknown) => ((
+      snapshot: Snapshot,
+      now: Date,
+    ) => Snapshot | null) & {
+      meta?: { key: string; input: unknown };
+    }
+  >;
+
+  it("toda mutação carrega { key, input }: o nome e o primeiro argumento da fábrica", () => {
+    const names = Object.keys(factories);
+    expect(names.length).toBeGreaterThan(20);
+    for (const name of names) {
+      const input = { marcador: name };
+      const mutation = factories[name](input);
+      expect(typeof mutation).toBe("function");
+      expect(mutation.meta).toEqual({ key: name, input });
+      // O nome também é a chave do registro de ações remotas.
+      expect(mutation.meta?.input).toBe(input);
+    }
+  });
+
+  it("fábricas sem argumento têm entrada undefined", () => {
+    expect(mutations.restartCounter().meta).toEqual({
+      key: "restartCounter",
+      input: undefined,
+    });
+  });
+
+  it("os metadados não podem ser trocados e a mutação continua pura", () => {
+    const mutation = mutations.setLowEnergy(true);
+    expect(Object.isFrozen(mutation.meta)).toBe(true);
+    try {
+      (mutation.meta as { key: string }).key = "outra";
+    } catch {
+      // Em modo estrito a troca lança; fora dele é ignorada em silêncio.
+    }
+    expect(mutation.meta.key).toBe("setLowEnergy");
+    const first = mutation(base, NOW);
+    const second = mutation(base, NOW);
+    expect(first).toEqual(second);
+    expect(first?.lowEnergy.active).toBe(true);
+    expect(base.lowEnergy.active).toBe(false);
   });
 });

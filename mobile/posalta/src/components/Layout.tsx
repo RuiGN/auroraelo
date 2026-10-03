@@ -1,12 +1,20 @@
 import React, { ReactNode } from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
+import { useOptionalSession } from "../api/session";
 import { Snapshot } from "../domain/types";
-import { Store, useStore } from "../data/store";
+import { LoadFailure, Store, useStore } from "../data/store";
 import { useI18n } from "../i18n";
 import { useTheme } from "../theme/ThemeProvider";
 import { CONTENT_MAX_WIDTH, radius } from "../theme/tokens";
+import { Button } from "./Button";
 import { Card } from "./Card";
-import { DemoBanner } from "./Feedback";
+import { Alert, DemoBanner } from "./Feedback";
 import { Icon, IconName } from "./Icon";
 import { Text } from "./Text";
 
@@ -119,7 +127,11 @@ export function EmptyState({ icon = "info", text }: EmptyStateProps) {
   );
 }
 
-/** Estado honesto do modo `live` sem API autenticada: nada é exibido nem inventado. */
+/**
+ * Estado do modo `live` quando o app não tem com quem falar (sem endereço válido do
+ * servidor): nada é exibido nem inventado. Com servidor configurado o app mostra
+ * carregando/erro (`NoDataState`), nunca este aviso.
+ */
 export function UnavailableState() {
   const { t } = useI18n();
   const { colors } = useTheme();
@@ -141,15 +153,125 @@ export function UnavailableState() {
   );
 }
 
+/** Carregando os dados da clínica (primeiro carregamento). */
+export function LoadingState() {
+  const { t } = useI18n();
+  const { colors } = useTheme();
+  return (
+    <View
+      testID="loading-state"
+      accessibilityRole="progressbar"
+      accessibilityLabel={t("data.loading")}
+      accessibilityLiveRegion="polite"
+      style={styles.loading}
+    >
+      <ActivityIndicator color={colors.primary} />
+      <Text variant="bodySm" tone="muted">
+        {t("data.loading")}
+      </Text>
+    </View>
+  );
+}
+
+function failureKey(failure: LoadFailure | null) {
+  if (failure === "offline") return "error.code.network" as const;
+  if (failure === "blocked") return "error.code.clinic_blocked" as const;
+  return "error.code.unknown" as const;
+}
+
+interface LoadErrorStateProps {
+  failure: LoadFailure | null;
+  onRetry: () => void;
+}
+
+/** Não foi possível carregar: mensagem acolhedora por motivo e "tentar de novo". */
+export function LoadErrorState({ failure, onRetry }: LoadErrorStateProps) {
+  const { t } = useI18n();
+  return (
+    <Card testID="load-error-state" tone="warning">
+      <Text variant="title3" header>
+        {t("data.error.title")}
+      </Text>
+      <Text variant="bodySm">{t(failureKey(failure))}</Text>
+      <Button
+        testID="retry-load"
+        label={t("data.retry")}
+        icon="refresh"
+        variant="secondary"
+        onPress={onRetry}
+      />
+    </Card>
+  );
+}
+
+/**
+ * O que mostrar quando ainda não há snapshot: sem servidor configurado, o aviso de
+ * indisponível; carregando, o indicador; com falha, o erro com "tentar de novo".
+ */
+export function NoDataState() {
+  const store = useStore();
+  const session = useOptionalSession();
+  if (
+    store.mode === "live" &&
+    (session === null || session.status === "disabled")
+  ) {
+    return <UnavailableState />;
+  }
+  if (store.status === "error") {
+    return (
+      <LoadErrorState
+        failure={store.failure}
+        onRetry={() => void store.refresh()}
+      />
+    );
+  }
+  return <LoadingState />;
+}
+
+/** Aviso sobre dados antigos: a última atualização falhou, mas há dados na tela. */
+export function StaleNotice() {
+  const { t } = useI18n();
+  const store = useStore();
+  if (store.mode !== "live" || store.status !== "error") return null;
+  return (
+    <Alert tone="warning" testID="stale-notice" live>
+      <Text variant="bodySm">
+        {t(
+          store.failure === "blocked"
+            ? "error.code.clinic_blocked"
+            : "data.error.stale",
+        )}
+      </Text>
+      <Button
+        label={t("data.retry")}
+        icon="refresh"
+        size="sm"
+        variant="secondary"
+        testID="retry-refresh"
+        onPress={() => void store.refresh()}
+      />
+    </Alert>
+  );
+}
+
 interface WithDataProps {
   children: (snapshot: Snapshot, store: Store) => ReactNode;
 }
 
-/** Renderiza a tela só quando há dados reais ou de demonstração. */
+/**
+ * Renderiza a tela só quando há dados reais ou de demonstração; antes disso mostra
+ * o carregando ou o erro com "tentar de novo". Se uma atualização falhar com dados
+ * já na tela, mantém os dados e avisa.
+ */
 export function WithData({ children }: WithDataProps) {
   const store = useStore();
-  if (!store.snapshot) return <UnavailableState />;
-  return <>{children(store.snapshot, store)}</>;
+  if (!store.snapshot) return <NoDataState />;
+  return (
+    <>
+      <StaleNotice />
+      {children(store.snapshot, store)}
+    </>
+  );
 }
 
 const markSource = require("../../assets/aurora-elo-mark.png");
@@ -222,6 +344,7 @@ const styles = StyleSheet.create({
   fill: { height: 8, borderRadius: radius.full },
   empty: { alignItems: "center", gap: 8, paddingVertical: 16 },
   emptyText: { textAlign: "center" },
+  loading: { alignItems: "center", gap: 8, paddingVertical: 24 },
   unavailable: { flexDirection: "row", gap: 12 },
   unavailableText: { flex: 1, gap: 6 },
 });

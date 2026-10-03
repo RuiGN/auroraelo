@@ -8,16 +8,16 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Linking } from "react-native";
 import { CHECKIN_QUESTION_KEYS } from "../src/domain/types";
-import { flush, renderApp } from "./helpers";
+import { renderApp, settle } from "./helpers";
 
 async function press(testID: string) {
   fireEvent.press(screen.getByTestId(testID));
-  flush();
+  await settle();
 }
 
 async function openTab(label: string) {
   fireEvent.press(screen.getByLabelText(label));
-  flush();
+  await settle();
 }
 
 describe("Hoje", () => {
@@ -76,7 +76,7 @@ describe("Medicações", () => {
     const taken = screen.getAllByTestId(/^dose-taken-/);
     expect(taken).toHaveLength(3);
     fireEvent.press(taken[0]);
-    flush();
+    await settle();
     expect(await screen.findByText("Tomada")).toBeTruthy();
     expect(screen.getAllByTestId(/^undo-/)).toHaveLength(1);
     expect(
@@ -93,9 +93,9 @@ describe("Medicações", () => {
     await press("today-medications");
     await screen.findByTestId("screen-medications");
     fireEvent.press(screen.getAllByTestId(/^dose-late-/)[0]);
-    flush();
+    await settle();
     fireEvent.press(screen.getAllByTestId(/^undo-/)[0]);
-    flush();
+    await settle();
     await waitFor(() =>
       expect(screen.queryAllByTestId(/^undo-/)).toHaveLength(0),
     );
@@ -281,12 +281,18 @@ describe("Agenda", () => {
     expect(screen.getAllByTestId(/^request-slot-/)).toHaveLength(1); // o horário pedido saiu da lista
   });
 
-  it("pede reagendamento sem mudar o horário e cancela com confirmação", async () => {
+  it("pede remarcação escolhendo um horário livre do mesmo profissional", async () => {
     renderApp();
     await openTab("Agenda");
     await press("appointment-a-2");
     await screen.findByTestId("screen-appointment-detail");
     await press("appointment-reschedule");
+    await screen.findByTestId("reschedule-picker");
+    // sem escolher o horário não há o que enviar
+    expect(screen.getByTestId("reschedule-submit")).toBeDisabled();
+    const options = screen.getAllByTestId(/^reschedule-slot-/);
+    fireEvent.press(options[0]);
+    await press("reschedule-submit");
     expect(
       await screen.findByText(/só vale quando a clínica responder/),
     ).toBeTruthy();

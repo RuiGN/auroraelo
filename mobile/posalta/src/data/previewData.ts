@@ -39,6 +39,7 @@ export function buildPreviewSnapshot(now: Date): Snapshot {
       displayName: "Alex Exemplo",
       clinicName: "Clínica Aurora (demonstração)",
       dischargeDate,
+      timezone: "America/Sao_Paulo",
       careTeam: Object.values(team),
     },
     checkIns: [
@@ -57,6 +58,16 @@ export function buildPreviewSnapshot(now: Date): Snapshot {
         notes: "Dormi mal, mas consegui caminhar à tarde.",
         visibility: "shareable",
         submittedAt: at(-1, "20:40"),
+      },
+    ],
+    accessRequests: [
+      {
+        id: "ar-1",
+        entryId: "j-1",
+        entryCreatedAt: at(-2, "21:10"),
+        therapistName: "Dra. Helena Prado",
+        purpose: "Conversar sobre esse dia na próxima sessão.",
+        requestedAt: at(-1, "09:00"),
       },
     ],
     journal: [
@@ -455,14 +466,14 @@ export function buildPreviewSnapshot(now: Date): Snapshot {
         id: "sn-1",
         name: "Marta Exemplo",
         relationship: "Mãe",
-        scopes: ["view_goals", "view_appointments"],
+        scopes: ["view_wellness_summary", "receive_checkin_summary"],
         active: true,
       },
       {
         id: "sn-2",
         name: "Pedro Exemplo",
         relationship: "Irmão",
-        scopes: ["view_goals", "receive_alerts"],
+        scopes: ["view_wellness_summary", "receive_urgent_alerts"],
         active: true,
       },
     ],

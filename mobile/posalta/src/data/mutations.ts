@@ -2,13 +2,13 @@ import { toISODate } from "../domain/logic";
 import {
   CarePlanDecision,
   CheckInScaleAnswers,
-  ConsentPurposeKey,
   DoseStatus,
   Emotion,
   GoalStatus,
   HabitStatus,
   ISODateTime,
   PrivacyRequestType,
+  RelapseSectionType,
   Scale5,
   Snapshot,
   SupportScope,
@@ -16,11 +16,66 @@ import {
 } from "../domain/types";
 
 /**
- * Transformações puras do instantâneo — usadas SOMENTE no modo demonstração, onde
+ * Transformações puras do instantâneo — aplicadas SOMENTE no modo demonstração, onde
  * o estado vive na memória do app e some ao fechá-lo. Retornam `null` quando a
  * entrada é inválida. Nada aqui é enviado a servidor nem gravado no aparelho.
+ *
+ * No modo live a mesma chamada (`store.run(mutations.logDose(input))`) não executa a
+ * função: o store lê `meta` ({ key, input }) e procura a ação remota registrada em
+ * `src/data/live/actions.ts` para essa `key`. Assim as telas têm um único caminho de
+ * escrita e cada domínio liga a sua API sem mexer nelas.
  */
-export type Mutation = (snapshot: Snapshot, now: Date) => Snapshot | null;
+export interface MutationMeta<K extends string = string, I = unknown> {
+  readonly key: K;
+  /** Primeiro argumento da fábrica (`undefined` quando ela não recebe nada). */
+  readonly input: I;
+}
+
+export interface Mutation {
+  (snapshot: Snapshot, now: Date): Snapshot | null;
+  /** Presente nas mutações criadas por `defineMutations`. */
+  readonly meta?: MutationMeta;
+}
+
+type Factory = (...args: never[]) => Mutation;
+
+type InputOf<F> = F extends (...args: infer A) => unknown
+  ? A extends [infer I, ...unknown[]]
+    ? I
+    : undefined
+  : never;
+
+/** Mutação com os metadados garantidos. */
+export type TaggedMutation<K extends string, I> = Mutation & {
+  readonly meta: MutationMeta<K, I>;
+};
+
+/**
+ * Registra as fábricas e devolve as mesmas funções com o mesmo comportamento puro,
+ * mas cada mutação criada carrega `meta = { key, input }`.
+ */
+export type DefinedMutations<T extends Record<string, Factory>> = {
+  [K in keyof T & string]: (
+    ...args: Parameters<T[K]>
+  ) => TaggedMutation<K, InputOf<T[K]>>;
+};
+
+export function defineMutations<T extends Record<string, Factory>>(
+  factories: T,
+): DefinedMutations<T> {
+  const tagged: Record<string, (...args: never[]) => Mutation> = {};
+  for (const [key, factory] of Object.entries(factories)) {
+    tagged[key] = (...args: never[]) => {
+      const pure = factory(...args);
+      const mutation: Mutation = (snapshot, now) => pure(snapshot, now);
+      return Object.defineProperty(mutation, "meta", {
+        value: Object.freeze({ key, input: args[0] }),
+        enumerable: true,
+      });
+    };
+  }
+  return tagged as unknown as DefinedMutations<T>;
+}
 
 export const MAX_TEXT = 4000;
 export const MAX_DETAIL = 2000;
@@ -35,7 +90,7 @@ function blank(value: string): boolean {
   return value.trim().length === 0;
 }
 
-export const mutations = {
+export const mutations = defineMutations({
   submitCheckIn:
     (input: {
       answers: CheckInScaleAnswers;
@@ -253,7 +308,7 @@ export const mutations = {
     (snapshot, now) => {
       if (
         !Number.isInteger(input.intensity) ||
-        input.intensity < 0 ||
+        input.intensity < 1 ||
         input.intensity > 10
       ) {
         return null;
@@ -279,6 +334,18 @@ export const mutations = {
       };
     },
 
+  respondAccessRequest:
+    (input: { id: string; approve: boolean }): Mutation =>
+    (snapshot) =>
+      snapshot.accessRequests.some((item) => item.id === input.id)
+        ? {
+            ...snapshot,
+            accessRequests: snapshot.accessRequests.filter(
+              (item) => item.id !== input.id,
+            ),
+          }
+        : null,
+
   setCounterHidden:
     (hidden: boolean): Mutation =>
     (snapshot) =>
@@ -300,6 +367,172 @@ export const mutations = {
           },
         }
       : null,
+
+  // ── Conteúdo pessoal do paciente (privado; editado no app) ────────────────
+
+  setupSobriety:
+    (input: {
+      goalType: "abstinence" | "reduction" | "moderation";
+      focus: string;
+      referenceDate: string;
+      motivations: string;
+      hideCounter: boolean;
+    }): Mutation =>
+    (snapshot) => {
+      if (snapshot.sobriety || blank(input.focus) || input.focus.length > 128)
+        return null;
+      if (input.motivations.length > 2000) return null;
+      return {
+        ...snapshot,
+        sobriety: {
+          id: "sg-new",
+          goalType: input.goalType,
+          focus: input.focus.trim(),
+          referenceDate: input.referenceDate,
+          restartCount: 0,
+          motivations: input.motivations.trim(),
+          hideCounter: input.hideCounter,
+        },
+      };
+    },
+
+  saveRelapsePlan:
+    (input: {
+      title: string;
+      sections: { type: RelapseSectionType; title: string; content: string }[];
+    }): Mutation =>
+    (snapshot, now) => {
+      const sections = input.sections.filter((item) => !blank(item.content));
+      if (sections.some((item) => item.content.length > 4000)) return null;
+      if (input.title.length > 200) return null;
+      const types = new Set(sections.map((item) => item.type));
+      if (types.size !== sections.length) return null;
+      const previous = snapshot.relapsePlan;
+      return {
+        ...snapshot,
+        relapsePlan: {
+          id: previous?.id ?? "rp-new",
+          title: input.title.trim() || previous?.title || "",
+          version: (previous?.version ?? 0) + 1,
+          lastReviewedAt: now.toISOString(),
+          sections: sections.map((item) => ({
+            id: `${previous?.id ?? "rp-new"}-${item.type}`,
+            type: item.type,
+            title: item.title.trim(),
+            content: item.content.trim(),
+          })),
+        },
+      };
+    },
+
+  saveUrgentPlan:
+    (input: {
+      personalInstructions: string;
+      calmingStrategies: string[];
+    }): Mutation =>
+    (snapshot, now) => {
+      const strategies = input.calmingStrategies
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+      if (input.personalInstructions.length > 2000) return null;
+      if (strategies.length > 10 || strategies.some((i) => i.length > 200))
+        return null;
+      return {
+        ...snapshot,
+        urgentPlan: {
+          contacts: snapshot.urgentPlan?.contacts ?? [],
+          personalInstructions: input.personalInstructions.trim(),
+          calmingStrategies: strategies,
+          lastReviewedAt: now.toISOString(),
+        },
+      };
+    },
+
+  saveUrgentContact:
+    (input: {
+      /** Sem `id` cria um contato novo; com `id` atualiza o existente. */
+      id?: string;
+      name: string;
+      relationship: string;
+      phone: string;
+      messageTemplate: string;
+    }): Mutation =>
+    (snapshot, now) => {
+      const digits = input.phone.replace(/\D/g, "");
+      if (
+        blank(input.name) ||
+        input.name.length > 120 ||
+        blank(input.relationship) ||
+        input.relationship.length > 80 ||
+        digits.length < 8 ||
+        digits.length > 20 ||
+        input.messageTemplate.length > 500
+      ) {
+        return null;
+      }
+      const plan = snapshot.urgentPlan ?? {
+        personalInstructions: "",
+        calmingStrategies: [],
+        contacts: [],
+        lastReviewedAt: now.toISOString(),
+      };
+      const contact = {
+        id: input.id ?? newId("uc", now),
+        name: input.name.trim(),
+        relationship: input.relationship.trim(),
+        phone: input.phone.trim(),
+        messageTemplate: input.messageTemplate.trim(),
+      };
+      if (input.id && !plan.contacts.some((item) => item.id === input.id)) {
+        return null;
+      }
+      if (!input.id && plan.contacts.length >= 5) return null;
+      return {
+        ...snapshot,
+        urgentPlan: {
+          ...plan,
+          contacts: input.id
+            ? plan.contacts.map((item) =>
+                item.id === input.id ? contact : item,
+              )
+            : [...plan.contacts, contact],
+        },
+      };
+    },
+
+  removeUrgentContact:
+    (contactId: string): Mutation =>
+    (snapshot) =>
+      snapshot.urgentPlan?.contacts.some((item) => item.id === contactId)
+        ? {
+            ...snapshot,
+            urgentPlan: {
+              ...snapshot.urgentPlan,
+              contacts: snapshot.urgentPlan.contacts.filter(
+                (item) => item.id !== contactId,
+              ),
+            },
+          }
+        : null,
+
+  setLowEnergyActions:
+    (actions: string[]): Mutation =>
+    (snapshot) => {
+      const clean = actions
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+      if (clean.length > 3 || clean.some((item) => item.length > 120))
+        return null;
+      return {
+        ...snapshot,
+        lowEnergy: {
+          ...snapshot.lowEnergy,
+          actions: clean,
+          // sem ações não há como manter o modo ligado
+          ...(clean.length === 0 ? { active: false, startedAt: null } : {}),
+        },
+      };
+    },
 
   setLowEnergy:
     (active: boolean): Mutation =>
@@ -374,7 +607,7 @@ export const mutations = {
     },
 
   requestReschedule:
-    (input: { id: string }): Mutation =>
+    (input: { id: string; slot?: ISODateTime }): Mutation =>
     (snapshot) => {
       const target = snapshot.appointments.find((item) => item.id === input.id);
       if (
@@ -382,18 +615,34 @@ export const mutations = {
         (target.status !== "confirmed" && target.status !== "requested")
       )
         return null;
+      // Como no servidor: o horário proposto já vale e a clínica confirma depois.
+      const length =
+        new Date(target.endAt).getTime() - new Date(target.startAt).getTime();
+      const times = input.slot
+        ? {
+            startAt: input.slot,
+            endAt: new Date(
+              new Date(input.slot).getTime() + length,
+            ).toISOString(),
+          }
+        : {};
       return {
         ...snapshot,
         appointments: snapshot.appointments.map((item) =>
           item.id === input.id
-            ? { ...item, status: "reschedule_requested" as const }
+            ? { ...item, ...times, status: "reschedule_requested" as const }
             : item,
         ),
       };
     },
 
   toggleSupportScope:
-    (input: { id: string; scope: SupportScope }): Mutation =>
+    (input: {
+      id: string;
+      scope: SupportScope;
+      /** Reautenticação: o servidor exige a senha para mudar o que a rede vê. */
+      password?: string;
+    }): Mutation =>
     (snapshot) => {
       if (!snapshot.supportNetwork.some((item) => item.id === input.id))
         return null;
@@ -439,11 +688,9 @@ export const mutations = {
     },
 
   setConsent:
-    (input: { purpose: ConsentPurposeKey; granted: boolean }): Mutation =>
+    (input: { id: string; granted: boolean }): Mutation =>
     (snapshot, now) => {
-      const current = snapshot.consents.find(
-        (item) => item.purpose === input.purpose,
-      );
+      const current = snapshot.consents.find((item) => item.id === input.id);
       if (!current) return null;
       // Consentimentos obrigatórios não podem ser revogados por aqui: a revogação
       // exige o fluxo de solicitação ao titular (LGPD) e encerra o uso do serviço.
@@ -451,7 +698,7 @@ export const mutations = {
       return {
         ...snapshot,
         consents: snapshot.consents.map((item) =>
-          item.purpose === input.purpose
+          item.id === input.id
             ? {
                 ...item,
                 status: input.granted
@@ -484,4 +731,12 @@ export const mutations = {
         ],
       };
     },
-};
+});
+
+/** Nome de cada mutação: é a chave do registro de ações remotas. */
+export type MutationKey = keyof typeof mutations;
+
+/** Tipo da entrada de uma mutação (o argumento da fábrica). */
+export type MutationInput<K extends MutationKey> = ReturnType<
+  (typeof mutations)[K]
+>["meta"]["input"];

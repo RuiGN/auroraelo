@@ -1,4 +1,11 @@
 import { catalogs, isLocale, Locale, translate } from "../src/i18n";
+import {
+  authFailureKey,
+  ERROR_CODE_KEYS,
+  errorCodeKey,
+  errorMessageKey,
+} from "../src/i18n/errorCodes";
+import type { AuthFailureReason } from "../src/api/session";
 import { ptBr } from "../src/i18n/pt-br";
 
 const locales = Object.keys(catalogs) as Locale[];
@@ -117,5 +124,93 @@ describe("translate", () => {
     expect(isLocale("pt-BR")).toBe(false);
     expect(isLocale("fr")).toBe(false);
     expect(isLocale(null)).toBe(false);
+  });
+});
+
+describe("mensagens por código de erro da API", () => {
+  // Códigos de docs/mobile-patient-api.md (seção "Erros") e os do cliente HTTP.
+  const serverCodes = [
+    "invalid_credentials",
+    "rate_limited",
+    "clinic_choice_required",
+    "invalid_token",
+    "not_found",
+    "invalid_dose_time",
+    "timezone_required",
+    "plan_closed",
+    "invalid_date",
+    "not_scheduled",
+    "already_completed",
+    "invalid_response",
+    "unsupported",
+    "no_actions_configured",
+    "invalid_intensity",
+    "invalid_scope",
+    "reauthentication_failed",
+    "consent_rejected",
+    "revocation_rejected",
+    "already_open",
+    "rejected",
+    "slot_unavailable",
+    "weak_password",
+    "invalid_code",
+    "invalid_contact",
+    "invalid_focus",
+    "invalid_phone",
+    "invalid_section_type",
+    "already_exists",
+    "limit_reached",
+  ];
+  const clientCodes = ["network", "timeout", "clinic_blocked", "rate_limited"];
+
+  it("todo código do contrato e do cliente tem mensagem nos 3 idiomas", () => {
+    for (const code of [...serverCodes, ...clientCodes]) {
+      const key = errorCodeKey(code);
+      expect({ code, key }).not.toEqual({ code, key: null });
+      for (const locale of locales) {
+        const text = translate(locale, key!);
+        expect(text).not.toBe(key); // a chave existe no catálogo
+        expect(text.trim().length).toBeGreaterThan(10);
+      }
+    }
+  });
+
+  it("código desconhecido (ou ausente) cai na mensagem genérica, nunca no detail", () => {
+    expect(errorCodeKey("http_418")).toBeNull();
+    expect(errorCodeKey(undefined)).toBeNull();
+    expect(errorCodeKey("toString")).toBeNull(); // não herda de Object
+    expect(errorMessageKey("http_418")).toBe("error.code.unknown");
+    expect(errorMessageKey("invalid_credentials")).toBe(
+      "error.code.invalid_credentials",
+    );
+  });
+
+  it("todo motivo de falha de entrada tem texto", () => {
+    const reasons: AuthFailureReason[] = [
+      "invalid_credentials",
+      "rate_limited",
+      "offline",
+      "invalid_code",
+      "weak_password",
+      "clinic_choice",
+      "blocked",
+      "unexpected",
+    ];
+    for (const reason of reasons) {
+      const key = authFailureKey(reason);
+      for (const locale of locales) {
+        expect(translate(locale, key)).not.toBe(key);
+      }
+    }
+  });
+
+  it("as mensagens de erro não culpam a pessoa nem soam como alarme", () => {
+    for (const locale of locales) {
+      for (const key of Object.values(ERROR_CODE_KEYS)) {
+        expect(translate(locale, key)).not.toMatch(
+          /sua culpa|you failed|fracasso|falhou você|error fatal|fatal error/i,
+        );
+      }
+    }
   });
 });

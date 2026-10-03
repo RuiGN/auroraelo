@@ -6,13 +6,14 @@ import {
   Alert,
   Badge,
   FeedbackAlert,
-  useActionFeedback,
+  useRunAction,
 } from "../components/Feedback";
-import { CheckRow } from "../components/Form";
+import { CheckRow, Field } from "../components/Form";
 import { Icon, IconName } from "../components/Icon";
 import { EmptyState, Screen, Section, WithData } from "../components/Layout";
 import { Text } from "../components/Text";
 import { mutations } from "../data/mutations";
+import { useStore } from "../data/store";
 import { ContentKind, SupportScope } from "../domain/types";
 import { useI18n } from "../i18n";
 import { RootScreenProps } from "../navigation/types";
@@ -64,22 +65,40 @@ export function SupportHubScreen() {
 // ── Rede de apoio ───────────────────────────────────────────────────────────
 
 const SCOPES: SupportScope[] = [
-  "view_goals",
-  "view_routine",
-  "view_appointments",
-  "receive_alerts",
+  "view_wellness_summary",
+  "receive_urgent_alerts",
+  "view_relapse_plan_safe",
+  "receive_checkin_summary",
 ];
 
 export function NetworkScreen() {
   const { t } = useI18n();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   const [confirming, setConfirming] = useState<string | null>(null);
+  const [password, setPassword] = useState("");
+  // No servidor, mudar o que a rede enxerga exige a senha (reautenticação).
+  const needsPassword = useStore().mode === "live";
   return (
     <Screen testID="screen-network">
       <Text variant="body" tone="muted">
         {t("network.intro")}
       </Text>
       <Alert tone="info">{t("network.diary")}</Alert>
+      {needsPassword ? (
+        <Field
+          testID="network-password"
+          label={t("network.password")}
+          help={t("network.password.note")}
+          value={password}
+          onChangeText={setPassword}
+          password={{
+            showLabel: t("auth.password.show"),
+            hideLabel: t("auth.password.hide"),
+          }}
+          autoComplete="current-password"
+          textContentType="password"
+        />
+      ) : null}
       <FeedbackAlert feedback={feedback} />
       <WithData>
         {(snapshot, store) =>
@@ -109,13 +128,12 @@ export function NetworkScreen() {
                           label={t(`network.scope.${scope}`)}
                           checked={person.scopes.includes(scope)}
                           onToggle={() =>
-                            report(
-                              store.run(
-                                mutations.toggleSupportScope({
-                                  id: person.id,
-                                  scope,
-                                }),
-                              ),
+                            run(
+                              mutations.toggleSupportScope({
+                                id: person.id,
+                                scope,
+                                ...(needsPassword ? { password } : {}),
+                              }),
                               "common.done",
                             )
                           }
@@ -143,8 +161,8 @@ export function NetworkScreen() {
                               style={styles.action}
                               testID={`revoke-confirm-${person.id}`}
                               onPress={() => {
-                                report(
-                                  store.run(mutations.revokeSupport(person.id)),
+                                run(
+                                  mutations.revokeSupport(person.id),
                                   "common.done",
                                 );
                                 setConfirming(null);
@@ -248,7 +266,7 @@ export function ContentDetailScreen({
 }: RootScreenProps<"ContentDetail">) {
   const { t } = useI18n();
   const { colors } = useTheme();
-  const { feedback, report } = useActionFeedback();
+  const { feedback, run } = useRunAction();
   return (
     <Screen testID="screen-content-detail">
       <WithData>
@@ -291,44 +309,45 @@ export function ContentDetailScreen({
                 </View>
               </Card>
               <FeedbackAlert feedback={feedback} />
-              <View style={styles.actions}>
-                <Button
-                  label={
-                    item.favorite ? t("learn.unfavorite") : t("learn.favorite")
-                  }
-                  icon="star"
-                  variant="secondary"
-                  size="sm"
-                  style={styles.action}
-                  testID="content-favorite"
-                  onPress={() =>
-                    report(
-                      store.run(
+              {/* Favorito e "lido" não existem no servidor: só na demonstração. */}
+              {store.mode === "preview" ? (
+                <View style={styles.actions}>
+                  <Button
+                    label={
+                      item.favorite
+                        ? t("learn.unfavorite")
+                        : t("learn.favorite")
+                    }
+                    icon="star"
+                    variant="secondary"
+                    size="sm"
+                    style={styles.action}
+                    testID="content-favorite"
+                    onPress={() =>
+                      run(
                         mutations.toggleContent({
                           id: item.id,
                           flag: "favorite",
                         }),
-                      ),
-                      "common.done",
-                    )
-                  }
-                />
-                <Button
-                  label={item.read ? t("learn.read") : t("learn.markRead")}
-                  icon="check"
-                  size="sm"
-                  style={styles.action}
-                  testID="content-read"
-                  onPress={() =>
-                    report(
-                      store.run(
+                        "common.done",
+                      )
+                    }
+                  />
+                  <Button
+                    label={item.read ? t("learn.read") : t("learn.markRead")}
+                    icon="check"
+                    size="sm"
+                    style={styles.action}
+                    testID="content-read"
+                    onPress={() =>
+                      run(
                         mutations.toggleContent({ id: item.id, flag: "read" }),
-                      ),
-                      "common.done",
-                    )
-                  }
-                />
-              </View>
+                        "common.done",
+                      )
+                    }
+                  />
+                </View>
+              ) : null}
             </>
           );
         }}
