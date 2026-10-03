@@ -15,7 +15,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
-from accounts.models import ClinicInvitation
+from accounts.selectors import pending_patient_invitation_id
 from accounts.services import (
     issue_patient_otp,
     revoke_invitation,
@@ -249,20 +249,12 @@ def patient_send_otp(
     if profile is None:
         raise PermissionDenied
 
-    # Busca o convite pendente mais recente do paciente (por e-mail)
-    invitation = (
-        ClinicInvitation.infrastructure_objects.filter(
-            clinic_id=clinic_id,
-            recipient_email=profile.email,
-            initial_role="patient",
-            used_at__isnull=True,
-            revoked_at__isnull=True,
-        )
-        .order_by("-created_at")
-        .first()
+    # Busca o ID do convite pendente mais recente do paciente (por e-mail)
+    invitation_id = pending_patient_invitation_id(
+        clinic_id=clinic_id, recipient_email=profile.email
     )
 
-    if invitation is None:
+    if invitation_id is None:
         messages.error(
             request,
             _(
@@ -278,7 +270,7 @@ def patient_send_otp(
     # para obter um novo raw_token disponível para gerar o OTP.
     revoke_invitation(
         clinic_id=clinic_id,
-        invitation_id=invitation.pk,
+        invitation_id=invitation_id,
         actor=actor,
     )
     issued = issue_patient_invitation(

@@ -285,3 +285,62 @@ Detalhamento, comandos e logs: `docs/migration/evidence/newversion-final-2026092
 - Alterações funcionais desta continuação: gestão de convites na tela de equipe (listar, revogar e reenviar sem apagar histórico, sempre limitada à clínica da sessão), logs técnicos de login Master com `request_id` e sem PII, e confirmação declarativa de ações destrutivas (`data-confirmation`) nos botões de suspender e revogar.
 - Risco aberto a validar (não é regressão desta sessão): `celery==5.6.3` com `python:3.14-slim` e pool prefork apresentou falha de execução de tarefa no host macOS. A produção executa a mesma imagem Linux, então a verificação precisa ser feita em Linux/CI (por exemplo um job que suba broker descartável e um worker que processe uma tarefa simples, ou a inspeção do worker já em execução no host — não feita aqui porque os logs de um worker ativo podem conter dados reais).
 - Pendências explícitas (9 itens ainda `[ ]`): validação visual interativa; conectividade real worker↔RabbitMQ; gates legados de Ruff/format/mypy verdes; validação HTTP e da jornada autenticada na VPS; confirmação de que o artefato na VPS corresponde ao trabalho aprovado; verificação em produção com conta real; e o aceite final da Sprint 9.
+
+## Registro de execução 2026-10-02 — App Pós-Alta + Auth OTP
+
+### App Mobile (`auroraelo_mobile/`)
+
+Projeto separado criado em `/Users/rgnsystems/Documents/auroraelo_v2/auroraelo_mobile/`.
+Não é um projeto Django — HTML/CSS/JS puro consumindo a API REST do `auroraelo/`.
+
+**Arquivos entregues:**
+- `index.html` — Shell PWA completo: login two-step, 6 seções (Início, Agenda, Diário, Metas, Recuperação, Perfil), navegação inferior, modo claro/escuro, CVV 188.
+- `css/mobile.css` — CSS mobile-first sobre tokens do `auroraelo_design_system/` (Manrope, `--brand-navy`, `--brand-sky`, etc.).
+- `js/app.js` — Autenticação via `/activate-otp/`, refresh automático de token, roteamento de seções, consumo de API (agenda, diário, metas, recuperação, check-in).
+- Assets copiados do `auroraelo_design_system/`: `aurora-elo.css`, `aurora-elo.js`, logos PNG, ícones SVG (Lucide style).
+
+**Fluxo de login:**
+```
+Passo 1 → Nome completo (campo de texto)
+Passo 2 → PIN de 6 dígitos (OTP do email)
+POST /api/v1/mobile/auth/activate-otp/ { code, pin, first_name, last_name }
+→ Bearer token no localStorage → app liberado
+```
+
+O token do convite (`code`) é lido automaticamente de `?code=TOKEN` na URL (deep link do email).
+
+### Backend — Auth OTP (commit `3f1e006`, branch `gemini`, 2026-10-02)
+
+Deploy realizado: `727ec32 → 3f1e006`, push para `origin/gemini` às 19h13 BRT.
+
+**Alterações (433 linhas adicionadas, 1 deletada — 6 arquivos):**
+
+`accounts/services.py`:
+- `issue_patient_otp(raw_token, language, recipient_email) → str` — gera PIN via `secrets.randbelow` (CSPRNG), armazena hash SHA-256 no Redis (TTL 15 min), reseta contador de tentativas, envia email com assunto "Seu código de acesso — Aurora Elo Pós-alta".
+- `activate_patient_by_otp(request, raw_token, pin, first_name, last_name) → User` — valida OTP (rate-limit 5 tentativas / 15 min, `secrets.compare_digest`), aceita convite, cria conta com `unusable_password` (auth somente via Bearer).
+- `_send_otp_email(recipient_email, pin, language)` — template PT-BR com PIN em destaque.
+
+`mobile_api/services.py`:
+- `start_session_for_user(request, user, clinic_id, ...) → IssuedTokens` — cria sessão Bearer para `User` já autenticado, sem verificar senha.
+
+`api/mobile_auth_api.py`:
+- `POST /api/v1/mobile/auth/activate-otp/` — schema `ActivateOtpIn { code, pin(6d), first_name, last_name, device_label, platform, app_version }`. Retorna `TokensOut` (200) ou 401/429.
+
+`people/views.py`:
+- `patient_send_otp(request, patient_profile_id)` — view `@require_POST` que: busca convite pendente do paciente, revoga-o, emite novo convite, chama `issue_patient_otp`, exibe mensagem Django de sucesso/erro e redireciona para a ficha.
+
+`people/urls.py`:
+- `POST /patients/<uuid:patient_profile_id>/send-otp/` → `patient_send_otp`.
+
+`templates/people/patient_detail.html`:
+- Seção "App Pós-Alta" com botão "Enviar código por e-mail" (form POST → `send-otp`) e link para "Convidar para o app (link longo)".
+- Bloco de mensagens Django (`alert-success` / `alert-danger`) exibido no topo.
+
+**Segurança:**
+- PIN gerado via CSPRNG (`secrets.randbelow(1_000_000)`) — 6 dígitos, 1.000.000 possibilidades.
+- Armazenamento: apenas o hash SHA-256 no Redis; o PIN em claro nunca toca o banco.
+- Comparação constant-time (`secrets.compare_digest`).
+- Rate-limit: máx. 5 tentativas por OTP/janela (15 min).
+- OTP destruído após 1 uso bem-sucedido.
+- Contas novas: `user.set_unusable_password()` imediato após ativação.
+

@@ -152,3 +152,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/static/aurora_elo/sw.js', { scope: '/' })
+      .catch(err => console.debug('[SW] Registro ignorado:', err.message));
+  });
+}

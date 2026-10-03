@@ -241,6 +241,7 @@ def test_postgres_drill_measures_objectives_and_binds_persistent_artifacts(
         assert len(digest) == 64
 
 
+@pytest.mark.skipif(not _docker_available(), reason="Docker daemon not available")
 def test_postgres_drill_fails_closed_when_rpo_objective_is_exceeded(
     tmp_path: Path,
 ) -> None:

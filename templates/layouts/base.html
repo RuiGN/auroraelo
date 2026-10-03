@@ -26,17 +26,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Aurora Elo">
-  <link rel="apple-touch-icon" href="{% static 'aurora_elo/img/aurora-elo-icon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/aurora-elo-icon.png' %}">
 </head>
 
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('{% static "aurora_elo/sw.js" %}', { scope: '/' })
-        .catch(err => console.debug('[SW] Registro ignorado:', err.message));
-    });
-  }
-</script>
+
 
 <body class="product-workspace-body"
   hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'

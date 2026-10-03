@@ -18,6 +18,7 @@ Somente `Authorization: Bearer <token de acesso>`. Cookie de sessão não vale n
 | Passo | Rota | Observações |
 |---|---|---|
 | Ativar conta | `POST /mobile/auth/activate/` | `code` (do convite), `password`, `first_name`, `last_name`; já abre a sessão. Quem já tem conta informa a senha atual |
+| Ativar com OTP | `POST /mobile/auth/activate-otp/` | `full_name` e `otp` enviados por email; faz a ativação ou login de forma simplificada e devolve os tokens. |
 | Recuperar senha | `POST /mobile/auth/password-recovery/` | `email`; resposta sempre `202`; só paciente recebe e-mail |
 | Redefinir senha | `POST /mobile/auth/password-reset/` | `code` (`uid.token` do e-mail), `new_password`; derruba todas as sessões |
 | Entrar | `POST /mobile/auth/login/` | `email`, `password`, `device_label`, `platform` (`ios`/`android`), `app_version`, `clinic_id` (só se houver mais de uma clínica) |

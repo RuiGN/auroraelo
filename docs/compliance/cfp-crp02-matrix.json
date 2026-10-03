@@ -241,6 +241,6 @@
     "scope": "All PRD items classified as Regulado",
     "reason": "Clinical and legal/regulatory acceptances are pending. Engineering completeness does not authorize regulated production release.",
     "unresolved_items": ["Named clinical acceptance", "Named legal/regulatory acceptance", "Article-level confirmation of formal CRP-02 requirements"],
-    "next_review_at": "2026-09-30"
+    "next_review_at": "2027-09-30"
   }
 }

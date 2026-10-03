@@ -81,9 +81,30 @@ def active_user_display(*, user_id: UUID) -> tuple[str, str] | None:
     return user.get_full_name().strip() or "Perfil profissional", user.email
 
 
+def pending_patient_invitation_id(
+    *, clinic_id: UUID, recipient_email: str
+) -> UUID | None:
+    """Returns the ID of the most recent pending patient invitation for a given email."""
+    from .models import ClinicInvitation
+
+    return (
+        ClinicInvitation.infrastructure_objects.filter(
+            clinic_id=clinic_id,
+            recipient_email=recipient_email,
+            initial_role="patient",
+            used_at__isnull=True,
+            revoked_at__isnull=True,
+        )
+        .order_by("-created_at")
+        .values_list("pk", flat=True)
+        .first()
+    )
+
+
 __all__ = [
     "Selector",
     "accepted_professional_invitation",
     "active_user_display",
     "identity_export_records",
+    "pending_patient_invitation_id",
 ]

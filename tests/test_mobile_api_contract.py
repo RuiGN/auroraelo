@@ -21,6 +21,7 @@ PUBLIC_OPERATIONS = {
     ("post", "/api/v1/mobile/auth/login/"),
     ("post", "/api/v1/mobile/auth/refresh/"),
     ("post", "/api/v1/mobile/auth/activate/"),
+    ("post", "/api/v1/mobile/auth/activate-otp/"),
     ("post", "/api/v1/mobile/auth/password-recovery/"),
     ("post", "/api/v1/mobile/auth/password-reset/"),
 }
