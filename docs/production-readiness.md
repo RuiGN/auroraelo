@@ -24,6 +24,7 @@ Estado em 2026-10-02. Nada foi publicado, commitado nem implantado nesta rodada.
 | Painel "Aplicativo do paciente" (convite, aparelhos, revogar sessões) | pronto | `tests/test_mobile_api_staff_views.py` |
 | App ligado à API (22 fatias do estado, todas as gravações) | pronto em teste | 406 testes Jest, `tsc`, Prettier, `expo export` |
 | Contrato app × servidor | conferido por teste | foto do OpenAPI + `tests/contract-live.test.ts` |
+| App × servidor em execução (SQLite local) | 13 de 13 | `npm run test:e2e` |
 | Aceite obrigatório de consentimentos no primeiro acesso | pronto (no cliente) | `tests/consent-gate.test.tsx` |
 
 A única falha da suíte do web é `test_repository_matrix_passes_completeness_gate…`: a data
@@ -32,10 +33,12 @@ de revisão da matriz regulatória (`docs/compliance/cfp-crp02-matrix.json`) ven
 
 ## O que NÃO foi verificado (risco real)
 
-1. **Nunca rodou ponta a ponta contra o servidor de verdade.** O app foi testado contra
-   respostas geradas do OpenAPI, não contra o Django em execução. Rodar um roteiro de
-   fumaça (convite → ativar → aceitar documentos → usar cada tela) num ambiente de teste
-   é o primeiro passo.
+1. **Contra o servidor de verdade (feito, em ambiente local).** O roteiro
+   `mobile/posalta/tests/e2e` (`npm run test:e2e`) roda o código real do app contra o
+   Django em execução, com banco descartável: ativação, 18 loaders, aceite, cuidado,
+   diário, agenda, conteúdo pessoal, perfil, renovação e reuso de token, saída — 13 de 13
+   passam. Falta rodá-lo contra um ambiente de teste com PostgreSQL, Redis e SMTP reais
+   (o banco do roteiro é SQLite e o e-mail é em memória).
 2. **Nada rodou em aparelho real:** Keychain/Keystore (`expo-secure-store`), links
    `auroraelo-posalta://`, VoiceOver/TalkBack, texto ampliado, teclado, modo escuro.
 3. **E-mail:** convite e recuperação de senha dependem de SMTP. As variáveis `MAILER_*`
@@ -63,7 +66,7 @@ de revisão da matriz regulatória (`docs/compliance/cfp-crp02-matrix.json`) ven
 
 | Etapa | Itens | Estimativa |
 |---|---|---|
-| **A. Piloto interno** (TestFlight / APK interno, 1 clínica) | roteiro de fumaça contra o servidor; SMTP; `EXPO_PUBLIC_API_BASE_URL` e `eas.json`; conta Apple/Google; build iOS/Android; correções do que aparecer em aparelho | 1–2 semanas |
+| **A. Piloto interno** (TestFlight / APK interno, 1 clínica) | roteiro de fumaça em ambiente com PostgreSQL/Redis/SMTP; SMTP; `EXPO_PUBLIC_API_BASE_URL` e `eas.json`; conta Apple/Google; build iOS/Android; correções do que aparecer em aparelho | 1–2 semanas |
 | **B. Endurecimento** | teste de invasão da API e do app; `npm audit`; servidor recusando dados sem aceite; revisão de privacidade (RIPD/LGPD, política, exclusão de conta no app para a Apple); backup e monitoramento | 2–3 semanas |
 | **C. Conformidade e conteúdo** | revisão clínica; revisão humana en/es; matriz regulatória; textos legais por clínica | 2–4 semanas (depende de terceiros) |
 | **D. Lojas** | fichas de privacidade, capturas, revisão da Apple/Google | 1–2 semanas |
