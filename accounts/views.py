@@ -7,6 +7,7 @@ from datetime import timedelta
 from uuid import UUID
 
 from django.conf import settings
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.mail import EmailMultiAlternatives
@@ -28,6 +29,7 @@ from .forms import (
     LoginForm,
     PasswordRecoveryForm,
     PasswordResetForm,
+    RequiredPasswordChangeForm,
     SensitiveActionReauthenticationForm,
 )
 from .models import AccountSession, User
@@ -39,6 +41,7 @@ from .services import (
     RecoveryRateLimitedError,
     SensitiveActionRateLimitedError,
     accept_invitation,
+    change_required_password,
     invitation_clinic_id,
     invitation_initial_role,
     issue_invitation,
@@ -51,6 +54,7 @@ from .services import (
     revoke_account_session,
     revoke_invitation,
     revoke_other_sessions,
+    rotate_current_session_tracking,
 )
 
 logger = logging.getLogger("application.accounts")
@@ -65,6 +69,7 @@ def _form_response(
         | LoginForm
         | PasswordRecoveryForm
         | PasswordResetForm
+        | RequiredPasswordChangeForm
     ),
     title: str,
     description: str,
@@ -104,6 +109,61 @@ def _safe_local_next(request: HttpRequest, value: object) -> str | None:
     ):
         return value
     return None
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def password_change_required(request: HttpRequest) -> HttpResponse:
+    """First access: replace the generated password before using the system."""
+    user = request.user
+    if not isinstance(user, User):
+        raise PermissionDenied
+    if not user.must_change_password:
+        return redirect("workspace_vertical")
+    form = RequiredPasswordChangeForm(request.POST or None)
+    status = 200
+    if request.method == "POST" and form.is_valid():
+        try:
+            change_required_password(
+                request=request,
+                user=user,
+                current_password=form.cleaned_data["current_password"],
+                new_password=form.cleaned_data["new_password"],
+            )
+        except SensitiveActionRateLimitedError:
+            form.add_error(None, _("Muitas tentativas. Tente novamente mais tarde."))
+            status = 429
+        except ValidationError as error:
+            field = (
+                "current_password"
+                if getattr(error, "code", "") == "current_password"
+                else "new_password"
+            )
+            form.add_error(field, error)
+        else:
+            # A nova senha muda o hash da sessão: renova a sessão e o rastreio dela.
+            update_session_auth_hash(request, user)
+            rotate_current_session_tracking(request=request, user=user)
+            if (user.is_staff or user.is_superuser) and not request.session.get(
+                CLINIC_SESSION_KEY
+            ):
+                return redirect("master_panel:dashboard")
+            return redirect("workspace_vertical")
+    response = _form_response(
+        request,
+        form=form,
+        title=_("Troque sua senha"),
+        description=_(
+            "Por segurança, a senha que você recebeu vale só para o primeiro acesso. "
+            "Crie uma senha que apenas você conheça."
+        ),
+        submit_label=_("Salvar nova senha"),
+        status=status,
+        secondary_url=reverse("account_logout"),
+        secondary_label=_("Sair"),
+    )
+    response["Cache-Control"] = "private, no-store"
+    return response
 
 
 @require_http_methods(["GET", "POST"])

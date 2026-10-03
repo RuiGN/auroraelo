@@ -46,12 +46,16 @@
           <a href="{% url 'psychiatry:crisis_protocol' %}" style="background: #fff1f2; border: 1px solid #fecdd3; color: #e11d48;" title="{% translate 'Orientações em crise' %}">
             <i class="feather-alert-triangle" aria-hidden="true"></i> {% translate "Orientações em crise" %}
           </a>
+          {% if can_use_clinical_modules %}
           <a href="{% url 'psychiatry:telepsychiatry' %}" style="background: #f0fdf4; border: 1px solid #bbf7d0; color: #059669;" title="{% translate 'Telepsiquiatria' %}">
             <i class="feather-video" aria-hidden="true"></i> {% translate "Telepsiquiatria" %}
           </a>
+          {% endif %}
+          {% if user.is_staff or user.is_superuser %}
           <a href="{% url 'design_system_reference' %}" style="background: #f0f7ff; border: 1px solid #bae0fd; color: #0284c7;" title="{% translate 'Sistema de design Aurora Elo' %}">
             <i class="feather-layers" aria-hidden="true"></i> {% translate "Sistema de design" %}
           </a>
+          {% endif %}
         </div>
         {% include "components/language_selector.html" with selector_id="header" %}
         <!-- Notifications Bell -->

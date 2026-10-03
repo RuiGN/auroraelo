@@ -7,7 +7,7 @@ import logging
 import secrets
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
-from typing import Protocol
+from typing import NamedTuple, Protocol
 from uuid import UUID, uuid4
 
 from django.conf import settings
@@ -35,6 +35,7 @@ from clinics.selectors import (
     active_clinics_for_actor,
     active_clinics_with_role,
     active_web_clinics_for_actor,
+    memberships_visible_to,
 )
 from clinics.services import (
     CLINIC_SESSION_KEY,
@@ -444,10 +445,12 @@ def reset_password(*, uid: str, token: str, new_password: str) -> bool:
     affected_clinic_ids = active_clinic_ids_for_actor(user)
     changed_at = timezone.now()
     user.set_password(new_password)
+    user.must_change_password = False
     user.security_state_changed_at = changed_at
     user.save(
         update_fields=(
             "password",
+            "must_change_password",
             "credentials_changed_at",
             "security_state_changed_at",
         )
@@ -1037,6 +1040,196 @@ def reauthenticate_sensitive_action(*, actor: User, password: str) -> bool:
     return verified
 
 
+# ── Cadastro de usuários pelo administrador e senha provisória ──────────────
+
+TEAM_MEMBER_ROLES = ("clinic_admin", "therapist", "administrative_staff")
+
+_LOWER = "abcdefghijkmnpqrstuvwxyz"  # sem "l" e "o"
+_UPPER = "ABCDEFGHJKLMNPQRSTUVWXYZ"  # sem "I" e "O"
+_DIGITS = "23456789"  # sem "0" e "1"
+
+
+def generate_temporary_password() -> str:
+    """Return a random one-time password, easy to read aloud: ``Kp7m-Xw3r-Tn9v-Bc4z``.
+
+    Sixteen characters from an alphabet without look-alikes, with at least one lowercase
+    letter, one uppercase letter and one digit, drawn from the OS entropy source.
+    """
+    rng = secrets.SystemRandom()
+    chars = [secrets.choice(_LOWER), secrets.choice(_UPPER), secrets.choice(_DIGITS)]
+    pool = _LOWER + _UPPER + _DIGITS
+    chars += [secrets.choice(pool) for _ in range(13)]
+    rng.shuffle(chars)
+    raw = "".join(chars)
+    return "-".join(raw[index : index + 4] for index in range(0, 16, 4))
+
+
+class TeamMemberResult(NamedTuple):
+    """Outcome of registering a member; the password is shown once, never stored."""
+
+    user: User
+    temporary_password: str | None
+    created_identity: bool
+
+
+@transaction.atomic
+def create_team_member(
+    *,
+    clinic_id: UUID,
+    actor: User,
+    email: str,
+    first_name: str,
+    last_name: str,
+    role: str,
+    request_id: UUID,
+) -> TeamMemberResult:
+    """Register a team member: new identities get a generated temporary password.
+
+    The password is returned to the administrator once and the person must replace it
+    on the first access (`must_change_password`). An identity that already exists keeps
+    its own password and only receives the new clinic role.
+    """
+    _active_clinic_for_action(
+        clinic_id=clinic_id, actor=actor, action="invitation.issue"
+    )
+    if role not in TEAM_MEMBER_ROLES:
+        raise ValidationError(_("Escolha uma função da equipe."))
+    canonical = UserManager.canonical_email(email)
+    if not canonical:
+        raise ValidationError(_("Informe o e-mail da pessoa."))
+    existing = User.objects.select_for_update().filter(email=canonical).first()
+    if existing is not None:
+        if not existing.is_active:
+            raise ValidationError(
+                _("Esta conta está desativada e não pode ser vinculada.")
+            )
+        if clinic_id in active_clinic_ids_for_actor(existing):
+            raise ValidationError(_("Esta pessoa já tem vínculo ativo nesta clínica."))
+        create_clinic_membership(
+            clinic_id=clinic_id,
+            user_id=existing.pk,
+            role=role,
+            authorized_by_id=actor.pk,
+        )
+        _publish_account_audit(
+            clinic_id=clinic_id,
+            actor_id=actor.pk,
+            action="create",
+            resource_type="team_member",
+            resource_id=str(existing.pk),
+            request_id=request_id,
+        )
+        return TeamMemberResult(existing, None, False)
+
+    password = generate_temporary_password()
+    user = User.objects.create_user(
+        email=canonical,
+        password=password,
+        first_name=first_name.strip(),
+        last_name=last_name.strip(),
+        must_change_password=True,
+    )
+    create_clinic_membership(
+        clinic_id=clinic_id,
+        user_id=user.pk,
+        role=role,
+        authorized_by_id=actor.pk,
+    )
+    _publish_account_audit(
+        clinic_id=clinic_id,
+        actor_id=actor.pk,
+        action="create",
+        resource_type="team_member",
+        resource_id=str(user.pk),
+        request_id=request_id,
+    )
+    return TeamMemberResult(user, password, True)
+
+
+@transaction.atomic
+def reset_team_member_password(
+    *, clinic_id: UUID, actor: User, membership_id: UUID, request_id: UUID
+) -> TeamMemberResult:
+    """Generate a new temporary password for a member who belongs only to this clinic.
+
+    A person who also works elsewhere (or who is global staff) is refused: one clinic's
+    administrator must never be able to take over an identity another tenant relies on.
+    Sessions of the person end through the password hash and the flag forces the change.
+    """
+    clinic = _active_clinic_for_action(
+        clinic_id=clinic_id, actor=actor, action="membership.update"
+    )
+    membership = memberships_visible_to(actor, clinic).filter(pk=membership_id).first()
+    if membership is None:
+        raise PermissionDenied
+    target = User.objects.select_for_update().get(pk=membership.user_id)
+    if target.pk == actor.pk:
+        raise ValidationError(_("Use a troca de senha da própria conta."))
+    if target.is_staff or target.is_superuser:
+        raise ValidationError(_("Esta conta é da operação da plataforma."))
+    if set(active_clinic_ids_for_actor(target)) - {clinic_id}:
+        raise ValidationError(
+            _(
+                "Esta pessoa também atua em outra clínica: "
+                "ela deve usar “Esqueci minha senha”."
+            )
+        )
+    password = generate_temporary_password()
+    target.set_password(password)
+    target.must_change_password = True
+    target.security_state_changed_at = timezone.now()
+    target.save(
+        update_fields=(
+            "password",
+            "must_change_password",
+            "credentials_changed_at",
+            "security_state_changed_at",
+        )
+    )
+    _publish_account_audit(
+        clinic_id=clinic_id,
+        actor_id=actor.pk,
+        action="update",
+        resource_type="user_credential",
+        resource_id=str(target.pk),
+        request_id=request_id,
+    )
+    return TeamMemberResult(target, password, False)
+
+
+def change_required_password(
+    *, request: HttpRequest, user: User, current_password: str, new_password: str
+) -> None:
+    """Replace the temporary password on the first access and release the account.
+
+    The current (temporary) password is verified under the shared sensitive-action
+    throttle; the new one must pass the configured validators and differ from it.
+    """
+    if not reauthenticate_sensitive_action(actor=user, password=current_password):
+        raise ValidationError(_("A senha atual não confere."), code="current_password")
+    if user.check_password(new_password):
+        raise ValidationError(
+            _("A nova senha precisa ser diferente da senha provisória."),
+            code="same_password",
+        )
+    validate_password(new_password, user=user)
+    with transaction.atomic():
+        user.set_password(new_password)
+        user.must_change_password = False
+        user.save(
+            update_fields=("password", "must_change_password", "credentials_changed_at")
+        )
+    for clinic_id in active_clinic_ids_for_actor(user):
+        _publish_account_audit(
+            clinic_id=clinic_id,
+            actor_id=user.pk,
+            action="update",
+            resource_type="user_credential",
+            resource_id=str(user.pk),
+            request_id=_request_id(request),
+        )
+
+
 __all__ = [
     "GENERIC_LOGIN_ERROR",
     "GENERIC_RECOVERY_RESPONSE",
@@ -1050,7 +1243,12 @@ __all__ = [
     "User",
     "accept_invitation",
     "activate_patient_account",
+    "TEAM_MEMBER_ROLES",
+    "TeamMemberResult",
     "authenticate_identity",
+    "change_required_password",
+    "create_team_member",
+    "generate_temporary_password",
     "invitation_initial_role",
     "send_patient_activation_email",
     "invitation_clinic_id",
@@ -1060,6 +1258,7 @@ __all__ = [
     "password_reset_identity",
     "request_password_recovery",
     "reset_password",
+    "reset_team_member_password",
     "register_current_session",
     "reauthenticate_sensitive_action",
     "rotate_current_session_tracking",

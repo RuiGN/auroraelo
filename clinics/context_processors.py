@@ -7,6 +7,7 @@ from typing import Any, cast
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.http import HttpRequest
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 from .models import ClinicConfiguration
 from .policies import ClinicAuthorizationPolicy, has_active_clinic_role
@@ -29,6 +30,10 @@ def clinic_navigation(request: HttpRequest) -> dict[str, Any]:
             "can_manage_active_clinic": False,
             "is_therapist": False,
             "is_clinic_admin": False,
+            "is_administrative_staff": False,
+            "can_read_patients": False,
+            "can_use_clinical_modules": False,
+            "active_role_labels": [],
             "can_use_aftercare": False,
             "can_manage_aftercare_rules": False,
         }
@@ -40,6 +45,27 @@ def clinic_navigation(request: HttpRequest) -> dict[str, Any]:
     today = timezone.localdate()
     clinic_id = clinic_request.clinic.pk
     user_id = request.user.pk
+    is_admin = has_active_clinic_role(
+        clinic_id=clinic_id, user_id=user_id, role="clinic_admin", on_date=today
+    )
+    is_therapist = has_active_clinic_role(
+        clinic_id=clinic_id, user_id=user_id, role="therapist", on_date=today
+    )
+    is_staff_member = has_active_clinic_role(
+        clinic_id=clinic_id,
+        user_id=user_id,
+        role="administrative_staff",
+        on_date=today,
+    )
+    role_labels = [
+        label
+        for held, label in (
+            (is_admin, _("Administrador da clínica")),
+            (is_therapist, _("Terapeuta")),
+            (is_staff_member, _("Equipe administrativa")),
+        )
+        if held
+    ]
     return {
         "active_clinic": clinic_request.clinic,
         "active_clinic_branding": branding,
@@ -49,12 +75,16 @@ def clinic_navigation(request: HttpRequest) -> dict[str, Any]:
             clinic_request.clinic,
             "clinic.manage",
         ),
-        "is_therapist": has_active_clinic_role(
-            clinic_id=clinic_id, user_id=user_id, role="therapist", on_date=today
-        ),
-        "is_clinic_admin": has_active_clinic_role(
-            clinic_id=clinic_id, user_id=user_id, role="clinic_admin", on_date=today
-        ),
+        # O menu é montado pela função da pessoa na clínica ativa. É só conveniência: o
+        # servidor autoriza cada rota (docs/authorization-matrix.md).
+        "is_therapist": is_therapist,
+        "is_clinic_admin": is_admin,
+        "is_administrative_staff": is_staff_member,
+        # patient.demographics.read: administração, terapeuta e equipe administrativa.
+        "can_read_patients": is_admin or is_therapist or is_staff_member,
+        # patient.clinical.read é só do terapeuta (psiquiatria, painel profissional).
+        "can_use_clinical_modules": is_therapist,
+        "active_role_labels": role_labels,
         "can_use_aftercare": ClinicAuthorizationPolicy().is_allowed(
             request.user, clinic_request.clinic, "aftercare.read"
         ),

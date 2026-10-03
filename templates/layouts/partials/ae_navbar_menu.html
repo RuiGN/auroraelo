@@ -19,9 +19,11 @@
     </ul>
   </li>
   {% endif %}
+  {% if can_read_patients %}
   <li class="ae-nav__item">
     <a class="ae-nav__link{% if request.resolver_match.url_name == 'patient_list' %} is-active{% endif %}" href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a>
   </li>
+  {% endif %}
   <li class="ae-nav__item">
     <a class="ae-nav__link{% if 'appointment' in request.resolver_match.url_name %} is-active{% endif %}" href="{% url 'appointment_list' %}">{% translate "Agenda" %}</a>
   </li>

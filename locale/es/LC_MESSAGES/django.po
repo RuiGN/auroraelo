@@ -7822,3 +7822,109 @@ msgstr "Plan de cuidado"
 msgid "Diário compartilhado"
 msgstr "Diario compartido"
 
+msgid "Escolha uma função da equipe."
+msgstr "Elija una función del equipo."
+
+msgid "Informe o e-mail da pessoa."
+msgstr "Indique el correo electrónico de la persona."
+
+msgid "Esta conta está desativada e não pode ser vinculada."
+msgstr "Esta cuenta está desactivada y no puede vincularse."
+
+msgid "Esta pessoa já tem vínculo ativo nesta clínica."
+msgstr "Esta persona ya tiene un vínculo activo con esta clínica."
+
+msgid "Use a troca de senha da própria conta."
+msgstr "Use el cambio de contraseña de su propia cuenta."
+
+msgid "Esta conta é da operação da plataforma."
+msgstr "Esta cuenta pertenece a la operación de la plataforma."
+
+msgid "Esta pessoa também atua em outra clínica: ela deve usar “Esqueci minha senha”."
+msgstr "Esta persona también trabaja en otra clínica: debe usar «Olvidé mi contraseña»."
+
+msgid "A senha atual não confere."
+msgstr "La contraseña actual no coincide."
+
+msgid "A nova senha precisa ser diferente da senha provisória."
+msgstr "La nueva contraseña debe ser distinta de la contraseña provisional."
+
+msgid "É o usuário de acesso da pessoa."
+msgstr "Es el usuario de acceso de la persona."
+
+msgid "Define o que a pessoa enxerga e pode fazer no sistema."
+msgstr "Define lo que la persona ve y puede hacer en el sistema."
+
+msgid "Função"
+msgstr "Función"
+
+msgid "Senha provisória"
+msgstr "Contraseña provisional"
+
+msgid "A senha que você recebeu"
+msgstr "La contraseña que recibió"
+
+msgid "Troque sua senha"
+msgstr "Cambie su contraseña"
+
+msgid "Por segurança, a senha que você recebeu vale só para o primeiro acesso. Crie uma senha que apenas você conheça."
+msgstr "Por seguridad, la contraseña que recibió vale solo para el primer acceso. Cree una contraseña que solo usted conozca."
+
+msgid "Cadastrar usuário"
+msgstr "Registrar usuario"
+
+msgid "O sistema gera uma senha provisória, mostrada uma única vez. A pessoa a troca no primeiro acesso."
+msgstr "El sistema genera una contraseña provisional, que se muestra una sola vez. La persona la cambia en el primer acceso."
+
+msgid "Cadastrar e gerar senha"
+msgstr "Registrar y generar contraseña"
+
+msgid "Nova senha provisória"
+msgstr "Nueva contraseña provisional"
+
+msgid "Usuário cadastrado"
+msgstr "Usuario registrado"
+
+msgid "Vínculo criado"
+msgstr "Vínculo creado"
+
+msgid "Esta senha aparece uma única vez e não fica guardada em lugar nenhum. Entregue-a à pessoa por um canal seguro. No primeiro acesso, o sistema pede que ela crie a própria senha."
+msgstr "Esta contraseña aparece una sola vez y no se guarda en ningún lugar. Entréguela a la persona por un canal seguro. En el primer acceso, el sistema le pide que cree su propia contraseña."
+
+msgid "Usuário de acesso: o e-mail cadastrado."
+msgstr "Usuario de acceso: el correo electrónico registrado."
+
+msgid "A pessoa já tem conta"
+msgstr "La persona ya tiene cuenta"
+
+msgid "Esta pessoa já tinha uma conta e continua com a própria senha. Ela passa a ver o sistema de acordo com a nova função."
+msgstr "Esta persona ya tenía una cuenta y conserva su propia contraseña. Ahora ve el sistema según la nueva función."
+
+msgid "Voltar à equipe"
+msgstr "Volver al equipo"
+
+msgid "Cadastrar outra pessoa"
+msgstr "Registrar otra persona"
+
+msgid "Primeiro acesso pendente"
+msgstr "Primer acceso pendiente"
+
+msgid "Gerar uma nova senha provisória? A senha atual deixa de valer e a pessoa será desconectada."
+msgstr "¿Generar una nueva contraseña provisional? La contraseña actual deja de valer y la persona será desconectada."
+
+msgid "Redefinir senha"
+msgstr "Restablecer contraseña"
+
+msgid "Minha conta"
+msgstr "Mi cuenta"
+
+msgid "Acompanhe altas, contatos e pedidos dos pacientes."
+msgstr "Siga las altas, los contactos y las solicitudes de los pacientes."
+
+msgid "Cadastre pessoas, defina a função e redefina senhas."
+msgstr "Registre personas, defina la función y restablezca contraseñas."
+
+#, python-format
+msgid "Sua função: %(roles)s."
+msgstr "Su función: %(roles)s."
+

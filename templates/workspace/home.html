@@ -13,14 +13,21 @@
   <h1 id="workspace-title" class="h3 mb-2">{% blocktranslate with name=user.first_name|default:welcome_fallback %}Olá, {{ name }}.{% endblocktranslate %}</h1>
   <p class="text-body-secondary mb-2">{% blocktranslate with clinic_name=active_clinic.name %}Acesse seus recursos em {{ clinic_name }}.{% endblocktranslate %}</p>
   <p class="fs-13 text-muted mb-3">{% translate "Apoio à recuperação relacionada ao álcool, outras substâncias e jogos." %}</p>
+  {% if active_role_labels %}<p class="fs-13 text-muted mb-3">{% blocktranslate with roles=active_role_labels|join:", " %}Sua função: {{ roles }}.{% endblocktranslate %}</p>{% endif %}
+  {% if can_use_clinical_modules or user.is_staff or user.is_superuser %}
   <div class="d-flex flex-wrap gap-2">
+    {% if can_use_clinical_modules %}
     <a class="btn btn-primary" href="{% url 'psychiatry:dashboard' %}">
       <i class="feather-activity me-1" aria-hidden="true"></i>{% translate "Portal de psiquiatria" %}
     </a>
+    {% endif %}
+    {% if user.is_staff or user.is_superuser %}
     <a class="btn btn-outline-primary" href="{% url 'design_system_reference' %}">
       <i class="feather-layers me-1" aria-hidden="true"></i>{% translate "Sistema de design" %}
     </a>
+    {% endif %}
   </div>
+  {% endif %}
 </section>
 
 <!-- Standard Workspace Shortcuts (Contractually tested) -->
@@ -35,9 +42,17 @@
       {% translate "Painel operacional" as shortcut_label %}{% translate "Consulte os indicadores da clínica ativa." as shortcut_description %}
       {% include "workspace/shortcut.html" with route="clinic_panel" icon="feather-bar-chart-2" label=shortcut_label description=shortcut_description only %}
     {% endif %}
-    {% if can_manage_active_clinic %}
+    {% if can_read_patients %}
       {% translate "Pacientes" as shortcut_label %}{% translate "Consulte e organize os cadastros da clínica." as shortcut_description %}
       {% include "workspace/shortcut.html" with route="patient_list" icon="feather-users" label=shortcut_label description=shortcut_description only %}
+    {% endif %}
+    {% if can_use_aftercare %}
+      {% translate "Pós-alta e concierge" as shortcut_label %}{% translate "Acompanhe altas, contatos e pedidos dos pacientes." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="concierge:dashboard" icon="feather-phone-call" label=shortcut_label description=shortcut_description only %}
+    {% endif %}
+    {% if is_clinic_admin %}
+      {% translate "Usuários e equipe" as shortcut_label %}{% translate "Cadastre pessoas, defina a função e redefina senhas." as shortcut_description %}
+      {% include "workspace/shortcut.html" with route="team_list" icon="feather-user-plus" label=shortcut_label description=shortcut_description only %}
       {% translate "Configurar clínica" as shortcut_label %}{% translate "Revise os dados e a identidade da sua clínica." as shortcut_description %}
       {% include "workspace/shortcut.html" with route="clinic_setup" icon="feather-settings" label=shortcut_label description=shortcut_description only %}
     {% endif %}

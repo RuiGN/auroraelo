@@ -7792,3 +7792,109 @@ msgstr "Care plan"
 msgid "Diário compartilhado"
 msgstr "Shared diary"
 
+msgid "Escolha uma função da equipe."
+msgstr "Choose a team role."
+
+msgid "Informe o e-mail da pessoa."
+msgstr "Enter the person's e-mail."
+
+msgid "Esta conta está desativada e não pode ser vinculada."
+msgstr "This account is deactivated and cannot be linked."
+
+msgid "Esta pessoa já tem vínculo ativo nesta clínica."
+msgstr "This person already has an active link to this clinic."
+
+msgid "Use a troca de senha da própria conta."
+msgstr "Use the password change of your own account."
+
+msgid "Esta conta é da operação da plataforma."
+msgstr "This account belongs to the platform operation."
+
+msgid "Esta pessoa também atua em outra clínica: ela deve usar “Esqueci minha senha”."
+msgstr "This person also works at another clinic: they must use “Forgot my password”."
+
+msgid "A senha atual não confere."
+msgstr "The current password does not match."
+
+msgid "A nova senha precisa ser diferente da senha provisória."
+msgstr "The new password must be different from the temporary password."
+
+msgid "É o usuário de acesso da pessoa."
+msgstr "This is the person's sign-in username."
+
+msgid "Define o que a pessoa enxerga e pode fazer no sistema."
+msgstr "Defines what the person sees and can do in the system."
+
+msgid "Função"
+msgstr "Role"
+
+msgid "Senha provisória"
+msgstr "Temporary password"
+
+msgid "A senha que você recebeu"
+msgstr "The password you received"
+
+msgid "Troque sua senha"
+msgstr "Change your password"
+
+msgid "Por segurança, a senha que você recebeu vale só para o primeiro acesso. Crie uma senha que apenas você conheça."
+msgstr "For security, the password you received is valid only for your first access. Create a password only you know."
+
+msgid "Cadastrar usuário"
+msgstr "Register user"
+
+msgid "O sistema gera uma senha provisória, mostrada uma única vez. A pessoa a troca no primeiro acesso."
+msgstr "The system generates a temporary password, shown only once. The person replaces it on the first access."
+
+msgid "Cadastrar e gerar senha"
+msgstr "Register and generate password"
+
+msgid "Nova senha provisória"
+msgstr "New temporary password"
+
+msgid "Usuário cadastrado"
+msgstr "User registered"
+
+msgid "Vínculo criado"
+msgstr "Link created"
+
+msgid "Esta senha aparece uma única vez e não fica guardada em lugar nenhum. Entregue-a à pessoa por um canal seguro. No primeiro acesso, o sistema pede que ela crie a própria senha."
+msgstr "This password appears only once and is not stored anywhere. Hand it to the person through a secure channel. On the first access, the system asks them to create their own password."
+
+msgid "Usuário de acesso: o e-mail cadastrado."
+msgstr "Sign-in username: the registered e-mail."
+
+msgid "A pessoa já tem conta"
+msgstr "The person already has an account"
+
+msgid "Esta pessoa já tinha uma conta e continua com a própria senha. Ela passa a ver o sistema de acordo com a nova função."
+msgstr "This person already had an account and keeps their own password. They now see the system according to the new role."
+
+msgid "Voltar à equipe"
+msgstr "Back to the team"
+
+msgid "Cadastrar outra pessoa"
+msgstr "Register another person"
+
+msgid "Primeiro acesso pendente"
+msgstr "First access pending"
+
+msgid "Gerar uma nova senha provisória? A senha atual deixa de valer e a pessoa será desconectada."
+msgstr "Generate a new temporary password? The current password stops working and the person will be signed out."
+
+msgid "Redefinir senha"
+msgstr "Reset password"
+
+msgid "Minha conta"
+msgstr "My account"
+
+msgid "Acompanhe altas, contatos e pedidos dos pacientes."
+msgstr "Follow discharges, contacts and patient requests."
+
+msgid "Cadastre pessoas, defina a função e redefina senhas."
+msgstr "Register people, set their role and reset passwords."
+
+#, python-format
+msgid "Sua função: %(roles)s."
+msgstr "Your role: %(roles)s."
+

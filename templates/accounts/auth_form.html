@@ -13,12 +13,6 @@
     <p class="aurora-auth-identity mt-2 mb-0">{% translate "Álcool, outras substâncias e jogos: cada trajetória merece cuidado e respeito." %}</p>
   </div>
 
-  <div class="aurora-auth-roles mb-3" role="group" aria-label="{% translate 'Perfil de acesso' %}">
-    <button type="button" class="aurora-role-tab is-active" data-role-tab data-role-placeholder="{% translate 'seu e-mail profissional' %}">{% translate "Médico / Psi" %}</button>
-    <button type="button" class="aurora-role-tab" data-role-tab data-role-placeholder="{% translate 'seu CPF ou e-mail' %}">{% translate "Paciente" %}</button>
-    <button type="button" class="aurora-role-tab" data-role-tab data-role-placeholder="{% translate 'sua matrícula ou e-mail' %}">{% translate "Recepção" %}</button>
-  </div>
-
   <form method="post" novalidate data-form-guard>
     {% csrf_token %}
     {% if form.non_field_errors %}

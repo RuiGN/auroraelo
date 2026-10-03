@@ -7,7 +7,7 @@ from typing import cast
 
 from django.conf import settings
 from django.contrib.auth import logout
-from django.http import HttpRequest
+from django.http import HttpRequest, JsonResponse
 from django.http.response import HttpResponseBase, StreamingHttpResponse
 from django.shortcuts import redirect
 from django.utils import translation
@@ -34,6 +34,46 @@ class AccountSecurityMiddleware:
         account_session = register_current_session(request=request, user=actor)
         request.account_session = account_session  # type: ignore[attr-defined]
         return self.get_response(request)
+
+
+# Caminhos que continuam abertos para quem ainda precisa trocar a senha provisória.
+PASSWORD_CHANGE_EXEMPT_PREFIXES = (
+    "/accounts/password-change/",
+    "/accounts/logout/",
+    "/accounts/language/",
+    "/static/",
+    "/health/",
+)
+
+
+class RequirePasswordChangeMiddleware:
+    """Hold a person with a generated password on the change page until they replace it.
+
+    Runs after the session checks, so only a valid authenticated session reaches it. API
+    calls get a 403 with a stable code instead of a redirect.
+    """
+
+    def __init__(self, get_response: Callable[[HttpRequest], HttpResponseBase]) -> None:
+        self.get_response = get_response
+
+    def __call__(self, request: HttpRequest) -> HttpResponseBase:
+        user = request.user if isinstance(request.user, User) else None
+        if (
+            user is None
+            or not user.is_authenticated
+            or not user.must_change_password
+            or request.path.startswith(PASSWORD_CHANGE_EXEMPT_PREFIXES)
+        ):
+            return self.get_response(request)
+        if request.path.startswith("/api/"):
+            return JsonResponse(
+                {
+                    "detail": "Troque a senha provisória antes de continuar.",
+                    "code": "password_change_required",
+                },
+                status=403,
+            )
+        return redirect("password_change_required")
 
 
 def _restore_language(language: str | None) -> None:

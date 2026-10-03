@@ -205,6 +205,8 @@
     "mobile_api/views.py",
     "templates/mobile_api/confirm.html",
     "templates/mobile_api/invitation_issued.html",
-    "templates/mobile_api/patient_app.html"
+    "templates/mobile_api/patient_app.html",
+    "templates/accounts/team_member_form.html",
+    "templates/accounts/team_member_credentials.html"
   ]
 }

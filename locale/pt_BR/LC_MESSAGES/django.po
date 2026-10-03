@@ -7797,3 +7797,109 @@ msgstr "Plano de cuidado"
 msgid "Diário compartilhado"
 msgstr "Diário compartilhado"
 
+msgid "Escolha uma função da equipe."
+msgstr "Escolha uma função da equipe."
+
+msgid "Informe o e-mail da pessoa."
+msgstr "Informe o e-mail da pessoa."
+
+msgid "Esta conta está desativada e não pode ser vinculada."
+msgstr "Esta conta está desativada e não pode ser vinculada."
+
+msgid "Esta pessoa já tem vínculo ativo nesta clínica."
+msgstr "Esta pessoa já tem vínculo ativo nesta clínica."
+
+msgid "Use a troca de senha da própria conta."
+msgstr "Use a troca de senha da própria conta."
+
+msgid "Esta conta é da operação da plataforma."
+msgstr "Esta conta é da operação da plataforma."
+
+msgid "Esta pessoa também atua em outra clínica: ela deve usar “Esqueci minha senha”."
+msgstr "Esta pessoa também atua em outra clínica: ela deve usar “Esqueci minha senha”."
+
+msgid "A senha atual não confere."
+msgstr "A senha atual não confere."
+
+msgid "A nova senha precisa ser diferente da senha provisória."
+msgstr "A nova senha precisa ser diferente da senha provisória."
+
+msgid "É o usuário de acesso da pessoa."
+msgstr "É o usuário de acesso da pessoa."
+
+msgid "Define o que a pessoa enxerga e pode fazer no sistema."
+msgstr "Define o que a pessoa enxerga e pode fazer no sistema."
+
+msgid "Função"
+msgstr "Função"
+
+msgid "Senha provisória"
+msgstr "Senha provisória"
+
+msgid "A senha que você recebeu"
+msgstr "A senha que você recebeu"
+
+msgid "Troque sua senha"
+msgstr "Troque sua senha"
+
+msgid "Por segurança, a senha que você recebeu vale só para o primeiro acesso. Crie uma senha que apenas você conheça."
+msgstr "Por segurança, a senha que você recebeu vale só para o primeiro acesso. Crie uma senha que apenas você conheça."
+
+msgid "Cadastrar usuário"
+msgstr "Cadastrar usuário"
+
+msgid "O sistema gera uma senha provisória, mostrada uma única vez. A pessoa a troca no primeiro acesso."
+msgstr "O sistema gera uma senha provisória, mostrada uma única vez. A pessoa a troca no primeiro acesso."
+
+msgid "Cadastrar e gerar senha"
+msgstr "Cadastrar e gerar senha"
+
+msgid "Nova senha provisória"
+msgstr "Nova senha provisória"
+
+msgid "Usuário cadastrado"
+msgstr "Usuário cadastrado"
+
+msgid "Vínculo criado"
+msgstr "Vínculo criado"
+
+msgid "Esta senha aparece uma única vez e não fica guardada em lugar nenhum. Entregue-a à pessoa por um canal seguro. No primeiro acesso, o sistema pede que ela crie a própria senha."
+msgstr "Esta senha aparece uma única vez e não fica guardada em lugar nenhum. Entregue-a à pessoa por um canal seguro. No primeiro acesso, o sistema pede que ela crie a própria senha."
+
+msgid "Usuário de acesso: o e-mail cadastrado."
+msgstr "Usuário de acesso: o e-mail cadastrado."
+
+msgid "A pessoa já tem conta"
+msgstr "A pessoa já tem conta"
+
+msgid "Esta pessoa já tinha uma conta e continua com a própria senha. Ela passa a ver o sistema de acordo com a nova função."
+msgstr "Esta pessoa já tinha uma conta e continua com a própria senha. Ela passa a ver o sistema de acordo com a nova função."
+
+msgid "Voltar à equipe"
+msgstr "Voltar à equipe"
+
+msgid "Cadastrar outra pessoa"
+msgstr "Cadastrar outra pessoa"
+
+msgid "Primeiro acesso pendente"
+msgstr "Primeiro acesso pendente"
+
+msgid "Gerar uma nova senha provisória? A senha atual deixa de valer e a pessoa será desconectada."
+msgstr "Gerar uma nova senha provisória? A senha atual deixa de valer e a pessoa será desconectada."
+
+msgid "Redefinir senha"
+msgstr "Redefinir senha"
+
+msgid "Minha conta"
+msgstr "Minha conta"
+
+msgid "Acompanhe altas, contatos e pedidos dos pacientes."
+msgstr "Acompanhe altas, contatos e pedidos dos pacientes."
+
+msgid "Cadastre pessoas, defina a função e redefina senhas."
+msgstr "Cadastre pessoas, defina a função e redefina senhas."
+
+#, python-format
+msgid "Sua função: %(roles)s."
+msgstr "Sua função: %(roles)s."
+

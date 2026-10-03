@@ -5,6 +5,8 @@ from django.urls import path
 from .language_views import account_set_language
 from .team_views import (
     team_list,
+    team_member_create,
+    team_member_reset_password,
     team_resend_invitation,
     team_revoke_invitation,
     team_set_active,
@@ -16,6 +18,7 @@ from .views import (
     invitation_accept,
     invitation_issue,
     invitation_revoke,
+    password_change_required,
     password_recovery,
     password_reset,
     password_reset_complete,
@@ -26,6 +29,17 @@ urlpatterns = [
     path("login/", account_login, name="account_login"),
     path("logout/", account_logout, name="account_logout"),
     path("team/", team_list, name="team_list"),
+    path("team/new/", team_member_create, name="team_member_create"),
+    path(
+        "team/<uuid:membership_id>/reset-password/",
+        team_member_reset_password,
+        name="team_member_reset_password",
+    ),
+    path(
+        "password-change/",
+        password_change_required,
+        name="password_change_required",
+    ),
     path(
         "team/<uuid:membership_id>/active/",
         team_set_active,

@@ -126,7 +126,14 @@ def test_preference_migration_leaves_existing_users_without_explicit_choice() ->
         executor = MigrationExecutor(connection)
         executor.migrate([("accounts", "0007_user_preferred_language")])
 
-        assert User.objects.get(pk=old_user.pk).preferred_language == ""
+        # Lê pelo modelo histórico: o modelo atual tem colunas de migrações posteriores.
+        migrated_apps = executor.loader.project_state(
+            [("accounts", "0007_user_preferred_language")]
+        ).apps
+        migrated = migrated_apps.get_model("accounts", "User").objects.get(
+            pk=old_user.pk
+        )
+        assert migrated.preferred_language == ""
     finally:
         # A historical state can contain retired tables unknown to Django's flush.
         MigrationExecutor(connection).migrate(latest_targets)

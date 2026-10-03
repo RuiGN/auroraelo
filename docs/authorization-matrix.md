@@ -31,6 +31,42 @@ All decisions are evaluated on the backend and default to denial.
 6. Altering a URL or UUID cannot move authorization to another tenant or bypass the relationship requirement.
 7. Interface visibility is not an authorization control. Services, selectors and policies enforce the same decision on the server.
 
+## Login, cadastro de usuários e primeiro acesso (web da equipe)
+
+- **Login único.** `/accounts/login/` é a única entrada: e-mail (o usuário de acesso) e
+  senha, sem abas nem escolha de perfil. O sistema decide o que mostrar pela função da
+  pessoa na clínica ativa. Paciente não entra no web (usa o aplicativo).
+- **Quem cadastra.** Só o administrador da clínica (`invitation.issue`) cadastra pessoas em
+  *Usuários e equipe → Cadastrar usuário*: nome, e-mail e função (administrador, terapeuta
+  ou equipe administrativa). Paciente não é cadastrado por aqui.
+- **Senha gerada pelo sistema.** O cadastro cria a identidade com uma senha aleatória
+  (`Kp7m-Xw3r-Tn9v-Bc4z`, 16 caracteres sem look-alikes, entropia do sistema operacional),
+  mostrada **uma única vez** ao administrador (`Cache-Control: no-store`), nunca gravada em
+  claro, nem enviada por e-mail, nem registrada em auditoria. A pessoa a recebe do
+  administrador por um canal seguro.
+- **Troca obrigatória.** A identidade nasce com `must_change_password`. Até trocar a senha,
+  toda página redireciona para `/accounts/password-change/` (APIs respondem 403
+  `password_change_required`); só a troca, o idioma e o logout ficam abertos. A troca exige
+  a senha provisória (com o mesmo limite de tentativas das ações sensíveis), uma nova senha
+  diferente e válida e mantém a sessão atual. Recuperar a senha por e-mail também libera.
+- **Redefinição pelo administrador.** *Redefinir senha* gera outra senha provisória e
+  encerra as sessões da pessoa. É recusada para si mesmo, para conta da plataforma e para
+  quem também atua em outra clínica (essa pessoa usa "Esqueci minha senha").
+- **Quem vê o quê.** O menu, os atalhos e o cabeçalho seguem a função:
+
+| Seção | Administrador | Terapeuta | Equipe administrativa |
+|---|:-:|:-:|:-:|
+| Gestão da clínica (configurar, profissionais, usuários e equipe, serviços, horários, recursos de crise, painel operacional) | Sim | — | — |
+| Pacientes | Sim | Sim | Sim |
+| Pós-alta e concierge | Sim | — | Sim |
+| Agenda de consultas | Sim | Sim | Sim |
+| Painel profissional e psiquiatria/recuperação (telepsiquiatria) | — | Sim | — |
+| Segurança da conta | Sim | Sim | Sim |
+| Sistema de design | só operação da plataforma | — | — |
+
+  A visibilidade é conveniência (`clinics/context_processors.py`); a autorização continua
+  sendo decidida no servidor, como acima.
+
 ## Patient app (token) access
 
 The post-discharge patient app does not use the matrix above: it holds no clinic role other

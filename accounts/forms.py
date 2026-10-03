@@ -11,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from clinics.services import membership_role_choices
 
+from .services import TEAM_MEMBER_ROLES
+
 _MEMBERSHIP_ROLE_UI_LABELS = {
     "clinic_admin": _("Administrador da clínica"),
     "therapist": _("Terapeuta"),
@@ -170,5 +172,72 @@ class InvitationAcceptanceForm(forms.Form):
         password = cleaned.get("password")
         confirmation = cleaned.get("confirm_password")
         if password and confirmation and password != confirmation:
+            self.add_error("confirm_password", _("As senhas informadas não coincidem."))
+        return cleaned
+
+
+class TeamMemberForm(forms.Form):
+    """Register a team member; the system generates the first password."""
+
+    first_name = forms.CharField(label=_("Nome"), max_length=150)
+    last_name = forms.CharField(label=_("Sobrenome"), max_length=150)
+    email = forms.EmailField(
+        label=_("E-mail"),
+        help_text=_("É o usuário de acesso da pessoa."),
+        widget=forms.EmailInput(
+            attrs={"autocomplete": "off", "inputmode": "email"},
+        ),
+    )
+    role = forms.ChoiceField(
+        label=_("Função"),
+        help_text=_("Define o que a pessoa enxerga e pode fazer no sistema."),
+        choices=tuple(
+            (value, label)
+            for value, label in translated_membership_role_choices()
+            if value in TEAM_MEMBER_ROLES
+        ),
+    )
+
+
+class RequiredPasswordChangeForm(forms.Form):
+    """Replace the generated password on the first access."""
+
+    current_password = forms.CharField(
+        label=_("Senha provisória"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "autocomplete": "current-password",
+                "placeholder": _("A senha que você recebeu"),
+            }
+        ),
+    )
+    new_password = forms.CharField(
+        label=_("Nova senha"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "autocomplete": "new-password",
+                "placeholder": _("Crie uma senha forte"),
+            }
+        ),
+    )
+    confirm_password = forms.CharField(
+        label=_("Confirme a nova senha"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "autocomplete": "new-password",
+                "placeholder": _("Repita a nova senha"),
+            }
+        ),
+    )
+
+    def clean(self) -> dict[str, Any]:
+        """Require matching passwords; strength is validated by the service."""
+        cleaned: dict[str, Any] = super().clean() or {}
+        new = cleaned.get("new_password")
+        confirmation = cleaned.get("confirm_password")
+        if new and confirmation and new != confirmation:
             self.add_error("confirm_password", _("As senhas informadas não coincidem."))
         return cleaned

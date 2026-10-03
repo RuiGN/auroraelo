@@ -149,6 +149,7 @@ MIDDLEWARE = [
     "clinics.middleware.ClinicTenantMiddleware",
     "master_panel.middleware.PaymentRequiredMiddleware",
     "accounts.middleware.AccountSecurityMiddleware",
+    "accounts.middleware.RequirePasswordChangeMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]

@@ -15,14 +15,22 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
 from accounts.forms import (
+    TeamMemberForm,
     translated_membership_role_choices,
     translated_membership_role_label,
 )
 from accounts.models import ClinicInvitation, ClinicInvitationQuerySet, User
-from accounts.services import IssuedInvitation, resend_invitation, revoke_invitation
+from accounts.services import (
+    IssuedInvitation,
+    TeamMemberResult,
+    create_team_member,
+    resend_invitation,
+    reset_team_member_password,
+    revoke_invitation,
+)
 from clinics.selectors import memberships_visible_to
 from clinics.services import (
     CLINIC_SESSION_KEY,
@@ -186,3 +194,72 @@ def team_resend_invitation(request: HttpRequest, invitation_id: UUID) -> HttpRes
     _email_invitation_link(request, issued)
     messages.success(request, _("Convite reenviado."))
     return redirect("team_list")
+
+
+def _credentials_response(
+    request: HttpRequest, clinic: Clinic, result: TeamMemberResult, *, reset: bool
+) -> HttpResponse:
+    """Show the generated password once: never stored, logged or put in a redirect."""
+    response = render(
+        request,
+        "accounts/team_member_credentials.html",
+        {
+            "page_title": _("Senha provisória"),
+            "clinic": clinic,
+            "member": result.user,
+            "temporary_password": result.temporary_password,
+            "created_identity": result.created_identity,
+            "reset": reset,
+        },
+    )
+    response["Cache-Control"] = "private, no-store"
+    response["Pragma"] = "no-cache"
+    return response
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def team_member_create(request: HttpRequest) -> HttpResponse:
+    """The administrator registers a person; the system generates the first password."""
+    actor, clinic = _clinic_for_team(request)
+    form = TeamMemberForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        try:
+            result = create_team_member(
+                clinic_id=clinic.pk,
+                actor=actor,
+                email=form.cleaned_data["email"],
+                first_name=form.cleaned_data["first_name"],
+                last_name=form.cleaned_data["last_name"],
+                role=form.cleaned_data["role"],
+                request_id=uuid4(),
+            )
+        except ValidationError as error:
+            form.add_error(None, error)
+        else:
+            return _credentials_response(request, clinic, result, reset=False)
+    return render(
+        request,
+        "accounts/team_member_form.html",
+        {"page_title": _("Cadastrar usuário"), "clinic": clinic, "form": form},
+    )
+
+
+@login_required
+@require_POST
+def team_member_reset_password(
+    request: HttpRequest, membership_id: UUID
+) -> HttpResponse:
+    """Generate a new temporary password for one member of the clinic."""
+    actor, clinic = _clinic_for_team(request)
+    try:
+        result = reset_team_member_password(
+            clinic_id=clinic.pk,
+            actor=actor,
+            membership_id=membership_id,
+            request_id=uuid4(),
+        )
+    except ValidationError as error:
+        messages.error(request, "; ".join(error.messages))
+        return redirect("team_list")
+    return _credentials_response(request, clinic, result, reset=True)

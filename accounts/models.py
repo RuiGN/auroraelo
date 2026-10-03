@@ -116,6 +116,9 @@ class User(AbstractUser):
     )
     security_state_changed_at = models.DateTimeField(default=timezone.now)
     credentials_changed_at = models.DateTimeField(default=timezone.now)
+    # Senha gerada pelo sistema (cadastro ou redefinição pelo administrador): a pessoa
+    # só usa o sistema depois de trocá-la no primeiro acesso.
+    must_change_password = models.BooleanField(default=False)
 
     objects = UserManager()  # type: ignore[misc,assignment]
 
