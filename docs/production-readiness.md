@@ -1,6 +1,19 @@
 # Prontidão para produção — Aurora Elo (web da equipe + app Pós-Alta)
 
-Estado em 2026-10-02. Nada foi publicado, commitado nem implantado nesta rodada.
+Estado em 2026-10-03. O repositório (`origin/gemini`, `9915b34`) contém apenas esta linha
+de trabalho (a outra linha — ativação por PIN, PWA da equipe — ficou no histórico, como
+segundo pai do commit de mesclagem) e **a VPS roda esse commit** desde 2026-10-03 02:23 UTC.
+
+## Entrada no web da equipe
+
+- **Login único** (sem abas): e-mail + senha, para todas as funções. Depois de entrar, o
+  sistema monta menu e início conforme a função (gestor, terapeuta, administrativo).
+- **O gestor cadastra os usuários** em *Usuários e equipe → Cadastrar usuário*. O sistema
+  gera uma senha aleatória (16 caracteres, ex.: `Kp7m-Xw3r-Tn9v-Bc4z`) e a mostra uma única
+  vez, sem cache; o gestor repassa por canal seguro. Há "Redefinir senha" por pessoa.
+- **Troca obrigatória no primeiro acesso:** enquanto `must_change_password` for verdadeiro,
+  todo caminho (exceto trocar senha e sair) redireciona para a tela de troca.
+- Matriz de funções e menus: `docs/authorization-matrix.md`.
 
 ## Modelo do produto
 
@@ -16,7 +29,8 @@ Estado em 2026-10-02. Nada foi publicado, commitado nem implantado nesta rodada.
 | Área | Estado | Evidência |
 |---|---|---|
 | Web só da equipe (paciente barrado, telas de paciente removidas) | pronto | `tests/test_patient_web_boundary.py` |
-| API do paciente (59 operações, sessão por token, posse por perfil) | pronta | suíte do web: 3111 passam |
+| Login único, cadastro com senha gerada, troca no primeiro acesso, menus por função | pronto, **em produção** | `tests/test_team_registration.py` (25 testes) |
+| API do paciente (59 operações, sessão por token, posse por perfil) | pronta | suíte do web: 3137 passam |
 | Ativação e recuperação de senha pelo app (código + link) | pronta | `tests/test_mobile_api_accounts.py` |
 | Telas da equipe: medicação, plano de cuidado, hábitos | prontas | `tests/test_routines_staff_*.py` |
 | Telas da equipe: serviços, horários de atendimento, recursos de crise | prontas | `tests/test_clinic_setup_staff_views.py` |
@@ -45,8 +59,10 @@ de revisão da matriz regulatória (`docs/compliance/cfp-crp02-matrix.json`) ven
    rodá-lo contra um ambiente remoto de teste (rede, TLS, SMTP do provedor).
 2. **Nada rodou em aparelho real:** Keychain/Keystore (`expo-secure-store`), links
    `auroraelo-posalta://`, VoiceOver/TalkBack, texto ampliado, teclado, modo escuro.
-3. **E-mail:** convite e recuperação de senha dependem de SMTP. As variáveis `MAILER_*`
-   existem, mas não foi confirmado que o `.env` da VPS as define.
+3. **E-mail:** convite do paciente e recuperação de senha dependem de SMTP. **O `.env` da
+   VPS não define `MAILER_*`** (conferido em 2026-10-03): o cadastro de usuários da equipe
+   funciona sem e-mail (a senha aparece na tela), mas "esqueci a senha" e o convite do app
+   não chegam enquanto o SMTP não for configurado.
 4. **Revisão clínica** das telas de prescrição, plano de cuidado e textos do app
    (linguagem, avisos, limites do serviço) por profissional habilitado.
 5. **Traduções en/es** foram feitas sem revisão humana.
