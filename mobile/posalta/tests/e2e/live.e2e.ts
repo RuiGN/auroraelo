@@ -22,7 +22,12 @@ import { combineDateTime, addDays, toISODate } from "../../src/domain/logic";
 const BASE = process.env.E2E_BASE_URL ?? "http://127.0.0.1:8765";
 const OUT = process.env.E2E_OUT as string;
 const PROJECT = process.env.E2E_PROJECT as string;
-const PASSWORD = "E2e-Senha-Sintetica-2026!"; // credencial sintética do banco descartável
+// Senhas sintéticas do banco descartável, geradas a cada execução (nada fixo no repositório).
+const synthetic = (label: string) =>
+  [label, require("crypto").randomBytes(9).toString("base64url"), "Aa1!"].join(
+    "-",
+  );
+const PASSWORD = synthetic("E2e");
 
 const seed = JSON.parse(fs.readFileSync(`${OUT}/seed.json`, "utf8"));
 const MAIL = process.env.E2E_MAIL; // arquivo do servidor SMTP de captura (opcional)
@@ -600,7 +605,7 @@ describe("roteiro ponta a ponta contra o servidor real", () => {
           { auth: false, parse: parseTokens },
         );
       const old = await login(PASSWORD);
-      const NEW_PASSWORD = "E2e-Outra-Senha-Sintetica-2027!";
+      const NEW_PASSWORD = synthetic("E2eNova");
       await anonymous.post(
         "/mobile/auth/password-reset/",
         { code: reset![1], new_password: NEW_PASSWORD },
