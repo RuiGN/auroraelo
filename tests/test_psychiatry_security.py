@@ -71,158 +71,10 @@ def test_profile_scopes_require_care_relationship(identities):
     ]
 
 
-@pytest.mark.parametrize(
-    "view", [api.b2c_mood, api.b2c_cbt_diary, api.b2c_subscription_status]
-)
-def test_b2c_rejects_external_identity(identities, view):
-    actor = identities[2]["patient"]
-    response = request_for(view, actor=actor, method="post", data={"user_id": "victim"})
-    assert response.status_code == 400
-
-
-@pytest.mark.parametrize("view", [api.b2c_mood, api.b2c_cbt_diary])
-def test_b2c_history_has_no_demo_or_legacy_identity_fallback(identities, view):
-    from psychiatry.models import B2CCBTDiary, B2CMindLog
-
-    actor = identities[2]["patient"]
-    B2CMindLog.objects.create(user_identifier=str(actor.pk))
-    B2CCBTDiary.objects.create(user_identifier=str(actor.pk))
-    response = request_for(view, actor=actor)
-    data = json.loads(response.content)
-    assert data.get("history", data.get("entries")) == []
-
-
-def test_b2c_writes_owner_and_reads_only_owner(identities):
-    from psychiatry.models import B2CMindLog
-
-    actor = identities[2]["patient"]
-    response = request_for(
-        api.b2c_mood,
-        actor=actor,
-        method="post",
-        data={
-            "mood": "CALM",
-            "anxiety_score": 0,
-            "energy_score": 1,
-            "sleep_hours": 0,
-        },
-    )
-    assert response.status_code == 200
-    log = B2CMindLog.objects.get()
-    assert log.user_id == actor.pk
-    assert log.anxiety_score == 0
-    assert (
-        len(json.loads(request_for(api.b2c_mood, actor=actor).content)["history"]) == 1
-    )
-    assert (
-        json.loads(request_for(api.b2c_mood, actor=identities[2]["therapist"]).content)[
-            "history"
-        ]
-        == []
-    )
-
-
-@pytest.mark.parametrize(
-    "body",
-    ["null", "[]", "1", '"text"', "{", '{"mood":NaN}', '{"mood":"CALM","mood":"LOW"}'],
-)
-def test_json_root_and_syntax_are_validated(identities, body):
-    request = RequestFactory().post("/", data=body, content_type="application/json")
-    request.user = identities[2]["patient"]
-    request._dont_enforce_csrf_checks = True
-    assert api.b2c_mood(request).status_code == 400
-
-
-@pytest.mark.parametrize(
-    "data",
-    [
-        {"anxiety_score": True},
-        {"anxiety_score": "3"},
-        {"anxiety_score": 11},
-        {"energy_score": 0},
-        {"sleep_hours": 25},
-        {"mood": "UNKNOWN"},
-        {"tags": "x"},
-        {"gratitude": "x" * 4001},
-    ],
-)
-def test_mood_field_validation(identities, data):
-    assert (
-        request_for(
-            api.b2c_mood, actor=identities[2]["patient"], method="post", data=data
-        ).status_code
-        == 400
-    )
-
-
-def test_session_writes_enforce_csrf_locally(identities):
-    request = RequestFactory().post("/", data="{}", content_type="application/json")
-    request.user = identities[2]["patient"]
-    assert api.b2c_mood(request).status_code == 403
-
-
-@pytest.mark.parametrize(
-    "params", [{"limit": "0"}, {"limit": "101"}, {"offset": "-1"}, {"offset": "1.2"}]
-)
-def test_pagination_invalid_values_rejected(identities, params):
-    assert (
-        request_for(
-            api.b2c_mood, actor=identities[2]["patient"], data=params
-        ).status_code
-        == 400
-    )
-
-
-def test_payload_size_is_bounded(identities):
-    assert (
-        request_for(
-            api.b2c_mood,
-            actor=identities[2]["patient"],
-            method="post",
-            data={"gratitude": "a" * 65537},
-        ).status_code
-        == 413
-    )
-
-
-def test_subscription_cannot_be_self_activated(identities):
-    assert (
-        request_for(
-            api.b2c_subscription_status,
-            actor=identities[2]["patient"],
-            method="post",
-            data={"plan": "PLUS_ANNUAL"},
-        ).status_code
-        == 503
-    )
-
-
 @pytest.fixture
 def own_profile(identities):
     clinic, _, actors = identities
     return profile(clinic=clinic, user=actors["patient"])
-
-
-def test_connected_summary_uses_only_own_profile(identities, own_profile):
-    response = request_for(
-        api.patient_mobile_summary, actor=identities[2]["patient"], clinic=identities[0]
-    )
-    data = json.loads(response.content)["data"]
-    assert data["patient"]["record_number"] == own_profile.record_number
-    assert data["medications"] == []
-    assert data["monitoring_active"] is False
-
-
-def test_connected_missing_owner_fails_closed(identities):
-    profile(tcle_signed=True)
-    assert (
-        request_for(
-            api.patient_mobile_summary,
-            actor=identities[2]["patient"],
-            clinic=identities[0],
-        ).status_code
-        == 404
-    )
 
 
 @pytest.fixture
@@ -236,132 +88,6 @@ def prescribed(own_profile):
     )
     return PrescriptionItem.objects.create(
         prescription=rx, drug_name="Sintético", dosage="1", posology="Teste"
-    )
-
-
-def test_adherence_is_persisted_and_other_prescription_denied(identities, prescribed):
-    from psychiatry.models import (
-        MedicationAdherenceLog,
-        PrescriptionItem,
-        PsychopharmacologyPrescription,
-    )
-
-    payload = {
-        "medication_id": prescribed.pk,
-        "is_taken": False,
-        "scheduled_time": "2026-01-01T10:00:00Z",
-    }
-    response = request_for(
-        api.log_medication_adherence,
-        actor=identities[2]["patient"],
-        clinic=identities[0],
-        method="post",
-        data=payload,
-    )
-    assert response.status_code == 200
-    log = MedicationAdherenceLog.objects.get()
-    assert log.patient_id == prescribed.prescription.patient_id
-    assert log.is_taken is False and log.taken_at is None
-    foreign = profile()
-    rx = PsychopharmacologyPrescription.objects.create(
-        patient=foreign, expires_date=date(2099, 1, 1)
-    )
-    item = PrescriptionItem.objects.create(prescription=rx)
-    payload["medication_id"] = item.pk
-    assert (
-        request_for(
-            api.log_medication_adherence,
-            actor=identities[2]["patient"],
-            clinic=identities[0],
-            method="post",
-            data=payload,
-        ).status_code
-        == 404
-    )
-    assert MedicationAdherenceLog.objects.count() == 1
-
-
-def test_sos_persists_but_never_claims_delivery(identities, own_profile):
-    from psychiatry.models import PsychiatricCrisisAlert
-
-    response = request_for(
-        api.trigger_patient_sos,
-        actor=identities[2]["patient"],
-        clinic=identities[0],
-        method="post",
-        data={"latitude": -23.1, "longitude": -46.1},
-    )
-    assert response.status_code == 200
-    alert = PsychiatricCrisisAlert.objects.get()
-    assert alert.patient == own_profile
-    data = json.loads(response.content)
-    assert data["persisted"] is True
-    assert data["notification_delivered"] is False
-    assert data["monitoring_active"] is False
-    assert data["protocol_active"] is False
-    assert "ninguém foi notificado" in data["instructions"].lower()
-
-
-@pytest.mark.parametrize(
-    "data",
-    [
-        {"latitude": 91},
-        {"longitude": -181},
-        {"latitude": True},
-        {"patient_cpf": "fake"},
-        {"user_id": "fake"},
-    ],
-)
-def test_sos_invalid_or_external_identity_rejected(identities, own_profile, data):
-    assert (
-        request_for(
-            api.trigger_patient_sos,
-            actor=identities[2]["patient"],
-            clinic=identities[0],
-            method="post",
-            data=data,
-        ).status_code
-        == 400
-    )
-
-
-def test_craving_persists_without_inferred_recovery_or_notification(
-    identities, own_profile
-):
-    from psychiatry.models import CravingTrackingLog
-
-    data = {
-        "intensity": 9,
-        "target_urge": "Álcool",
-        "halt_factors": ["HUNGRY"],
-        "urge_surfed_successfully": False,
-    }
-    response = request_for(
-        api.api_record_craving,
-        actor=identities[2]["patient"],
-        clinic=identities[0],
-        method="post",
-        data=data,
-    )
-    assert response.status_code == 200
-    assert CravingTrackingLog.objects.get().patient == own_profile
-    assert CravingTrackingLog.objects.get().urge_surfed_successfully is False
-    assert json.loads(response.content)["urgent_intervention_dispatched"] is False
-
-
-@pytest.mark.parametrize(
-    "data", [{"intensity": 11}, {"intensity": "5"}, {"patient_cpf": "fake"}]
-)
-def test_craving_invalid_fields(identities, own_profile, data):
-    assert (
-        request_for(
-            api.api_record_craving,
-            actor=identities[2]["patient"],
-            clinic=identities[0],
-            method="post",
-            data=data,
-        ).status_code
-        == 400
     )
 
 
@@ -668,33 +394,14 @@ def test_bed_ownership_nullable_and_unassessed_risk_not_zero():
     assert TwelveStepsAnamnesis().relapse_risk_index is None
 
 
-def test_service_actor_none_is_denied_not_system_bypass(identities):
-    from django.core.exceptions import PermissionDenied
-
-    from psychiatry.services import record_sos
-
-    with pytest.raises(PermissionDenied):
-        record_sos(actor=None, clinic=identities[0], data={})
-
-
-PUBLIC = {"login_view", "b2c_breathing_exercises"}
+PUBLIC = {"login_view"}
 ROUTES = [(str(route.pattern), route.callback) for route in urls.urlpatterns]
 PRIVATE_ROUTES = [(p, view) for p, view in ROUTES if view.__name__ not in PUBLIC]
-CLINICAL_ROUTES = [
-    (p, view)
-    for p, view in PRIVATE_ROUTES
-    if not view.__name__.startswith("b2c_") and view.__name__ != "mobile_b2c_view"
-]
+CLINICAL_ROUTES = PRIVATE_ROUTES
 WRITE_VIEWS = [
     api.save_anamnesis,
-    api.log_medication_adherence,
-    api.trigger_patient_sos,
-    api.b2c_mood,
-    api.b2c_cbt_diary,
-    api.b2c_subscription_status,
     api.api_save_12steps_step,
     api.api_consolidate_12steps,
-    api.api_record_craving,
 ]
 
 
@@ -735,40 +442,11 @@ def test_all_clinical_entries_recheck_clinic_and_membership(
 
 @pytest.mark.parametrize("view", WRITE_VIEWS)
 def test_all_session_mutations_require_real_csrf(identities, view):
-    actor = (
-        identities[2]["patient"]
-        if view
-        in [
-            api.log_medication_adherence,
-            api.trigger_patient_sos,
-            api.api_record_craving,
-            api.b2c_mood,
-            api.b2c_cbt_diary,
-            api.b2c_subscription_status,
-        ]
-        else identities[2]["therapist"]
-    )
+    actor = identities[2]["therapist"]
     request = RequestFactory().post("/", data="{}", content_type="application/json")
     request.user, request.clinic = actor, identities[0]
     assert not getattr(view, "csrf_exempt", False)
     assert view(request).status_code == 403
-
-
-def test_valid_csrf_token_permits_persisted_b2c_write(identities):
-    from django.middleware.csrf import get_token
-
-    from psychiatry.models import B2CMindLog
-
-    data = {"mood": "CALM", "anxiety_score": 0, "energy_score": 1, "sleep_hours": 0}
-    request = RequestFactory().post(
-        "/", data=json.dumps(data), content_type="application/json"
-    )
-    request.user = identities[2]["patient"]
-    token = get_token(request)
-    request.COOKIES["csrftoken"] = request.META["CSRF_COOKIE"]
-    request.META["HTTP_X_CSRFTOKEN"] = token
-    assert api.b2c_mood(request).status_code == 200
-    assert B2CMindLog.objects.filter(user=request.user).count() == 1
 
 
 def test_another_therapist_cannot_read_authored_draft(identities, linked_profile):

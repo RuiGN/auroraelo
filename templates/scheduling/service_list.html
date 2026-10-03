@@ -1,0 +1,57 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'appointment_list' %}">{% translate "Agenda" %}</a></li><li>{% translate "Serviços de agendamento" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Serviços de agendamento" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Os tipos de consulta que o paciente pode pedir no aplicativo, com a duração de cada um." %}</p>
+  </div>
+  <div class="ae-actions">
+    <a class="ae-btn ae-btn--secondary" href="{% url 'scheduling:availability_list' %}">{% translate "Horários de atendimento" %}</a>
+    {% if can_manage %}<a class="ae-btn" href="{% url 'scheduling:service_create' %}"><svg class="ae-icon" aria-hidden="true"><use href="#i-plus"/></svg>{% translate "Novo serviço" %}</a>{% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+{% if not active_count %}
+<div class="ae-alert ae-alert--warning" role="status">
+  <svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg>
+  <div>{% translate "Nenhum serviço ativo: sem ele o paciente não consegue pedir consulta no aplicativo." %}</div>
+</div>
+{% endif %}
+{% if services %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Serviços cadastrados" %}</caption>
+    <thead><tr><th scope="col">{% translate "Serviço" %}</th><th scope="col">{% translate "Duração" %}</th><th scope="col">{% translate "Intervalo entre consultas" %}</th><th scope="col">{% translate "Situação" %}</th>{% if can_manage %}<th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th>{% endif %}</tr></thead>
+    <tbody>
+      {% for service in services %}
+      <tr>
+        <th scope="row" class="ae-table__strong">{{ service.name }}</th>
+        <td class="ae-table__nowrap">{% blocktranslate with minutes=service.duration_minutes %}{{ minutes }} min{% endblocktranslate %}</td>
+        <td class="ae-table__nowrap">{% blocktranslate with minutes=service.buffer_minutes %}{{ minutes }} min{% endblocktranslate %}</td>
+        <td>{% if service.is_active %}<span class="ae-badge ae-badge--success">{% translate "Ativo" %}</span>{% else %}<span class="ae-badge ae-badge--muted">{% translate "Inativo" %}</span>{% endif %}</td>
+        {% if can_manage %}
+        <td class="ae-table__actions">
+          <a class="ae-btn ae-btn--ghost ae-btn--sm" href="{% url 'scheduling:service_update' service.pk %}">{% translate "Editar" %}</a>
+          {% if service.is_active %}
+          <form class="ae-inline-form" method="post" action="{% url 'scheduling:service_deactivate' service.pk %}">{% csrf_token %}<button type="submit" class="ae-btn ae-btn--secondary ae-btn--sm">{% translate "Inativar" %}</button></form>
+          {% else %}
+          <form class="ae-inline-form" method="post" action="{% url 'scheduling:service_activate' service.pk %}">{% csrf_token %}<button type="submit" class="ae-btn ae-btn--secondary ae-btn--sm">{% translate "Ativar" %}</button></form>
+          {% endif %}
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if can_manage %}<p class="ae-card__meta">{% translate "Inativar um serviço o tira das opções do aplicativo; as consultas já marcadas continuam como estão." %}</p>{% endif %}
+{% else %}
+<div class="ae-card ae-empty">
+  <p>{% translate "Nenhum serviço cadastrado ainda." %}</p>
+  {% if can_manage %}<a class="ae-btn" href="{% url 'scheduling:service_create' %}">{% translate "Cadastrar serviço" %}</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

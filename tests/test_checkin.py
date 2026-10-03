@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from datetime import date
 from typing import TypedDict
 from uuid import uuid4
@@ -10,7 +9,6 @@ from uuid import uuid4
 import pytest
 from django.core.exceptions import ValidationError
 from django.test import Client
-from django.urls import reverse
 
 from accounts.models import User
 from accounts.services import accept_invitation
@@ -410,72 +408,6 @@ def test_checkin_denied_without_active_questionnaire_and_cross_clinic() -> None:
 # ---------------------------------------------------------------------------
 # HTTP acceptance tests
 # ---------------------------------------------------------------------------
-
-
-def test_checkin_http_flow_submit_and_history(client: Client) -> None:
-    """8.6.4.2 & 8.6.4.3: HTTP check-in with progress and history."""
-    clinic = ClinicFactory.create()
-    administrator, user, profile = _linked_patient(clinic)
-    _activate_default_questionnaire(clinic, administrator)
-    _force_patient_client(client, clinic, user)
-
-    # GET today's check-in form
-    get_res = client.get(reverse("checkin_today"))
-    assert get_res.status_code == 200
-    content = get_res.content.decode()
-    assert "Check-in Diário" in content
-    rendered_ids = set(re.findall(r'id="([^"]+)"', content))
-    described_by = re.findall(r'aria-describedby="([^"]+)"', content)
-    assert described_by
-    for targets in described_by:
-        assert set(targets.split()) <= rendered_ids
-    assert "Prefiro não responder" in content
-    assert 'role="progressbar"' in content
-
-    # POST with idempotency key
-    post_data = dict(_valid_answers())
-    post_data["idempotency_key"] = "http-key-1"
-    post_res = client.post(reverse("checkin_today"), data=post_data)
-    assert post_res.status_code == 302
-
-    checkin = DailyCheckIn.infrastructure_objects.get(
-        clinic_id=clinic.pk, patient_profile_id=profile.pk
-    )
-    assert checkin.answers["general_state"] == 3
-
-    # History shows the entry
-    history = client.get(reverse("checkin_list"))
-    assert history.status_code == 200
-    history_content = history.content.decode()
-    assert "Histórico de Check-ins" in history_content
-    assert "Enviado" in history_content
-
-    # Re-POST with same idempotency key does not duplicate
-    client.post(reverse("checkin_today"), data=post_data)
-    assert (
-        DailyCheckIn.infrastructure_objects.filter(
-            clinic_id=clinic.pk, patient_profile_id=profile.pk
-        ).count()
-        == 1
-    )
-
-
-def test_checkin_http_unavailable_without_questionnaire(client: Client) -> None:
-    """8.6.4.4: Questionnaire deactivated shows accessible empty state."""
-    clinic = ClinicFactory.create()
-    _administrator, user, _profile = _linked_patient(clinic)
-    _force_patient_client(client, clinic, user)
-
-    res = client.get(reverse("checkin_today"))
-    assert res.status_code == 200
-    assert "Check-in indisponível" in res.content.decode()
-
-
-def test_checkin_requires_authentication(client: Client) -> None:
-    """8.6.4.4: Anonymous access is redirected to login."""
-    anon_client = Client()
-    res = anon_client.get(reverse("checkin_today"))
-    assert res.status_code == 302
 
 
 def test_checkin_submission_is_audited() -> None:

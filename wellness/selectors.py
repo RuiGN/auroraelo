@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import date
+from dataclasses import dataclass
+from datetime import date, datetime
 from typing import Any
 from uuid import UUID
 
@@ -214,6 +215,29 @@ def sobriety_dashboard(
     }
 
 
+def active_sobriety_goal_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID
+) -> SobrietyGoal | None:
+    """Return the patient's newest active recovery goal, or ``None``."""
+    return (
+        SobrietyGoal.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id, is_active=True)
+        .order_by("-created_at")
+        .first()
+    )
+
+
+def cravings_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, limit: int = 50
+) -> list[CravingCheckIn]:
+    """Return the patient's own craving self-reports, newest first."""
+    return list(
+        CravingCheckIn.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id)
+        .order_by("-recorded_at")[: max(1, limit)]
+    )
+
+
 def relapse_plan_for_patient(
     *,
     clinic_id: UUID,
@@ -225,6 +249,46 @@ def relapse_plan_for_patient(
         .filter(patient_profile_id=patient_profile_id)
         .prefetch_related("sections", "shares")
         .first()
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class CrisisSettings:
+    """What the patient app shows in a crisis, for the staff screen."""
+
+    emergency_medical_number: str
+    emergency_fire_number: str
+    emotional_support_number: str
+    custom_helpline_name: str
+    custom_helpline_number: str
+    mandatory_disclaimer_text: str
+    is_saved: bool
+    updated_at: datetime | None
+
+
+def crisis_settings_for_clinic(*, clinic_id: UUID) -> CrisisSettings:
+    """Return the clinic's crisis resources, or the app defaults when none saved."""
+    config = CrisisResourceConfig.objects.for_clinic(clinic_id).first()
+    if config is None:
+        return CrisisSettings(
+            emergency_medical_number="192",
+            emergency_fire_number="193",
+            emotional_support_number="188",
+            custom_helpline_name="",
+            custom_helpline_number="",
+            mandatory_disclaimer_text=MANDATORY_CRISIS_DISCLAIMER,
+            is_saved=False,
+            updated_at=None,
+        )
+    return CrisisSettings(
+        emergency_medical_number=config.emergency_medical_number,
+        emergency_fire_number=config.emergency_fire_number,
+        emotional_support_number=config.emotional_support_number,
+        custom_helpline_name=config.custom_helpline_name,
+        custom_helpline_number=config.custom_helpline_number,
+        mandatory_disclaimer_text=config.mandatory_disclaimer_text,
+        is_saved=True,
+        updated_at=config.updated_at,
     )
 
 
@@ -277,9 +341,13 @@ def crisis_resources_and_grounding(
 
 __all__ = [
     "SAFETY_DISCLAIMER_TEXT",
+    "CrisisSettings",
     "Selector",
     "activity_trends_summary",
+    "active_sobriety_goal_for_patient",
     "crisis_resources_and_grounding",
+    "crisis_settings_for_clinic",
+    "cravings_for_patient",
     "relapse_plan_for_patient",
     "safe_movement_plans_for_patient",
     "sobriety_dashboard",

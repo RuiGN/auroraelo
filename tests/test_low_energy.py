@@ -9,7 +9,6 @@ from uuid import uuid4
 import pytest
 from django.core.exceptions import ValidationError
 from django.test import Client
-from django.urls import reverse
 from django.utils import timezone
 
 from accounts.models import User
@@ -319,47 +318,3 @@ def test_low_energy_never_diagnoses_or_escalates() -> None:
     assert not hasattr(session, "risk_score")
     assert not hasattr(session, "escalation_level")
     assert session.suppress_non_essential_notifications is True
-
-
-def test_low_energy_http_flow(client: Client) -> None:
-    """8.7.3.2: HTTP configure, activate, and deactivate flow."""
-    clinic = ClinicFactory.create()
-    _administrator, user, _profile = _linked_patient(clinic)
-    _force_patient_client(client, clinic, user)
-
-    # Configure actions
-    config_res = client.post(
-        reverse("low_energy_configure"),
-        data={
-            "action_1": "Beber um copo de água",
-            "action_2": "Abrir a janela",
-            "action_3": "Uma etapa curta",
-        },
-    )
-    assert config_res.status_code == 302
-
-    # Activate with one touch
-    activate_res = client.post(
-        reverse("low_energy_activate"), data={"duration_hours": "8"}
-    )
-    assert activate_res.status_code == 302
-
-    session = LowEnergyMode.infrastructure_objects.get(
-        clinic_id=clinic.pk, patient_profile__user_id=user.pk
-    )
-    assert session.is_active is True
-
-    # Simplified screen shows the actions and end option
-    home_res = client.get(reverse("low_energy_home"))
-    assert home_res.status_code == 200
-    content = home_res.content.decode()
-    assert "Modo baixa energia" in content
-    assert "Beber um copo de água" in content
-    assert "não substitui orientação de crise" in content
-
-    # Manual end
-    deactivate_res = client.post(reverse("low_energy_deactivate"))
-    assert deactivate_res.status_code == 302
-    session.refresh_from_db()
-    assert session.ended_at is not None
-    assert session.end_reason == "manual"

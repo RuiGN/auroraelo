@@ -35,7 +35,6 @@ from scheduling.messaging_services import (
     send_message,
 )
 from scheduling.models import (
-    Appointment,
     AppointmentEvent,
     AppointmentStatus,
     AvailabilityOverride,
@@ -816,41 +815,6 @@ def _force_client(client: Client, clinic: Clinic, user: User) -> None:
     session.save()
 
 
-def test_appointment_request_http_flow(client: Client) -> None:
-    """8.8.2: Patient requests a consultation over HTTP and sees the agenda."""
-    clinic = ClinicFactory.create()
-    admin, patient, profile = _linked_patient(clinic)
-    therapist = _link_therapist(clinic, admin, profile)
-    unit = _unit(clinic)
-    service = _service(clinic)
-    _force_client(client, clinic, patient)
-
-    get_res = client.get(reverse("appointment_request"))
-    assert get_res.status_code == 200
-    assert "Solicitar consulta" in get_res.content.decode()
-
-    post_res = client.post(
-        reverse("appointment_request"),
-        data={
-            "service": str(service.pk),
-            "professional": str(therapist.pk),
-            "unit": str(unit.pk),
-            "start_at": "2026-09-07T09:00",
-        },
-    )
-    assert post_res.status_code == 302
-
-    appointment = Appointment.infrastructure_objects.get(
-        clinic_id=clinic.pk, patient_profile__user_id=patient.pk
-    )
-    assert appointment.status == AppointmentStatus.REQUESTED
-
-    list_res = client.get(reverse("appointment_list"))
-    assert list_res.status_code == 200
-    assert "Agenda" in list_res.content.decode()
-    assert "Sessão individual" in list_res.content.decode()
-
-
 # ---------------------------------------------------------------------------
 # 8.8.1.3 Weekly calendar
 # ---------------------------------------------------------------------------
@@ -868,7 +832,7 @@ def test_weekly_calendar_renders_grid_and_textual_list(client: Client) -> None:
             clinic, patient, therapist, unit, service, date(2026, 9, 7), 9
         )
     )
-    _force_client(client, clinic, patient)
+    _force_client(client, clinic, therapist)
 
     res = client.get(reverse("appointment_calendar") + "?date=2026-09-07")
     content = res.content.decode()
@@ -1095,43 +1059,6 @@ def test_low_energy_suppresses_non_essential_only() -> None:
 # ---------------------------------------------------------------------------
 # 8.8.4.2 Pagination and 8.8.4.4 out-of-hours response
 # ---------------------------------------------------------------------------
-
-
-def test_message_history_paginates(client: Client) -> None:
-    """8.8.4.2: The conversation history paginates server-side."""
-    clinic = ClinicFactory.create()
-    admin, patient, profile = _linked_patient(clinic)
-    therapist = _link_therapist(clinic, admin, profile)
-    conversation = create_conversation(
-        clinic_id=clinic.pk,
-        actor=patient,
-        kind=ConversationKind.CLINICAL,
-        subject="Histórico",
-        participant_ids=[therapist.pk],
-        request_id=uuid4(),
-    )
-    for index in range(55):
-        send_message(
-            clinic_id=clinic.pk,
-            actor=patient,
-            conversation_id=conversation.pk,
-            body=f"mensagem-{index:02d}",
-            request_id=uuid4(),
-        )
-    _force_client(client, clinic, patient)
-
-    first_page = client.get(reverse("conversation_detail", args=[conversation.pk]))
-    assert first_page.status_code == 200
-    assert "Mais recentes ›" in first_page.content.decode()
-    assert "mensagem-00" in first_page.content.decode()
-    assert "mensagem-54" not in first_page.content.decode()
-
-    second_page = client.get(
-        reverse("conversation_detail", args=[conversation.pk]) + "?page=2"
-    )
-    assert second_page.status_code == 200
-    assert "‹ Mais antigas" in second_page.content.decode()
-    assert "mensagem-54" in second_page.content.decode()
 
 
 def test_out_of_hours_response_helper() -> None:

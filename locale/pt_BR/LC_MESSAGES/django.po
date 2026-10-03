@@ -981,13 +981,13 @@ msgid "Moeda"
 msgstr "Moeda"
 
 msgid "Vigência inicial"
-msgstr "Papel inicial"
+msgstr "Vigência inicial"
 
 msgid "Vigência final (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Vigência final (opcional)"
 
 msgid "Motivo"
-msgstr "Ativo"
+msgstr "Motivo"
 
 msgid "Contas a receber"
 msgstr "Contas a receber"
@@ -996,22 +996,22 @@ msgid "Cadastrar preço"
 msgstr "Cadastrar preço"
 
 msgid "Salvar preço"
-msgstr "Cadastrar preço"
+msgstr "Salvar preço"
 
 msgid "Catálogo de exercícios terapêuticos"
-msgstr "Catálogo de exercícios"
+msgstr "Catálogo de exercícios terapêuticos"
 
 msgid "Novo exercício"
 msgstr "Novo exercício"
 
 msgid "Editar exercício"
-msgstr "Realizar exercício"
+msgstr "Editar exercício"
 
 msgid "Atribuir exercício a paciente"
-msgstr "Atribuir a paciente"
+msgstr "Atribuir exercício a paciente"
 
 msgid "Meus exercícios terapêuticos"
-msgstr "Exercícios terapêuticos"
+msgstr "Meus exercícios terapêuticos"
 
 #, python-format
 msgid "Resposta: %(title)s"
@@ -1024,19 +1024,19 @@ msgid "Ex.: Retomar caminhadas diárias"
 msgstr "Ex.: Retomar caminhadas diárias"
 
 msgid "Detalhes (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Detalhes (opcional)"
 
 msgid "Opcional. Máximo de 4000 caracteres."
 msgstr "Opcional. Máximo de 4000 caracteres."
 
 msgid "Horizonte de tempo"
-msgstr "Horários de atendimento"
+msgstr "Horizonte de tempo"
 
 msgid "Prioridade"
 msgstr "Prioridade"
 
 msgid "Prazo (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Prazo (opcional)"
 
 msgid "Você pode alterar ou remover o prazo quando quiser, sem penalidade."
 msgstr "Você pode alterar ou remover o prazo quando quiser, sem penalidade."
@@ -1129,7 +1129,7 @@ msgid "Escala de 1 a 5"
 msgstr "Escala de 1 a 5"
 
 msgid "Escolha única"
-msgstr "Especialidade técnica"
+msgstr "Escolha única"
 
 msgid "Múltipla escolha"
 msgstr "Múltipla escolha"
@@ -1144,31 +1144,31 @@ msgid "Cancelado"
 msgstr "Cancelado"
 
 msgid "Verde (compartilhado)"
-msgstr "Verde (Compartilhável)"
+msgstr "Verde (compartilhado)"
 
 msgid "Amarelo (perguntar antes)"
-msgstr "Amarelo (Perguntar antes)"
+msgstr "Amarelo (perguntar antes)"
 
 msgid "Vermelho (somente eu)"
-msgstr "Vermelho — Somente você"
+msgstr "Vermelho (somente eu)"
 
 msgid "Minhas Metas"
 msgstr "Minhas Metas"
 
 msgid "Nova Meta"
-msgstr "Nova meta"
+msgstr "Nova Meta"
 
 msgid "Criar meta"
-msgstr "Criar item"
+msgstr "Criar meta"
 
 msgid "Detalhe da Meta"
-msgstr "Detalhes do Registro"
+msgstr "Detalhe da Meta"
 
 msgid "Editar Meta"
-msgstr "Editar"
+msgstr "Editar Meta"
 
 msgid "Salvar alterações"
-msgstr "Cancelar alterações"
+msgstr "Salvar alterações"
 
 msgid "Prefiro não responder"
 msgstr "Prefiro não responder"
@@ -1186,13 +1186,13 @@ msgid "4 — Alto"
 msgstr "4 — Alto"
 
 msgid "5 — Muito alto"
-msgstr "Muito mal"
+msgstr "5 — Muito alto"
 
 msgid "Sim"
 msgstr "Sim"
 
 msgid "Não"
-msgstr "Ação"
+msgstr "Não"
 
 msgid "Opcional. Máximo de 2000 caracteres."
 msgstr "Opcional. Máximo de 2000 caracteres."
@@ -1208,7 +1208,7 @@ msgstr ""
 "= Muito bem)."
 
 msgid "Quais emoções você identifica?"
-msgstr "Emoções identificadas"
+msgstr "Quais emoções você identifica?"
 
 msgid "Você pode selecionar mais de uma emoção."
 msgstr "Você pode selecionar mais de uma emoção."
@@ -1220,7 +1220,7 @@ msgid "1 = muito leve, 5 = muito intensa"
 msgstr "1 = muito leve, 5 = muito intensa"
 
 msgid "Relato do diário"
-msgstr "Relato do Diário"
+msgstr "Relato do diário"
 
 msgid "Descreva o que aconteceu ou como você está se sentindo..."
 msgstr "Descreva o que aconteceu ou como você está se sentindo..."
@@ -1263,7 +1263,7 @@ msgstr ""
 "compartilhar; Vermelho = Somente eu (privado)."
 
 msgid "Descreva o relato do diário."
-msgstr "Relato do Diário"
+msgstr "Descreva o relato do diário."
 
 #, python-format
 msgid "O relato do diário deve ter no máximo %(max)d caracteres."
@@ -1327,13 +1327,13 @@ msgid "Calma"
 msgstr "Calma"
 
 msgid "Frustração"
-msgstr "Fundação"
+msgstr "Frustração"
 
 msgid "Esperança"
-msgstr "Cobrança"
+msgstr "Esperança"
 
 msgid "Amarelo — Confirmação necessária"
-msgstr "Amarelo — Confirmar antes"
+msgstr "Amarelo — Confirmação necessária"
 
 msgid "Diário Emocional"
 msgstr "Diário Emocional"
@@ -1342,10 +1342,10 @@ msgid "Novo Registro no Diário"
 msgstr "Novo Registro no Diário"
 
 msgid "Salvar registro"
-msgstr "Sem registro"
+msgstr "Salvar registro"
 
 msgid "Detalhe do Registro"
-msgstr "Detalhes do Registro"
+msgstr "Detalhe do Registro"
 
 msgid "Editar Registro no Diário"
 msgstr "Editar Registro no Diário"
@@ -1561,19 +1561,19 @@ msgid "Push"
 msgstr "Push"
 
 msgid "Tipo de consulta"
-msgstr "Sem consultas"
+msgstr "Tipo de consulta"
 
 msgid "Unidade"
 msgstr "Unidade"
 
 msgid "Data e horário"
-msgstr "Data de início"
+msgstr "Data e horário"
 
 msgid "Novo data e horário"
-msgstr "Fuso horário"
+msgstr "Novo data e horário"
 
 msgid "Tipo de lembrete"
-msgstr "Preferências de lembrete"
+msgstr "Tipo de lembrete"
 
 msgid "Canal"
 msgstr "Canal"
@@ -1594,28 +1594,28 @@ msgid "Frequência máxima diária"
 msgstr "Frequência máxima diária"
 
 msgid "Tipo de conversa"
-msgstr "Nova conversa"
+msgstr "Tipo de conversa"
 
 msgid "Assunto (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Assunto (opcional)"
 
 msgid "Participantes"
-msgstr "Pacientes"
+msgstr "Participantes"
 
 msgid "Mensagem"
-msgstr "Mensagens"
+msgstr "Mensagem"
 
 msgid "Este canal não atende emergências."
-msgstr "Contato de emergência"
+msgstr "Este canal não atende emergências."
 
 msgid "Motivo (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Motivo (opcional)"
 
 msgid "Período preferido (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Período preferido (opcional)"
 
 msgid "Contato (opcional)"
-msgstr "Gênero (opcional)"
+msgstr "Contato (opcional)"
 
 msgid "Informe o nome da unidade."
 msgstr "Informe o nome da unidade."
@@ -1630,7 +1630,7 @@ msgid "Nova unidade"
 msgstr "Nova unidade"
 
 msgid "Salvar unidade"
-msgstr "Inativar unidade"
+msgstr "Salvar unidade"
 
 msgid "Editar unidade"
 msgstr "Editar unidade"
@@ -1639,13 +1639,13 @@ msgid "Nova sala"
 msgstr "Nova sala"
 
 msgid "Salvar sala"
-msgstr "Nova sala"
+msgstr "Salvar sala"
 
 msgid "Agenda semanal"
 msgstr "Agenda semanal"
 
 msgid "Selecione um serviço válido."
-msgstr "Selecione um papel profissional válido."
+msgstr "Selecione um serviço válido."
 
 msgid "Solicitar consulta"
 msgstr "Solicitar consulta"
@@ -1654,13 +1654,13 @@ msgid "Remarcar consulta"
 msgstr "Remarcar consulta"
 
 msgid "Propor novo horário"
-msgstr "Fuso horário"
+msgstr "Propor novo horário"
 
 msgid "Preferências de lembrete"
 msgstr "Preferências de lembrete"
 
 msgid "Salvar preferência"
-msgstr "Salvar exercício"
+msgstr "Salvar preferência"
 
 msgid "Mensagens"
 msgstr "Mensagens"
@@ -1672,10 +1672,10 @@ msgid "Iniciar conversa"
 msgstr "Iniciar conversa"
 
 msgid "Conversa"
-msgstr "Conversas"
+msgstr "Conversa"
 
 msgid "Enviar"
-msgstr "Enviado"
+msgstr "Enviar"
 
 msgid "Lista de espera"
 msgstr "Lista de espera"
@@ -1684,7 +1684,7 @@ msgid "Adicionar à lista de espera"
 msgstr "Adicionar à lista de espera"
 
 msgid "Adicionar"
-msgstr "Adicionar aula"
+msgstr "Adicionar"
 
 msgid "Ir para o conteúdo principal"
 msgstr "Ir para o conteúdo principal"
@@ -5307,3 +5307,2493 @@ msgstr "Área de infraestrutura"
 
 msgid "Área restrita. Acesso permitido apenas a administradores autorizados."
 msgstr "Área restrita. Acesso permitido apenas a administradores autorizados."
+
+msgid "Ligação"
+msgstr "Ligação"
+
+msgid "Visita presencial"
+msgstr "Visita presencial"
+
+msgid "Régua padrão pós-alta"
+msgstr "Régua padrão pós-alta"
+
+msgid "Equipe administrativa (concierge)"
+msgstr "Equipe administrativa (concierge)"
+
+msgid "Em acompanhamento"
+msgstr "Em acompanhamento"
+
+msgid "Acompanhamento concluído"
+msgstr "Acompanhamento concluído"
+
+msgid "Realizado"
+msgstr "Realizado"
+
+msgid "Não realizado"
+msgstr "Não realizado"
+
+msgid "Conseguiu falar"
+msgstr "Conseguiu falar"
+
+msgid "Não atendeu"
+msgstr "Não atendeu"
+
+msgid "Recusou o contato"
+msgstr "Recusou o contato"
+
+msgid "Visita realizada"
+msgstr "Visita realizada"
+
+msgid "Visita não foi possível"
+msgstr "Visita não foi possível"
+
+msgid "Visita"
+msgstr "Visita"
+
+msgid "Da clínica para a família"
+msgstr "Da clínica para a família"
+
+msgid "Da família para a clínica"
+msgstr "Da família para a clínica"
+
+msgid "Que me liguem"
+msgstr "Que me liguem"
+
+msgid "Que me visitem"
+msgstr "Que me visitem"
+
+msgid "Que tragam algo"
+msgstr "Que tragam algo"
+
+msgid "Que recebam um recado"
+msgstr "Que recebam um recado"
+
+msgid "Aberto"
+msgstr "Aberto"
+
+msgid "Encaminhado à família"
+msgstr "Encaminhado à família"
+
+msgid "Atendido"
+msgstr "Atendido"
+
+msgid "Não atendido"
+msgstr "Não atendido"
+
+msgid "Data da alta"
+msgstr "Data da alta"
+
+msgid "Não registre conteúdo clínico. Máximo de 500 caracteres."
+msgstr "Não registre conteúdo clínico. Máximo de 500 caracteres."
+
+msgid "Selecione um paciente"
+msgstr "Selecione um paciente"
+
+msgid "Familiar contatado (opcional)"
+msgstr "Familiar contatado (opcional)"
+
+msgid "Escolha apenas se o contato foi com um familiar autorizado."
+msgstr "Escolha apenas se o contato foi com um familiar autorizado."
+
+msgid "Observações"
+msgstr "Observações"
+
+msgid "Não registre conteúdo clínico. Máximo de 1000 caracteres."
+msgstr "Não registre conteúdo clínico. Máximo de 1000 caracteres."
+
+msgid "Nenhum (contato com o paciente)"
+msgstr "Nenhum (contato com o paciente)"
+
+msgid "Nova data"
+msgstr "Nova data"
+
+msgid "Motivo de não ter sido realizado"
+msgstr "Motivo de não ter sido realizado"
+
+msgid "Parentesco"
+msgstr "Parentesco"
+
+msgid "Contato principal"
+msgstr "Contato principal"
+
+msgid "O paciente autorizou o contato com este familiar"
+msgstr "O paciente autorizou o contato com este familiar"
+
+msgid "Como a autorização foi obtida"
+msgstr "Como a autorização foi obtida"
+
+msgid "Ex.: termo assinado em 01/10. Obrigatório se autorizado."
+msgstr "Ex.: termo assinado em 01/10. Obrigatório se autorizado."
+
+msgid "Decisão do paciente"
+msgstr "Decisão do paciente"
+
+msgid "Autoriza o contato com este familiar"
+msgstr "Autoriza o contato com este familiar"
+
+msgid "Revoga a autorização de contato"
+msgstr "Revoga a autorização de contato"
+
+msgid "Como a decisão foi obtida"
+msgstr "Como a decisão foi obtida"
+
+msgid "Ex.: termo assinado, pedido verbal registrado em consulta."
+msgstr "Ex.: termo assinado, pedido verbal registrado em consulta."
+
+msgid "Familiar"
+msgstr "Familiar"
+
+msgid "Sentido"
+msgstr "Sentido"
+
+msgid "Data e hora do contato"
+msgstr "Data e hora do contato"
+
+msgid "Deixe em branco para usar agora."
+msgstr "Deixe em branco para usar agora."
+
+msgid "O que foi tratado"
+msgstr "O que foi tratado"
+
+msgid "Não registre conteúdo clínico nem informações de saúde."
+msgstr "Não registre conteúdo clínico nem informações de saúde."
+
+msgid "Texto corrigido"
+msgstr "Texto corrigido"
+
+msgid "Motivo da correção"
+msgstr "Motivo da correção"
+
+msgid "O que o paciente pediu"
+msgstr "O que o paciente pediu"
+
+msgid "Detalhes do pedido"
+msgstr "Detalhes do pedido"
+
+msgid "Canal usado"
+msgstr "Canal usado"
+
+msgid "O que foi dito à família"
+msgstr "O que foi dito à família"
+
+msgid "Desfecho"
+msgstr "Desfecho"
+
+msgid "Observação"
+msgstr "Observação"
+
+msgid "Nome da régua"
+msgstr "Nome da régua"
+
+#, python-format
+msgid "Tipo da etapa %(number)d"
+msgstr "Tipo da etapa %(number)d"
+
+msgid "— sem etapa —"
+msgstr "— sem etapa —"
+
+#, python-format
+msgid "Dias após a alta (etapa %(number)d)"
+msgstr "Dias após a alta (etapa %(number)d)"
+
+#, python-format
+msgid "Responsável (etapa %(number)d)"
+msgstr "Responsável (etapa %(number)d)"
+
+#, python-format
+msgid "Preencha o tipo e os dias da etapa %(number)d."
+msgstr "Preencha o tipo e os dias da etapa %(number)d."
+
+msgid "A régua precisa ter ao menos uma etapa."
+msgstr "A régua precisa ter ao menos uma etapa."
+
+msgid "Este contato da família está inativo."
+msgstr "Este contato da família está inativo."
+
+msgid "O paciente ainda não autorizou o contato com este familiar. Registre a autorização antes de continuar."
+msgstr "O paciente ainda não autorizou o contato com este familiar. Registre a autorização antes de continuar."
+
+msgid "Tipo de contato inválido na régua."
+msgstr "Tipo de contato inválido na régua."
+
+msgid "Informe os dias após a alta como número."
+msgstr "Informe os dias após a alta como número."
+
+msgid "Os dias após a alta devem estar entre 1 e 365."
+msgstr "Os dias após a alta devem estar entre 1 e 365."
+
+msgid "Responsável inválido na régua."
+msgstr "Responsável inválido na régua."
+
+msgid "A régua não pode repetir o mesmo tipo de contato no mesmo dia."
+msgstr "A régua não pode repetir o mesmo tipo de contato no mesmo dia."
+
+msgid "A régua pode ter no máximo 8 etapas."
+msgstr "A régua pode ter no máximo 8 etapas."
+
+msgid "Informe o nome da régua (3 a 120 caracteres)."
+msgstr "Informe o nome da régua (3 a 120 caracteres)."
+
+msgid "A data da alta não pode ser futura."
+msgstr "A data da alta não pode ser futura."
+
+msgid "A data da alta não pode ser anterior a 365 dias."
+msgstr "A data da alta não pode ser anterior a 365 dias."
+
+msgid "As observações da alta aceitam até 500 caracteres."
+msgstr "As observações da alta aceitam até 500 caracteres."
+
+msgid "Este paciente já tem uma alta em acompanhamento."
+msgstr "Este paciente já tem uma alta em acompanhamento."
+
+msgid "Somente uma alta em acompanhamento pode ser cancelada."
+msgstr "Somente uma alta em acompanhamento pode ser cancelada."
+
+msgid "Informe o motivo do cancelamento (3 a 255 caracteres)."
+msgstr "Informe o motivo do cancelamento (3 a 255 caracteres)."
+
+msgid "Este contato já foi concluído ou cancelado."
+msgstr "Este contato já foi concluído ou cancelado."
+
+msgid "A alta deste contato não está mais em acompanhamento."
+msgstr "A alta deste contato não está mais em acompanhamento."
+
+msgid "Resultado inválido para este tipo de contato."
+msgstr "Resultado inválido para este tipo de contato."
+
+msgid "As observações aceitam até 1000 caracteres."
+msgstr "As observações aceitam até 1000 caracteres."
+
+msgid "Informe o motivo do reagendamento (3 a 255 caracteres)."
+msgstr "Informe o motivo do reagendamento (3 a 255 caracteres)."
+
+msgid "A nova data não pode estar no passado."
+msgstr "A nova data não pode estar no passado."
+
+msgid "A nova data excede 365 dias após a alta."
+msgstr "A nova data excede 365 dias após a alta."
+
+msgid "Este contato já foi reagendado o máximo de vezes."
+msgstr "Este contato já foi reagendado o máximo de vezes."
+
+msgid "Só é possível encerrar como não realizado após a data prevista."
+msgstr "Só é possível encerrar como não realizado após a data prevista."
+
+msgid "Informe o motivo (3 a 1000 caracteres)."
+msgstr "Informe o motivo (3 a 1000 caracteres)."
+
+msgid "Informe o nome do familiar (2 a 255 caracteres)."
+msgstr "Informe o nome do familiar (2 a 255 caracteres)."
+
+msgid "Informe o parentesco (2 a 100 caracteres)."
+msgstr "Informe o parentesco (2 a 100 caracteres)."
+
+msgid "Informe ao menos um telefone ou e-mail."
+msgstr "Informe ao menos um telefone ou e-mail."
+
+msgid "Telefone inválido: informe ao menos 8 dígitos."
+msgstr "Telefone inválido: informe ao menos 8 dígitos."
+
+msgid "E-mail inválido."
+msgstr "E-mail inválido."
+
+msgid "Limite de 10 contatos da família ativos por paciente."
+msgstr "Limite de 10 contatos da família ativos por paciente."
+
+msgid "Registre como a autorização do paciente foi obtida (ex.: termo assinado)."
+msgstr "Registre como a autorização do paciente foi obtida (ex.: termo assinado)."
+
+msgid "Registre como a decisão do paciente foi obtida (3 a 255 caracteres)."
+msgstr "Registre como a decisão do paciente foi obtida (3 a 255 caracteres)."
+
+msgid "Autorização do paciente revogada."
+msgstr "Autorização do paciente revogada."
+
+msgid "Contato da família inativado."
+msgstr "Contato da família inativado."
+
+msgid "A data e hora do contato não podem estar no futuro."
+msgstr "A data e hora do contato não podem estar no futuro."
+
+msgid "O contato não pode ser anterior a 90 dias."
+msgstr "O contato não pode ser anterior a 90 dias."
+
+msgid "Canal de contato inválido."
+msgstr "Canal de contato inválido."
+
+msgid "Sentido do contato inválido."
+msgstr "Sentido do contato inválido."
+
+msgid "Descreva o contato (3 a 2000 caracteres). Não registre conteúdo clínico."
+msgstr "Descreva o contato (3 a 2000 caracteres). Não registre conteúdo clínico."
+
+msgid "Este registro já foi corrigido. Corrija a versão mais recente."
+msgstr "Este registro já foi corrigido. Corrija a versão mais recente."
+
+msgid "Informe o motivo da correção (3 a 255 caracteres)."
+msgstr "Informe o motivo da correção (3 a 255 caracteres)."
+
+msgid "Tipo de pedido inválido."
+msgstr "Tipo de pedido inválido."
+
+msgid "Descreva o pedido (3 a 1000 caracteres)."
+msgstr "Descreva o pedido (3 a 1000 caracteres)."
+
+msgid "Este pedido já foi encerrado."
+msgstr "Este pedido já foi encerrado."
+
+msgid "O encaminhamento deste pedido já foi registrado."
+msgstr "O encaminhamento deste pedido já foi registrado."
+
+msgid "Registre primeiro o encaminhamento à família antes de concluir o pedido."
+msgstr "Registre primeiro o encaminhamento à família antes de concluir o pedido."
+
+msgid "Informe o desfecho (3 a 500 caracteres)."
+msgstr "Informe o desfecho (3 a 500 caracteres)."
+
+msgid "Informe o motivo (3 a 500 caracteres)."
+msgstr "Informe o motivo (3 a 500 caracteres)."
+
+msgid "Acompanhamento pós-alta"
+msgstr "Acompanhamento pós-alta"
+
+msgid "Fila de contatos"
+msgstr "Fila de contatos"
+
+msgid "Altas"
+msgstr "Altas"
+
+msgid "Alta registrada. A agenda de contatos foi criada."
+msgstr "Alta registrada. A agenda de contatos foi criada."
+
+msgid "Registrar alta"
+msgstr "Registrar alta"
+
+msgid "A agenda de ligações e visita é gerada automaticamente pela régua vigente da clínica."
+msgstr "A agenda de ligações e visita é gerada automaticamente pela régua vigente da clínica."
+
+#, python-format
+msgid "Alta de %(name)s"
+msgstr "Alta de %(name)s"
+
+msgid "Alta cancelada."
+msgstr "Alta cancelada."
+
+msgid "Cancelar alta"
+msgstr "Cancelar alta"
+
+msgid "Use apenas para alta registrada por engano. Os contatos ainda agendados serão cancelados."
+msgstr "Use apenas para alta registrada por engano. Os contatos ainda agendados serão cancelados."
+
+msgid "Contato registrado."
+msgstr "Contato registrado."
+
+#, python-format
+msgid "Registrar %(kind)s do %(day)dº dia"
+msgstr "Registrar %(kind)s do %(day)dº dia"
+
+msgid "Registrar resultado"
+msgstr "Registrar resultado"
+
+#, python-format
+msgid "Paciente: %(name)s"
+msgstr "Paciente: %(name)s"
+
+msgid "Contato reagendado."
+msgstr "Contato reagendado."
+
+msgid "Reagendar contato"
+msgstr "Reagendar contato"
+
+msgid "Reagendar"
+msgstr "Reagendar"
+
+#, python-format
+msgid "Data prevista atual: %(date)s"
+msgstr "Data prevista atual: %(date)s"
+
+msgid "Contato encerrado como não realizado."
+msgstr "Contato encerrado como não realizado."
+
+msgid "Encerrar como não realizado"
+msgstr "Encerrar como não realizado"
+
+msgid "Encerrar contato"
+msgstr "Encerrar contato"
+
+msgid "Familiar cadastrado."
+msgstr "Familiar cadastrado."
+
+msgid "Novo contato da família"
+msgstr "Novo contato da família"
+
+msgid "Salvar familiar"
+msgstr "Salvar familiar"
+
+msgid "A clínica só entra em contato com a família quando o paciente autoriza. Telefone e e-mail ficam cifrados no banco."
+msgstr "A clínica só entra em contato com a família quando o paciente autoriza. Telefone e e-mail ficam cifrados no banco."
+
+msgid "Dados do familiar atualizados."
+msgstr "Dados do familiar atualizados."
+
+msgid "Editar contato da família"
+msgstr "Editar contato da família"
+
+msgid "Salvar"
+msgstr "Salvar"
+
+msgid "Autorização do paciente registrada."
+msgstr "Autorização do paciente registrada."
+
+msgid "Autorização de contato com a família"
+msgstr "Autorização de contato com a família"
+
+msgid "Registrar decisão"
+msgstr "Registrar decisão"
+
+#, python-format
+msgid "Familiar: %(name)s"
+msgstr "Familiar: %(name)s"
+
+msgid "Registro do concierge"
+msgstr "Registro do concierge"
+
+msgid "Registrar contato com a família"
+msgstr "Registrar contato com a família"
+
+msgid "Registrar contato"
+msgstr "Registrar contato"
+
+msgid "O registro não pode ser editado nem apagado. Se errar, use «Corrigir»: o texto original permanece no histórico."
+msgstr "O registro não pode ser editado nem apagado. Se errar, use «Corrigir»: o texto original permanece no histórico."
+
+msgid "Correção registrada."
+msgstr "Correção registrada."
+
+msgid "Corrigir registro"
+msgstr "Corrigir registro"
+
+msgid "Salvar correção"
+msgstr "Salvar correção"
+
+msgid "O texto original continua visível no histórico."
+msgstr "O texto original continua visível no histórico."
+
+msgid "Pedidos dos pacientes"
+msgstr "Pedidos dos pacientes"
+
+msgid "Pedido registrado. A família ainda não foi contatada."
+msgstr "Pedido registrado. A família ainda não foi contatada."
+
+msgid "Registrar pedido do paciente"
+msgstr "Registrar pedido do paciente"
+
+msgid "Registrar pedido"
+msgstr "Registrar pedido"
+
+msgid "O pedido só é dado como encaminhado depois que você registrar o contato com a família."
+msgstr "O pedido só é dado como encaminhado depois que você registrar o contato com a família."
+
+msgid "Encaminhamento à família registrado."
+msgstr "Encaminhamento à família registrado."
+
+msgid "Registrar encaminhamento à família"
+msgstr "Registrar encaminhamento à família"
+
+msgid "Registrar encaminhamento"
+msgstr "Registrar encaminhamento"
+
+#, python-format
+msgid "Pedido: %(text)s"
+msgstr "Pedido: %(text)s"
+
+msgid "Pedido concluído."
+msgstr "Pedido concluído."
+
+msgid "Concluir pedido"
+msgstr "Concluir pedido"
+
+msgid "Pedido cancelado."
+msgstr "Pedido cancelado."
+
+msgid "Cancelar pedido"
+msgstr "Cancelar pedido"
+
+msgid "Régua de comunicação"
+msgstr "Régua de comunicação"
+
+msgid "Nova versão da régua salva. Vale para as próximas altas."
+msgstr "Nova versão da régua salva. Vale para as próximas altas."
+
+msgid "Editar régua de comunicação"
+msgstr "Editar régua de comunicação"
+
+msgid "Pós-alta"
+msgstr "Pós-alta"
+
+msgid "Ligações e visitas ainda agendadas, da data mais antiga para a mais recente."
+msgstr "Ligações e visitas ainda agendadas, da data mais antiga para a mais recente."
+
+msgid "Atrasados"
+msgstr "Atrasados"
+
+msgid "Hoje"
+msgstr "Hoje"
+
+msgid "Próximos 7 dias"
+msgstr "Próximos 7 dias"
+
+msgid "Contatos agendados"
+msgstr "Contatos agendados"
+
+msgid "Alta em"
+msgstr "Alta em"
+
+msgid "Previsto para"
+msgstr "Previsto para"
+
+#, python-format
+msgid "%(day)sº dia"
+msgstr "%(day)sº dia"
+
+#, python-format
+msgid "reagendado %(count)s vez"
+msgid_plural "reagendado %(count)s vezes"
+msgstr[0] "reagendado %(count)s vez"
+msgstr[1] "reagendado %(count)s vezes"
+
+msgid "Registrar"
+msgstr "Registrar"
+
+msgid "Nenhum contato encontrado com estes filtros."
+msgstr "Nenhum contato encontrado com estes filtros."
+
+msgid "Ligações e visita combinadas com cada paciente nas primeiras semanas depois da alta."
+msgstr "Ligações e visita combinadas com cada paciente nas primeiras semanas depois da alta."
+
+msgid "Para hoje"
+msgstr "Para hoje"
+
+msgid "Altas em acompanhamento"
+msgstr "Altas em acompanhamento"
+
+msgid "Pedidos abertos"
+msgstr "Pedidos abertos"
+
+#, python-format
+msgid "%(count)s paciente em acompanhamento ainda não tem familiar autorizado a receber contato."
+msgid_plural "%(count)s pacientes em acompanhamento ainda não têm familiar autorizado a receber contato."
+msgstr[0] "%(count)s paciente em acompanhamento ainda não tem familiar autorizado a receber contato."
+msgstr[1] "%(count)s pacientes em acompanhamento ainda não têm familiar autorizado a receber contato."
+
+msgid "Contatos atrasados, de hoje e da semana"
+msgstr "Contatos atrasados, de hoje e da semana"
+
+msgid "Contatos pós-alta em ordem de data"
+msgstr "Contatos pós-alta em ordem de data"
+
+msgid "Ver a fila completa"
+msgstr "Ver a fila completa"
+
+msgid "Nenhum contato atrasado nem previsto para os próximos 7 dias."
+msgstr "Nenhum contato atrasado nem previsto para os próximos 7 dias."
+
+#, python-format
+msgid "Alta em %(date)s."
+msgstr "Alta em %(date)s."
+
+msgid "Ver paciente"
+msgstr "Ver paciente"
+
+#, python-format
+msgid "Alta cancelada: %(reason)s"
+msgstr "Alta cancelada: %(reason)s"
+
+msgid "Agenda de contatos desta alta"
+msgstr "Agenda de contatos desta alta"
+
+#, python-format
+msgid "%(day)sº dia após a alta"
+msgstr "%(day)sº dia após a alta"
+
+#, python-format
+msgid "original: %(date)s"
+msgstr "original: %(date)s"
+
+#, python-format
+msgid "Agenda gerada pela régua «%(name)s» (versão %(version)s). Mudanças futuras na régua não alteram esta agenda."
+msgstr "Agenda gerada pela régua «%(name)s» (versão %(version)s). Mudanças futuras na régua não alteram esta agenda."
+
+msgid "Cada alta gera a agenda de ligações e visita definida pela régua da clínica."
+msgstr "Cada alta gera a agenda de ligações e visita definida pela régua da clínica."
+
+msgid "Altas registradas"
+msgstr "Altas registradas"
+
+msgid "Contatos"
+msgstr "Contatos"
+
+msgid "Nenhuma alta registrada ainda."
+msgstr "Nenhuma alta registrada ainda."
+
+msgid "Histórico de contatos com as famílias. Os registros não podem ser editados nem apagados."
+msgstr "Histórico de contatos com as famílias. Os registros não podem ser editados nem apagados."
+
+msgid "Contatos com famílias"
+msgstr "Contatos com famílias"
+
+msgid "Quando"
+msgstr "Quando"
+
+msgid "Resumo"
+msgstr "Resumo"
+
+msgid "correção de um registro anterior"
+msgstr "correção de um registro anterior"
+
+msgid "Nenhum contato registrado ainda."
+msgstr "Nenhum contato registrado ainda."
+
+msgid "Atrasado"
+msgstr "Atrasado"
+
+msgid "Etapas da régua"
+msgstr "Etapas da régua"
+
+msgid "Etapa"
+msgstr "Etapa"
+
+msgid "Tipo de contato"
+msgstr "Tipo de contato"
+
+msgid "Dias após a alta"
+msgstr "Dias após a alta"
+
+msgid "Responsável sugerido"
+msgstr "Responsável sugerido"
+
+msgid "Contato com a família e acompanhamento pós-alta. Este painel não mostra informações clínicas."
+msgstr "Contato com a família e acompanhamento pós-alta. Este painel não mostra informações clínicas."
+
+msgid "Altas e contatos pós-alta"
+msgstr "Altas e contatos pós-alta"
+
+#, python-format
+msgid "Alta em %(date)s"
+msgstr "Alta em %(date)s"
+
+msgid "Nenhuma alta registrada para este paciente."
+msgstr "Nenhuma alta registrada para este paciente."
+
+msgid "Família"
+msgstr "Família"
+
+msgid "Adicionar familiar"
+msgstr "Adicionar familiar"
+
+msgid "Contatos da família"
+msgstr "Contatos da família"
+
+msgid "Autorização do paciente"
+msgstr "Autorização do paciente"
+
+msgid "Principal"
+msgstr "Principal"
+
+msgid "Inativo"
+msgstr "Inativo"
+
+msgid "Autorizado"
+msgstr "Autorizado"
+
+msgid "Sem autorização"
+msgstr "Sem autorização"
+
+msgid "Autorização"
+msgstr "Autorização"
+
+msgid "Inativar"
+msgstr "Inativar"
+
+msgid "Nenhum familiar cadastrado."
+msgstr "Nenhum familiar cadastrado."
+
+msgid "Pedidos do paciente à família"
+msgstr "Pedidos do paciente à família"
+
+msgid "Nenhum pedido registrado."
+msgstr "Nenhum pedido registrado."
+
+msgid "Linha do tempo"
+msgstr "Linha do tempo"
+
+msgid "Corrigir"
+msgstr "Corrigir"
+
+msgid "Ainda não há contatos registrados."
+msgstr "Ainda não há contatos registrados."
+
+msgid "Pedidos feitos pelos pacientes aos familiares. Um pedido só vira «encaminhado» depois que o contato com a família é registrado."
+msgstr "Pedidos feitos pelos pacientes aos familiares. Um pedido só vira «encaminhado» depois que o contato com a família é registrado."
+
+msgid "Atendidos"
+msgstr "Atendidos"
+
+msgid "Não atendidos"
+msgstr "Não atendidos"
+
+msgid "Cancelados"
+msgstr "Cancelados"
+
+msgid "Pedidos à família"
+msgstr "Pedidos à família"
+
+msgid "Pedido"
+msgstr "Pedido"
+
+msgid "A família ainda não foi contatada."
+msgstr "A família ainda não foi contatada."
+
+msgid "Nenhum pedido encontrado."
+msgstr "Nenhum pedido encontrado."
+
+msgid "Salvar cria uma nova versão. Vale para as próximas altas; as altas já registradas mantêm a agenda original."
+msgstr "Salvar cria uma nova versão. Vale para as próximas altas; as altas já registradas mantêm a agenda original."
+
+msgid "Preencha até 8 etapas. Deixe a etapa em branco para não usar."
+msgstr "Preencha até 8 etapas. Deixe a etapa em branco para não usar."
+
+msgid "Salvar nova versão"
+msgstr "Salvar nova versão"
+
+msgid "Define as ligações e visitas após a alta. O padrão sugerido é ligação aos 7 e 15 dias e visita aos 15 dias."
+msgstr "Define as ligações e visitas após a alta. O padrão sugerido é ligação aos 7 e 15 dias e visita aos 15 dias."
+
+msgid "Editar régua"
+msgstr "Editar régua"
+
+msgid "Nenhuma régua definida"
+msgstr "Nenhuma régua definida"
+
+msgid "Etapas da régua vigente"
+msgstr "Etapas da régua vigente"
+
+msgid "A régua padrão é criada automaticamente na primeira alta registrada."
+msgstr "A régua padrão é criada automaticamente na primeira alta registrada."
+
+msgid "Versões anteriores"
+msgstr "Versões anteriores"
+
+msgid "Aurora Elo"
+msgstr "Aurora Elo"
+
+msgid "Aurora Elo — início"
+msgstr "Aurora Elo — início"
+
+msgid "Menu principal"
+msgstr "Menu principal"
+
+msgid "Alternar tema claro/escuro"
+msgstr "Alternar tema claro/escuro"
+
+msgid "Pós-alta e concierge"
+msgstr "Pós-alta e concierge"
+
+msgid "As solicitações feitas pelos pacientes no aplicativo aparecem aqui."
+msgstr "As solicitações feitas pelos pacientes no aplicativo aparecem aqui."
+
+msgid "Acesso da equipe da clínica. Pacientes usam o aplicativo Aurora Elo Pós-alta."
+msgstr "Acesso da equipe da clínica. Pacientes usam o aplicativo Aurora Elo Pós-alta."
+
+msgid "Aplicativo do paciente"
+msgstr "Aplicativo do paciente"
+
+msgid "Convite do paciente"
+msgstr "Convite do paciente"
+
+msgid "Código de ativação"
+msgstr "Código de ativação"
+
+msgid "Entrar (equipe da clínica)"
+msgstr "Entrar (equipe da clínica)"
+
+msgid "Este acesso é pelo aplicativo"
+msgstr "Este acesso é pelo aplicativo"
+
+msgid "Este código aparece somente agora: a clínica não consegue consultá-lo depois. Se for perdido, envie um novo convite."
+msgstr "Este código aparece somente agora: a clínica não consegue consultá-lo depois. Se for perdido, envie um novo convite."
+
+msgid "Não foi possível enviar o e-mail. Entregue o código ao paciente por outro meio seguro."
+msgstr "Não foi possível enviar o e-mail. Entregue o código ao paciente por outro meio seguro."
+
+msgid "O código e o link do aplicativo foram enviados ao e-mail do paciente."
+msgstr "O código e o link do aplicativo foram enviados ao e-mail do paciente."
+
+msgid "O paciente usa apenas o aplicativo Aurora Elo Pós-alta. Ele ativa a conta com o código abaixo."
+msgstr "O paciente usa apenas o aplicativo Aurora Elo Pós-alta. Ele ativa a conta com o código abaixo."
+
+msgid "Pacientes usam apenas o aplicativo Aurora Elo Pós-alta. Abra o aplicativo no celular e informe o código recebido por e-mail."
+msgstr "Pacientes usam apenas o aplicativo Aurora Elo Pós-alta. Abra o aplicativo no celular e informe o código recebido por e-mail."
+
+#, python-format
+msgid "Recebemos uma solicitação para redefinir sua senha no aplicativo Aurora Elo Pós-alta.\n\nAbra o link no celular em que o aplicativo está instalado: %(app_link)s\n\nSe o link não abrir, copie o código abaixo no aplicativo: %(code)s\n\nSe você não fez esta solicitação, ignore esta mensagem."
+msgstr "Recebemos uma solicitação para redefinir sua senha no aplicativo Aurora Elo Pós-alta.\n\nAbra o link no celular em que o aplicativo está instalado: %(app_link)s\n\nSe o link não abrir, copie o código abaixo no aplicativo: %(code)s\n\nSe você não fez esta solicitação, ignore esta mensagem."
+
+msgid "Seu acesso ao aplicativo Aurora Elo Pós-alta"
+msgstr "Seu acesso ao aplicativo Aurora Elo Pós-alta"
+
+#, python-format
+msgid "Sua clínica convidou você para o aplicativo Aurora Elo Pós-alta.\n\nAbra o link no celular em que o aplicativo está instalado: %(app_link)s\n\nSe o link não abrir, copie o código abaixo no aplicativo: %(code)s\n\nO convite vale por 7 dias e só pode ser usado uma vez."
+msgstr "Sua clínica convidou você para o aplicativo Aurora Elo Pós-alta.\n\nAbra o link no celular em que o aplicativo está instalado: %(app_link)s\n\nSe o link não abrir, copie o código abaixo no aplicativo: %(code)s\n\nO convite vale por 7 dias e só pode ser usado uma vez."
+
+#, python-format
+msgid "Vale até %(date)s e só pode ser usado uma vez."
+msgstr "Vale até %(date)s e só pode ser usado uma vez."
+
+msgid "Suspender: sai do app e poderá ser retomada"
+msgstr "Suspender: sai do app e poderá ser retomada"
+
+msgid "Encerrar o tratamento: sai do app e não poderá ser retomada"
+msgstr "Encerrar o tratamento: sai do app e não poderá ser retomada"
+
+msgid "Concluído: os objetivos foram cumpridos ou o ciclo terminou"
+msgstr "Concluído: os objetivos foram cumpridos ou o ciclo terminou"
+
+msgid "Revogado: a equipe retirou o plano"
+msgstr "Revogado: a equipe retirou o plano"
+
+msgid "O que fazer com este medicamento"
+msgstr "O que fazer com este medicamento"
+
+msgid "Como o plano termina"
+msgstr "Como o plano termina"
+
+msgid "Pausado até (opcional)"
+msgstr "Pausado até (opcional)"
+
+msgid "É só um lembrete para a equipe: o hábito continua pausado até que alguém o retome."
+msgstr "É só um lembrete para a equipe: o hábito continua pausado até que alguém o retome."
+
+msgid "Informe ao menos um horário."
+msgstr "Informe ao menos um horário."
+
+#, python-format
+msgid "Informe no máximo %(max)d horários."
+msgstr "Informe no máximo %(max)d horários."
+
+msgid "Medicamento"
+msgstr "Medicamento"
+
+msgid "Apresentação"
+msgstr "Apresentação"
+
+msgid "Por exemplo: comprimido, gotas, solução oral."
+msgstr "Por exemplo: comprimido, gotas, solução oral."
+
+msgid "Dose prescrita"
+msgstr "Dose prescrita"
+
+msgid "Exatamente como consta na receita. Por exemplo: 50 mg."
+msgstr "Exatamente como consta na receita. Por exemplo: 50 mg."
+
+msgid "Via de administração"
+msgstr "Via de administração"
+
+msgid "Horários das doses"
+msgstr "Horários das doses"
+
+msgid "Início do tratamento"
+msgstr "Início do tratamento"
+
+msgid "Uso contínuo (sem data final)"
+msgstr "Uso contínuo (sem data final)"
+
+msgid "Fim do tratamento"
+msgstr "Fim do tratamento"
+
+msgid "Prescritor"
+msgstr "Prescritor"
+
+msgid "Profissional externo que assinou a receita."
+msgstr "Profissional externo que assinou a receita."
+
+msgid "Registro do prescritor (CRM/CRO)"
+msgstr "Registro do prescritor (CRM/CRO)"
+
+msgid "Data da receita"
+msgstr "Data da receita"
+
+msgid "Orientações da receita (o paciente vê)"
+msgstr "Orientações da receita (o paciente vê)"
+
+msgid "Copie só o que está na receita. Mudar, compensar ou interromper a dose é decisão do prescritor e não pode ser publicado aqui."
+msgstr "Copie só o que está na receita. Mudar, compensar ou interromper a dose é decisão do prescritor e não pode ser publicado aqui."
+
+#, python-format
+msgid "Horários no formato HH:MM, separados por vírgula, no fuso do paciente (%(zone)s). Por exemplo: 08:00, 20:00."
+msgstr "Horários no formato HH:MM, separados por vírgula, no fuso do paciente (%(zone)s). Por exemplo: 08:00, 20:00."
+
+msgid "Título do plano"
+msgstr "Título do plano"
+
+msgid "Objetivo (o paciente vê)"
+msgstr "Objetivo (o paciente vê)"
+
+msgid "Justificativa clínica (uso interno)"
+msgstr "Justificativa clínica (uso interno)"
+
+msgid "Fica só no sistema da clínica: não aparece no app do paciente."
+msgstr "Fica só no sistema da clínica: não aparece no app do paciente."
+
+msgid "Cuidados e contraindicações (o paciente vê)"
+msgstr "Cuidados e contraindicações (o paciente vê)"
+
+msgid "Vale a partir de"
+msgstr "Vale a partir de"
+
+msgid "Vale até (opcional)"
+msgstr "Vale até (opcional)"
+
+msgid "Frequência (o paciente vê)"
+msgstr "Frequência (o paciente vê)"
+
+msgid "Texto livre. Por exemplo: Diária, 3 vezes por semana."
+msgstr "Texto livre. Por exemplo: Diária, 3 vezes por semana."
+
+msgid "Orientação (o paciente vê)"
+msgstr "Orientação (o paciente vê)"
+
+msgid "Ação obrigatória"
+msgstr "Ação obrigatória"
+
+msgid "Remover esta ação"
+msgstr "Remover esta ação"
+
+msgid "Hábito"
+msgstr "Hábito"
+
+msgid "Descrição (o paciente vê)"
+msgstr "Descrição (o paciente vê)"
+
+msgid "Dias da semana"
+msgstr "Dias da semana"
+
+msgid "Vale apenas para a frequência “Dias específicos”."
+msgstr "Vale apenas para a frequência “Dias específicos”."
+
+msgid "Parte do dia"
+msgstr "Parte do dia"
+
+msgid "Escolha “Horário fixo” para informar a hora exata."
+msgstr "Escolha “Horário fixo” para informar a hora exata."
+
+msgid "Horário (fuso do paciente)"
+msgstr "Horário (fuso do paciente)"
+
+msgid "Duração em minutos (opcional)"
+msgstr "Duração em minutos (opcional)"
+
+msgid "Marque a confirmação para continuar."
+msgstr "Marque a confirmação para continuar."
+
+msgid "A data não pode estar no passado."
+msgstr "A data não pode estar no passado."
+
+#, python-format
+msgid "Horário inválido: %(value)s. Use HH:MM, por exemplo 08:00."
+msgstr "Horário inválido: %(value)s. Use HH:MM, por exemplo 08:00."
+
+msgid "A data final não pode ser anterior ao início."
+msgstr "A data final não pode ser anterior ao início."
+
+msgid "A data da receita não pode ser futura."
+msgstr "A data da receita não pode ser futura."
+
+msgid "Inclua ao menos uma ação no plano."
+msgstr "Inclua ao menos uma ação no plano."
+
+msgid "Escolha ao menos um dia da semana."
+msgstr "Escolha ao menos um dia da semana."
+
+msgid "Informe o horário do hábito."
+msgstr "Informe o horário do hábito."
+
+msgid "Esta orientação sugere mudar, compensar ou interromper a medicação. Isso é decisão do prescritor e não pode ser publicado no app."
+msgstr "Esta orientação sugere mudar, compensar ou interromper a medicação. Isso é decisão do prescritor e não pode ser publicado no app."
+
+msgid "Uso contínuo não tem data final: apague a data ou desmarque o uso contínuo."
+msgstr "Uso contínuo não tem data final: apague a data ou desmarque o uso contínuo."
+
+msgid "Informe a data final ou marque o uso contínuo."
+msgstr "Informe a data final ou marque o uso contínuo."
+
+msgid "Conferi os dados com a receita e confirmo que o paciente passará a vê-los no app agora."
+msgstr "Conferi os dados com a receita e confirmo que o paciente passará a vê-los no app agora."
+
+msgid "A alteração não foi concluída. Atualize a página e tente novamente."
+msgstr "A alteração não foi concluída. Atualize a página e tente novamente."
+
+msgid "Editar medicação"
+msgstr "Editar medicação"
+
+msgid "Registrar medicação"
+msgstr "Registrar medicação"
+
+msgid "Editar rascunho do plano"
+msgstr "Editar rascunho do plano"
+
+msgid "Propor plano de cuidado"
+msgstr "Propor plano de cuidado"
+
+msgid "Editar hábito"
+msgstr "Editar hábito"
+
+msgid "Novo hábito"
+msgstr "Novo hábito"
+
+msgid "Hábito retomado. O paciente já pode registrá-lo."
+msgstr "Hábito retomado. O paciente já pode registrá-lo."
+
+msgid "Medicação"
+msgstr "Medicação"
+
+msgid "Planos de cuidado"
+msgstr "Planos de cuidado"
+
+msgid "Hábitos"
+msgstr "Hábitos"
+
+msgid "O que você registra aqui aparece no app do paciente assim que for publicado. A plataforma não sugere medicamento, dose nem horário."
+msgstr "O que você registra aqui aparece no app do paciente assim que for publicado. A plataforma não sugere medicamento, dose nem horário."
+
+#, python-format
+msgid "A partir de %(start)s, uso contínuo"
+msgstr "A partir de %(start)s, uso contínuo"
+
+#, python-format
+msgid "De %(start)s a %(end)s"
+msgstr "De %(start)s a %(end)s"
+
+msgid "Orientações da receita"
+msgstr "Orientações da receita"
+
+msgid "Revisar antes de publicar"
+msgstr "Revisar antes de publicar"
+
+msgid "Registre a receita externa do paciente. Você vai revisar tudo antes de publicar."
+msgstr "Registre a receita externa do paciente. Você vai revisar tudo antes de publicar."
+
+msgid "O paciente verá o nome, a dose, os horários e as orientações no app. Esta tela não sugere nem calcula doses."
+msgstr "O paciente verá o nome, a dose, os horários e as orientações no app. Esta tela não sugere nem calcula doses."
+
+msgid "Este tratamento foi encerrado. Registre uma nova prescrição."
+msgstr "Este tratamento foi encerrado. Registre uma nova prescrição."
+
+msgid "Este tratamento já foi encerrado."
+msgstr "Este tratamento já foi encerrado."
+
+msgid "Entendi que o medicamento deixa de aparecer no app agora."
+msgstr "Entendi que o medicamento deixa de aparecer no app agora."
+
+msgid "Registros de dose já feitos pelo paciente são mantidos no histórico."
+msgstr "Registros de dose já feitos pelo paciente são mantidos no histórico."
+
+msgid "O medicamento sai do app do paciente assim que você confirmar. Avise o paciente: o app não envia aviso sobre a mudança."
+msgstr "O medicamento sai do app do paciente assim que você confirmar. Avise o paciente: o app não envia aviso sobre a mudança."
+
+msgid "Medicação retirada do app do paciente."
+msgstr "Medicação retirada do app do paciente."
+
+msgid "Só um medicamento suspenso pode ser retomado."
+msgstr "Só um medicamento suspenso pode ser retomado."
+
+msgid "Entendi que o medicamento volta a aparecer no app agora."
+msgstr "Entendi que o medicamento volta a aparecer no app agora."
+
+msgid "O paciente volta a ver este medicamento e a registrar as doses no app. Confira se a receita continua valendo."
+msgstr "O paciente volta a ver este medicamento e a registrar as doses no app. Confira se a receita continua valendo."
+
+msgid "Retomar medicação"
+msgstr "Retomar medicação"
+
+msgid "Medicação publicada de novo no app do paciente."
+msgstr "Medicação publicada de novo no app do paciente."
+
+msgid "O paciente só vê um plano depois que o profissional o assina. Rascunhos e planos aguardando assinatura nunca aparecem no app."
+msgstr "O paciente só vê um plano depois que o profissional o assina. Rascunhos e planos aguardando assinatura nunca aparecem no app."
+
+msgid "O plano nasce como rascunho: o paciente só o vê depois do envio para assinatura e da assinatura do profissional."
+msgstr "O plano nasce como rascunho: o paciente só o vê depois do envio para assinatura e da assinatura do profissional."
+
+msgid "Só um rascunho pode ser editado."
+msgstr "Só um rascunho pode ser editado."
+
+msgid "Só um rascunho pode ser enviado para assinatura."
+msgstr "Só um rascunho pode ser enviado para assinatura."
+
+msgid "Revisei o plano e quero enviá-lo para assinatura."
+msgstr "Revisei o plano e quero enviá-lo para assinatura."
+
+msgid "Enviar para assinatura"
+msgstr "Enviar para assinatura"
+
+msgid "O plano deixa de ser editável e aguarda a sua assinatura. O paciente ainda não vê nada: ele só aparece no app depois que você assinar."
+msgstr "O plano deixa de ser editável e aguarda a sua assinatura. O paciente ainda não vê nada: ele só aparece no app depois que você assinar."
+
+msgid "Plano aguardando assinatura. O paciente ainda não o vê."
+msgstr "Plano aguardando assinatura. O paciente ainda não o vê."
+
+msgid "Só um plano aguardando assinatura volta a rascunho."
+msgstr "Só um plano aguardando assinatura volta a rascunho."
+
+msgid "Quero devolver o plano para edição."
+msgstr "Quero devolver o plano para edição."
+
+msgid "Voltar para rascunho"
+msgstr "Voltar para rascunho"
+
+msgid "O plano volta a ser editável. O paciente continua sem vê-lo."
+msgstr "O plano volta a ser editável. O paciente continua sem vê-lo."
+
+msgid "Plano devolvido para rascunho."
+msgstr "Plano devolvido para rascunho."
+
+msgid "Este plano não está aguardando assinatura."
+msgstr "Este plano não está aguardando assinatura."
+
+msgid "O paciente já tem um plano em vigor. Encerre-o antes de assinar outro."
+msgstr "O paciente já tem um plano em vigor. Encerre-o antes de assinar outro."
+
+msgid "Revisei o plano, assino digitalmente e confirmo que o paciente passará a vê-lo no app agora."
+msgstr "Revisei o plano, assino digitalmente e confirmo que o paciente passará a vê-lo no app agora."
+
+msgid "Assinar e publicar no app"
+msgstr "Assinar e publicar no app"
+
+msgid "Ao assinar, o plano aparece imediatamente no app do paciente, que poderá aceitar, pausar, recusar ou pedir revisão. Recusar encerra o plano. A justificativa clínica não aparece para o paciente."
+msgstr "Ao assinar, o plano aparece imediatamente no app do paciente, que poderá aceitar, pausar, recusar ou pedir revisão. Recusar encerra o plano. A justificativa clínica não aparece para o paciente."
+
+msgid "Assinar e publicar"
+msgstr "Assinar e publicar"
+
+msgid "Plano assinado e publicado no app do paciente."
+msgstr "Plano assinado e publicado no app do paciente."
+
+msgid "Só um plano ativo pode ser pausado."
+msgstr "Só um plano ativo pode ser pausado."
+
+msgid "Entendi que o plano aparece como pausado no app do paciente."
+msgstr "Entendi que o plano aparece como pausado no app do paciente."
+
+msgid "Pausar plano"
+msgstr "Pausar plano"
+
+msgid "O plano continua visível no app, marcado como pausado. Combine a pausa com o paciente."
+msgstr "O plano continua visível no app, marcado como pausado. Combine a pausa com o paciente."
+
+msgid "Plano pausado."
+msgstr "Plano pausado."
+
+msgid "Só um plano pausado pode ser retomado."
+msgstr "Só um plano pausado pode ser retomado."
+
+msgid "Retomar plano"
+msgstr "Retomar plano"
+
+msgid "Plano retomado."
+msgstr "Plano retomado."
+
+msgid "Só um plano ativo ou pausado pode ser encerrado."
+msgstr "Só um plano ativo ou pausado pode ser encerrado."
+
+msgid "Entendi que o plano encerrado não aceita novas respostas do paciente."
+msgstr "Entendi que o plano encerrado não aceita novas respostas do paciente."
+
+msgid "Encerrar plano"
+msgstr "Encerrar plano"
+
+msgid "O plano continua visível no app, mas encerrado: o paciente não poderá mais responder. Para propor mudanças, crie um novo plano."
+msgstr "O plano continua visível no app, mas encerrado: o paciente não poderá mais responder. Para propor mudanças, crie um novo plano."
+
+msgid "Plano encerrado."
+msgstr "Plano encerrado."
+
+msgid "O paciente vê os hábitos ativos e pausados no app e registra por lá. Os registros abaixo são só para leitura."
+msgstr "O paciente vê os hábitos ativos e pausados no app e registra por lá. Os registros abaixo são só para leitura."
+
+msgid "Salvar hábito"
+msgstr "Salvar hábito"
+
+msgid "O paciente verá este hábito no app assim que você salvar. Os hábitos são metas flexíveis: o app não cobra nem mede sequências."
+msgstr "O paciente verá este hábito no app assim que você salvar. Os hábitos são metas flexíveis: o app não cobra nem mede sequências."
+
+msgid "Um hábito arquivado não pode ser editado."
+msgstr "Um hábito arquivado não pode ser editado."
+
+msgid "Só um hábito ativo pode ser pausado."
+msgstr "Só um hábito ativo pode ser pausado."
+
+msgid "Pausar hábito"
+msgstr "Pausar hábito"
+
+msgid "O hábito continua no app, marcado como pausado, e o paciente não consegue registrá-lo até que seja retomado."
+msgstr "O hábito continua no app, marcado como pausado, e o paciente não consegue registrá-lo até que seja retomado."
+
+msgid "Só um hábito pausado pode ser retomado."
+msgstr "Só um hábito pausado pode ser retomado."
+
+msgid "Este hábito já está arquivado."
+msgstr "Este hábito já está arquivado."
+
+msgid "Entendi que o hábito deixa de aparecer no app do paciente."
+msgstr "Entendi que o hábito deixa de aparecer no app do paciente."
+
+msgid "O hábito sai do app e não gera novos dias. Os registros já feitos ficam guardados."
+msgstr "O hábito sai do app e não gera novos dias. Os registros já feitos ficam guardados."
+
+msgid "Arquivar hábito"
+msgstr "Arquivar hábito"
+
+msgid "Hábito arquivado."
+msgstr "Hábito arquivado."
+
+msgid "Visível no app"
+msgstr "Visível no app"
+
+msgid "Curso terminado"
+msgstr "Curso terminado"
+
+#, python-format
+msgid "Medicação de %(name)s"
+msgstr "Medicação de %(name)s"
+
+#, python-format
+msgid "Horários das doses (fuso %(zone)s)"
+msgstr "Horários das doses (fuso %(zone)s)"
+
+msgid "Confira cada campo com a receita. Nada foi salvo ainda."
+msgstr "Confira cada campo com a receita. Nada foi salvo ainda."
+
+msgid "Publicar no app do paciente"
+msgstr "Publicar no app do paciente"
+
+msgid "Ao publicar, o paciente passa a ver o medicamento, a dose e os horários no app e poderá registrar cada dose. A plataforma não sugere medicamento, dose nem horário: o conteúdo é o da receita que você informou."
+msgstr "Ao publicar, o paciente passa a ver o medicamento, a dose e os horários no app e poderá registrar cada dose. A plataforma não sugere medicamento, dose nem horário: o conteúdo é o da receita que você informou."
+
+#, python-format
+msgid "Suspender ou encerrar %(name)s"
+msgstr "Suspender ou encerrar %(name)s"
+
+#, python-format
+msgid "Retomar %(name)s"
+msgstr "Retomar %(name)s"
+
+#, python-format
+msgid "Planos de cuidado de %(name)s"
+msgstr "Planos de cuidado de %(name)s"
+
+msgid "Pausar"
+msgstr "Pausar"
+
+msgid "Combinei a retomada com o paciente, que pausou o plano."
+msgstr "Combinei a retomada com o paciente, que pausou o plano."
+
+msgid "Entendi que o plano volta a aparecer como ativo no app."
+msgstr "Entendi que o plano volta a aparecer como ativo no app."
+
+msgid "O paciente pausou este plano. Só o retome depois de combinar com ele: o app mostrará o plano como ativo de novo."
+msgstr "O paciente pausou este plano. Só o retome depois de combinar com ele: o app mostrará o plano como ativo de novo."
+
+msgid "O plano volta a aparecer como ativo no app do paciente."
+msgstr "O plano volta a aparecer como ativo no app do paciente."
+
+msgid "Retomar"
+msgstr "Retomar"
+
+msgid "Encerrar"
+msgstr "Encerrar"
+
+#, python-format
+msgid "Hábitos de %(name)s"
+msgstr "Hábitos de %(name)s"
+
+#, python-format
+msgid "Horários seguem o fuso do paciente (%(zone)s)."
+msgstr "Horários seguem o fuso do paciente (%(zone)s)."
+
+msgid "Hábito pausado."
+msgstr "Hábito pausado."
+
+#, python-format
+msgid "Pausar %(name)s"
+msgstr "Pausar %(name)s"
+
+msgid "O hábito não pôde ser retomado."
+msgstr "O hábito não pôde ser retomado."
+
+#, python-format
+msgid "Arquivar %(name)s"
+msgstr "Arquivar %(name)s"
+
+msgid "Rascunho salvo. O paciente ainda não vê este plano."
+msgstr "Rascunho salvo. O paciente ainda não vê este plano."
+
+msgid "Hábito atualizado. O paciente vê a mudança no app."
+msgstr "Hábito atualizado. O paciente vê a mudança no app."
+
+msgid "Hábito criado. O paciente já o vê no app."
+msgstr "Hábito criado. O paciente já o vê no app."
+
+msgid "Medicação atualizada no app do paciente."
+msgstr "Medicação atualizada no app do paciente."
+
+msgid "Medicação publicada no app do paciente."
+msgstr "Medicação publicada no app do paciente."
+
+msgid "Oral"
+msgstr "Oral"
+
+msgid "Sublingual"
+msgstr "Sublingual"
+
+msgid "Tópica"
+msgstr "Tópica"
+
+msgid "Inalação"
+msgstr "Inalação"
+
+msgid "Injetável"
+msgstr "Injetável"
+
+msgid "Oftálmica"
+msgstr "Oftálmica"
+
+msgid "Nasal"
+msgstr "Nasal"
+
+msgid "Outra"
+msgstr "Outra"
+
+msgid "Tomada"
+msgstr "Tomada"
+
+msgid "Tomada com atraso"
+msgstr "Tomada com atraso"
+
+msgid "Não tomada"
+msgstr "Não tomada"
+
+msgid "Sem informação"
+msgstr "Sem informação"
+
+msgid "Aguardando assinatura"
+msgstr "Aguardando assinatura"
+
+msgid "Pausado"
+msgstr "Pausado"
+
+msgid "O paciente ainda não vê este plano. Ele só aparece no app depois que o profissional assina."
+msgstr "O paciente ainda não vê este plano. Ele só aparece no app depois que o profissional assina."
+
+msgid "O paciente ainda não vê este plano. Ele passa a aparecer no app quando o profissional assinar."
+msgstr "O paciente ainda não vê este plano. Ele passa a aparecer no app quando o profissional assinar."
+
+msgid "O paciente vê o título, o objetivo, as ações e os cuidados do plano e pode aceitar, pausar, recusar ou pedir revisão. A justificativa clínica não aparece no app."
+msgstr "O paciente vê o título, o objetivo, as ações e os cuidados do plano e pode aceitar, pausar, recusar ou pedir revisão. A justificativa clínica não aparece no app."
+
+msgid "O plano continua visível no app, marcado como pausado, e o paciente ainda pode responder."
+msgstr "O plano continua visível no app, marcado como pausado, e o paciente ainda pode responder."
+
+msgid "O plano continua visível no app como concluído e não aceita novas respostas."
+msgstr "O plano continua visível no app como concluído e não aceita novas respostas."
+
+msgid "O plano continua visível no app como revogado e não aceita novas respostas."
+msgstr "O plano continua visível no app como revogado e não aceita novas respostas."
+
+msgid "Aceitou o plano"
+msgstr "Aceitou o plano"
+
+msgid "Recusou o plano"
+msgstr "Recusou o plano"
+
+msgid "Pausou o plano"
+msgstr "Pausou o plano"
+
+msgid "Pediu revisão do plano"
+msgstr "Pediu revisão do plano"
+
+msgid "Todos os dias"
+msgstr "Todos os dias"
+
+msgid "Dias úteis"
+msgstr "Dias úteis"
+
+msgid "Dias específicos"
+msgstr "Dias específicos"
+
+msgid "Meta flexível"
+msgstr "Meta flexível"
+
+msgid "Madrugada"
+msgstr "Madrugada"
+
+msgid "Qualquer horário"
+msgstr "Qualquer horário"
+
+msgid "Horário fixo"
+msgstr "Horário fixo"
+
+msgid "Feito"
+msgstr "Feito"
+
+msgid "Parcial"
+msgstr "Parcial"
+
+msgid "Adiado"
+msgstr "Adiado"
+
+msgid "Pulado"
+msgstr "Pulado"
+
+msgid "Editar rascunho"
+msgstr "Editar rascunho"
+
+msgid "O que o paciente vê"
+msgstr "O que o paciente vê"
+
+msgid "Conteúdo do plano"
+msgstr "Conteúdo do plano"
+
+msgid "Justificativa clínica (uso interno, não aparece no app)"
+msgstr "Justificativa clínica (uso interno, não aparece no app)"
+
+msgid "Ações do plano"
+msgstr "Ações do plano"
+
+msgid "Orientação"
+msgstr "Orientação"
+
+msgid "Obrigatória"
+msgstr "Obrigatória"
+
+msgid "Nenhuma ação cadastrada."
+msgstr "Nenhuma ação cadastrada."
+
+msgid "Resposta do paciente"
+msgstr "Resposta do paciente"
+
+msgid "Somente leitura: a resposta é dada pelo paciente, no app. Recusar encerra o plano e pausar o pausa."
+msgstr "Somente leitura: a resposta é dada pelo paciente, no app. Recusar encerra o plano e pausar o pausa."
+
+msgid "O plano foi encerrado pela recusa do paciente. Converse com ele antes de propor um novo plano."
+msgstr "O plano foi encerrado pela recusa do paciente. Converse com ele antes de propor um novo plano."
+
+msgid "O paciente ainda não respondeu a esta versão do plano."
+msgstr "O paciente ainda não respondeu a esta versão do plano."
+
+msgid "Histórico de respostas"
+msgstr "Histórico de respostas"
+
+msgid "Resposta"
+msgstr "Resposta"
+
+msgid "Comentário"
+msgstr "Comentário"
+
+#, python-format
+msgid "Versão %(version)s · profissional: %(prescriber)s"
+msgstr "Versão %(version)s · profissional: %(prescriber)s"
+
+#, python-format
+msgid "assinado em %(date)s"
+msgstr "assinado em %(date)s"
+
+#, python-format
+msgid "assinatura %(digest)s"
+msgstr "assinatura %(digest)s"
+
+#, python-format
+msgid "Vale a partir de %(start)s"
+msgstr "Vale a partir de %(start)s"
+
+#, python-format
+msgid "até %(end)s"
+msgstr "até %(end)s"
+
+msgid "Isto é um rascunho: o paciente não vê nada até que o plano seja enviado para assinatura e assinado. Depois de assinado, o conteúdo marcado como “o paciente vê” aparece no app."
+msgstr "Isto é um rascunho: o paciente não vê nada até que o plano seja enviado para assinatura e assinado. Depois de assinado, o conteúdo marcado como “o paciente vê” aparece no app."
+
+msgid "Revise as ações do plano"
+msgstr "Revise as ações do plano"
+
+msgid "Dados do plano"
+msgstr "Dados do plano"
+
+msgid "Precisa de mais ações? Salve o rascunho e edite de novo: surgem novas linhas em branco."
+msgstr "Precisa de mais ações? Salve o rascunho e edite de novo: surgem novas linhas em branco."
+
+#, python-format
+msgid "Ação %(number)s"
+msgstr "Ação %(number)s"
+
+msgid "Propor plano"
+msgstr "Propor plano"
+
+msgid "Planos"
+msgstr "Planos"
+
+msgid "Planos de cuidado do paciente"
+msgstr "Planos de cuidado do paciente"
+
+msgid "Vigência"
+msgstr "Vigência"
+
+msgid "Nenhum plano de cuidado. O paciente não vê nada nesta área do app."
+msgstr "Nenhum plano de cuidado. O paciente não vê nada nesta área do app."
+
+msgid "Resumo do que o paciente verá"
+msgstr "Resumo do que o paciente verá"
+
+msgid "Voltar e corrigir"
+msgstr "Voltar e corrigir"
+
+msgid "Hábitos do paciente"
+msgstr "Hábitos do paciente"
+
+msgid "Sem registros"
+msgstr "Sem registros"
+
+msgid "Nenhum hábito cadastrado. O paciente não vê nada nesta área do app."
+msgstr "Nenhum hábito cadastrado. O paciente não vê nada nesta área do app."
+
+msgid "Registros recentes de hábitos"
+msgstr "Registros recentes de hábitos"
+
+msgid "Dia"
+msgstr "Dia"
+
+msgid "Registro"
+msgstr "Registro"
+
+msgid "O paciente ainda não registrou hábitos neste período."
+msgstr "O paciente ainda não registrou hábitos neste período."
+
+msgid "Arquivados"
+msgstr "Arquivados"
+
+msgid "Não aparecem mais no app; os registros anteriores ficam guardados."
+msgstr "Não aparecem mais no app; os registros anteriores ficam guardados."
+
+msgid "Hábitos arquivados"
+msgstr "Hábitos arquivados"
+
+#, python-format
+msgid "Os hábitos ativos e pausados aparecem no app assim que são salvos, com o horário no fuso do paciente (%(zone)s). O paciente registra por lá; aqui você só acompanha."
+msgstr "Os hábitos ativos e pausados aparecem no app assim que são salvos, com o horário no fuso do paciente (%(zone)s). O paciente registra por lá; aqui você só acompanha."
+
+#, python-format
+msgid "Registros nos últimos %(days)s dias"
+msgstr "Registros nos últimos %(days)s dias"
+
+#, python-format
+msgid "%(minutes)s min"
+msgstr "%(minutes)s min"
+
+#, python-format
+msgid "até %(date)s"
+msgstr "até %(date)s"
+
+#, python-format
+msgid "Registros recentes do paciente (últimos %(days)s dias)"
+msgstr "Registros recentes do paciente (últimos %(days)s dias)"
+
+msgid "Prescrições registradas"
+msgstr "Prescrições registradas"
+
+msgid "Medicações do paciente"
+msgstr "Medicações do paciente"
+
+msgid "Horários"
+msgstr "Horários"
+
+msgid "Suspender ou encerrar"
+msgstr "Suspender ou encerrar"
+
+msgid "Nenhuma medicação registrada. O paciente não vê nada nesta área do app."
+msgstr "Nenhuma medicação registrada. O paciente não vê nada nesta área do app."
+
+msgid "Somente leitura. Mostra apenas as doses que o paciente registrou: uma dose sem registro não aparece aqui."
+msgstr "Somente leitura. Mostra apenas as doses que o paciente registrou: uma dose sem registro não aparece aqui."
+
+msgid "Registradas"
+msgstr "Registradas"
+
+msgid "Tomadas"
+msgstr "Tomadas"
+
+msgid "Com atraso"
+msgstr "Com atraso"
+
+msgid "Não tomadas"
+msgstr "Não tomadas"
+
+msgid "Registros de dose recentes"
+msgstr "Registros de dose recentes"
+
+msgid "Horário previsto"
+msgstr "Horário previsto"
+
+msgid "O paciente ainda não registrou doses neste período."
+msgstr "O paciente ainda não registrou doses neste período."
+
+msgid "Os registros de dose do paciente só aparecem para quem recebeu o consentimento dele ou é administrador da clínica."
+msgstr "Os registros de dose do paciente só aparecem para quem recebeu o consentimento dele ou é administrador da clínica."
+
+#, python-format
+msgid "O paciente vê no app as medicações visíveis, com dose e horários no fuso dele (%(zone)s), e registra cada dose por lá. O registro de adesão é feito só pelo paciente."
+msgstr "O paciente vê no app as medicações visíveis, com dose e horários no fuso dele (%(zone)s), e registra cada dose por lá. O registro de adesão é feito só pelo paciente."
+
+#, python-format
+msgid "Desde %(start)s, uso contínuo"
+msgstr "Desde %(start)s, uso contínuo"
+
+#, python-format
+msgid "%(start)s a %(end)s"
+msgstr "%(start)s a %(end)s"
+
+#, python-format
+msgid "Doses registradas no app (últimos %(days)s dias)"
+msgstr "Doses registradas no app (últimos %(days)s dias)"
+
+msgid "Cuidado do paciente"
+msgstr "Cuidado do paciente"
+
+msgid "Como o paciente vai ver"
+msgstr "Como o paciente vai ver"
+
+msgid "Objetivo"
+msgstr "Objetivo"
+
+msgid "Cuidados e contraindicações"
+msgstr "Cuidados e contraindicações"
+
+#, python-format
+msgid "Profissional: %(name)s"
+msgstr "Profissional: %(name)s"
+
+#, python-format
+msgid "vale a partir de %(date)s"
+msgstr "vale a partir de %(date)s"
+
+msgid "A clínica ainda não personalizou estes dados: o aplicativo usa os números e o aviso padrão."
+msgstr "A clínica ainda não personalizou estes dados: o aplicativo usa os números e o aviso padrão."
+
+#, python-format
+msgid "A clínica não funciona em %(day)s."
+msgstr "A clínica não funciona em %(day)s."
+
+msgid "A duração deve ficar entre 5 e 480 minutos."
+msgstr "A duração deve ficar entre 5 e 480 minutos."
+
+msgid "A duração e o intervalo definem os horários que o paciente vê ao pedir consulta no aplicativo."
+msgstr "A duração e o intervalo definem os horários que o paciente vê ao pedir consulta no aplicativo."
+
+msgid "A unidade está inativa."
+msgstr "A unidade está inativa."
+
+msgid "Apenas dígitos, espaços e um + no início."
+msgstr "Apenas dígitos, espaços e um + no início."
+
+msgid "Apoio emocional"
+msgstr "Apoio emocional"
+
+msgid "Aviso exibido"
+msgstr "Aviso exibido"
+
+msgid "Aviso exibido ao paciente"
+msgstr "Aviso exibido ao paciente"
+
+msgid "Bem-estar"
+msgstr "Bem-estar"
+
+msgid "Bombeiros"
+msgstr "Bombeiros"
+
+msgid "Cadastrar horário"
+msgstr "Cadastrar horário"
+
+msgid "Cadastrar serviço"
+msgstr "Cadastrar serviço"
+
+msgid "Começa depois"
+msgstr "Começa depois"
+
+msgid "Deixe em branco para valer por tempo indeterminado."
+msgstr "Deixe em branco para valer por tempo indeterminado."
+
+msgid "Deixe em branco quando qualquer sala da unidade puder ser usada."
+msgstr "Deixe em branco quando qualquer sala da unidade puder ser usada."
+
+msgid "Dia da semana"
+msgstr "Dia da semana"
+
+msgid "Dia da semana inválido."
+msgstr "Dia da semana inválido."
+
+msgid "Disponibilidade"
+msgstr "Disponibilidade"
+
+msgid "Disponibilidade dos profissionais"
+msgstr "Disponibilidade dos profissionais"
+
+msgid "Duração"
+msgstr "Duração"
+
+msgid "Duração da consulta (minutos)"
+msgstr "Duração da consulta (minutos)"
+
+msgid "Editar horário de atendimento"
+msgstr "Editar horário de atendimento"
+
+msgid "Editar recursos de crise"
+msgstr "Editar recursos de crise"
+
+msgid "Editar serviço"
+msgstr "Editar serviço"
+
+msgid "Ele não monitora o paciente em tempo real e ninguém da equipe é avisado quando a ajuda é aberta. Em perigo imediato, o paciente deve acionar o serviço de emergência da sua localidade."
+msgstr "Ele não monitora o paciente em tempo real e ninguém da equipe é avisado quando a ajuda é aberta. Em perigo imediato, o paciente deve acionar o serviço de emergência da sua localidade."
+
+msgid "Em vigor"
+msgstr "Em vigor"
+
+msgid "Emergência médica"
+msgstr "Emergência médica"
+
+msgid "Escolha um serviço e um profissional da lista."
+msgstr "Escolha um serviço e um profissional da lista."
+
+msgid "Esta sala não pertence à unidade escolhida."
+msgstr "Esta sala não pertence à unidade escolhida."
+
+msgid "Este horário foi removido."
+msgstr "Este horário foi removido."
+
+#, python-format
+msgid "Este horário se sobrepõe a outro horário do profissional em %(day)s, das %(start)s às %(end)s, na unidade %(unit)s."
+msgstr "Este horário se sobrepõe a outro horário do profissional em %(day)s, das %(start)s às %(end)s, na unidade %(unit)s."
+
+msgid "Fim"
+msgstr "Fim"
+
+msgid "Horário"
+msgstr "Horário"
+
+msgid "Horário atualizado. Confira a prévia dos horários livres."
+msgstr "Horário atualizado. Confira a prévia dos horários livres."
+
+msgid "Horário removido."
+msgstr "Horário removido."
+
+#, python-format
+msgid "Horários de %(name)s"
+msgstr "Horários de %(name)s"
+
+msgid "Horários livres"
+msgstr "Horários livres"
+
+#, python-format
+msgid "Horários livres de %(name)s em %(unit)s"
+msgstr "Horários livres de %(name)s em %(unit)s"
+
+#, python-format
+msgid "Horários livres dos próximos %(days)s dias, calculados como o aplicativo calcula para o paciente. O paciente só vê profissionais vinculados a ele, em unidades e serviços ativos."
+msgstr "Horários livres dos próximos %(days)s dias, calculados como o aplicativo calcula para o paciente. O paciente só vê profissionais vinculados a ele, em unidades e serviços ativos."
+
+msgid "Horários salvos. Confira a prévia dos horários livres."
+msgstr "Horários salvos. Confira a prévia dos horários livres."
+
+msgid "Horários semanais em que cada profissional atende, por unidade. O aplicativo oferece ao paciente apenas os horários livres dentro destes."
+msgstr "Horários semanais em que cada profissional atende, por unidade. O aplicativo oferece ao paciente apenas os horários livres dentro destes."
+
+msgid "Há muitas combinações de profissional e unidade. Filtre por profissional para ver as demais."
+msgstr "Há muitas combinações de profissional e unidade. Filtre por profissional para ver as demais."
+
+msgid "Inativar um serviço o tira das opções do aplicativo; as consultas já marcadas continuam como estão."
+msgstr "Inativar um serviço o tira das opções do aplicativo; as consultas já marcadas continuam como estão."
+
+msgid "Informe o nome da linha de apoio."
+msgstr "Informe o nome da linha de apoio."
+
+msgid "Informe o nome do serviço."
+msgstr "Informe o nome do serviço."
+
+msgid "Informe o nome e o telefone da linha de apoio ou deixe os dois vazios."
+msgstr "Informe o nome e o telefone da linha de apoio ou deixe os dois vazios."
+
+msgid "Informe o telefone da linha de apoio."
+msgstr "Informe o telefone da linha de apoio."
+
+msgid "Intervalo entre consultas"
+msgstr "Intervalo entre consultas"
+
+msgid "Intervalo entre consultas (minutos)"
+msgstr "Intervalo entre consultas (minutos)"
+
+msgid "Já existe um serviço com este nome."
+msgstr "Já existe um serviço com este nome."
+
+msgid "Linha de apoio da clínica (opcional)"
+msgstr "Linha de apoio da clínica (opcional)"
+
+msgid "Marque todos os dias em que este horário se repete."
+msgstr "Marque todos os dias em que este horário se repete."
+
+msgid "Nenhum horário de atendimento cadastrado. Cadastre horários para ver a prévia."
+msgstr "Nenhum horário de atendimento cadastrado. Cadastre horários para ver a prévia."
+
+msgid "Nenhum horário de atendimento cadastrado. Sem horários, o paciente não consegue pedir consulta no aplicativo."
+msgstr "Nenhum horário de atendimento cadastrado. Sem horários, o paciente não consegue pedir consulta no aplicativo."
+
+msgid "Nenhum serviço ativo. Cadastre ou ative um serviço para ver a prévia."
+msgstr "Nenhum serviço ativo. Cadastre ou ative um serviço para ver a prévia."
+
+msgid "Nenhum serviço ativo: sem ele o paciente não consegue pedir consulta no aplicativo."
+msgstr "Nenhum serviço ativo: sem ele o paciente não consegue pedir consulta no aplicativo."
+
+msgid "Nenhum serviço cadastrado ainda."
+msgstr "Nenhum serviço cadastrado ainda."
+
+msgid "Nenhuma combinação de profissional e unidade ativa para mostrar."
+msgstr "Nenhuma combinação de profissional e unidade ativa para mostrar."
+
+msgid "No Brasil, 188 (CVV)."
+msgstr "No Brasil, 188 (CVV)."
+
+msgid "No Brasil, 192 (SAMU)."
+msgstr "No Brasil, 192 (SAMU)."
+
+msgid "No Brasil, 193."
+msgstr "No Brasil, 193."
+
+msgid "Nome do serviço"
+msgstr "Nome do serviço"
+
+msgid "Nome mostrado ao paciente, por exemplo: Plantão da clínica."
+msgstr "Nome mostrado ao paciente, por exemplo: Plantão da clínica."
+
+msgid "Novo horário"
+msgstr "Novo horário"
+
+msgid "Novo horário de atendimento"
+msgstr "Novo horário de atendimento"
+
+msgid "Novo serviço"
+msgstr "Novo serviço"
+
+msgid "Número"
+msgstr "Número"
+
+msgid "Números e aviso que o paciente vê na tela de ajuda do aplicativo. O app só abre o discador quando o paciente toca no número."
+msgstr "Números e aviso que o paciente vê na tela de ajuda do aplicativo. O app só abre o discador quando o paciente toca no número."
+
+msgid "Números exibidos na tela de ajuda"
+msgstr "Números exibidos na tela de ajuda"
+
+msgid "O aplicativo não é um serviço de emergência"
+msgstr "O aplicativo não é um serviço de emergência"
+
+msgid "O aviso deve manter o texto obrigatório. Você pode acrescentar orientações antes ou depois dele."
+msgstr "O aviso deve manter o texto obrigatório. Você pode acrescentar orientações antes ou depois dele."
+
+msgid "O aviso não pode ficar vazio."
+msgstr "O aviso não pode ficar vazio."
+
+msgid "O aviso é longo demais (máximo de 1000 caracteres)."
+msgstr "O aviso é longo demais (máximo de 1000 caracteres)."
+
+msgid "O fim deve ser depois do início."
+msgstr "O fim deve ser depois do início."
+
+#, python-format
+msgid "O horário %(start)s–%(end)s fica fora do funcionamento da clínica em %(day)s (%(hours)s)."
+msgstr "O horário %(start)s–%(end)s fica fora do funcionamento da clínica em %(day)s (%(hours)s)."
+
+msgid "O horário final deve ser posterior ao inicial."
+msgstr "O horário final deve ser posterior ao inicial."
+
+msgid "O horário inicial deve ser anterior ao final."
+msgstr "O horário inicial deve ser anterior ao final."
+
+msgid "O horário precisa caber no funcionamento da clínica e não pode se sobrepor a outro horário do mesmo profissional."
+msgstr "O horário precisa caber no funcionamento da clínica e não pode se sobrepor a outro horário do mesmo profissional."
+
+msgid "O intervalo entre consultas deve ficar entre 0 e 120 minutos."
+msgstr "O intervalo entre consultas deve ficar entre 0 e 120 minutos."
+
+msgid "O nome da linha de apoio é longo demais."
+msgstr "O nome da linha de apoio é longo demais."
+
+msgid "O nome do serviço é longo demais (máximo de 255 caracteres)."
+msgstr "O nome do serviço é longo demais (máximo de 255 caracteres)."
+
+msgid "O número deve ter entre 3 e 15 dígitos."
+msgstr "O número deve ter entre 3 e 15 dígitos."
+
+msgid "O número é longo demais."
+msgstr "O número é longo demais."
+
+msgid "O profissional não possui vínculo ativo como terapeuta nesta clínica."
+msgstr "O profissional não possui vínculo ativo como terapeuta nesta clínica."
+
+msgid "O que o paciente vê hoje"
+msgstr "O que o paciente vê hoje"
+
+msgid "O texto obrigatório abaixo não pode ser removido nem alterado. Você pode acrescentar orientações antes ou depois dele."
+msgstr "O texto obrigatório abaixo não pode ser removido nem alterado. Você pode acrescentar orientações antes ou depois dele."
+
+msgid "Os tipos de consulta que o paciente pode pedir no aplicativo, com a duração de cada um."
+msgstr "Os tipos de consulta que o paciente pode pedir no aplicativo, com a duração de cada um."
+
+msgid "Profissional sem perfil"
+msgstr "Profissional sem perfil"
+
+#, python-format
+msgid "Profissional: %(name)s."
+msgstr "Profissional: %(name)s."
+
+msgid "Prévia"
+msgstr "Prévia"
+
+msgid "Prévia dos horários livres"
+msgstr "Prévia dos horários livres"
+
+msgid "Qualquer sala"
+msgstr "Qualquer sala"
+
+msgid "Recurso"
+msgstr "Recurso"
+
+msgid "Recursos de crise"
+msgstr "Recursos de crise"
+
+msgid "Recursos de crise do aplicativo"
+msgstr "Recursos de crise do aplicativo"
+
+msgid "Recursos de crise salvos. O aplicativo já usa os novos dados."
+msgstr "Recursos de crise salvos. O aplicativo já usa os novos dados."
+
+msgid "Remover"
+msgstr "Remover"
+
+msgid "Remover horário"
+msgstr "Remover horário"
+
+msgid "Remover horário de atendimento"
+msgstr "Remover horário de atendimento"
+
+#, python-format
+msgid "Remover o horário de %(name)s, %(day)s, das %(start)s às %(end)s? Os pacientes deixam de ver estes horários. Consultas já marcadas não são alteradas."
+msgstr "Remover o horário de %(name)s, %(day)s, das %(start)s às %(end)s? Os pacientes deixam de ver estes horários. Consultas já marcadas não são alteradas."
+
+msgid "Sala"
+msgstr "Sala"
+
+msgid "Sala (opcional)"
+msgstr "Sala (opcional)"
+
+msgid "Sala não encontrada nesta unidade."
+msgstr "Sala não encontrada nesta unidade."
+
+msgid "Salvar horário"
+msgstr "Salvar horário"
+
+msgid "Salvar recursos de crise"
+msgstr "Salvar recursos de crise"
+
+msgid "Salvar serviço"
+msgstr "Salvar serviço"
+
+msgid "Selecione a unidade"
+msgstr "Selecione a unidade"
+
+msgid "Selecione o profissional"
+msgstr "Selecione o profissional"
+
+msgid "Sem data final"
+msgstr "Sem data final"
+
+msgid "Sem horários livres"
+msgstr "Sem horários livres"
+
+msgid "Serviço ativado. O paciente já pode pedi-lo no aplicativo."
+msgstr "Serviço ativado. O paciente já pode pedi-lo no aplicativo."
+
+msgid "Serviço atualizado."
+msgstr "Serviço atualizado."
+
+msgid "Serviço criado."
+msgstr "Serviço criado."
+
+msgid "Serviço inativado. O paciente deixa de ver este serviço."
+msgstr "Serviço inativado. O paciente deixa de ver este serviço."
+
+#, python-format
+msgid "Serviço: %(name)s, %(minutes)s min de duração e %(buffer)s min de intervalo."
+msgstr "Serviço: %(name)s, %(minutes)s min de duração e %(buffer)s min de intervalo."
+
+msgid "Serviços cadastrados"
+msgstr "Serviços cadastrados"
+
+msgid "Serviços de agendamento"
+msgstr "Serviços de agendamento"
+
+msgid "Somado à duração para calcular os horários que o paciente vê no aplicativo. Consultas já marcadas não mudam."
+msgstr "Somado à duração para calcular os horários que o paciente vê no aplicativo. Consultas já marcadas não mudam."
+
+msgid "Somente o administrador da clínica pode alterar estes dados."
+msgstr "Somente o administrador da clínica pode alterar estes dados."
+
+msgid "Telefone da linha de apoio (opcional)"
+msgstr "Telefone da linha de apoio (opcional)"
+
+msgid "Texto obrigatório"
+msgstr "Texto obrigatório"
+
+msgid "Todos os profissionais"
+msgstr "Todos os profissionais"
+
+#, python-format
+msgid "Total: %(total)s"
+msgstr "Total: %(total)s"
+
+msgid "Unidade não encontrada."
+msgstr "Unidade não encontrada."
+
+msgid "Use apenas dígitos, espaços e um + no início."
+msgstr "Use apenas dígitos, espaços e um + no início."
+
+msgid "Vale até"
+msgstr "Vale até"
+
+msgid "Ver prévia"
+msgstr "Ver prévia"
+
+msgid "Voltar aos horários"
+msgstr "Voltar aos horários"
+
+#, python-format
+msgid "Última alteração em %(when)s."
+msgstr "Última alteração em %(when)s."
+
+#, python-format
+msgid "%(label)s: respostas no período: %(answered)s"
+msgstr "%(label)s: respostas no período: %(answered)s"
+
+msgid "7 dias"
+msgstr "7 dias"
+
+msgid "15 dias"
+msgstr "15 dias"
+
+msgid "60 dias"
+msgstr "60 dias"
+
+msgid "90 dias"
+msgstr "90 dias"
+
+msgid "Aguardando resposta do paciente"
+msgstr "Aguardando resposta do paciente"
+
+msgid "Aparecem só os check-ins que o paciente compartilhou. Um dia em branco não quer dizer que ele não respondeu. As observações escritas por ele não são exibidas. Cada leitura fica registrada na auditoria."
+msgstr "Aparecem só os check-ins que o paciente compartilhou. Um dia em branco não quer dizer que ele não respondeu. As observações escritas por ele não são exibidas. Cada leitura fica registrada na auditoria."
+
+msgid "Aprovado pelo paciente"
+msgstr "Aprovado pelo paciente"
+
+msgid "As sete perguntas de 1 a 5 dos check-ins que o paciente escolheu compartilhar."
+msgstr "As sete perguntas de 1 a 5 dos check-ins que o paciente escolheu compartilhar."
+
+msgid "Check-ins compartilhados"
+msgstr "Check-ins compartilhados"
+
+#, python-format
+msgid "Check-ins de %(name)s"
+msgstr "Check-ins de %(name)s"
+
+msgid "Compartilhado pelo paciente"
+msgstr "Compartilhado pelo paciente"
+
+msgid "Conta a partir de hoje. O paciente pode escolher outro prazo ao responder."
+msgstr "Conta a partir de hoje. O paciente pode escolher outro prazo ao responder."
+
+msgid "Dia a dia"
+msgstr "Dia a dia"
+
+msgid "Disposição e energia"
+msgstr "Disposição e energia"
+
+msgid "Diário"
+msgstr "Diário"
+
+#, python-format
+msgid "Diário de %(name)s"
+msgstr "Diário de %(name)s"
+
+msgid "Enviar pedido"
+msgstr "Enviar pedido"
+
+msgid "Escala de 1 a 5: quanto maior o número, mais alto o nível descrito na pergunta (por exemplo, mais ansiedade ou mais energia). Cada barra é um dia, do mais antigo para o mais recente."
+msgstr "Escala de 1 a 5: quanto maior o número, mais alto o nível descrito na pergunta (por exemplo, mais ansiedade ou mais energia). Cada barra é um dia, do mais antigo para o mais recente."
+
+msgid "Este registro já foi liberado pelo paciente."
+msgstr "Este registro já foi liberado pelo paciente."
+
+msgid "Estratégias"
+msgstr "Estratégias"
+
+msgid "Evolução por pergunta"
+msgstr "Evolução por pergunta"
+
+msgid "Expirado"
+msgstr "Expirado"
+
+msgid "Finalidade do pedido"
+msgstr "Finalidade do pedido"
+
+#, python-format
+msgid "Humor: %(mood)s (%(score)s/5)"
+msgstr "Humor: %(mood)s (%(score)s/5)"
+
+#, python-format
+msgid "Intensidade: %(score)s/5"
+msgstr "Intensidade: %(score)s/5"
+
+msgid "Irritabilidade"
+msgstr "Irritabilidade"
+
+msgid "Janela"
+msgstr "Janela"
+
+msgid "Já existe um pedido aguardando a resposta do paciente."
+msgstr "Já existe um pedido aguardando a resposta do paciente."
+
+msgid "Liberado a pedido"
+msgstr "Liberado a pedido"
+
+msgid "Motivação"
+msgstr "Motivação"
+
+msgid "Nenhum check-in compartilhado neste período."
+msgstr "Nenhum check-in compartilhado neste período."
+
+msgid "Nenhum pedido feito"
+msgstr "Nenhum pedido feito"
+
+msgid "Nenhum registro compartilhado neste período."
+msgstr "Nenhum registro compartilhado neste período."
+
+msgid "O paciente lê este texto no aplicativo antes de decidir. Explique para que você precisa do registro e não inclua conteúdo clínico."
+msgstr "O paciente lê este texto no aplicativo antes de decidir. Explique para que você precisa do registro e não inclua conteúdo clínico."
+
+msgid "O paciente marcou estes registros como “perguntar antes”. O conteúdo só aparece depois que ele aprovar o seu pedido, pelo aplicativo."
+msgstr "O paciente marcou estes registros como “perguntar antes”. O conteúdo só aparece depois que ele aprovar o seu pedido, pelo aplicativo."
+
+msgid "O paciente recusou este pedido. Só ele pode liberar o registro, pelo aplicativo."
+msgstr "O paciente recusou este pedido. Só ele pode liberar o registro, pelo aplicativo."
+
+msgid "O que o paciente escolheu compartilhar com a equipe pelo aplicativo."
+msgstr "O que o paciente escolheu compartilhar com a equipe pelo aplicativo."
+
+msgid "Paginação dos registros"
+msgstr "Paginação dos registros"
+
+msgid "Pedido em"
+msgstr "Pedido em"
+
+msgid "Pedido enviado. O paciente responde pelo aplicativo."
+msgstr "Pedido enviado. O paciente responde pelo aplicativo."
+
+msgid "Pedidos de acesso feitos por você a este paciente"
+msgstr "Pedidos de acesso feitos por você a este paciente"
+
+msgid "Pedir acesso"
+msgstr "Pedir acesso"
+
+msgid "Pedir acesso a um registro"
+msgstr "Pedir acesso a um registro"
+
+msgid "Pergunta"
+msgstr "Pergunta"
+
+#, python-format
+msgid "Página %(number)s de %(total)s"
+msgstr "Página %(number)s de %(total)s"
+
+msgid "Qualidade do sono"
+msgstr "Qualidade do sono"
+
+msgid "Quem decide é o paciente. Ele recebe o pedido no aplicativo e pode aprovar, recusar ou escolher a validade. Você só verá o registro se ele aprovar. O pedido fica registrado na auditoria."
+msgstr "Quem decide é o paciente. Ele recebe o pedido no aplicativo e pode aprovar, recusar ou escolher a validade. Você só verá o registro se ele aprovar. O pedido fica registrado na auditoria."
+
+msgid "Reações"
+msgstr "Reações"
+
+msgid "Recusado pelo paciente"
+msgstr "Recusado pelo paciente"
+
+msgid "Registrado"
+msgstr "Registrado"
+
+msgid "Registro de"
+msgstr "Registro de"
+
+#, python-format
+msgid "Registro de %(date)s, marcado pelo paciente como “perguntar antes”."
+msgstr "Registro de %(date)s, marcado pelo paciente como “perguntar antes”."
+
+msgid "Registros compartilhados"
+msgstr "Registros compartilhados"
+
+msgid "Registros do diário"
+msgstr "Registros do diário"
+
+msgid "Registros que dependem da aprovação do paciente"
+msgstr "Registros que dependem da aprovação do paciente"
+
+msgid "Registros que pedem confirmação"
+msgstr "Registros que pedem confirmação"
+
+#, python-format
+msgid "Respondido em %(date)s"
+msgstr "Respondido em %(date)s"
+
+msgid "Respostas"
+msgstr "Respostas"
+
+msgid "Respostas de 1 a 5 em cada dia com check-in compartilhado, do mais recente para o mais antigo"
+msgstr "Respostas de 1 a 5 em cada dia com check-in compartilhado, do mais recente para o mais antigo"
+
+msgid "Resumo das perguntas no período"
+msgstr "Resumo das perguntas no período"
+
+msgid "Resumo do período"
+msgstr "Resumo do período"
+
+msgid "Sem pedido"
+msgstr "Sem pedido"
+
+msgid "Seus pedidos de acesso"
+msgstr "Seus pedidos de acesso"
+
+msgid "Seções do diário do paciente"
+msgstr "Seções do diário do paciente"
+
+msgid "Todo o período"
+msgstr "Todo o período"
+
+msgid "Tristeza ou desânimo"
+msgstr "Tristeza ou desânimo"
+
+msgid "Validade do acesso, se o paciente aprovar"
+msgstr "Validade do acesso, se o paciente aprovar"
+
+msgid "Valores por dia"
+msgstr "Valores por dia"
+
+msgid "Você vê só os registros que o paciente compartilhou ou liberou a seu pedido. Os demais ficam com o paciente e não aparecem aqui. Cada leitura fica registrada na auditoria."
+msgstr "Você vê só os registros que o paciente compartilhou ou liberou a seu pedido. Os demais ficam com o paciente e não aparecem aqui. Cada leitura fica registrada na auditoria."
+
+msgid "sem resposta"
+msgstr "sem resposta"
+
+msgid "Último"
+msgstr "Último"
+
+msgid "Últimos 14 dias"
+msgstr "Últimos 14 dias"
+
+msgid "A conta existe, mas o vínculo do paciente com a clínica não está mais ativo. O aplicativo recusa o acesso."
+msgstr "A conta existe, mas o vínculo do paciente com a clínica não está mais ativo. O aplicativo recusa o acesso."
+
+msgid "Aceito"
+msgstr "Aceito"
+
+#, python-format
+msgid "Acesso de %(name)s ao aplicativo Aurora Elo Pós-alta. Esta página não mostra conteúdo clínico nem credenciais de acesso."
+msgstr "Acesso de %(name)s ao aplicativo Aurora Elo Pós-alta. Esta página não mostra conteúdo clínico nem credenciais de acesso."
+
+msgid "Acesso encerrado"
+msgstr "Acesso encerrado"
+
+msgid "Ainda não ativada"
+msgstr "Ainda não ativada"
+
+#, python-format
+msgid "Alta registrada em %(date)s. O aplicativo usa esta data para contar os dias desde a alta."
+msgstr "Alta registrada em %(date)s. O aplicativo usa esta data para contar os dias desde a alta."
+
+msgid "Aparelho"
+msgstr "Aparelho"
+
+msgid "Aparelho desconectado. Para voltar a usar o aplicativo, o paciente precisa entrar de novo."
+msgstr "Aparelho desconectado. Para voltar a usar o aplicativo, o paciente precisa entrar de novo."
+
+msgid "Aparelhos com sessão ativa no aplicativo"
+msgstr "Aparelhos com sessão ativa no aplicativo"
+
+msgid "Aparelhos conectados"
+msgstr "Aparelhos conectados"
+
+msgid "Atividade recente"
+msgstr "Atividade recente"
+
+msgid "Celular perdido ou roubado? Desconecte o aparelho aqui: ele perde o acesso na hora. Se houver risco para a conta, o paciente também pode trocar a senha pelo aplicativo, o que desconecta todos os aparelhos."
+msgstr "Celular perdido ou roubado? Desconecte o aparelho aqui: ele perde o acesso na hora. Se houver risco para a conta, o paciente também pode trocar a senha pelo aplicativo, o que desconecta todos os aparelhos."
+
+msgid "Conectado em"
+msgstr "Conectado em"
+
+msgid "Confirmo que quero seguir com esta ação."
+msgstr "Confirmo que quero seguir com esta ação."
+
+msgid "Conta ativa"
+msgstr "Conta ativa"
+
+msgid "Conta no aplicativo"
+msgstr "Conta no aplicativo"
+
+msgid "Convite"
+msgstr "Convite"
+
+msgid "Convite de ativação"
+msgstr "Convite de ativação"
+
+msgid "Convite do aplicativo"
+msgstr "Convite do aplicativo"
+
+msgid "Desconectar"
+msgstr "Desconectar"
+
+msgid "Desconectar aparelho"
+msgstr "Desconectar aparelho"
+
+msgid "Desconectar todos"
+msgstr "Desconectar todos"
+
+msgid "Desconectar todos os aparelhos"
+msgstr "Desconectar todos os aparelhos"
+
+#, python-format
+msgid "Enviado e ainda não usado. Vale até %(date)s."
+msgstr "Enviado e ainda não usado. Vale até %(date)s."
+
+msgid "Este aparelho já não estava conectado."
+msgstr "Este aparelho já não estava conectado."
+
+msgid "Este paciente já ativou a conta: não há convite a enviar."
+msgstr "Este paciente já ativou a conta: não há convite a enviar."
+
+msgid "Nenhum aparelho conectado no momento."
+msgstr "Nenhum aparelho conectado no momento."
+
+msgid "Nenhum aparelho estava conectado."
+msgstr "Nenhum aparelho estava conectado."
+
+msgid "Nenhum convite enviado"
+msgstr "Nenhum convite enviado"
+
+msgid "Nenhum convite foi emitido para este paciente."
+msgstr "Nenhum convite foi emitido para este paciente."
+
+msgid "O aplicativo deste aparelho perde o acesso na hora. Para voltar a usar o aplicativo, o paciente precisa entrar de novo com e-mail e senha."
+msgstr "O aplicativo deste aparelho perde o acesso na hora. Para voltar a usar o aplicativo, o paciente precisa entrar de novo com e-mail e senha."
+
+#, python-format
+msgid "O convite venceu em %(date)s sem ser usado."
+msgstr "O convite venceu em %(date)s sem ser usado."
+
+msgid "O código aparece uma única vez, na próxima tela. A clínica não consegue consultá-lo depois."
+msgstr "O código aparece uma única vez, na próxima tela. A clínica não consegue consultá-lo depois."
+
+msgid "O código de ativação aparece uma única vez, quando o convite é emitido. A clínica não consegue consultá-lo depois."
+msgstr "O código de ativação aparece uma única vez, quando o convite é emitido. A clínica não consegue consultá-lo depois."
+
+msgid "O código novo aparece uma única vez, na próxima tela. A clínica não consegue consultá-lo depois."
+msgstr "O código novo aparece uma única vez, na próxima tela. A clínica não consegue consultá-lo depois."
+
+msgid "O paciente ainda não ativou a conta. A ativação é feita só no aplicativo, com o código do convite."
+msgstr "O paciente ainda não ativou a conta. A ativação é feita só no aplicativo, com o código do convite."
+
+msgid "O paciente já ativou a conta e pode entrar no aplicativo."
+msgstr "O paciente já ativou a conta e pode entrar no aplicativo."
+
+#, python-format
+msgid "O paciente usou o convite em %(date)s."
+msgstr "O paciente usou o convite em %(date)s."
+
+msgid "O último convite foi cancelado e não vale mais."
+msgstr "O último convite foi cancelado e não vale mais."
+
+msgid "Outra plataforma"
+msgstr "Outra plataforma"
+
+msgid "Reenviar convite"
+msgstr "Reenviar convite"
+
+msgid "Sem acesso ao aplicativo registrado."
+msgstr "Sem acesso ao aplicativo registrado."
+
+msgid "Será emitido um convite com um código de ativação, enviado ao e-mail do paciente. O paciente ativa a conta só no aplicativo."
+msgstr "Será emitido um convite com um código de ativação, enviado ao e-mail do paciente. O paciente ativa a conta só no aplicativo."
+
+msgid "Será emitido um convite novo, com um código novo, enviado ao e-mail do paciente. O código anterior deixa de valer."
+msgstr "Será emitido um convite novo, com um código novo, enviado ao e-mail do paciente. O código anterior deixa de valer."
+
+msgid "Situação do acesso"
+msgstr "Situação do acesso"
+
+msgid "Somente o administrador da clínica envia convites."
+msgstr "Somente o administrador da clínica envia convites."
+
+msgid "Todos os aparelhos abaixo perdem o acesso ao aplicativo na hora. Use esta opção quando houver risco para a conta. Para voltar a usar o aplicativo, o paciente precisa entrar de novo com e-mail e senha."
+msgstr "Todos os aparelhos abaixo perdem o acesso ao aplicativo na hora. Use esta opção quando houver risco para a conta. Para voltar a usar o aplicativo, o paciente precisa entrar de novo com e-mail e senha."
+
+msgid "Todos os aparelhos foram desconectados. Para voltar a usar o aplicativo, o paciente precisa entrar de novo."
+msgstr "Todos os aparelhos foram desconectados. Para voltar a usar o aplicativo, o paciente precisa entrar de novo."
+
+msgid "Versão do aplicativo"
+msgstr "Versão do aplicativo"
+
+msgid "Voltar ao painel do aplicativo"
+msgstr "Voltar ao painel do aplicativo"
+
+msgid "Voltar à ficha do paciente"
+msgstr "Voltar à ficha do paciente"
+
+#, python-format
+msgid "Último acesso ao aplicativo em %(date)s."
+msgstr "Último acesso ao aplicativo em %(date)s."
+
+msgid "Último uso"
+msgstr "Último uso"
+
+#, python-format
+msgid "último uso em %(date)s"
+msgstr "último uso em %(date)s"
+
+msgid "Serviços de atendimento"
+msgstr "Serviços de atendimento"
+
+msgid "O paciente usa apenas o aplicativo. O que a equipe cadastra aqui aparece no app dele."
+msgstr "O paciente usa apenas o aplicativo. O que a equipe cadastra aqui aparece no app dele."
+
+msgid "Acesso e aparelhos"
+msgstr "Acesso e aparelhos"
+
+msgid "Plano de cuidado"
+msgstr "Plano de cuidado"
+
+msgid "Diário compartilhado"
+msgstr "Diário compartilhado"
+

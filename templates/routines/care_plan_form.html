@@ -1,0 +1,44 @@
+{% extends "routines/base.html" %}
+{% load i18n %}
+{% block content %}
+<form method="post" novalidate class="ae-stack">
+  {% csrf_token %}
+  <div class="ae-alert" role="note"><svg class="ae-icon" aria-hidden="true"><use href="#i-info"/></svg><div>{% translate "Isto é um rascunho: o paciente não vê nada até que o plano seja enviado para assinatura e assinado. Depois de assinado, o conteúdo marcado como “o paciente vê” aparece no app." %}</div></div>
+  {% include "routines/partials/errors.html" %}
+  {% if formset.non_form_errors or formset.total_error_count %}
+  <div class="ae-alert ae-alert--danger" role="alert" tabindex="-1">
+    <svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg>
+    <div>
+      <p class="ae-alert__title">{% translate "Revise as ações do plano" %}</p>
+      {% if formset.non_form_errors %}<ul class="m-0">{% for error in formset.non_form_errors %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+  <section class="ae-card ae-stack" aria-labelledby="sec-plan-data">
+    <h2 class="ae-card__title" id="sec-plan-data">{% translate "Dados do plano" %}</h2>
+    <div class="ae-form-grid">
+      {% for field in form.hidden_fields %}{{ field }}{% endfor %}
+      {% for field in form.visible_fields %}
+      {% include "routines/partials/field.html" with field=field only %}
+      {% endfor %}
+    </div>
+  </section>
+  {{ formset.management_form }}
+  {% for action_form in formset %}
+  <section class="ae-card ae-stack" aria-labelledby="sec-action-{{ forloop.counter }}">
+    <h2 class="ae-card__title" id="sec-action-{{ forloop.counter }}">{% blocktranslate with number=forloop.counter %}Ação {{ number }}{% endblocktranslate %}</h2>
+    {% for field in action_form.hidden_fields %}{{ field }}{% endfor %}
+    <div class="ae-form-grid">
+      {% for field in action_form.visible_fields %}
+      {% include "routines/partials/field.html" with field=field only %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+  <p class="ae-card__meta">{% translate "Precisa de mais ações? Salve o rascunho e edite de novo: surgem novas linhas em branco." %}</p>
+  <div class="ae-actions ae-actions--end">
+    <a class="ae-btn ae-btn--secondary" href="{{ cancel_url }}">{% translate "Voltar" %}</a>
+    <button type="submit" class="ae-btn">{{ submit_label }}</button>
+  </div>
+</form>
+{% endblock %}

@@ -60,6 +60,15 @@ def _patient(clinic: Clinic, email: str) -> User:
     return user
 
 
+def _therapist_member(clinic: Clinic, email: str) -> User:
+    """Membro da equipe que consulta a biblioteca (o paciente usa só o aplicativo)."""
+    user = UserFactory.create(email=email)
+    ClinicMembershipFactory.create(
+        clinic=clinic, user=user, role=ClinicMembership.Role.THERAPIST
+    )
+    return user
+
+
 def _clinic_team(clinic: Clinic) -> tuple[User, User, User]:
     admin = UserFactory.create()
     reviewer = UserFactory.create()
@@ -127,7 +136,7 @@ def _editorial_url(name: str, **kwargs: object) -> str:
 def test_library_lists_published_content(client: Client) -> None:
     clinic = ClinicFactory.create()
     admin, reviewer, publisher = _clinic_team(clinic)
-    patient = _patient(clinic, "paciente@example.test")
+    member = _therapist_member(clinic, "paciente@example.test")
     _publish_article(
         clinic,
         admin,
@@ -137,7 +146,7 @@ def test_library_lists_published_content(client: Client) -> None:
         title="Respiração 4-7-8",
         body="Técnica de respiração para acalmar.",
     )
-    _force_clinic_client(client, clinic, patient)
+    _force_clinic_client(client, clinic, member)
 
     response = client.get(reverse("content_library"))
 
@@ -148,7 +157,7 @@ def test_library_lists_published_content(client: Client) -> None:
 def test_detail_renders_published_body(client: Client) -> None:
     clinic = ClinicFactory.create()
     admin, reviewer, publisher = _clinic_team(clinic)
-    patient = _patient(clinic, "paciente@example.test")
+    member = _therapist_member(clinic, "paciente@example.test")
     _publish_article(
         clinic,
         admin,
@@ -158,7 +167,7 @@ def test_detail_renders_published_body(client: Client) -> None:
         title="Autocompaixão",
         body="Pratique bondade consigo mesmo.",
     )
-    _force_clinic_client(client, clinic, patient)
+    _force_clinic_client(client, clinic, member)
 
     response = client.get(reverse("content_detail", kwargs={"slug": "autocompaixao"}))
 
@@ -169,7 +178,7 @@ def test_detail_renders_published_body(client: Client) -> None:
 def test_detail_404_for_unpublished_content(client: Client) -> None:
     clinic = ClinicFactory.create()
     admin, reviewer, publisher = _clinic_team(clinic)
-    patient = _patient(clinic, "paciente@example.test")
+    member = _therapist_member(clinic, "paciente@example.test")
     content_services.start_content(
         clinic_id=clinic.pk,
         actor=admin,
@@ -179,7 +188,7 @@ def test_detail_404_for_unpublished_content(client: Client) -> None:
         body="Ainda não publicado.",
         request_id=uuid4(),
     )
-    _force_clinic_client(client, clinic, patient)
+    _force_clinic_client(client, clinic, member)
 
     response = client.get(reverse("content_detail", kwargs={"slug": "rascunho"}))
 
@@ -190,7 +199,7 @@ def test_library_is_tenant_scoped(client: Client) -> None:
     clinic_a = ClinicFactory.create()
     clinic_b = ClinicFactory.create()
     admin_b, reviewer_b, publisher_b = _clinic_team(clinic_b)
-    patient_a = _patient(clinic_a, "paciente-a@example.test")
+    member_a = _therapist_member(clinic_a, "paciente-a@example.test")
     _publish_article(
         clinic_b,
         admin_b,
@@ -200,48 +209,13 @@ def test_library_is_tenant_scoped(client: Client) -> None:
         title="Material exclusivo da clínica B",
         body="Não deve vazar para a clínica A.",
     )
-    _force_clinic_client(client, clinic_a, patient_a)
+    _force_clinic_client(client, clinic_a, member_a)
 
     library = client.get(reverse("content_library"))
     detail = client.get(reverse("content_detail", kwargs={"slug": "somente-clinica-b"}))
 
     assert "Material exclusivo da clínica B" not in library.content.decode()
     assert detail.status_code == 404
-
-
-def test_recommendation_list_scoped_to_recipient(client: Client) -> None:
-    clinic = ClinicFactory.create()
-    admin, reviewer, publisher = _clinic_team(clinic)
-    therapist = UserFactory.create()
-    _credential_for(clinic, therapist, "therapist")
-    patient = _patient(clinic, "paciente@example.test")
-    other = _patient(clinic, "outro@example.test")
-    content = _publish_article(
-        clinic,
-        admin,
-        reviewer,
-        publisher,
-        slug="valores-pessoais",
-        title="Valores pessoais",
-        body="Reflita sobre o que importa.",
-    )
-    content_services.recommend_content(
-        clinic_id=clinic.pk,
-        actor=therapist,
-        content_id=content.pk,
-        patient_id=patient.pk,
-        cohort_id=None,
-        objective="Trabalhar valores entre sessões",
-        priority="normal",
-        context="Complemento do plano de cuidado.",
-        request_id=uuid4(),
-    )
-
-    _force_clinic_client(client, clinic, other)
-    response = client.get(reverse("content_recommendations"))
-
-    assert response.status_code == 200
-    assert "Trabalhar valores" not in response.content.decode()
 
 
 def test_publish_action_denied_for_non_admin(client: Client) -> None:

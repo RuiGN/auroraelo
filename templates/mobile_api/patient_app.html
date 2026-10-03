@@ -1,0 +1,125 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{% url 'patient_detail' patient.pk %}">{{ patient.full_name }}</a></li>
+      <li>{% translate "Aplicativo do paciente" %}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{% translate "Aplicativo do paciente" %}</h1>
+    <p class="ae-page-header__lead">{% blocktranslate with name=patient.full_name %}Acesso de {{ name }} ao aplicativo Aurora Elo Pós-alta. Esta página não mostra conteúdo clínico nem credenciais de acesso.{% endblocktranslate %}</p>
+  </div>
+  <div class="ae-actions">
+    <a class="ae-btn ae-btn--secondary" href="{% url 'patient_detail' patient.pk %}">{% translate "Voltar à ficha do paciente" %}</a>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="ae-stack">
+  <section class="ae-card" aria-labelledby="sec-access">
+    <h2 class="ae-card__title" id="sec-access">{% translate "Situação do acesso" %}</h2>
+    <ul class="ae-timeline">
+      <li class="ae-timeline__item">
+        <span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-patient"/></svg></span>
+        <div>
+          <p class="ae-timeline__title">{% translate "Conta no aplicativo" %}
+            {% if access.account_state == "active" %}<span class="ae-badge ae-badge--success">{% translate "Conta ativa" %}</span>
+            {% elif access.account_state == "ended" %}<span class="ae-badge ae-badge--danger">{% translate "Acesso encerrado" %}</span>
+            {% else %}<span class="ae-badge ae-badge--muted">{% translate "Ainda não ativada" %}</span>{% endif %}
+          </p>
+          <p class="ae-timeline__body">
+            {% if access.account_state == "active" %}{% translate "O paciente já ativou a conta e pode entrar no aplicativo." %}
+            {% elif access.account_state == "ended" %}{% translate "A conta existe, mas o vínculo do paciente com a clínica não está mais ativo. O aplicativo recusa o acesso." %}
+            {% else %}{% translate "O paciente ainda não ativou a conta. A ativação é feita só no aplicativo, com o código do convite." %}{% endif %}
+          </p>
+        </div>
+      </li>
+      <li class="ae-timeline__item">
+        <span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-message"/></svg></span>
+        <div>
+          <p class="ae-timeline__title">{% translate "Convite de ativação" %}
+            {% if access.invitation.status == "pending" %}<span class="ae-badge ae-badge--info">{% translate "Pendente" %}</span>
+            {% elif access.invitation.status == "expired" %}<span class="ae-badge ae-badge--warning">{% translate "Expirado" %}</span>
+            {% elif access.invitation.status == "accepted" %}<span class="ae-badge ae-badge--success">{% translate "Aceito" %}</span>
+            {% elif access.invitation.status == "revoked" %}<span class="ae-badge ae-badge--muted">{% translate "Cancelado" %}</span>
+            {% else %}<span class="ae-badge ae-badge--muted">{% translate "Nenhum convite enviado" %}</span>{% endif %}
+          </p>
+          <p class="ae-timeline__body">
+            {% if access.invitation.status == "pending" %}{% blocktranslate with date=access.invitation.expires_at|date:"SHORT_DATETIME_FORMAT" %}Enviado e ainda não usado. Vale até {{ date }}.{% endblocktranslate %}
+            {% elif access.invitation.status == "expired" %}{% blocktranslate with date=access.invitation.expires_at|date:"SHORT_DATETIME_FORMAT" %}O convite venceu em {{ date }} sem ser usado.{% endblocktranslate %}
+            {% elif access.invitation.status == "accepted" %}{% blocktranslate with date=access.invitation.accepted_at|date:"SHORT_DATETIME_FORMAT" %}O paciente usou o convite em {{ date }}.{% endblocktranslate %}
+            {% elif access.invitation.status == "revoked" %}{% translate "O último convite foi cancelado e não vale mais." %}
+            {% else %}{% translate "Nenhum convite foi emitido para este paciente." %}{% endif %}
+          </p>
+          <p class="ae-timeline__meta">{% translate "O código de ativação aparece uma única vez, quando o convite é emitido. A clínica não consegue consultá-lo depois." %}</p>
+          {% if access.account_state == "not_activated" %}
+          <p class="ae-actions">
+            {% if can_issue_invitation %}
+            <a class="ae-btn ae-btn--sm ae-btn--secondary" href="{% url 'mobile_api:invitation_send' patient.pk %}">{% if access.invitation %}{% translate "Reenviar convite" %}{% else %}{% translate "Enviar convite" %}{% endif %}</a>
+            {% else %}
+            <span class="ae-card__meta">{% translate "Somente o administrador da clínica envia convites." %}</span>
+            {% endif %}
+          </p>
+          {% endif %}
+        </div>
+      </li>
+      <li class="ae-timeline__item">
+        <span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+        <div>
+          <p class="ae-timeline__title">{% translate "Atividade recente" %}</p>
+          <p class="ae-timeline__body">
+            {% if access.last_access_at %}{% blocktranslate with date=access.last_access_at|date:"SHORT_DATE_FORMAT" %}Último acesso ao aplicativo em {{ date }}.{% endblocktranslate %}
+            {% else %}{% translate "Sem acesso ao aplicativo registrado." %}{% endif %}
+          </p>
+        </div>
+      </li>
+      <li class="ae-timeline__item">
+        <span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+        <div>
+          <p class="ae-timeline__title">{% translate "Data da alta" %}</p>
+          <p class="ae-timeline__body">
+            {% if access.discharge_date %}{% blocktranslate with date=access.discharge_date|date:"SHORT_DATE_FORMAT" %}Alta registrada em {{ date }}. O aplicativo usa esta data para contar os dias desde a alta.{% endblocktranslate %}
+            {% else %}{% translate "Nenhuma alta registrada para este paciente." %}{% endif %}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-devices">
+    <div class="ae-actions">
+      <h2 class="ae-card__title" id="sec-devices">{% translate "Aparelhos conectados" %}</h2>
+      {% if access.devices %}
+      <a class="ae-btn ae-btn--sm ae-btn--danger" href="{% url 'mobile_api:devices_revoke_all' patient.pk %}">{% translate "Desconectar todos" %}</a>
+      {% endif %}
+    </div>
+    {% if access.devices %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Aparelhos com sessão ativa no aplicativo" %}</caption>
+        <thead><tr><th scope="col">{% translate "Aparelho" %}</th><th scope="col">{% translate "Versão do aplicativo" %}</th><th scope="col">{% translate "Conectado em" %}</th><th scope="col">{% translate "Último uso" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+        <tbody>
+          {% for device in access.devices %}
+          <tr>
+            <td><span class="ae-table__strong">{{ device.device_label }}</span><span class="ae-table__meta">{% if device.platform == "ios" %}iOS{% elif device.platform == "android" %}Android{% else %}{% translate "Outra plataforma" %}{% endif %}</span></td>
+            <td>{% if device.app_version %}{{ device.app_version }}{% else %}<span class="ae-muted">{% translate "Não informada" %}</span>{% endif %}</td>
+            <td class="ae-table__nowrap">{{ device.connected_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+            <td class="ae-table__nowrap">{{ device.last_used_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+            <td class="ae-table__actions"><a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'mobile_api:device_revoke' patient.pk device.session_id %}">{% translate "Desconectar" %}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="ae-card__meta">{% translate "Celular perdido ou roubado? Desconecte o aparelho aqui: ele perde o acesso na hora. Se houver risco para a conta, o paciente também pode trocar a senha pelo aplicativo, o que desconecta todos os aparelhos." %}</p>
+    {% else %}
+    <p class="ae-card__meta">{% translate "Nenhum aparelho conectado no momento." %}</p>
+    {% endif %}
+  </section>
+
+  {# Ponto de extensão: resumos de adesão e links para os editores (medicação, plano, hábitos, diário) entram aqui depois da união dos domínios. #}
+  {% block app_panels %}{% endblock %}
+</div>
+{% endblock %}

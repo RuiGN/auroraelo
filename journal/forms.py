@@ -1,184 +1,74 @@
-"""Forms for the emotional journal and check-in domain."""
+"""Formulários da equipe para o diário compartilhado pelo paciente."""
 
 from __future__ import annotations
+
+from typing import Any
 
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import (
-    CONTEXT_MAX_LENGTH,
-    DETAIL_MAX_LENGTH,
-    JournalEntry,
+PURPOSE_MIN_LENGTH = 10
+PURPOSE_MAX_LENGTH = 255
+DEFAULT_VALIDITY_DAYS = "30"
+# Validade pedida ao paciente: sempre limitada, nunca "sem prazo".
+VALIDITY_DAY_CHOICES = (
+    ("7", _("7 dias")),
+    ("15", _("15 dias")),
+    ("30", _("30 dias")),
+    ("60", _("60 dias")),
+    ("90", _("90 dias")),
+)
+PERIOD_CHOICES = (
+    ("7d", _("Últimos 7 dias")),
+    ("30d", _("Últimos 30 dias")),
+    ("90d", _("Últimos 90 dias")),
+    ("todos", _("Todo o período")),
+)
+CHECKIN_WINDOW_CHOICES = (
+    ("14", _("Últimos 14 dias")),
+    ("30", _("Últimos 30 dias")),
 )
 
 
-class JournalEntryForm(forms.Form):
-    """Collect one patient diary record in PT-BR with accessibility metadata."""
+class AccessRequestForm(forms.Form):
+    """Pedido da equipe para ver um registro "perguntar antes"."""
 
-    mood = forms.TypedChoiceField(
-        label=_("Como você está se sentindo?"),
-        choices=JournalEntry.Mood.choices,
-        coerce=int,
-        widget=forms.RadioSelect,
+    purpose = forms.CharField(
+        label=_("Finalidade do pedido"),
+        min_length=PURPOSE_MIN_LENGTH,
+        max_length=PURPOSE_MAX_LENGTH,
         help_text=_(
-            "Selecione como você avalia seu humor geral neste momento "
-            "(1 = Muito mal a 5 = Muito bem)."
+            "O paciente lê este texto no aplicativo antes de decidir. Explique "
+            "para que você precisa do registro e não inclua conteúdo clínico."
         ),
-        required=True,
     )
-    emotions = forms.MultipleChoiceField(
-        label=_("Quais emoções você identifica?"),
-        choices=JournalEntry.Emotion.choices,
-        widget=forms.CheckboxSelectMultiple,
-        help_text=_("Você pode selecionar mais de uma emoção."),
-        required=False,
-    )
-    intensity = forms.IntegerField(
-        label=_("Intensidade emocional (1 a 5)"),
-        min_value=1,
-        max_value=5,
-        initial=3,
-        help_text=_("1 = muito leve, 5 = muito intensa"),
-        required=True,
-    )
-    context = forms.CharField(
-        label=_("Relato do diário"),
-        max_length=CONTEXT_MAX_LENGTH,
-        widget=forms.Textarea(
-            attrs={
-                "rows": 4,
-                "placeholder": _(
-                    "Descreva o que aconteceu ou como você está se sentindo..."
-                ),
-            }
-        ),
-        help_text=_("Máximo de %(max)d caracteres.") % {"max": CONTEXT_MAX_LENGTH},
-        required=True,
-    )
-    triggers = forms.CharField(
-        label=_("Gatilhos"),
-        max_length=DETAIL_MAX_LENGTH,
-        widget=forms.Textarea(
-            attrs={
-                "rows": 2,
-                "placeholder": _(
-                    "Situações, pensamentos ou eventos que desencadearam este momento"
-                    " (opcional)"
-                ),
-            }
-        ),
-        help_text=_("Opcional. Máximo de %(max)d caracteres.")
-        % {"max": DETAIL_MAX_LENGTH},
-        required=False,
-    )
-    reactions = forms.CharField(
-        label=_("Reações físicas"),
-        max_length=DETAIL_MAX_LENGTH,
-        widget=forms.Textarea(
-            attrs={
-                "rows": 2,
-                "placeholder": _(
-                    "Ex.: tensão muscular, respiração curta, aperto no peito (opcional)"
-                ),
-            }
-        ),
-        help_text=_("Opcional. Máximo de %(max)d caracteres.")
-        % {"max": DETAIL_MAX_LENGTH},
-        required=False,
-    )
-    strategies = forms.CharField(
-        label=_("O que me ajudou"),
-        max_length=DETAIL_MAX_LENGTH,
-        widget=forms.Textarea(
-            attrs={
-                "rows": 2,
-                "placeholder": _(
-                    "Ações, pensamentos ou técnicas que ajudaram a lidar com a situação"
-                    " (opcional)"
-                ),
-            }
-        ),
-        help_text=_("Opcional. Máximo de %(max)d caracteres.")
-        % {"max": DETAIL_MAX_LENGTH},
-        required=False,
-    )
-    visibility = forms.ChoiceField(
-        label=_("Compartilhamento"),
-        choices=JournalEntry.Visibility.choices,
-        widget=forms.RadioSelect,
-        initial=JournalEntry.Visibility.PRIVATE,
+    validity_days = forms.ChoiceField(
+        label=_("Validade do acesso, se o paciente aprovar"),
+        choices=VALIDITY_DAY_CHOICES,
+        initial=DEFAULT_VALIDITY_DAYS,
         help_text=_(
-            "Verde = Compartilhável com terapeuta; Amarelo = Perguntar antes de"
-            " compartilhar; Vermelho = Somente eu (privado)."
+            "Conta a partir de hoje. O paciente pode escolher outro prazo ao responder."
         ),
-        required=True,
     )
 
-    def clean_context(self) -> str:
-        value = (self.cleaned_data.get("context") or "").strip()
-        if not value:
-            raise forms.ValidationError(_("Descreva o relato do diário."))
-        if len(value) > CONTEXT_MAX_LENGTH:
-            raise forms.ValidationError(
-                _("O relato do diário deve ter no máximo %(max)d caracteres.")
-                % {"max": CONTEXT_MAX_LENGTH}
-            )
-        return value
-
-    def clean_triggers(self) -> str:
-        value = (self.cleaned_data.get("triggers") or "").strip()
-        if len(value) > DETAIL_MAX_LENGTH:
-            raise forms.ValidationError(
-                _("O campo gatilhos deve ter no máximo %(max)d caracteres.")
-                % {"max": DETAIL_MAX_LENGTH}
-            )
-        return value
-
-    def clean_reactions(self) -> str:
-        value = (self.cleaned_data.get("reactions") or "").strip()
-        if len(value) > DETAIL_MAX_LENGTH:
-            raise forms.ValidationError(
-                _("O campo reações deve ter no máximo %(max)d caracteres.")
-                % {"max": DETAIL_MAX_LENGTH}
-            )
-        return value
-
-    def clean_strategies(self) -> str:
-        value = (self.cleaned_data.get("strategies") or "").strip()
-        if len(value) > DETAIL_MAX_LENGTH:
-            raise forms.ValidationError(
-                _("O campo estratégias deve ter no máximo %(max)d caracteres.")
-                % {"max": DETAIL_MAX_LENGTH}
-            )
-        return value
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields["purpose"].widget.attrs["class"] = "ae-input"
+        self.fields["purpose"].widget.attrs["maxlength"] = PURPOSE_MAX_LENGTH
+        self.fields["validity_days"].widget.attrs["class"] = "ae-select"
 
 
-class JournalFilterForm(forms.Form):
-    """Filter parameters for patient journal history in PT-BR."""
+class DiaryFilterForm(forms.Form):
+    """Período do diário (o padrão é curto: a equipe lê o mínimo necessário)."""
 
-    PERIOD_CHOICES = (
-        ("7d", _("Últimos 7 dias")),
-        ("30d", _("Últimos 30 dias")),
-        ("90d", _("Últimos 90 dias")),
-        ("all", _("Todo o histórico")),
+    periodo = forms.ChoiceField(
+        label=_("Período"), choices=PERIOD_CHOICES, required=False
     )
 
-    period = forms.ChoiceField(
-        label=_("Período"),
-        choices=PERIOD_CHOICES,
-        required=False,
-        initial="30d",
-    )
-    emotion = forms.ChoiceField(
-        label=_("Emoção"),
-        choices=[("", _("Todas as emoções")), *JournalEntry.Emotion.choices],
-        required=False,
-    )
-    mood = forms.ChoiceField(
-        label=_("Humor"),
-        choices=[
-            ("", _("Todos os humores")),
-            *[(str(val), label) for val, label in JournalEntry.Mood.choices],
-        ],
-        required=False,
+
+class CheckInWindowForm(forms.Form):
+    """Janela da série de check-ins."""
+
+    dias = forms.ChoiceField(
+        label=_("Janela"), choices=CHECKIN_WINDOW_CHOICES, required=False
     )

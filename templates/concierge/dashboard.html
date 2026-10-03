@@ -1,0 +1,52 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li>{% translate "Pós-alta" %}</li><li>{% translate "Acompanhamento" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Acompanhamento pós-alta" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Ligações e visita combinadas com cada paciente nas primeiras semanas depois da alta." %}</p>
+  </div>
+  <a class="ae-btn" href="{% url 'concierge:discharge_create' %}"><svg class="ae-icon" aria-hidden="true"><use href="#i-plus"/></svg>{% translate "Registrar alta" %}</a>
+</div>
+{% endblock %}
+{% block content %}
+<section class="ae-grid" aria-label="{% translate 'Indicadores' %}">
+  <div class="ae-stat{% if summary.overdue %} ae-stat--danger{% endif %}"><span class="ae-stat__label">{% translate "Atrasados" %}</span><span class="ae-stat__value" data-testid="stat-overdue">{{ summary.overdue }}</span></div>
+  <div class="ae-stat{% if summary.due_today %} ae-stat--warning{% endif %}"><span class="ae-stat__label">{% translate "Para hoje" %}</span><span class="ae-stat__value" data-testid="stat-today">{{ summary.due_today }}</span></div>
+  <div class="ae-stat"><span class="ae-stat__label">{% translate "Próximos 7 dias" %}</span><span class="ae-stat__value" data-testid="stat-week">{{ summary.due_next_7_days }}</span></div>
+  <div class="ae-stat"><span class="ae-stat__label">{% translate "Altas em acompanhamento" %}</span><span class="ae-stat__value" data-testid="stat-active">{{ summary.active_discharges }}</span></div>
+  <div class="ae-stat"><span class="ae-stat__label">{% translate "Pedidos abertos" %}</span><span class="ae-stat__value" data-testid="stat-requests">{{ summary.open_requests }}</span></div>
+</section>
+
+{% if summary.patients_without_family_consent %}
+<div class="ae-alert ae-alert--warning" role="status">
+  <svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg>
+  <div>{% blocktranslate count count=summary.patients_without_family_consent %}{{ count }} paciente em acompanhamento ainda não tem familiar autorizado a receber contato.{% plural %}{{ count }} pacientes em acompanhamento ainda não têm familiar autorizado a receber contato.{% endblocktranslate %}</div>
+</div>
+{% endif %}
+
+<h2 class="ae-card__title">{% translate "Contatos atrasados, de hoje e da semana" %}</h2>
+{% if summary.queue %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Contatos pós-alta em ordem de data" %}</caption>
+    <thead><tr><th scope="col">{% translate "Paciente" %}</th><th scope="col">{% translate "Contato" %}</th><th scope="col">{% translate "Previsto para" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+    <tbody>
+      {% for row in summary.queue %}
+      <tr>
+        <td><a class="ae-table__strong" href="{% url 'concierge:patient_detail' row.patient_profile_id %}">{{ row.patient_name }}</a></td>
+        <td>{{ row.contact.get_kind_display }} · {% blocktranslate with day=row.contact.day_after_discharge %}{{ day }}º dia{% endblocktranslate %}</td>
+        <td class="ae-table__nowrap">{{ row.contact.due_date|date:"SHORT_DATE_FORMAT" }}</td>
+        <td>{% include "concierge/partials/badge.html" with state=row.state %}</td>
+        <td class="ae-table__actions"><a class="ae-btn ae-btn--sm ae-btn--secondary" href="{% url 'concierge:contact_complete' row.contact.pk %}">{% translate "Registrar" %}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="ae-card__meta"><a href="{% url 'concierge:contact_queue' %}">{% translate "Ver a fila completa" %}</a></p>
+{% else %}
+<div class="ae-card ae-empty">{% translate "Nenhum contato atrasado nem previsto para os próximos 7 dias." %}</div>
+{% endif %}
+{% endblock %}

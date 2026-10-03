@@ -1,0 +1,6 @@
+{% load i18n %}
+{# Seções do paciente para a equipe. O servidor autoriza cada rota; o menu é conveniência. #}
+<nav class="ae-tabs" aria-label="{% translate 'Seções do diário do paciente' %}">
+  <a class="ae-tabs__link" href="{% url 'journal:patient_diary' patient.pk %}"{% if section == "diary" %} aria-current="page"{% endif %}>{% translate "Registros do diário" %}</a>
+  <a class="ae-tabs__link" href="{% url 'journal:patient_checkins' patient.pk %}"{% if section == "checkins" %} aria-current="page"{% endif %}>{% translate "Check-ins" %}</a>
+</nav>

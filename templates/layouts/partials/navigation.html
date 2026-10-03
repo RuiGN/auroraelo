@@ -24,7 +24,7 @@
     </a>
   </div>
 
-  {% if can_manage_active_clinic or is_clinic_admin %}
+  {% if can_manage_active_clinic or is_clinic_admin or can_use_aftercare %}
   <div class="aurora-nav-section">
     <span class="aurora-nav-label">{% translate "Gestão da clínica" %}</span>
     {% if can_manage_active_clinic %}
@@ -40,6 +40,24 @@
       <i aria-hidden="true" class="feather-user-check"></i>
       <span class="aurora-nav-text">{% translate "Profissionais" %}</span>
     </a>
+    <a href="{% url 'scheduling:service_list' %}"{% if request.resolver_match.url_name == 'service_list' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-list"></i>
+      <span class="aurora-nav-text">{% translate "Serviços de atendimento" %}</span>
+    </a>
+    <a href="{% url 'scheduling:availability_list' %}"{% if request.resolver_match.url_name == 'availability_list' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-clock"></i>
+      <span class="aurora-nav-text">{% translate "Horários de atendimento" %}</span>
+    </a>
+    <a href="{% url 'wellness:crisis_resources' %}"{% if request.resolver_match.namespace == 'wellness' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-life-buoy"></i>
+      <span class="aurora-nav-text">{% translate "Recursos de crise" %}</span>
+    </a>
+    {% endif %}
+    {% if can_use_aftercare %}
+    <a href="{% url 'concierge:dashboard' %}"{% if request.resolver_match.namespace == 'concierge' %} class="is-active" aria-current="page"{% endif %}>
+      <i aria-hidden="true" class="feather-phone-call"></i>
+      <span class="aurora-nav-text">{% translate "Pós-alta e concierge" %}</span>
+    </a>
     {% endif %}
     {% if is_clinic_admin %}
     <a href="{% url 'clinic_panel' %}"{% if request.resolver_match.url_name == 'clinic_panel' %} class="is-active" aria-current="page"{% endif %}>
@@ -54,55 +72,21 @@
   </div>
   {% endif %}
 
-  {% if is_patient %}
   <div class="aurora-nav-section">
-    <span class="aurora-nav-label">{% translate "Cuidado e prática" %}</span>
-    <a href="{% url 'journal_list' %}"{% if 'journal' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
-      <i aria-hidden="true" class="feather-book-open"></i>
-      <span class="aurora-nav-text">{% translate "Diário emocional" %}</span>
-    </a>
-    <a href="{% url 'goal_list' %}"{% if 'goal' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
-      <i aria-hidden="true" class="feather-target"></i>
-      <span class="aurora-nav-text">{% translate "Minhas metas" %}</span>
-    </a>
-    <a href="{% url 'patient_exercise_list' %}"{% if 'exercicios' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
-      <i aria-hidden="true" class="feather-activity"></i>
-      <span class="aurora-nav-text">{% translate "Exercícios" %}</span>
-    </a>
-    <a href="{% url 'low_energy_home' %}"{% if request.resolver_match.url_name == 'low_energy_home' %} class="is-active" aria-current="page"{% endif %}>
-      <i aria-hidden="true" class="feather-moon"></i>
-      <span class="aurora-nav-text">{% translate "Modo de baixa energia" %}</span>
-    </a>
-  </div>
-  {% endif %}
-
-  <div class="aurora-nav-section">
-    <span class="aurora-nav-label">{% translate "Comunicação e agenda" %}</span>
+    <span class="aurora-nav-label">{% translate "Agenda" %}</span>
     <a href="{% url 'appointment_list' %}"{% if 'appointment' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
       <i aria-hidden="true" class="feather-clock"></i>
       <span class="aurora-nav-text">{% translate "Agenda de consultas" %}</span>
     </a>
-    <a href="{% url 'conversation_list' %}"{% if 'conversation' in request.resolver_match.url_name %} class="is-active" aria-current="page"{% endif %}>
-      <i aria-hidden="true" class="feather-message-square"></i>
-      <span class="aurora-nav-text">{% translate "Mensagens" %}</span>
-    </a>
   </div>
 
-  {% if is_patient or is_therapist %}
+  {% if is_therapist %}
   <div class="aurora-nav-section">
     <span class="aurora-nav-label">{% translate "Painéis de evolução" %}</span>
-    {% if is_patient %}
-    <a href="{% url 'patient_dashboard' %}"{% if request.resolver_match.url_name == 'patient_dashboard' %} class="is-active" aria-current="page"{% endif %}>
-      <i aria-hidden="true" class="feather-trending-up"></i>
-      <span class="aurora-nav-text">{% translate "Minha evolução" %}</span>
-    </a>
-    {% endif %}
-    {% if is_therapist %}
     <a href="{% url 'therapist_dashboard' %}"{% if request.resolver_match.url_name == 'therapist_dashboard' %} class="is-active" aria-current="page"{% endif %}>
       <i aria-hidden="true" class="feather-pie-chart"></i>
       <span class="aurora-nav-text">{% translate "Painel profissional" %}</span>
     </a>
-    {% endif %}
   </div>
   {% endif %}
 
@@ -132,14 +116,6 @@
 
   <div class="aurora-nav-section">
     <span class="aurora-nav-label">{% translate "Aplicativos e sistema de design" %}</span>
-    <a href="{% url 'psychiatry:mobile_connected' %}">
-      <i aria-hidden="true" class="feather-smartphone"></i>
-      <span class="aurora-nav-text">{% translate "Prévia do aplicativo conectado" %}</span>
-    </a>
-    <a href="{% url 'psychiatry:mobile_b2c' %}">
-      <i aria-hidden="true" class="feather-shopping-bag"></i>
-      <span class="aurora-nav-text">{% translate "Prévia do aplicativo Aurora Elo" %}</span>
-    </a>
     <a href="{% url 'design_system_reference' %}">
       <i aria-hidden="true" class="feather-layers" style="color: #38a9f8;"></i>
       <span class="aurora-nav-text" style="color: #7cc7fb;">{% translate "Sistema de design" %}</span>

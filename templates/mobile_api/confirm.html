@@ -1,0 +1,55 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{{ cancel_url }}">{% translate "Aplicativo do paciente" %}</a></li>
+      <li>{{ page_title }}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{{ page_title }}</h1>
+    <p class="ae-page-header__lead">{{ patient.full_name }}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="post" novalidate class="ae-card ae-stack">
+  {% csrf_token %}
+  {% if form.errors %}
+  <div class="ae-alert ae-alert--danger" role="alert" tabindex="-1">
+    <svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg>
+    <div>
+      <p class="ae-alert__title">{% translate "Revise os campos indicados" %}</p>
+      <ul class="m-0">{% for error in form.confirm.errors %}<li><a href="#{{ form.confirm.id_for_label }}">{{ error }}</a></li>{% endfor %}</ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if kind == "revoke_one" %}
+  <p>{% translate "O aplicativo deste aparelho perde o acesso na hora. Para voltar a usar o aplicativo, o paciente precisa entrar de novo com e-mail e senha." %}</p>
+  <p><span class="ae-table__strong">{{ device.device_label }}</span>
+    <span class="ae-table__meta">{% if device.platform == "ios" %}iOS{% elif device.platform == "android" %}Android{% else %}{% translate "Outra plataforma" %}{% endif %}{% if device.app_version %} · {{ device.app_version }}{% endif %} · {% blocktranslate with date=device.last_used_at|date:"SHORT_DATETIME_FORMAT" %}último uso em {{ date }}{% endblocktranslate %}</span></p>
+  {% elif kind == "revoke_all" %}
+  <p>{% translate "Todos os aparelhos abaixo perdem o acesso ao aplicativo na hora. Use esta opção quando houver risco para a conta. Para voltar a usar o aplicativo, o paciente precisa entrar de novo com e-mail e senha." %}</p>
+  <ul>
+    {% for item in devices %}<li><span class="ae-table__strong">{{ item.device_label }}</span> <span class="ae-table__meta">{% if item.platform == "ios" %}iOS{% elif item.platform == "android" %}Android{% else %}{% translate "Outra plataforma" %}{% endif %} · {% blocktranslate with date=item.last_used_at|date:"SHORT_DATETIME_FORMAT" %}último uso em {{ date }}{% endblocktranslate %}</span></li>{% endfor %}
+  </ul>
+  {% elif kind == "resend_invitation" %}
+  <p>{% translate "Será emitido um convite novo, com um código novo, enviado ao e-mail do paciente. O código anterior deixa de valer." %}</p>
+  <p>{% translate "O código novo aparece uma única vez, na próxima tela. A clínica não consegue consultá-lo depois." %}</p>
+  {% else %}
+  <p>{% translate "Será emitido um convite com um código de ativação, enviado ao e-mail do paciente. O paciente ativa a conta só no aplicativo." %}</p>
+  <p>{% translate "O código aparece uma única vez, na próxima tela. A clínica não consegue consultá-lo depois." %}</p>
+  {% endif %}
+
+  <div class="ae-field{% if form.confirm.errors %} ae-field--error{% endif %}">
+    <label class="ae-label" for="{{ form.confirm.id_for_label }}">{{ form.confirm }} {{ form.confirm.label }}</label>
+    {% for error in form.confirm.errors %}<span class="ae-error" role="alert">{{ error }}</span>{% endfor %}
+  </div>
+  <div class="ae-actions ae-actions--end">
+    <a class="ae-btn ae-btn--secondary" href="{{ cancel_url }}">{% translate "Voltar" %}</a>
+    <button type="submit" class="ae-btn{% if danger %} ae-btn--danger{% endif %}">{{ submit_label }}</button>
+  </div>
+</form>
+{% endblock %}

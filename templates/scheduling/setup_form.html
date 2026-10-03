@@ -1,0 +1,31 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'appointment_list' %}">{% translate "Agenda" %}</a></li>
+      {% for label, url in breadcrumb %}<li><a href="{{ url }}">{{ label }}</a></li>{% endfor %}
+      <li>{{ page_title }}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{{ page_title }}</h1>
+    {% if lead %}<p class="ae-page-header__lead">{{ lead }}</p>{% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="post" novalidate class="ae-card ae-stack">
+  {% csrf_token %}
+  {% include "scheduling/partials/errors.html" %}
+  <div class="ae-form-grid">
+    {% for field in form.hidden_fields %}{{ field }}{% endfor %}
+    {% for field in form.visible_fields %}
+    {% include "scheduling/partials/field.html" with field=field only %}
+    {% endfor %}
+  </div>
+  <div class="ae-actions ae-actions--end">
+    <a class="ae-btn ae-btn--secondary" href="{{ cancel_url }}">{% translate "Voltar" %}</a>
+    <button type="submit" class="ae-btn{% if danger %} ae-btn--danger{% endif %}">{{ submit_label }}</button>
+  </div>
+</form>
+{% endblock %}

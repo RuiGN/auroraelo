@@ -1,0 +1,37 @@
+{% extends "routines/base.html" %}
+{% load i18n %}
+{% comment %}
+  Confirmação explícita antes de publicar ou retirar algo do app do paciente. Serve a
+  revisão da prescrição (`hidden_form` + `rows`), a assinatura do plano (`content_template`)
+  e as demais ações. O primeiro botão de envio nunca publica: Enter não confirma sozinho.
+{% endcomment %}
+{% block content %}
+<form method="post" novalidate class="ae-card ae-stack">
+  {% csrf_token %}
+  {% if notice %}<div class="ae-alert ae-alert--warning" role="note"><svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg><div>{{ notice }}</div></div>{% endif %}
+  {% include "routines/partials/errors.html" %}
+  {% if hidden_form %}{% for hidden in hidden_form %}{{ hidden.as_hidden }}{% endfor %}{% endif %}
+  {% if rows %}
+  <div class="ae-table-wrap">
+    <table class="ae-table">
+      <caption class="ae-sr-only">{% translate "Resumo do que o paciente verá" %}</caption>
+      <tbody>
+        {% for label, value in rows %}<tr><th scope="row">{{ label }}</th><td>{{ value|linebreaksbr }}</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+  {% if content_template %}{% include content_template %}{% endif %}
+  <div class="ae-form-grid">
+    {% for field in form.hidden_fields %}{{ field }}{% endfor %}
+    {% for field in form.visible_fields %}
+    {% include "routines/partials/field.html" with field=field only %}
+    {% endfor %}
+  </div>
+  <div class="ae-actions ae-actions--end">
+    <a class="ae-btn ae-btn--secondary" href="{{ cancel_url }}">{% translate "Cancelar" %}</a>
+    {% if back_action %}<button type="submit" name="action" value="edit" formnovalidate class="ae-btn ae-btn--secondary">{% translate "Voltar e corrigir" %}</button>{% endif %}
+    <button type="submit" name="action" value="publish" class="ae-btn{% if danger %} ae-btn--danger{% endif %}">{{ submit_label }}</button>
+  </div>
+</form>
+{% endblock %}

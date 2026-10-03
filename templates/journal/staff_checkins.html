@@ -1,0 +1,89 @@
+{% extends layout_template %}
+{% load i18n static %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'aurora_elo/css/ae-journal.css' %}">{% endblock %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{% url 'patient_detail' patient.pk %}">{{ patient_name }}</a></li>
+      <li>{% translate "Check-ins" %}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{% blocktranslate with name=patient_name %}Check-ins de {{ name }}{% endblocktranslate %}</h1>
+    <p class="ae-page-header__lead">{% translate "As sete perguntas de 1 a 5 dos check-ins que o paciente escolheu compartilhar." %}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+{% include "journal/partials/staff_tabs.html" %}
+
+<div class="ae-alert" role="note">
+  <svg class="ae-icon" aria-hidden="true"><use href="#i-shield"/></svg>
+  <div>{% translate "Aparecem só os check-ins que o paciente compartilhou. Um dia em branco não quer dizer que ele não respondeu. As observações escritas por ele não são exibidas. Cada leitura fica registrada na auditoria." %}</div>
+</div>
+
+<form class="ae-toolbar" method="get" role="search">
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="dias">{% translate "Janela" %}</label>
+    <div class="ae-control"><span class="field-control-icon ae-control__icon" aria-hidden="true"><svg class="ae-icon"><use href="#i-calendar"/></svg></span><select class="ae-select ae-select--icon" id="dias" name="dias">
+      {% for value, label in window_choices %}<option value="{{ value }}"{% if days|stringformat:"d" == value %} selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select></div></div>
+  <button class="ae-btn ae-btn--secondary" type="submit">{% translate "Filtrar" %}</button>
+</form>
+
+<div class="ae-stack">
+  <section class="ae-grid" aria-label="{% translate 'Resumo do período' %}">
+    <div class="ae-stat"><span class="ae-stat__label">{% translate "Check-ins compartilhados" %}</span><span class="ae-stat__value" data-testid="stat-shared">{{ series.shared_count }}</span></div>
+    <div class="ae-stat"><span class="ae-stat__label">{% translate "Período" %}</span><span class="ae-card__meta">{{ series.start|date:"SHORT_DATE_FORMAT" }} – {{ series.end|date:"SHORT_DATE_FORMAT" }}</span></div>
+  </section>
+
+  {% if series.shared_count %}
+  <section aria-labelledby="sec-summary">
+    <h2 class="ae-card__title" id="sec-summary">{% translate "Evolução por pergunta" %}</h2>
+    <p class="ae-card__meta">{% translate "Escala de 1 a 5: quanto maior o número, mais alto o nível descrito na pergunta (por exemplo, mais ansiedade ou mais energia). Cada barra é um dia, do mais antigo para o mais recente." %}</p>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Resumo das perguntas no período" %}</caption>
+        <thead><tr><th scope="col">{% translate "Pergunta" %}</th><th scope="col">{% translate "Dia a dia" %}</th><th scope="col" class="ae-table__num">{% translate "Média" %}</th><th scope="col" class="ae-table__num">{% translate "Último" %}</th><th scope="col" class="ae-table__num">{% translate "Respostas" %}</th></tr></thead>
+        <tbody>
+          {% for item in questions %}
+          <tr>
+            <th scope="row">{{ item.label }}</th>
+            <td>
+              {% blocktranslate asvar bars_label with label=item.label answered=item.series.answered %}{{ label }}: respostas no período: {{ answered }}{% endblocktranslate %}
+              <div class="ae-bars" role="img" aria-label="{{ bars_label }}">
+                {% for bar in item.bars %}{% if bar.score %}<span class="ae-bars__bar ae-bars__bar--v{{ bar.score }}" title="{{ bar.day|date:'SHORT_DATE_FORMAT' }}: {{ bar.score }}"></span>{% else %}<span class="ae-bars__bar ae-bars__bar--none"></span>{% endif %}{% endfor %}
+              </div>
+            </td>
+            <td class="ae-table__num">{% if item.series.average is not None %}<span class="ae-score">{{ item.series.average|floatformat:1 }}</span>{% else %}<span class="ae-score ae-score--empty">—</span>{% endif %}</td>
+            <td class="ae-table__num">{% if item.series.latest %}<span class="ae-score">{{ item.series.latest }}</span>{% else %}<span class="ae-score ae-score--empty">—</span>{% endif %}</td>
+            <td class="ae-table__num"><span class="ae-score">{{ item.series.answered }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="sec-days">
+    <h2 class="ae-card__title" id="sec-days">{% translate "Valores por dia" %}</h2>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Respostas de 1 a 5 em cada dia com check-in compartilhado, do mais recente para o mais antigo" %}</caption>
+        <thead><tr><th scope="col">{% translate "Dia" %}</th>{% for label in question_labels %}<th scope="col" class="ae-table__num">{{ label }}</th>{% endfor %}</tr></thead>
+        <tbody>
+          {% for row in day_rows %}
+          <tr>
+            <th scope="row" class="ae-table__nowrap">{{ row.day|date:"SHORT_DATE_FORMAT" }}</th>
+            {% for label, score in row.cells %}<td class="ae-table__num">{% if score %}<span class="ae-score">{{ score }}</span>{% else %}<span class="ae-score ae-score--empty">—<span class="ae-sr-only">{% translate "sem resposta" %}</span></span>{% endif %}</td>{% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% else %}
+  <div class="ae-card ae-empty">{% translate "Nenhum check-in compartilhado neste período." %}</div>
+  {% endif %}
+</div>
+{% endblock %}

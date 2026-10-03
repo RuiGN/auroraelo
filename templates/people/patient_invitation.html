@@ -1,0 +1,27 @@
+{% extends layout_template %}
+{% load i18n %}
+
+{% block title %}{% translate "Convite do paciente" %}{% endblock %}
+
+{% block content %}
+<div class="product-page" aria-labelledby="patient-invitation-title">
+<section class="product-page-header d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3">
+  <div>
+    <p class="text-primary-emphasis fw-semibold text-uppercase small mb-0">{% translate "Aplicativo do paciente" %}</p>
+    <h1 id="patient-invitation-title">{{ patient.full_name }}</h1>
+    <p class="lead mb-0">{% translate "O paciente usa apenas o aplicativo Aurora Elo Pós-alta. Ele ativa a conta com o código abaixo." %}</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'patient_list' %}">{% translate "Voltar à lista de pacientes" %}</a>
+</section>
+
+<section class="d-grid gap-3" aria-labelledby="invitation-code-title">
+  <h2 id="invitation-code-title">{% translate "Código de ativação" %}</h2>
+  <p role="status">
+    {% if emailed %}{% translate "O código e o link do aplicativo foram enviados ao e-mail do paciente." %}{% else %}{% translate "Não foi possível enviar o e-mail. Entregue o código ao paciente por outro meio seguro." %}{% endif %}
+  </p>
+  <p><code id="invitation-code" class="user-select-all">{{ code }}</code></p>
+  <p class="text-body-secondary">{% blocktranslate with date=expires_at|date:"SHORT_DATETIME_FORMAT" %}Vale até {{ date }} e só pode ser usado uma vez.{% endblocktranslate %}</p>
+  <p class="text-body-secondary">{% translate "Este código aparece somente agora: a clínica não consegue consultá-lo depois. Se for perdido, envie um novo convite." %}</p>
+</section>
+</div>
+{% endblock %}

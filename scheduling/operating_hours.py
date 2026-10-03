@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, time
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 WEEKDAY_KEYS = (
     "monday",
@@ -15,6 +16,17 @@ WEEKDAY_KEYS = (
     "friday",
     "saturday",
     "sunday",
+)
+
+# Same order as WEEKDAY_KEYS and as ``datetime.weekday()`` (Monday is 0).
+WEEKDAY_LABELS = (
+    _("Segunda-feira"),
+    _("Terça-feira"),
+    _("Quarta-feira"),
+    _("Quinta-feira"),
+    _("Sexta-feira"),
+    _("Sábado"),
+    _("Domingo"),
 )
 
 DEFAULT_OUT_OF_HOURS_NOTICE = (
@@ -58,3 +70,28 @@ def out_of_hours_response(
     if within_operating_hours(weekly_hours=weekly_hours, now=now, tz_name=tz_name):
         return None
     return instructions.strip() or DEFAULT_OUT_OF_HOURS_NOTICE
+
+
+def has_configured_hours(weekly_hours: dict[str, list[dict[str, str]]]) -> bool:
+    """Return whether the clinic defined at least one opening interval.
+
+    A configuration with every day closed is how an unfinished setup looks, so
+    it must not forbid every availability window.
+    """
+    return any(weekly_hours.get(key) for key in WEEKDAY_KEYS)
+
+
+def weekday_intervals(
+    weekly_hours: dict[str, list[dict[str, str]]], weekday: int
+) -> list[tuple[time, time]]:
+    """Parse the opening intervals of one weekday; malformed entries are ignored."""
+    intervals: list[tuple[time, time]] = []
+    for interval in weekly_hours.get(WEEKDAY_KEYS[weekday], []):
+        try:
+            start = time.fromisoformat(interval.get("start", ""))
+            end = time.fromisoformat(interval.get("end", ""))
+        except ValueError:
+            continue
+        if start < end:
+            intervals.append((start, end))
+    return sorted(intervals)

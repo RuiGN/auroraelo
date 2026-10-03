@@ -14,7 +14,12 @@ from clinics.events import (
 from journal.events import (
     daily_checkin_submitted,
     daily_checkin_updated,
+    daily_checkins_viewed,
+    journal_diary_viewed,
+    journal_entry_access_requested,
     journal_entry_created,
+    journal_entry_sharing_granted,
+    journal_entry_sharing_revoked,
     journal_entry_updated,
     journal_entry_visibility_changed,
 )
@@ -445,4 +450,145 @@ def audit_daily_checkin_updated(
         resource_id=resource_id,
         request_id=request_id,
         action=AuditAction.UPDATE,
+    )
+
+
+def _record_journal_sharing_event(
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_type: str,
+    resource_id: str,
+    request_id: UUID,
+    action: AuditAction,
+) -> None:
+    """Append a minimized sharing/read event for the diary, never its content."""
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action=action,
+        resource_type=resource_type,
+        resource_id=resource_id,
+        outcome=AuditOutcome.SUCCESS,
+        request_id=request_id,
+        network_origin=None,
+    )
+
+
+@receiver(
+    journal_entry_access_requested,
+    dispatch_uid="audit.journal_entry_access_requested.v1",
+)
+def audit_journal_entry_access_requested(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_id: str,
+    request_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Append one event when the team asks to see a confirmation-required record."""
+    del sender, kwargs
+    _record_journal_sharing_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        resource_type="journal_access_request",
+        resource_id=resource_id,
+        request_id=request_id,
+        action=AuditAction.CREATE,
+    )
+
+
+@receiver(
+    journal_entry_sharing_granted,
+    dispatch_uid="audit.journal_entry_sharing_granted.v1",
+)
+def audit_journal_entry_sharing_granted(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_id: str,
+    request_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Append the patient's consent to share one diary record with the team."""
+    del sender, kwargs
+    _record_journal_sharing_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        resource_type="journal_entry",
+        resource_id=resource_id,
+        request_id=request_id,
+        action=AuditAction.CONSENT_ACCEPT,
+    )
+
+
+@receiver(
+    journal_entry_sharing_revoked,
+    dispatch_uid="audit.journal_entry_sharing_revoked.v1",
+)
+def audit_journal_entry_sharing_revoked(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_id: str,
+    request_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Append the patient's withdrawal of sharing on one diary record."""
+    del sender, kwargs
+    _record_journal_sharing_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        resource_type="journal_entry",
+        resource_id=resource_id,
+        request_id=request_id,
+        action=AuditAction.CONSENT_REVOKE,
+    )
+
+
+@receiver(journal_diary_viewed, dispatch_uid="audit.journal_diary_viewed.v1")
+def audit_journal_diary_viewed(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_id: str,
+    request_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Append a read event for what the team opened in one patient's shared diary."""
+    del sender, kwargs
+    _record_journal_sharing_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        resource_type="journal_diary",
+        resource_id=resource_id,
+        request_id=request_id,
+        action=AuditAction.VIEW,
+    )
+
+
+@receiver(daily_checkins_viewed, dispatch_uid="audit.daily_checkins_viewed.v1")
+def audit_daily_checkins_viewed(
+    sender: object,
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    resource_id: str,
+    request_id: UUID,
+    **kwargs: object,
+) -> None:
+    """Append a read event for the team's view of one patient's shared check-ins."""
+    del sender, kwargs
+    _record_journal_sharing_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        resource_type="daily_checkin_series",
+        resource_id=resource_id,
+        request_id=request_id,
+        action=AuditAction.VIEW,
     )

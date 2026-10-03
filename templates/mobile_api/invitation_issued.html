@@ -1,0 +1,27 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{% url 'mobile_api:patient_app' patient.pk %}">{% translate "Aplicativo do paciente" %}</a></li>
+      <li>{% translate "Convite" %}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{{ patient.full_name }}</h1>
+    <p class="ae-page-header__lead">{% translate "O paciente usa apenas o aplicativo Aurora Elo Pós-alta. Ele ativa a conta com o código abaixo." %}</p>
+  </div>
+  <div class="ae-actions">
+    <a class="ae-btn" href="{% url 'mobile_api:patient_app' patient.pk %}">{% translate "Voltar ao painel do aplicativo" %}</a>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<section class="ae-card ae-stack" aria-labelledby="invitation-code-title">
+  <h2 class="ae-card__title" id="invitation-code-title">{% translate "Código de ativação" %}</h2>
+  <p role="status">{% if emailed %}{% translate "O código e o link do aplicativo foram enviados ao e-mail do paciente." %}{% else %}{% translate "Não foi possível enviar o e-mail. Entregue o código ao paciente por outro meio seguro." %}{% endif %}</p>
+  <p><code id="invitation-code" class="user-select-all">{{ code }}</code></p>
+  <p class="ae-card__meta">{% blocktranslate with date=expires_at|date:"SHORT_DATETIME_FORMAT" %}Vale até {{ date }} e só pode ser usado uma vez.{% endblocktranslate %}</p>
+  <p class="ae-card__meta">{% translate "Este código aparece somente agora: a clínica não consegue consultá-lo depois. Se for perdido, envie um novo convite." %}</p>
+</section>
+{% endblock %}

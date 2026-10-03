@@ -18,9 +18,17 @@ from clinics.selectors import (
 )
 from core.selectors import Selector as Selector
 
-from .models import CareRelationship, PatientProfile, ProfessionalProfile
+from .models import (
+    CareRelationship,
+    PatientInvitationLink,
+    PatientProfile,
+    ProfessionalProfile,
+)
 from .policies import PatientAuthorizationPolicy
 from .presentation import ROLE_LABELS, STATUS_LABELS
+
+# Nome mostrado ao paciente quando a pessoa da equipe ainda não tem perfil profissional.
+PROFESSIONAL_FALLBACK_NAME = "Profissional"
 
 
 @dataclass(frozen=True, slots=True)
@@ -137,6 +145,17 @@ def patient_profiles_for_clinic(*, clinic_id: UUID) -> list[PatientProfile]:
     return list(PatientProfile.objects.for_clinic(clinic_id).order_by("full_name"))
 
 
+def patient_profile_in_clinic(
+    *, clinic_id: UUID, patient_profile_id: UUID
+) -> PatientProfile | None:
+    """Return one patient profile only when it belongs to the given clinic."""
+    return (
+        PatientProfile.objects.for_clinic(clinic_id)
+        .filter(pk=patient_profile_id)
+        .first()
+    )
+
+
 def active_patient_profile_count(*, clinic_id: UUID, on_date: date) -> int:
     """Return distinct patient profiles with an active care relationship."""
     return (
@@ -153,6 +172,67 @@ def patient_profile_for_user(
 ) -> PatientProfile | None:
     """Return the patient profile linked to one identity inside a clinic."""
     return PatientProfile.objects.for_clinic(clinic_id).filter(user_id=user_id).first()
+
+
+@dataclass(frozen=True, slots=True)
+class PatientInvitationState:
+    """Situação do convite de ativação do app, sem código, e-mail nem resumo.
+
+    `status`: `pending` (vale e não foi usado), `expired`, `accepted` ou `revoked`.
+    """
+
+    invitation_id: UUID
+    status: str
+    issued_at: datetime
+    expires_at: datetime
+    accepted_at: datetime | None
+    revoked_at: datetime | None
+
+
+def patient_invitation_state(
+    *, clinic_id: UUID, patient_profile_id: UUID
+) -> PatientInvitationState | None:
+    """Return the state of the latest activation invitation of one patient profile."""
+    link = (
+        PatientInvitationLink.objects.filter(
+            patient_profile_id=patient_profile_id,
+            patient_profile__clinic_id=clinic_id,
+            invitation__clinic_id=clinic_id,
+        )
+        .select_related("invitation")
+        .first()
+    )
+    if link is None:
+        return None
+    invitation = link.invitation
+    if invitation.used_at is not None:
+        status = "accepted"
+    elif invitation.revoked_at is not None:
+        status = "revoked"
+    elif invitation.expires_at <= timezone.now():
+        status = "expired"
+    else:
+        status = "pending"
+    return PatientInvitationState(
+        invitation_id=invitation.pk,
+        status=status,
+        issued_at=invitation.created_at,
+        expires_at=invitation.expires_at,
+        accepted_at=invitation.used_at,
+        revoked_at=invitation.revoked_at,
+    )
+
+
+def therapist_linked_to_patient_profile(
+    *, clinic_id: UUID, therapist_id: UUID, patient_profile_id: UUID, on_date: date
+) -> bool:
+    """Return whether the therapist has an active, dated care link to the profile."""
+    return (
+        CareRelationship.objects.for_clinic(clinic_id)
+        .active_on(on_date)
+        .filter(therapist_id=therapist_id, patient_profile_id=patient_profile_id)
+        .exists()
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -178,6 +258,7 @@ class LinkedTherapistRow:
     therapist_id: UUID
     full_name: str
     social_name: str
+    category: str = "other"
 
 
 def linked_therapists_for_patient(
@@ -208,10 +289,13 @@ def linked_therapists_for_patient(
             full_name=(
                 profiles[therapist_id].full_name
                 if therapist_id in profiles
-                else "Profissional"
+                else PROFESSIONAL_FALLBACK_NAME
             ),
             social_name=(
                 profiles[therapist_id].social_name if therapist_id in profiles else ""
+            ),
+            category=(
+                profiles[therapist_id].category if therapist_id in profiles else "other"
             ),
         )
         for therapist_id in therapist_ids
@@ -293,18 +377,41 @@ def patient_profile_detail_for_actor(
     return None
 
 
+def professional_display_names(
+    *, clinic_id: UUID, user_ids: set[UUID]
+) -> dict[UUID, str]:
+    """Return the public display name of professionals, keyed by identity.
+
+    Used by patient-facing screens to say who prescribed or assigned something.
+    Social name wins when present; identities without a profile are omitted.
+    """
+    if not user_ids:
+        return {}
+    return {
+        profile.user_id: profile.social_name or profile.full_name
+        for profile in ProfessionalProfile.objects.for_clinic(clinic_id).filter(
+            user_id__in=user_ids
+        )
+    }
+
+
 __all__ = [
+    "PROFESSIONAL_FALLBACK_NAME",
     "LinkedPatientRow",
     "LinkedTherapistRow",
+    "PatientInvitationState",
     "ProfessionalDirectoryRow",
     "Selector",
     "active_patient_profile_count",
     "has_patient_profiles",
     "linked_patients_for_therapist",
     "linked_therapists_for_patient",
+    "patient_invitation_state",
     "patient_profile_detail_for_actor",
     "patient_profile_for_user",
     "patient_profiles_for_clinic",
     "patient_visible_to",
     "professional_directory_visible_to",
+    "professional_display_names",
+    "therapist_linked_to_patient_profile",
 ]

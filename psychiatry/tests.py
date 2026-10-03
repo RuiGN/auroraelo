@@ -11,7 +11,6 @@ from psychiatry.models import (
     B2CSubscription,
     DiagnosticCategory,
     InpatientBed,
-    MedicationAdherenceLog,
     PrescriptionItem,
     PsychiatricEvaluation,
     PsychiatricPatientProfile,
@@ -88,16 +87,6 @@ class PsychiatricWebViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Leitos")
 
-    def test_mobile_connected_view(self):
-        response = self.client.get("/psiquiatria/mobile/conectado/")
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Aurora Elo")
-
-    def test_mobile_b2c_view(self):
-        response = self.client.get("/psiquiatria/mobile/b2c/")
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Aurora Mind")
-
     def test_login_view(self):
         response = self.client.get("/psiquiatria/login/")
         self.assertEqual(response.status_code, 200)
@@ -151,115 +140,6 @@ class PsychiatricAPITest(TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertTrue(data["success"])
-
-    def test_mobile_connected_summary(self):
-        patient = PsychiatricPatientProfile.objects.filter(record_number="PR-2026-0842").first()
-        response = self.client.get(f"/psiquiatria/api/v1/mobile/connected/summary/?cpf={patient.cpf}")
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        self.assertTrue(data["success"])
-        self.assertIn("patient", data["data"])
-        self.assertIn("medications", data["data"])
-
-    def test_mobile_connected_adherence(self):
-        log = MedicationAdherenceLog.objects.first()
-        payload = {
-            "log_id": log.id,
-            "is_taken": True,
-            "notes": "Tomado pontualmente com água."
-        }
-        response = self.client.post(
-            "/psiquiatria/api/v1/mobile/connected/adherence/",
-            data=json.dumps(payload),
-            content_type="application/json"
-        )
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        self.assertTrue(data["success"])
-
-    def test_mobile_connected_sos(self):
-        patient = PsychiatricPatientProfile.objects.first()
-        payload = {
-            "patient_cpf": patient.cpf,
-            "latitude": -23.55052,
-            "longitude": -46.633308,
-        }
-        response = self.client.post(
-            "/psiquiatria/api/v1/mobile/connected/sos/",
-            data=json.dumps(payload),
-            content_type="application/json"
-        )
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        self.assertTrue(data["success"])
-        self.assertIn("alert_id", data)
-
-    def test_mobile_b2c_mood(self):
-        # GET
-        response = self.client.get("/psiquiatria/api/v1/mobile/b2c/mood/?user_id=test_b2c_user")
-        self.assertEqual(response.status_code, 200)
-
-        # POST
-        payload = {
-            "user_id": "test_b2c_user",
-            "mood": "RADIANT",
-            "anxiety": 1,
-            "energy": 5,
-            "sleep_hours": 8.5,
-            "emotions": ["Alegria", "Entusiasmo"],
-            "gratitude": "Dia muito produtivo.",
-        }
-        post_res = self.client.post(
-            "/psiquiatria/api/v1/mobile/b2c/mood/",
-            data=json.dumps(payload),
-            content_type="application/json"
-        )
-        self.assertEqual(post_res.status_code, 200)
-        self.assertTrue(post_res.json()["success"])
-
-    def test_mobile_b2c_cbt_diary(self):
-        payload = {
-            "user_id": "test_b2c_user",
-            "situation": "Reunião de avaliação de desempenho.",
-            "automatic_thought": "Vão apontar apenas meus erros.",
-            "distortion": "Filtro Negativo",
-            "rational_response": "Recebi elogios no último trimestre e estou preparado.",
-            "emotion_before": 75,
-            "emotion_after": 20,
-        }
-        response = self.client.post(
-            "/psiquiatria/api/v1/mobile/b2c/cbt-diary/",
-            data=json.dumps(payload),
-            content_type="application/json"
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.json()["success"])
-
-    def test_mobile_b2c_breathing(self):
-        response = self.client.get("/psiquiatria/api/v1/mobile/b2c/breathing/")
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        self.assertTrue(data["success"])
-        self.assertIn("protocols", data["data"])
-
-    def test_mobile_b2c_subscription(self):
-        # GET
-        response = self.client.get("/psiquiatria/api/v1/mobile/b2c/subscription/?user_id=test_b2c_user")
-        self.assertEqual(response.status_code, 200)
-
-        # POST
-        payload = {
-            "user_id": "test_b2c_user",
-            "plan": "PLUS_ANNUAL",
-            "platform": "APPLE",
-        }
-        post_res = self.client.post(
-            "/psiquiatria/api/v1/mobile/b2c/subscription/",
-            data=json.dumps(payload),
-            content_type="application/json"
-        )
-        self.assertEqual(post_res.status_code, 200)
-        self.assertTrue(post_res.json()["success"])
 
     def test_addiction_dashboard_view(self):
         response = self.client.get("/psiquiatria/adictologia/")
@@ -338,4 +218,3 @@ class PsychiatricAPITest(TestCase):
         data = res.json()
         self.assertTrue(data["success"])
         self.assertIn("gambling_disorder_patients", data["data"])
-

@@ -1,0 +1,77 @@
+{% extends "routines/base.html" %}
+{% load i18n %}
+{% block header_actions %}
+{% if can_edit %}<a class="ae-btn ae-btn--secondary" href="{% url 'routines:care_plan_edit' patient.pk plan.pk %}">{% translate "Editar rascunho" %}</a>{% endif %}
+{% if can_submit %}<a class="ae-btn" href="{% url 'routines:care_plan_submit' patient.pk plan.pk %}">{% translate "Enviar para assinatura" %}</a>{% endif %}
+{% if can_reopen %}<a class="ae-btn ae-btn--secondary" href="{% url 'routines:care_plan_reopen' patient.pk plan.pk %}">{% translate "Voltar para rascunho" %}</a>{% endif %}
+{% if can_sign %}<a class="ae-btn" href="{% url 'routines:care_plan_sign' patient.pk plan.pk %}">{% translate "Assinar e publicar" %}</a>{% endif %}
+{% if can_pause %}<a class="ae-btn ae-btn--secondary" href="{% url 'routines:care_plan_pause' patient.pk plan.pk %}">{% translate "Pausar" %}</a>{% endif %}
+{% if can_resume %}<a class="ae-btn" href="{% url 'routines:care_plan_resume' patient.pk plan.pk %}">{% translate "Retomar" %}</a>{% endif %}
+{% if can_close %}<a class="ae-btn ae-btn--ghost" href="{% url 'routines:care_plan_close' patient.pk plan.pk %}">{% translate "Encerrar" %}</a>{% endif %}
+{% endblock %}
+{% block content %}
+<div class="ae-stack">
+  <section class="ae-card" aria-labelledby="sec-visibility">
+    <h2 class="ae-card__title" id="sec-visibility"><span class="ae-badge ae-badge--{{ status_badge }}">{{ status_label }}</span> {% translate "O que o paciente vê" %}</h2>
+    <p>{{ visibility }}</p>
+    <p class="ae-card__meta">{% blocktranslate with version=plan.version prescriber=prescriber %}Versão {{ version }} · profissional: {{ prescriber }}{% endblocktranslate %}{% if plan.signed_at %} · {% blocktranslate with date=plan.signed_at|date:"SHORT_DATETIME_FORMAT" %}assinado em {{ date }}{% endblocktranslate %}{% endif %}{% if plan.signature_digest %} · {% blocktranslate with digest=plan.signature_digest|slice:":12" %}assinatura {{ digest }}{% endblocktranslate %}{% endif %}</p>
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-content">
+    <h2 class="ae-card__title" id="sec-content">{% translate "Conteúdo do plano" %}</h2>
+    <p class="ae-card__meta">{% blocktranslate with start=plan.valid_from|date:"SHORT_DATE_FORMAT" %}Vale a partir de {{ start }}{% endblocktranslate %}{% if plan.valid_until %} · {% blocktranslate with end=plan.valid_until|date:"SHORT_DATE_FORMAT" %}até {{ end }}{% endblocktranslate %}{% endif %}</p>
+    <p class="ae-text-label">{% translate "Objetivo (o paciente vê)" %}</p>
+    <p>{{ plan.objective|linebreaksbr }}</p>
+    {% if plan.contraindications %}
+    <p class="ae-text-label">{% translate "Cuidados e contraindicações (o paciente vê)" %}</p>
+    <p>{{ plan.contraindications|linebreaksbr }}</p>
+    {% endif %}
+    <p class="ae-text-label">{% translate "Justificativa clínica (uso interno, não aparece no app)" %}</p>
+    <p>{{ plan.clinical_rationale|linebreaksbr }}</p>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Ações do plano" %}</caption>
+        <thead><tr><th scope="col">{% translate "Ação" %}</th><th scope="col">{% translate "Frequência" %}</th><th scope="col">{% translate "Orientação" %}</th></tr></thead>
+        <tbody>
+          {% for action in actions %}
+          <tr>
+            <td><span class="ae-table__strong">{{ action.action_description }}</span>{% if action.is_mandatory %}<span class="ae-badge ae-badge--info">{% translate "Obrigatória" %}</span>{% endif %}</td>
+            <td>{{ action.target_frequency }}</td>
+            <td>{{ action.guidance|default:"—"|linebreaksbr }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="3">{% translate "Nenhuma ação cadastrada." %}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-response">
+    <h2 class="ae-card__title" id="sec-response">{% translate "Resposta do paciente" %}</h2>
+    <p class="ae-card__meta">{% translate "Somente leitura: a resposta é dada pelo paciente, no app. Recusar encerra o plano e pausar o pausa." %}</p>
+    {% if refused %}
+    <div class="ae-alert ae-alert--warning"><svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg><div>{% translate "O plano foi encerrado pela recusa do paciente. Converse com ele antes de propor um novo plano." %}</div></div>
+    {% endif %}
+    {% if current_response %}
+    <p><span class="ae-badge ae-badge--{{ current_response.badge }}">{{ current_response.label }}</span> <span class="ae-card__meta">{{ current_response.responded_at|date:"SHORT_DATETIME_FORMAT" }}</span></p>
+    {% if current_response.notes %}<p>{{ current_response.notes|linebreaksbr }}</p>{% endif %}
+    {% else %}
+    <p class="ae-card__meta">{% translate "O paciente ainda não respondeu a esta versão do plano." %}</p>
+    {% endif %}
+    {% if responses|length > 1 %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Histórico de respostas" %}</caption>
+        <thead><tr><th scope="col">{% translate "Quando" %}</th><th scope="col">{% translate "Resposta" %}</th><th scope="col">{% translate "Versão" %}</th><th scope="col">{% translate "Comentário" %}</th></tr></thead>
+        <tbody>
+          {% for item in responses %}
+          <tr><td class="ae-table__nowrap">{{ item.responded_at|date:"SHORT_DATETIME_FORMAT" }}</td><td><span class="ae-badge ae-badge--{{ item.badge }}">{{ item.label }}</span></td><td>{{ item.version }}</td><td>{{ item.notes|default:"—" }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

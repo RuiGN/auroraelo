@@ -9,7 +9,6 @@ from uuid import uuid4
 import pytest
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.test import Client
-from django.urls import reverse
 
 from accounts.models import User
 from accounts.services import accept_invitation
@@ -402,19 +401,3 @@ def test_cross_clinic_rule_isolation() -> None:
         request_id=uuid4(),
     )
     assert len(items_a) == 1
-
-
-def test_persistent_emergency_notice_on_checkin_ui(client: Client) -> None:
-    """8.6.5.3: Patient-facing check-in shows persistent non-emergency warning."""
-    clinic = ClinicFactory.create()
-    administrator, user, _profile = _linked_patient(clinic)
-    journal_services.get_or_create_default_checkin_questionnaire(
-        clinic_id=clinic.pk, actor=administrator, request_id=uuid4()
-    )
-    _force_patient_client(client, clinic, user)
-
-    res = client.get(reverse("checkin_today"))
-    assert res.status_code == 200
-    content = res.content.decode()
-    assert "não atende emergências" in content
-    assert "serviços de emergência" in content

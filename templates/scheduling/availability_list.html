@@ -1,0 +1,56 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'appointment_list' %}">{% translate "Agenda" %}</a></li><li>{% translate "Disponibilidade" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Disponibilidade dos profissionais" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Horários semanais em que cada profissional atende, por unidade. O aplicativo oferece ao paciente apenas os horários livres dentro destes." %}</p>
+  </div>
+  <div class="ae-actions">
+    <a class="ae-btn ae-btn--secondary" href="{% url 'scheduling:availability_preview' %}"><svg class="ae-icon" aria-hidden="true"><use href="#i-calendar"/></svg>{% translate "Prévia dos horários livres" %}</a>
+    {% if can_manage %}<a class="ae-btn" href="{% url 'scheduling:availability_create' %}"><svg class="ae-icon" aria-hidden="true"><use href="#i-plus"/></svg>{% translate "Novo horário" %}</a>{% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+{% if groups %}
+<div class="ae-stack">
+  {% for group in groups %}
+  <section class="ae-card" aria-labelledby="pro-{{ forloop.counter }}">
+    <h2 class="ae-card__title" id="pro-{{ forloop.counter }}">{{ group.name }}</h2>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% blocktranslate with name=group.name %}Horários de {{ name }}{% endblocktranslate %}</caption>
+        <thead><tr><th scope="col">{% translate "Dia da semana" %}</th><th scope="col">{% translate "Horário" %}</th><th scope="col">{% translate "Unidade" %}</th><th scope="col">{% translate "Sala" %}</th><th scope="col">{% translate "Vale a partir de" %}</th><th scope="col">{% translate "Vale até" %}</th><th scope="col">{% translate "Situação" %}</th>{% if can_manage %}<th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th>{% endif %}</tr></thead>
+        <tbody>
+          {% for row in group.rows %}
+          <tr>
+            <th scope="row" class="ae-table__strong">{{ row.weekday_label }}</th>
+            <td class="ae-table__nowrap">{{ row.window }}</td>
+            <td>{{ row.pattern.unit.name }}</td>
+            <td>{% if row.pattern.room %}{{ row.pattern.room.name }}{% else %}<span class="ae-muted">{% translate "Qualquer sala" %}</span>{% endif %}</td>
+            <td class="ae-table__nowrap">{{ row.pattern.valid_from|date:"SHORT_DATE_FORMAT" }}</td>
+            <td class="ae-table__nowrap">{% if row.pattern.valid_until %}{{ row.pattern.valid_until|date:"SHORT_DATE_FORMAT" }}{% else %}<span class="ae-muted">{% translate "Sem data final" %}</span>{% endif %}</td>
+            <td>{% if row.state == "current" %}<span class="ae-badge ae-badge--success">{% translate "Em vigor" %}</span>{% elif row.state == "scheduled" %}<span class="ae-badge ae-badge--info">{% translate "Começa depois" %}</span>{% else %}<span class="ae-badge ae-badge--muted">{% translate "Encerrado" %}</span>{% endif %}</td>
+            {% if can_manage %}
+            <td class="ae-table__actions">
+              <a class="ae-btn ae-btn--ghost ae-btn--sm" href="{% url 'scheduling:availability_update' row.pattern.pk %}">{% translate "Editar" %}</a>
+              <a class="ae-btn ae-btn--secondary ae-btn--sm" href="{% url 'scheduling:availability_remove' row.pattern.pk %}">{% translate "Remover" %}</a>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+{% else %}
+<div class="ae-card ae-empty">
+  <p>{% translate "Nenhum horário de atendimento cadastrado. Sem horários, o paciente não consegue pedir consulta no aplicativo." %}</p>
+  {% if can_manage %}<a class="ae-btn" href="{% url 'scheduling:availability_create' %}">{% translate "Cadastrar horário" %}</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

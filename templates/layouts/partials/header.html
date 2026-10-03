@@ -120,7 +120,7 @@
               <h6 class="text-dark mb-0 fw-bold fs-13">{{ user.get_full_name|default:user.email }}</h6>
               <span class="fs-11 text-muted text-truncate d-block">{{ user.email }}</span>
               <span class="badge bg-soft-primary text-primary mt-1 fs-10">
-                {% if is_clinic_admin %}{% translate "Administrador" %}{% elif is_therapist %}{% translate "Profissional" %}{% elif is_patient %}{% translate "Paciente" %}{% else %}{% translate "Usuário" %}{% endif %}
+                {% if is_clinic_admin %}{% translate "Administrador" %}{% elif is_therapist %}{% translate "Profissional" %}{% else %}{% translate "Usuário" %}{% endif %}
               </span>
             </div>
 

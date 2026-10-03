@@ -1,0 +1,7 @@
+{% load i18n %}
+{# Navegação do cuidado do paciente: medicação, planos e hábitos (a ficha do paciente liga aqui depois). #}
+<nav class="ae-actions" aria-label="{% translate 'Cuidado do paciente' %}">
+  <a class="ae-btn ae-btn--sm{% if section != 'medication' %} ae-btn--secondary{% endif %}"{% if section == 'medication' %} aria-current="page"{% endif %} href="{% url 'routines:medication_list' patient.pk %}">{% translate "Medicação" %}</a>
+  <a class="ae-btn ae-btn--sm{% if section != 'plans' %} ae-btn--secondary{% endif %}"{% if section == 'plans' %} aria-current="page"{% endif %} href="{% url 'routines:care_plan_list' patient.pk %}">{% translate "Planos de cuidado" %}</a>
+  <a class="ae-btn ae-btn--sm{% if section != 'habits' %} ae-btn--secondary{% endif %}"{% if section == 'habits' %} aria-current="page"{% endif %} href="{% url 'routines:habit_list' patient.pk %}">{% translate "Hábitos" %}</a>
+</nav>

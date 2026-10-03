@@ -19,6 +19,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods, require_POST
 
+from clinics.selectors import active_web_clinics_for_actor
 from clinics.services import CLINIC_SESSION_KEY
 
 from .forms import (
@@ -39,6 +40,7 @@ from .services import (
     SensitiveActionRateLimitedError,
     accept_invitation,
     invitation_clinic_id,
+    invitation_initial_role,
     issue_invitation,
     login_user,
     logout_user,
@@ -106,7 +108,7 @@ def _safe_local_next(request: HttpRequest, value: object) -> str | None:
 
 @require_http_methods(["GET", "POST"])
 def account_login(request: HttpRequest) -> HttpResponse:
-    """Authenticate clinic users (therapists, patients, staff)."""
+    """Authenticate clinic team members (patients use only the mobile app)."""
     form = LoginForm(request.POST or None)
     status = 200
     if request.method == "POST" and form.is_valid():
@@ -140,7 +142,8 @@ def account_login(request: HttpRequest) -> HttpResponse:
         form=form,
         title=_("Entrar na plataforma"),
         description=_(
-            "Use seu e-mail e sua senha para acessar uma clínica autorizada."
+            "Acesso da equipe da clínica. Pacientes usam o aplicativo "
+            "Aurora Elo Pós-alta."
         ),
         submit_label=_("Entrar"),
         secondary_url=reverse("password_recovery"),
@@ -291,9 +294,33 @@ def invitation_issue(request: HttpRequest) -> HttpResponse:
     )
 
 
+def _patient_app_page(request: HttpRequest) -> TemplateResponse:
+    """Explain that patients activate and recover their access only in the app."""
+    return TemplateResponse(
+        request,
+        "accounts/auth_message.html",
+        {
+            "page_title": _("Aplicativo do paciente"),
+            "title": _("Este acesso é pelo aplicativo"),
+            "message": _(
+                "Pacientes usam apenas o aplicativo Aurora Elo Pós-alta. Abra o "
+                "aplicativo no celular e informe o código recebido por e-mail."
+            ),
+            "action_url": reverse("account_login"),
+            "action_label": _("Entrar (equipe da clínica)"),
+        },
+    )
+
+
 @require_http_methods(["GET", "POST"])
 def invitation_accept(request: HttpRequest, raw_token: str) -> HttpResponse:
     """Accept an invitation for a new or already authenticated identity."""
+    try:
+        invited_role = invitation_initial_role(raw_token=raw_token)
+    except ValueError:
+        invited_role = ""
+    if invited_role == "patient":
+        return _patient_app_page(request)
     actor = request.user if isinstance(request.user, User) else None
     if request.method == "POST" and actor is not None:
         clinic_id = invitation_clinic_id(raw_token=raw_token)
@@ -405,6 +432,8 @@ def password_reset(request: HttpRequest, uid: str, token: str) -> HttpResponse:
             },
             status=400,
         )
+    if not active_web_clinics_for_actor(identity):
+        return _patient_app_page(request)
     form = PasswordResetForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         if reset_password(

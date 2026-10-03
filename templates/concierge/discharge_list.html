@@ -1,0 +1,45 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li>{% translate "Altas" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Altas" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Cada alta gera a agenda de ligações e visita definida pela régua da clínica." %}</p>
+  </div>
+  <a class="ae-btn" href="{% url 'concierge:discharge_create' %}"><svg class="ae-icon" aria-hidden="true"><use href="#i-plus"/></svg>{% translate "Registrar alta" %}</a>
+</div>
+{% endblock %}
+{% block content %}
+<form class="ae-toolbar" method="get" role="search">
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="situacao">{% translate "Situação" %}</label>
+    <div class="ae-control"><span class="field-control-icon ae-control__icon" aria-hidden="true"><svg class="ae-icon"><use href="#i-checklist"/></svg></span><select class="ae-select ae-select--icon" id="situacao" name="situacao">
+      <option value="">{% translate "Todas" %}</option>
+      <option value="active"{% if status == "active" %} selected{% endif %}>{% translate "Em acompanhamento" %}</option>
+      <option value="completed"{% if status == "completed" %} selected{% endif %}>{% translate "Acompanhamento concluído" %}</option>
+      <option value="canceled"{% if status == "canceled" %} selected{% endif %}>{% translate "Cancelada" %}</option>
+    </select></div></div>
+  <button class="ae-btn ae-btn--secondary" type="submit">{% translate "Filtrar" %}</button>
+</form>
+{% if discharges %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Altas registradas" %}</caption>
+    <thead><tr><th scope="col">{% translate "Paciente" %}</th><th scope="col">{% translate "Alta em" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col">{% translate "Contatos" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+    <tbody>
+      {% for discharge in discharges %}
+      <tr>
+        <td><a class="ae-table__strong" href="{% url 'concierge:patient_detail' discharge.patient_profile_id %}">{{ discharge.patient_profile.full_name }}</a></td>
+        <td class="ae-table__nowrap">{{ discharge.discharge_date|date:"SHORT_DATE_FORMAT" }}</td>
+        <td>{% if discharge.status == "active" %}<span class="ae-badge ae-badge--info">{{ discharge.get_status_display }}</span>{% elif discharge.status == "completed" %}<span class="ae-badge ae-badge--success">{{ discharge.get_status_display }}</span>{% else %}<span class="ae-badge ae-badge--muted">{{ discharge.get_status_display }}</span>{% endif %}</td>
+        <td>{% for contact in discharge.contacts.all %}<span class="ae-badge ae-badge--{% if contact.status == 'done' %}success{% elif contact.status == 'missed' %}danger{% elif contact.status == 'canceled' %}muted{% elif contact.due_date < today %}danger{% else %}info{% endif %}">{{ contact.get_kind_display }} {{ contact.day_after_discharge }}d</span> {% endfor %}</td>
+        <td class="ae-table__actions"><a class="ae-btn ae-btn--ghost ae-btn--sm" href="{% url 'concierge:discharge_detail' discharge.pk %}">{% translate "Abrir" %}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="ae-card ae-empty">{% translate "Nenhuma alta registrada ainda." %}</div>
+{% endif %}
+{% endblock %}

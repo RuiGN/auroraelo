@@ -321,6 +321,17 @@ def _own_patient_profile_id(*, clinic_id: UUID, actor: AbstractBaseUser) -> UUID
     return profile.pk
 
 
+def _patient_owns(
+    *, clinic_id: UUID, actor: AbstractBaseUser, patient_profile_id: UUID
+) -> bool:
+    """True when the actor is the active patient whose record the appointment is."""
+    try:
+        own = _own_patient_profile_id(clinic_id=clinic_id, actor=actor)
+    except PermissionDenied:
+        return False
+    return own == patient_profile_id
+
+
 def _therapist_or_staff_can_manage(
     *, clinic_id: UUID, actor: AbstractBaseUser, patient_profile_id: UUID
 ) -> bool:
@@ -380,6 +391,18 @@ def request_appointment(
     ).first()
     if service is None:
         raise ValidationError("Serviço não encontrado ou inativo.")
+    # Os ids vêm do cliente: unidade e profissional precisam ser desta clínica.
+    if not Unit.infrastructure_objects.filter(
+        pk=unit_id, clinic_id=clinic_id, is_active=True
+    ).exists():
+        raise ValidationError("Unidade não encontrada ou inativa.")
+    if not has_active_clinic_role(
+        clinic_id=clinic_id,
+        user_id=professional_id,
+        role="therapist",
+        on_date=timezone.localdate(),
+    ):
+        raise ValidationError("Profissional indisponível.")
 
     _assert_no_overlap(
         clinic_id=clinic_id,
@@ -484,11 +507,17 @@ def request_reschedule(
     )
     if appointment is None:
         raise PermissionDenied
-    _require_staff_or_linked(
+    # O próprio paciente pode pedir nova data; a equipe confirma depois.
+    if not _patient_owns(
         clinic_id=clinic_id,
         actor=actor,
         patient_profile_id=appointment.patient_profile_id,
-    )
+    ):
+        _require_staff_or_linked(
+            clinic_id=clinic_id,
+            actor=actor,
+            patient_profile_id=appointment.patient_profile_id,
+        )
     _ensure_valid_transition(appointment.status, AppointmentStatus.RESCHEDULE_REQUESTED)
     _assert_no_overlap(
         clinic_id=clinic_id,
@@ -541,14 +570,10 @@ def cancel_appointment(
     )
     if appointment is None:
         raise PermissionDenied
-    is_patient = (
-        has_active_clinic_role(
-            clinic_id=clinic_id,
-            user_id=actor.pk,
-            role="patient",
-            on_date=timezone.localdate(),
-        )
-        and appointment.requested_by_id == actor.pk
+    is_patient = _patient_owns(
+        clinic_id=clinic_id,
+        actor=actor,
+        patient_profile_id=appointment.patient_profile_id,
     )
     if not is_patient and not _therapist_or_staff_can_manage(
         clinic_id=clinic_id,

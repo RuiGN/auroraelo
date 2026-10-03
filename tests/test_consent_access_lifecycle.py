@@ -47,13 +47,15 @@ from tests.factories import ClinicFactory, ClinicMembershipFactory, UserFactory
 pytestmark = pytest.mark.django_db
 
 
-def patient_context(client: Client) -> tuple[User, Clinic]:
+def patient_context(
+    client: Client, role: str = ClinicMembership.Role.PATIENT
+) -> tuple[User, Clinic]:
     clinic = ClinicFactory.create()
     patient = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=patient,
-        role=ClinicMembership.Role.PATIENT,
+        role=role,
     )
     client.force_login(patient)
     session = client.session
@@ -528,8 +530,10 @@ def test_mandatory_document_cannot_use_optional_revocation_flow(client: Client) 
 def test_generic_decision_flow_rejects_revoked_for_mandatory_document(
     client: Client,
 ) -> None:
-    patient, clinic = patient_context(client)
-    administrator, _ = published_optional_document(clinic=clinic)
+    patient, clinic = patient_context(client, role=ClinicMembership.Role.THERAPIST)
+    administrator, _ = published_optional_document(
+        clinic=clinic, audience=ConsentDocument.Audience.PROFESSIONAL
+    )
     document = publish_consent_document(
         clinic_id=clinic.pk,
         actor=administrator,
@@ -539,7 +543,7 @@ def test_generic_decision_flow_rejects_revoked_for_mandatory_document(
         content="Conteúdo sintético.",
         purpose="terms_of_use",
         effective_from=timezone.now(),
-        audience=ConsentDocument.Audience.PATIENT,
+        audience=ConsentDocument.Audience.PROFESSIONAL,
         is_mandatory=True,
         refusal_consequence="O recurso ficará indisponível.",
         alternative_instructions="Solicite atendimento humano.",
@@ -583,8 +587,10 @@ def test_generic_decision_flow_rejects_revoked_for_mandatory_document(
 
 
 def test_generic_refusal_cannot_bypass_revocation_propagation(client: Client) -> None:
-    patient, clinic = patient_context(client)
-    _administrator, document = published_optional_document(clinic=clinic)
+    patient, clinic = patient_context(client, role=ClinicMembership.Role.THERAPIST)
+    _administrator, document = published_optional_document(
+        clinic=clinic, audience=ConsentDocument.Audience.PROFESSIONAL
+    )
     record_consent_manifestation(
         clinic_id=clinic.pk,
         actor=patient,
@@ -625,8 +631,10 @@ def test_generic_refusal_cannot_bypass_revocation_propagation(client: Client) ->
 def test_revoked_document_version_cannot_be_reaccepted_while_dispatch_is_pending(
     client: Client,
 ) -> None:
-    patient, clinic = patient_context(client)
-    _administrator, document = published_optional_document(clinic=clinic)
+    patient, clinic = patient_context(client, role=ClinicMembership.Role.THERAPIST)
+    _administrator, document = published_optional_document(
+        clinic=clinic, audience=ConsentDocument.Audience.PROFESSIONAL
+    )
     revoked = accepted_revocation(patient=patient, clinic=clinic, document=document)
     assert ConsentRevocationDispatch.infrastructure_objects.filter(
         clinic_id=clinic.pk,
@@ -1008,8 +1016,10 @@ def test_access_review_expires_previously_suspended_representation(
 def test_patient_revokes_optional_consent_through_confirmed_accessible_flow(
     client: Client,
 ) -> None:
-    patient, clinic = patient_context(client)
-    _, document = published_optional_document(clinic=clinic)
+    patient, clinic = patient_context(client, role=ClinicMembership.Role.THERAPIST)
+    _, document = published_optional_document(
+        clinic=clinic, audience=ConsentDocument.Audience.PROFESSIONAL
+    )
     record_consent_manifestation(
         clinic_id=clinic.pk,
         actor=patient,

@@ -10,16 +10,23 @@ from django.utils import timezone
 
 from clinics.policies import has_active_clinic_role
 from core.selectors import Selector as Selector
-from people.selectors import linked_patients_for_therapist, patient_profile_for_user
+from people.selectors import (
+    linked_patients_for_therapist,
+    patient_profile_for_user,
+    professional_directory_visible_to,
+)
 
 from .models import (
     Appointment,
     AppointmentStatus,
+    AvailabilityPattern,
     Conversation,
     ConversationParticipant,
     Message,
     ReminderPreference,
+    Room,
     Service,
+    Unit,
     WaitlistEntry,
     WaitlistStatus,
 )
@@ -29,13 +36,20 @@ __all__ = [
     "Selector",
     "Service",
     "WaitlistStatus",
+    "active_rooms_for_clinic",
     "active_services_for_clinic",
+    "active_units_for_clinic",
     "appointment_for_finance",
     "appointment_for_integrations",
     "appointments_visible_to",
+    "availability_pattern_for_clinic",
+    "availability_patterns_for_clinic",
     "conversations_for_actor",
     "messages_for_conversation",
     "reminder_preferences_for_patient",
+    "schedulable_professionals",
+    "service_for_clinic",
+    "services_for_clinic",
     "waitlist_entries_visible_to",
 ]
 
@@ -45,6 +59,72 @@ def active_services_for_clinic(*, clinic_id: UUID) -> list[Service]:
     return list(
         Service.objects.for_clinic(clinic_id).filter(is_active=True).order_by("name")
     )
+
+
+def active_units_for_clinic(*, clinic_id: UUID) -> list[Unit]:
+    """Return active units of one clinic, ordered by name."""
+    return list(
+        Unit.objects.for_clinic(clinic_id).filter(is_active=True).order_by("name")
+    )
+
+
+def active_rooms_for_clinic(*, clinic_id: UUID) -> list[Room]:
+    """Return active rooms of one clinic with their unit loaded."""
+    return list(
+        Room.objects.for_clinic(clinic_id)
+        .filter(is_active=True)
+        .select_related("unit")
+        .order_by("unit__name", "name", "pk")
+    )
+
+
+def services_for_clinic(*, clinic_id: UUID) -> list[Service]:
+    """Return every service of one clinic, active ones first, then by name."""
+    return list(
+        Service.objects.for_clinic(clinic_id).order_by("-is_active", "name", "pk")
+    )
+
+
+def service_for_clinic(*, clinic_id: UUID, service_id: UUID) -> Service | None:
+    """Return one service of the clinic, active or not."""
+    return Service.objects.for_clinic(clinic_id).filter(pk=service_id).first()
+
+
+def availability_patterns_for_clinic(*, clinic_id: UUID) -> list[AvailabilityPattern]:
+    """Return the clinic's weekly windows that were not removed."""
+    return list(
+        AvailabilityPattern.objects.for_clinic(clinic_id)
+        .filter(is_active=True)
+        .select_related("unit", "room")
+        .order_by("professional_id", "weekday", "start_time", "pk")
+    )
+
+
+def availability_pattern_for_clinic(
+    *, clinic_id: UUID, pattern_id: UUID
+) -> AvailabilityPattern | None:
+    """Return one weekly window of the clinic, removed or not."""
+    return (
+        AvailabilityPattern.objects.for_clinic(clinic_id)
+        .filter(pk=pattern_id)
+        .select_related("unit", "room")
+        .first()
+    )
+
+
+def schedulable_professionals(
+    *, clinic_id: UUID, actor: AbstractBaseUser
+) -> list[tuple[UUID, str]]:
+    """Return the active therapists an administrator may give availability to."""
+    rows = professional_directory_visible_to(
+        clinic_id=clinic_id,
+        actor=actor,
+        role="therapist",
+        status="active",
+        on_date=timezone.localdate(),
+    )
+    named = [(row.user_id, row.social_name or row.full_name) for row in rows]
+    return sorted(named, key=lambda item: (item[1].casefold(), str(item[0])))
 
 
 def appointment_for_finance(

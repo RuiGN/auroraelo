@@ -8,7 +8,7 @@ Baseline da Sprint 0. A rota é exibida sem parâmetros repetitivos quando o pr�
 | `accounts/auth_message.html` | `invitation_issue`, `invitation_accept`, `password_recovery`, `password_reset`, `password_reset_complete` | anônimo, convidado ou clinic_admin conforme a ação | `accounts/auth_base.html` | `auth-register-minimal`, `auth-reset-minimal` | 3 |
 | `accounts/sessions.html` | `/accounts/sessions/` `account_sessions` | membro autenticado | `layouts/vertical.html` | `settings-general` | 3 |
 | `analytics/clinic_panel.html` | `/analytics/clinica/` `clinic_panel` | clinic_admin | `layouts/vertical.html` via `layout_template` | `analytics`, `reports-sales`, `widgets-charts` | 4 |
-| `analytics/patient_dashboard.html` | `/analytics/` `patient_dashboard` | patient | `layouts/vertical.html` via `layout_template` | `analytics`, `widgets-statistics` | 4 |
+| `analytics/patient_dashboard.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 4 |
 | `analytics/report_list.html` | `/analytics/relatorios/` `report_list` | patient e clinic_admin, conforme relatório | `layouts/vertical.html` via `layout_template` | `reports-leads`, `widgets-tables` | 4 |
 | `analytics/therapist_dashboard.html` | `/analytics/profissional/` `therapist_dashboard` | therapist | `layouts/vertical.html` via `layout_template` | `analytics`, `reports-project` | 4 |
 | `clinics/confirm_switch.html` | `/clinics/switch/review/` `review_clinic_switch` | membro autenticado com acesso às duas clínicas | `layouts/base.html` | `settings-general` | 4 |
@@ -43,8 +43,8 @@ Baseline da Sprint 0. A rota é exibida sem parâmetros repetitivos quando o pr�
 | `content/learning/quiz_participate.html` | `content_quiz_participate` | participante matriculado e autorizado | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `auth-verify-minimal` | 7 |
 | `content/lesson_player.html` | include em `content/learning/lesson_page.html` | herda participante autorizado | partial, sem layout próprio | `help-knowledgebase`, `apps-storage` | 7 |
 | `content/library.html` | `/conteudos/` `library_home` | membro ativo dentro da audiência | `layouts/vertical.html` via `layout_template` | `help-knowledgebase`, `apps-storage` | 7 |
-| `content/notifications.html` | `/conteudos/notificacoes/` `notification_list` | membro ativo, somente próprias notificações | `layouts/vertical.html` via `layout_template` | `apps-email`, `widgets-lists` | 7 |
-| `content/recommendations.html` | `/conteudos/minhas-recomendacoes/` `recommendation_list` | membro ativo, recomendações autorizadas | `layouts/vertical.html` via `layout_template` | `apps-notes`, `widgets-lists` | 7 |
+| `content/notifications.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 7 |
+| `content/recommendations.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 7 |
 | `content/reports.html` | `/conteudos/denuncias/` `content_reports` | clinic_admin/editor autorizado | `layouts/vertical.html` via `layout_template` | `settings-support`, `widgets-tables` | 7 |
 | `errors/400.html` | handler `bad_request` | público afetado pela requisição inválida | `accounts/auth_base.html` | `auth-404-minimal` | 3 |
 | `errors/403.html` | handler `permission_denied` | público ou autenticado sem autorização | `accounts/auth_base.html` | `auth-404-minimal` | 3 |
@@ -52,24 +52,24 @@ Baseline da Sprint 0. A rota é exibida sem parâmetros repetitivos quando o pr�
 | `errors/500.html` | handler `server_error` | público ou autenticado | `accounts/auth_base.html` | `auth-404-minimal` | 3 |
 | `finance/charge_list.html` | `/financeiro/` `charge_list` | clinic_admin e administrative_staff | `layouts/vertical.html` via `layout_template` | `payment`, `invoice-view`, `widgets-tables` | 5 |
 | `finance/service_price_form.html` | `/financeiro/precos/novo/` `service_price_create` | clinic_admin | `layouts/vertical.html` via `layout_template` | `invoice-create`, `settings-finance` | 5 |
-| `goals/detail.html` | `/goals/<goal>/` `goal_detail` | patient dono da meta | `layouts/vertical.html` via `layout_template` | `projects-view`, `apps-tasks` | 6 |
+| `goals/detail.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
 | `goals/exercise_assign.html` | `/goals/exercicios/catalogo/<exercise>/atribuir/` `exercise_assign_view` | therapist/clinic_admin autorizado | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `customers-view` | 6 |
 | `goals/exercise_catalog.html` | `/goals/exercicios/catalogo/` `exercise_catalog` | therapist/clinic_admin autorizado | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `projects` | 6 |
-| `goals/exercise_execute.html` | `/goals/exercicios/atribuicoes/<id>/executar/` `patient_exercise_execute_view` | patient destinatário | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `apps-notes` | 6 |
+| `goals/exercise_execute.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
 | `goals/exercise_execution_detail.html` | `/goals/exercicios/execucoes/<id>/` `exercise_execution_detail_view` | patient dono; therapist conforme semáforo | `layouts/vertical.html` via `layout_template` | `projects-view`, `apps-chat` | 6 |
 | `goals/exercise_form.html` | `exercise_form` em criar/editar | therapist/clinic_admin autorizado | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `settings-tasks` | 6 |
-| `goals/form.html` | `/goals/nova/` `goal_create`; `goal_edit` | patient dono da meta | `layouts/vertical.html` via `layout_template` | `projects-create`, `apps-tasks` | 6 |
-| `goals/list.html` | `/goals/` `goal_list` | patient | `layouts/vertical.html` via `layout_template` | `projects`, `apps-tasks` | 6 |
-| `goals/low_energy.html` | `/goals/baixa-energia/` `low_energy_home` | patient | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `apps-notes` | 6 |
-| `goals/patient_exercises.html` | `/goals/exercicios/meus/` `patient_exercise_list` | patient | `layouts/vertical.html` via `layout_template` | `apps-tasks`, `projects` | 6 |
+| `goals/form.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `goals/list.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `goals/low_energy.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `goals/patient_exercises.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
 | `goals/placeholder.html` | removido após busca provar ausência de consumidor | nenhum; arquivo removido | não aplicável | descarte justificado: duplicava `goals/list.html` | 6 |
-| `journal/checkin_list.html` | `/journal/checkin/historico/` `checkin_list` | patient | `layouts/vertical.html` via `layout_template` | `apps-notes`, `widgets-lists` | 6 |
-| `journal/checkin_today.html` | `/journal/checkin/` `checkin_today` | patient | `layouts/vertical.html` via `layout_template` | `apps-notes`, `apps-tasks` | 6 |
-| `journal/checkin_unavailable.html` | resposta de `checkin_today` quando indisponível | patient | `layouts/vertical.html` via `layout_template` | `apps-notes`, `widgets-miscellaneous` | 6 |
-| `journal/detail.html` | `/journal/<entry>/` `journal_detail` | patient dono; profissional conforme consentimento | `layouts/vertical.html` via `layout_template` | `apps-notes`, `projects-view` | 6 |
-| `journal/form.html` | `/journal/novo/` `journal_create`; `journal_edit` | patient dono | `layouts/vertical.html` via `layout_template` | `apps-notes`, `proposal-edit` | 6 |
-| `journal/list.html` | `/journal/` `journal_list` | patient; solicitações autorizadas por relação | `layouts/vertical.html` via `layout_template` | `apps-notes`, `widgets-lists` | 6 |
-| `journal/partials/calendar.html` | include em `journal/list.html` | herda o patient autorizado | partial, sem layout próprio | `apps-calendar`, `widgets-statistics` | 6 |
+| `journal/checkin_list.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `journal/checkin_today.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `journal/checkin_unavailable.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `journal/detail.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `journal/form.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `journal/list.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
+| `journal/partials/calendar.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 6 |
 | `layouts/base.html` | pai de autenticação, erros/shells e certificado por contexto | público ou autenticado conforme filho | HTML base completo | head/base dos HTMLs Duralux e auth minimal | 2 |
 | `layouts/detached.html` | `/workspace/detached/` e filhos quando preferência `detached` | membro autenticado autorizado | `layouts/base.html` | layout documentado em `docs/html/layouts` | 2 |
 | `layouts/partials/header.html` | include em `layouts/vertical.html` e `layouts/detached.html` | herda membro autenticado | partial, sem layout próprio | header comum das demos Duralux | 2 |
@@ -77,32 +77,32 @@ Baseline da Sprint 0. A rota é exibida sem parâmetros repetitivos quando o pr�
 | `layouts/partials/navigation.html` | include desktop/mobile nos dois shells | herda membro autenticado e flags de perfil | partial, sem layout próprio | `nxl-navigation` do núcleo Duralux | 2 |
 | `layouts/vertical.html` | pai padrão das páginas autenticadas | membro autenticado autorizado | `layouts/base.html` | shell de `index.html` e `docs/html/layouts.html` | 2 |
 | `onboarding/clinic_checklist.html` | `/onboarding/clinic/` `clinic_onboarding` | clinic_admin | `layouts/vertical.html` via `layout_template` | `projects`, `apps-tasks` | 4 |
-| `onboarding/patient_onboarding.html` | `/onboarding/patient/` `patient_onboarding` | patient | `layouts/vertical.html` via `layout_template` | `projects-create`, `auth-register-minimal` | 4 |
+| `onboarding/patient_onboarding.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 4 |
 | `people/patient_detail.html` | `/people/patients/<id>/` `patient_detail` | clinic_admin/therapist conforme policy | `layouts/vertical.html` via `layout_template` | `customers-view` | 4 |
 | `people/patient_form.html` | `/people/patients/new/` `patient_create` | clinic_admin | `layouts/vertical.html` via `layout_template` | `customers-create` | 4 |
 | `people/patient_list.html` | `/people/patients/` `patient_list` | clinic_admin | `layouts/vertical.html` via `layout_template` | `customers`, `widgets-tables` | 4 |
 | `people/professional_list.html` | `/people/professionals/` `professional_list` | clinic_admin | `layouts/vertical.html` via `layout_template` | `customers`, `widgets-tables` | 4 |
 | `scheduling/appointment_calendar.html` | `/agenda/semana/` `appointment_calendar` | membro ativo, agenda filtrada por papel | `layouts/vertical.html` via `layout_template` | `apps-calendar` | 5 |
 | `scheduling/appointment_list.html` | `/agenda/` `appointment_list` | membro ativo, consultas autorizadas | `layouts/vertical.html` via `layout_template` | `apps-calendar`, `widgets-tables` | 5 |
-| `scheduling/appointment_request.html` | `/agenda/consultas/nova/` `appointment_request` | patient ou equipe autorizada | `layouts/vertical.html` via `layout_template` | `apps-calendar`, `projects-create` | 5 |
+| `scheduling/appointment_request.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 5 |
 | `scheduling/appointment_reschedule.html` | `appointment_reschedule` | participante/equipe autorizada à consulta | `layouts/vertical.html` via `layout_template` | `apps-calendar`, `projects-create` | 5 |
-| `scheduling/conversation_create.html` | `/agenda/mensagens/nova/` `conversation_create` | membro ativo com participantes permitidos | `layouts/vertical.html` via `layout_template` | `apps-chat`, `apps-email` | 5 |
-| `scheduling/conversation_detail.html` | `/agenda/mensagens/<id>/` `conversation_detail` | participante ativo da conversa | `layouts/vertical.html` via `layout_template` | `apps-chat` | 5 |
-| `scheduling/conversation_list.html` | `/agenda/mensagens/` `conversation_list` | membro ativo, somente conversas próprias | `layouts/vertical.html` via `layout_template` | `apps-chat`, `apps-email` | 5 |
-| `scheduling/reminder_preferences.html` | `/agenda/lembretes/` `reminder_preferences` | membro autenticado | `layouts/vertical.html` via `layout_template` | `settings-email` | 5 |
+| `scheduling/conversation_create.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 5 |
+| `scheduling/conversation_detail.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 5 |
+| `scheduling/conversation_list.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 5 |
+| `scheduling/reminder_preferences.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 5 |
 | `scheduling/room_form.html` | `/agenda/salas/nova/` `room_create` | clinic_admin | `layouts/vertical.html` via `layout_template` | `settings-general`, `projects-create` | 5 |
 | `scheduling/unit_form.html` | `/agenda/unidades/nova/` `unit_create`; `unit_update` | clinic_admin | `layouts/vertical.html` via `layout_template` | `settings-general`, `projects-create` | 5 |
 | `scheduling/unit_list.html` | `/agenda/unidades/` `unit_list` | clinic_admin/administrative_staff autorizado | `layouts/vertical.html` via `layout_template` | `customers`, `widgets-tables` | 5 |
 | `scheduling/waitlist_form.html` | `/agenda/espera/nova/` `waitlist_add` | clinic_admin/administrative_staff autorizado | `layouts/vertical.html` via `layout_template` | `projects-create`, `customers-create` | 5 |
 | `scheduling/waitlist_list.html` | `/agenda/espera/` `waitlist_list` | clinic_admin/administrative_staff autorizado | `layouts/vertical.html` via `layout_template` | `widgets-tables`, `apps-calendar` | 5 |
 | `therapist_dashboard/home.html` | `/dashboard/` `therapist_dashboard` | therapist | `layouts/vertical.html` via `layout_template` | `analytics`, `widgets-charts`, `widgets-statistics` | 4 |
-| `visual_reference/reference.html` | `/design-system/` `design_system_reference` | staff Django | HTML completo, sem pai | catálogo `widgets-*`, `settings-*` e shell Duralux | 8 |
+| `visual_reference/reference.html` | removido: o paciente usa apenas o aplicativo pós-alta (web só da equipe) | nenhum; arquivo removido | não aplicável | descarte justificado: tela web do paciente | 8 |
 | `workspace/home.html` | `/workspace/` `workspace_vertical`; `/workspace/detached/` `workspace_detached` | membro autenticado permitido pelo middleware | `layouts/vertical.html` ou `layouts/detached.html` via contexto | `index`, `widgets-statistics`, `widgets-tables` | 4 |
 
 ## Fechamento da cobertura
 
 - Baseline contabilizada: **95 templates**; 93 permanecem migrados e `goals/placeholder.html` e as telas de MFA (`accounts/mfa_recovery_codes.html`) foram removidos com guarda de ausência de referência.
-- Templates atuais no disco: **106** = 93 templates retidos da baseline + 8 auxiliares e páginas adicionados após a baseline + 4 partials HTMX (checkin_table, steps_progress, calendar_grid, scheduling partials) + `accounts/team.html` (equipe da clínica ativa, Sprint 8). Contagem conferida por `templates/**/*.html`.
+- Templates atuais no disco: **129**. O sistema web é só da equipe da clínica: as telas web do paciente (diário e check-in, metas, exercícios e baixa energia do paciente, solicitar consulta, lembretes e mensagens, "Minha evolução", onboarding do paciente e recomendações) foram removidas; o paciente usa apenas o aplicativo pós-alta (`/api/v1/mobile/`). Restam 74 templates retidos da baseline e auxiliares anteriores, 4 partials HTMX/agenda, `accounts/team.html`, `people/patient_invitation.html` (código de ativação do paciente, exibido uma vez à equipe), 14 do Concierge (`templates/concierge/**`, design system Aurora Elo), 12 das telas de cuidado da equipe (`templates/routines/**`: medicação, plano de cuidado e hábitos), 7 da configuração da clínica que alimenta o app (`templates/scheduling/{service_list,availability_list,availability_preview,setup_form}.html`, `templates/scheduling/partials/{errors,field}.html` e `templates/wellness/crisis_resources.html`), 7 do diário e check-ins compartilhados com a equipe (`templates/journal/**`), 3 do painel do aplicativo do paciente (`templates/mobile_api/**`) e 3 do layout Aurora Elo. Contagem conferida por `templates/**/*.html`.
 - Distribuição de sprint: Sprint 2 = 11; Sprint 3 = 8; Sprint 4 = 15; Sprint 5 = 15; Sprint 6 = 24; Sprint 7 = 21; Sprint 8 = 1.
 - Layouts/partials/components herdam a autorização do consumidor; a matriz não atribui permissão nova a nenhum template.
 

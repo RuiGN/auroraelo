@@ -99,13 +99,7 @@ def test_form_behaviors_are_loaded_only_by_form_consumers() -> None:
         "accounts/auth_form.html",
         "accounts/sessions.html",
         "clinics/setup.html",
-        "goals/form.html",
-        "journal/checkin_today.html",
-        "journal/form.html",
-        "scheduling/appointment_request.html",
         "scheduling/appointment_reschedule.html",
-        "scheduling/conversation_create.html",
-        "scheduling/reminder_preferences.html",
     ):
         assert "duralux/js/form-behaviors.js" in _read(template_root / relative_path)
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from typing import Any
 from uuid import UUID
 
@@ -10,6 +10,7 @@ from core.selectors import Selector as CoreSelector
 
 from .models import (
     CarePlan,
+    CarePlanStatus,
     CheckInStatus,
     Habit,
     HabitOccurrence,
@@ -380,12 +381,190 @@ def professional_supervision_dashboard(
     }
 
 
+# ── Leituras do paciente sobre os próprios dados (app do paciente) ────────────
+#
+# Os serviços de escrita deste domínio autorizam só por clínica. Estes seletores
+# resolvem o objeto **já restrito ao perfil do paciente**: quem chama nunca recebe
+# (nem grava em) um item de outra pessoa da mesma clínica.
+
+PATIENT_VISIBLE_PLAN_STATUSES = (
+    CarePlanStatus.ACTIVE,
+    CarePlanStatus.PAUSED,
+    CarePlanStatus.COMPLETED,
+    CarePlanStatus.REVOKED,
+)
+
+
+def medication_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, medication_id: UUID
+) -> PrescribedMedication | None:
+    """Return one active medication of this patient, or ``None``."""
+    return (
+        PrescribedMedication.objects.for_clinic(clinic_id)
+        .filter(pk=medication_id, patient_profile_id=patient_profile_id, is_active=True)
+        .first()
+    )
+
+
+def medication_logs_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, since: datetime
+) -> list[MedicationLog]:
+    """Return this patient's dose records scheduled at or after ``since``."""
+    return list(
+        MedicationLog.objects.for_clinic(clinic_id)
+        .filter(
+            medication__patient_profile_id=patient_profile_id,
+            scheduled_time__gte=since,
+        )
+        .order_by("scheduled_time")
+    )
+
+
+def current_care_plan_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID
+) -> CarePlan | None:
+    """Return the newest care plan the patient may see (never drafts)."""
+    return (
+        CarePlan.objects.for_clinic(clinic_id)
+        .filter(
+            patient_profile_id=patient_profile_id,
+            status__in=PATIENT_VISIBLE_PLAN_STATUSES,
+        )
+        .prefetch_related("actions", "patient_responses")
+        .order_by("-version", "-created_at")
+        .first()
+    )
+
+
+def care_plan_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, care_plan_id: UUID
+) -> CarePlan | None:
+    """Return one visible care plan of this patient, or ``None``."""
+    return (
+        CarePlan.objects.for_clinic(clinic_id)
+        .filter(
+            pk=care_plan_id,
+            patient_profile_id=patient_profile_id,
+            status__in=PATIENT_VISIBLE_PLAN_STATUSES,
+        )
+        .prefetch_related("actions", "patient_responses")
+        .first()
+    )
+
+
+def habits_for_patient(*, clinic_id: UUID, patient_profile_id: UUID) -> list[Habit]:
+    """Return the patient's habits that are active or temporarily paused."""
+    return list(
+        Habit.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id)
+        .exclude(status="archived")
+        .order_by("order", "created_at")
+    )
+
+
+def habit_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, habit_id: UUID
+) -> Habit | None:
+    """Return one non-archived habit of this patient, or ``None``."""
+    return (
+        Habit.objects.for_clinic(clinic_id)
+        .filter(pk=habit_id, patient_profile_id=patient_profile_id)
+        .exclude(status="archived")
+        .first()
+    )
+
+
+def habit_checks_for_patient(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    start_date: date,
+    end_date: date,
+) -> list[tuple[UUID, date, str]]:
+    """Return ``(habit_id, date, status)`` for effective check-ins in the range."""
+    rows = (
+        HabitOccurrence.objects.for_clinic(clinic_id)
+        .filter(
+            habit__patient_profile_id=patient_profile_id,
+            scheduled_date__gte=start_date,
+            scheduled_date__lte=end_date,
+            is_canceled=False,
+            checkin__isnull=False,
+        )
+        .select_related("checkin")
+        .order_by("scheduled_date")
+    )
+    return [(row.habit_id, row.scheduled_date, row.checkin.status) for row in rows]
+
+
+# ── Leituras da equipe (telas web de medicação, plano e hábitos) ──────────────
+#
+# Diferente das leituras do paciente acima, estas enxergam também o que o app não
+# mostra (rascunho, aguardando assinatura, suspenso, arquivado). Quem chama já
+# autorizou a equipe sobre o paciente; o objeto continua restrito a ele.
+
+
+def medication_for_staff(
+    *, clinic_id: UUID, patient_profile_id: UUID, medication_id: UUID
+) -> PrescribedMedication | None:
+    """Return one medication of this patient in any state, or ``None``."""
+    return (
+        PrescribedMedication.objects.for_clinic(clinic_id)
+        .filter(pk=medication_id, patient_profile_id=patient_profile_id)
+        .first()
+    )
+
+
+def care_plan_for_staff(
+    *, clinic_id: UUID, patient_profile_id: UUID, care_plan_id: UUID
+) -> CarePlan | None:
+    """Return one care plan of this patient in any status, with its reply history."""
+    return (
+        CarePlan.objects.for_clinic(clinic_id)
+        .filter(pk=care_plan_id, patient_profile_id=patient_profile_id)
+        .prefetch_related("actions", "patient_responses")
+        .first()
+    )
+
+
+def habit_for_staff(
+    *, clinic_id: UUID, patient_profile_id: UUID, habit_id: UUID
+) -> Habit | None:
+    """Return one habit of this patient in any state, or ``None``."""
+    return (
+        Habit.objects.for_clinic(clinic_id)
+        .filter(pk=habit_id, patient_profile_id=patient_profile_id)
+        .first()
+    )
+
+
+def habits_for_staff(*, clinic_id: UUID, patient_profile_id: UUID) -> list[Habit]:
+    """Return every habit of this patient, archived ones included."""
+    return list(
+        Habit.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id)
+        .order_by("order", "created_at")
+    )
+
+
 __all__ = [
     "Selector",
+    "PATIENT_VISIBLE_PLAN_STATUSES",
+    "care_plan_for_patient",
+    "care_plan_for_staff",
     "care_plans_for_patient",
+    "current_care_plan_for_patient",
     "daily_routine_agenda_for_patient",
+    "habit_checks_for_patient",
+    "habit_for_patient",
+    "habit_for_staff",
     "habit_trends_for_period",
+    "habits_for_patient",
+    "habits_for_staff",
     "medication_adherence_summary",
+    "medication_for_patient",
+    "medication_for_staff",
+    "medication_logs_for_patient",
     "prescribed_medications_for_patient",
     "professional_supervision_dashboard",
     "sleep_entries_for_patient",

@@ -19,8 +19,6 @@ SURFACES = (
     "anamnesis.html",
     "beds.html",
     "crisis_protocol.html",
-    "mobile_b2c.html",
-    "mobile_connected.html",
     "patients.html",
     "telepsychiatry_room.html",
     "twelve_steps_anamnesis.html",
@@ -30,16 +28,6 @@ LOCALES = {"pt-br": "pt_BR", "en": "en", "es": "es"}
 
 # Expectativas literais, independentes do retorno de gettext/HTML sob teste.
 COPY = {
-    "connected": (
-        "A agenda, as prescrições, o registro de tomadas e o SOS estão "
-        "indisponíveis nesta prévia. Esta página não confirma tratamento ou "
-        "atendimento.",
-        "Scheduling, prescriptions, dose tracking and SOS are unavailable in "
-        "this preview. This page does not confirm treatment or care.",
-        "La agenda, las recetas, el registro de tomas y el SOS no están "
-        "disponibles en esta vista previa. Esta página no confirma tratamiento "
-        "ni atención.",
-    ),
     "beds": (
         "A consulta de ocupação, a admissão e as comunicações de internação "
         "estão indisponíveis nesta interface. Nenhuma vaga está confirmada.",
@@ -161,25 +149,10 @@ COPY = {
         "indicadores de recuperación no están disponibles en esta interfaz. No "
         "hay seguimiento ni intervención automática.",
     ),
-    "b2c": (
-        "O registro de humor, o diário e a contratação de assinatura estão "
-        "indisponíveis nesta prévia. Nenhum histórico ou benefício de "
-        "assinatura é exibido.",
-        "Mood tracking, the journal and subscription sign-up are unavailable "
-        "in this preview. No history or subscription benefits are displayed.",
-        "El registro del estado de ánimo, el diario y la contratación de una "
-        "suscripción no están disponibles en esta vista previa. No se muestra "
-        "ningún historial ni beneficio de suscripción.",
-    ),
     "patients_title": (
         "Pacientes disponíveis para consulta",
         "Patients available to view",
         "Pacientes disponibles para consulta",
-    ),
-    "profile": (
-        "Perfil vinculado à sua conta nesta clínica",
-        "Profile linked to your account at this clinic",
-        "Perfil vinculado a tu cuenta en esta clínica",
     ),
     "record": ("Prontuário", "Medical record", "Historia clínica"),
     "back": (
@@ -199,8 +172,6 @@ SURFACE_COPY = {
     "anamnesis.html": ("intake",),
     "beds.html": ("beds",),
     "crisis_protocol.html": ("sos", "samu", "cvv"),
-    "mobile_b2c.html": ("b2c",),
-    "mobile_connected.html": ("connected", "profile"),
     "patients.html": ("patients_readonly", "record", "patient_actions", "intake_link"),
     "telepsychiatry_room.html": ("telepsychiatry",),
     "twelve_steps_anamnesis.html": ("steps_title", "steps", "back"),
@@ -310,7 +281,7 @@ def synthetic_render(rf, settings):
 
 @pytest.mark.parametrize("language", LANGUAGES)
 @pytest.mark.parametrize("surface", SURFACES)
-def test_nine_sanitized_surfaces_render_translated_limits(
+def test_sanitized_surfaces_render_translated_limits(
     surface, language, synthetic_render
 ):
     html, page, patient = synthetic_render(surface, language)
@@ -330,11 +301,7 @@ def test_nine_sanitized_surfaces_render_translated_limits(
         form.get("action") == reverse("account_set_language") for form in page.forms
     )
     assert 'data-ai-status="disabled"' in html
-    if surface in (
-        "patients.html",
-        "addiction_dashboard.html",
-        "mobile_connected.html",
-    ):
+    if surface in ("patients.html", "addiction_dashboard.html"):
         assert str(escape(patient.full_name)) in html
         assert patient.full_name not in html
     if surface in ("patients.html", "addiction_dashboard.html"):
@@ -350,9 +317,7 @@ def test_nine_sanitized_surfaces_render_translated_limits(
 
 
 @pytest.mark.parametrize("language", LANGUAGES)
-@pytest.mark.parametrize(
-    "surface", ("patients.html", "addiction_dashboard.html", "mobile_connected.html")
-)
+@pytest.mark.parametrize("surface", ("patients.html", "addiction_dashboard.html"))
 def test_empty_synthetic_context_does_not_invent_patient_data(
     surface, language, synthetic_render
 ):
@@ -361,9 +326,4 @@ def test_empty_synthetic_context_does_not_invent_patient_data(
     index = LANGUAGES.index(language)
     assert patient.record_number not in html
     assert str(escape(patient.full_name)) not in html
-    if surface == "mobile_connected.html":
-        assert COPY["profile"][index] not in text
-        assert COPY["connected"][index] in text
-        assert COPY["no_writes"][index] in text
-    else:
-        assert COPY["empty"][index] in text
+    assert COPY["empty"][index] in text

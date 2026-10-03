@@ -20,6 +20,8 @@ domain rules in views, models, tasks, or signal receivers.
 | `audit` | Append-only audit events, integrity chains, authorized queries, and minimized exports. |
 | `privacy` | Data-subject requests, reauthenticated exports, lifecycle execution, and operator confirmations. |
 | `therapist_dashboard` | Read-only therapist dashboard composition; it owns no source-of-truth domain state. |
+| `concierge` | Post-discharge follow-up for the clinic team: discharge, versioned contact schedule, family contacts with patient consent, append-only concierge log and requests. Administrative only; no clinical content. |
+| `mobile_api` | Token sessions for the post-discharge patient app: login, rotating refresh tokens, per-request re-authorization and device revocation. It owns no clinical data; the app's endpoints live in `api/` and call each domain's public selectors and services. |
 
 The current sprint intentionally provides interfaces and typed events only. Models,
 workflows, persistence adapters, event transports, and user-facing features belong to
@@ -52,6 +54,16 @@ edge is forbidden.
   registries without importing another domain's persistence.
 - `therapist_dashboard` may import every source domain because it is a read-only
   composition boundary. Source domains must never import it.
+- `concierge` may import `core`, `clinics` (authorization and tenant lock), `people`
+  (patient lookup) and the public `audit.services` boundary.
+- `mobile_api` may import `core`, `accounts` (credential verification that shares the
+  web login failure budget, invitation revocation and the activation e-mail), `clinics`
+  (role-bound clinic selection and membership policy), `people` (patient profile,
+  invitation state, care link), `concierge` (the discharge date, read-only, shown to the
+  team) and the public `audit.services` boundary. The HTTP routes for the patient app
+  live in `api/` and are not a domain module; the only web screens of this domain are the
+  team's "patient app" panel (`mobile_api.views`, `/app-paciente/`), which shows access
+  status and connected devices, re-sends the activation invitation and revokes devices.
 
 Cross-domain calls use public services, selectors, policies, or domain events. Direct
 imports of another module's models or private implementation modules are not allowed.

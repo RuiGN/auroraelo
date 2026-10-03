@@ -28,7 +28,7 @@ from .models import (
     CarePlanStatus,
     PatientResponseChoice,
 )
-from .policies import can_prescribe_care_plan
+from .policies import can_author_care_plan, can_prescribe_care_plan
 
 
 class Service(CoreService[Any, Any]):
@@ -48,8 +48,12 @@ def propose_care_plan(
     valid_from: date | None = None,
     valid_until: date | None = None,
     actions_data: list[dict[str, Any]] | None = None,
+    request_id: UUID | None = None,
 ) -> CarePlan:
-    """Propose a clinical care plan in DRAFT status awaiting clinician signature."""
+    """Propose a clinical care plan in DRAFT status awaiting clinician signature.
+
+    A draft is never shown to the patient (see ``PATIENT_VISIBLE_PLAN_STATUSES``).
+    """
     if not can_prescribe_care_plan(user=professional_user, clinic_id=clinic_id):
         raise ValidationError(
             "Apenas profissionais de saúde habilitados podem propor planos de cuidado."
@@ -78,19 +82,204 @@ def propose_care_plan(
         valid_until=valid_until,
     )
 
-    if actions_data:
-        for idx, act in enumerate(actions_data):
-            CarePlanAction.objects.for_clinic(clinic_id).create(
-                clinic_id=clinic_id,
-                care_plan=plan,
-                action_description=act["description"].strip(),
-                target_frequency=act.get("frequency", "daily"),
-                guidance=act.get("guidance", "").strip(),
-                is_mandatory=act.get("is_mandatory", False),
-                order=idx,
-            )
-
+    _store_actions(clinic_id=clinic_id, plan=plan, actions_data=actions_data)
+    _audit_plan(
+        clinic_id=clinic_id,
+        actor_id=professional_user.pk,
+        request_id=request_id,
+        action="routines.care_plan_proposed",
+        plan=plan,
+        justification="Professional proposed a care plan draft",
+    )
     care_plan_proposed.send(sender=CarePlan, plan=plan)
+    return plan
+
+
+def _store_actions(
+    *, clinic_id: UUID, plan: CarePlan, actions_data: list[dict[str, Any]] | None
+) -> None:
+    for idx, act in enumerate(actions_data or []):
+        CarePlanAction.objects.for_clinic(clinic_id).create(
+            clinic_id=clinic_id,
+            care_plan=plan,
+            action_description=act["description"].strip(),
+            target_frequency=act.get("frequency", "daily"),
+            guidance=act.get("guidance", "").strip(),
+            is_mandatory=act.get("is_mandatory", False),
+            order=idx,
+        )
+
+
+def _audit_plan(
+    *,
+    clinic_id: UUID,
+    actor_id: UUID,
+    request_id: UUID | None,
+    action: str,
+    plan: CarePlan,
+    justification: str,
+) -> None:
+    """Audit a team change to a care plan (identifiers only, never its content)."""
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action=action,
+        resource_type="care_plan",
+        resource_id=str(plan.id),
+        outcome="success",
+        request_id=request_id or uuid4(),
+        network_origin=None,
+        justification=justification,
+    )
+
+
+def _locked_plan(
+    *, clinic_id: UUID, patient_profile_id: UUID, care_plan_id: UUID
+) -> CarePlan:
+    """Resolve one plan of this patient with a row lock (transitions are exclusive)."""
+    plan = (
+        CarePlan.objects.for_clinic(clinic_id)
+        .select_for_update()
+        .filter(pk=care_plan_id, patient_profile_id=patient_profile_id)
+        .first()
+    )
+    if plan is None:
+        raise ValidationError("Plano de cuidado não encontrado.")
+    return plan
+
+
+def _require_author(
+    *, clinic_id: UUID, plan: CarePlan, professional_user: AbstractBaseUser
+) -> None:
+    if not can_author_care_plan(
+        user=professional_user,
+        clinic_id=clinic_id,
+        prescribing_professional_id=plan.prescribing_professional_id,
+    ):
+        raise ValidationError(
+            "Somente o profissional que propôs o plano pode editá-lo, enviá-lo "
+            "para assinatura ou assiná-lo."
+        )
+
+
+@transaction.atomic
+def update_care_plan_draft(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    title: str,
+    objective: str,
+    clinical_rationale: str,
+    contraindications: str = "",
+    valid_from: date | None = None,
+    valid_until: date | None = None,
+    actions_data: list[dict[str, Any]] | None = None,
+    request_id: UUID | None = None,
+) -> CarePlan:
+    """Edit a plan that was never published; the actions are replaced as a set."""
+    plan = _locked_plan(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+    )
+    _require_author(clinic_id=clinic_id, plan=plan, professional_user=professional_user)
+    if plan.status != CarePlanStatus.DRAFT:
+        raise ValidationError("Só é possível editar um plano em rascunho.")
+    clean_title = title.strip()
+    clean_obj = objective.strip()
+    clean_rationale = clinical_rationale.strip()
+    if not clean_title or not clean_obj or not clean_rationale:
+        raise ValidationError(
+            "Título, objetivo e justificativa clínica são obrigatórios."
+        )
+    plan.title = clean_title
+    plan.objective = clean_obj
+    plan.clinical_rationale = clean_rationale
+    plan.contraindications = contraindications.strip()
+    plan.valid_from = valid_from or plan.valid_from
+    plan.valid_until = valid_until
+    plan.save()
+    CarePlanAction.objects.for_clinic(clinic_id).filter(care_plan=plan).delete()
+    _store_actions(clinic_id=clinic_id, plan=plan, actions_data=actions_data)
+    _audit_plan(
+        clinic_id=clinic_id,
+        actor_id=professional_user.pk,
+        request_id=request_id,
+        action="routines.care_plan_updated",
+        plan=plan,
+        justification="Professional edited a care plan draft",
+    )
+    return plan
+
+
+@transaction.atomic
+def submit_care_plan_for_signature(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    request_id: UUID | None = None,
+) -> CarePlan:
+    """Lock a draft for its final review: DRAFT -> PENDING_SIGNATURE."""
+    plan = _locked_plan(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+    )
+    _require_author(clinic_id=clinic_id, plan=plan, professional_user=professional_user)
+    if plan.status != CarePlanStatus.DRAFT:
+        raise ValidationError("Só um rascunho pode ser enviado para assinatura.")
+    has_actions = (
+        CarePlanAction.objects.for_clinic(clinic_id).filter(care_plan=plan).exists()
+    )
+    if not has_actions:
+        raise ValidationError(
+            "Inclua ao menos uma ação antes de enviar para assinatura."
+        )
+    plan.status = CarePlanStatus.PENDING_SIGNATURE
+    plan.save(update_fields=["status", "updated_at"])
+    _audit_plan(
+        clinic_id=clinic_id,
+        actor_id=professional_user.pk,
+        request_id=request_id,
+        action="routines.care_plan_submitted",
+        plan=plan,
+        justification="Professional sent a care plan for signature",
+    )
+    return plan
+
+
+@transaction.atomic
+def reopen_care_plan_draft(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    request_id: UUID | None = None,
+) -> CarePlan:
+    """Send a plan awaiting signature back to draft so it can be edited."""
+    plan = _locked_plan(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+    )
+    _require_author(clinic_id=clinic_id, plan=plan, professional_user=professional_user)
+    if plan.status != CarePlanStatus.PENDING_SIGNATURE:
+        raise ValidationError("Só um plano aguardando assinatura volta a rascunho.")
+    plan.status = CarePlanStatus.DRAFT
+    plan.save(update_fields=["status", "updated_at"])
+    _audit_plan(
+        clinic_id=clinic_id,
+        actor_id=professional_user.pk,
+        request_id=request_id,
+        action="routines.care_plan_reopened",
+        plan=plan,
+        justification="Professional returned a care plan to draft",
+    )
     return plan
 
 
@@ -108,9 +297,35 @@ def sign_care_plan(
             "Apenas profissionais de saúde habilitados podem assinar planos de cuidado."
         )
 
-    plan = CarePlan.objects.for_clinic(clinic_id).filter(pk=care_plan_id).first()
+    plan = (
+        CarePlan.objects.for_clinic(clinic_id)
+        .select_for_update()
+        .filter(pk=care_plan_id)
+        .first()
+    )
     if not plan:
         raise ValidationError("Plano de cuidado não encontrado.")
+    # Signing publishes the plan to the patient's app: a plan the patient refused
+    # or that was closed must never be re-activated by signing it again.
+    if plan.status not in {CarePlanStatus.DRAFT, CarePlanStatus.PENDING_SIGNATURE}:
+        raise ValidationError("Este plano não está aguardando assinatura.")
+    if plan.prescribing_professional_id != signing_professional.pk:
+        raise ValidationError(
+            "Somente o profissional que propôs o plano pode assiná-lo."
+        )
+    if (
+        CarePlan.objects.for_clinic(clinic_id)
+        .filter(
+            patient_profile_id=plan.patient_profile_id,
+            status__in=[CarePlanStatus.ACTIVE, CarePlanStatus.PAUSED],
+        )
+        .exclude(pk=plan.pk)
+        .exists()
+    ):
+        raise ValidationError(
+            "O paciente já tem um plano de cuidado em vigor. Encerre-o antes de "
+            "assinar outro."
+        )
 
     now = timezone.now()
     secret = getattr(settings, "SECRET_KEY", "default-test-secret")
@@ -190,9 +405,132 @@ def respond_to_care_plan(
     return response
 
 
+def _transition(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    allowed_from: set[str],
+    to_status: str,
+    action: str,
+    justification: str,
+    error: str,
+    request_id: UUID | None,
+) -> CarePlan:
+    """Move a published plan to another status on behalf of the team."""
+    if not can_prescribe_care_plan(user=professional_user, clinic_id=clinic_id):
+        raise ValidationError(
+            "Apenas profissionais de saúde habilitados podem alterar planos de cuidado."
+        )
+    plan = _locked_plan(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+    )
+    if plan.status not in allowed_from:
+        raise ValidationError(error)
+    plan.status = to_status
+    plan.save(update_fields=["status", "updated_at"])
+    _audit_plan(
+        clinic_id=clinic_id,
+        actor_id=professional_user.pk,
+        request_id=request_id,
+        action=action,
+        plan=plan,
+        justification=justification,
+    )
+    return plan
+
+
+@transaction.atomic
+def pause_care_plan(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    request_id: UUID | None = None,
+) -> CarePlan:
+    """Pause an active plan: the patient still sees it, marked as paused."""
+    return _transition(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+        professional_user=professional_user,
+        allowed_from={CarePlanStatus.ACTIVE},
+        to_status=CarePlanStatus.PAUSED,
+        action="routines.care_plan_paused",
+        justification="Team paused a care plan",
+        error="Só um plano ativo pode ser pausado.",
+        request_id=request_id,
+    )
+
+
+@transaction.atomic
+def resume_care_plan(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    request_id: UUID | None = None,
+) -> CarePlan:
+    """Resume a paused plan (the team decision; the patient is told in the app)."""
+    return _transition(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+        professional_user=professional_user,
+        allowed_from={CarePlanStatus.PAUSED},
+        to_status=CarePlanStatus.ACTIVE,
+        action="routines.care_plan_resumed",
+        justification="Team resumed a paused care plan",
+        error="Só um plano pausado pode ser retomado.",
+        request_id=request_id,
+    )
+
+
+@transaction.atomic
+def close_care_plan(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    care_plan_id: UUID,
+    professional_user: AbstractBaseUser,
+    outcome: str = CarePlanStatus.COMPLETED,
+    request_id: UUID | None = None,
+) -> CarePlan:
+    """End a published plan as completed or revoked; a closed plan accepts no reply.
+
+    Drafts and plans awaiting signature are never closed here: ``revoked`` is visible
+    to the patient, so using it on an unpublished draft would expose it.
+    """
+    if outcome not in {CarePlanStatus.COMPLETED, CarePlanStatus.REVOKED}:
+        raise ValidationError("Resultado de encerramento inválido.")
+    return _transition(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        care_plan_id=care_plan_id,
+        professional_user=professional_user,
+        allowed_from={CarePlanStatus.ACTIVE, CarePlanStatus.PAUSED},
+        to_status=outcome,
+        action="routines.care_plan_closed",
+        justification=f"Team closed a care plan as {outcome}",
+        error="Só um plano ativo ou pausado pode ser encerrado.",
+        request_id=request_id,
+    )
+
+
 __all__ = [
     "Service",
+    "close_care_plan",
+    "pause_care_plan",
     "propose_care_plan",
+    "reopen_care_plan_draft",
     "respond_to_care_plan",
+    "resume_care_plan",
     "sign_care_plan",
+    "submit_care_plan_for_signature",
+    "update_care_plan_draft",
 ]

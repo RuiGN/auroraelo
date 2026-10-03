@@ -1,0 +1,73 @@
+{% extends "routines/base.html" %}
+{% load i18n %}
+{% block header_actions %}
+<a class="ae-btn" href="{% url 'routines:medication_create' patient.pk %}">{% translate "Registrar medicação" %}</a>
+{% endblock %}
+{% block content %}
+<div class="ae-stack">
+  <div class="ae-alert" role="note"><svg class="ae-icon" aria-hidden="true"><use href="#i-info"/></svg><div>{% blocktranslate with zone=patient.timezone_name %}O paciente vê no app as medicações visíveis, com dose e horários no fuso dele ({{ zone }}), e registra cada dose por lá. O registro de adesão é feito só pelo paciente.{% endblocktranslate %}</div></div>
+
+  <section class="ae-card" aria-labelledby="sec-meds">
+    <h2 class="ae-card__title" id="sec-meds">{% translate "Prescrições registradas" %}</h2>
+    {% if rows %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Medicações do paciente" %}</caption>
+        <thead><tr><th scope="col">{% translate "Medicamento" %}</th><th scope="col">{% translate "Horários" %}</th><th scope="col">{% translate "Período" %}</th><th scope="col">{% translate "Prescritor" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+        <tbody>
+          {% for row in rows %}
+          {% with med=row.medication %}
+          <tr>
+            <td><span class="ae-table__strong">{{ med.medication_name }}</span><span class="ae-table__meta">{{ med.presentation }} · {{ med.prescribed_dose }}</span>{% if med.instructions %}<span class="ae-table__meta">{{ med.instructions }}</span>{% endif %}</td>
+            <td class="ae-table__nowrap">{{ row.times }}</td>
+            <td class="ae-table__nowrap">{% if med.is_continuous %}{% blocktranslate with start=med.start_date|date:"SHORT_DATE_FORMAT" %}Desde {{ start }}, uso contínuo{% endblocktranslate %}{% else %}{% blocktranslate with start=med.start_date|date:"SHORT_DATE_FORMAT" end=med.end_date|date:"SHORT_DATE_FORMAT" %}{{ start }} a {{ end }}{% endblocktranslate %}{% endif %}</td>
+            <td>{{ med.prescriber_name }}<span class="ae-table__meta">{{ med.prescriber_registration }}</span></td>
+            <td><span class="ae-badge ae-badge--{{ row.badge }}">{{ row.label }}</span></td>
+            <td class="ae-table__actions ae-actions ae-actions--end">
+              {% if row.state != "ended" %}<a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'routines:medication_edit' patient.pk med.pk %}">{% translate "Editar" %}</a>{% endif %}
+              {% if row.state == "suspended" %}<a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'routines:medication_resume' patient.pk med.pk %}">{% translate "Retomar" %}</a>{% endif %}
+              {% if row.state != "ended" %}<a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'routines:medication_stop' patient.pk med.pk %}">{% if row.state == "suspended" %}{% translate "Encerrar" %}{% else %}{% translate "Suspender ou encerrar" %}{% endif %}</a>{% endif %}
+            </td>
+          </tr>
+          {% endwith %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="ae-empty">{% translate "Nenhuma medicação registrada. O paciente não vê nada nesta área do app." %}</p>
+    {% endif %}
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-adherence">
+    <h2 class="ae-card__title" id="sec-adherence">{% blocktranslate with days=adherence.days|default:14 %}Doses registradas no app (últimos {{ days }} dias){% endblocktranslate %}</h2>
+    {% if adherence.allowed %}
+    <p class="ae-card__meta">{% translate "Somente leitura. Mostra apenas as doses que o paciente registrou: uma dose sem registro não aparece aqui." %}</p>
+    <div class="ae-grid">
+      <div class="ae-stat"><span class="ae-stat__label">{% translate "Registradas" %}</span><span class="ae-stat__value">{{ adherence.summary.total_scheduled_doses }}</span></div>
+      <div class="ae-stat ae-stat--success"><span class="ae-stat__label">{% translate "Tomadas" %}</span><span class="ae-stat__value">{{ adherence.summary.taken }}</span></div>
+      <div class="ae-stat"><span class="ae-stat__label">{% translate "Com atraso" %}</span><span class="ae-stat__value">{{ adherence.summary.late }}</span></div>
+      <div class="ae-stat ae-stat--warning"><span class="ae-stat__label">{% translate "Não tomadas" %}</span><span class="ae-stat__value">{{ adherence.summary.omitted }}</span></div>
+      <div class="ae-stat"><span class="ae-stat__label">{% translate "Sem informação" %}</span><span class="ae-stat__value">{{ adherence.summary.not_reported }}</span></div>
+    </div>
+    {% if adherence.rows %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Registros de dose recentes" %}</caption>
+        <thead><tr><th scope="col">{% translate "Horário previsto" %}</th><th scope="col">{% translate "Medicamento" %}</th><th scope="col">{% translate "Registro" %}</th></tr></thead>
+        <tbody>
+          {% for item in adherence.rows %}
+          <tr><td class="ae-table__nowrap">{{ item.when|date:"SHORT_DATETIME_FORMAT" }}</td><td>{{ item.medication }}</td><td><span class="ae-badge ae-badge--{{ item.badge }}">{{ item.label }}</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="ae-card__meta">{% translate "O paciente ainda não registrou doses neste período." %}</p>
+    {% endif %}
+    {% else %}
+    <p class="ae-card__meta">{% translate "Os registros de dose do paciente só aparecem para quem recebeu o consentimento dele ou é administrador da clínica." %}</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

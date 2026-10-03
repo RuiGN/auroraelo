@@ -1,0 +1,34 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li>{% translate "Régua de comunicação" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Régua de comunicação" %}</h1>
+    <p class="ae-page-header__lead">{% translate "Define as ligações e visitas após a alta. O padrão sugerido é ligação aos 7 e 15 dias e visita aos 15 dias." %}</p>
+  </div>
+  {% if can_manage_aftercare_rules %}<a class="ae-btn" href="{% url 'concierge:rule_edit' %}">{% translate "Editar régua" %}</a>{% endif %}
+</div>
+{% endblock %}
+{% block content %}
+<div class="ae-stack">
+  <section class="ae-card" aria-labelledby="sec-current">
+    <h2 class="ae-card__title" id="sec-current">{% if current %}{{ current.name }} <span class="ae-badge ae-badge--info">{% blocktranslate with version=current.version %}versão {{ version }}{% endblocktranslate %}</span>{% else %}{% translate "Nenhuma régua definida" %}{% endif %}</h2>
+    {% if steps %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Etapas da régua vigente" %}</caption>
+        <thead><tr><th scope="col">{% translate "Contato" %}</th><th scope="col">{% translate "Dias após a alta" %}</th><th scope="col">{% translate "Responsável sugerido" %}</th></tr></thead>
+        <tbody>{% for step in steps %}<tr><td>{{ step.get_kind_display }}</td><td>{{ step.day_after_discharge }}</td><td>{{ step.get_responsible_role_display }}</td></tr>{% endfor %}</tbody>
+      </table>
+    </div>
+    {% else %}<p class="ae-card__meta">{% translate "A régua padrão é criada automaticamente na primeira alta registrada." %}</p>{% endif %}
+  </section>
+  {% if history|length > 1 %}
+  <section class="ae-card" aria-labelledby="sec-history">
+    <h2 class="ae-card__title" id="sec-history">{% translate "Versões anteriores" %}</h2>
+    <ul class="ae-timeline">{% for rule in history %}{% if not rule.is_active %}<li class="ae-timeline__item"><span class="ae-timeline__icon"><svg class="ae-icon" aria-hidden="true"><use href="#i-clock"/></svg></span><div><p class="ae-timeline__title">{{ rule.name }} · {% blocktranslate with version=rule.version %}versão {{ version }}{% endblocktranslate %}</p><p class="ae-timeline__meta">{{ rule.created_at|date:"SHORT_DATETIME_FORMAT" }}</p></div></li>{% endif %}{% endfor %}</ul>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

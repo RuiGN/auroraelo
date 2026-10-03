@@ -22,8 +22,6 @@ UNAVAILABLE_ROUTES = (
     "anamnesis",
     "twelve_steps_anamnesis",
     "addiction_dashboard",
-    "mobile_connected",
-    "mobile_b2c",
 )
 
 
@@ -97,14 +95,7 @@ def get_page(identities, route, *, role="therapist"):
 
 @pytest.mark.parametrize("route", UNAVAILABLE_ROUTES)
 def test_nonintegrated_surfaces_do_not_collect_or_simulate_care(identities, route):
-    clinic, actors = identities
-    if route == "mobile_connected":
-        make_profile(clinic, actors["patient"])
-    html, page = get_page(
-        identities,
-        route,
-        role="patient" if route == "mobile_connected" else "therapist",
-    )
+    html, page = get_page(identities, route, role="therapist")
     assert "Indisponível nesta interface" in page.text
     assert "Esta página não grava dados nem envia notificações." in page.text
     assert not any(
@@ -173,9 +164,7 @@ def authorized_profile(identities):
     )
 
 
-@pytest.mark.parametrize(
-    "route", ("patients", "addiction_dashboard", "mobile_connected")
-)
+@pytest.mark.parametrize("route", ("patients", "addiction_dashboard"))
 def test_authorized_identity_is_rendered_without_demo_or_foreign_data(
     identities, authorized_profile, route
 ):
@@ -189,11 +178,7 @@ def test_authorized_identity_is_rendered_without_demo_or_foreign_data(
     unrelated = make_profile(clinic, UserFactory.create(), "Sem Relação Sintético")
     for patient in (authorized_profile, foreign, legacy, unrelated):
         AddictionProfile.objects.create(patient=patient)
-    html, page = get_page(
-        identities,
-        route,
-        role="patient" if route == "mobile_connected" else "therapist",
-    )
+    html, page = get_page(identities, route, role="therapist")
     assert authorized_profile.full_name in page.text
     assert "&lt;script&gt;erro&lt;/script&gt;" in html
     assert "<script>erro</script>" not in html
@@ -259,7 +244,7 @@ def test_every_psychiatry_template_renders_with_local_assets(
     templates = sorted(
         (Path(settings.BASE_DIR) / "psychiatry/templates/psychiatry").glob("*.html")
     )
-    assert len(templates) == 12
+    assert len(templates) == 10
     for template in templates:
         with override(language):
             html = render_to_string(

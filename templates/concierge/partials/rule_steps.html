@@ -1,0 +1,17 @@
+{% load i18n %}
+<div class="ae-table-wrap">
+  <table class="ae-table">
+    <caption class="ae-sr-only">{% translate "Etapas da régua" %}</caption>
+    <thead><tr><th scope="col">{% translate "Etapa" %}</th><th scope="col">{% translate "Tipo de contato" %}</th><th scope="col">{% translate "Dias após a alta" %}</th><th scope="col">{% translate "Responsável sugerido" %}</th></tr></thead>
+    <tbody>
+      {% for row in step_rows %}
+      <tr>
+        <th scope="row">{{ row.number }}</th>
+        <td><label class="ae-sr-only" for="{{ row.kind.id_for_label }}">{{ row.kind.label }}</label>{{ row.kind }}{% for error in row.kind.errors %}<span class="ae-error" role="alert">{{ error }}</span>{% endfor %}</td>
+        <td><label class="ae-sr-only" for="{{ row.day.id_for_label }}">{{ row.day.label }}</label>{{ row.day }}{% for error in row.day.errors %}<span class="ae-error" role="alert">{{ error }}</span>{% endfor %}</td>
+        <td><label class="ae-sr-only" for="{{ row.role.id_for_label }}">{{ row.role.label }}</label>{{ row.role }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

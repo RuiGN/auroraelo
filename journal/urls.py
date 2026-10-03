@@ -1,45 +1,25 @@
-"""URL routes for the patient journal domain."""
+"""Rotas web do diário compartilhado pelo paciente (equipe da clínica)."""
 
 from django.urls import path
 
-from .views import (
-    checkin_list,
-    checkin_today,
-    journal_create,
-    journal_detail,
-    journal_edit,
-    journal_list,
-    journal_request_access_view,
-    journal_respond_access_request_view,
-    journal_revoke_sharing_view,
-    journal_set_visibility,
-)
+from . import views
+
+app_name = "journal"
 
 urlpatterns = [
-    path("", journal_list, name="journal_list"),
-    path("novo/", journal_create, name="journal_create"),
-    path("<uuid:entry_id>/", journal_detail, name="journal_detail"),
-    path("<uuid:entry_id>/editar/", journal_edit, name="journal_edit"),
     path(
-        "<uuid:entry_id>/visibilidade/",
-        journal_set_visibility,
-        name="journal_set_visibility",
+        "pacientes/<uuid:patient_id>/",
+        views.patient_diary,
+        name="patient_diary",
     ),
     path(
-        "<uuid:entry_id>/revogar/",
-        journal_revoke_sharing_view,
-        name="journal_revoke_sharing",
+        "pacientes/<uuid:patient_id>/checkins/",
+        views.patient_checkins,
+        name="patient_checkins",
     ),
     path(
-        "<uuid:entry_id>/solicitar-acesso/",
-        journal_request_access_view,
-        name="journal_request_access",
+        "pacientes/<uuid:patient_id>/registros/<uuid:entry_id>/pedir-acesso/",
+        views.access_request_create,
+        name="access_request_create",
     ),
-    path(
-        "solicitacoes/<uuid:access_request_id>/responder/",
-        journal_respond_access_request_view,
-        name="journal_respond_access_request",
-    ),
-    path("checkin/", checkin_today, name="checkin_today"),
-    path("checkin/historico/", checkin_list, name="checkin_list"),
 ]

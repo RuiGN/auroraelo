@@ -1,0 +1,126 @@
+{% extends layout_template %}
+{% load i18n static %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'aurora_elo/css/ae-journal.css' %}">{% endblock %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{% url 'patient_detail' patient.pk %}">{{ patient_name }}</a></li>
+      <li>{% translate "Diário" %}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{% blocktranslate with name=patient_name %}Diário de {{ name }}{% endblocktranslate %}</h1>
+    <p class="ae-page-header__lead">{% translate "O que o paciente escolheu compartilhar com a equipe pelo aplicativo." %}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+{% include "journal/partials/staff_tabs.html" %}
+
+<div class="ae-alert" role="note">
+  <svg class="ae-icon" aria-hidden="true"><use href="#i-shield"/></svg>
+  <div>{% translate "Você vê só os registros que o paciente compartilhou ou liberou a seu pedido. Os demais ficam com o paciente e não aparecem aqui. Cada leitura fica registrada na auditoria." %}</div>
+</div>
+
+<form class="ae-toolbar" method="get" role="search">
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="periodo">{% translate "Período" %}</label>
+    <div class="ae-control"><span class="field-control-icon ae-control__icon" aria-hidden="true"><svg class="ae-icon"><use href="#i-calendar"/></svg></span><select class="ae-select ae-select--icon" id="periodo" name="periodo">
+      {% for value, label in period_choices %}<option value="{{ value }}"{% if period == value %} selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select></div></div>
+  <button class="ae-btn ae-btn--secondary" type="submit">{% translate "Filtrar" %}</button>
+</form>
+
+<div class="ae-stack">
+  <section aria-labelledby="sec-entries">
+    <h2 class="ae-card__title" id="sec-entries">{% translate "Registros compartilhados" %}</h2>
+    {% if cards %}
+    <div class="ae-entry-list">
+      {% for card in cards %}
+      <article class="ae-card ae-entry" aria-labelledby="entry-{{ card.entry.pk }}">
+        <header class="ae-entry__head">
+          <h3 class="ae-entry__title" id="entry-{{ card.entry.pk }}"><time datetime="{{ card.entry.created_at|date:'c' }}">{{ card.entry.created_at|date:"SHORT_DATETIME_FORMAT" }}</time></h3>
+          {% if card.is_granted %}
+          <span class="ae-badge ae-badge--info">{% translate "Liberado a pedido" %}{% if card.granted_until %} · {% blocktranslate with date=card.granted_until|date:"SHORT_DATE_FORMAT" %}até {{ date }}{% endblocktranslate %}{% endif %}</span>
+          {% else %}
+          <span class="ae-badge ae-badge--success">{% translate "Compartilhado pelo paciente" %}</span>
+          {% endif %}
+        </header>
+        <ul class="ae-entry__facts">
+          <li><span class="ae-badge ae-badge--muted">{% blocktranslate with mood=card.mood_label score=card.entry.mood %}Humor: {{ mood }} ({{ score }}/5){% endblocktranslate %}</span></li>
+          <li><span class="ae-badge ae-badge--muted">{% blocktranslate with score=card.entry.intensity %}Intensidade: {{ score }}/5{% endblocktranslate %}</span></li>
+          {% for emotion in card.emotions %}<li><span class="ae-badge ae-badge--info">{{ emotion }}</span></li>{% endfor %}
+        </ul>
+        <p class="ae-entry__text">{{ card.entry.context|linebreaksbr }}</p>
+        {% if card.entry.triggers or card.entry.reactions or card.entry.strategies %}
+        <dl class="ae-entry__detail">
+          {% if card.entry.triggers %}<div><dt>{% translate "Gatilhos" %}</dt><dd>{{ card.entry.triggers|linebreaksbr }}</dd></div>{% endif %}
+          {% if card.entry.reactions %}<div><dt>{% translate "Reações" %}</dt><dd>{{ card.entry.reactions|linebreaksbr }}</dd></div>{% endif %}
+          {% if card.entry.strategies %}<div><dt>{% translate "Estratégias" %}</dt><dd>{{ card.entry.strategies|linebreaksbr }}</dd></div>{% endif %}
+        </dl>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    {% if page.has_other_pages %}
+    <nav class="ae-pager" aria-label="{% translate 'Paginação dos registros' %}">
+      <span class="ae-card__meta">{% blocktranslate with number=page.number total=page.paginator.num_pages %}Página {{ number }} de {{ total }}{% endblocktranslate %}</span>
+      <span class="ae-actions">
+        {% if page.has_previous %}<a class="ae-btn ae-btn--sm ae-btn--secondary" href="?periodo={{ period }}&amp;pagina={{ page.previous_page_number }}">{% translate "Anterior" %}</a>{% endif %}
+        {% if page.has_next %}<a class="ae-btn ae-btn--sm ae-btn--secondary" href="?periodo={{ period }}&amp;pagina={{ page.next_page_number }}">{% translate "Próxima" %}</a>{% endif %}
+      </span>
+    </nav>
+    {% endif %}
+    {% else %}
+    <div class="ae-card ae-empty">{% translate "Nenhum registro compartilhado neste período." %}</div>
+    {% endif %}
+  </section>
+
+  {% if confirmation_rows %}
+  <section aria-labelledby="sec-confirmation">
+    <h2 class="ae-card__title" id="sec-confirmation">{% translate "Registros que pedem confirmação" %}</h2>
+    <p class="ae-card__meta">{% translate "O paciente marcou estes registros como “perguntar antes”. O conteúdo só aparece depois que ele aprovar o seu pedido, pelo aplicativo." %}</p>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Registros que dependem da aprovação do paciente" %}</caption>
+        <thead><tr><th scope="col">{% translate "Registro de" %}</th><th scope="col">{% translate "Pedido" %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+        <tbody>
+          {% for item in confirmation_rows %}
+          <tr>
+            <td class="ae-table__nowrap">{{ item.row.created_at|date:"SHORT_DATE_FORMAT" }}</td>
+            <td>{% if item.row.state != "none" %}{% include "journal/partials/access_badge.html" with state=item.state %}{% else %}<span class="ae-muted">{% translate "Nenhum pedido feito" %}</span>{% endif %}</td>
+            <td class="ae-table__actions">
+              {% if item.row.can_request %}<a class="ae-btn ae-btn--sm" href="{% url 'journal:access_request_create' patient.pk item.row.entry_id %}">{% translate "Pedir acesso" %}</a>{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if request_rows %}
+  <section aria-labelledby="sec-requests">
+    <h2 class="ae-card__title" id="sec-requests">{% translate "Seus pedidos de acesso" %}</h2>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Pedidos de acesso feitos por você a este paciente" %}</caption>
+        <thead><tr><th scope="col">{% translate "Registro de" %}</th><th scope="col">{% translate "Finalidade" %}</th><th scope="col">{% translate "Pedido em" %}</th><th scope="col">{% translate "Válido até" %}</th><th scope="col">{% translate "Situação" %}</th></tr></thead>
+        <tbody>
+          {% for item in request_rows %}
+          <tr>
+            <td class="ae-table__nowrap">{% if item.row.entry_created_at %}{{ item.row.entry_created_at|date:"SHORT_DATE_FORMAT" }}{% else %}—{% endif %}</td>
+            <td>{{ item.row.request.purpose }}</td>
+            <td class="ae-table__nowrap">{{ item.row.request.requested_at|date:"SHORT_DATETIME_FORMAT" }}</td>
+            <td class="ae-table__nowrap">{% if item.row.request.expires_at %}{{ item.row.request.expires_at|date:"SHORT_DATE_FORMAT" }}{% else %}—{% endif %}</td>
+            <td>{% include "journal/partials/access_badge.html" with state=item.state %}{% if item.row.request.responded_at %}<span class="ae-table__meta">{% blocktranslate with date=item.row.request.responded_at|date:"SHORT_DATETIME_FORMAT" %}Respondido em {{ date }}{% endblocktranslate %}</span>{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

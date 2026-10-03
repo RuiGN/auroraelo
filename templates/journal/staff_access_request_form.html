@@ -1,0 +1,36 @@
+{% extends layout_template %}
+{% load i18n static %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'aurora_elo/css/ae-journal.css' %}">{% endblock %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{% url 'patient_detail' patient.pk %}">{{ patient_name }}</a></li>
+      <li><a href="{{ cancel_url }}">{% translate "Diário" %}</a></li>
+      <li>{% translate "Pedir acesso" %}</li>
+    </ol>
+    <h1 class="ae-page-header__title">{% translate "Pedir acesso a um registro" %}</h1>
+    <p class="ae-page-header__lead">{% blocktranslate with date=entry.created_at|date:"SHORT_DATE_FORMAT" %}Registro de {{ date }}, marcado pelo paciente como “perguntar antes”.{% endblocktranslate %}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="ae-alert" role="note">
+  <svg class="ae-icon" aria-hidden="true"><use href="#i-shield"/></svg>
+  <div>{% translate "Quem decide é o paciente. Ele recebe o pedido no aplicativo e pode aprovar, recusar ou escolher a validade. Você só verá o registro se ele aprovar. O pedido fica registrado na auditoria." %}</div>
+</div>
+<form method="post" novalidate class="ae-card ae-stack">
+  {% csrf_token %}
+  {% include "journal/partials/errors.html" %}
+  <div class="ae-form-grid">
+    {% for field in form.visible_fields %}
+    {% include "journal/partials/field.html" with field=field only %}
+    {% endfor %}
+  </div>
+  <div class="ae-actions ae-actions--end">
+    <a class="ae-btn ae-btn--secondary" href="{{ cancel_url }}">{% translate "Voltar" %}</a>
+    <button type="submit" class="ae-btn">{% translate "Enviar pedido" %}</button>
+  </div>
+</form>
+{% endblock %}

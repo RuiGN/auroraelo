@@ -12,6 +12,7 @@ from django.db import transaction
 from django.utils import timezone
 
 from audit.services import record_audit_event
+from clinics.services import lock_clinic_for_update
 from core.services import Service as CoreService
 
 from .events import (
@@ -41,8 +42,15 @@ def create_or_update_relapse_plan(
     sections_data: list[dict[str, Any]] | None = None,
     disclaimer_acknowledged: bool = True,
     actor_id: UUID | None = None,
+    request_id: UUID | None = None,
+    network_origin: str | None = None,
 ) -> RelapsePreventionPlan:
-    """Create or update versioned relapse prevention plan with structured sections."""
+    """Create or update versioned relapse prevention plan with structured sections.
+
+    The clinic row is locked first so two concurrent first saves cannot leave the
+    patient with two plans. The audit trail never carries the plan content.
+    """
+    lock_clinic_for_update(clinic_id=clinic_id)
     plan, created = RelapsePreventionPlan.objects.for_clinic(clinic_id).get_or_create(
         patient_profile_id=patient_profile_id,
         defaults={
@@ -90,8 +98,68 @@ def create_or_update_relapse_plan(
         resource_type="relapse_prevention_plan",
         resource_id=str(plan.id),
         outcome="success",
-        request_id=uuid4(),
-        network_origin=None,
+        request_id=request_id or uuid4(),
+        network_origin=network_origin,
+    )
+    return plan
+
+
+@transaction.atomic
+def remove_relapse_plan_section(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    section_type: str,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
+    network_origin: str | None = None,
+) -> RelapsePreventionPlan:
+    """Remove one section of the patient's own plan; the plan is versioned.
+
+    Only the plan of ``patient_profile_id`` is considered. Shares that were granted
+    for that section stop being valid, so a section written later under the same
+    type is not exposed to a previous recipient.
+    """
+    lock_clinic_for_update(clinic_id=clinic_id)
+    plan = (
+        RelapsePreventionPlan.objects.for_clinic(clinic_id)
+        .filter(patient_profile_id=patient_profile_id)
+        .first()
+    )
+    if plan is None:
+        raise ValidationError("Plano de prevenção não encontrado.")
+    section = (
+        RelapsePlanSection.objects.for_clinic(clinic_id)
+        .filter(relapse_plan=plan, section_type=section_type)
+        .first()
+    )
+    if section is None:
+        raise ValidationError("Seção do plano não encontrada.")
+
+    for share_id in list(
+        RelapsePlanShare.objects.for_clinic(clinic_id)
+        .filter(relapse_plan=plan, section_type=section_type, is_revoked=False)
+        .values_list("pk", flat=True)
+    ):
+        revoke_relapse_plan_share(
+            clinic_id=clinic_id, share_id=share_id, actor_id=actor_id
+        )
+    section.delete()
+
+    plan.version += 1
+    plan.last_reviewed_at = timezone.now()
+    plan.save(update_fields=["version", "last_reviewed_at", "updated_at"])
+
+    relapse_plan_updated.send(sender=RelapsePreventionPlan, plan=plan)
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action="wellness.relapse_plan_section_removed",
+        resource_type="relapse_prevention_plan",
+        resource_id=str(plan.id),
+        outcome="success",
+        request_id=request_id or uuid4(),
+        network_origin=network_origin,
     )
     return plan
 
@@ -217,6 +285,7 @@ __all__ = [
     "RelapseService",
     "create_or_update_relapse_plan",
     "record_post_lapse_event",
+    "remove_relapse_plan_section",
     "revoke_relapse_plan_share",
     "share_relapse_plan_section",
 ]

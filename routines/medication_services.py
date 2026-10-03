@@ -71,18 +71,18 @@ def register_prescribed_medication(
     reminder_enabled: bool = True,
     quiet_hours_start: time | None = None,
     quiet_hours_end: time | None = None,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
 ) -> PrescribedMedication:
-    """Register an existing external prescription strictly for adherence reminders."""
-    clean_name = medication_name.strip()
-    clean_prescriber = prescriber_name.strip()
-    clean_reg = prescriber_registration.strip()
+    """Register an existing external prescription strictly for adherence reminders.
 
-    if not clean_name:
-        raise ValidationError("Nome do medicamento é obrigatório.")
-    if not clean_prescriber or not clean_reg:
-        raise ValidationError(
-            "Identificação do prescritor externo (nome e CRM/CRO) é obrigatória."
-        )
+    When ``actor_id`` is given (team screens) the registration is also audited.
+    """
+    clean_name, clean_prescriber, clean_reg = _clean_identification(
+        medication_name=medication_name,
+        prescriber_name=prescriber_name,
+        prescriber_registration=prescriber_registration,
+    )
 
     if instructions:
         validate_non_prescriptive_content(instructions)
@@ -107,7 +107,243 @@ def register_prescribed_medication(
         quiet_hours_start=quiet_hours_start,
         quiet_hours_end=quiet_hours_end,
     )
+    _audit_medication(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.medication_registered",
+        medication=med,
+        justification="Team registered an external prescription for adherence tracking",
+    )
     medication_registered.send(sender=PrescribedMedication, medication=med)
+    return med
+
+
+def _clean_identification(
+    *, medication_name: str, prescriber_name: str, prescriber_registration: str
+) -> tuple[str, str, str]:
+    clean_name = medication_name.strip()
+    clean_prescriber = prescriber_name.strip()
+    clean_reg = prescriber_registration.strip()
+    if not clean_name:
+        raise ValidationError("Nome do medicamento é obrigatório.")
+    if not clean_prescriber or not clean_reg:
+        raise ValidationError(
+            "Identificação do prescritor externo (nome e CRM/CRO) é obrigatória."
+        )
+    return clean_name, clean_prescriber, clean_reg
+
+
+def _audit_medication(
+    *,
+    clinic_id: UUID,
+    actor_id: UUID | None,
+    request_id: UUID | None,
+    action: str,
+    medication: PrescribedMedication,
+    justification: str,
+) -> None:
+    """Audit a team change to a medication (never the clinical content itself)."""
+    if actor_id is None:
+        return
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action=action,
+        resource_type="prescribed_medication",
+        resource_id=str(medication.pk),
+        outcome="success",
+        request_id=request_id or uuid4(),
+        network_origin=None,
+        justification=justification,
+    )
+
+
+def _medication_of_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, medication_id: UUID
+) -> PrescribedMedication:
+    """Resolve one medication restricted to its patient (these services check only
+    the clinic otherwise)."""
+    med = (
+        PrescribedMedication.objects.for_clinic(clinic_id)
+        .filter(pk=medication_id, patient_profile_id=patient_profile_id)
+        .first()
+    )
+    if med is None:
+        raise ValidationError("Medicamento não encontrado.")
+    return med
+
+
+@transaction.atomic
+def update_prescribed_medication(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    medication_id: UUID,
+    medication_name: str,
+    presentation: str,
+    prescribed_dose: str,
+    route: str,
+    schedule_times: list[str],
+    start_date: date,
+    end_date: date | None,
+    is_continuous: bool,
+    prescriber_name: str,
+    prescriber_registration: str,
+    prescription_date: date,
+    instructions: str = "",
+    actor_id: UUID,
+    request_id: UUID | None = None,
+) -> PrescribedMedication:
+    """Correct the registered prescription; the patient sees the change in the app.
+
+    Past dose records are kept: they are keyed by the scheduled time, not by the
+    current schedule.
+    """
+    med = _medication_of_patient(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        medication_id=medication_id,
+    )
+    clean_name, clean_prescriber, clean_reg = _clean_identification(
+        medication_name=medication_name,
+        prescriber_name=prescriber_name,
+        prescriber_registration=prescriber_registration,
+    )
+    if instructions:
+        validate_non_prescriptive_content(instructions)
+    med.medication_name = clean_name
+    med.presentation = presentation.strip()
+    med.prescribed_dose = prescribed_dose.strip()
+    med.route = route
+    med.schedule_times = list(schedule_times)
+    med.start_date = start_date
+    med.end_date = None if is_continuous else end_date
+    med.is_continuous = is_continuous
+    med.prescriber_name = clean_prescriber
+    med.prescriber_registration = clean_reg
+    med.prescription_date = prescription_date
+    med.instructions = instructions.strip()
+    med.save()
+    _audit_medication(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.medication_updated",
+        medication=med,
+        justification="Team corrected a registered prescription",
+    )
+    return med
+
+
+def course_has_ended(medication: PrescribedMedication, *, today: date) -> bool:
+    """Whether the course reached its end date (a continuous one never does).
+
+    Meant for medications that are already off: a suspended course is only resumable
+    while it still has days ahead.
+    """
+    return (
+        not medication.is_continuous
+        and medication.end_date is not None
+        and medication.end_date <= today
+    )
+
+
+@transaction.atomic
+def suspend_prescribed_medication(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    medication_id: UUID,
+    actor_id: UUID,
+    request_id: UUID | None = None,
+) -> PrescribedMedication:
+    """Stop showing the medication in the app, keeping it (and its doses) on file."""
+    med = _medication_of_patient(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        medication_id=medication_id,
+    )
+    if not med.is_active:
+        raise ValidationError("Este medicamento já está suspenso ou encerrado.")
+    med.is_active = False
+    med.save(update_fields=["is_active", "updated_at"])
+    _audit_medication(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.medication_suspended",
+        medication=med,
+        justification="Team suspended a medication",
+    )
+    return med
+
+
+@transaction.atomic
+def resume_prescribed_medication(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    medication_id: UUID,
+    actor_id: UUID,
+    request_id: UUID | None = None,
+) -> PrescribedMedication:
+    """Show a suspended medication again; an ended course cannot be resumed."""
+    med = _medication_of_patient(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        medication_id=medication_id,
+    )
+    if med.is_active:
+        raise ValidationError("Este medicamento já está ativo.")
+    if course_has_ended(med, today=timezone.localdate()):
+        raise ValidationError(
+            "O tratamento já terminou. Registre uma nova prescrição para retomar."
+        )
+    med.is_active = True
+    med.save(update_fields=["is_active", "updated_at"])
+    _audit_medication(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.medication_resumed",
+        medication=med,
+        justification="Team resumed a suspended medication",
+    )
+    return med
+
+
+@transaction.atomic
+def end_prescribed_medication(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    medication_id: UUID,
+    actor_id: UUID,
+    request_id: UUID | None = None,
+) -> PrescribedMedication:
+    """End the course today: it leaves the app and cannot be resumed."""
+    med = _medication_of_patient(
+        clinic_id=clinic_id,
+        patient_profile_id=patient_profile_id,
+        medication_id=medication_id,
+    )
+    today = timezone.localdate()
+    if not med.is_active and course_has_ended(med, today=today):
+        raise ValidationError("Este tratamento já foi encerrado.")
+    ended_on = min(med.end_date or today, today)
+    med.is_active = False
+    med.is_continuous = False
+    med.end_date = max(ended_on, med.start_date)
+    med.save(update_fields=["is_active", "is_continuous", "end_date", "updated_at"])
+    _audit_medication(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.medication_ended",
+        medication=med,
+        justification="Team ended a medication course",
+    )
     return med
 
 
@@ -237,9 +473,14 @@ def revoke_medication_share_consent(
 
 __all__ = [
     "Service",
+    "course_has_ended",
+    "end_prescribed_medication",
     "grant_medication_share_consent",
     "record_medication_dose",
     "register_prescribed_medication",
+    "resume_prescribed_medication",
     "revoke_medication_share_consent",
+    "suspend_prescribed_medication",
+    "update_prescribed_medication",
     "validate_non_prescriptive_content",
 ]

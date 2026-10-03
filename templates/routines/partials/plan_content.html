@@ -1,0 +1,29 @@
+{% load i18n %}
+{# O plano como o paciente o verá no app (sem a justificativa clínica, que é interna). #}
+<section class="ae-stack" aria-labelledby="plan-preview-title">
+  <h2 class="ae-card__title" id="plan-preview-title">{% translate "Como o paciente vai ver" %}</h2>
+  <p><span class="ae-table__strong">{{ plan.title }}</span></p>
+  <p class="ae-card__meta">{% blocktranslate with name=prescriber %}Profissional: {{ name }}{% endblocktranslate %} · {% blocktranslate with date=plan.valid_from|date:"SHORT_DATE_FORMAT" %}vale a partir de {{ date }}{% endblocktranslate %}{% if plan.valid_until %} · {% blocktranslate with date=plan.valid_until|date:"SHORT_DATE_FORMAT" %}até {{ date }}{% endblocktranslate %}{% endif %}</p>
+  <div>
+    <p class="ae-text-label">{% translate "Objetivo" %}</p>
+    <p>{{ plan.objective|linebreaksbr }}</p>
+  </div>
+  <div class="ae-table-wrap">
+    <table class="ae-table">
+      <caption class="ae-sr-only">{% translate "Ações do plano" %}</caption>
+      <thead><tr><th scope="col">{% translate "Ação" %}</th><th scope="col">{% translate "Frequência" %}</th><th scope="col">{% translate "Orientação" %}</th></tr></thead>
+      <tbody>
+        {% for action in actions %}
+        <tr>
+          <td><span class="ae-table__strong">{{ action.action_description }}</span>{% if action.is_mandatory %}<span class="ae-badge ae-badge--info">{% translate "Obrigatória" %}</span>{% endif %}</td>
+          <td>{{ action.target_frequency }}</td>
+          <td>{{ action.guidance|default:"—"|linebreaksbr }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if plan.contraindications %}
+  <div class="ae-alert ae-alert--warning"><svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg><div><p class="ae-alert__title">{% translate "Cuidados e contraindicações" %}</p>{{ plan.contraindications|linebreaksbr }}</div></div>
+  {% endif %}
+</section>

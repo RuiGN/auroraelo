@@ -117,18 +117,14 @@ def test_draft_rechecks_authorization_after_resource_lock(
         "update_step",
         "consolidate",
         "anamnesis",
-        "sos",
-        "craving",
-        "adherence",
     ],
 )
 def test_write_waits_for_clinic_and_rechecks_committed_revocation(
-    identities, linked_profile, prescribed, operation
+    identities, linked_profile, operation
 ):
     clinic, _, actors = identities
     document = grant_follow_up(identities)
-    patient_mode = operation in {"sos", "craving", "adherence"}
-    actor = actors["patient" if patient_mode else "therapist"]
+    actor = actors["therapist"]
     draft = TwelveStepsAnamnesis.objects.create(
         patient=linked_profile,
         author=actors["therapist"],
@@ -154,14 +150,6 @@ def test_write_waits_for_clinic_and_rechecks_committed_revocation(
             },
         ),
         "consolidate": (api.api_consolidate_12steps, {"session_id": str(draft.uuid)}),
-        "adherence": (
-            api.log_medication_adherence,
-            {
-                "medication_id": prescribed.pk,
-                "is_taken": False,
-                "scheduled_time": "2026-01-01T10:00:00Z",
-            },
-        ),
         "anamnesis": (
             api.save_anamnesis,
             {
@@ -172,15 +160,6 @@ def test_write_waits_for_clinic_and_rechecks_committed_revocation(
                 "risk_level": "LOW",
                 "diagnostic_impression": "Relato sintético",
                 "therapeutic_plan": "Revisão humana",
-            },
-        ),
-        "sos": (api.trigger_patient_sos, {}),
-        "craving": (
-            api.api_record_craving,
-            {
-                "intensity": 1,
-                "target_urge": "Relato sintético",
-                "urge_surfed_successfully": False,
             },
         ),
     }[operation]
@@ -217,17 +196,14 @@ def test_write_waits_for_clinic_and_rechecks_committed_revocation(
                 if blocked:
                     break
                 sleep(0.01)
-            if patient_mode:
-                type(actor).objects.filter(pk=actor.pk).update(is_active=False)
-            else:
-                revoke_consent(
-                    clinic_id=clinic.pk,
-                    actor=actors["patient"],
-                    subject_id=actors["patient"].pk,
-                    document_id=document.pk,
-                    reason="Revogação confirmada antes da escrita",
-                    request_id=uuid4(),
-                )
+            revoke_consent(
+                clinic_id=clinic.pk,
+                actor=actors["patient"],
+                subject_id=actors["patient"].pk,
+                document_id=document.pk,
+                reason="Revogação confirmada antes da escrita",
+                request_id=uuid4(),
+            )
         response = future.result(timeout=15)
     assert blocked, "A mutação não se serializou com a revogação da clínica."
     assert response.status_code in {403, 404}

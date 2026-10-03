@@ -29,8 +29,9 @@ class SessionOrBearerAuth(HttpBearer):
         # handles the Bearer path only.
         if request.user.is_authenticated:
             return request.user
-        # TODO: Implement API token lookup when integrations.ApiAccessToken
-        # is ready for external consumers.
+        # The patient app's access tokens are accepted only by ``/api/v1/mobile/``
+        # routes (``api.mobile_common.PatientBearerAuth``). They never authenticate
+        # the generic routers below, which stay session-only.
         return None
 
 
@@ -90,10 +91,30 @@ def api_ping(request: HttpRequest) -> dict[str, str]:
 
 # ── Domain routers ───────────────────────────────────────────────────────────
 
-from api.goals_api import router as goals_router
-from api.journal_api import router as journal_router
-from api.scheduling_api import router as scheduling_router
+from api.goals_api import router as goals_router  # noqa: E402
+from api.journal_api import router as journal_router  # noqa: E402
+from api.mobile_agenda_api import router as mobile_agenda_router  # noqa: E402
+from api.mobile_auth_api import router as mobile_auth_router  # noqa: E402
+from api.mobile_authoring_api import router as mobile_authoring_router  # noqa: E402
+from api.mobile_care_api import router as mobile_care_router  # noqa: E402
+from api.mobile_diary_api import router as mobile_diary_router  # noqa: E402
+from api.mobile_patient_api import router as mobile_patient_router  # noqa: E402
+from api.mobile_recovery_api import help_router as mobile_help_router  # noqa: E402
+from api.mobile_recovery_api import router as mobile_recovery_router  # noqa: E402
+from api.mobile_support_api import router as mobile_support_router  # noqa: E402
+from api.scheduling_api import router as scheduling_router  # noqa: E402
 
 api.add_router("/journal/", journal_router)
 api.add_router("/goals/", goals_router)
 api.add_router("/scheduling/", scheduling_router)
+
+# App do paciente (pós-alta): só token de acesso, nunca cookie de sessão.
+api.add_router("/mobile/auth/", mobile_auth_router)
+api.add_router("/mobile/", mobile_patient_router)
+api.add_router("/mobile/", mobile_care_router)
+api.add_router("/mobile/", mobile_diary_router)
+api.add_router("/mobile/", mobile_agenda_router)
+api.add_router("/mobile/", mobile_recovery_router)
+api.add_router("/mobile/", mobile_help_router)
+api.add_router("/mobile/", mobile_support_router)
+api.add_router("/mobile/", mobile_authoring_router)

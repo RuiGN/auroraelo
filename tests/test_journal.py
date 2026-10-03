@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, timedelta
 from typing import TypedDict
 from uuid import uuid4
 
 import pytest
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.test import Client
-from django.urls import reverse
+from django.utils import timezone
 
 from accounts.models import User
 from accounts.services import accept_invitation
@@ -17,7 +17,6 @@ from audit.models import AuditEvent
 from clinics.models import Clinic, ClinicMembership
 from journal import selectors as journal_selectors
 from journal import services as journal_services
-from journal.forms import JournalEntryForm, JournalFilterForm
 from journal.models import (
     CONTEXT_MAX_LENGTH,
     DETAIL_MAX_LENGTH,
@@ -423,62 +422,6 @@ def test_journal_cross_clinic_access_is_denied() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_journal_entry_form_validation() -> None:
-    """8.6.2.1: Test form validation for fields and text limits."""
-    # Valid form
-    valid_data = {
-        "mood": JournalEntry.Mood.GOOD,
-        "emotions": ["joy", "calm"],
-        "intensity": 4,
-        "context": "Hoje foi um bom dia de trabalho.",
-        "triggers": "Concluí um projeto importante.",
-        "reactions": "Sensação de alívio e leveza.",
-        "strategies": "Comemorei com amigos.",
-        "visibility": JournalEntry.Visibility.SHAREABLE,
-    }
-    form = JournalEntryForm(data=valid_data)
-    assert form.is_valid(), form.errors
-
-    # Invalid mood
-    invalid_data = dict(valid_data, mood=99)
-    form = JournalEntryForm(data=invalid_data)
-    assert not form.is_valid()
-    assert "mood" in form.errors
-
-    # Invalid intensity (out of bounds)
-    invalid_data = dict(valid_data, intensity=0)
-    form = JournalEntryForm(data=invalid_data)
-    assert not form.is_valid()
-    assert "intensity" in form.errors
-
-    # Missing required context
-    invalid_data = dict(valid_data, context="   ")
-    form = JournalEntryForm(data=invalid_data)
-    assert not form.is_valid()
-    assert "context" in form.errors
-
-    # Oversized context
-    invalid_data = dict(valid_data, context="A" * (CONTEXT_MAX_LENGTH + 1))
-    form = JournalEntryForm(data=invalid_data)
-    assert not form.is_valid()
-    assert "context" in form.errors
-
-    # Oversized triggers
-    invalid_data = dict(valid_data, triggers="A" * (DETAIL_MAX_LENGTH + 1))
-    form = JournalEntryForm(data=invalid_data)
-    assert not form.is_valid()
-    assert "triggers" in form.errors
-
-
-def test_journal_filter_form_defaults() -> None:
-    """8.6.2.3: Test filter form options and defaults."""
-    form = JournalFilterForm(data={"period": "7d", "emotion": "joy", "mood": "4"})
-    assert form.is_valid()
-    assert form.cleaned_data["period"] == "7d"
-    assert form.cleaned_data["emotion"] == "joy"
-    assert form.cleaned_data["mood"] == "4"
-
-
 def test_patient_journal_calendar_selector() -> None:
     """8.6.2.2: Test calendar data generator with legend, matrix, and summary."""
     clinic = ClinicFactory.create()
@@ -525,240 +468,12 @@ def test_patient_journal_calendar_selector() -> None:
     assert today_found
 
 
-def test_journal_views_create_and_list_flow(client: Client) -> None:
-    """8.6.2.1 & 8.6.2.3: Test creating a journal entry and listing it via HTTP."""
-    clinic = ClinicFactory.create()
-    _administrator, user, profile = _linked_patient(clinic)
-    _force_patient_client(client, clinic, user)
-
-    # GET Create form
-    get_res = client.get(reverse("journal_create"))
-    assert get_res.status_code == 200
-    assert "Novo Registro no Diário" in get_res.content.decode()
-    assert "Como você está se sentindo?" in get_res.content.decode()
-    assert "Verde — Compartilhável" in get_res.content.decode()
-
-    # POST Create valid entry
-    post_data = {
-        "mood": JournalEntry.Mood.GOOD,
-        "emotions": ["calm", "hope"],
-        "intensity": 4,
-        "context": "Hoje fiz uma caminhada e me senti muito melhor.",
-        "triggers": "Ar puro e sol.",
-        "reactions": "Respiração profunda e tranquila.",
-        "strategies": "Atenção plena ao caminhar.",
-        "visibility": JournalEntry.Visibility.CONFIRMATION_REQUIRED,
-    }
-    post_res = client.post(reverse("journal_create"), data=post_data)
-    assert post_res.status_code == 302
-    assert post_res["Location"] == reverse("journal_list")
-
-    # Verify created entry in database
-    entry = JournalEntry.objects.for_clinic(clinic.pk).first()
-    assert entry is not None
-    assert entry.mood == JournalEntry.Mood.GOOD
-    assert entry.visibility == JournalEntry.Visibility.CONFIRMATION_REQUIRED
-    assert entry.context == "Hoje fiz uma caminhada e me senti muito melhor."
-
-    # GET List view
-    list_res = client.get(reverse("journal_list"))
-    assert list_res.status_code == 200
-    content = list_res.content.decode()
-    assert "Diário Emocional" in content
-    assert "Calendário Emocional" in content
-    assert "Hoje fiz uma caminhada" in content
-    assert "Amarelo — Confirmar antes" in content
-    assert "Legenda:" in content
-
-
-def test_journal_views_validation_error_rendering(client: Client) -> None:
-    """8.6.2.4: Test accessible error summary rendering on invalid POST."""
-    clinic = ClinicFactory.create()
-    _administrator, user, profile = _linked_patient(clinic)
-    _force_patient_client(client, clinic, user)
-
-    # POST Invalid entry (missing context)
-    invalid_post_data = {
-        "mood": JournalEntry.Mood.NEUTRAL,
-        "intensity": 3,
-        "context": "",
-        "visibility": JournalEntry.Visibility.PRIVATE,
-    }
-    response = client.post(reverse("journal_create"), data=invalid_post_data)
-    assert response.status_code == 200
-    content = response.content.decode()
-    assert "Revise os campos indicados" in content
-    assert "alert alert-danger" in content
-
-
-def test_journal_detail_and_edit_flow(client: Client) -> None:
-    """8.6.2.3: Test detail view, edit view, and visibility toggle."""
-    clinic = ClinicFactory.create()
-    _administrator, user, profile = _linked_patient(clinic)
-    _force_patient_client(client, clinic, user)
-
-    entry = journal_services.create_journal_entry(
-        clinic_id=clinic.pk,
-        actor=user,
-        patient_profile_id=profile.pk,
-        mood=JournalEntry.Mood.LOW,
-        emotions=["sadness"],
-        intensity=2,
-        context="Relato inicial com sentimento de tristeza.",
-        triggers="Notícia desagradável.",
-        reactions="Cansaço.",
-        strategies="Descansei.",
-        visibility=JournalEntry.Visibility.PRIVATE,
-        request_id=uuid4(),
-    )
-
-    # Detail view
-    detail_res = client.get(reverse("journal_detail", args=[entry.pk]))
-    assert detail_res.status_code == 200
-    detail_content = detail_res.content.decode()
-    assert "Relato inicial com sentimento de tristeza." in detail_content
-    assert "Vermelho — Somente você" in detail_content
-    assert "Notícia desagradável." in detail_content
-
-    # Edit GET
-    edit_get = client.get(reverse("journal_edit", args=[entry.pk]))
-    assert edit_get.status_code == 200
-    assert "Editar Registro no Diário" in edit_get.content.decode()
-
-    # Edit POST
-    edit_post_data = {
-        "mood": JournalEntry.Mood.NEUTRAL,
-        "emotions": ["calm"],
-        "intensity": 3,
-        "context": "Relato atualizado após conversa reflexiva.",
-        "triggers": "",
-        "reactions": "",
-        "strategies": "Conversar com amigos.",
-        "visibility": JournalEntry.Visibility.SHAREABLE,
-    }
-    edit_post = client.post(
-        reverse("journal_edit", args=[entry.pk]), data=edit_post_data
-    )
-    assert edit_post.status_code == 302
-
-    entry.refresh_from_db()
-    assert entry.mood == JournalEntry.Mood.NEUTRAL
-    assert entry.context == "Relato atualizado após conversa reflexiva."
-    assert entry.visibility == JournalEntry.Visibility.SHAREABLE
-
-    # Quick set visibility endpoint
-    vis_res = client.post(
-        reverse("journal_set_visibility", args=[entry.pk]),
-        data={"visibility": JournalEntry.Visibility.PRIVATE},
-    )
-    assert vis_res.status_code == 302
-    entry.refresh_from_db()
-    assert entry.visibility == JournalEntry.Visibility.PRIVATE
-
-
-def test_journal_views_security_and_authorization(client: Client) -> None:
-    """8.6.2.3: Test that unauthenticated and unauthorized access is denied."""
-    clinic = ClinicFactory.create()
-    _administrator, user, profile = _linked_patient(clinic)
-    _administrator, other_user, _other_profile = _linked_patient(
-        clinic, email="outro@example.test"
-    )
-
-    entry = journal_services.create_journal_entry(
-        clinic_id=clinic.pk,
-        actor=user,
-        patient_profile_id=profile.pk,
-        mood=JournalEntry.Mood.GOOD,
-        emotions=["joy"],
-        intensity=4,
-        context="Segredo pessoal do paciente.",
-        triggers="",
-        reactions="",
-        strategies="",
-        visibility=JournalEntry.Visibility.PRIVATE,
-        request_id=uuid4(),
-    )
-
-    # Anonymous user -> redirected to login
-    anon_client = Client()
-    anon_res = anon_client.get(reverse("journal_list"))
-    assert anon_res.status_code == 302
-
-    # Other patient attempting to view or edit first patient's entry
-    _force_patient_client(client, clinic, other_user)
-    other_detail = client.get(reverse("journal_detail", args=[entry.pk]))
-    assert other_detail.status_code == 403
-
-    other_edit = client.get(reverse("journal_edit", args=[entry.pk]))
-    assert other_edit.status_code == 403
-
-    other_edit_post = client.post(
-        reverse("journal_edit", args=[entry.pk]),
-        data={"context": "Hacked"},
-    )
-    assert other_edit_post.status_code == 403
-
-
-def test_journal_history_filtering_and_pagination(client: Client) -> None:
-    """8.6.2.3: Test filtering by period/emotion/mood and pagination."""
-    clinic = ClinicFactory.create()
-    _administrator, user, profile = _linked_patient(clinic)
-    _force_patient_client(client, clinic, user)
-
-    # Create 12 entries to trigger pagination (10 per page)
-    for i in range(12):
-        mood = JournalEntry.Mood.GOOD if i % 2 == 0 else JournalEntry.Mood.LOW
-        emotion = "joy" if i % 2 == 0 else "sadness"
-        journal_services.create_journal_entry(
-            clinic_id=clinic.pk,
-            actor=user,
-            patient_profile_id=profile.pk,
-            mood=mood,
-            emotions=[emotion],
-            intensity=3,
-            context=f"Entrada número {i + 1}",
-            triggers="",
-            reactions="",
-            strategies="",
-            visibility=JournalEntry.Visibility.PRIVATE,
-            request_id=uuid4(),
-        )
-
-    # Page 1
-    page1_res = client.get(reverse("journal_list"))
-    assert page1_res.status_code == 200
-    content1 = page1_res.content.decode()
-    assert "Página 1 de 2" in content1
-    assert "Entrada número 12" in content1
-
-    # Page 2
-    page2_res = client.get(f"{reverse('journal_list')}?page=2")
-    assert page2_res.status_code == 200
-    content2 = page2_res.content.decode()
-    assert "Página 2 de 2" in content2
-    assert "Entrada número 1" in content2
-
-    # Filter by emotion=joy
-    filter_joy = client.get(f"{reverse('journal_list')}?emotion=joy")
-    assert filter_joy.status_code == 200
-    joy_content = filter_joy.content.decode()
-    assert "Entrada número 11" in joy_content
-    assert "Entrada número 12" not in joy_content
-
-    # Filter by mood=1 (Muito mal) -> empty state
-    filter_empty = client.get(f"{reverse('journal_list')}?mood=1")
-    assert filter_empty.status_code == 200
-    assert "Nenhum registro encontrado" in filter_empty.content.decode()
-
-
 # ---------------------------------------------------------------------------
 # 8.6.3 Sharing Traffic Light & Access Request Acceptance Tests
 # ---------------------------------------------------------------------------
 
 
-def test_sharing_traffic_light_yellow_request_grant_and_revoke_flow(
-    client: Client,
-) -> None:
+def test_sharing_traffic_light_yellow_request_grant_and_revoke_flow() -> None:
     """8.6.3: Test full flow of yellow request, approval, visibility and revocation."""
     clinic = ClinicFactory.create()
     administrator, user, profile = _linked_patient(clinic)
@@ -810,23 +525,15 @@ def test_sharing_traffic_light_yellow_request_grant_and_revoke_flow(
     )
     assert req.status == JournalAccessRequest.Status.PENDING
 
-    # 4. Patient sees pending request in list
-    _force_patient_client(client, clinic, user)
-    list_res = client.get(reverse("journal_list"))
-    assert list_res.status_code == 200
-    list_content = list_res.content.decode()
-    assert "Solicitações de Acesso Pendentes (1)" in list_content
-    assert f'for="id_expires_days_{req.pk}"' in list_content
-    assert f'id="id_expires_days_{req.pk}"' in list_content
-    assert "Validade da autorização" in list_content
-
-    # 5. Patient approves request via HTTP POST
-    respond_res = client.post(
-        reverse("journal_respond_access_request", args=[req.pk]),
-        data={"decision": "approve", "expires_days": "30"},
+    # 4-5. O paciente aprova pelo aplicativo (serviço usado pela API)
+    req = journal_services.respond_journal_entry_access_request(
+        clinic_id=clinic.pk,
+        actor=user,
+        access_request_id=req.pk,
+        approved=True,
+        expires_at=timezone.now() + timedelta(days=30),
+        request_id=uuid4(),
     )
-    assert respond_res.status_code == 302
-    req.refresh_from_db()
     assert req.status == JournalAccessRequest.Status.GRANTED
     assert req.expires_at is not None
 
@@ -836,9 +543,13 @@ def test_sharing_traffic_light_yellow_request_grant_and_revoke_flow(
     )
     assert [e.pk for e in visible_after_grant] == [entry.pk]
 
-    # 7. Patient revokes sharing via HTTP POST
-    revoke_res = client.post(reverse("journal_revoke_sharing", args=[entry.pk]))
-    assert revoke_res.status_code == 302
+    # 7. O paciente revoga o compartilhamento pelo aplicativo
+    journal_services.revoke_journal_entry_sharing(
+        clinic_id=clinic.pk,
+        actor=user,
+        journal_entry_id=entry.pk,
+        request_id=uuid4(),
+    )
     entry.refresh_from_db()
     req.refresh_from_db()
     assert entry.visibility == JournalEntry.Visibility.PRIVATE

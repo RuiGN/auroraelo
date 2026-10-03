@@ -1,0 +1,21 @@
+{% extends layout_template %}
+{% load i18n %}
+{% comment %}
+  Base das telas da equipe para medicação, plano de cuidado e hábitos. O paciente não
+  abre estas páginas: ele usa o app. Breadcrumb e navegação do cuidado são próprios.
+{% endcomment %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb">
+      <li><a href="{% url 'patient_list' %}">{% translate "Pacientes" %}</a></li>
+      <li><a href="{% url 'patient_detail' patient.pk %}">{{ patient.full_name }}</a></li>
+      {% for label, url in breadcrumb %}<li>{% if url %}<a href="{{ url }}">{{ label }}</a>{% else %}{{ label }}{% endif %}</li>{% endfor %}
+    </ol>
+    <h1 class="ae-page-header__title">{{ page_title }}</h1>
+    {% if lead %}<p class="ae-page-header__lead">{{ lead }}</p>{% endif %}
+    {% include "routines/partials/patient_nav.html" %}
+  </div>
+  <div class="ae-actions">{% block header_actions %}{% endblock %}</div>
+</div>
+{% endblock %}

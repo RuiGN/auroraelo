@@ -1,0 +1,12 @@
+{% load i18n %}
+{# Campo do design system: rótulo, controle, ajuda e erro. O Django liga aria-describedby/aria-invalid. #}
+<div class="ae-field{% if field.errors %} ae-field--error{% endif %}{% if wide %} ae-field--wide{% endif %}">
+  {% if field.field.widget.input_type == "checkbox" %}
+  <label class="ae-label" for="{{ field.id_for_label }}">{{ field }} {{ field.label }}</label>
+  {% else %}
+  <label class="ae-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="ae-label__req" aria-hidden="true"> *</span>{% endif %}</label>
+  {{ field }}
+  {% endif %}
+  {% if field.help_text %}<span class="ae-help" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</span>{% endif %}
+  {% for error in field.errors %}<span class="ae-error" role="alert">{{ error }}</span>{% endfor %}
+</div>

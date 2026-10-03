@@ -470,15 +470,21 @@ def test_current_documents_respect_audience_version_and_effective_date(
 def test_consent_center_separates_required_and_optional_without_preselection(
     client: Client,
 ) -> None:
-    patient, clinic = member_context(client)
+    patient, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=administrator,
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
-    publish_document(clinic=clinic, actor=administrator, mandatory=True)
     publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
+        clinic=clinic,
+        actor=administrator,
+        mandatory=True,
+    )
+    publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
         clinic=clinic,
         actor=administrator,
         purpose="communication",
@@ -498,14 +504,18 @@ def test_consent_center_separates_required_and_optional_without_preselection(
 def test_consent_center_static_copy_comes_from_translation_catalog(
     client: Client,
 ) -> None:
-    _, clinic = member_context(client)
+    _, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=administrator,
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
-    publish_document(clinic=clinic, actor=administrator)
+    publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
+        clinic=clinic,
+        actor=administrator,
+    )
 
     with override_settings(
         LANGUAGES=(("pt-br", "Português (Brasil)"), ("en", "English"))
@@ -523,14 +533,18 @@ def test_consent_center_static_copy_comes_from_translation_catalog(
 def test_request_id_is_required_by_form_and_manifestation_service(
     client: Client,
 ) -> None:
-    patient, clinic = member_context(client)
+    patient, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=administrator,
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
-    document = publish_document(clinic=clinic, actor=administrator)
+    document = publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
+        clinic=clinic,
+        actor=administrator,
+    )
 
     assert ConsentDecisionForm({"decision": "accepted"}).is_valid() is False
     response = client.post(
@@ -551,7 +565,7 @@ def test_request_id_is_required_by_form_and_manifestation_service(
 def test_consent_decision_records_refusal_without_blocking_basic_workspace(
     client: Client,
 ) -> None:
-    patient, clinic = member_context(client)
+    patient, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
@@ -559,6 +573,7 @@ def test_consent_decision_records_refusal_without_blocking_basic_workspace(
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
     document = publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
         clinic=clinic,
         actor=administrator,
         purpose="communication",
@@ -594,14 +609,18 @@ def test_consent_decision_records_refusal_without_blocking_basic_workspace(
 
 
 def test_consent_center_translates_persisted_decision(client: Client) -> None:
-    patient, clinic = member_context(client)
+    patient, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=administrator,
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
-    document = publish_document(clinic=clinic, actor=administrator)
+    document = publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
+        clinic=clinic,
+        actor=administrator,
+    )
     request_id = uuid4()
     response = client.post(
         reverse("consent_decide", kwargs={"document_id": document.pk}),
@@ -949,14 +968,18 @@ def test_duplicate_publication_attempt_is_audited_as_error(client: Client) -> No
 def test_conflicting_http_replay_returns_controlled_client_error(
     client: Client,
 ) -> None:
-    patient, clinic = member_context(client)
+    patient, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=administrator,
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
-    document = publish_document(clinic=clinic, actor=administrator)
+    document = publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
+        clinic=clinic,
+        actor=administrator,
+    )
     request_id = uuid4()
     url = reverse("consent_decide", kwargs={"document_id": document.pk})
     assert (
@@ -984,14 +1007,18 @@ def test_conflicting_http_replay_returns_controlled_client_error(
 
 
 def test_consent_center_translates_purpose_labels(client: Client) -> None:
-    _, clinic = member_context(client)
+    _, clinic = member_context(client, role=ClinicMembership.Role.THERAPIST)
     administrator = UserFactory.create()
     ClinicMembershipFactory.create(
         clinic=clinic,
         user=administrator,
         role=ClinicMembership.Role.CLINIC_ADMIN,
     )
-    publish_document(clinic=clinic, actor=administrator)
+    publish_document(
+        audience=ConsentDocument.Audience.PROFESSIONAL,
+        clinic=clinic,
+        actor=administrator,
+    )
 
     response = client.get(reverse("consent_center"))
 

@@ -67,6 +67,18 @@ def active_supporters_for_patient(
     )
 
 
+def active_supporter_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, relationship_id: UUID
+) -> SupportNetworkRelationship | None:
+    """Return one active supporter of this patient, or ``None``."""
+    return (
+        SupportNetworkRelationship.objects.for_clinic(clinic_id)
+        .filter(id=relationship_id, patient_id=patient_profile_id, is_active=True)
+        .prefetch_related("permissions")
+        .first()
+    )
+
+
 def minor_guardrails_for_patient(
     *, clinic_id: UUID, patient_profile_id: UUID
 ) -> dict[str, Any]:
@@ -112,6 +124,17 @@ def urgent_support_plan_for_patient(
         "contacts": contacts,
         "local_resources": list(resources),
     }
+
+
+def urgent_contact_for_patient(
+    *, clinic_id: UUID, patient_profile_id: UUID, contact_id: UUID
+) -> UrgentSupportContact | None:
+    """The patient's own active urgent contact, or ``None`` for anyone else's id."""
+    return (
+        UrgentSupportContact.objects.for_clinic(clinic_id)
+        .filter(id=contact_id, plan__patient_id=patient_profile_id, is_active=True)
+        .first()
+    )
 
 
 def contemplative_catalog_for_patient(
@@ -165,5 +188,6 @@ __all__ = [
     "minor_guardrails_for_patient",
     "rollout_status_for_tenant",
     "support_network_summary",
+    "urgent_contact_for_patient",
     "urgent_support_plan_for_patient",
 ]

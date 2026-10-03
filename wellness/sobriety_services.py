@@ -11,6 +11,7 @@ from django.db import transaction
 from django.utils import timezone
 
 from audit.services import record_audit_event
+from clinics.services import lock_clinic_for_update
 from core.services import Service as CoreService
 
 from .events import (
@@ -32,6 +33,10 @@ class SobrietyService(CoreService[Any, Any]):
     """Sobriety domain service base."""
 
 
+class ActiveSobrietyGoalExistsError(ValidationError):
+    """The patient already has an active recovery goal."""
+
+
 @transaction.atomic
 def setup_sobriety_goal(
     *,
@@ -44,11 +49,29 @@ def setup_sobriety_goal(
     language_preference: str = "dia_a_dia",
     hide_counter: bool = False,
     is_private: bool = True,
+    one_active_goal_only: bool = False,
     actor_id: UUID | None = None,
+    request_id: UUID | None = None,
+    network_origin: str | None = None,
 ) -> SobrietyGoal:
-    """Set up recovery goal with private-by-default and neutral phrasing."""
+    """Set up recovery goal with private-by-default and neutral phrasing.
+
+    ``one_active_goal_only`` makes the check-and-create atomic per clinic: a second
+    concurrent request cannot leave the patient with two active goals.
+    """
     if not substance_or_behavior.strip():
         raise ValidationError("Especifique o foco ou objetivo de recuperação.")
+
+    if one_active_goal_only:
+        lock_clinic_for_update(clinic_id=clinic_id)
+        if (
+            SobrietyGoal.objects.for_clinic(clinic_id)
+            .filter(patient_profile_id=patient_profile_id, is_active=True)
+            .exists()
+        ):
+            raise ActiveSobrietyGoalExistsError(
+                "Já existe uma meta de recuperação ativa."
+            )
 
     goal = SobrietyGoal.objects.for_clinic(clinic_id).create(
         clinic_id=clinic_id,
@@ -73,8 +96,8 @@ def setup_sobriety_goal(
         resource_type="sobriety_goal",
         resource_id=str(goal.id),
         outcome="success",
-        request_id=uuid4(),
-        network_origin=None,
+        request_id=request_id or uuid4(),
+        network_origin=network_origin,
     )
     return goal
 
@@ -88,9 +111,17 @@ def adjust_or_restart_sobriety_goal(
     new_motivations: str = "",
     hide_counter: bool | None = None,
     actor_id: UUID | None = None,
+    patient_profile_id: UUID | None = None,
 ) -> SobrietyGoal:
-    """Ajuste ou recomeço não punitivo, mantendo histórico intacto."""
-    goal = SobrietyGoal.objects.for_clinic(clinic_id).filter(pk=goal_id).first()
+    """Ajuste ou recomeço não punitivo, mantendo histórico intacto.
+
+    Quando ``patient_profile_id`` é informado, só um objetivo desse paciente é
+    aceito (autoatendimento); sem ele, vale apenas o escopo da clínica.
+    """
+    queryset = SobrietyGoal.objects.for_clinic(clinic_id).filter(pk=goal_id)
+    if patient_profile_id is not None:
+        queryset = queryset.filter(patient_profile_id=patient_profile_id)
+    goal = queryset.first()
     if not goal:
         raise ValidationError("Objetivo de sobriedade não encontrado.")
 
@@ -115,6 +146,38 @@ def adjust_or_restart_sobriety_goal(
         clinic_id=clinic_id,
         actor_id=actor_id,
         action="wellness.sobriety_goal_adjusted",
+        resource_type="sobriety_goal",
+        resource_id=str(goal.id),
+        outcome="success",
+        request_id=uuid4(),
+        network_origin=None,
+    )
+    return goal
+
+
+@transaction.atomic
+def set_sobriety_counter_hidden(
+    *,
+    clinic_id: UUID,
+    patient_profile_id: UUID,
+    goal_id: UUID,
+    hidden: bool,
+    actor_id: UUID | None = None,
+) -> SobrietyGoal:
+    """Show or hide the day counter without touching dates or restart history."""
+    goal = (
+        SobrietyGoal.objects.for_clinic(clinic_id)
+        .filter(pk=goal_id, patient_profile_id=patient_profile_id)
+        .first()
+    )
+    if not goal:
+        raise ValidationError("Objetivo de sobriedade não encontrado.")
+    goal.hide_counter = hidden
+    goal.save(update_fields=["hide_counter", "updated_at"])
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action="wellness.sobriety_counter_visibility",
         resource_type="sobriety_goal",
         resource_id=str(goal.id),
         outcome="success",
@@ -220,10 +283,12 @@ def register_support_contact(
 
 
 __all__ = [
+    "ActiveSobrietyGoalExistsError",
     "SobrietyService",
     "adjust_or_restart_sobriety_goal",
     "record_craving_checkin",
     "record_sobriety_milestone",
     "register_support_contact",
+    "set_sobriety_counter_hidden",
     "setup_sobriety_goal",
 ]

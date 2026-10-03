@@ -10,7 +10,7 @@ from .models import (
     TwelveStepsAnamnesis,
 )
 from .policies import domain_access
-from .selectors import own_patient, visible_patients
+from .selectors import visible_patients
 
 
 @domain_access("clinical")
@@ -97,23 +97,6 @@ def crisis_protocol_view(request):
 @require_GET
 def inpatient_beds_view(request):
     return render(request, "psychiatry/beds.html", {"active_nav": "beds", "beds": []})
-
-
-@domain_access("patient")
-@require_GET
-def mobile_connected_view(request):
-    patient = own_patient(actor=request.user, clinic=request.clinic)
-    return render(
-        request,
-        "psychiatry/mobile_connected.html",
-        {"patient": patient, "monitoring_active": False},
-    )
-
-
-@domain_access("b2c")
-@require_GET
-def mobile_b2c_view(request):
-    return render(request, "psychiatry/mobile_b2c.html", {"monitoring_active": False})
 
 
 @require_GET

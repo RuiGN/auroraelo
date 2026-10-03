@@ -22,7 +22,7 @@ def _learner() -> tuple[Clinic, User]:
     clinic = ClinicFactory.create()
     learner = UserFactory.create()
     ClinicMembershipFactory.create(
-        clinic=clinic, user=learner, role=ClinicMembership.Role.PATIENT
+        clinic=clinic, user=learner, role=ClinicMembership.Role.ADMINISTRATIVE_STAFF
     )
     return clinic, learner
 
@@ -198,7 +198,9 @@ def test_lesson_page_foreign_course_is_404(client: Client) -> None:
     lesson = _enrolled_published_lesson(clinic, learner)
     other_clinic = ClinicFactory.create()
     ClinicMembershipFactory.create(
-        clinic=other_clinic, user=learner, role=ClinicMembership.Role.PATIENT
+        clinic=other_clinic,
+        user=learner,
+        role=ClinicMembership.Role.ADMINISTRATIVE_STAFF,
     )
     _force_clinic_client(client, other_clinic, learner)
 

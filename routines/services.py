@@ -35,6 +35,35 @@ class Service(CoreService[Any, Any]):
     """Routines domain service base."""
 
 
+def _audit_habit(
+    *,
+    clinic_id: UUID,
+    actor_id: UUID | None,
+    request_id: UUID | None,
+    action: str,
+    habit: Habit,
+    justification: str,
+) -> None:
+    """Audit a team change to a habit (identifiers only, never the habit text).
+
+    Callers that act for the patient's own flows (no ``actor_id``) are not audited
+    here: those paths keep their own trail.
+    """
+    if actor_id is None:
+        return
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action=action,
+        resource_type="habit",
+        resource_id=str(habit.pk),
+        outcome="success",
+        request_id=request_id or uuid4(),
+        network_origin=None,
+        justification=justification,
+    )
+
+
 @transaction.atomic
 def create_routine_block(
     *,
@@ -108,6 +137,8 @@ def create_habit(
     timezone_name: str = "America/Sao_Paulo",
     routine_block_id: UUID | None = None,
     order: int = 0,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
 ) -> Habit:
     """Create a new habit designed with self-compassionate, flexible framing."""
     clean_title = title.strip()
@@ -139,6 +170,14 @@ def create_habit(
         timezone_name=timezone_name,
         order=order,
     )
+    _audit_habit(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.habit_created",
+        habit=habit,
+        justification="Team created a habit",
+    )
     habit_created.send(sender=Habit, habit=habit)
     return habit
 
@@ -155,8 +194,17 @@ def update_habit(
     routine_block_id: UUID | None = None,
     target_duration_minutes: int | None = None,
     reminder_enabled: bool | None = None,
+    time_window: str | None = None,
+    target_time: time | None = None,
+    clear_target_time: bool = False,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
 ) -> Habit:
-    """Update habit configuration, incrementing version for future occurrences."""
+    """Update habit configuration, incrementing version for future occurrences.
+
+    ``target_time=None`` leaves the time untouched; pass ``clear_target_time=True``
+    to remove it.
+    """
     habit = Habit.objects.for_clinic(clinic_id).filter(pk=habit_id).first()
     if not habit:
         raise ValidationError("Hábito não encontrado.")
@@ -195,7 +243,23 @@ def update_habit(
         habit.reminder_enabled = reminder_enabled
         update_fields.append("reminder_enabled")
 
+    if time_window is not None:
+        habit.time_window = time_window
+        update_fields.append("time_window")
+
+    if target_time is not None or clear_target_time:
+        habit.target_time = None if clear_target_time else target_time
+        update_fields.append("target_time")
+
     habit.save(update_fields=update_fields)
+    _audit_habit(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.habit_updated",
+        habit=habit,
+        justification="Team edited a habit",
+    )
     return habit
 
 
@@ -205,35 +269,69 @@ def pause_habit(
     clinic_id: UUID,
     habit_id: UUID,
     paused_until: date | None = None,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
 ) -> Habit:
     """Pause habit without streak penalty, respecting user autonomy."""
     habit = Habit.objects.for_clinic(clinic_id).filter(pk=habit_id).first()
     if not habit:
         raise ValidationError("Hábito não encontrado.")
+    if habit.status == HabitStatus.ARCHIVED:
+        raise ValidationError("Um hábito arquivado não pode ser pausado.")
 
     habit.status = HabitStatus.PAUSED
     habit.paused_until = paused_until
     habit.save(update_fields=["status", "paused_until", "updated_at"])
+    _audit_habit(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.habit_paused",
+        habit=habit,
+        justification="Team paused a habit",
+    )
     habit_paused.send(sender=Habit, habit=habit)
     return habit
 
 
 @transaction.atomic
-def resume_habit(*, clinic_id: UUID, habit_id: UUID) -> Habit:
+def resume_habit(
+    *,
+    clinic_id: UUID,
+    habit_id: UUID,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
+) -> Habit:
     """Resume a paused habit cleanly."""
     habit = Habit.objects.for_clinic(clinic_id).filter(pk=habit_id).first()
     if not habit:
         raise ValidationError("Hábito não encontrado.")
+    if habit.status == HabitStatus.ARCHIVED:
+        raise ValidationError("Um hábito arquivado não pode ser retomado.")
 
     habit.status = HabitStatus.ACTIVE
     habit.paused_until = None
     habit.save(update_fields=["status", "paused_until", "updated_at"])
+    _audit_habit(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.habit_resumed",
+        habit=habit,
+        justification="Team resumed a habit",
+    )
     habit_resumed.send(sender=Habit, habit=habit)
     return habit
 
 
 @transaction.atomic
-def archive_habit(*, clinic_id: UUID, habit_id: UUID) -> Habit:
+def archive_habit(
+    *,
+    clinic_id: UUID,
+    habit_id: UUID,
+    actor_id: UUID | None = None,
+    request_id: UUID | None = None,
+) -> Habit:
     """Archive a habit so it no longer generates future occurrences."""
     habit = Habit.objects.for_clinic(clinic_id).filter(pk=habit_id).first()
     if not habit:
@@ -241,6 +339,14 @@ def archive_habit(*, clinic_id: UUID, habit_id: UUID) -> Habit:
 
     habit.status = HabitStatus.ARCHIVED
     habit.save(update_fields=["status", "updated_at"])
+    _audit_habit(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        request_id=request_id,
+        action="routines.habit_archived",
+        habit=habit,
+        justification="Team archived a habit",
+    )
     return habit
 
 
@@ -282,6 +388,62 @@ def generate_habit_occurrences_for_date(
         created_occurrences.append(occ)
 
     return created_occurrences
+
+
+@transaction.atomic
+def ensure_habit_occurrence(
+    *, clinic_id: UUID, habit_id: UUID, scheduled_date: date
+) -> HabitOccurrence | None:
+    """Return the occurrence of one habit on one date, creating it when due.
+
+    Returns ``None`` when the habit is not scheduled that day (paused, not an
+    active weekday or not active at all), so callers can refuse the check-in.
+    """
+    habit = Habit.objects.for_clinic(clinic_id).filter(pk=habit_id).first()
+    if habit is None or habit.status != HabitStatus.ACTIVE:
+        return None
+    if habit.paused_until and scheduled_date <= habit.paused_until:
+        return None
+    if habit.active_days and scheduled_date.weekday() not in habit.active_days:
+        return None
+    occurrence, _created = HabitOccurrence.objects.for_clinic(clinic_id).get_or_create(
+        habit=habit,
+        scheduled_date=scheduled_date,
+        defaults={
+            "clinic_id": clinic_id,
+            "plan_key": f"plan_{habit.id}_{scheduled_date}_{habit.version}",
+            "version": habit.version,
+            "is_canceled": False,
+        },
+    )
+    return occurrence
+
+
+@transaction.atomic
+def clear_habit_checkin(
+    *, clinic_id: UUID, occurrence_id: UUID, actor_id: UUID, request_id: UUID
+) -> bool:
+    """Remove the patient's own check-in of one occurrence (undo), with audit."""
+    checkin = (
+        HabitCheckIn.objects.for_clinic(clinic_id)
+        .filter(occurrence_id=occurrence_id)
+        .first()
+    )
+    if checkin is None:
+        return False
+    checkin_id = checkin.pk
+    checkin.delete()
+    record_audit_event(
+        clinic_id=clinic_id,
+        actor_id=actor_id,
+        action="delete",
+        resource_type="habit_checkin",
+        resource_id=str(checkin_id),
+        outcome="success",
+        request_id=request_id,
+        network_origin=None,
+    )
+    return True
 
 
 @transaction.atomic
@@ -427,7 +589,9 @@ __all__ = [
     "archive_habit",
     "create_habit",
     "create_routine_block",
+    "clear_habit_checkin",
     "delete_patient_routine_data",
+    "ensure_habit_occurrence",
     "export_patient_routine_data",
     "generate_habit_occurrences_for_date",
     "pause_habit",

@@ -1,0 +1,76 @@
+{% extends "routines/base.html" %}
+{% load i18n %}
+{% block header_actions %}
+<a class="ae-btn" href="{% url 'routines:habit_create' patient.pk %}">{% translate "Novo hábito" %}</a>
+{% endblock %}
+{% block content %}
+<div class="ae-stack">
+  <div class="ae-alert" role="note"><svg class="ae-icon" aria-hidden="true"><use href="#i-info"/></svg><div>{% blocktranslate with zone=patient.timezone_name %}Os hábitos ativos e pausados aparecem no app assim que são salvos, com o horário no fuso do paciente ({{ zone }}). O paciente registra por lá; aqui você só acompanha.{% endblocktranslate %}</div></div>
+
+  <section class="ae-card" aria-labelledby="sec-habits">
+    <h2 class="ae-card__title" id="sec-habits">{% translate "Hábitos" %}</h2>
+    {% if current %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Hábitos do paciente" %}</caption>
+        <thead><tr><th scope="col">{% translate "Hábito" %}</th><th scope="col">{% translate "Frequência" %}</th><th scope="col">{% translate "Quando" %}</th><th scope="col">{% translate "Situação" %}</th><th scope="col">{% blocktranslate with days=recent_days %}Registros nos últimos {{ days }} dias{% endblocktranslate %}</th><th scope="col"><span class="ae-sr-only">{% translate "Ações" %}</span></th></tr></thead>
+        <tbody>
+          {% for row in current %}
+          <tr>
+            <td><span class="ae-table__strong">{{ row.habit.title }}</span>{% if row.habit.description %}<span class="ae-table__meta">{{ row.habit.description }}</span>{% endif %}</td>
+            <td>{{ row.frequency }}</td>
+            <td>{{ row.when }}{% if row.habit.target_duration_minutes %}<span class="ae-table__meta">{% blocktranslate with minutes=row.habit.target_duration_minutes %}{{ minutes }} min{% endblocktranslate %}</span>{% endif %}</td>
+            <td>{% if row.habit.status == "paused" %}<span class="ae-badge ae-badge--warning">{{ row.status_label }}</span>{% if row.habit.paused_until %}<span class="ae-table__meta">{% blocktranslate with date=row.habit.paused_until|date:"SHORT_DATE_FORMAT" %}até {{ date }}{% endblocktranslate %}</span>{% endif %}{% else %}<span class="ae-badge ae-badge--success">{{ row.status_label }}</span>{% endif %}</td>
+            <td>{% if row.total %}{% for label, count in row.summary %}{% if count %}<span class="ae-table__meta">{{ label }}: {{ count }}</span>{% endif %}{% endfor %}{% else %}<span class="ae-table__meta">{% translate "Sem registros" %}</span>{% endif %}</td>
+            <td class="ae-table__actions ae-actions ae-actions--end">
+              <a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'routines:habit_edit' patient.pk row.habit.pk %}">{% translate "Editar" %}</a>
+              {% if row.habit.status == "active" %}<a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'routines:habit_pause' patient.pk row.habit.pk %}">{% translate "Pausar" %}</a>{% endif %}
+              {% if row.habit.status == "paused" %}<form method="post" action="{% url 'routines:habit_resume' patient.pk row.habit.pk %}" class="ae-inline-form">{% csrf_token %}<button class="ae-btn ae-btn--sm ae-btn--ghost" type="submit">{% translate "Retomar" %}</button></form>{% endif %}
+              <a class="ae-btn ae-btn--sm ae-btn--ghost" href="{% url 'routines:habit_archive' patient.pk row.habit.pk %}">{% translate "Arquivar" %}</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="ae-empty">{% translate "Nenhum hábito cadastrado. O paciente não vê nada nesta área do app." %}</p>
+    {% endif %}
+  </section>
+
+  <section class="ae-card" aria-labelledby="sec-recent">
+    <h2 class="ae-card__title" id="sec-recent">{% blocktranslate with days=recent_days %}Registros recentes do paciente (últimos {{ days }} dias){% endblocktranslate %}</h2>
+    {% if recent %}
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Registros recentes de hábitos" %}</caption>
+        <thead><tr><th scope="col">{% translate "Dia" %}</th><th scope="col">{% translate "Hábito" %}</th><th scope="col">{% translate "Registro" %}</th></tr></thead>
+        <tbody>
+          {% for item in recent %}
+          <tr><td class="ae-table__nowrap">{{ item.date|date:"SHORT_DATE_FORMAT" }}</td><td>{{ item.title }}</td><td><span class="ae-badge ae-badge--{{ item.badge }}">{{ item.label }}</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="ae-card__meta">{% translate "O paciente ainda não registrou hábitos neste período." %}</p>
+    {% endif %}
+  </section>
+
+  {% if archived %}
+  <section class="ae-card" aria-labelledby="sec-archived">
+    <h2 class="ae-card__title" id="sec-archived">{% translate "Arquivados" %}</h2>
+    <p class="ae-card__meta">{% translate "Não aparecem mais no app; os registros anteriores ficam guardados." %}</p>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% translate "Hábitos arquivados" %}</caption>
+        <thead><tr><th scope="col">{% translate "Hábito" %}</th><th scope="col">{% translate "Frequência" %}</th><th scope="col">{% translate "Quando" %}</th></tr></thead>
+        <tbody>
+          {% for row in archived %}<tr><td>{{ row.habit.title }}</td><td>{{ row.frequency }}</td><td>{{ row.when }}</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

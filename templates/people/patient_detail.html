@@ -24,6 +24,19 @@
   </dl>
 </section>
 
+<section class="d-grid gap-3" aria-labelledby="detail-app-title">
+  <h2 id="detail-app-title">{% translate "Aplicativo do paciente" %}</h2>
+  <p class="mb-0">{% translate "O paciente usa apenas o aplicativo. O que a equipe cadastra aqui aparece no app dele." %}</p>
+  <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+    <li><a class="btn btn-outline-primary" href="{% url 'mobile_api:patient_app' patient.pk %}">{% translate "Acesso e aparelhos" %}</a></li>
+    <li><a class="btn btn-outline-primary" href="{% url 'routines:medication_list' patient.pk %}">{% translate "Medicação" %}</a></li>
+    <li><a class="btn btn-outline-primary" href="{% url 'routines:care_plan_list' patient.pk %}">{% translate "Plano de cuidado" %}</a></li>
+    <li><a class="btn btn-outline-primary" href="{% url 'routines:habit_list' patient.pk %}">{% translate "Hábitos" %}</a></li>
+    <li><a class="btn btn-outline-primary" href="{% url 'journal:patient_diary' patient.pk %}">{% translate "Diário compartilhado" %}</a></li>
+    <li><a class="btn btn-outline-primary" href="{% url 'journal:patient_checkins' patient.pk %}">{% translate "Check-ins" %}</a></li>
+  </ul>
+</section>
+
 {% if patient.accessibility_preferences %}
 <section class="d-grid gap-3" aria-labelledby="detail-accessibility-title">
   <h2 id="detail-accessibility-title">{% translate "Acessibilidade" %}</h2>

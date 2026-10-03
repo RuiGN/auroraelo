@@ -10,7 +10,6 @@ from django.conf import settings
 SPRINT4_TEMPLATE_PATHS = (
     "workspace/home.html",
     "analytics/clinic_panel.html",
-    "analytics/patient_dashboard.html",
     "analytics/report_list.html",
     "analytics/therapist_dashboard.html",
     "therapist_dashboard/home.html",
@@ -22,7 +21,6 @@ SPRINT4_TEMPLATE_PATHS = (
     "people/patient_list.html",
     "people/professional_list.html",
     "onboarding/clinic_checklist.html",
-    "onboarding/patient_onboarding.html",
 )
 
 LEGACY_CLASS_TOKENS = (

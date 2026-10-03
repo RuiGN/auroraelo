@@ -15,7 +15,11 @@ from core.selectors import Selector as Selector
 from .integrity import require_document_integrity
 from .models import ConsentDocument, ConsentManifestation
 
-__all__ = ["Selector", "current_documents_for_actor"]
+__all__ = [
+    "Selector",
+    "current_documents_for_actor",
+    "latest_manifestations_for_subject",
+]
 
 _ROLE_VALUES = ("clinic_admin", "therapist", "administrative_staff", "patient")
 
@@ -86,6 +90,21 @@ def current_documents_for_actor(
     return current
 
 
+def latest_manifestations_for_subject(
+    *, clinic_id: UUID, subject_id: UUID, document_ids: set[UUID]
+) -> dict[UUID, ConsentManifestation]:
+    """Return the most recent decision of one subject for each given document."""
+    if not document_ids:
+        return {}
+    latest: dict[UUID, ConsentManifestation] = {}
+    rows = ConsentManifestation.objects.for_clinic(clinic_id).filter(
+        subject_id=subject_id, document_id__in=document_ids
+    )
+    for row in rows.order_by("sequence", "manifested_at"):
+        latest[row.document_id] = row
+    return latest
+
+
 def has_published_documents(*, clinic_id: UUID) -> bool:
     """Return whether at least one active consent document was published."""
     return (
@@ -116,4 +135,5 @@ __all__ = [
     "accepted_consent_subject_ids",
     "current_documents_for_actor",
     "has_published_documents",
+    "latest_manifestations_for_subject",
 ]

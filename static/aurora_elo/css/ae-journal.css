@@ -1,0 +1,37 @@
+/* Diário e check-ins compartilhados pelo paciente (telas da equipe).
+   Usa APENAS variáveis de tokens de aurora-elo.css, então herda o tema claro/escuro.
+   Carregado só nas páginas do diário, pelo bloco extra_head. */
+
+/* Navegação entre as seções do paciente */
+.ae-tabs { display: flex; flex-wrap: wrap; gap: var(--space-1); margin: 0 0 var(--space-4); border-bottom: 1px solid var(--line); }
+.ae-tabs__link { display: inline-flex; align-items: center; min-height: var(--touch-target); padding: 0 var(--space-4); border-bottom: 3px solid transparent; color: var(--ink-muted); font-weight: 700; text-decoration: none; }
+.ae-tabs__link:hover { color: var(--ink); }
+.ae-tabs__link[aria-current="page"] { color: var(--primary); border-bottom-color: var(--primary); }
+.ae-tabs__link:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: var(--radius-md); }
+
+/* Registro do diário */
+.ae-entry__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); margin-bottom: var(--space-2); }
+.ae-entry__title { margin: 0; font-size: 15px; line-height: 22px; font-weight: 700; }
+.ae-entry__facts { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0 0 var(--space-3); padding: 0; list-style: none; }
+.ae-entry__text { margin: 0; overflow-wrap: anywhere; }
+.ae-entry__detail { display: grid; gap: var(--space-2); margin: var(--space-3) 0 0; }
+.ae-entry__detail dt { color: var(--ink-muted); font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.ae-entry__detail dd { margin: 0; overflow-wrap: anywhere; }
+.ae-entry-list { display: grid; gap: var(--space-4); }
+.ae-entry-list .ae-card + .ae-card { margin-top: 0; }
+
+/* Paginação simples */
+.ae-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-4); }
+
+/* Série de check-ins: barras em CSS (altura = nota de 1 a 5) */
+.ae-bars { display: flex; align-items: flex-end; gap: 2px; height: 32px; min-width: 112px; }
+.ae-bars__bar { flex: 1 1 0; min-width: 3px; max-width: 14px; border-radius: 2px 2px 0 0; background: var(--primary); }
+.ae-bars__bar--none { height: 3px; background: var(--line); }
+.ae-bars__bar--v1 { height: 20%; }
+.ae-bars__bar--v2 { height: 40%; }
+.ae-bars__bar--v3 { height: 60%; }
+.ae-bars__bar--v4 { height: 80%; }
+.ae-bars__bar--v5 { height: 100%; }
+.ae-score { display: inline-block; min-width: 2ch; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ae-score--empty { color: var(--ink-muted); font-weight: 500; }
+.ae-table__num { text-align: center; }

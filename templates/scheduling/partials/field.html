@@ -1,0 +1,17 @@
+{% load i18n %}
+{# Campo do design system: rótulo, controle, ajuda e erro. O Django liga aria-describedby/aria-invalid. #}
+{% if field.widget_type == "checkboxselectmultiple" %}
+<fieldset class="ae-field ae-field--wide{% if field.errors %} ae-field--error{% endif %}">
+  <legend class="ae-label">{{ field.label }}{% if field.field.required %}<span class="ae-label__req" aria-hidden="true"> *</span>{% endif %}</legend>
+  {{ field }}
+  {% if field.help_text %}<span class="ae-help" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</span>{% endif %}
+  {% for error in field.errors %}<span class="ae-error" role="alert">{{ error }}</span>{% endfor %}
+</fieldset>
+{% else %}
+<div class="ae-field{% if field.errors %} ae-field--error{% endif %}">
+  <label class="ae-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="ae-label__req" aria-hidden="true"> *</span>{% endif %}</label>
+  {{ field }}
+  {% if field.help_text %}<span class="ae-help" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</span>{% endif %}
+  {% for error in field.errors %}<span class="ae-error" role="alert">{{ error }}</span>{% endfor %}
+</div>
+{% endif %}

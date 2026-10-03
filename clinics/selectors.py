@@ -35,6 +35,39 @@ def active_clinics_for_actor(actor: AbstractBaseUser) -> list[Clinic]:
     return [membership.clinic for membership in memberships]
 
 
+def active_web_clinics_for_actor(actor: AbstractBaseUser) -> list[Clinic]:
+    """Return active clinics where the actor works on the team (not as a patient).
+
+    The web system is for the clinic team. Patients use only the mobile app, so a
+    patient membership never opens a web session or a web clinic choice.
+    """
+    if not current_actor_is_active(actor):
+        return []
+    memberships = (
+        ClinicMembership.infrastructure_objects.get_queryset()
+        .active_on(timezone.localdate())
+        .filter(user_id=actor.pk, clinic__is_active=True)
+        .exclude(role=ClinicMembership.Role.PATIENT)
+        .select_related("clinic")
+        .order_by("clinic__name", "clinic_id")
+    )
+    return [membership.clinic for membership in memberships]
+
+
+def active_clinics_with_role(actor: AbstractBaseUser, role: str) -> list[Clinic]:
+    """Return active clinics where the actor currently holds exactly this role."""
+    if not current_actor_is_active(actor):
+        return []
+    memberships = (
+        ClinicMembership.infrastructure_objects.get_queryset()
+        .active_on(timezone.localdate())
+        .filter(user_id=actor.pk, role=role, clinic__is_active=True)
+        .select_related("clinic")
+        .order_by("clinic__name", "clinic_id")
+    )
+    return [membership.clinic for membership in memberships]
+
+
 def active_clinic_ids_for_actor(actor: AbstractBaseUser) -> list[UUID]:
     """Return current active tenant identifiers without exposing memberships."""
     if not current_actor_is_active(actor):
@@ -211,6 +244,7 @@ __all__ = [
     "Selector",
     "active_clinic_ids_for_actor",
     "active_clinics_for_actor",
+    "active_web_clinics_for_actor",
     "active_member_identity_for_role",
     "active_membership_roles_for_users",
     "clinic_operating_hours",

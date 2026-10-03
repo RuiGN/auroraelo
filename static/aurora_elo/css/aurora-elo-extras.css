@@ -1,0 +1,55 @@
+/* Complementos web do design system Aurora Elo.
+   Usa APENAS as variáveis de tokens de aurora-elo.css (nada de cores soltas), então
+   herda o tema claro/escuro. Prefixo ae- como nos componentes do design system. */
+
+/* Idioma no menu superior */
+.ae-language { position: relative; display: flex; align-items: center; }
+.ae-select--nav { min-height: 36px; height: 36px; padding: 0 28px 0 var(--space-3); border-color: var(--nav-line); background-color: var(--nav-bg-hover); color: var(--nav-ink); font-size: 13px; font-weight: 600; width: auto; }
+.ae-select--nav option { color: var(--ink); background: var(--surface-raised); }
+.ae-select--nav:focus { outline: 2px solid var(--nav-accent); outline-offset: 2px; }
+
+/* Cartão (mesmo padrão visual de .ae-table-wrap e .ae-alert) */
+.ae-card { background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: var(--space-4); }
+.ae-card + .ae-card { margin-top: var(--space-4); }
+.ae-card__title { margin: 0 0 var(--space-3); font-size: 18px; line-height: 26px; font-weight: 700; }
+.ae-card__meta { margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 20px; }
+.ae-card--flush { padding: 0; overflow: hidden; }
+
+/* Grade responsiva de indicadores */
+.ae-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-6); }
+.ae-stat { background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: var(--space-4); display: grid; gap: var(--space-1); }
+.ae-stat__label { color: var(--ink-muted); font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.ae-stat__value { font-size: 32px; line-height: 40px; font-weight: 800; letter-spacing: -0.02em; }
+.ae-stat--danger .ae-stat__value { color: var(--danger); }
+.ae-stat--warning .ae-stat__value { color: var(--warning); }
+.ae-stat--success .ae-stat__value { color: var(--success); }
+
+/* Formulários em colunas */
+.ae-form-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.ae-form-grid .ae-field--wide, .ae-form-grid .ae-field:has(textarea) { grid-column: 1 / -1; }
+.ae-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.ae-actions--end { justify-content: flex-end; }
+.ae-inline-form { display: inline; margin: 0; }
+
+/* Linha do tempo (registro do concierge) */
+.ae-timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.ae-timeline__item { display: grid; grid-template-columns: 36px 1fr; gap: var(--space-3); align-items: start; }
+.ae-timeline__icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius-md); background: var(--primary-soft); color: var(--primary); }
+.ae-timeline__title { margin: 0; font-weight: 700; }
+.ae-timeline__body { margin: 2px 0 0; color: var(--ink); }
+.ae-timeline__meta { margin: 2px 0 0; color: var(--ink-muted); font-size: 13px; }
+
+/* Texto auxiliar e estados vazios */
+.ae-muted { color: var(--ink-muted); }
+.ae-empty { padding: var(--space-8) var(--space-4); text-align: center; color: var(--ink-muted); }
+.ae-stack { display: grid; gap: var(--space-4); }
+.ae-table-wrap + .ae-table-wrap { margin-top: var(--space-4); }
+.ae-badge--muted { background: var(--surface-sunken); color: var(--ink-muted); }
+.ae-select--nav.ae-select--icon { padding-inline-start: 34px; }
+
+/* Campo com ícone à esquerda (o guarda de formulários exige `field-control-icon`). */
+.ae-control { position: relative; }
+.ae-control__icon { position: absolute; inset-block: 0; inset-inline-start: 12px; display: flex; align-items: center; color: var(--ink-muted); pointer-events: none; z-index: 1; }
+.ae-control__icon .ae-icon { width: 18px; height: 18px; }
+.ae-select--icon { padding-inline-start: 38px; }
+.ae-control__icon--nav { inset-inline-start: 10px; }

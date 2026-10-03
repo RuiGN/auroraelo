@@ -1,0 +1,24 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'concierge:dashboard' %}">{% translate "Pós-alta" %}</a></li><li><a href="{% url 'concierge:rule_list' %}">{% translate "Régua de comunicação" %}</a></li><li>{% translate "Editar" %}</li></ol>
+    <h1 class="ae-page-header__title">{{ page_title }}</h1>
+    <p class="ae-page-header__lead">{% translate "Salvar cria uma nova versão. Vale para as próximas altas; as altas já registradas mantêm a agenda original." %}</p>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form method="post" novalidate class="ae-card ae-stack">
+  {% csrf_token %}
+  {% include "concierge/partials/errors.html" %}
+  {% include "concierge/partials/field.html" with field=form.name %}
+  <p class="ae-card__meta">{% translate "Preencha até 8 etapas. Deixe a etapa em branco para não usar." %}</p>
+  {% include "concierge/partials/rule_steps.html" %}
+  <div class="ae-actions ae-actions--end">
+    <a class="ae-btn ae-btn--secondary" href="{{ cancel_url }}">{% translate "Voltar" %}</a>
+    <button type="submit" class="ae-btn">{% translate "Salvar nova versão" %}</button>
+  </div>
+</form>
+{% endblock %}

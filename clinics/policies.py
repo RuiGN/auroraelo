@@ -26,6 +26,10 @@ ACTION_ROLES: dict[str, frozenset[str]] = {
     "invitation.revoke": frozenset({"clinic_admin"}),
     "membership.enumerate": frozenset({"clinic_admin"}),
     "membership.update": frozenset({"clinic_admin"}),
+    # Concierge e acompanhamento pós-alta: função administrativa, sem acesso clínico.
+    "aftercare.read": frozenset({"clinic_admin", "administrative_staff"}),
+    "aftercare.manage": frozenset({"clinic_admin", "administrative_staff"}),
+    "aftercare.rules.manage": frozenset({"clinic_admin"}),
     "course.enroll": frozenset(
         {"clinic_admin", "therapist", "administrative_staff", "patient"}
     ),

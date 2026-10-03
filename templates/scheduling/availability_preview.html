@@ -1,0 +1,64 @@
+{% extends layout_template %}
+{% load i18n %}
+{% block page_header %}
+<div class="ae-page-header">
+  <div>
+    <ol class="ae-breadcrumb"><li><a href="{% url 'appointment_list' %}">{% translate "Agenda" %}</a></li><li><a href="{% url 'scheduling:availability_list' %}">{% translate "Disponibilidade" %}</a></li><li>{% translate "Prévia" %}</li></ol>
+    <h1 class="ae-page-header__title">{% translate "Prévia dos horários livres" %}</h1>
+    <p class="ae-page-header__lead">{% blocktranslate with days=preview_days %}Horários livres dos próximos {{ days }} dias, calculados como o aplicativo calcula para o paciente. O paciente só vê profissionais vinculados a ele, em unidades e serviços ativos.{% endblocktranslate %}</p>
+  </div>
+  <a class="ae-btn ae-btn--secondary" href="{% url 'scheduling:availability_list' %}">{% translate "Voltar aos horários" %}</a>
+</div>
+{% endblock %}
+{% block content %}
+{% if not has_services %}
+<div class="ae-card ae-empty">
+  <p>{% translate "Nenhum serviço ativo. Cadastre ou ative um serviço para ver a prévia." %}</p>
+  <a class="ae-btn" href="{% url 'scheduling:service_list' %}">{% translate "Serviços de agendamento" %}</a>
+</div>
+{% elif not has_patterns %}
+<div class="ae-card ae-empty">
+  <p>{% translate "Nenhum horário de atendimento cadastrado. Cadastre horários para ver a prévia." %}</p>
+  <a class="ae-btn" href="{% url 'scheduling:availability_list' %}">{% translate "Horários de atendimento" %}</a>
+</div>
+{% else %}
+<form class="ae-toolbar" method="get" role="search">
+  {% for field in form.visible_fields %}
+  <div class="ae-field ae-field--narrow"><label class="ae-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}</div>
+  {% endfor %}
+  <button class="ae-btn ae-btn--secondary" type="submit">{% translate "Ver prévia" %}</button>
+</form>
+{% if form.errors %}
+<div class="ae-alert ae-alert--danger" role="alert"><svg class="ae-icon" aria-hidden="true"><use href="#i-alert"/></svg><div>{% translate "Escolha um serviço e um profissional da lista." %}</div></div>
+{% endif %}
+{% if selected_service %}
+<p class="ae-card__meta">{% blocktranslate with name=selected_service.name minutes=selected_service.duration_minutes buffer=selected_service.buffer_minutes %}Serviço: {{ name }}, {{ minutes }} min de duração e {{ buffer }} min de intervalo.{% endblocktranslate %}</p>
+{% endif %}
+{% if blocks %}
+<div class="ae-stack">
+  {% for block in blocks %}
+  <section class="ae-card" aria-labelledby="prev-{{ forloop.counter }}">
+    <h2 class="ae-card__title" id="prev-{{ forloop.counter }}">{{ block.professional }} · {{ block.unit }} <span class="ae-badge {% if block.total %}ae-badge--info{% else %}ae-badge--warning{% endif %}">{% blocktranslate with total=block.total %}Total: {{ total }}{% endblocktranslate %}</span></h2>
+    <div class="ae-table-wrap">
+      <table class="ae-table">
+        <caption class="ae-sr-only">{% blocktranslate with name=block.professional unit=block.unit %}Horários livres de {{ name }} em {{ unit }}{% endblocktranslate %}</caption>
+        <thead><tr><th scope="col">{% translate "Dia" %}</th><th scope="col">{% translate "Horários livres" %}</th></tr></thead>
+        <tbody>
+          {% for day in block.days %}
+          <tr>
+            <th scope="row" class="ae-table__nowrap">{{ day.date|date:"l" }}, {{ day.date|date:"SHORT_DATE_FORMAT" }}</th>
+            <td>{% for slot in day.slots %}<span class="ae-badge ae-badge--info">{{ slot }}</span> {% empty %}<span class="ae-muted">{% translate "Sem horários livres" %}</span>{% endfor %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+{% if truncated %}<p class="ae-card__meta">{% translate "Há muitas combinações de profissional e unidade. Filtre por profissional para ver as demais." %}</p>{% endif %}
+{% else %}
+<div class="ae-card ae-empty">{% translate "Nenhuma combinação de profissional e unidade ativa para mostrar." %}</div>
+{% endif %}
+{% endif %}
+{% endblock %}

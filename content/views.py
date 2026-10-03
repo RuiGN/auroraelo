@@ -50,7 +50,6 @@ from .selectors import (
     editorial_contents,
     editorial_version,
     editorial_versions,
-    notifications_for_user,
     published_content_by_id,
     published_content_by_slug,
 )
@@ -62,7 +61,6 @@ from .services import (
     create_content_version,
     publish_content_version,
     recommend_content,
-    recommendations_for_patient,
     resolve_content_report,
     rollback_content,
     search_published_content,
@@ -545,38 +543,6 @@ def content_detail(request: HttpRequest, slug: str) -> HttpResponse:
             "content": content,
             "body": body,
             "recommend_form": recommend_form,
-            "layout_template": "layouts/vertical.html",
-        },
-    )
-
-
-@login_required
-@require_GET
-def recommendation_list(request: HttpRequest) -> HttpResponse:
-    """Render the requesting patient's own active recommendations."""
-    clinic_id, actor = _clinic_and_actor(request)
-    listing = recommendations_for_patient(clinic_id=clinic_id, user=actor)
-    return TemplateResponse(
-        request,
-        "content/recommendations.html",
-        {
-            "recommendations": listing,
-            "layout_template": "layouts/vertical.html",
-        },
-    )
-
-
-@login_required
-@require_GET
-def notification_list(request: HttpRequest) -> HttpResponse:
-    """Render the requesting user's own in-product notifications."""
-    clinic_id, actor = _clinic_and_actor(request)
-    notifications = notifications_for_user(clinic_id=clinic_id, user_id=actor.pk)
-    return TemplateResponse(
-        request,
-        "content/notifications.html",
-        {
-            "notifications": notifications,
             "layout_template": "layouts/vertical.html",
         },
     )

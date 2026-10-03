@@ -10,6 +10,8 @@ journal_entry_visibility_changed = Signal()
 journal_entry_sharing_granted = Signal()
 journal_entry_access_requested = Signal()
 journal_entry_sharing_revoked = Signal()
+journal_diary_viewed = Signal()
+daily_checkins_viewed = Signal()
 daily_checkin_submitted = Signal()
 daily_checkin_updated = Signal()
 human_triage_item_created = Signal()
@@ -19,8 +21,10 @@ __all__ = [
     "DomainEvent",
     "daily_checkin_submitted",
     "daily_checkin_updated",
+    "daily_checkins_viewed",
     "human_triage_item_created",
     "human_triage_item_reviewed",
+    "journal_diary_viewed",
     "journal_entry_access_requested",
     "journal_entry_created",
     "journal_entry_sharing_granted",

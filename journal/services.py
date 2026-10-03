@@ -17,8 +17,10 @@ from people.selectors import linked_patients_for_therapist, patient_profile_for_
 from .events import (
     daily_checkin_submitted,
     daily_checkin_updated,
+    daily_checkins_viewed,
     human_triage_item_created,
     human_triage_item_reviewed,
+    journal_diary_viewed,
     journal_entry_access_requested,
     journal_entry_created,
     journal_entry_sharing_granted,
@@ -37,12 +39,16 @@ from .models import (
     JournalAccessRequest,
     JournalEntry,
 )
+from .policies import therapist_may_read_patient_diary
 
 __all__ = [
     "Service",
     "configure_checkin_questionnaire",
     "create_journal_entry",
+    "ensure_default_checkin_questionnaire",
     "get_or_create_default_checkin_questionnaire",
+    "record_staff_checkins_read",
+    "record_staff_diary_read",
     "request_journal_entry_access",
     "respond_journal_entry_access_request",
     "revoke_journal_entry_sharing",
@@ -387,6 +393,57 @@ def request_journal_entry_access(
     return req
 
 
+def _authorize_staff_read(
+    *, clinic_id: UUID, actor: AbstractBaseUser, patient_profile_id: UUID
+) -> None:
+    if not therapist_may_read_patient_diary(
+        clinic_id=clinic_id,
+        therapist_id=actor.pk,
+        patient_profile_id=patient_profile_id,
+    ):
+        raise PermissionDenied
+
+
+def record_staff_diary_read(
+    *,
+    clinic_id: UUID,
+    actor: AbstractBaseUser,
+    patient_profile_id: UUID,
+    request_id: UUID,
+) -> None:
+    """Audit that a therapist opened one patient's shared diary (no content logged)."""
+    _authorize_staff_read(
+        clinic_id=clinic_id, actor=actor, patient_profile_id=patient_profile_id
+    )
+    journal_diary_viewed.send(
+        sender=JournalEntry,
+        clinic_id=clinic_id,
+        actor_id=actor.pk,
+        resource_id=str(patient_profile_id),
+        request_id=request_id,
+    )
+
+
+def record_staff_checkins_read(
+    *,
+    clinic_id: UUID,
+    actor: AbstractBaseUser,
+    patient_profile_id: UUID,
+    request_id: UUID,
+) -> None:
+    """Audit that a therapist opened one patient's shared check-in series."""
+    _authorize_staff_read(
+        clinic_id=clinic_id, actor=actor, patient_profile_id=patient_profile_id
+    )
+    daily_checkins_viewed.send(
+        sender=DailyCheckIn,
+        clinic_id=clinic_id,
+        actor_id=actor.pk,
+        resource_id=str(patient_profile_id),
+        request_id=request_id,
+    )
+
+
 @transaction.atomic
 def respond_journal_entry_access_request(
     *,
@@ -485,6 +542,35 @@ def get_or_create_default_checkin_questionnaire(
     if existing is not None:
         return existing
 
+    questionnaire = CheckInQuestionnaire(
+        clinic_id=clinic_id,
+        title="Check-in Diário",
+        version="v1.0",
+        is_active=True,
+        questions=DEFAULT_CHECKIN_QUESTIONS,
+    )
+    questionnaire.full_clean(validate_unique=False, validate_constraints=False)
+    questionnaire.save(force_insert=True)
+    return questionnaire
+
+
+@transaction.atomic
+def ensure_default_checkin_questionnaire(*, clinic_id: UUID) -> CheckInQuestionnaire:
+    """Return the clinic's active questionnaire, creating the default when missing.
+
+    System action (no actor): a patient's first check-in must not depend on an
+    administrator having opened a configuration screen. Never replaces an existing
+    questionnaire.
+    """
+    existing = (
+        CheckInQuestionnaire.infrastructure_objects.filter(
+            clinic_id=clinic_id, is_active=True
+        )
+        .order_by("created_at")
+        .first()
+    )
+    if existing is not None:
+        return existing
     questionnaire = CheckInQuestionnaire(
         clinic_id=clinic_id,
         title="Check-in Diário",
@@ -622,9 +708,12 @@ def submit_daily_checkin(
     answers: dict[str, object],
     period: str = "daily",
     idempotency_key: str = "",
+    visibility: str = JournalEntry.Visibility.PRIVATE,
     request_id: UUID,
 ) -> DailyCheckIn:
     """Create or update one patient's daily check-in idempotently per period."""
+    if visibility not in JournalEntry.Visibility.values:
+        raise ValidationError("Selecione uma visibilidade válida.")
     profile_id = _resolve_owned_profile_id(
         clinic_id=clinic_id, actor=actor, patient_profile_id=patient_profile_id
     )
@@ -675,7 +764,7 @@ def submit_daily_checkin(
             date=today,
             period=period,
             answers=validated_answers,
-            visibility=JournalEntry.Visibility.PRIVATE,
+            visibility=visibility,
             is_draft=False,
             idempotency_key=idempotency_key,
             submitted_at=now,
@@ -700,8 +789,10 @@ def submit_daily_checkin(
     existing.submitted_at = now
     existing.previous_version_answers = previous
     existing.is_draft = False
+    existing.visibility = visibility
     existing.save(
         update_fields=(
+            "visibility",
             "answers",
             "questionnaire",
             "questionnaire_version",
