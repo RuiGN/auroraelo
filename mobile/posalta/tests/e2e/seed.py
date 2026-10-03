@@ -71,9 +71,20 @@ issued = people_services.issue_patient_invitation(
     expires_at=people_services.invitation_expiration_after(days=7),
     request_id=uuid4(),
 )
+# Com E2E_INVITE_VIA=email o convite sai por SMTP de verdade (servidor de captura) e o
+# código NÃO vai para o seed.json: o teste o lê da mensagem recebida, como o paciente.
+via_email = os.environ.get("E2E_INVITE_VIA") == "email"
+if via_email:
+    from accounts.services import send_patient_activation_email
+
+    assert send_patient_activation_email(
+        recipient_email=profile.email,
+        raw_token=issued.raw_token,
+        language=profile.language_code,
+    ), "o envio do convite por SMTP falhou"
 json.dump(
     {
-        "code": issued.raw_token,
+        "code": None if via_email else issued.raw_token,
         "email": profile.email,
         "clinic_id": str(stage.clinic.pk),
         "patient_profile_id": str(profile.pk),
@@ -82,4 +93,4 @@ json.dump(
     },
     open(os.path.join(OUT, "seed.json"), "w"),
 )
-print("seed ok; código de ativação emitido")
+print("seed ok; convite enviado por e-mail" if via_email else "seed ok; código de ativação emitido")

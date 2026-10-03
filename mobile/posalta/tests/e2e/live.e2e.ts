@@ -25,6 +25,43 @@ const PROJECT = process.env.E2E_PROJECT as string;
 const PASSWORD = "E2e-Senha-Sintetica-2026!"; // credencial sintética do banco descartável
 
 const seed = JSON.parse(fs.readFileSync(`${OUT}/seed.json`, "utf8"));
+const MAIL = process.env.E2E_MAIL; // arquivo do servidor SMTP de captura (opcional)
+
+interface Mail {
+  to: string[];
+  subject: string;
+  body: string;
+}
+
+function mailsTo(email: string): Mail[] {
+  if (!MAIL || !fs.existsSync(MAIL)) return [];
+  return fs
+    .readFileSync(MAIL, "utf8")
+    .split("\n")
+    .filter(Boolean)
+    .map((line) => JSON.parse(line) as Mail)
+    .filter((mail) => mail.to.includes(email));
+}
+
+async function waitForMail(email: string, count: number): Promise<Mail[]> {
+  for (let attempt = 0; attempt < 50; attempt += 1) {
+    const found = mailsTo(email);
+    if (found.length >= count) return found;
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  throw new Error(`e-mail para ${email} não chegou ao servidor de captura`);
+}
+
+/** O código do convite: do seed (modo local) ou da mensagem recebida por SMTP. */
+async function activationCode(): Promise<string> {
+  if (seed.code) return seed.code as string;
+  const [mail] = await waitForMail(seed.email, 1);
+  const link = mail.body.match(/auroraelo-posalta:\/\/activate\?code=(\S+)/);
+  const plain = mail.body.match(/copie o código abaixo no aplicativo: (\S+)/);
+  expect(link?.[1]).toBeDefined();
+  expect(plain?.[1]).toBe(link?.[1]); // o link e o texto levam o mesmo código
+  return link![1];
+}
 
 const nodeTransport: Transport = (input, init) =>
   new Promise((resolve, reject) => {
@@ -91,7 +128,7 @@ describe("roteiro ponta a ponta contra o servidor real", () => {
     const session = await client.post(
       "/mobile/auth/activate/",
       {
-        code: seed.code,
+        code: await activationCode(),
         password: PASSWORD,
         first_name: "Alex",
         last_name: "Exemplo",
@@ -166,8 +203,11 @@ describe("roteiro ponta a ponta contra o servidor real", () => {
       cwd: PROJECT,
       env: {
         ...process.env,
-        DJANGO_SETTINGS_MODULE: "config.settings.test",
-        SQLITE_NAME: process.env.E2E_SQLITE,
+        DJANGO_SETTINGS_MODULE:
+          process.env.E2E_SETTINGS ?? "config.settings.test",
+        ...(process.env.E2E_SQLITE
+          ? { SQLITE_NAME: process.env.E2E_SQLITE }
+          : {}),
         E2E_OUT: OUT,
       },
       stdio: "pipe",
@@ -523,5 +563,85 @@ describe("roteiro ponta a ponta contra o servidor real", () => {
     await expect(client.get("/mobile/me/")).rejects.toMatchObject({
       status: 401,
     });
+  });
+
+  const withMail = MAIL ? it : it.skip;
+
+  withMail(
+    "14. recuperação de senha por e-mail: código, nova senha e sessões antigas encerradas",
+    async () => {
+      const anonymous = createApiClient({
+        baseUrl: BASE,
+        transport: nodeTransport,
+        tokenStore: createMemoryTokenStore(),
+        dev: true,
+      });
+      const before = mailsTo(seed.email).length;
+      await anonymous.post(
+        "/mobile/auth/password-recovery/",
+        { email: seed.email },
+        { auth: false },
+      );
+      const mails = await waitForMail(seed.email, before + 1);
+      const reset = mails[mails.length - 1].body.match(
+        /auroraelo-posalta:\/\/reset\?code=(\S+)/,
+      );
+      expect(reset?.[1]).toBeDefined();
+      const login = (password: string) =>
+        anonymous.post(
+          "/mobile/auth/login/",
+          {
+            email: seed.email,
+            password,
+            device_label: "Terceiro aparelho",
+            platform: "ios",
+            app_version: "1.0.0",
+          },
+          { auth: false, parse: parseTokens },
+        );
+      const old = await login(PASSWORD);
+      const NEW_PASSWORD = "E2e-Outra-Senha-Sintetica-2027!";
+      await anonymous.post(
+        "/mobile/auth/password-reset/",
+        { code: reset![1], new_password: NEW_PASSWORD },
+        { auth: false },
+      );
+      await expect(login(PASSWORD)).rejects.toMatchObject({ status: 401 });
+      expect((await login(NEW_PASSWORD)).patient.displayName).toContain("Alex");
+      // a sessão aberta antes da troca deixou de valer
+      await anonymous.setSession(old);
+      await expect(anonymous.get("/mobile/me/")).rejects.toMatchObject({
+        status: 401,
+      });
+    },
+  );
+
+  it("15. tentativas erradas esgotam o limite (compartilhado entre os processos)", async () => {
+    const anonymous = createApiClient({
+      baseUrl: BASE,
+      transport: nodeTransport,
+      tokenStore: createMemoryTokenStore(),
+      dev: true,
+    });
+    const statuses: number[] = [];
+    for (let attempt = 0; attempt < 14; attempt += 1) {
+      try {
+        await anonymous.post(
+          "/mobile/auth/login/",
+          {
+            email: "limite@example.test",
+            password: "senha-errada",
+            device_label: "Teste",
+            platform: "ios",
+            app_version: "1.0.0",
+          },
+          { auth: false },
+        );
+      } catch (error) {
+        statuses.push(isApiError(error) ? error.status : 0);
+      }
+    }
+    expect(statuses).toContain(429);
+    expect(statuses.filter((s) => s !== 401 && s !== 429)).toEqual([]);
   });
 });

@@ -17,7 +17,9 @@
     "export": "EXPO_NO_DOTENV=1 expo export --platform all",
     "export:preview": "EXPO_NO_DOTENV=1 EXPO_PUBLIC_APP_MODE=preview expo export --platform web --output-dir dist-preview",
     "tokens": "node scripts/sync-tokens.mjs",
-    "test:e2e": "bash tests/e2e/run.sh"
+    "test:e2e": "bash tests/e2e/run.sh",
+    "test:e2e:staging": "bash tests/e2e/run-staging.sh",
+    "e2e:serve": "E2E_SERVE_ONLY=1 bash tests/e2e/run-staging.sh"
   },
   "dependencies": {
     "@expo-google-fonts/manrope": "^0.4.2",

@@ -25,6 +25,7 @@ Estado em 2026-10-02. Nada foi publicado, commitado nem implantado nesta rodada.
 | App ligado à API (22 fatias do estado, todas as gravações) | pronto em teste | 406 testes Jest, `tsc`, Prettier, `expo export` |
 | Contrato app × servidor | conferido por teste | foto do OpenAPI + `tests/contract-live.test.ts` |
 | App × servidor em execução (SQLite local) | 13 de 13 | `npm run test:e2e` |
+| App × servidor com PostgreSQL, Redis, gunicorn e SMTP | 15 de 15 | `npm run test:e2e:staging` |
 | Aceite obrigatório de consentimentos no primeiro acesso | pronto (no cliente) | `tests/consent-gate.test.tsx` |
 
 A única falha da suíte do web é `test_repository_matrix_passes_completeness_gate…`: a data
@@ -37,8 +38,11 @@ de revisão da matriz regulatória (`docs/compliance/cfp-crp02-matrix.json`) ven
    `mobile/posalta/tests/e2e` (`npm run test:e2e`) roda o código real do app contra o
    Django em execução, com banco descartável: ativação, 18 loaders, aceite, cuidado,
    diário, agenda, conteúdo pessoal, perfil, renovação e reuso de token, saída — 13 de 13
-   passam. Falta rodá-lo contra um ambiente de teste com PostgreSQL, Redis e SMTP reais
-   (o banco do roteiro é SQLite e o e-mail é em memória).
+   passam. Há também a versão em ambiente fiel ao de produção
+   (`npm run test:e2e:staging`: PostgreSQL 17, Redis 8, settings de produção, gunicorn
+   com 3 processos e SMTP real de captura), com recuperação de senha por e-mail e limite de
+   tentativas compartilhado: 15 de 15 passam, sem nenhum erro no log do servidor. Falta
+   rodá-lo contra um ambiente remoto de teste (rede, TLS, SMTP do provedor).
 2. **Nada rodou em aparelho real:** Keychain/Keystore (`expo-secure-store`), links
    `auroraelo-posalta://`, VoiceOver/TalkBack, texto ampliado, teclado, modo escuro.
 3. **E-mail:** convite e recuperação de senha dependem de SMTP. As variáveis `MAILER_*`
