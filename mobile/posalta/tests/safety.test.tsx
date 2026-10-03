@@ -350,7 +350,9 @@ describe("configuração nativa", () => {
   });
 
   it("o símbolo do app é o logo.png fornecido", () => {
-    const source = join(root, "../../../logo.png");
+    // O logo fornecido vive no web (idêntico byte a byte); o teste não depende de
+    // nenhum arquivo fora do repositório.
+    const source = join(root, "../../static/images/aurora-elo-emblem.png");
     const mark = join(root, "assets/aurora-elo-mark.png");
     expect(readFileSync(mark).equals(readFileSync(source))).toBe(true);
   });
